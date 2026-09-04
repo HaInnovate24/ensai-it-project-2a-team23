@@ -1,7 +1,7 @@
 # Weekly Report
 
-Date: Thursday ...
-Week No. ...
+Date: Jeudi 10 septembre 2026
+Semaine n°2
 
 ## Tasks completed this week
 
