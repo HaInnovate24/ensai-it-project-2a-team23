@@ -2,7 +2,7 @@
 -- Player
 -----------------------------------------------------
 DROP TABLE IF EXISTS player CASCADE;
-CREATE TABLE player (
+CREATE TABLE BaseUser (
     id_player    SERIAL PRIMARY KEY,
     username     VARCHAR(30) UNIQUE,
     password     VARCHAR(256),
