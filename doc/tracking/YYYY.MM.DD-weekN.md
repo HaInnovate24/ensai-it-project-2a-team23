@@ -7,7 +7,9 @@ Semaine n°2
 
 > Examples: `- [x] Task 1` or - `none`
 
-### Student 1: Last Name, First Name
+### Fratter-Bardy Alexandre
+- [x] diagrammes de séquences (authentification et analyse) et de cas d'utilisation
+- [x] rédaction des paragraphes correspondant dans le rapport d'analyse 
 
 
 ### Student 2: Last Name, First Name
