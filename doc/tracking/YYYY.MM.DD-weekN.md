@@ -1,7 +1,7 @@
 # Weekly Report
 
-Date: Jeudi 10 septembre 2026
-Semaine n°2
+Date: Jeudi 17 septembre 2026
+Semaine n°3
 
 ## Tasks completed this week
 
@@ -12,7 +12,10 @@ Semaine n°2
 - [x] rédaction des paragraphes correspondant dans le rapport d'analyse 
 
 
-### Student 2: Last Name, First Name
+### Student 2: Colin Jade
+- [x] rédaction de tout nos questionnements et de nos choix 
+- [x] rédaction organisation du travail et du groupe
+- [x] mise en page quarto
 
 
 ### Student 3: Last Name, First Name
