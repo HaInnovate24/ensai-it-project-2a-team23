@@ -382,8 +382,8 @@
 #set heading(numbering: "1.1")
 
 #show heading.where(level: 1): it => {
-  pagebreak(weak: true)
-  block(above: 0pt, below: 1.1em)[
+  //pagebreak(weak: true)
+  block(above: 2.5em, below: 1.1em)[
     #text(size: 20pt, weight: "bold", fill: accent)[
       #if it.numbering != none [#counter(heading).display() #h(0.4em)]
       #it.body
@@ -576,7 +576,7 @@ Ce diagramme de cas d'utilisation permet d'illustrer les différentes actions qu
 
 Il existe dans ce diagramme deux acteurs différents.
 
-Le profil “Utilisateur” est le rôle standard. Il est strictement limité à l'authentification ainsi qu'à la consultation des analyses et des visualisations telles que l'analyse temporelle, la comparaison géographique ou encore la comparaison multi-indicateurs. Il bénéficie également d'outils tels que la cartographie et la génération de rapports. Les limites du profil “Utilisateur” s'opposent donc aux compétences du profil “Administrateur” qui a un rôle dédié aux tâches de gestion de l'application. Il est le seul à pouvoir modifier ou supprimer certaines données et à gérer l'accès des profils “Utilisateur”. De plus, la flèche d'héritage reliant l'Administrateur à l'Utilisateur indique que l'Administrateur hérite automatiquement des toutes les fonctionnalités dont l'Utilisateur a accès.
+Le profil “Utilisateur” est le rôle standard. Il est strictement limité à l'authentification ainsi qu'à la consultation des analyses et des visualisations telles que l'analyse temporelle, la comparaison géographique ou encore la comparaison multi-indicateurs. Il bénéficie également d'outils tels que la cartographie et la génération de rapports. Les limites du profil “Utilisateur” s'opposent donc aux compétences du profil “Administrateur” qui a un rôle dédié aux tâches de gestion de l'application. Il est le seul à pouvoir modifier ou supprimer certaines données et à gérer l'accès des profils “Utilisateur”. De plus, la flèche d'héritage reliant l'Administrateur à l'Utilisateur indique que l'Administrateur hérite automatiquement de toutes les fonctionnalités dont l'Utilisateur a accès.
 
 #figure([
 #box(image("diagramme_cas_utilisation.drawio.png", width: 100.0%))
@@ -609,7 +609,7 @@ S'il est connecté en tant qu'administrateur, il aura accès à toutes les fonct
 - Supprimer ou promouvoir un compte en admin
 - Gérer les données
 
-A la fin, l'utilisateur pourra se déconnecter.
+À la fin, l'utilisateur pourra se déconnecter.
 
 #figure([
 #box(image("activite.png", width: 100.0%))

@@ -26,8 +26,8 @@ format:
 #set heading(numbering: "1.1")
 
 #show heading.where(level: 1): it => {
-  pagebreak(weak: true)
-  block(above: 0pt, below: 1.1em)[
+  //pagebreak(weak: true)
+  block(above: 2.5em, below: 1.1em)[
     #text(size: 20pt, weight: "bold", fill: accent)[
       #if it.numbering != none [#counter(heading).display() #h(0.4em)]
       #it.body
