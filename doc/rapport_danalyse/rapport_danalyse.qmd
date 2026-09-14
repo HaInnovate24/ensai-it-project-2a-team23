@@ -45,7 +45,9 @@ format:
 }
 #show heading.where(level: 3): it => {
   block(above: 1.1em, below: 0.5em)[
-    #text(size: 11.5pt, weight: "bold", style: "italic")[#it.body]
+    #text(size: 11.5pt, weight: "bold", style: "italic")[
+      #counter(heading).display() #h(0.4em) #it.body
+    ]
   ]
 }
 
@@ -174,7 +176,7 @@ Ces fonctionnalités supplémentaires pourront être développées en fonction d
 
 Lors de la phase de conception de LaborScope, plusieurs réflexions ont été menées afin de définir les orientations techniques et fonctionnelles du projet.
 
-Le premier choix décisif a concerné l'architecture globale de l'outil. Bien que le cahier des charges laisse la possibilité de se limiter au développement de l'API, nous avons pris le parti de développer la solution la plus complète : une API couplée à une interface graphique (front-end). Cette approche nous paraît indispensable pour répondre à l'objectif principal du projet, c'est-à-dire rendre des volumes importants de statistiques accessibles, exploitables et visuellement clair pour l'utilisateur final.
+Le premier choix décisif a concerné l'architecture globale de l'outil. Bien que le cahier des charges laisse la possibilité de se limiter au développement de l'API, nous avons pris le parti de développer la solution la plus complète : une API couplée à une interface graphique (front-end). Cette approche nous paraît indispensable pour répondre à l'objectif principal du projet, c'est-à-dire rendre des volumes importants de statistiques accessibles, exploitables et visuellement clairs pour l'utilisateur final.
 
 Une autre réflexion majeure a porté sur le système d'authentification et la répartition des droits d'accès. Plutôt que d'imposer la création d'un compte de manière stricte dès l'ouverture de l'application, nous avons opté pour une approche progressive. L'objectif est de démontrer l'utilité de notre outil dès la première visite.
 
@@ -186,11 +188,11 @@ Nous avons fait le choix d'orienter l'application vers une logique marketing et 
 
 # Description des fonctionnalités
 
-Le projet comporte différentes fonctionnalités qui se répartissent entre fonctionnalités obligatoires et fonctionnelles. Il y a 6 fonctionnalités obligatoires ainsi que 2 fonctionnalités optionnelles.
+Le projet comporte différentes fonctionnalités qui se répartissent entre fonctionnalités obligatoires et optionnelles. Il y a 6 fonctionnalités obligatoires ainsi que 2 fonctionnalités optionnelles.
 
 La première fonctionnalité de cette application consiste en la récupération et le stockage automatisés des données. Ainsi, l’application interroge automatiquement et de façon périodique l’API ILOSTAT et récupère les indicateurs souhaités sur plusieurs pays. Ensuite vient le traitement des données, les fichiers bruts sont triés pour ne conserver que les champs jugés essentiels au bon fonctionnement de l’application. Ces données nettoyées sont ensuite sauvegardées dans la base de données locale et deviennent enfin prêtes à être analysées.
 
-Une autre fonctionnalité doit permettre l’analyse temporelle des données extraites et stockées. L’utilisateur pourra sélectionner un indicateur, définir une fenêtre de temps et afficher les résultats sous forme graphique. Concrètement, après la sélection des paramètres, l’API calcule cette évolution temporelle et l'interface affiche permet d’observer les dynamiques du marché du travail.
+Une autre fonctionnalité doit permettre l’analyse temporelle des données extraites et stockées. L’utilisateur pourra sélectionner un indicateur, définir une fenêtre de temps et afficher les résultats sous forme graphique. Concrètement, après la sélection des paramètres, l’API calcule cette évolution temporelle et l'interface affichée permet d’observer les dynamiques du marché du travail.
 
 Outre la comparaison temporelle d’un indicateur, cette fonctionnalité propose à l’utilisateur, pour la période la plus récente possible présente dans la base de données, de comparer un indicateur entre plusieurs pays. L’utilisateur peut choisir une liste de pays ainsi qu’ un indicateur et l’application met en évidence les pays présentant les valeurs les plus hautes et les plus basses concernant cet indicateur.
 
@@ -224,13 +226,13 @@ Ce diagramme de cas d’utilisation permet d’illustrer les différentes action
 
 Il existe dans ce diagramme deux acteurs différents.
 
-Le profil “Utilisateur” est le rôle standard. Il est strictement limité à l’authentification ainsi qu’à la consultation des analyses et des visualisations telles que l’analyse temporelle, la comparaison géographique ou encore la comparaison multi-indicateurs. Il bénéficie également d’outils tels que la cartographie et la génération de rapports. Les limites du profil “Utilisateur” s’opposent donc aux compétences du profil “Administrateur” qui a un rôle dédié aux tâches de gestion de l’application. Il est le seul à pouvoir modifier ou supprimer certaines données et à gérer l’accès des profils “Utilisateur”. De plus, la flèche d’héritage reliant l’Administrateur à l’Utilisateur indique que l’Administrateur hérite automatiquement de toutes les fonctionnalités dont l’Utilisateur a accès.
+Le profil “Utilisateur” est le rôle standard. Il est strictement limité à l’authentification ainsi qu’à la consultation des analyses et des visualisations telles que l’analyse temporelle, la comparaison géographique ou encore la comparaison multi-indicateurs. Il bénéficie également d’outils tels que la cartographie et la génération de rapports. Les limites du profil “Utilisateur” s’opposent donc aux compétences du profil “Administrateur” qui a un rôle dédié aux tâches de gestion de l’application. Il est le seul à pouvoir modifier ou supprimer certaines données et à gérer l’accès des profils “Utilisateur”. De plus, la flèche d’héritage reliant l’Administrateur à l’Utilisateur indique que l’Administrateur hérite automatiquement de toutes les fonctionnalités auxquelles l’Utilisateur a accès.
 
-![Diagramme de cas d'utilisation](diagramme_cas_utilisation.drawio.png){#fig-orga width=100%}
+![Diagramme de cas d'utilisation](diagramme_cas_utilisation.drawio.png){#fig-orga width=50%}
 
 ## Diagramme d’activité
 
-Le diagramme présenté permet de caractériser les choix offerts à l'utilisateur lorsqu'il se ouvre l'application. Dans un premier temps, il va soit se connecter, soit créer un compte s'il n'en a pas.
+Le diagramme présenté permet de caractériser les choix offerts à l'utilisateur lorsqu'il  ouvre l'application. Dans un premier temps, il va soit se connecter, soit créer un compte s'il n'en a pas.
 
 S'il est connecté en tant qu'utilisateur, il aura la possibilité d'accéder aux trois fonctionnalités principales :
 
@@ -260,44 +262,46 @@ Cette partie présente le diagramme de classes. Notre modélisation comporte cin
 - Indicateur : Cette classe sert à savoir de quel indicateur issu de l’API ILOSTAT on parle. Elle comprend le code de l’indicateur ainsi que sa description.
 - Donnee_emploi : Cette classe stocke la valeur chiffrée d’une statistique selon les paramètres choisis (période, sexe, tranche d’âge, pays).
 
-## Diagramme de séquences
+## Diagramme de séquence
 
 Un diagramme de séquence permet de montrer comment les objets et les acteurs du projet interagissent entre eux selon un ordre chronologique dans le cadre d’une fonctionnalité du diagramme de cas d’utilisation. 
 
-## Diagramme de séquences : authentification
+### Diagramme de séquence : authentification
 
 On retrouve dans cette partie le diagramme de séquence concernant la fonctionnalité de l’authentification. Ce diagramme illustre l’ordre chronologique des interactions entre la personne qui tente de se connecter et les trois couches du système que sont l’interface, l’API ainsi que la base de données. L’objectif de ce diagramme est de visualiser comment l’application sépare, en fonction du profil renseigné, les droits de chaque profil (Utilisateur ou Administrateur).
 
-Le processus d’authentification est initié par une personne qui saisit son nom et son mot de passe directement sur l’interface. Afin de maintenir la sécurité de l'architecture, l'Interface ne communique jamais directement avec les données, elle formule une demande d'authentification qu'elle transmet au Serveur. C'est l'API qui porte le rôle de la vérification. En effet, le Serveur interroge la Base de données locale pour vérifier si les informations transmises correspondent à un compte existant. Si le compte existe, la Base de données retourne à l'API l'identité de la personne ainsi que son rôle exact, à savoir s’il est simple Utilisateur ou bien Administrateur. En fonction de la réponse de la Base de données, l’application fait face à trois scénarios distincts selon le niveau d’authentification. En effet, selon que le profil renseigné soit utilisateur ou Administrateur, le cahier des charges nous indique que l’utilisateur ne doit pas bénéficier de tous les accès. Voici la liste des trois scénarios : 
+Le processus d’authentification est initié par une personne qui saisit son nom et son mot de passe directement sur l’interface. Afin de maintenir la sécurité de l'architecture, l'Interface ne communique jamais directement avec les données, elle formule une demande d'authentification qu'elle transmet au Serveur. C'est l'API qui porte le rôle de la vérification. En effet, le Serveur interroge la Base de données locale pour vérifier si les informations transmises correspondent à un compte existant. Si le compte existe, la Base de données retourne à l'API l'identité de la personne ainsi que son rôle exact, à savoir s’il est simple Utilisateur ou bien Administrateur. En fonction de la réponse de la Base de données, l’application fait face à trois scénarios distincts selon le niveau d’authentification. En effet, selon que le profil renseigné est utilisateur ou Administrateur, le cahier des charges nous indique que l’utilisateur ne doit pas bénéficier de tous les accès. Voici la liste des trois scénarios : 
 
 - Si le rôle détecté est “Utilisateur”, l’API confirme la réussite de l’authentification à l’Interface et accorde ensuite un accès restreint à cet Utilisateur (consultation des analyses et des visualisations)
 - Si le rôle détecté est “Administrateur”, l’API confirme la réussite de l’authentification à l’Interface et accorde ensuite tous les accès de l’application à ce profil
 - Si la vérification échoue, l’API notifie le refus de connexion à l’Interface et bloque l’accès à l’application en affichant un message d’erreur.
 
-![Diagramme de séquences (authentification)](authentification.png){#fig-orga width=100%}
+![Diagramme de séquence (authentification)](authentification.png){#fig-orga width=100%}
 
-## Diagramme de séquences : données analytiques
+### Diagramme de séquence : données analytiques
 
-Cette partie présente le diagramme de séquence qui regroupe les fonctionnalités d’analyse de l’application telles que l’analyse temporelle, la comparaison géographique d’un indicateur ou encore la comparaison multi-indicateurs. Même si les calculs statistiques cachés derrières ces fonctionnalités diffèrent, le cheminement informatique reste similaire entre ces fonctionnalités. 
+Cette partie présente le diagramme de séquence qui regroupe les fonctionnalités d’analyse de l’application telles que l’analyse temporelle, la comparaison géographique d’un indicateur ou encore la comparaison multi-indicateurs. Même si les calculs statistiques cachés derrière ces fonctionnalités diffèrent, le cheminement informatique reste similaire entre ces fonctionnalités. 
 
 Ainsi, pour ces fonctionnalités, le processus est déclenché par l’utilisateur qui depuis l’Interface sélectionne les paramètres d’analyse : indicateur, pays, période de temps. Une fois la demande d’analyse validée, l’Interface formule une requête qu’elle envoie à l’API. À la réception de cette requête, l’API prend le relais concernant la gestion des données et interroge la Base de données locale avec les critères de filtrage renseignés par l’utilisateur. Ensuite la Base de données répond à cette requête en retournant les données correspondantes. La dernière étape consiste en la préparation et l’affichage des résultats. Pour cela, l’API nettoie les données brutes et calcule les statistiques demandées par l’utilisateur avant de renvoyer ces données formatées à l’Interface. À la réception de ces données finales, l’Interface les utilise pour construire le graphique approprié et l’affiche à l’utilisateur. 
 
-![Diagramme de séquences (données analytiques)](donnees.png){#fig-orga width=100%}
+![Diagramme de séquence (données analytiques)](donnees.png){#fig-orga width=100%}
 
 ## Diagramme de packages
 
 Le diagramme de packages nous permet de voir comment les différentes couches du code interagissent entre elles. La première couche est le frontend, et permet à l’utilisateur d’interagir avec l’application. Il pourra se connecter et ensuite naviguer dans l’application. 
-La deuxième couche est l’API, qui va transmettre les demandes, commandes de l’utilisateur vers le programme. La couche de services va réceptionner ces demandes pour ensuite réaliser des calculs. Cette couche comprend tous les objets, classes relatives aux utilisateurs et calculs à effectuer. Elle interagit avec la dernière couche qui est la couche de données. Les données sont récupérées et parsées, pour être envoyées à la DAO. Les données seront alors traitées pour ensuite être stockées localement dans une base de données PostgreSQL. Ces données seront donc exploitées afin d’effectuer les calculs dans la couche de services. Enfin, on pourra réaliser des visuels graphiques dans la couche de services, qui apparaîtront directement dans le frontend.
+La deuxième couche est l’API, qui va transmettre les demandes, commandes de l’utilisateur vers le programme. La couche de services va réceptionner ces demandes pour ensuite réaliser des calculs. Cette couche comprend tous les objets et classes relatives aux utilisateurs et calculs à effectuer. Elle interagit avec la dernière couche qui est la couche de données. Les données sont récupérées et parsées, pour être envoyées à la DAO. Les données seront alors traitées pour ensuite être stockées localement dans une base de données PostgreSQL. Ces données seront donc exploitées afin d’effectuer les calculs dans la couche de services. Enfin, on pourra réaliser des visuels graphiques dans la couche de services, qui apparaîtront directement dans le frontend.
+
+![Diagramme de packages](packages.png){#fig-orga width=100%}
 
 # Liste des principaux composants 
 
 ## Les DAO  
 
-Le rôle de la couche DAO (Data Access Object) est de  récupérer les données de la base de données locale. Cette couche assure le relai technique entre la base de données locale et la couche de services. Concernant ses dépendances, ce composant est totalement indépendant des autres parties de l'application. Son seul lien direct est avec la base de données locale, qu'il a justement pour mission de manipuler. À l'inverse, le serveur principal dépend entièrement de lui pour pouvoir retrouver leurs informations. Ainsi, de par son importance technique, ce composant est à développer avec une priorité absolue avec un temps de développement estimé à 40H.  
+Le rôle de la couche DAO (Data Access Object) est de récupérer les données de la base de données locale. Cette couche assure le relai technique entre la base de données locale et la couche de services. Concernant ses dépendances, ce composant est totalement indépendant des autres parties de l'application. Son seul lien direct est avec la base de données locale, qu'il a justement pour mission de manipuler. À l'inverse, le serveur principal dépend entièrement de lui pour pouvoir retrouver ses informations. Ainsi, de par son importance technique, ce composant est à développer avec une priorité absolue avec un temps de développement estimé à 40H.  
 
 ## La couche de services
 
-La couche de services contiendra les classes et objets métiers. C’est cette couche qui récupérera les requêtes via l’API et qui les traitera à l’aide des fonctions implémentées. Les principales fonctionnalités seront l’affichage de l’évolution d'indicateurs, la comparaison entre pays et la comparaison de plusieurs indicateurs. Elle interagit avec la DAO pour la récupération de données utiles aux calculs. Le temps de développement est estimé à 35H.
+La couche de services contiendra les classes et objets métier. C’est cette couche qui récupérera les requêtes via l’API et qui les traitera à l’aide des fonctions implémentées. Les principales fonctionnalités seront l’affichage de l’évolution d'indicateurs, la comparaison entre pays et la comparaison de plusieurs indicateurs. Elle interagit avec la DAO pour la récupération de données utiles aux calculs. Le temps de développement est estimé à 35H.
 
 ## L’API
 
