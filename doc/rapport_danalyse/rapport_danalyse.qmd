@@ -142,7 +142,9 @@ format:
 # Introduction
 
 Le marché du travail occupe une place centrale dans nos sociétés. Que ce soit pour suivre l’évolution de l’emploi, comprendre les différences entre les pays ou encore analyser les inégalités entre les catégories de population, les statistiques liées au travail constituent une source d’information essentielle. En effet, l’emploi peut être influencé par de nombreux facteurs tels que l’âge, le sexe, la profession ou encore la situation économique d’un pays. L’analyse de ces données permet ainsi de mieux comprendre les évolutions du marché du travail et les différentes tendances qui peuvent apparaître au fil du temps.
+
 Cependant, la quantité de données disponibles peut rendre leur utilisation assez complexe. Les statistiques sont régulièrement mises à jour et peuvent être classées selon de nombreux critères. Il peut alors être difficile de retrouver une information précise, de comparer plusieurs pays ou encore de suivre l’évolution d’un indicateur sur une période donnée. Disposer d’un outil capable de regrouper ces données, de les traiter et de les présenter de manière simple permettrait donc de faciliter leur analyse.
+
 C’est dans cette idée que s’inscrit notre projet LaborScope. Son objectif est de développer une API permettant d’exploiter et d’analyser des statistiques mondiales sur le marché du travail, en utilisant notamment les données ouvertes de l’Organisation Internationale du Travail  disponibles via l’API ILOSTAT. Ces données permettent par exemple d’étudier l’emploi en fonction du sexe et de la profession, mais aussi la population en âge de travailler selon le sexe et l’âge, pour de nombreux pays et régions du monde.
 
 Le projet intégrera également une gestion des utilisateurs avec différents niveaux d’accès. Des fonctionnalités complémentaires pourront être ajoutées, comme une cartographie interactive ou la génération automatique de rapports.
@@ -171,21 +173,33 @@ Ces fonctionnalités supplémentaires pourront être développées en fonction d
 # Questionnements et choix
 
 Lors de la phase de conception de LaborScope, plusieurs réflexions ont été menées afin de définir les orientations techniques et fonctionnelles du projet.
+
 Le premier choix décisif a concerné l'architecture globale de l'outil. Bien que le cahier des charges laisse la possibilité de se limiter au développement de l'API, nous avons pris le parti de développer la solution la plus complète : une API couplée à une interface graphique (front-end). Cette approche nous paraît indispensable pour répondre à l'objectif principal du projet, c'est-à-dire rendre des volumes importants de statistiques accessibles, exploitables et visuellement clair pour l'utilisateur final.
+
 Une autre réflexion majeure a porté sur le système d'authentification et la répartition des droits d'accès. Plutôt que d'imposer la création d'un compte de manière stricte dès l'ouverture de l'application, nous avons opté pour une approche progressive. L'objectif est de démontrer l'utilité de notre outil dès la première visite.
+
 Ainsi, nous avons décidé de laisser la fonctionnalité d'analyse temporelle de l'emploi (F3) en accès libre. Un visiteur non connecté pourra donc interroger la base de données, générer un graphique et observer l'évolution d'un indicateur sans restriction.
+
 En revanche, l'accès aux fonctionnalités d'analyse plus avancées (comparaison géographique, croisement multi-indicateurs, cartographie ou génération de rapports) nécessitera obligatoirement une authentification. Ce choix stratégique permet d'offrir un aperçu concret des capacités de l'application pour susciter l'intérêt de l'utilisateur, tout en l'incitant à s'inscrire pour bénéficier d'une expérience complète.
+
 Nous avons fait le choix d'orienter l'application vers une logique marketing et commerciale afin d'attirer et de fidéliser de potentiels clients comme dans une vraie application . Cette dynamique permet d'enrichir notre base de données clients et s'intègre parfaitement avec le système de gestion des rôles (Utilisateurs et Administrateurs) mis en place pour administrer l’application.
 
 # Description des fonctionnalités
 
-Le projet comporte différentes fonctionnalités qui se répartissent entre fonctionnalités obligatoires et fonctionnelles. Il y a 6 fonctionnalités obligatoires ainsi que 2 fonctionnalités.
+Le projet comporte différentes fonctionnalités qui se répartissent entre fonctionnalités obligatoires et fonctionnelles. Il y a 6 fonctionnalités obligatoires ainsi que 2 fonctionnalités optionnelles.
+
 La première fonctionnalité de cette application consiste en la récupération et le stockage automatisés des données. Ainsi, l’application interroge automatiquement et de façon périodique l’API ILOSTAT et récupère les indicateurs souhaités sur plusieurs pays. Ensuite vient le traitement des données, les fichiers bruts sont triés pour ne conserver que les champs jugés essentiels au bon fonctionnement de l’application. Ces données nettoyées sont ensuite sauvegardées dans la base de données locale et deviennent enfin prêtes à être analysées.
+
 Une autre fonctionnalité doit permettre l’analyse temporelle des données extraites et stockées. L’utilisateur pourra sélectionner un indicateur, définir une fenêtre de temps et afficher les résultats sous forme graphique. Concrètement, après la sélection des paramètres, l’API calcule cette évolution temporelle et l'interface affiche permet d’observer les dynamiques du marché du travail.
+
 Outre la comparaison temporelle d’un indicateur, cette fonctionnalité propose à l’utilisateur, pour la période la plus récente possible présente dans la base de données, de comparer un indicateur entre plusieurs pays. L’utilisateur peut choisir une liste de pays ainsi qu’ un indicateur et l’application met en évidence les pays présentant les valeurs les plus hautes et les plus basses concernant cet indicateur.
+
 La fonctionnalité de comparaison multi-indicateurs doit permettre à l’utilisateur de croiser plusieurs jeux de données. L’utilisateur pourra superposer plusieurs indicateurs sur un même graphique ainsi qu’une échelle de temps. Cela permet de dégager visuellement des liens entre les indicateurs  sur une période donnée et ainsi de comprendre quels mécanismes régissent le monde du travail.
+
 La dernière fonctionnalité obligatoire consiste en la gestion des utilisateurs et de la sécurité. Ainsi, l’accès à l’application sera sécurisé par une authentification vérifiant les mots de passe et le système devra gérer deux niveaux de droits d’accès. Les utilisateurs standard consultent les analyses et les visualisations tandis que les administrateurs possèdent en plus de la consultation des droits de gestion sur les données. De plus, chaque modification sur les bases de données entraîne une actualisation du journal de suivi des activités.
+
 La première fonctionnalité optionnelle est une cartographie interactive où  l’utilisateur choisit un indicateur et les données sont ensuite projetées sur une carte du monde. Chaque pays est colorié selon la valeur de l’indicateur choisi. Cela permet donc de visualiser des tendances mondiales sur un indicateur précis.
+
 L’application intègre également une fonctionnalité permettant de générer un rapport d’analyse au format PDF. L’utilisateur sélectionne des indicateurs, une période de temps ainsi que des pays et l’outil en fera un résumé statistique contenant des graphiques et une conclusion synthétique générée automatiquement à partir des données observées.
 
 # Organisation du groupe
@@ -195,7 +209,9 @@ ICI mettre diagramme de Gantt
 # Organisation du travail
 
 Concernant l’organisation du travail, notre équipe s'appuie sur plusieurs outils collaboratifs afin d'assurer une communication fluide et une répartition efficace des tâches. Pour nos échanges quotidiens, nous disposons d’un groupe de discussion sur WhatsApp, ce qui nous permet de débattre de nos idées et de faire des points réguliers sur l’avancement du projet. En parallèle, nous utilisons Google Docs pour la rédaction et le partage de nos documents communs  garantissant ainsi à chaque membre un accès simultané pour la lecture et la modification des fichiers.
+
 La gestion de projet et le suivi des tâches sont quant à eux centralisés sur la plateforme Notion. Cet espace de travail nous permet de répertorier l'intégralité des actions à mener. Chaque tâche y est qualifiée selon plusieurs critères : son statut (à faire, en cours ou terminé), la phase du projet à laquelle elle se rattache, son niveau d'importance, ainsi que le membre du groupe qui en est responsable. Cette méthode structure notre organisation, offre une vision claire de la progression globale et permet à chacun de savoir précisément ce qu'il doit accomplir.
+
 Enfin, concernant la partie développement, nous codons notre application sur VSCode et nous nous appuyons sur GitHub pour centraliser notre travail. Ce répertoire commun est très utile : il sécurise notre collaboration, nous permet de coder en parallèle, de conserver tout l'historique de nos modifications et de résoudre facilement les éventuels conflits de versions.
 
 # Modèle de conception
@@ -208,7 +224,9 @@ Ce diagramme de cas d’utilisation permet d’illustrer les différentes action
 
 Il existe dans ce diagramme deux acteurs différents.
 
-Le profil “Utilisateur” est le rôle standard. Il est strictement limité à l’authentification ainsi qu’à la consultation des analyses et des visualisations telles que l’analyse temporelle, la comparaison géographique ou encore la comparaison multi-indicateurs. Il bénéficie également d’outils tels que la cartographie et la génération de rapports. Les limites du profil “Utilisateur” s’opposent donc aux compétences du profil “Administrateur” qui a un rôle dédié aux tâches de gestion de l’application. Il est le seul à pouvoir modifier ou supprimer certaines données et à gérer l’accès des profils “Utilisateur”. De plus, la flèche d’héritage reliant l’Administrateur à l’Utilisateur indique que l’Administrateur hérite automatiquement des toutes les fonctionnalités dont l’Utilisateur a accès.
+Le profil “Utilisateur” est le rôle standard. Il est strictement limité à l’authentification ainsi qu’à la consultation des analyses et des visualisations telles que l’analyse temporelle, la comparaison géographique ou encore la comparaison multi-indicateurs. Il bénéficie également d’outils tels que la cartographie et la génération de rapports. Les limites du profil “Utilisateur” s’opposent donc aux compétences du profil “Administrateur” qui a un rôle dédié aux tâches de gestion de l’application. Il est le seul à pouvoir modifier ou supprimer certaines données et à gérer l’accès des profils “Utilisateur”. De plus, la flèche d’héritage reliant l’Administrateur à l’Utilisateur indique que l’Administrateur hérite automatiquement de toutes les fonctionnalités dont l’Utilisateur a accès.
+
+![Diagramme de cas d'utilisation](diagramme_cas_utilisation.drawio.png){#fig-orga width=100%}
 
 ## Diagramme d’activité
 
@@ -228,7 +246,9 @@ S'il est connecté en tant qu'administrateur, il aura accès à toutes les fonct
 - Supprimer ou promouvoir un compte en admin
 - Gérer les données
 
-A la fin, l’utilisateur pourra se déconnecter.
+À la fin, l’utilisateur pourra se déconnecter.
+
+![Diagramme d'activité](activite.png){#fig-orga width=100%}
 
 ## Diagramme de classes
 
@@ -247,17 +267,22 @@ Un diagramme de séquence permet de montrer comment les objets et les acteurs du
 ## Diagramme de séquences : authentification
 
 On retrouve dans cette partie le diagramme de séquence concernant la fonctionnalité de l’authentification. Ce diagramme illustre l’ordre chronologique des interactions entre la personne qui tente de se connecter et les trois couches du système que sont l’interface, l’API ainsi que la base de données. L’objectif de ce diagramme est de visualiser comment l’application sépare, en fonction du profil renseigné, les droits de chaque profil (Utilisateur ou Administrateur).
+
 Le processus d’authentification est initié par une personne qui saisit son nom et son mot de passe directement sur l’interface. Afin de maintenir la sécurité de l'architecture, l'Interface ne communique jamais directement avec les données, elle formule une demande d'authentification qu'elle transmet au Serveur. C'est l'API qui porte le rôle de la vérification. En effet, le Serveur interroge la Base de données locale pour vérifier si les informations transmises correspondent à un compte existant. Si le compte existe, la Base de données retourne à l'API l'identité de la personne ainsi que son rôle exact, à savoir s’il est simple Utilisateur ou bien Administrateur. En fonction de la réponse de la Base de données, l’application fait face à trois scénarios distincts selon le niveau d’authentification. En effet, selon que le profil renseigné soit utilisateur ou Administrateur, le cahier des charges nous indique que l’utilisateur ne doit pas bénéficier de tous les accès. Voici la liste des trois scénarios : 
 
 - Si le rôle détecté est “Utilisateur”, l’API confirme la réussite de l’authentification à l’Interface et accorde ensuite un accès restreint à cet Utilisateur (consultation des analyses et des visualisations)
 - Si le rôle détecté est “Administrateur”, l’API confirme la réussite de l’authentification à l’Interface et accorde ensuite tous les accès de l’application à ce profil
 - Si la vérification échoue, l’API notifie le refus de connexion à l’Interface et bloque l’accès à l’application en affichant un message d’erreur.
 
+![Diagramme de séquences (authentification)](authentification.png){#fig-orga width=100%}
+
 ## Diagramme de séquences : données analytiques
 
 Cette partie présente le diagramme de séquence qui regroupe les fonctionnalités d’analyse de l’application telles que l’analyse temporelle, la comparaison géographique d’un indicateur ou encore la comparaison multi-indicateurs. Même si les calculs statistiques cachés derrières ces fonctionnalités diffèrent, le cheminement informatique reste similaire entre ces fonctionnalités. 
 
 Ainsi, pour ces fonctionnalités, le processus est déclenché par l’utilisateur qui depuis l’Interface sélectionne les paramètres d’analyse : indicateur, pays, période de temps. Une fois la demande d’analyse validée, l’Interface formule une requête qu’elle envoie à l’API. À la réception de cette requête, l’API prend le relais concernant la gestion des données et interroge la Base de données locale avec les critères de filtrage renseignés par l’utilisateur. Ensuite la Base de données répond à cette requête en retournant les données correspondantes. La dernière étape consiste en la préparation et l’affichage des résultats. Pour cela, l’API nettoie les données brutes et calcule les statistiques demandées par l’utilisateur avant de renvoyer ces données formatées à l’Interface. À la réception de ces données finales, l’Interface les utilise pour construire le graphique approprié et l’affiche à l’utilisateur. 
+
+![Diagramme de séquences (données analytiques)](donnees.png){#fig-orga width=100%}
 
 ## Diagramme de packages
 
@@ -268,8 +293,7 @@ La deuxième couche est l’API, qui va transmettre les demandes, commandes de l
 
 ## Les DAO  
 
-(`se servir du cahier des charges pour écrire ce paragraphe`)
-Les DAO servent à récupérer les données de la base de données. 
+Le rôle de la couche DAO (Data Access Object) est de  récupérer les données de la base de données locale. Cette couche assure le relai technique entre la base de données locale et la couche de services. Concernant ses dépendances, ce composant est totalement indépendant des autres parties de l'application. Son seul lien direct est avec la base de données locale, qu'il a justement pour mission de manipuler. À l'inverse, le serveur principal dépend entièrement de lui pour pouvoir retrouver leurs informations. Ainsi, de par son importance technique, ce composant est à développer avec une priorité absolue avec un temps de développement estimé à 40H.  
 
 ## La couche de services
 
