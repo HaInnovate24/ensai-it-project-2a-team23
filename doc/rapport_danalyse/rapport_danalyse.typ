@@ -519,7 +519,7 @@
     Ludovic #smallcaps[Deneuville]
 
     #v(1.2cm)
-
+    
     #text(style: "italic", fill: mutedgray)[Encadrant]
     #v(0.35em)
     Anas #smallcaps[Knefati]
@@ -620,7 +620,7 @@ Il existe dans ce diagramme deux acteurs différents.
 
 Le profil “Utilisateur” est le rôle standard. Il est strictement limité à l'authentification ainsi qu'à la consultation des analyses et des visualisations telles que l'analyse temporelle, la comparaison géographique ou encore la comparaison multi-indicateurs. Il bénéficie également d'outils tels que la cartographie et la génération de rapports. Les limites du profil “Utilisateur” s'opposent donc aux compétences du profil “Administrateur” qui a un rôle dédié aux tâches de gestion de l'application. Il est le seul à pouvoir modifier ou supprimer certaines données et à gérer l'accès des profils “Utilisateur”. De plus, la flèche d'héritage reliant l'Administrateur à l'Utilisateur indique que l'Administrateur hérite automatiquement des toutes les fonctionnalités dont l'Utilisateur a accès.
 
-#figure_block("images/diagramme_cas_utilisation.drawio.png", "Diagramme de cas d'utilisation", w: 11cm, h: auto)
+#figure_block("images/diagramme_cas_utilisation.drawio.png", "Diagramme de cas d'utilisation", w: 14cm, h: auto)
 == Diagramme d'activité
 <diagramme-dactivité>
 Le diagramme présenté permet de caractériser les choix offerts à l'utilisateur lorsqu'il se ouvre l'application. Dans un premier temps, il va soit se connecter, soit créer un compte s'il n'en a pas.
@@ -641,7 +641,7 @@ S'il est connecté en tant qu'administrateur, il aura accès à toutes les fonct
 
 A la fin, l'utilisateur pourra se déconnecter.
 
-#figure_block("images/Diagramme_dactivite.drawio.png", "Diagramme d'activité", w: 12cm, h: auto)
+#figure_block("images/Diagramme_dactivite.drawio.png", "Diagramme d'activité", w: 14cm, h: 12cm)
 == Diagramme de classes
 <diagramme-de-classes>
 Cette partie présente le diagramme de classes. Notre modélisation comporte cinq classes, voici une liste de chaque classe avec une courte description pour chacune :
@@ -656,7 +656,7 @@ Cette partie présente le diagramme de classes. Notre modélisation comporte cin
 <diagramme-de-séquences>
 Un diagramme de séquence permet de montrer comment les objets et les acteurs du projet interagissent entre eux selon un ordre chronologique dans le cadre d'une fonctionnalité du diagramme de cas d'utilisation.
 
-#figure_block("images/diagramme_sequence_fonctionnnalité.drawio.png", "Diagramme de séquence - fonctionnalité", w: 12cm, h: auto)
+#figure_block("images/diagramme_sequence_fonctionnnalité.drawio.png", "Diagramme de séquence - fonctionnalité", w: 14cm, h: 12cm)
 == Diagramme de séquences : authentification
 <diagramme-de-séquences-authentification>
 On retrouve dans cette partie le diagramme de séquence concernant la fonctionnalité de l'authentification. Ce diagramme illustre l'ordre chronologique des interactions entre la personne qui tente de se connecter et les trois couches du système que sont l'interface, l'API ainsi que la base de données. L'objectif de ce diagramme est de visualiser comment l'application sépare, en fonction du profil renseigné, les droits de chaque profil (Utilisateur ou Administrateur). Le processus d'authentification est initié par une personne qui saisit son nom et son mot de passe directement sur l'interface. Afin de maintenir la sécurité de l'architecture, l'Interface ne communique jamais directement avec les données, elle formule une demande d'authentification qu'elle transmet au Serveur. C'est l'API qui porte le rôle de la vérification. En effet, le Serveur interroge la Base de données locale pour vérifier si les informations transmises correspondent à un compte existant. Si le compte existe, la Base de données retourne à l'API l'identité de la personne ainsi que son rôle exact, à savoir s'il est simple Utilisateur ou bien Administrateur. En fonction de la réponse de la Base de données, l'application fait face à trois scénarios distincts selon le niveau d'authentification. En effet, selon que le profil renseigné soit utilisateur ou Administrateur, le cahier des charges nous indique que l'utilisateur ne doit pas bénéficier de tous les accès. Voici la liste des trois scénarios :
@@ -665,7 +665,7 @@ On retrouve dans cette partie le diagramme de séquence concernant la fonctionna
 - Si le rôle détecté est “Administrateur”, l'API confirme la réussite de l'authentification à l'Interface et accorde ensuite tous les accès de l'application à ce profil
 - Si la vérification échoue, l'API notifie le refus de connexion à l'Interface et bloque l'accès à l'application en affichant un message d'erreur.
 
-#figure_block("images/diagramme_sequence_authentification.drawio.png", "Diagramme de séquence - authentification", w: 12cm, h: auto)
+#figure_block("images/diagramme_sequence_authentification.drawio.png", "Diagramme de séquence - authentification", w: 14cm, h: 12cm)
 == Diagramme de séquences : données analytiques
 <diagramme-de-séquences-données-analytiques>
 Cette partie présente le diagramme de séquence qui regroupe les fonctionnalités d'analyse de l'application telles que l'analyse temporelle, la comparaison géographique d'un indicateur ou encore la comparaison multi-indicateurs. Même si les calculs statistiques cachés derrières ces fonctionnalités diffèrent, le cheminement informatique reste similaire entre ces fonctionnalités.
@@ -676,7 +676,7 @@ Ainsi, pour ces fonctionnalités, le processus est déclenché par l'utilisateur
 <diagramme-de-packages>
 Le diagramme de packages nous permet de voir comment les différentes couches du code interagissent entre elles. La première couche est le frontend, et permet à l'utilisateur d'interagir avec l'application. Il pourra se connecter et ensuite naviguer dans l'application. La deuxième couche est l'API, qui va transmettre les demandes, commandes de l'utilisateur vers le programme. La couche de services va réceptionner ces demandes pour ensuite réaliser des calculs. Cette couche comprend tous les objets, classes relatives aux utilisateurs et calculs à effectuer. Elle interagit avec la dernière couche qui est la couche de données. Les données sont récupérées et parsées, pour être envoyées à la DAO. Les données seront alors traitées pour ensuite être stockées localement dans une base de données PostgreSQL. Ces données seront donc exploitées afin d'effectuer les calculs dans la couche de services. Enfin, on pourra réaliser des visuels graphiques dans la couche de services, qui apparaîtront directement dans le frontend.
 
-#figure_block("images/Diagramme_de_packages.drawio.png", "Diagramme de packages", w: 12cm, h: auto)
+#figure_block("images/Diagramme_de_packages.drawio.png", "Diagramme de packages", w: 14cm, h: 12cm)
 = Liste des principaux composants
 <liste-des-principaux-composants>
 == Les DAO
