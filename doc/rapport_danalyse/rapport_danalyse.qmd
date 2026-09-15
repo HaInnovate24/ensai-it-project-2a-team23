@@ -26,8 +26,7 @@ format:
 #set heading(numbering: "1.1")
 
 #show heading.where(level: 1): it => {
-  pagebreak(weak: true)
-  block(above: 0pt, below: 1.1em)[
+  block(above: 1.6em, below: 1.1em)[
     #text(size: 20pt, weight: "bold", fill: accent)[
       #if it.numbering != none [#counter(heading).display() #h(0.4em)]
       #it.body
@@ -46,6 +45,33 @@ format:
 #show heading.where(level: 3): it => {
   block(above: 1.1em, below: 0.5em)[
     #text(size: 11.5pt, weight: "bold", style: "italic")[#it.body]
+  ]
+}
+
+// ------------------------------------------------------------
+// Bloc image standardisé : centré, encadré sobrement, légende
+// stylée en italique grise sous un fin trait d'accent.
+// ------------------------------------------------------------
+#let fig_counter = counter("figures")
+
+#let figure_block(path, caption, w: 8cm, h: auto) = {
+  fig_counter.step()
+  align(center)[
+    #box(
+      stroke: 0.6pt + mutedgray.lighten(55%),
+      radius: 3pt,
+      inset: 12pt,
+      fill: rgb("#fafafa"),
+    )[
+      #image(path, width: w)
+    ]
+    #v(0.6em)
+    #line(length: 2.2cm, stroke: 0.6pt + accent)
+    #v(0.35em)
+    #context text(size: 9.5pt, fill: mutedgray, style: "italic")[
+      #text(fill: accent, weight: "bold", style: "normal")[Fig. #fig_counter.display()] — #caption
+    ]
+    #v(0.4em)
   ]
 }
 
@@ -190,7 +216,7 @@ L’application intègre également une fonctionnalité permettant de générer 
 
 # Organisation du groupe
 
-ICI mettre diagramme de Gantt
+`ICI mettre diagramme de Gantt` (SALIM)
 
 # Organisation du travail
 
@@ -209,6 +235,10 @@ Ce diagramme de cas d’utilisation permet d’illustrer les différentes action
 Il existe dans ce diagramme deux acteurs différents.
 
 Le profil “Utilisateur” est le rôle standard. Il est strictement limité à l’authentification ainsi qu’à la consultation des analyses et des visualisations telles que l’analyse temporelle, la comparaison géographique ou encore la comparaison multi-indicateurs. Il bénéficie également d’outils tels que la cartographie et la génération de rapports. Les limites du profil “Utilisateur” s’opposent donc aux compétences du profil “Administrateur” qui a un rôle dédié aux tâches de gestion de l’application. Il est le seul à pouvoir modifier ou supprimer certaines données et à gérer l’accès des profils “Utilisateur”. De plus, la flèche d’héritage reliant l’Administrateur à l’Utilisateur indique que l’Administrateur hérite automatiquement des toutes les fonctionnalités dont l’Utilisateur a accès.
+
+```{=typst}
+#figure_block("images/diagramme_cas_utilisation.drawio.png", "Diagramme de cas d'utilisation", w: 10cm)
+```
 
 ## Diagramme d’activité
 
@@ -230,6 +260,10 @@ S'il est connecté en tant qu'administrateur, il aura accès à toutes les fonct
 
 A la fin, l’utilisateur pourra se déconnecter.
 
+```{=typst}
+#figure_block("images/activite.png", "Diagramme d'activité", w: 12cm, h: 4cm)
+```
+
 ## Diagramme de classes
 
 Cette partie présente le diagramme de classes. Notre modélisation comporte cinq classes, voici une liste de chaque classe avec une courte description pour chacune : 
@@ -240,9 +274,15 @@ Cette partie présente le diagramme de classes. Notre modélisation comporte cin
 - Indicateur : Cette classe sert à savoir de quel indicateur issu de l’API ILOSTAT on parle. Elle comprend le code de l’indicateur ainsi que sa description.
 - Donnee_emploi : Cette classe stocke la valeur chiffrée d’une statistique selon les paramètres choisis (période, sexe, tranche d’âge, pays).
 
+
+
 ## Diagramme de séquences
 
 Un diagramme de séquence permet de montrer comment les objets et les acteurs du projet interagissent entre eux selon un ordre chronologique dans le cadre d’une fonctionnalité du diagramme de cas d’utilisation. 
+
+```{=typst}
+#figure_block("images/diagramme_sequence_fonctionnnalité.drawio.png", "Diagramme de séquence - fonctionnalité", w: 12cm)
+```
 
 ## Diagramme de séquences : authentification
 
@@ -252,6 +292,10 @@ Le processus d’authentification est initié par une personne qui saisit son no
 - Si le rôle détecté est “Utilisateur”, l’API confirme la réussite de l’authentification à l’Interface et accorde ensuite un accès restreint à cet Utilisateur (consultation des analyses et des visualisations)
 - Si le rôle détecté est “Administrateur”, l’API confirme la réussite de l’authentification à l’Interface et accorde ensuite tous les accès de l’application à ce profil
 - Si la vérification échoue, l’API notifie le refus de connexion à l’Interface et bloque l’accès à l’application en affichant un message d’erreur.
+
+```{=typst}
+#figure_block("images/diagramme_sequence_authentification.drawio.png", "Diagramme de séquence - authentification", w: 12cm)
+```
 
 ## Diagramme de séquences : données analytiques
 
@@ -263,6 +307,10 @@ Ainsi, pour ces fonctionnalités, le processus est déclenché par l’utilisate
 
 Le diagramme de packages nous permet de voir comment les différentes couches du code interagissent entre elles. La première couche est le frontend, et permet à l’utilisateur d’interagir avec l’application. Il pourra se connecter et ensuite naviguer dans l’application. 
 La deuxième couche est l’API, qui va transmettre les demandes, commandes de l’utilisateur vers le programme. La couche de services va réceptionner ces demandes pour ensuite réaliser des calculs. Cette couche comprend tous les objets, classes relatives aux utilisateurs et calculs à effectuer. Elle interagit avec la dernière couche qui est la couche de données. Les données sont récupérées et parsées, pour être envoyées à la DAO. Les données seront alors traitées pour ensuite être stockées localement dans une base de données PostgreSQL. Ces données seront donc exploitées afin d’effectuer les calculs dans la couche de services. Enfin, on pourra réaliser des visuels graphiques dans la couche de services, qui apparaîtront directement dans le frontend.
+
+```{=typst}
+#figure_block("images/Diagramme_de_packages.drawio.png", "Diagramme de packages", w: 12cm)
+```
 
 # Liste des principaux composants 
 
@@ -282,8 +330,3 @@ L’API (Application Programming Interface) va nous permettre de lier le fronten
 ## Le frontend
 
 Le dernier composant que nous allons développer est le frontend. Il correspond à la couche d’interaction entre l’utilisateur et le programme. C’est là-dessus que l’utilisateur pourra faire des demandes et obtenir des résultats (visualisation graphique, calculs de statistiques...). Le package streamlit sera utilisé afin de développer cette couche. Il affichera donc l’écran de connexion et les différentes fonctionnalités que l’utilisateur pourra choisir. Cette couche interagit avec le backend qui va effectuer les calculs. Le frontend dépend donc du backend pour obtenir les données, les commandes et les résultats. Le backend quant à lui aura besoin du frontend pour enregistrer les demandes de l’utilisateur et y répondre. Le temps estimé pour développer ce composant est de 15H. 
-
-
-
-
-
