@@ -228,7 +228,7 @@ Il existe dans ce diagramme deux acteurs différents.
 
 Le profil “Utilisateur” est le rôle standard. Il est strictement limité à l’authentification ainsi qu’à la consultation des analyses et des visualisations telles que l’analyse temporelle, la comparaison géographique ou encore la comparaison multi-indicateurs. Il bénéficie également d’outils tels que la cartographie et la génération de rapports. Les limites du profil “Utilisateur” s’opposent donc aux compétences du profil “Administrateur” qui a un rôle dédié aux tâches de gestion de l’application. Il est le seul à pouvoir modifier ou supprimer certaines données et à gérer l’accès des profils “Utilisateur”. De plus, la flèche d’héritage reliant l’Administrateur à l’Utilisateur indique que l’Administrateur hérite automatiquement de toutes les fonctionnalités auxquelles l’Utilisateur a accès.
 
-![Diagramme de cas d'utilisation](diagramme_cas_utilisation.drawio.png){#fig-orga width=50%}
+![Diagramme de cas d'utilisation](utilisation.png){#fig-orga width=50%}
 
 ## Diagramme d’activité
 
