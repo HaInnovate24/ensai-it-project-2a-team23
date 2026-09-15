@@ -115,7 +115,7 @@ format:
     Ludovic #smallcaps[Deneuville]
 
     #v(1.2cm)
-
+    
     #text(style: "italic", fill: mutedgray)[Encadrant]
     #v(0.35em)
     Anas #smallcaps[Knefati]
