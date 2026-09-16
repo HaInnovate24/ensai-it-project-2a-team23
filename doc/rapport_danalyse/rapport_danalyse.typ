@@ -641,7 +641,7 @@ S'il est connecté en tant qu'administrateur, il aura accès à toutes les fonct
 
 A la fin, l'utilisateur pourra se déconnecter.
 
-#figure_block("images/Diagramme_dactivite.drawio.png", "Diagramme d'activité", w: 14cm, h: 12cm)
+#figure_block("images/Diagramme_activite.png", "Diagramme d'activité", w: 14cm, h: 12cm)
 == Diagramme de classes
 <diagramme-de-classes>
 Cette partie présente le diagramme de classes. Notre modélisation comporte cinq classes, voici une liste de chaque classe avec une courte description pour chacune :
