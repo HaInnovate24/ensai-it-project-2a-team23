@@ -1,0 +1,129 @@
+@startuml
+title LaborScope - Diagramme de classes
+
+skinparam classAttributeIconSize 0
+
+' =====================================================
+' UTILISATEUR
+' =====================================================
+
+class Utilisateur {
+    +id : int
+    +nom_utilisateur : String
+    +mot_de_passe_hash : String
+    +role : String
+    +actif : Boolean
+    +date_creation : DateTime
+    +derniere_connexion : DateTime
+}
+
+' =====================================================
+' REFERENTIELS ILOSTAT
+' =====================================================
+
+class Pays {
+    +code_pays : String
+    +nom_pays : String
+    +continent : String
+    +latitude : Decimal
+    +longitude : Decimal
+}
+
+class Indicateur {
+    +code_indicateur : String
+    +description : String
+    +unite : String
+    +source : String
+    +actif : Boolean
+}
+
+class Sexe {
+    +code_sexe : String
+    +libelle : String
+}
+
+class Age {
+    +code_age : String
+    +libelle : String
+    +age_min : Integer
+    +age_max : Integer
+}
+
+class Classification {
+    +code_occupation : String
+    +libelle : String
+    +valeur : String
+}
+
+' =====================================================
+' DONNEES
+' =====================================================
+
+class Observation {
+    +id : Long
+    +periode : String
+    +valeur : Decimal
+    +source : String
+    +date_import : DateTime
+}
+
+' =====================================================
+' PIPELINE
+' =====================================================
+
+class ImportDonnees {
+    +id : int
+    +date_debut : DateTime
+    +date_fin : DateTime
+    +statut : String
+    +nombre_lignes : Integer
+    +fichier_source : String
+    +message_erreur : String
+}
+
+' =====================================================
+' JOURNAL
+' =====================================================
+
+class JournalActivite {
+    +id : Long
+    +action : String
+    +cible : String
+    +details : String
+    +date_heure : DateTime
+}
+
+' =====================================================
+' RAPPORT
+' =====================================================
+
+class Rapport {
+    +id : int
+    +titre : String
+    +description : String
+    +date_creation : DateTime
+    +fichier_path : String
+    +statut : String
+}
+
+' =====================================================
+' RELATIONS
+' =====================================================
+
+Utilisateur "1" -- "0..*" JournalActivite : effectue >
+
+Utilisateur "1" -- "0..*" Rapport : genere >
+
+Indicateur "1" -- "0..*" Observation : concerne >
+
+Pays "1" -- "0..*" Observation : possede >
+
+Sexe "1" -- "0..*" Observation : concerne >
+
+Age "1" -- "0..*" Observation : concerne >
+
+Classification "1" -- "0..*" Observation : concerne >
+
+Indicateur "1" -- "0..*" ImportDonnees : importe >
+
+@enduml

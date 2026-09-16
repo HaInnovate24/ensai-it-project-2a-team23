@@ -602,8 +602,27 @@ Le projet comporte différentes fonctionnalités qui se répartissent entre fonc
 
 = Organisation du groupe
 <organisation-du-groupe>
-#NormalTok("ICI mettre diagramme de Gantt"); (SALIM)
+Le projet sera réalisé par une équipe de 5 membres, avec une répartition claire des responsabilités afin d'assurer une organisation efficace et une bonne coordination des différentes phases du projet.
 
+- #strong[P1] #strong[--- Chef de projet & Qualité :] coordination, suivi et qualité des livrables.
+
+- #strong[P2 --- Data Engineer :] collecte, traitement et préparation des données.
+
+- #strong[P3 --- Base de données & DAO :] modélisation, stockage et accès aux données.
+
+- #strong[P4 --- Backend / API :] développement des services et endpoints de l'API.
+
+- #strong[P5 --- Front & DataViz] : interface utilisateur et visualisation des données.
+
+Le diagramme de Gantt ci-dessous présente la planification des tâches, leur enchaînement ainsi que leur répartition entre les différents membres de l'équipe.
+
+#pagebreak()
+#page(header: none, footer: none, numbering: none, margin: 1cm)[
+  #set align(center + horizon)
+  #rotate(-90deg, reflow: true)[
+    #image("images/GanttPlanning.png", width: 26.5cm)
+  ]
+]
 = Organisation du travail
 <organisation-du-travail>
 Concernant l'organisation du travail, notre équipe s'appuie sur plusieurs outils collaboratifs afin d'assurer une communication fluide et une répartition efficace des tâches. Pour nos échanges quotidiens, nous disposons d'un groupe de discussion sur WhatsApp, ce qui nous permet de débattre de nos idées et de faire des points réguliers sur l'avancement du projet. En parallèle, nous utilisons Google Docs pour la rédaction et le partage de nos documents communs garantissant ainsi à chaque membre un accès simultané pour la lecture et la modification des fichiers. La gestion de projet et le suivi des tâches sont quant à eux centralisés sur la plateforme Notion. Cet espace de travail nous permet de répertorier l'intégralité des actions à mener. Chaque tâche y est qualifiée selon plusieurs critères : son statut (à faire, en cours ou terminé), la phase du projet à laquelle elle se rattache, son niveau d'importance, ainsi que le membre du groupe qui en est responsable. Cette méthode structure notre organisation, offre une vision claire de la progression globale et permet à chacun de savoir précisément ce qu'il doit accomplir. Enfin, concernant la partie développement, nous codons notre application sur VSCode et nous nous appuyons sur GitHub pour centraliser notre travail. Ce répertoire commun est très utile : il sécurise notre collaboration, nous permet de coder en parallèle, de conserver tout l'historique de nos modifications et de résoudre facilement les éventuels conflits de versions.
@@ -618,9 +637,9 @@ Ce diagramme de cas d'utilisation permet d'illustrer les différentes actions qu
 
 Il existe dans ce diagramme deux acteurs différents.
 
-Le profil “Utilisateur” est le rôle standard. Il est strictement limité à l'authentification ainsi qu'à la consultation des analyses et des visualisations telles que l'analyse temporelle, la comparaison géographique ou encore la comparaison multi-indicateurs. Il bénéficie également d'outils tels que la cartographie et la génération de rapports. Les limites du profil “Utilisateur” s'opposent donc aux compétences du profil “Administrateur” qui a un rôle dédié aux tâches de gestion de l'application. Il est le seul à pouvoir modifier ou supprimer certaines données et à gérer l'accès des profils “Utilisateur”. De plus, la flèche d'héritage reliant l'Administrateur à l'Utilisateur indique que l'Administrateur hérite automatiquement des toutes les fonctionnalités dont l'Utilisateur a accès.
+Le profil "Utilisateur" est le rôle standard. Il est strictement limité à l'authentification ainsi qu'à la consultation des analyses et des visualisations telles que l'analyse temporelle, la comparaison géographique ou encore la comparaison multi-indicateurs. Il bénéficie également d'outils tels que la cartographie et la génération de rapports. Les limites du profil "Utilisateur" s'opposent donc aux compétences du profil "Administrateur" qui a un rôle dédié aux tâches de gestion de l'application. Il est le seul à pouvoir modifier ou supprimer certaines données et à gérer l'accès des profils "Utilisateur". De plus, la flèche d'héritage reliant l'Administrateur à l'Utilisateur indique que l'Administrateur hérite automatiquement des toutes les fonctionnalités dont l'Utilisateur a accès.
 
-#figure_block("images/diagramme_cas_utilisation.drawio.png", "Diagramme de cas d'utilisation", w: 14cm, h: auto)
+#figure_block("images/diagramme_cas_utilisation.drawio.png", "Diagramme de cas d'utilisation", w: 10cm, h: 4cm)
 == Diagramme d'activité
 <diagramme-dactivité>
 Le diagramme présenté permet de caractériser les choix offerts à l'utilisateur lorsqu'il se ouvre l'application. Dans un premier temps, il va soit se connecter, soit créer un compte s'il n'en a pas.
@@ -644,25 +663,56 @@ A la fin, l'utilisateur pourra se déconnecter.
 #figure_block("images/Diagramme_activite.png", "Diagramme d'activité", w: 14cm, h: 12cm)
 == Diagramme de classes
 <diagramme-de-classes>
-Cette partie présente le diagramme de classes. Notre modélisation comporte cinq classes, voici une liste de chaque classe avec une courte description pour chacune :
+Le diagramme de classes formalise la structure de données de LaborScope. Il s'organise en trois ensembles :
 
-- Utilisateur : cette classe permet de gérer les connexions. Elle stocke les informations nécessaires à l'authentification et à la sécurité (identifiant, nom d'utilisateur et son mot de passe) ainsi que le rôle de la personne qui s'identifie \;
-- Journal\_activite : cette classe répond à la fonctionnalité qui exige le suivi des activités de l'Administrateur s'il modifie ou supprime des données. Il s'agit donc d'un historique où chaque action réalisée est associée à l'Administrateur correspondant \;
-- Pays : Cette classe sert à stocker les données géographiques. Elle contient le code du pays ainsi que son nom complet \;
-- Indicateur : Cette classe sert à savoir de quel indicateur issu de l'API ILOSTAT on parle. Elle comprend le code de l'indicateur ainsi que sa description.
-- Donnee\_emploi : Cette classe stocke la valeur chiffrée d'une statistique selon les paramètres choisis (période, sexe, tranche d'âge, pays).
+- #strong[Gestion des utilisateurs] : #NormalTok("Utilisateur"); (authentification et rôles), #NormalTok("JournalActivite"); (traçabilité des actions sensibles) et #NormalTok("Rapport"); (rapports PDF générés) \;
+- #strong[Référentiels ILOSTAT] : #NormalTok("Pays");, #NormalTok("Indicateur");, #NormalTok("Sexe");, #NormalTok("Age"); et #NormalTok("Occupation");, qui décrivent les dimensions d'analyse \;
+- #strong[Données] : #NormalTok("Observation");, classe centrale reliant chaque valeur mesurée à ses cinq dimensions, et #NormalTok("ImportDonnees");, qui trace les chargements depuis l'API.
 
+#figure_block("images/diag_class_user.png", "Diagramme de classes — utilisateurs", w: 14cm, h: auto)
+#figure_block("images/diag_class_emploi.png", "Diagramme de classes — données ILOSTAT", w: 15.5cm, h: auto)
+Le tableau suivant décrit le rôle et les attributs principaux de chaque classe.
+
+#block(above: 0.6em, below: 1em)[
+  #set text(size: 8.5pt)
+  #set par(justify: false, leading: 0.55em)
+  #table(
+    columns: (auto, 1.1fr, 1.5fr),
+    inset: (x: 6pt, y: 5pt),
+    align: (left + horizon, left + horizon, left + horizon),
+    stroke: 0.5pt + mutedgray.lighten(45%),
+    table.header(
+      table.cell(fill: accent)[#text(fill: white, weight: "bold")[Classe]],
+      table.cell(fill: accent)[#text(fill: white, weight: "bold")[Rôle]],
+      table.cell(fill: accent)[#text(fill: white, weight: "bold")[Attributs principaux]],
+    ),
+    [*Utilisateur*], [Comptes et authentification (rôles Utilisateur / Administrateur)], [id, nom_utilisateur, mot_de_passe_hash, role, actif, date_creation, derniere_connexion],
+    [*JournalActivite*], [Historique des actions sensibles], [id, action, cible, details, date_heure],
+    [*Rapport*], [Rapports d'analyse PDF générés], [id, titre, description, date_creation, fichier_path, statut],
+    [*Pays*], [Référentiel géographique], [code_pays, nom_pays, continent],
+    [*Indicateur*], [Référentiel des indicateurs ILOSTAT], [code_indicateur, description, unite, source, actif],
+    [*Sexe*], [Dimension sexe], [code_sexe, libelle],
+    [*Age*], [Dimension tranche d'âge], [code_age, libelle, age_min, age_max],
+    [*Occupation*], [Dimension profession / classification], [code_occupation, libelle, valeur],
+    [*Observation*], [Valeur statistique croisant les cinq dimensions], [id, periode, valeur, source, date_import],
+    [*ImportDonnees*], [Suivi des imports automatiques depuis l'API], [id, date_debut, date_fin, statut, nombre_lignes, fichier_source, message_erreur],
+  )
+]
+== Modèle physique de données
+<modèle-physique-de-données>
+Le modèle physique de données traduit le diagramme de classes en schéma relationnel. Il réunit l'ensemble des tables et met en évidence les #strong[clés primaire]s, les #strong[clés étrangères] et les relations entre elles.
+
+#figure_block("images/modele_donnees.png", "Modèle physique de données", w: 15.5cm, h: auto)
 == Diagramme de séquences
 <diagramme-de-séquences>
 Un diagramme de séquence permet de montrer comment les objets et les acteurs du projet interagissent entre eux selon un ordre chronologique dans le cadre d'une fonctionnalité du diagramme de cas d'utilisation.
 
-#figure_block("images/diagramme_sequence_fonctionnnalité.drawio.png", "Diagramme de séquence - fonctionnalité", w: 14cm, h: 12cm)
 == Diagramme de séquences : authentification
 <diagramme-de-séquences-authentification>
 On retrouve dans cette partie le diagramme de séquence concernant la fonctionnalité de l'authentification. Ce diagramme illustre l'ordre chronologique des interactions entre la personne qui tente de se connecter et les trois couches du système que sont l'interface, l'API ainsi que la base de données. L'objectif de ce diagramme est de visualiser comment l'application sépare, en fonction du profil renseigné, les droits de chaque profil (Utilisateur ou Administrateur). Le processus d'authentification est initié par une personne qui saisit son nom et son mot de passe directement sur l'interface. Afin de maintenir la sécurité de l'architecture, l'Interface ne communique jamais directement avec les données, elle formule une demande d'authentification qu'elle transmet au Serveur. C'est l'API qui porte le rôle de la vérification. En effet, le Serveur interroge la Base de données locale pour vérifier si les informations transmises correspondent à un compte existant. Si le compte existe, la Base de données retourne à l'API l'identité de la personne ainsi que son rôle exact, à savoir s'il est simple Utilisateur ou bien Administrateur. En fonction de la réponse de la Base de données, l'application fait face à trois scénarios distincts selon le niveau d'authentification. En effet, selon que le profil renseigné soit utilisateur ou Administrateur, le cahier des charges nous indique que l'utilisateur ne doit pas bénéficier de tous les accès. Voici la liste des trois scénarios :
 
-- Si le rôle détecté est “Utilisateur”, l'API confirme la réussite de l'authentification à l'Interface et accorde ensuite un accès restreint à cet Utilisateur (consultation des analyses et des visualisations)
-- Si le rôle détecté est “Administrateur”, l'API confirme la réussite de l'authentification à l'Interface et accorde ensuite tous les accès de l'application à ce profil
+- Si le rôle détecté est "Utilisateur", l'API confirme la réussite de l'authentification à l'Interface et accorde ensuite un accès restreint à cet Utilisateur (consultation des analyses et des visualisations)
+- Si le rôle détecté est "Administrateur", l'API confirme la réussite de l'authentification à l'Interface et accorde ensuite tous les accès de l'application à ce profil
 - Si la vérification échoue, l'API notifie le refus de connexion à l'Interface et bloque l'accès à l'application en affichant un message d'erreur.
 
 #figure_block("images/diagramme_sequence_authentification.drawio.png", "Diagramme de séquence - authentification", w: 14cm, h: 12cm)
@@ -672,6 +722,7 @@ Cette partie présente le diagramme de séquence qui regroupe les fonctionnalit�
 
 Ainsi, pour ces fonctionnalités, le processus est déclenché par l'utilisateur qui depuis l'Interface sélectionne les paramètres d'analyse : indicateur, pays, période de temps. Une fois la demande d'analyse validée, l'Interface formule une requête qu'elle envoie à l'API. À la réception de cette requête, l'API prend le relais concernant la gestion des données et interroge la Base de données locale avec les critères de filtrage renseignés par l'utilisateur. Ensuite la Base de données répond à cette requête en retournant les données correspondantes. La dernière étape consiste en la préparation et l'affichage des résultats. Pour cela, l'API nettoie les données brutes et calcule les statistiques demandées par l'utilisateur avant de renvoyer ces données formatées à l'Interface. À la réception de ces données finales, l'Interface les utilise pour construire le graphique approprié et l'affiche à l'utilisateur.
 
+#figure_block("images/donnees.png", "Diagramme de séquence - analyse ", w: 14cm, h: 12cm)
 == Diagramme de packages
 <diagramme-de-packages>
 Le diagramme de packages nous permet de voir comment les différentes couches du code interagissent entre elles. La première couche est le frontend, et permet à l'utilisateur d'interagir avec l'application. Il pourra se connecter et ensuite naviguer dans l'application. La deuxième couche est l'API, qui va transmettre les demandes, commandes de l'utilisateur vers le programme. La couche de services va réceptionner ces demandes pour ensuite réaliser des calculs. Cette couche comprend tous les objets, classes relatives aux utilisateurs et calculs à effectuer. Elle interagit avec la dernière couche qui est la couche de données. Les données sont récupérées et parsées, pour être envoyées à la DAO. Les données seront alors traitées pour ensuite être stockées localement dans une base de données PostgreSQL. Ces données seront donc exploitées afin d'effectuer les calculs dans la couche de services. Enfin, on pourra réaliser des visuels graphiques dans la couche de services, qui apparaîtront directement dans le frontend.
@@ -681,7 +732,7 @@ Le diagramme de packages nous permet de voir comment les différentes couches du
 <liste-des-principaux-composants>
 == Les DAO
 <les-dao>
-\(#NormalTok("se servir du cahier des charges pour écrire ce paragraphe");) Les DAO servent à récupérer les données de la base de données.
+Les #strong[DAO (Data Access Objects)] assurent l'accès à la base de données. Ils permettent de récupérer, enregistrer et manipuler les données nécessaires aux traitements métier.
 
 == La couche de services
 <la-couche-de-services>
@@ -693,4 +744,10 @@ L'API (Application Programming Interface) va nous permettre de lier le frontend 
 
 == Le frontend
 <le-frontend>
-Le dernier composant que nous allons développer est le frontend. Il correspond à la couche d'interaction entre l'utilisateur et le programme. C'est là-dessus que l'utilisateur pourra faire des demandes et obtenir des résultats (visualisation graphique, calculs de statistiques…). Le package streamlit sera utilisé afin de développer cette couche. Il affichera donc l'écran de connexion et les différentes fonctionnalités que l'utilisateur pourra choisir. Cette couche interagit avec le backend qui va effectuer les calculs. Le frontend dépend donc du backend pour obtenir les données, les commandes et les résultats. Le backend quant à lui aura besoin du frontend pour enregistrer les demandes de l'utilisateur et y répondre. Le temps estimé pour développer ce composant est de 15H.
+Le frontend est la couche d'interaction entre l'utilisateur et l'application. Développé avec Streamlit, il permet à l'utilisateur de se connecter, de choisir des fonctionnalités et de visualiser les résultats des analyses. Il communique avec le backend pour traiter les demandes. Le temps de développement prévu est de 15H. #box(image("images/composant.png", width: 4.88542in))
+
+= Conclusion
+<conclusion>
+Ce dossier d'analyse a permis de poser les fondations du projet LaborScope. En partant du cahier des charges, nous avons défini les fonctionnalités attendues, justifié nos choix techniques et fonctionnels, puis modélisé l'application à l'aide des différents diagrammes UML (cas d'utilisation, activité, classes, séquences et packages). Cette phase de conception nous offre une vision claire de l'architecture retenue : une API développée avec FastAPI, une couche de services portant la logique métier, une base de données PostgreSQL accessible via les DAO et une interface utilisateur réalisée avec Streamlit.
+
+Au-delà de la modélisation, cette étape a structuré notre organisation collective grâce à une répartition précise des rôles et à une planification détaillée présentée dans le diagramme de Gantt. Nous disposons ainsi d'un cadre de travail solide qui guidera la phase de développement à venir. Bien que certains aspects puissent encore évoluer au fil de la réalisation, ce dossier constitue une base fiable sur laquelle nous nous appuierons pour construire une solution simple, évolutive et réellement utile à l'analyse des données du marché du travail. Les prochaines étapes seront consacrées à l'implémentation des fonctionnalités, à leur test et à leur intégration, dont les résultats seront présentés dans le dossier final.
