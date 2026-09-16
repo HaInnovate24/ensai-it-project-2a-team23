@@ -447,7 +447,7 @@
     Ludovic #smallcaps[Deneuville]
 
     #v(1.2cm)
-
+    
     #text(style: "italic", fill: mutedgray)[Encadrant]
     #v(0.35em)
     Anas #smallcaps[Knefati]
@@ -558,8 +558,11 @@ L'application intègre également une fonctionnalité permettant de générer un
 
 = Organisation du groupe
 <organisation-du-groupe>
-ICI mettre diagramme de Gantt
+Le groupe est composé de #strong[cinq membres], chacun ayant un rôle principal : pilotage et qualité, Data Engineering, base de données et DAO, Backend/API, et Frontend/DataViz. Cette répartition permet de structurer les responsabilités et de coordonner efficacement les différentes phases du projet.
 
+Le #strong[diagramme de Gantt ci-dessous] présente la planification des tâches, leur répartition entre les membres ainsi que les principaux jalons du projet.
+
+#align(center)[#box(image("images/GantLaborScope.jpg"))]
 = Organisation du travail
 <organisation-du-travail>
 Concernant l'organisation du travail, notre équipe s'appuie sur plusieurs outils collaboratifs afin d'assurer une communication fluide et une répartition efficace des tâches. Pour nos échanges quotidiens, nous disposons d'un groupe de discussion sur WhatsApp, ce qui nous permet de débattre de nos idées et de faire des points réguliers sur l'avancement du projet. En parallèle, nous utilisons Google Docs pour la rédaction et le partage de nos documents communs garantissant ainsi à chaque membre un accès simultané pour la lecture et la modification des fichiers.
@@ -578,7 +581,7 @@ Ce diagramme de cas d'utilisation permet d'illustrer les différentes actions qu
 
 Il existe dans ce diagramme deux acteurs différents.
 
-Le profil “Utilisateur” est le rôle standard. Il est strictement limité à l'authentification ainsi qu'à la consultation des analyses et des visualisations telles que l'analyse temporelle, la comparaison géographique ou encore la comparaison multi-indicateurs. Il bénéficie également d'outils tels que la cartographie et la génération de rapports. Les limites du profil “Utilisateur” s'opposent donc aux compétences du profil “Administrateur” qui a un rôle dédié aux tâches de gestion de l'application. Il est le seul à pouvoir modifier ou supprimer certaines données et à gérer l'accès des profils “Utilisateur”. De plus, la flèche d'héritage reliant l'Administrateur à l'Utilisateur indique que l'Administrateur hérite automatiquement de toutes les fonctionnalités auxquelles l'Utilisateur a accès.
+Le profil "Utilisateur" est le rôle standard. Il est strictement limité à l'authentification ainsi qu'à la consultation des analyses et des visualisations telles que l'analyse temporelle, la comparaison géographique ou encore la comparaison multi-indicateurs. Il bénéficie également d'outils tels que la cartographie et la génération de rapports. Les limites du profil "Utilisateur" s'opposent donc aux compétences du profil "Administrateur" qui a un rôle dédié aux tâches de gestion de l'application. Il est le seul à pouvoir modifier ou supprimer certaines données et à gérer l'accès des profils "Utilisateur". De plus, la flèche d'héritage reliant l'Administrateur à l'Utilisateur indique que l'Administrateur hérite automatiquement de toutes les fonctionnalités auxquelles l'Utilisateur a accès.
 
 #figure([
 #box(image("diagramme_cas_utilisation.drawio.png", width: 50.0%))
@@ -623,7 +626,6 @@ Diagramme d'activité
 kind: "quarto-float-fig", 
 supplement: "Figure", 
 )
-<fig-orga>
 
 
 == Diagramme de classes
@@ -646,8 +648,8 @@ On retrouve dans cette partie le diagramme de séquence concernant la fonctionna
 
 Le processus d'authentification est initié par une personne qui saisit son nom et son mot de passe directement sur l'interface. Afin de maintenir la sécurité de l'architecture, l'Interface ne communique jamais directement avec les données, elle formule une demande d'authentification qu'elle transmet au Serveur. C'est l'API qui porte le rôle de la vérification. En effet, le Serveur interroge la Base de données locale pour vérifier si les informations transmises correspondent à un compte existant. Si le compte existe, la Base de données retourne à l'API l'identité de la personne ainsi que son rôle exact, à savoir s'il est simple Utilisateur ou bien Administrateur. En fonction de la réponse de la Base de données, l'application fait face à trois scénarios distincts selon le niveau d'authentification. En effet, selon que le profil renseigné est utilisateur ou Administrateur, le cahier des charges nous indique que l'utilisateur ne doit pas bénéficier de tous les accès. Voici la liste des trois scénarios :
 
-- Si le rôle détecté est “Utilisateur”, l'API confirme la réussite de l'authentification à l'Interface et accorde ensuite un accès restreint à cet Utilisateur (consultation des analyses et des visualisations)
-- Si le rôle détecté est “Administrateur”, l'API confirme la réussite de l'authentification à l'Interface et accorde ensuite tous les accès de l'application à ce profil
+- Si le rôle détecté est "Utilisateur", l'API confirme la réussite de l'authentification à l'Interface et accorde ensuite un accès restreint à cet Utilisateur (consultation des analyses et des visualisations)
+- Si le rôle détecté est "Administrateur", l'API confirme la réussite de l'authentification à l'Interface et accorde ensuite tous les accès de l'application à ce profil
 - Si la vérification échoue, l'API notifie le refus de connexion à l'Interface et bloque l'accès à l'application en affichant un message d'erreur.
 
 #figure([
@@ -660,7 +662,6 @@ Diagramme de séquence (authentification)
 kind: "quarto-float-fig", 
 supplement: "Figure", 
 )
-<fig-orga>
 
 
 === Diagramme de séquence : données analytiques
@@ -679,7 +680,6 @@ Diagramme de séquence (données analytiques)
 kind: "quarto-float-fig", 
 supplement: "Figure", 
 )
-<fig-orga>
 
 
 == Diagramme de packages
@@ -696,7 +696,6 @@ Diagramme de packages
 kind: "quarto-float-fig", 
 supplement: "Figure", 
 )
-<fig-orga>
 
 
 = Liste des principaux composants
