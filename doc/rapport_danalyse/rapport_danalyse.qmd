@@ -199,15 +199,15 @@ Le projet comporte différentes fonctionnalités qui se répartissent entre fonc
 
 La première fonctionnalité de cette application consiste en la récupération et le stockage automatisés des données. Ainsi, l’application interroge automatiquement et de façon périodique `l’API ILOSTAT` et récupère les indicateurs souhaités sur plusieurs pays. Ensuite vient le traitement des données, les fichiers bruts sont triés pour ne conserver que les champs jugés essentiels au bon fonctionnement de l’application. Ces données nettoyées sont ensuite sauvegardées dans la base de données locale et deviennent enfin prêtes à être analysées.
 
-Une autre fonctionnalité doit permettre l’analyse temporelle des données extraites et stockées. L’utilisateur pourra sélectionner un indicateur, définir une fenêtre de temps et afficher les résultats sous forme graphique. Concrètement, après la sélection des paramètres, l’`API` calcule cette évolution temporelle et l'interface permet d’observer les dynamiques du marché du travail. 
+Une autre fonctionnalité doit permettre l’analyse temporelle des données extraites et stockées. L’utilisateur pourra sélectionner un indicateur, définir une fenêtre de temps et afficher les résultats sous forme graphique. Concrètement, après la sélection des paramètres, l’`API` calcule cette évolution temporelle et l'interface permet d’observer les dynamiques du marché du travail.
 
-Outre la comparaison temporelle d’un indicateur, cette fonctionnalité propose à l’utilisateur, pour la période la plus récente possible présente dans la base de données, de comparer un indicateur entre plusieurs pays. L’utilisateur peut choisir une liste de pays ainsi qu'un indicateur et l’application met en évidence les pays présentant les valeurs les plus hautes et les plus basses concernant cet indicateur. 
+Outre la comparaison temporelle d’un indicateur, cette fonctionnalité propose à l’utilisateur, pour la période la plus récente possible présente dans la base de données, de comparer un indicateur entre plusieurs pays. L’utilisateur peut choisir une liste de pays ainsi qu'un indicateur et l’application met en évidence les pays présentant les valeurs les plus hautes et les plus basses concernant cet indicateur.
 
-La fonctionnalité de comparaison multi-indicateurs doit permettre à l’utilisateur de croiser plusieurs jeux de données. L’utilisateur pourra superposer plusieurs indicateurs sur un même graphique ainsi qu’une échelle de temps. Cela permet de dégager visuellement des liens entre les indicateurs sur une période donnée et ainsi de comprendre quels mécanismes régissent le monde du travail. 
+La fonctionnalité de comparaison multi-indicateurs doit permettre à l’utilisateur de croiser plusieurs jeux de données. L’utilisateur pourra superposer plusieurs indicateurs sur un même graphique ainsi qu’une échelle de temps. Cela permet de dégager visuellement des liens entre les indicateurs sur une période donnée et ainsi de comprendre quels mécanismes régissent le monde du travail.
 
-La dernière fonctionnalité obligatoire consiste en la gestion des utilisateurs et de la sécurité. Ainsi, l’accès à l’application sera sécurisé par une authentification vérifiant les mots de passe et le système devra gérer deux niveaux de droits d’accès. Les utilisateurs standard consultent les analyses et les visualisations tandis que les administrateurs possèdent en plus de la consultation des droits de gestion sur les données. De plus, chaque modification sur les bases de données entraîne une actualisation du journal de suivi des activités. 
+La dernière fonctionnalité obligatoire consiste en la gestion des utilisateurs et de la sécurité. Ainsi, l’accès à l’application sera sécurisé par une authentification vérifiant les mots de passe et le système devra gérer deux niveaux de droits d’accès. Les utilisateurs standard consultent les analyses et les visualisations tandis que les administrateurs possèdent en plus de la consultation des droits de gestion sur les données. De plus, chaque modification sur les bases de données entraîne une actualisation du journal de suivi des activités.
 
-La première fonctionnalité optionnelle est une cartographie interactive où l’utilisateur choisit un indicateur et les données sont ensuite projetées sur une carte du monde. Chaque pays est colorié selon la valeur de l’indicateur choisi. Cela permet donc de visualiser des tendances mondiales sur un indicateur précis. 
+La première fonctionnalité optionnelle est une cartographie interactive où l’utilisateur choisit un indicateur et les données sont ensuite projetées sur une carte du monde. Chaque pays est colorié selon la valeur de l’indicateur choisi. Cela permet donc de visualiser des tendances mondiales sur un indicateur précis.
 
 L’application intègre également une fonctionnalité permettant de générer un rapport d’analyse au format PDF. L’utilisateur sélectionne des indicateurs, une période de temps ainsi que des pays et l’outil en fera un résumé statistique contenant des graphiques et une conclusion synthétique générée automatiquement à partir des données observées.
 
@@ -350,7 +350,6 @@ Ainsi, pour ces fonctionnalités, le processus est déclenché par l’utilisate
 ```{=typst}
 #figure_block("images/donnees.png", "Diagramme de séquence - analyse ", w: 14cm, h: 12cm)
 ```
-
 ## Diagramme de packages
 
 Le diagramme de packages nous permet de voir comment les différentes couches du code interagissent entre elles. La première couche est le `frontend`, et permet à l’utilisateur d’interagir avec l’application. Il pourra se connecter et ensuite naviguer dans l’application. La deuxième couche est l’`API`, qui va transmettre les demandes, commandes de l’utilisateur vers le programme. La couche de services va réceptionner ces demandes pour ensuite réaliser des calculs. Cette couche comprend tous les objets, classes relatives aux utilisateurs et calculs à effectuer. Elle interagit avec la dernière couche qui est la couche de données. Les données sont récupérées et parsées, pour être envoyées à la `DAO`. Les données seront alors traitées pour ensuite être stockées localement dans une base de données `PostgreSQL`. Ces données seront donc exploitées afin d’effectuer les calculs dans la couche de services. Enfin, on pourra réaliser des visuels graphiques dans la couche de services, qui apparaîtront directement dans le `frontend`.
@@ -362,7 +361,7 @@ Le diagramme de packages nous permet de voir comment les différentes couches du
 
 ## Les DAO
 
-Le rôle de la couche `DAO` (**Data Access Object**) est de  récupérer les données de la base de données locale. Cette couche assure le relai technique entre la base de données locale et la couche de services. Concernant ses dépendances, ce composant est totalement indépendant des autres parties de l'application. Son seul lien direct est avec la base de données locale, qu'il a justement pour mission de manipuler. À l'inverse, le serveur principal dépend entièrement de lui pour pouvoir retrouver ces informations. Ainsi, de par son importance technique, ce composant est à développer avec une priorité absolue avec un temps de développement estimé à 40H. 
+Le rôle de la couche `DAO` (**Data Access Object**) est de récupérer les données de la base de données locale. Cette couche assure le relai technique entre la base de données locale et la couche de services. Concernant ses dépendances, ce composant est totalement indépendant des autres parties de l'application. Son seul lien direct est avec la base de données locale, qu'il a justement pour mission de manipuler. À l'inverse, le serveur principal dépend entièrement de lui pour pouvoir retrouver ces informations. Ainsi, de par son importance technique, ce composant est à développer avec une priorité absolue avec un temps de développement estimé à 40H.
 
 ## La couche de services
 
@@ -374,8 +373,7 @@ L’`API` (Application Programming Interface) va nous permettre de lier le `fron
 
 ## Le frontend
 
-Le `frontend` est la couche d’interaction entre l’utilisateur et l’application. Développé avec `Streamlit`, il permet à l’utilisateur de se connecter, de choisir des fonctionnalités et de visualiser les résultats des analyses. Il communique avec le `backend` pour traiter les demandes. Le temps de développement prévu est de 15H.
-![](images/composant.png){fig-align="center" width="469"}
+Le `frontend` est la couche d’interaction entre l’utilisateur et l’application. Développé avec `Streamlit`, il permet à l’utilisateur de se connecter, de choisir des fonctionnalités et de visualiser les résultats des analyses. Il communique avec le `backend` pour traiter les demandes. Le temps de développement prévu est de 15H. ![](images/composant.png){fig-align="center" width="469"}
 
 # Conclusion
 
