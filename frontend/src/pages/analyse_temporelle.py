@@ -12,8 +12,7 @@ with col1:
         [
             "Taux de chômage",
             "Taux d'activité",
-            "Taux d'emploi",
-            "Comparaison des 3 indicateurs"
+            "Taux d'emploi"
         ]
     )
 
