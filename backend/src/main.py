@@ -9,7 +9,13 @@ from fastapi import FastAPI, Request, status
 from fastapi.exceptions import RequestValidationError
 from fastapi.responses import JSONResponse, RedirectResponse
 
-from controller import game_controller, login_controller, player_controller
+from controller import (
+    extraction_controller,
+    parsing_controller,
+    game_controller,
+    login_controller,
+    player_controller,
+)
 from utils.env_variables import display_values, load_environment_variables
 from utils.log_utils import LogMiddleware, get_logger, initialize_logs
 from utils.reset_database import ResetDatabase
@@ -47,6 +53,16 @@ async def validation_exception_handler(request: Request, exc: RequestValidationE
 app.include_router(player_controller.router, prefix="/player", tags=["Players"])
 app.include_router(login_controller.router, prefix="/login", tags=["Login"])
 app.include_router(game_controller.router, prefix="/game", tags=["Games"])
+app.include_router(
+    extraction_controller.router,
+    prefix="/data",
+    tags=["ILOSTAT data"],
+)
+app.include_router(
+    parsing_controller.router,
+    prefix="/parse",
+    tags=["ILOSTAT parsing"],
+)
 
 
 @app.get("/", include_in_schema=False)
