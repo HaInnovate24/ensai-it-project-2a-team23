@@ -1,38 +1,39 @@
-"""
-Main entry point for the FastAPI web service.
+"""Point d'entrée du service web FastAPI.
 
-Initializes logging, loads environment variables, and sets up API routers
-for players, login, and games.
+Crée l'application, branche les routeurs et démarre le planificateur.
 """
 
 from fastapi import FastAPI, Request, status
 from fastapi.exceptions import RequestValidationError
 from fastapi.responses import JSONResponse, RedirectResponse
 
-from controller import game_controller, login_controller, player_controller
-from utils.env_variables import display_values, load_environment_variables
-from utils.log_utils import LogMiddleware, get_logger, initialize_logs
-from utils.reset_database import ResetDatabase
+from controller import (
+    admin_controller,
+    analyse_controller,
+    auth_controller,
+    rapport_controller,
+    referentiel_controller,
+)
+from utils.config import display_values, load_environment_variables
+from utils.journalisation import LogMiddleware, get_logger, initialize_logs
 
 logger = get_logger(__name__)
 
-# Initialization
+# Initialisation
 initialize_logs("Webservice")
 
 load_environment_variables()
 display_values()
 
 
-app = FastAPI(title="My Webservice")
+app = FastAPI(title="LaborScope")
 
 app.add_middleware(LogMiddleware)
 
 
 @app.exception_handler(RequestValidationError)
 async def validation_exception_handler(request: Request, exc: RequestValidationError):
-    """
-    Intercepts Pydantic 422 errors to log them.
-    """
+    """Intercepte les erreurs 422 de Pydantic pour les journaliser."""
     body = await request.body()
     body_str = body.decode() if body else "empty body"
 
@@ -44,34 +45,20 @@ async def validation_exception_handler(request: Request, exc: RequestValidationE
     )
 
 
-app.include_router(player_controller.router, prefix="/player", tags=["Players"])
-app.include_router(login_controller.router, prefix="/login", tags=["Login"])
-app.include_router(game_controller.router, prefix="/game", tags=["Games"])
+app.include_router(auth_controller.router, prefix="/auth", tags=["Authentification"])
+app.include_router(referentiel_controller.router, prefix="/referentiels", tags=["Référentiels"])
+app.include_router(analyse_controller.router, prefix="/analyses", tags=["Analyses"])
+app.include_router(rapport_controller.router, prefix="/rapports", tags=["Rapports"])
+app.include_router(admin_controller.router, prefix="/admin", tags=["Administration"])
 
 
 @app.get("/", include_in_schema=False)
 async def redirect_to_docs():
-    """Redirect to the API documentation"""
+    """Redirige vers la documentation de l'API."""
     return RedirectResponse(url="/docs")
 
 
-@app.get("/hello/{name}", tags=["Misc"])
-async def hello_name(name: str):
-    """Display Hello"""
-    logger.info("Display Hello")
-    return {"message": f"Hello {name}"}
-
-
-@app.get("/reset_database", tags=["Misc"])
-async def reset_database():
-    """Reset the database"""
-    logger.info("Database reset")
-    success = ResetDatabase().run()
-
-    return {"message": f"Database re-initialization - {'SUCCESS' if success else 'FAILURE'}"}
-
-
-# Run the FastAPI application
+# Lancement de l'application FastAPI
 if __name__ == "__main__":
     import os
 

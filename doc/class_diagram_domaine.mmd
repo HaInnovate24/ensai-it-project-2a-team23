@@ -1,0 +1,152 @@
+classDiagram
+    direction LR
+
+    %% =====================================================
+    %% ENUMERATIONS
+    %% =====================================================
+    class Role {
+        <<enumeration>>
+        UTILISATEUR
+        ADMIN
+    }
+    class Sexe {
+        <<enumeration>>
+        HOMME
+        FEMME
+        TOTAL
+    }
+    class TypeClassification {
+        <<enumeration>>
+        AGE
+        OCCUPATION
+    }
+    class StatutImport {
+        <<enumeration>>
+        EN_COURS
+        SUCCES
+        ECHEC
+    }
+    class StatutRapport {
+        <<enumeration>>
+        EN_ATTENTE
+        PRET
+        ECHEC
+    }
+
+    %% =====================================================
+    %% OBJETS METIER (porteurs de donnees, sans logique)
+    %% =====================================================
+    class Utilisateur {
+        +int id
+        +str nom_utilisateur
+        +str mot_de_passe_hash
+        +Role role
+        +bool actif
+        +datetime date_creation
+        +datetime derniere_connexion
+        +__init__(id, nom_utilisateur, mot_de_passe_hash, role, actif, date_creation, derniere_connexion)
+    }
+
+    class Pays {
+        +str code_pays
+        +str nom_pays
+        +__init__(code_pays, nom_pays)
+    }
+
+    class Indicateur {
+        +str code_indicateur
+        +str description
+        +str unite
+        +str source
+        +bool actif
+        +__init__(code_indicateur, description, unite, source, actif)
+    }
+
+    class Classification {
+        +str code
+        +str libelle
+        +TypeClassification type
+        +__init__(code, libelle, type)
+    }
+    class Age {
+        +int age_min
+        +int age_max
+        +__init__(code, libelle, age_min, age_max)
+    }
+    class Occupation {
+        +str valeur
+        +__init__(code, libelle, valeur)
+    }
+
+    class Observation {
+        +int id
+        +str code_indicateur
+        +str code_pays
+        +str periode
+        +float valeur
+        +Sexe sexe
+        +str code_classification
+        +int import_id
+        +str source
+        +datetime date_import
+        +__init__(id, code_indicateur, code_pays, periode, valeur, sexe, code_classification, import_id, source, date_import)
+    }
+
+    class ImportDonnees {
+        +int id
+        +str indicateur_code
+        +int utilisateur_id
+        +datetime date_debut
+        +datetime date_fin
+        +StatutImport statut
+        +int nombre_lignes
+        +str fichier_source
+        +str message_erreur
+        +__init__(id, indicateur_code, utilisateur_id, date_debut, date_fin, statut, nombre_lignes, fichier_source, message_erreur)
+    }
+
+    class JournalActivite {
+        +int id
+        +int utilisateur_id
+        +str action
+        +str cible
+        +str details
+        +datetime date_heure
+        +__init__(id, utilisateur_id, action, cible, details, date_heure)
+    }
+
+    class Rapport {
+        +int id
+        +int utilisateur_id
+        +str titre
+        +str description
+        +datetime date_creation
+        +str fichier_path
+        +StatutRapport statut
+        +__init__(id, utilisateur_id, titre, description, date_creation, fichier_path, statut)
+    }
+
+    %% =====================================================
+    %% HERITAGE
+    %% =====================================================
+    Classification <|-- Age
+    Classification <|-- Occupation
+
+    %% =====================================================
+    %% ASSOCIATIONS
+    %% =====================================================
+    Observation "0..*" --> "1" Indicateur : concerne
+    Observation "0..*" --> "1" Pays : porte sur
+    Observation "0..*" --> "0..1" Classification : ventile
+    Observation "0..*" --> "1" ImportDonnees : issue de
+    ImportDonnees "0..*" --> "1" Indicateur : importe
+    ImportDonnees "0..*" --> "0..1" Utilisateur : declenche par
+    Utilisateur "1" --> "0..*" JournalActivite : effectue
+    Utilisateur "1" --> "0..*" Rapport : genere
+
+    %% Usage des enumerations
+    Utilisateur ..> Role
+    Observation ..> Sexe
+    Classification ..> TypeClassification
+    ImportDonnees ..> StatutImport
+    Rapport ..> StatutRapport

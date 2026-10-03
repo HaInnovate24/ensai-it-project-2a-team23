@@ -1,3 +1,3 @@
-from utils.env_variables import load_environment_variables
+from utils.config import load_environment_variables
 
 load_environment_variables()

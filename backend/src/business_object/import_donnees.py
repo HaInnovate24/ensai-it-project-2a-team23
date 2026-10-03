@@ -1,0 +1,36 @@
+"""Objet métier représentant un import de données ILOSTAT."""
+
+from datetime import datetime
+
+from business_object.enums import StatutImport
+
+
+class ImportDonnees:
+    """Trace d'une opération de collecte et de chargement de données.
+
+    Attributs :
+        id : identifiant technique.
+        indicateur_code : indicateur importé.
+        utilisateur_id : utilisateur ayant déclenché l'import (si manuel).
+        date_debut : horodatage de début.
+        date_fin : horodatage de fin.
+        statut : statut de l'import.
+        nombre_lignes : nombre de lignes traitées.
+        fichier_source : fichier ou URL source.
+        message_erreur : message d'erreur en cas d'échec.
+    """
+
+    def __init__(
+        self,
+        id: int | None = None,
+        indicateur_code: str | None = None,
+        utilisateur_id: int | None = None,
+        date_debut: datetime | None = None,
+        date_fin: datetime | None = None,
+        statut: StatutImport = StatutImport.EN_COURS,
+        nombre_lignes: int = 0,
+        fichier_source: str | None = None,
+        message_erreur: str | None = None,
+    ):
+        """Initialise un import de données."""
+        ...
