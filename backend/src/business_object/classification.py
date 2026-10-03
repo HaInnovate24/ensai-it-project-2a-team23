@@ -19,4 +19,10 @@ class Classification:
         type: TypeClassification | None = None,
     ):
         """Initialise une classification."""
-        ...
+        self.code = code
+        self.libelle = libelle
+        
+        if isinstance(type, str):
+            self.type = TypeClassification(type)
+        else:
+            self.type = type

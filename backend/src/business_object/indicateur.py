@@ -21,4 +21,8 @@ class Indicateur:
         actif: bool = True,
     ):
         """Initialise un indicateur."""
-        ...
+        self.code_indicateur = code_indicateur
+        self.description = description
+        self.unite = unite
+        self.source = source
+        self.actif = actif

@@ -15,4 +15,5 @@ class Pays:
         nom_pays: str | None = None,
     ):
         """Initialise un pays."""
-        ...
+        self.code_pays = code_pays
+        self.nom_pays = nom_pays
