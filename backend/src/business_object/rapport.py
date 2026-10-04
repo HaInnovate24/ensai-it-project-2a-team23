@@ -26,7 +26,18 @@ class Rapport:
         description: str | None = None,
         date_creation: datetime | None = None,
         fichier_path: str | None = None,
-        statut: StatutRapport = StatutRapport.EN_ATTENTE,
+        statut: StatutRapport | str = StatutRapport.EN_ATTENTE,
     ):
         """Initialise un rapport."""
-        ...
+        self.id = id
+        self.utilisateur_id = utilisateur_id
+        self.titre = titre
+        self.description = description
+        self.date_creation = date_creation
+        self.fichier_path = fichier_path
+        
+        # Gère la conversion du texte PostgreSQL vers l'Enum
+        if isinstance(statut, str):
+            self.statut = StatutRapport(statut)
+        else:
+            self.statut = statut

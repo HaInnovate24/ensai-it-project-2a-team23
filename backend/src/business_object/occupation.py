@@ -1,6 +1,7 @@
 """Objet métier représentant une classification par catégorie d'occupation."""
 
 from business_object.classification import Classification
+from business_object.enums import TypeClassification
 
 
 class Occupation(Classification):
@@ -17,4 +18,5 @@ class Occupation(Classification):
         valeur: str | None = None,
     ):
         """Initialise une occupation."""
-        ...
+        super().__init__(code=code, libelle=libelle, type=TypeClassification.OCCUPATION)
+        self.valeur = valeur

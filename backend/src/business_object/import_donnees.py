@@ -33,4 +33,18 @@ class ImportDonnees:
         message_erreur: str | None = None,
     ):
         """Initialise un import de données."""
-        ...
+        self.id = id
+        self.indicateur_code = indicateur_code
+        self.utilisateur_id = utilisateur_id
+        self.date_debut = date_debut
+        self.date_fin = date_fin
+
+        # Conversion automatique du texte PostgreSQL vers l'Enum Python
+        if isinstance(statut, str):
+            self.statut = StatutImport(statut)
+        else:
+            self.statut = statut
+
+        self.nombre_lignes = nombre_lignes
+        self.fichier_source = fichier_source
+        self.message_erreur = message_erreur

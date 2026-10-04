@@ -29,4 +29,16 @@ class Utilisateur:
         derniere_connexion: datetime | None = None,
     ):
         """Initialise un utilisateur."""
-        ...
+        self.id = id
+        self.nom_utilisateur = nom_utilisateur
+        self.mot_de_passe_hash = mot_de_passe_hash
+        
+        # Gère la conversion si PostgreSQL renvoie une chaîne de caractères
+        if isinstance(role, str):
+            self.role = Role(role)
+        else:
+            self.role = role
+            
+        self.actif = actif
+        self.date_creation = date_creation
+        self.derniere_connexion = derniere_connexion

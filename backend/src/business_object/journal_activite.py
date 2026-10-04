@@ -25,4 +25,9 @@ class JournalActivite:
         date_heure: datetime | None = None,
     ):
         """Initialise une entrée de journal."""
-        ...
+        self.id = id
+        self.utilisateur_id = utilisateur_id
+        self.action = action
+        self.cible = cible
+        self.details = details
+        self.date_heure = date_heure

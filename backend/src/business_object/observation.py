@@ -35,4 +35,19 @@ class Observation:
         date_import: datetime | None = None,
     ):
         """Initialise une observation."""
-        ...
+        self.id = id
+        self.code_indicateur = code_indicateur
+        self.code_pays = code_pays
+        self.periode = periode
+        self.valeur = valeur
+        
+        # Gère la conversion du type Sexe
+        if isinstance(sexe, str):
+            self.sexe = Sexe(sexe)
+        else:
+            self.sexe = sexe
+            
+        self.code_classification = code_classification
+        self.import_id = import_id
+        self.source = source
+        self.date_import = date_import
