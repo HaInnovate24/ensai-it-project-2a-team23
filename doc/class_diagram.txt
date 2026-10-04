@@ -24,9 +24,6 @@ class Utilisateur {
 class Pays {
     +code_pays : String
     +nom_pays : String
-    +continent : String
-    +latitude : Decimal
-    +longitude : Decimal
 }
 
 class Indicateur {

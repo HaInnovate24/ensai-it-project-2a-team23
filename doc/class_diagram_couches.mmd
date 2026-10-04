@@ -1,0 +1,121 @@
+classDiagram
+    direction LR
+
+    %% =====================================================
+    %% CLIENT
+    %% =====================================================
+    class IlostatClient {
+        +telecharger_indicateur(code_indicateur) str
+    }
+
+    %% =====================================================
+    %% DAO
+    %% =====================================================
+    class IndicateurDao {
+        +lister() List~Indicateur~
+        +trouver_par_code(code_indicateur) Indicateur
+        +creer(indicateur) Indicateur
+    }
+    class PaysDao {
+        +lister() List~Pays~
+        +trouver_par_code(code_pays) Pays
+        +creer(pays) Pays
+    }
+    class ClassificationDao {
+        +lister(type) List~Classification~
+        +trouver_par_code(code) Classification
+        +creer(classification) Classification
+    }
+    class ObservationDao {
+        +inserer_ou_mettre_a_jour_par_lot(observations) int
+        +lire_serie(code_indicateur, code_pays, sexe, code_classification) List~Observation~
+        +lire_par_periode(code_indicateur, periode, codes_pays) List~Observation~
+        +trouver_par_id(id) Observation
+        +modifier(observation) bool
+        +supprimer(id) bool
+    }
+    class ImportDao {
+        +creer(import_donnees) ImportDonnees
+        +mettre_a_jour(import_donnees) bool
+        +lister() List~ImportDonnees~
+    }
+    class UtilisateurDao {
+        +creer(utilisateur) Utilisateur
+        +trouver_par_id(id) Utilisateur
+        +trouver_par_nom(nom_utilisateur) Utilisateur
+        +lister() List~Utilisateur~
+        +modifier(utilisateur) bool
+    }
+    class JournalDao {
+        +creer(entree) JournalActivite
+        +lister() List~JournalActivite~
+    }
+    class RapportDao {
+        +creer(rapport) Rapport
+        +mettre_a_jour(rapport) bool
+        +trouver_par_id(id) Rapport
+        +lister(utilisateur_id) List~Rapport~
+    }
+
+    %% =====================================================
+    %% SERVICES
+    %% =====================================================
+    class CollecteService {
+        +collecter_indicateur(code_indicateur, utilisateur_id) ImportDonnees
+    }
+    class ParserService {
+        +parser(contenu_brut, code_indicateur) List~Observation~
+    }
+    class ReferentielService {
+        +lister_indicateurs() List~Indicateur~
+        +lister_pays() List~Pays~
+        +lister_classifications(type) List~Classification~
+    }
+    class AnalyseService {
+        +evolution(code_indicateur, code_pays, sexe, code_classification) List
+        +comparer_pays(code_indicateur, codes_pays, periode) List
+        +comparer_indicateurs(codes_indicateur, code_pays) List
+        +carte(code_indicateur, periode) List
+    }
+    class AuthentificationService {
+        +se_connecter(nom_utilisateur, mot_de_passe) str
+        +utilisateur_courant(jeton) Utilisateur
+        +verifier_role(utilisateur, role_requis) bool
+    }
+    class UtilisateurService {
+        +inscrire(nom_utilisateur, mot_de_passe) Utilisateur
+        +promouvoir_admin(utilisateur_id) bool
+        +desactiver(utilisateur_id) bool
+    }
+    class DonneesService {
+        +rechercher(filtres) List~Observation~
+        +corriger(observation) bool
+        +supprimer(observation_id) bool
+    }
+    class JournalService {
+        +enregistrer(utilisateur_id, action, cible, details) JournalActivite
+        +consulter() List~JournalActivite~
+    }
+    class RapportService {
+        +generer(utilisateur_id, parametres) Rapport
+        +lister(utilisateur_id) List~Rapport~
+        +telecharger(rapport_id) bytes
+    }
+
+    %% =====================================================
+    %% COMPOSITION : chaque service possede ses DAO / client
+    %% =====================================================
+    CollecteService *-- IlostatClient
+    CollecteService *-- ParserService
+    CollecteService *-- ObservationDao
+    CollecteService *-- ImportDao
+    ReferentielService *-- IndicateurDao
+    ReferentielService *-- PaysDao
+    ReferentielService *-- ClassificationDao
+    AnalyseService *-- ObservationDao
+    AuthentificationService *-- UtilisateurDao
+    UtilisateurService *-- UtilisateurDao
+    DonneesService *-- ObservationDao
+    JournalService *-- JournalDao
+    RapportService *-- RapportDao
+    RapportService *-- ObservationDao
