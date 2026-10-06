@@ -1,9 +1,9 @@
 from io import StringIO
 
-import pandas as pd  # type: ignore[import-untyped]
-import requests  # type: ignore[import-untyped]
+import pandas as pd
+import requests
 
-from utils.log_utils import get_logger  # type: ignore[import-not-found]
+from utils.log_utils import get_logger
 
 logger = get_logger(__name__)
 
@@ -22,12 +22,12 @@ class ExtractionService:
         if from_date > to_date:
             raise ValueError("from_date must be less than or equal to to_date")
 
-        params = {
-            "id": indicator_id,
-            "timefrom": from_date,
-            "timeto": to_date,
-            "type": "label",
-            "format": ".csv",
+        params: dict[str, str | int] = {
+        "id": indicator_id,
+        "timefrom": from_date,
+        "timeto": to_date,
+        "type": "label",
+        "format": ".csv",
         }
 
         logger.info(
@@ -39,3 +39,35 @@ class ExtractionService:
         response = requests.get(self.BASE_URL, params=params, timeout=60)
         response.raise_for_status()
         return pd.read_csv(StringIO(response.text))
+
+
+    def get_data_from_ilo_for_one_indicator(
+        self,
+        indicator_id: str = "EMP_5EMP_SEX_OC2_NB_Q",
+        from_date: int = 2014,
+        to_date: int = 2026,
+    ) -> pd.DataFrame:
+        """
+        Méthode utilitaire pour traiter un seul indicateur sur une période donnée.
+
+        Args:
+            indicator_id (str, optionnel): Identifiant de l'indicateur. Valeur par défaut "EMP_5EMP_SEX_OC2_NB_Q".
+            from_date (int, optionnel): Année de début de période. Valeur par défaut 2014.
+            to_date (int, optionnel): Année de fin de période. Valeur par défaut 2026.
+
+        Returns:
+            pd.DataFrame: Les données extraites pour l'indicateur demandé sous forme de DataFrame.
+        """
+
+        logger.info(
+            "Traitement de l'indicateur %s (%s-%s)",
+            indicator_id,
+            from_date,
+            to_date,
+        )
+
+        return self.get_indicator_data(
+            indicator_id=indicator_id,
+            from_date=from_date,
+            to_date=to_date,
+        )
