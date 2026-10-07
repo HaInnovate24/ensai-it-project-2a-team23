@@ -2,20 +2,21 @@
 port = 8000
 
 [theme]
-textColor="#1a1a1a"
-font="Calibri"
+# --- Ambiance Beige & Marron Chaleureux ---
+textColor="#2C3E50"
+font="sans serif"
 
-primaryColor="#1963a0"
-backgroundColor="#90C090"
-secondaryBackgroundColor="#ffffff"
+primaryColor="#2E86C1"
+backgroundColor="#EFEAE2" # Un beige lin très doux, chaleureux et naturel
+secondaryBackgroundColor="#FFFFFF" # Les blocs et menus restent blancs pour contraster
 
+# --- Tes variables personnalisées conservées à l'identique ---
 redTextColor="#8b0303"
 redBackgroundColor="#ff5f5f"
 greenTextColor="#016806"
 greenBackgroundColor="#9cd1b7"
 yellowTextColor="#bd7f0c"
 yellowBackgroundColor="#f7bd53"
-
 
 dataframeBorderColor="#976a09"
 dataframeHeaderBackgroundColor="#eea73d"
