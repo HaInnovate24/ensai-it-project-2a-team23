@@ -62,8 +62,10 @@ class ParserService:
             value = float(row["value"])
             if not math.isfinite(value):
                 continue
-
-            sex = self._parse_sex(row[sex_column]) if sex_column else Sexe.TOTAL
+            try:
+                sex = self._parse_sex(row[sex_column]) if sex_column else Sexe.TOTAL
+            except ValueError:
+                continue
             classification = None
             if classification_column is not None:
                 raw_classification = row[classification_column]

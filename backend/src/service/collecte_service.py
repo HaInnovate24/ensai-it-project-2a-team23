@@ -87,29 +87,34 @@ class CollecteService:
 
         return trace
 
-
 import sys
 sys.path.insert(0, "backend/src")
 
-from service.collecte_service import CollecteService
 from business_object.enums import StatutImport
-
-
-class FauxClientILOSTAT:
-    def telecharger_indicateur(self, code_indicateur, from_date, to_date):
-        return "ref_area,sex,time,obs_value\nFRA,SEX_T,2020,12.5\n"
+from client.ilostat_client import IlostatClient
+from service.collecte_service import CollecteService
+from service.parser_service import ParserService
 
 
 class FauxImportDao:
     def creer(self, trace):
-        trace.id = 42
+        trace.id = 1
         return trace
 
     def mettre_a_jour(self, trace):
-        self.trace = trace
+        pass
+
+
+class FauxConnexion:
+    def rollback(self):
+        pass
 
 
 class FauxObservationDao:
+    def __init__(self):
+        self.conn = FauxConnexion()
+        self.observations = []
+
     def inserer_ou_mettre_a_jour_par_lot(self, observations):
         self.observations = observations
         return len(observations)
@@ -118,12 +123,18 @@ class FauxObservationDao:
 service = CollecteService.__new__(CollecteService)
 service.import_dao = FauxImportDao()
 service.observation_dao = FauxObservationDao()
-service.ilostat_client = FauxClientILOSTAT()
+service.parser_service = ParserService()
+service.ilostat_client = IlostatClient()
 
-trace = service.collecter_indicateur("TEST_INDICATOR", 2020, 2020)
+trace = service.collecter_indicateur(
+    code_indicateur="EMP_TEMP_SEX_OCU_NB",
+    from_date=2020,
+    to_date=2021,
+)
 
-assert trace.statut == StatutImport.SUCCES
-assert trace.nombre_lignes == 1
-assert service.observation_dao.observations[0].import_id == 42
+assert trace.statut == StatutImport.SUCCES, trace.message_erreur
+assert trace.nombre_lignes > 0
+assert all(observation.import_id == trace.id
+           for observation in service.observation_dao.observations)
 
-print("Test réussi")
+print(f"Test réussi : {trace.nombre_lignes} observations traitées")
