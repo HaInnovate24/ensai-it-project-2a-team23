@@ -49,7 +49,6 @@ class ExtractionService:
             from_date,
             to_date,
         )
-        
 
         response = requests.get(
             self.BASE_URL,
@@ -61,9 +60,6 @@ class ExtractionService:
 
         return pd.read_csv(StringIO(response.text))
 
-
-
-        
     def get_data_from_ilo_for_one_indicator(
         self,
         indicator_id: str = "EMP_5EMP_SEX_OC2_NB_Q",

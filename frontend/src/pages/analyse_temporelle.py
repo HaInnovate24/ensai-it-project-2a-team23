@@ -8,19 +8,11 @@ col1, col2 = st.columns(2)
 
 with col1:
     indicateur = st.selectbox(
-        "Choisissez l'indicateur :",
-        [
-            "Taux de chômage",
-            "Taux d'activité",
-            "Taux d'emploi"
-        ]
+        "Choisissez l'indicateur :", ["Taux de chômage", "Taux d'activité", "Taux d'emploi"]
     )
 
 with col2:
-    population = st.selectbox(
-        "Sélectionnez la tranche d'âge :",
-        ["15 ans et plus", "15-24 ans"]
-    )
+    population = st.selectbox("Sélectionnez la tranche d'âge :", ["15 ans et plus", "15-24 ans"])
 
 # --- Ligne 2 : Les filtres géographiques et temporels ---
 col3, col4 = st.columns(2)
@@ -29,7 +21,7 @@ with col3:
     pays = st.multiselect(
         "Sélectionnez le(s) pays :",
         ["France", "Allemagne", "États-Unis", "Sénégal", "Japon"],
-        default=["France"]
+        default=["France"],
     )
 
 with col4:

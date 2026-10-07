@@ -1,6 +1,7 @@
 from fastapi import APIRouter
 
-from  service.extraction_service import ExtractionService
+from service.extraction_service import ExtractionService
+
 router = APIRouter()
 
 
