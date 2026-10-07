@@ -26,16 +26,16 @@ if "role_utilisateur" not in st.session_state:
     })
 
 elif st.session_state["role_utilisateur"] == "Utilisateur":
-    # Mode "Utilisateur connecté" : accès à F3, F4, F5 (sans l'admin)
+    # Mode "Utilisateur connecté" : accès à F3, F4, F5 
     pg = st.navigation({
-        "LaborScope": [page_accueil],
+        "LaborScope": [page_accueil, page_connexion], # <-- Ajouté ici pour pouvoir se déconnecter
         "Analyses Avancées": [page_analyse_f3, page_comparaison_f4, page_multi_f5]
     })
 
 elif st.session_state["role_utilisateur"] == "Administrateur":
     # Mode "Administrateur" : accès total
     pg = st.navigation({
-        "LaborScope": [page_accueil],
+        "LaborScope": [page_accueil, page_connexion], # <-- Ajouté ici aussi
         "Analyses Avancées": [page_analyse_f3, page_comparaison_f4, page_multi_f5],
         "Espace Administration": [page_admin]
     })
