@@ -86,3 +86,44 @@ class CollecteService:
             self.import_dao.mettre_a_jour(trace)
 
         return trace
+
+
+import sys
+sys.path.insert(0, "backend/src")
+
+from service.collecte_service import CollecteService
+from business_object.enums import StatutImport
+
+
+class FauxClientILOSTAT:
+    def telecharger_indicateur(self, code_indicateur, from_date, to_date):
+        return "ref_area,sex,time,obs_value\nFRA,SEX_T,2020,12.5\n"
+
+
+class FauxImportDao:
+    def creer(self, trace):
+        trace.id = 42
+        return trace
+
+    def mettre_a_jour(self, trace):
+        self.trace = trace
+
+
+class FauxObservationDao:
+    def inserer_ou_mettre_a_jour_par_lot(self, observations):
+        self.observations = observations
+        return len(observations)
+
+
+service = CollecteService.__new__(CollecteService)
+service.import_dao = FauxImportDao()
+service.observation_dao = FauxObservationDao()
+service.ilostat_client = FauxClientILOSTAT()
+
+trace = service.collecter_indicateur("TEST_INDICATOR", 2020, 2020)
+
+assert trace.statut == StatutImport.SUCCES
+assert trace.nombre_lignes == 1
+assert service.observation_dao.observations[0].import_id == 42
+
+print("Test réussi")
