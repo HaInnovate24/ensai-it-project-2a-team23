@@ -13,7 +13,9 @@ class UtilisateurDao:
 
     def creer(self, utilisateur: Utilisateur) -> Utilisateur:
         """Insère un compte et renvoie l'objet créé."""
-        valeur_role = utilisateur.role.value if hasattr(utilisateur.role, 'value') else utilisateur.role
+        valeur_role = (
+            utilisateur.role.value if hasattr(utilisateur.role, "value") else utilisateur.role
+        )
 
         with self.conn.cursor() as cursor:
             cursor.execute(
@@ -26,8 +28,8 @@ class UtilisateurDao:
                     utilisateur.nom_utilisateur,
                     utilisateur.mot_de_passe_hash,
                     valeur_role,
-                    utilisateur.actif
-                )
+                    utilisateur.actif,
+                ),
             )
             row = cursor.fetchone()
             self.conn.commit()
@@ -41,7 +43,7 @@ class UtilisateurDao:
                 SELECT id, nom_utilisateur, mot_de_passe_hash, role, actif, date_creation, derniere_connexion 
                 FROM utilisateur WHERE id = %s;
                 """,
-                (id,)
+                (id,),
             )
             row = cursor.fetchone()
             if row:
@@ -56,7 +58,7 @@ class UtilisateurDao:
                 SELECT id, nom_utilisateur, mot_de_passe_hash, role, actif, date_creation, derniere_connexion 
                 FROM utilisateur WHERE nom_utilisateur = %s;
                 """,
-                (nom_utilisateur,)
+                (nom_utilisateur,),
             )
             row = cursor.fetchone()
             if row:
@@ -77,7 +79,9 @@ class UtilisateurDao:
 
     def modifier(self, utilisateur: Utilisateur) -> bool:
         """Met à jour un compte (rôle, activation, dernière connexion) et renvoie True si succès."""
-        valeur_role = utilisateur.role.value if hasattr(utilisateur.role, 'value') else utilisateur.role
+        valeur_role = (
+            utilisateur.role.value if hasattr(utilisateur.role, "value") else utilisateur.role
+        )
 
         with self.conn.cursor() as cursor:
             cursor.execute(
@@ -91,8 +95,8 @@ class UtilisateurDao:
                     utilisateur.actif,
                     utilisateur.derniere_connexion,
                     utilisateur.mot_de_passe_hash,
-                    utilisateur.id
-                )
+                    utilisateur.id,
+                ),
             )
             self.conn.commit()
             # rowcount indique le nombre de lignes modifiées (1 si ok, 0 si l'ID n'existe pas)

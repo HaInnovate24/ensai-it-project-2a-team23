@@ -3,6 +3,7 @@
 from business_object.classification import Classification
 from business_object.enums import TypeClassification
 
+
 class Age(Classification):
     """Classification par tranche d'âge.
 

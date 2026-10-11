@@ -2,6 +2,8 @@
 
 from fastapi import APIRouter
 
+from service.referentiel_service import ReferentielService
+
 router = APIRouter()
 
 
@@ -14,7 +16,8 @@ def lister_indicateurs():
 @router.get("/pays")
 def lister_pays():
     """Renvoie la liste des pays."""
-    ...
+    service = ReferentielService()
+    return service.lister_pays()
 
 
 @router.get("/classifications")

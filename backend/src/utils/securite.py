@@ -17,7 +17,7 @@ def hash_password(password: str, salt: str = "") -> str:
     return hash_object.hexdigest()
 
 
-def verify_token(x_auth_token=Header(None)) :
+def verify_token(x_auth_token=Header(None)):
     """Verifies the authenticity of a player via the provided auth token.
 
     This function checks if a token is present in the request headers and

@@ -20,7 +20,7 @@ class JournalDao:
                 VALUES (%s, %s, %s, %s) 
                 RETURNING id, utilisateur_id, action, cible, details, date_heure;
                 """,
-                (entree.utilisateur_id, entree.action, entree.cible, entree.details)
+                (entree.utilisateur_id, entree.action, entree.cible, entree.details),
             )
             row = cursor.fetchone()
             self.conn.commit()

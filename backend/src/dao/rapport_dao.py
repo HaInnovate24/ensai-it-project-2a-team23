@@ -13,7 +13,7 @@ class RapportDao:
 
     def creer(self, rapport: Rapport) -> Rapport:
         """Enregistre un rapport et renvoie l'objet créé."""
-        valeur_statut = rapport.statut.value if hasattr(rapport.statut, 'value') else rapport.statut
+        valeur_statut = rapport.statut.value if hasattr(rapport.statut, "value") else rapport.statut
 
         with self.conn.cursor() as cursor:
             cursor.execute(
@@ -23,12 +23,12 @@ class RapportDao:
                 RETURNING id, utilisateur_id, titre, description, date_creation, fichier_path, statut;
                 """,
                 (
-                    rapport.utilisateur_id, 
-                    rapport.titre, 
-                    rapport.description, 
-                    rapport.fichier_path, 
-                    valeur_statut
-                )
+                    rapport.utilisateur_id,
+                    rapport.titre,
+                    rapport.description,
+                    rapport.fichier_path,
+                    valeur_statut,
+                ),
             )
             row = cursor.fetchone()
             self.conn.commit()
@@ -36,7 +36,7 @@ class RapportDao:
 
     def mettre_a_jour(self, rapport: Rapport) -> bool:
         """Met à jour le statut et le chemin de fichier d'un rapport."""
-        valeur_statut = rapport.statut.value if hasattr(rapport.statut, 'value') else rapport.statut
+        valeur_statut = rapport.statut.value if hasattr(rapport.statut, "value") else rapport.statut
 
         with self.conn.cursor() as cursor:
             cursor.execute(
@@ -45,7 +45,7 @@ class RapportDao:
                 SET statut = %s, fichier_path = %s 
                 WHERE id = %s;
                 """,
-                (valeur_statut, rapport.fichier_path, rapport.id)
+                (valeur_statut, rapport.fichier_path, rapport.id),
             )
             self.conn.commit()
             return cursor.rowcount > 0
@@ -58,7 +58,7 @@ class RapportDao:
                 SELECT id, utilisateur_id, titre, description, date_creation, fichier_path, statut 
                 FROM rapport WHERE id = %s;
                 """,
-                (id,)
+                (id,),
             )
             row = cursor.fetchone()
             if row:
@@ -76,7 +76,7 @@ class RapportDao:
                     WHERE utilisateur_id = %s 
                     ORDER BY date_creation DESC;
                     """,
-                    (utilisateur_id,)
+                    (utilisateur_id,),
                 )
             else:
                 cursor.execute(

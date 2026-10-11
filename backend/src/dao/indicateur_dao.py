@@ -27,7 +27,7 @@ class IndicateurDao:
             cursor.execute(
                 "SELECT code_indicateur, description, unite, source, actif "
                 "FROM indicateur WHERE code_indicateur = %s;",
-                (code_indicateur,)
+                (code_indicateur,),
             )
             row = cursor.fetchone()
             if row:
@@ -48,8 +48,8 @@ class IndicateurDao:
                     indicateur.description,
                     indicateur.unite,
                     indicateur.source,
-                    indicateur.actif
-                )
+                    indicateur.actif,
+                ),
             )
             row = cursor.fetchone()
             self.conn.commit()  # Indispensable pour enregistrer la création

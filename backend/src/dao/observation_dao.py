@@ -6,6 +6,7 @@ en commun avant implémentation.
 """
 
 from psycopg2.extras import execute_values
+
 from business_object.enums import Sexe
 from business_object.observation import Observation
 from dao.db_connection import DBConnection
@@ -32,10 +33,10 @@ class ObservationDao:
                 obs.code_pays,
                 obs.periode,
                 obs.valeur,
-                obs.sexe.value if hasattr(obs.sexe, 'value') else obs.sexe,
+                obs.sexe.value if hasattr(obs.sexe, "value") else obs.sexe,
                 obs.code_classification,
                 obs.import_id,
-                obs.source
+                obs.source,
             )
             for obs in observations
         ]
@@ -71,12 +72,12 @@ class ObservationDao:
 
         if sexe:
             requete += " AND sexe = %s"
-            parametres.append(sexe.value if hasattr(sexe, 'value') else sexe)
-        
+            parametres.append(sexe.value if hasattr(sexe, "value") else sexe)
+
         if code_classification:
             requete += " AND code_classification = %s"
             parametres.append(code_classification)
-            
+
         requete += " ORDER BY periode ASC;"
 
         with self.conn.cursor() as cursor:
@@ -122,7 +123,7 @@ class ObservationDao:
                 SET valeur = %s, source = %s 
                 WHERE id = %s;
                 """,
-                (observation.valeur, observation.source, observation.id)
+                (observation.valeur, observation.source, observation.id),
             )
             self.conn.commit()
             return cursor.rowcount > 0

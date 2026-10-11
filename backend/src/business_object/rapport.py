@@ -35,7 +35,7 @@ class Rapport:
         self.description = description
         self.date_creation = date_creation
         self.fichier_path = fichier_path
-        
+
         # Gère la conversion du texte PostgreSQL vers l'Enum
         if isinstance(statut, str):
             self.statut = StatutRapport(statut)
