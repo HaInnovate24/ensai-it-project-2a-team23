@@ -1,3 +1,5 @@
+from dao.pays_dao import PaysDao
+
 """Fourniture des listes de référentiels."""
 
 from business_object.classification import Classification
