@@ -2,14 +2,11 @@ import sys
 import os
 import pytest
 
-# 1. On donne le bon chemin vers le dossier src (on remonte de tests/dao vers src)
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..', 'src')))
 
-# 2. On charge obligatoirement le fichier .env AVANT de faire les autres imports
 from utils.config import load_environment_variables
 load_environment_variables()
 
-# 3. Maintenant on peut importer le code métier
 from business_object.pays import Pays
 from dao.pays_dao import PaysDao
 
