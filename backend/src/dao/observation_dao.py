@@ -58,6 +58,25 @@ class ObservationDao:
             self.conn.commit()
             return len(observations)
 
+    def lister_annees_existantes(
+        self, code_indicateur: str, from_date: int, to_date: int
+    ) -> set[int]:
+        """Renvoie les années ayant déjà au moins une observation stockée."""
+        requete = """
+            WITH annees_observees AS (
+                SELECT DISTINCT substring(periode FROM '^[0-9]{4}') AS annee
+                FROM observation
+                WHERE code_indicateur = %s
+            )
+            SELECT annee
+            FROM annees_observees
+            WHERE annee IS NOT NULL
+              AND annee::INTEGER BETWEEN %s AND %s;
+        """
+        with self.conn.cursor() as cursor:
+            cursor.execute(requete, (code_indicateur, from_date, to_date))
+            return {int(row["annee"]) for row in cursor.fetchall()}
+
     def lire_serie(
         self,
         code_indicateur: str,
