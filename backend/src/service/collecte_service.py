@@ -57,7 +57,7 @@ class CollecteService:
                 to_date,
             )
 
-            annees_existantes = self.observation_dao.lister_annees_existantes(
+            annees_existantes = self.ilostat_client.lister_annees_telechargees(
                 code_indicateur.strip(), from_date, to_date
             )
             annees_a_charger = [
