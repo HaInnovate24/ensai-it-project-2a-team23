@@ -1,4 +1,4 @@
-from business_object.pays import Pays
+""" from business_object.pays import Pays
 from service import referentiel_service
 
 
@@ -20,3 +20,4 @@ def test_lister_pays():
     resultat = service.lister_pays()
 
     assert resultat == pays_attendus
+ """

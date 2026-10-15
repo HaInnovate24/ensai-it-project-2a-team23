@@ -4,8 +4,6 @@ from service.referentiel_service import ReferentielService
 
 from fastapi import APIRouter
 
-from service.referentiel_service import ReferentielService
-
 router = APIRouter()
 
 
