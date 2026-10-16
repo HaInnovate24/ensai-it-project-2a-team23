@@ -7,23 +7,27 @@ from fastapi import FastAPI, Request, status
 from fastapi.exceptions import RequestValidationError
 from fastapi.responses import JSONResponse, RedirectResponse
 
-from controller import (
-    admin_controller,
-    analyse_controller,
-    auth_controller,
-    rapport_controller,
-    referentiel_controller,
-)
 from utils.config import display_values, load_environment_variables
 from utils.journalisation import LogMiddleware, get_logger, initialize_logs
 
 logger = get_logger(__name__)
 
 # Initialisation
+# Les variables d'environnement doivent être chargées AVANT l'import des
+# controllers : certains instancient leurs services (et donc ouvrent la
+# connexion PostgreSQL) au moment de l'import, ce qui lit os.environ.
 initialize_logs("Webservice")
 
 load_environment_variables()
 display_values()
+
+from controller import (  # noqa: E402  (import après chargement du .env, cf. ci-dessus)
+    admin_controller,
+    analyse_controller,
+    auth_controller,
+    rapport_controller,
+    referentiel_controller,
+)
 
 
 app = FastAPI(title="LaborScope")
