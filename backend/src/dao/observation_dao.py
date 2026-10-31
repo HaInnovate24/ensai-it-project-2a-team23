@@ -92,7 +92,7 @@ class ObservationDao:
     ) -> list[Observation]:
         """Renvoie les observations d'une période donnée (comparaison, carte)."""
         requete = "SELECT * FROM observation WHERE code_indicateur = %s AND periode = %s"
-        parametres = [code_indicateur, periode]
+        parametres: list[str | list[str]] = [code_indicateur, periode]
 
         if codes_pays:
             # L'opérateur = ANY(%s) de PostgreSQL fonctionne très bien avec les listes Python
