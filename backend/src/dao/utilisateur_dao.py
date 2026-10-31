@@ -20,8 +20,8 @@ class UtilisateurDao:
         with self.conn.cursor() as cursor:
             cursor.execute(
                 """
-                INSERT INTO utilisateur (nom_utilisateur, mot_de_passe_hash, role, actif) 
-                VALUES (%s, %s, %s, %s) 
+                INSERT INTO utilisateur (nom_utilisateur, mot_de_passe_hash, role, actif)
+                VALUES (%s, %s, %s, %s)
                 RETURNING id, nom_utilisateur, mot_de_passe_hash, role, actif, date_creation, derniere_connexion;
                 """,
                 (
@@ -40,7 +40,7 @@ class UtilisateurDao:
         with self.conn.cursor() as cursor:
             cursor.execute(
                 """
-                SELECT id, nom_utilisateur, mot_de_passe_hash, role, actif, date_creation, derniere_connexion 
+                SELECT id, nom_utilisateur, mot_de_passe_hash, role, actif, date_creation, derniere_connexion
                 FROM utilisateur WHERE id = %s;
                 """,
                 (id,),
@@ -55,7 +55,7 @@ class UtilisateurDao:
         with self.conn.cursor() as cursor:
             cursor.execute(
                 """
-                SELECT id, nom_utilisateur, mot_de_passe_hash, role, actif, date_creation, derniere_connexion 
+                SELECT id, nom_utilisateur, mot_de_passe_hash, role, actif, date_creation, derniere_connexion
                 FROM utilisateur WHERE nom_utilisateur = %s;
                 """,
                 (nom_utilisateur,),
@@ -70,7 +70,7 @@ class UtilisateurDao:
         with self.conn.cursor() as cursor:
             cursor.execute(
                 """
-                SELECT id, nom_utilisateur, mot_de_passe_hash, role, actif, date_creation, derniere_connexion 
+                SELECT id, nom_utilisateur, mot_de_passe_hash, role, actif, date_creation, derniere_connexion
                 FROM utilisateur ORDER BY id;
                 """
             )
@@ -86,7 +86,7 @@ class UtilisateurDao:
         with self.conn.cursor() as cursor:
             cursor.execute(
                 """
-                UPDATE utilisateur 
+                UPDATE utilisateur
                 SET role = %s, actif = %s, derniere_connexion = %s, mot_de_passe_hash = %s
                 WHERE id = %s;
                 """,

@@ -36,8 +36,8 @@ class PaysDao:
         with self.conn.cursor() as cursor:
             cursor.execute(
                 """
-                INSERT INTO pays (code_pays, nom_pays) 
-                VALUES (%s, %s) 
+                INSERT INTO pays (code_pays, nom_pays)
+                VALUES (%s, %s)
                 RETURNING code_pays, nom_pays;
                 """,
                 (pays.code_pays, pays.nom_pays),

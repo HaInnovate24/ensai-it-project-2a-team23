@@ -51,8 +51,8 @@ class ClassificationDao:
         with self.conn.cursor() as cursor:
             cursor.execute(
                 """
-                INSERT INTO classification (code, libelle, type) 
-                VALUES (%s, %s, %s) 
+                INSERT INTO classification (code, libelle, type)
+                VALUES (%s, %s, %s)
                 RETURNING code, libelle, type;
                 """,
                 (classification.code, classification.libelle, valeur_type),

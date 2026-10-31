@@ -4,7 +4,6 @@ import pytest
 
 from client.ilostat_client import IlostatClient
 
-
 CSV_EXEMPLE = "ref_area,time,sex,obs_value\nFRA,2020,SEX_T,12.5\n"
 
 

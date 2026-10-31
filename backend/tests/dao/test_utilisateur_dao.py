@@ -1,16 +1,19 @@
-import sys
 import os
-import pytest
+import sys
 from datetime import datetime
+
+import pytest
 
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..', 'src')))
 
 from utils.config import load_environment_variables
+
 load_environment_variables()
 
+from business_object.enums import Role
 from business_object.utilisateur import Utilisateur
 from dao.utilisateur_dao import UtilisateurDao
-from business_object.enums import Role 
+
 
 @pytest.fixture
 def dao():
@@ -63,10 +66,10 @@ def test_lister(dao, utilisateur_test):
 def test_modifier_utilisateur(dao, utilisateur_test):
     utilisateur_test.actif = False
     utilisateur_test.derniere_connexion = datetime.now()
-    
+
     succes = dao.modifier(utilisateur_test)
     assert succes is True
-    
+
     en_base = dao.trouver_par_id(utilisateur_test.id)
     assert en_base.actif is False
     assert en_base.derniere_connexion is not None

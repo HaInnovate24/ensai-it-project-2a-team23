@@ -1,8 +1,10 @@
 
 import sys
+
 sys.path.insert(0, "backend/src")
 
 import pandas as pd
+
 from service.parser_service import ParserService
 
 data = pd.DataFrame([

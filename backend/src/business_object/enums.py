@@ -1,16 +1,16 @@
 """Énumérations partagées par les objets métier (rôles, sexe, statuts)."""
 
-from enum import Enum
+from enum import StrEnum
 
 
-class Role(str, Enum):
+class Role(StrEnum):
     """Rôle d'un utilisateur : accès standard ou administration."""
 
     UTILISATEUR = "utilisateur"
     ADMIN = "admin"
 
 
-class Sexe(str, Enum):
+class Sexe(StrEnum):
     """Sexe associé à une observation (colonne de la table observation)."""
 
     HOMME = "homme"
@@ -18,14 +18,14 @@ class Sexe(str, Enum):
     TOTAL = "total"
 
 
-class TypeClassification(str, Enum):
+class TypeClassification(StrEnum):
     """Type d'une classification : tranche d'âge ou catégorie d'occupation."""
 
     AGE = "age"
     OCCUPATION = "occupation"
 
 
-class StatutImport(str, Enum):
+class StatutImport(StrEnum):
     """Statut d'un import de données ILOSTAT."""
 
     EN_COURS = "en_cours"
@@ -33,7 +33,7 @@ class StatutImport(str, Enum):
     ECHEC = "echec"
 
 
-class StatutRapport(str, Enum):
+class StatutRapport(StrEnum):
     """Statut de génération d'un rapport PDF."""
 
     EN_ATTENTE = "en_attente"

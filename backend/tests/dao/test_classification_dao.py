@@ -1,16 +1,17 @@
-import sys
 import os
+import sys
+
 import pytest
 
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..', 'src')))
 
 from utils.config import load_environment_variables
+
 load_environment_variables()
 
 from business_object.classification import Classification
 from dao.classification_dao import ClassificationDao
 
-.
 try:
     from business_object.enums import TypeClassification
 except ImportError:
@@ -54,11 +55,11 @@ def test_lister_avec_filtre(dao):
     """Vérifie que le filtrage par type fonctionne bien."""
     # On peut passer l'Enum s'il existe, sinon on passe directement la chaîne 'age'
     filtre = TypeClassification.AGE if hasattr(TypeClassification, 'AGE') else 'age'
-    
+
     liste = dao.lister(type=filtre)
     # Il n'y a que 3 tranches d'âge dans le référentiel de base
     assert len(liste) >= 3
-    
+
     # On vérifie que toutes les lignes retournées sont bien du type 'age'
     for classif in liste:
         valeur_type = classif.type.value if hasattr(classif.type, 'value') else classif.type
@@ -71,10 +72,10 @@ def test_creer_classification(dao, nettoyage_db):
         libelle='Classification de test automatisé',
         type='occupation'
     )
-    
+
     classif_creee = dao.creer(nouvelle)
     assert classif_creee.code == 'TEST_CLASS'
-    
+
     # Vérification en base
     classif_en_base = dao.trouver_par_code('TEST_CLASS')
     assert classif_en_base is not None

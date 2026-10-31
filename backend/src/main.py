@@ -29,7 +29,6 @@ from controller import (  # noqa: E402  (import après chargement du .env, cf. c
     referentiel_controller,
 )
 
-
 app = FastAPI(title="LaborScope")
 
 app.add_middleware(LogMiddleware)

@@ -1,14 +1,17 @@
-import sys
 import os
+import sys
+
 import pytest
 
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..', 'src')))
 
 from utils.config import load_environment_variables
+
 load_environment_variables()
 
 from business_object.indicateur import Indicateur
 from dao.indicateur_dao import IndicateurDao
+
 
 @pytest.fixture
 def dao():
@@ -51,12 +54,12 @@ def test_creer_indicateur(dao, nettoyage_db):
         source='TEST',
         actif=False
     )
-    
+
     ind_cree = dao.creer(nouvel_indicateur)
-    
+
     assert ind_cree.code_indicateur == 'TEST_IND'
     assert ind_cree.description == 'Indicateur de test automatisé'
-    
+
     ind_en_base = dao.trouver_par_code('TEST_IND')
     assert ind_en_base is not None
     assert ind_en_base.unite == 'Pourcentage'

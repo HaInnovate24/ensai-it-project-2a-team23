@@ -22,8 +22,8 @@ class ImportDao:
         with self.conn.cursor() as cursor:
             cursor.execute(
                 """
-                INSERT INTO import_donnees 
-                (indicateur_code, utilisateur_id, date_debut, date_fin, statut, nombre_lignes, fichier_source, message_erreur) 
+                INSERT INTO import_donnees
+                (indicateur_code, utilisateur_id, date_debut, date_fin, statut, nombre_lignes, fichier_source, message_erreur)
                 VALUES (%s, %s, %s, %s, %s, %s, %s, %s)
                 RETURNING id, indicateur_code, utilisateur_id, date_debut, date_fin, statut, nombre_lignes, fichier_source, message_erreur;
                 """,
@@ -53,10 +53,10 @@ class ImportDao:
         with self.conn.cursor() as cursor:
             cursor.execute(
                 """
-                UPDATE import_donnees 
-                SET date_fin = %s, 
-                    statut = %s, 
-                    nombre_lignes = %s, 
+                UPDATE import_donnees
+                SET date_fin = %s,
+                    statut = %s,
+                    nombre_lignes = %s,
                     message_erreur = %s
                 WHERE id = %s;
                 """,
@@ -76,8 +76,8 @@ class ImportDao:
         with self.conn.cursor() as cursor:
             cursor.execute(
                 """
-                SELECT id, indicateur_code, utilisateur_id, date_debut, date_fin, statut, nombre_lignes, fichier_source, message_erreur 
-                FROM import_donnees 
+                SELECT id, indicateur_code, utilisateur_id, date_debut, date_fin, statut, nombre_lignes, fichier_source, message_erreur
+                FROM import_donnees
                 ORDER BY date_debut DESC;
                 """
             )

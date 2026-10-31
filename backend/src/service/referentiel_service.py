@@ -1,11 +1,10 @@
-from dao.pays_dao import PaysDao
-
 """Fourniture des listes de référentiels."""
 
 from business_object.classification import Classification
 from business_object.enums import TypeClassification
 from business_object.indicateur import Indicateur
 from business_object.pays import Pays
+from dao.pays_dao import PaysDao
 
 
 class ReferentielService:

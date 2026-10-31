@@ -24,9 +24,6 @@ class ObservationDao:
         S'appuie sur la contrainte d'unicité (indicateur, pays, période,
         sexe, classification) pour éviter les doublons.
         """
-        if not observations:
-            return 0
-
         valeurs = [
             (
                 obs.code_indicateur,
@@ -42,11 +39,11 @@ class ObservationDao:
         ]
 
         requete = """
-            INSERT INTO observation 
+            INSERT INTO observation
             (code_indicateur, code_pays, periode, valeur, sexe, code_classification, import_id, source)
             VALUES %s
-            ON CONFLICT ON CONSTRAINT uq_observation 
-            DO UPDATE SET 
+            ON CONFLICT ON CONSTRAINT uq_observation
+            DO UPDATE SET
                 valeur = EXCLUDED.valeur,
                 import_id = EXCLUDED.import_id,
                 source = EXCLUDED.source,
@@ -119,8 +116,8 @@ class ObservationDao:
         with self.conn.cursor() as cursor:
             cursor.execute(
                 """
-                UPDATE observation 
-                SET valeur = %s, source = %s 
+                UPDATE observation
+                SET valeur = %s, source = %s
                 WHERE id = %s;
                 """,
                 (observation.valeur, observation.source, observation.id),

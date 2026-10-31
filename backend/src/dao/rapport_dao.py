@@ -18,8 +18,8 @@ class RapportDao:
         with self.conn.cursor() as cursor:
             cursor.execute(
                 """
-                INSERT INTO rapport (utilisateur_id, titre, description, fichier_path, statut) 
-                VALUES (%s, %s, %s, %s, %s) 
+                INSERT INTO rapport (utilisateur_id, titre, description, fichier_path, statut)
+                VALUES (%s, %s, %s, %s, %s)
                 RETURNING id, utilisateur_id, titre, description, date_creation, fichier_path, statut;
                 """,
                 (
@@ -41,8 +41,8 @@ class RapportDao:
         with self.conn.cursor() as cursor:
             cursor.execute(
                 """
-                UPDATE rapport 
-                SET statut = %s, fichier_path = %s 
+                UPDATE rapport
+                SET statut = %s, fichier_path = %s
                 WHERE id = %s;
                 """,
                 (valeur_statut, rapport.fichier_path, rapport.id),
@@ -55,7 +55,7 @@ class RapportDao:
         with self.conn.cursor() as cursor:
             cursor.execute(
                 """
-                SELECT id, utilisateur_id, titre, description, date_creation, fichier_path, statut 
+                SELECT id, utilisateur_id, titre, description, date_creation, fichier_path, statut
                 FROM rapport WHERE id = %s;
                 """,
                 (id,),
@@ -71,9 +71,9 @@ class RapportDao:
             if utilisateur_id is not None:
                 cursor.execute(
                     """
-                    SELECT id, utilisateur_id, titre, description, date_creation, fichier_path, statut 
-                    FROM rapport 
-                    WHERE utilisateur_id = %s 
+                    SELECT id, utilisateur_id, titre, description, date_creation, fichier_path, statut
+                    FROM rapport
+                    WHERE utilisateur_id = %s
                     ORDER BY date_creation DESC;
                     """,
                     (utilisateur_id,),
@@ -81,8 +81,8 @@ class RapportDao:
             else:
                 cursor.execute(
                     """
-                    SELECT id, utilisateur_id, titre, description, date_creation, fichier_path, statut 
-                    FROM rapport 
+                    SELECT id, utilisateur_id, titre, description, date_creation, fichier_path, statut
+                    FROM rapport
                     ORDER BY date_creation DESC;
                     """
                 )

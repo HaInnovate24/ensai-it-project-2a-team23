@@ -16,8 +16,8 @@ class JournalDao:
         with self.conn.cursor() as cursor:
             cursor.execute(
                 """
-                INSERT INTO journal_activite (utilisateur_id, action, cible, details) 
-                VALUES (%s, %s, %s, %s) 
+                INSERT INTO journal_activite (utilisateur_id, action, cible, details)
+                VALUES (%s, %s, %s, %s)
                 RETURNING id, utilisateur_id, action, cible, details, date_heure;
                 """,
                 (entree.utilisateur_id, entree.action, entree.cible, entree.details),
@@ -31,8 +31,8 @@ class JournalDao:
         with self.conn.cursor() as cursor:
             cursor.execute(
                 """
-                SELECT id, utilisateur_id, action, cible, details, date_heure 
-                FROM journal_activite 
+                SELECT id, utilisateur_id, action, cible, details, date_heure
+                FROM journal_activite
                 ORDER BY date_heure DESC;
                 """
             )

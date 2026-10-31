@@ -1,14 +1,17 @@
-import sys
 import os
+import sys
+
 import pytest
 
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..', 'src')))
 
 from utils.config import load_environment_variables
+
 load_environment_variables()
 
 from business_object.pays import Pays
 from dao.pays_dao import PaysDao
+
 
 @pytest.fixture
 def dao():
@@ -44,11 +47,11 @@ def test_lister_pays(dao):
 def test_creer_pays(dao, nettoyage_db):
     """Vérifie l'insertion d'un nouveau pays et le nettoyage automatique."""
     nouveau_pays = Pays(code_pays='ZZZ', nom_pays='Pays de Test')
-    
+
     pays_cree = dao.creer(nouveau_pays)
     assert pays_cree.code_pays == 'ZZZ'
     assert pays_cree.nom_pays == 'Pays de Test'
-    
+
     pays_en_base = dao.trouver_par_code('ZZZ')
     assert pays_en_base is not None
     assert pays_en_base.nom_pays == 'Pays de Test'

@@ -39,8 +39,8 @@ class IndicateurDao:
         with self.conn.cursor() as cursor:
             cursor.execute(
                 """
-                INSERT INTO indicateur (code_indicateur, description, unite, source, actif) 
-                VALUES (%s, %s, %s, %s, %s) 
+                INSERT INTO indicateur (code_indicateur, description, unite, source, actif)
+                VALUES (%s, %s, %s, %s, %s)
                 RETURNING code_indicateur, description, unite, source, actif;
                 """,
                 (

@@ -12,18 +12,19 @@ collecte_service = CollecteService()
 @router.post("/imports/{indicator_id}")
 def lancer_import(
     indicator_id: str,
-    from_date: int = Query(default=2014, ge=1900, le=2100),
-    to_date: int = Query(default=2026, ge=1900, le=2100),
+    from_date: int = Query(default=2014, ge=2014, le=2026),
+    to_date: int = Query(default=2026, ge=2014, le=2026),
 ):
     """Lance un import de données depuis ILOSTAT."""
     try:
         trace_import = collecte_service.collecter_indicateur(
-            code_indicateur=indicator_id, 
-            from_date=from_date, 
+            code_indicateur=indicator_id,
+            from_date=from_date,
             to_date=to_date
         )
+        print(trace_import)
         return {
-            "message": "Import terminé", 
+            "message": "Import terminé",
             "statut": trace_import.statut,
             "lignes_inserees": trace_import.nombre_lignes
         }

@@ -4,6 +4,7 @@ import io
 from datetime import datetime
 
 import pandas as pd
+
 from business_object.enums import StatutImport
 from business_object.import_donnees import ImportDonnees
 from client.ilostat_client import IlostatClient
@@ -39,15 +40,7 @@ class CollecteService:
                 "L'année de début (from_date) doit être inférieure ou égale à l'année de fin (to_date)."
             )
 
-        trace = self.import_dao.creer(
-            ImportDonnees(
-                indicateur_code=code_indicateur.strip(),
-                utilisateur_id=utilisateur_id,
-                date_debut=datetime.now(),
-                statut=StatutImport.EN_COURS,
-                fichier_source=IlostatClient.BASE_URL,
-            )
-        )
+        trace = None
 
         try:
             logger.info(
@@ -57,38 +50,34 @@ class CollecteService:
                 to_date,
             )
 
-            annees_existantes = self.ilostat_client.lister_annees_telechargees(
-                code_indicateur.strip(), from_date, to_date
+            trace = self.import_dao.creer(
+            ImportDonnees(
+                indicateur_code=code_indicateur.strip(),
+                utilisateur_id=utilisateur_id,
+                date_debut=datetime.now(),
+                statut=StatutImport.EN_COURS,
+                fichier_source=IlostatClient.BASE_URL,
             )
-            annees_a_charger = [
-                annee
-                for annee in range(from_date, to_date + 1)
-                if annee not in annees_existantes
-            ]
-            intervalles_a_charger = self._regrouper_annees_consecutives(annees_a_charger)
+            )
 
-            nombre_annees_ignorees = to_date - from_date + 1 - len(annees_a_charger)
-            if nombre_annees_ignorees:
-                logger.info(
-                    "%s année(s) déjà stockée(s) pour %s ; téléchargement ignoré",
-                    nombre_annees_ignorees,
-                    code_indicateur,
-                )
-
+            # Le client ne télécharge que les années absentes du cache de
+            # fichiers, puis renvoie le CSV consolidé de toute la période
+            # demandée. On parse et on upsert donc systématiquement l'ensemble
+            # de la période : les données présentes dans les fichiers CSV mais
+            # absentes de la base (par exemple après une réinitialisation) sont
+            # ainsi réinsérées, l'upsert restant idempotent pour celles déjà
+            # présentes en base.
+            csv_brut = self.ilostat_client.telecharger_indicateur(
+                code_indicateur=code_indicateur.strip(),
+                from_date=from_date,
+                to_date=to_date,
+            )
             observations = []
-            for debut, fin in intervalles_a_charger:
-                csv_brut = self.ilostat_client.telecharger_indicateur(
-                    code_indicateur=code_indicateur.strip(),
-                    from_date=debut,
-                    to_date=fin,
-                )
+            if csv_brut.strip():
                 data = pd.read_csv(io.StringIO(csv_brut))
-                observations.extend(
-                    self.parser_service.parser(data, code_indicateur.strip())
-                )
-
-            if intervalles_a_charger and not observations:
-                raise ValueError("Aucune observation exploitable reçue pour cet indicateur.")
+                observations = self.parser_service.parser(data, code_indicateur.strip())
+                if not observations:
+                    raise ValueError("Aucune observation exploitable reçue pour cet indicateur.")
 
             # La contrainte uq_observation est aussi appliquée par le DAO en base,
             # mais PostgreSQL ne peut pas traiter deux fois la même clé dans un
@@ -119,11 +108,10 @@ class CollecteService:
                     code_indicateur,
                 )
             observations = list(observations_uniques.values())
-            trace.nombre_lignes = (
-                self.observation_dao.inserer_ou_mettre_a_jour_par_lot(observations)
-                if observations
-                else 0
-            )
+            if observations:
+                trace.nombre_lignes = self.observation_dao.inserer_ou_mettre_a_jour_par_lot(observations)
+            else:
+                trace.nombre_lignes = 0
             trace.statut = StatutImport.SUCCES
             trace.message_erreur = None
         except Exception as exc:
@@ -139,18 +127,16 @@ class CollecteService:
 
         return trace
 
-    @staticmethod
-    def _regrouper_annees_consecutives(annees: list[int]) -> list[tuple[int, int]]:
-        """Réunit les années manquantes en plages contiguës pour limiter les appels API."""
-        if not annees:
-            return []
 
-        plages = []
-        debut = precedent = annees[0]
-        for annee in annees[1:]:
-            if annee != precedent + 1:
-                plages.append((debut, precedent))
-                debut = annee
-            precedent = annee
-        plages.append((debut, precedent))
-        return plages
+if __name__ == "__main__":
+    collecte_service = CollecteService()
+    trace = collecte_service.collecter_indicateur("SR_LMP_SEX_AGE_NB")
+    print(trace)
+    print(trace.nombre_lignes)
+    print(trace.statut)
+    print(trace.message_erreur)
+    print(trace.date_debut)
+    print(trace.date_fin)
+    print(trace.fichier_source)
+    print(trace.indicateur_code)
+    print(trace.utilisateur_id)
