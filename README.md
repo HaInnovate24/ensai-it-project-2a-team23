@@ -3,13 +3,13 @@
 
 
 src/
-├── dao/
+├── dao/                           
 │   ├── emploi_dao.py
 │   ├── activity_dao.py
 │   ├── indicateur_dao.py
 │   └── user_dao.py
 │
-├── services/
+├── services/                       # Logique métier / cas d'utilisation
 │   ├── extraction_service.py       # F1
 │   ├── parsing_service.py          # F2
 │   ├── analyse_emploi_service.py   # F3
@@ -18,7 +18,7 @@ src/
 │   ├── cartographie_service.py     # FO2 
 │   └── rapport_pdf__service.py     # F03
 │
-├── controllers/
+├── controllers/                    # Entrée/sortie de l'application
 │   ├── extraction_controller.py
 │   ├── parsing_controller.py
 │   ├── analyse_emploi_controller.py
@@ -28,14 +28,16 @@ src/
 │   ├── rapport_pdf_controller.py
 │   └── user_controller.py
 │
-├── schema/
+├── schema/                         # Données entrantes/sortantes de l'API
 │   ├── emploi_model.py
 │   ├── indicateur_model.py
 │   ├── pays_model.py
 │   └── user_model.py
 │
-└── bussiness_object/
+└── bussiness_object/               # Objets métier
     ├── emploi.py
     ├── indicateur.py
     ├── pays.py
     └── user.py
+
+
