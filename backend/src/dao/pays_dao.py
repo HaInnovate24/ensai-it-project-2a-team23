@@ -16,7 +16,7 @@ class PaysDao:
         with self.conn.cursor() as cursor:
             cursor.execute("SELECT code_pays, nom_pays FROM pays ORDER BY nom_pays;")
             rows = cursor.fetchall()
-            # L'unpacking **row fonctionne car les clés du dictionnaire (code_pays, nom_pays) 
+            # L'unpacking **row fonctionne car les clés du dictionnaire (code_pays, nom_pays)
             # correspondent exactement aux paramètres de Pays.__init__
             return [Pays(**row) for row in rows]
 
@@ -24,8 +24,7 @@ class PaysDao:
         """Renvoie le pays correspondant au code, ou None."""
         with self.conn.cursor() as cursor:
             cursor.execute(
-                "SELECT code_pays, nom_pays FROM pays WHERE code_pays = %s;", 
-                (code_pays,)
+                "SELECT code_pays, nom_pays FROM pays WHERE code_pays = %s;", (code_pays,)
             )
             row = cursor.fetchone()
             if row:
@@ -41,7 +40,7 @@ class PaysDao:
                 VALUES (%s, %s) 
                 RETURNING code_pays, nom_pays;
                 """,
-                (pays.code_pays, pays.nom_pays)
+                (pays.code_pays, pays.nom_pays),
             )
             row = cursor.fetchone()
             self.conn.commit()  # Indispensable pour sauvegarder l'insertion en base

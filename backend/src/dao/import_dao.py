@@ -13,7 +13,11 @@ class ImportDao:
 
     def creer(self, import_donnees: ImportDonnees) -> ImportDonnees:
         """Enregistre un import et renvoie l'objet créé."""
-        valeur_statut = import_donnees.statut.value if hasattr(import_donnees.statut, 'value') else import_donnees.statut
+        valeur_statut = (
+            import_donnees.statut.value
+            if hasattr(import_donnees.statut, "value")
+            else import_donnees.statut
+        )
 
         with self.conn.cursor() as cursor:
             cursor.execute(
@@ -31,8 +35,8 @@ class ImportDao:
                     valeur_statut,
                     import_donnees.nombre_lignes,
                     import_donnees.fichier_source,
-                    import_donnees.message_erreur
-                )
+                    import_donnees.message_erreur,
+                ),
             )
             row = cursor.fetchone()
             self.conn.commit()
@@ -40,7 +44,11 @@ class ImportDao:
 
     def mettre_a_jour(self, import_donnees: ImportDonnees) -> bool:
         """Met à jour le statut et les compteurs d'un import."""
-        valeur_statut = import_donnees.statut.value if hasattr(import_donnees.statut, 'value') else import_donnees.statut
+        valeur_statut = (
+            import_donnees.statut.value
+            if hasattr(import_donnees.statut, "value")
+            else import_donnees.statut
+        )
 
         with self.conn.cursor() as cursor:
             cursor.execute(
@@ -57,8 +65,8 @@ class ImportDao:
                     valeur_statut,
                     import_donnees.nombre_lignes,
                     import_donnees.message_erreur,
-                    import_donnees.id
-                )
+                    import_donnees.id,
+                ),
             )
             self.conn.commit()
             return cursor.rowcount > 0

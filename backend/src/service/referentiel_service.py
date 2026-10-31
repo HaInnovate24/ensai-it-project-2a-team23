@@ -1,3 +1,5 @@
+from dao.pays_dao import PaysDao
+
 """Fourniture des listes de référentiels."""
 
 from business_object.classification import Classification
@@ -15,7 +17,8 @@ class ReferentielService:
 
     def lister_pays(self) -> list[Pays]:
         """Renvoie la liste des pays."""
-        ...
+        dao = PaysDao()
+        return dao.lister()
 
     def lister_classifications(
         self, type: TypeClassification | None = None
