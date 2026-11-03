@@ -7,7 +7,7 @@ from backend.src.service import utilisateur_service
 from service.collecte_service import CollecteService
 from service.donnees_service import DonneesService
 from service.utilisateur_service import UtilisateurService
-
+from business_object.utilisateur import Utilisateur
 from business_object.observation import Observation
 
 
@@ -111,12 +111,30 @@ def lister_utilisateurs():
 
 
 @router.put("/utilisateurs/{utilisateur_id}")
-def gerer_utilisateur(utilisateur_id: int):
+def gerer_utilisateur(utilisateur_id: int, modification: Utilisateur):
     """Gère un compte (promotion, désactivation)."""
-    ...
+    try:
+        # On s'assure que l'ID de l'URL correspond à l'ID de l'objet
+        if utilisateur_id != modification.id:
+            raise ValueError("L'ID de l'URL ne correspond pas à l'ID de l'utilisateur fourni.")
+            
+        # Appel du service qui va gérer la logique (et le DAO)
+        succes = UtilisateurService.modifier(modification)
+        
+        if succes:
+            return {
+                "message": "Utilisateur mis à jour avec succès",
+                "statut": "succes",
+                "utilisateur_id": utilisateur_id
+            }
+        else:
+            raise HTTPException(status_code=404, detail="Utilisateur introuvable")
+
+    except ValueError as exc:
+        raise HTTPException(status_code=400, detail=str(exc)) from exc
+    except Exception as exc:
+        raise HTTPException(status_code=500, detail=f"Erreur interne : {str(exc)}") from exc
+    
 
 
-@router.get("/journal")
-def consulter_journal():
-    """Renvoie le journal des actions sensibles."""
-    ...
+
