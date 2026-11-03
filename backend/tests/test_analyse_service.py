@@ -144,9 +144,7 @@ def libelles(comparaison):
     return [serie.libelle for serie in comparaison.series]
 
 
-# ----------------------------------------------------------------------
 # F3 : évolution
-# ----------------------------------------------------------------------
 
 
 def test_evolution_trie_par_periode_et_construit_le_libelle():
