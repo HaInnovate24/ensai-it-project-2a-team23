@@ -86,6 +86,11 @@ if reponse["status_code"] != 200:
     st.error(message_erreur(reponse))
     st.stop()
 
+# CORRECTION : Extraction sécurisée des données depuis la structure imbriquée renvoyée par le backend
+corps_reponse = reponse.get("data", {}) if isinstance(reponse.get("data"), dict) else {}
+donnees_analyse = corps_reponse.get("data", {})
+series = donnees_analyse.get("series", [])
+
 # Le backend renvoie une série d'un seul point par pays, déjà triée de la valeur
 # la plus haute à la plus basse.
 lignes = [
@@ -94,8 +99,8 @@ lignes = [
         "Valeur": serie["points"][0]["valeur"],
         "Période": serie["points"][0]["periode"],
     }
-    for serie in reponse["data"]["series"]
-    if serie["points"]
+    for serie in series
+    if serie.get("points")
 ]
 
 if not lignes:
