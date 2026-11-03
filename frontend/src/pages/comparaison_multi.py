@@ -32,8 +32,9 @@ if not est_connecte():
 indicateurs = get_indicateurs()
 pays_referentiel = get_pays()
 
-# --- Filtres ---
-col1, col2 = st.columns(2)
+# --- Filtres de recherche ---
+with st.expander("🛠️ Filtres de recherche", expanded=True):
+    col1, col2 = st.columns(2)
 
 with col1:
     nom_pays = st.selectbox("Pays cible :", options=list(pays_referentiel))
@@ -63,15 +64,15 @@ if not codes_indicateur:
     st.warning("Sélectionnez au moins un indicateur pour générer le graphique.")
     st.stop()
 
-# --- Appel du backend : /analyses/comparaison-indicateurs ---
+# --- Appel du backend ---
 reponse = api_client.get(
     "/analyses/comparaison-indicateurs",
     params={
         "jeton": st.session_state.get("access_token"),
         "codes_indicateur": codes_indicateur,
-        "code_pays": pays_referentiel[nom_pays],
-        "sexe": SEXES[libelle_sexe],
-        "code_classification": classifications[libelle_classification],
+        "code_pays": code_pays,
+        "sexe": code_sexe,
+        "code_classification": code_classification,
     },
 )
 
@@ -87,15 +88,20 @@ if reponse["status_code"] != 200:
     st.error(message_erreur(reponse))
     st.stop()
 
+# --- Traitement des données ---
 lignes = []
-for serie in reponse["data"]["series"]:
-    for point in serie["points"]:
+for serie in donnees.get("series", []):
+    for point in serie.get("points", []):
         lignes.append(
-            {"Période": point["periode"], "Indicateur": serie["libelle"], "Valeur": point["valeur"]}
+            {
+                "Période": point["periode"],
+                "Indicateur": serie["libelle"],
+                "Valeur": point["valeur"]
+            }
         )
 
 if not lignes:
-    st.info("Aucune donnée à afficher pour cette sélection.")
+    st.info("📊 Aucune donnée à afficher pour cette sélection.")
     st.stop()
 
 df = pd.DataFrame(lignes).sort_values("Période")

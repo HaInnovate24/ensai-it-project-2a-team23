@@ -1,6 +1,7 @@
 import pandas as pd
 import plotly.express as px
 import streamlit as st
+from utils.api_client import api_client
 
 from utils.api_client import api_client
 from utils.log_init import get_page_logger
