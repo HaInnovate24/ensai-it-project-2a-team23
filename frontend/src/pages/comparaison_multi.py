@@ -4,15 +4,6 @@ import streamlit as st
 
 from utils.api_client import api_client
 from utils.log_init import get_page_logger
-<<<<<<< HEAD
-
-get_page_logger("Multi-indicateurs (F5)")
-
-st.set_page_config(page_title="Comparaison Multi-indicateurs", page_icon="📊")
-
-st.title("Comparaison Multi-indicateurs (F5) 📊")
-st.write(
-=======
 from utils.referentiels import (
     SEXES,
     get_classifications_toutes,
@@ -27,7 +18,6 @@ get_page_logger("Multi-indicateurs (F5)")
 
 entete(
     "Comparaison multi-indicateurs",
->>>>>>> f4d753ee7f00cfbed40afdc2538dda2d69849181
     "Superposez plusieurs indicateurs sur un même graphique pour dégager "
     "visuellement des liens.",
     eyebrow="Analyse",
@@ -86,19 +76,6 @@ reponse = api_client.get(
     },
 )
 
-<<<<<<< HEAD
-status_code = reponse.get("status_code", 0)
-donnees = reponse.get("data", {})
-
-if status_code == 404:
-    st.warning("⚠️ Aucune donnée disponible pour cette sélection.")
-    st.stop()
-
-if status_code != 200:
-    # Si 'donnees' est un dict et contient un message d'erreur spécifique, on l'affiche
-    msg = donnees.get("detail", donnees) if isinstance(donnees, dict) else donnees
-    st.error(f"❌ Erreur du serveur backend ({status_code}) : {msg}")
-=======
 if reponse["status_code"] == 404:
     st.warning("Aucune donnée disponible pour cette sélection.")
     st.stop()
@@ -109,7 +86,6 @@ if reponse["status_code"] in (401, 403):
 
 if reponse["status_code"] != 200:
     st.error(message_erreur(reponse))
->>>>>>> f4d753ee7f00cfbed40afdc2538dda2d69849181
     st.stop()
 
 # --- Traitement des données ---
