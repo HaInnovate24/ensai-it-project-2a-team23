@@ -2,21 +2,16 @@
 port = 8000
 
 [theme]
-# --- Ambiance Beige & Marron Chaleureux ---
-textColor="#2C3E50"
-font="sans serif"
+# --- Thème sobre et professionnel : fond clair, accent bleu unique ---
+base = "light"
+font = "sans serif"
 
-primaryColor="#2E86C1"
-backgroundColor="#EFEAE2" # Un beige lin très doux, chaleureux et naturel
-secondaryBackgroundColor="#FFFFFF" # Les blocs et menus restent blancs pour contraster
+# Accent unique, utilisé avec parcimonie (boutons, curseurs, liens actifs).
+primaryColor = "#2563EB"
 
-# --- Tes variables personnalisées conservées à l'identique ---
-redTextColor="#8b0303"
-redBackgroundColor="#ff5f5f"
-greenTextColor="#016806"
-greenBackgroundColor="#9cd1b7"
-yellowTextColor="#bd7f0c"
-yellowBackgroundColor="#f7bd53"
+# Surfaces neutres : fond blanc, blocs/latérale en gris très clair.
+backgroundColor = "#FFFFFF"
+secondaryBackgroundColor = "#F1F5F9"
 
-dataframeBorderColor="#976a09"
-dataframeHeaderBackgroundColor="#eea73d"
+# Texte ardoise foncé pour un bon contraste sans dureté.
+textColor = "#1E293B"

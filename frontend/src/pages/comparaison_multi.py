@@ -5,54 +5,69 @@ import streamlit as st
 from utils.api_client import api_client
 from utils.log_init import get_page_logger
 from utils.referentiels import (
-    INDICATEURS,
     SEXES,
-    classifications_toutes,
+    get_classifications_toutes,
+    get_indicateurs,
     get_pays,
+    index_defaut,
     message_erreur,
 )
+from utils.ui import PALETTE_GRAPHIQUE, entete, est_connecte, styliser_figure
 
 get_page_logger("Multi-indicateurs (F5)")
 
-st.title("Comparaison Multi-indicateurs (F5) 📊")
-st.write(
+entete(
+    "Comparaison multi-indicateurs",
     "Superposez plusieurs indicateurs sur un même graphique pour dégager "
-    "visuellement des liens."
+    "visuellement des liens.",
+    eyebrow="Analyse",
 )
 
+# Cette analyse exige une connexion (le backend attend un jeton).
+if not est_connecte():
+    st.info("Connectez-vous pour accéder à la comparaison multi-indicateurs.")
+    st.page_link("pages/login.py", label="Se connecter", icon=":material/lock:")
+    st.stop()
+
+indicateurs = get_indicateurs()
 pays_referentiel = get_pays()
 
 # --- Filtres ---
 col1, col2 = st.columns(2)
 
 with col1:
-    nom_pays = st.selectbox("Sélectionnez un pays cible :", options=list(pays_referentiel))
+    nom_pays = st.selectbox("Pays cible :", options=list(pays_referentiel))
 
 with col2:
     libelle_sexe = st.selectbox("Sexe :", list(SEXES))
 
 codes_indicateur = st.multiselect(
-    "Sélectionnez les indicateurs à croiser :",
-    options=list(INDICATEURS),
-    format_func=lambda code: INDICATEURS[code],
-    default=list(INDICATEURS),
+    "Indicateurs à croiser :",
+    options=list(indicateurs),
+    format_func=lambda code: indicateurs[code],
+    default=list(indicateurs),
 )
 
 # L'API applique une seule classification à tous les indicateurs : chaque
 # indicateur n'apparaîtra que s'il possède des données pour cette catégorie.
-classifications = classifications_toutes()
-libelle_classification = st.selectbox("Catégorie (âge ou profession) :", list(classifications))
+classifications = get_classifications_toutes()
+libelle_classification = st.selectbox(
+    "Catégorie (âge ou profession) :",
+    list(classifications),
+    index=index_defaut(classifications),
+)
 
 st.divider()
 
 if not codes_indicateur:
-    st.warning("⚠️ Veuillez sélectionner au moins un indicateur pour générer le graphique.")
+    st.warning("Sélectionnez au moins un indicateur pour générer le graphique.")
     st.stop()
 
 # --- Appel du backend : /analyses/comparaison-indicateurs ---
 reponse = api_client.get(
     "/analyses/comparaison-indicateurs",
     params={
+        "jeton": st.session_state.get("access_token"),
         "codes_indicateur": codes_indicateur,
         "code_pays": pays_referentiel[nom_pays],
         "sexe": SEXES[libelle_sexe],
@@ -61,11 +76,15 @@ reponse = api_client.get(
 )
 
 if reponse["status_code"] == 404:
-    st.warning("⚠️ Aucune donnée disponible pour cette sélection.")
+    st.warning("Aucune donnée disponible pour cette sélection.")
+    st.stop()
+
+if reponse["status_code"] in (401, 403):
+    st.error("Session expirée ou accès refusé. Reconnectez-vous pour continuer.")
     st.stop()
 
 if reponse["status_code"] != 200:
-    st.error(f"❌ {message_erreur(reponse)}")
+    st.error(message_erreur(reponse))
     st.stop()
 
 lignes = []
@@ -79,7 +98,7 @@ if not lignes:
     st.info("Aucune donnée à afficher pour cette sélection.")
     st.stop()
 
-df = pd.DataFrame(lignes)
+df = pd.DataFrame(lignes).sort_values("Période")
 
 fig = px.line(
     df,
@@ -88,6 +107,9 @@ fig = px.line(
     color="Indicateur",
     title=f"Croisement des indicateurs pour : {nom_pays}",
     markers=True,
+    color_discrete_sequence=PALETTE_GRAPHIQUE,
 )
+fig.update_xaxes(type="category")
+styliser_figure(fig)
 
 st.plotly_chart(fig, use_container_width=True)
