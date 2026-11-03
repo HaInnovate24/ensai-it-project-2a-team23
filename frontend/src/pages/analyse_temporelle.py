@@ -55,7 +55,7 @@ if pays:
         y="Valeur",
         color="Pays",
         title=f"Évolution : {indicateur} ({population})",
-        markers=True
+        markers=True,
     )
 
     # 3. Affichage du graphique dans Streamlit

@@ -8,15 +8,16 @@ import pandas as pd
 import plotly.express as px
 
 st.title("Comparaison Multi-indicateurs (F5) 📊")
-st.write("Superposez plusieurs indicateurs sur un même graphique pour dégager visuellement des liens.")
+st.write(
+    "Superposez plusieurs indicateurs sur un même graphique pour dégager visuellement des liens."
+)
 
 # --- Filtres ---
 col1, col2 = st.columns(2)
 
 with col1:
     pays = st.selectbox(
-        "Sélectionnez un pays cible :",
-        ["France", "Allemagne", "États-Unis", "Sénégal", "Japon"]
+        "Sélectionnez un pays cible :", ["France", "Allemagne", "États-Unis", "Sénégal", "Japon"]
     )
 
 with col2:
@@ -25,7 +26,7 @@ with col2:
 indicateurs = st.multiselect(
     "Sélectionnez les indicateurs à croiser :",
     ["Taux de chômage", "Taux d'activité", "Taux d'emploi"],
-    default=["Taux de chômage", "Taux d'activité"] # Deux courbes affichées par défaut
+    default=["Taux de chômage", "Taux d'activité"],  # Deux courbes affichées par défaut
 )
 
 st.divider()
@@ -42,7 +43,7 @@ if len(indicateurs) > 0:
             base = random.randint(5, 12)
         elif "activité" in ind:
             base = random.randint(65, 75)
-        else: # Taux d'emploi
+        else:  # Taux d'emploi
             base = random.randint(60, 70)
 
         for t in noms_trimestres:
@@ -56,12 +57,11 @@ if len(indicateurs) > 0:
         df,
         x="Trimestre",
         y="Valeur",
-        color="Indicateur", # Une couleur différente par indicateur
+        color="Indicateur",  # Une couleur différente par indicateur
         title=f"Croisement des indicateurs pour : {pays}",
-        markers=True
+        markers=True,
     )
 
     st.plotly_chart(fig, use_container_width=True)
 else:
     st.warning("⚠️ Veuillez sélectionner au moins un indicateur pour générer le graphique.")
-

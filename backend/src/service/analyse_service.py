@@ -85,11 +85,10 @@ class AnalyseService:
         """F4 : compare un indicateur entre plusieurs pays.
 
         Chaque pays donne une série d'un seul point. Les séries sont triées de la
-        valeur la plus haute à la plus basse : la première est donc le pays le plus
+        valeur la plus haute à la plus basse : la première est le pays le plus
         haut, la dernière le pays le plus bas.
 
-        Si periode est None, on prend pour chaque pays sa période la plus récente
-        (elle peut différer d'un pays à l'autre : elle est indiquée dans le point).
+        Si periode est None, on prend pour chaque pays sa période la plus récente.
         """
         codes = self._sans_doublons(codes_pays)
         if not codes:
@@ -135,7 +134,7 @@ class AnalyseService:
 
         Chaque indicateur donne une série. L'unité est écrite dans le libellé car
         les indicateurs n'ont pas forcément la même unité. Un indicateur sans
-        donnée pour ce pays est simplement ignoré.
+        donnée pour ce pays est ignoré.
         """
         codes = self._sans_doublons(codes_indicateur)
         if not codes:

@@ -70,9 +70,7 @@ def test_collecter_demande_toute_la_periode_et_sauvegarde():
     client = FauxIlostatClient()
     service = creer_service(client)
 
-    trace = service.collecter_indicateur(
-        "EMP_TEMP_SEX_OCU_NB", from_date=2016, to_date=2022
-    )
+    trace = service.collecter_indicateur("EMP_TEMP_SEX_OCU_NB", from_date=2016, to_date=2022)
 
     # Le service délègue la gestion du cache au client : il demande toujours la
     # période complète en un seul appel, puis parse et upsert tout le CSV reçu.
@@ -108,9 +106,7 @@ def test_collecter_dedoublonne_le_lot_avant_sauvegarde():
     client = FauxIlostatClient(avec_doublons=True)
     service = creer_service(client)
 
-    trace = service.collecter_indicateur(
-        "EMP_TEMP_SEX_OCU_NB", from_date=2020, to_date=2020
-    )
+    trace = service.collecter_indicateur("EMP_TEMP_SEX_OCU_NB", from_date=2020, to_date=2020)
 
     observations = service.observation_dao.observations
     assert trace.statut == StatutImport.SUCCES

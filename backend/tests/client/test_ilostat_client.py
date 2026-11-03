@@ -35,9 +35,7 @@ def test_telecharger_indicateur_reutilise_le_fichier_exact(monkeypatch, tmp_path
     monkeypatch.setattr(IlostatClient, "DATA_DIRECTORY", tmp_path)
     repertoire = tmp_path / "TEST_INDICATOR"
     repertoire.mkdir()
-    (repertoire / "TEST_INDICATOR_2020_2021.csv").write_text(
-        CSV_EXEMPLE, encoding="utf-8"
-    )
+    (repertoire / "TEST_INDICATOR_2020_2021.csv").write_text(CSV_EXEMPLE, encoding="utf-8")
     requete = Mock()
     monkeypatch.setattr("client.ilostat_client.requests.get", requete)
 
@@ -63,9 +61,7 @@ def test_lister_annees_telechargees_reconnait_les_plages_et_limites_les_annees(
     assert annees == {2016, 2017, 2018, 2019, 2020, 2022}
 
 
-def test_telecharger_indicateur_ne_telecharge_que_les_plages_manquantes(
-    monkeypatch, tmp_path
-):
+def test_telecharger_indicateur_ne_telecharge_que_les_plages_manquantes(monkeypatch, tmp_path):
     monkeypatch.setattr(IlostatClient, "DATA_DIRECTORY", tmp_path)
     repertoire = tmp_path / "TEST_INDICATOR"
     repertoire.mkdir()
@@ -104,9 +100,7 @@ def test_telecharger_indicateur_ne_telecharge_que_les_plages_manquantes(
     )
 
 
-def test_telecharger_indicateur_ne_refait_aucun_appel_quand_tout_est_archive(
-    monkeypatch, tmp_path
-):
+def test_telecharger_indicateur_ne_refait_aucun_appel_quand_tout_est_archive(monkeypatch, tmp_path):
     monkeypatch.setattr(IlostatClient, "DATA_DIRECTORY", tmp_path)
     repertoire = tmp_path / "TEST_INDICATOR"
     repertoire.mkdir()
