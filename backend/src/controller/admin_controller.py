@@ -8,6 +8,7 @@ from service.donnees_service import DonneesService
 from service.utilisateur_service import UtilisateurService
 
 from business_object.observation import Observation
+from model.donnees_model import ObservationCorrection
 
 
 router = APIRouter()
@@ -58,10 +59,10 @@ def lister_imports():
 
 
 @router.put("/observations/{observation_id}")
-def corriger_observation(observation_id: int, observation:Observation):
+def corriger_observation(observation_id: int, observation: ObservationCorrection):
     """Corrige une observation."""
     try:
-        observation = DonneesService.corriger(observation)
+        DonneesService().corriger(Observation(**observation.model_dump()))
         return {
             "message": "Correction observation",
             "statut": "succes",
@@ -79,7 +80,7 @@ def corriger_observation(observation_id: int, observation:Observation):
 def supprimer_observation(observation_id: int):
     """Supprime une observation."""
     try:
-        observation = DonneesService.supprimer(observation_id)
+        DonneesService().supprimer(observation_id)
         return {
             "message": "Suppression observation",
             "statut": "succes",
