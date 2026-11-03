@@ -131,11 +131,11 @@ class CollecteService:
 
     def lister_imports(self) -> list[ImportDonnees]:
         """
-            Lister toutes les historiques d'imports 
+        Lister toutes les historiques d'imports
         """
         imports = ImportDao.lister()
         return imports
-        
+
 
 if __name__ == "__main__":
     collecte_service = CollecteService()

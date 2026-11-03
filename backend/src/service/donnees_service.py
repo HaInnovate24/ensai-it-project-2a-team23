@@ -9,9 +9,7 @@ class DonneesService:
 
     def __init__(self, observation_dao: ObservationDao | None = None):
         """Initialise le service, avec possibilité d'injecter un DAO de test."""
-        self.observation_dao = (
-            observation_dao if observation_dao is not None else ObservationDao()
-        )
+        self.observation_dao = observation_dao if observation_dao is not None else ObservationDao()
 
     def rechercher(self, **filtres: object) -> list[Observation]:
         """Recherche des observations selon les filtres fournis.
