@@ -76,9 +76,7 @@ class IlostatClient:
 
         annees_existantes = self.lister_annees_telechargees(code, from_date, to_date)
         annees_manquantes = [
-            annee
-            for annee in range(from_date, to_date + 1)
-            if annee not in annees_existantes
+            annee for annee in range(from_date, to_date + 1) if annee not in annees_existantes
         ]
         for debut, fin in self._regrouper_annees_consecutives(annees_manquantes):
             self._telecharger_plage(code, debut, fin)

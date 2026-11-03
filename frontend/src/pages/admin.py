@@ -11,13 +11,15 @@ st.write("Gérez les accès utilisateurs et consultez le journal d'activité de 
 st.header("👥 Gestion des utilisateurs")
 
 # Fausse base de données des utilisateurs (Mock)
-utilisateurs = pd.DataFrame({
-    "ID": [101, 102, 103],
-    "Nom d'utilisateur": ["admin_alice", "user_bob", "user_charlie"],
-    "Rôle": ["Administrateur", "Utilisateur", "Utilisateur"],
-    "Dernière connexion": ["Aujourd'hui", "Hier", "Il y a 10 jours"],
-    "Statut": ["🟢 Actif", "🟢 Actif", "🔴 Inactif"]
-})
+utilisateurs = pd.DataFrame(
+    {
+        "ID": [101, 102, 103],
+        "Nom d'utilisateur": ["admin_alice", "user_bob", "user_charlie"],
+        "Rôle": ["Administrateur", "Utilisateur", "Utilisateur"],
+        "Dernière connexion": ["Aujourd'hui", "Hier", "Il y a 10 jours"],
+        "Statut": ["🟢 Actif", "🟢 Actif", "🔴 Inactif"],
+    }
+)
 
 # Affichage sous forme de tableau interactif
 st.dataframe(utilisateurs, use_container_width=True, hide_index=True)
@@ -35,7 +37,14 @@ st.divider()
 st.header("📋 Journal d'activité récent")
 
 # Création de faux historiques de navigation (Mock)
-actions_possibles = ["Connexion", "Consultation F3", "Consultation F4", "Consultation F5", "Erreur 404", "Déconnexion"]
+actions_possibles = [
+    "Connexion",
+    "Consultation F3",
+    "Consultation F4",
+    "Consultation F5",
+    "Erreur 404",
+    "Déconnexion",
+]
 utilisateurs_possibles = ["admin_alice", "user_bob", "Visiteur Anonyme"]
 
 logs = []
@@ -45,11 +54,13 @@ maintenant = datetime.now()
 for _ in range(15):
     # On recule dans le temps de quelques minutes au hasard
     temps = maintenant - timedelta(minutes=random.randint(1, 300))
-    logs.append({
-        "Date et Heure": temps.strftime("%Y-%m-%d %H:%M:%S"),
-        "Utilisateur": random.choice(utilisateurs_possibles),
-        "Action": random.choice(actions_possibles)
-    })
+    logs.append(
+        {
+            "Date et Heure": temps.strftime("%Y-%m-%d %H:%M:%S"),
+            "Utilisateur": random.choice(utilisateurs_possibles),
+            "Action": random.choice(actions_possibles),
+        }
+    )
 
 df_logs = pd.DataFrame(logs)
 # On trie pour avoir les actions les plus récentes en haut
@@ -59,4 +70,3 @@ st.dataframe(df_logs, use_container_width=True, hide_index=True)
 
 if st.button("📥 Exporter les logs (CSV)"):
     st.success("Fonctionnalité d'export en cours de développement.")
-

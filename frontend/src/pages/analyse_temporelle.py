@@ -101,6 +101,16 @@ try:
             )
             st.plotly_chart(fig, use_container_width=True)
 
+<<<<<<< HEAD
+    # 2. Création du graphique avec Plotly Express
+    fig = px.line(
+        df,
+        x="Trimestre",
+        y="Valeur",
+        color="Pays",
+        title=f"Évolution : {indicateur} ({population})",
+        markers=True,
+=======
     elif reponse.status_code == 404:
         st.warning(
             "⚠️ Aucune donnée trouvée pour cette combinaison d'indicateur et de pays."
@@ -113,4 +123,5 @@ try:
 except requests.exceptions.ConnectionError:
     st.error(
         "❌ Impossible de joindre le backend. Vérifiez qu'il tourne bien sur http://localhost:5000."
+>>>>>>> 459404f89f84fa83d33a4c449b0b4e2eb08b53ba
     )
