@@ -44,9 +44,8 @@ class APIClient:
             dict: A dictionary containing the 'status_code' and the response 'data'.
         """
         url = f"{self.base_url}{path}"
-        logger = st.session_state.get("logger")
+        loggers = st.session_state.get("logger")
        
-
         # Automatically inject headers (including the token)
         headers = kwargs.pop("headers", {})
         headers.update(self._get_headers())
@@ -74,7 +73,7 @@ class APIClient:
         finally:
             # Only log if a response was actually received to avoid errors in the finally block
             pass
-        
+
     def get(self, path: str, params=None, **kwargs):
         """Sends a GET request.
         Args:

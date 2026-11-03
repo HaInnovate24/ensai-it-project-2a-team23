@@ -11,48 +11,33 @@ st.set_page_config(page_title="Comparaison Multi-indicateurs", page_icon="📊")
 
 st.title("Comparaison Multi-indicateurs (F5) 📊")
 st.write(
-    "Superposez plusieurs indicateurs sur un même graphique pour dégager visuellement des liens."
+    "Superposez plusieurs indicateurs sur un même graphique pour dégager "
+    "visuellement des liens."
 )
+
+pays_referentiel = get_pays()  
 
 # --- Filtres de recherche ---
 with st.expander("🛠️ Filtres de recherche", expanded=True):
     col1, col2 = st.columns(2)
 
-    with col1:
-        dict_pays = {
-            "France": "FRA",
-            "Allemagne": "DEU",
-            "Espagne": "ESP",
-            "Italie": "ITA",
-        }
-        nom_pays = st.selectbox("Sélectionnez un pays cible :", options=list(dict_pays.keys()))
-        code_pays = dict_pays[nom_pays]
+with col1:
+    nom_pays = st.selectbox("Sélectionnez un pays cible :", options=list(pays_referentiel))
 
-        dict_sexes = {
-            "Total": "total",
-            "Hommes": "homme",
-            "Femmes": "femme",
-        }
-        nom_sexe = st.selectbox("Sexe :", options=list(dict_sexes.keys()))
-        code_sexe = dict_sexes[nom_sexe]
+with col2:
+    libelle_sexe = st.selectbox("Sexe :", list(SEXES))
 
-    with col2:
-        dict_indicateurs = {
-            "Emploi par sexe et profession": "EMP_TEMP_SEX_OCU_NB",
-            "Population en âge de travailler": "POP_XWAP_SEX_AGE_NB",
-        }
-        noms_indicateurs = st.multiselect(
-            "Sélectionnez les indicateurs à croiser :",
-            options=list(dict_indicateurs.keys()),
-            default=list(dict_indicateurs.keys()),
-        )
-        codes_indicateur = [dict_indicateurs[nom] for nom in noms_indicateurs]
+codes_indicateur = st.multiselect(
+    "Sélectionnez les indicateurs à croiser :",
+    options=list(INDICATEURS),
+    format_func=lambda code: INDICATEURS[code],
+    default=list(INDICATEURS),
+)
 
-        dict_classifications = {
-            "Total": "TOTAL",
-        }
-        nom_classification = st.selectbox("Catégorie :", options=list(dict_classifications.keys()))
-        code_classification = dict_classifications[nom_classification]
+# L'API applique une seule classification à tous les indicateurs : chaque
+# indicateur n'apparaîtra que s'il possède des données pour cette catégorie.
+classifications = classifications_toutes()
+libelle_classification = st.selectbox("Catégorie (âge ou profession) :", list(classifications))
 
 st.divider()
 
