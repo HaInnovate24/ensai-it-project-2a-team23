@@ -57,7 +57,7 @@ help: ## Affiche cette aide
 # Initialisation complete du projet
 # ---------------------------------------------------------------------
 .PHONY: init
-init: install db-up db-init ## Initialise tout le projet (dependances + base de donnees)
+init: install  ## Initialise tout le projet (dependances + base de donnees)
 	@echo.
 	@echo Projet initialise.
 	@echo   Lancez l'API  : make run-back
