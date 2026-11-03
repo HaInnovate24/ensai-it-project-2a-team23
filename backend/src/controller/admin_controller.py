@@ -3,7 +3,6 @@
 import requests
 from fastapi import APIRouter, HTTPException, Query
 
-from backend.src.service import utilisateur_service
 from service.collecte_service import CollecteService
 from service.donnees_service import DonneesService
 from service.utilisateur_service import UtilisateurService
