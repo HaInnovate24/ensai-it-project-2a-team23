@@ -17,3 +17,7 @@ class UtilisateurService:
     def desactiver(self, utilisateur_id: int) -> bool:
         """Désactive un compte."""
         ...
+    
+    def lister_utilisateurs(self, ) -> list[Utilisateur]:
+        """lister les utilisateurs."""
+        ...
