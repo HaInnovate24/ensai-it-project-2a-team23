@@ -1,0 +1,333 @@
+31/10/2026 14:05:11 root                      INFO    - --------------------------------------------------
+31/10/2026 14:05:11 root                      INFO    - Starting Webservice                           
+31/10/2026 14:05:11 root                      INFO    - --------------------------------------------------
+31/10/2026 14:05:11 root                      INFO    - Load environment variables: SUCCES
+31/10/2026 14:05:11 root                      INFO    - POSTGRES_HOST=localhost
+31/10/2026 14:05:11 root                      INFO    - POSTGRES_PORT=5432
+31/10/2026 14:05:11 root                      INFO    - POSTGRES_DATABASE=defaultdb
+31/10/2026 14:05:11 root                      INFO    - POSTGRES_USER=user
+31/10/2026 14:05:11 root                      INFO    - POSTGRES_PASSWORD=*******
+31/10/2026 14:05:11 root                      INFO    - POSTGRES_SCHEMA=project
+31/10/2026 14:05:11 root                      INFO    - UVICORN_HOST=127.0.0.1
+31/10/2026 14:05:11 root                      INFO    - UVICORN_PORT=5000
+31/10/2026 14:05:11 root                      INFO    - BACKEND_URL=http://localhost:5000
+31/10/2026 14:05:11 root                      INFO    - BACKEND_TIMEOUT=5
+31/10/2026 14:05:11 root                      INFO    - ELO_K_FACTOR=32
+31/10/2026 14:06:22 root                      INFO    - --------------------------------------------------
+31/10/2026 14:06:22 root                      INFO    - Starting Webservice                           
+31/10/2026 14:06:22 root                      INFO    - --------------------------------------------------
+31/10/2026 14:06:22 root                      INFO    - Load environment variables: SUCCES
+31/10/2026 14:06:22 root                      INFO    - POSTGRES_HOST=localhost
+31/10/2026 14:06:22 root                      INFO    - POSTGRES_PORT=5432
+31/10/2026 14:06:22 root                      INFO    - POSTGRES_DATABASE=defaultdb
+31/10/2026 14:06:22 root                      INFO    - POSTGRES_USER=user
+31/10/2026 14:06:22 root                      INFO    - POSTGRES_PASSWORD=*******
+31/10/2026 14:06:22 root                      INFO    - POSTGRES_SCHEMA=project
+31/10/2026 14:06:22 root                      INFO    - UVICORN_HOST=127.0.0.1
+31/10/2026 14:06:22 root                      INFO    - UVICORN_PORT=5000
+31/10/2026 14:06:22 root                      INFO    - BACKEND_URL=http://localhost:5000
+31/10/2026 14:06:22 root                      INFO    - BACKEND_TIMEOUT=5
+31/10/2026 14:06:22 root                      INFO    - ELO_K_FACTOR=32
+31/10/2026 14:06:24 root                      INFO    - GET /json/version - START
+31/10/2026 14:06:24 root                      INFO    - GET / - START
+31/10/2026 14:06:24 root                      INFO    - GET /json/version - END [Status: 404]
+31/10/2026 14:06:24 root                      INFO    - GET / - END [Status: 307]
+31/10/2026 14:06:24 root                      INFO    - GET /docs - START
+31/10/2026 14:06:24 root                      INFO    - GET /docs - END [Status: 200]
+31/10/2026 14:06:25 root                      INFO    - GET / - START
+31/10/2026 14:06:25 root                      INFO    - GET / - END [Status: 307]
+31/10/2026 14:06:25 root                      INFO    - GET /docs - START
+31/10/2026 14:06:25 root                      INFO    - GET /docs - END [Status: 200]
+31/10/2026 14:06:25 root                      INFO    - GET /openapi.json - START
+31/10/2026 14:06:25 root                      INFO    - GET /openapi.json - END [Status: 200]
+31/10/2026 14:13:54 root                      INFO    - GET / - START
+31/10/2026 14:13:54 root                      INFO    - GET / - END [Status: 307]
+31/10/2026 14:13:54 root                      INFO    - GET /docs - START
+31/10/2026 14:13:54 root                      INFO    - GET /docs - END [Status: 200]
+31/10/2026 14:13:54 root                      INFO    - GET /openapi.json - START
+31/10/2026 14:13:54 root                      INFO    - GET /openapi.json - END [Status: 200]
+31/10/2026 14:27:29 root                      INFO    - GET / - START
+31/10/2026 14:27:29 root                      INFO    - GET / - END [Status: 307]
+31/10/2026 14:27:29 root                      INFO    - GET /docs - START
+31/10/2026 14:27:29 root                      INFO    - GET /docs - END [Status: 200]
+31/10/2026 14:27:29 root                      INFO    - GET /openapi.json - START
+31/10/2026 14:27:29 root                      INFO    - GET /openapi.json - END [Status: 200]
+31/10/2026 14:27:38 root                      INFO    - GET /docs - START
+31/10/2026 14:27:38 root                      INFO    - GET /docs - END [Status: 200]
+31/10/2026 14:27:38 root                      INFO    - GET /openapi.json - START
+31/10/2026 14:27:38 root                      INFO    - GET /openapi.json - END [Status: 200]
+31/10/2026 14:27:49 root                      INFO    - GET /admin/imports - START
+31/10/2026 14:27:49 root                      INFO    - GET /admin/imports - END [Status: 200]
+31/10/2026 14:28:23 root                      INFO    - POST /admin/imports/POP_XWAP_SEX_AGE_NB - START
+31/10/2026 14:28:23 service.collecte_service  INFO    - Collecte ILOSTAT : indicateur=POP_XWAP_SEX_AGE_NB, période=2016-2017
+31/10/2026 14:28:27 service.collecte_service  ERROR   - Échec de la collecte de l'indicateur POP_XWAP_SEX_AGE_NB
+Traceback (most recent call last):
+  File "D:\ENSAI\s1\Informatique\Projet informatique\ensai-it-project-2a-team23\backend\src\service\collecte_service.py", line 123, in collecter_indicateur
+    observations = list(observations_uniques.values())
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ENSAI\s1\Informatique\Projet informatique\ensai-it-project-2a-team23\backend\src\dao\observation_dao.py", line 58, in inserer_ou_mettre_a_jour_par_lot
+    execute_values(cursor, requete, valeurs)
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ENSAI\s1\Informatique\Projet informatique\ensai-it-project-2a-team23\backend\.venv\Lib\site-packages\psycopg2\extras.py", line 1299, in execute_values
+    cur.execute(b''.join(parts))
+    ~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "D:\ENSAI\s1\Informatique\Projet informatique\ensai-it-project-2a-team23\backend\.venv\Lib\site-packages\psycopg2\extras.py", line 236, in execute
+    return super().execute(query, vars)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+psycopg2.errors.ForeignKeyViolation: insert or update on table "observation" violates foreign key constraint "observation_code_pays_fkey"
+DETAIL:  Key (code_pays)=(ARE) is not present in table "pays".
+
+31/10/2026 14:28:27 root                      INFO    - POST /admin/imports/POP_XWAP_SEX_AGE_NB - END [Status: 200]
+31/10/2026 14:29:00 root                      INFO    - POST /admin/imports/POP_XWAP_SEX_AGE_NB - START
+31/10/2026 14:29:00 service.collecte_service  INFO    - Collecte ILOSTAT : indicateur=POP_XWAP_SEX_AGE_NB, période=2018-2019
+31/10/2026 14:29:03 service.collecte_service  ERROR   - Échec de la collecte de l'indicateur POP_XWAP_SEX_AGE_NB
+Traceback (most recent call last):
+  File "D:\ENSAI\s1\Informatique\Projet informatique\ensai-it-project-2a-team23\backend\src\service\collecte_service.py", line 123, in collecter_indicateur
+    observations = list(observations_uniques.values())
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ENSAI\s1\Informatique\Projet informatique\ensai-it-project-2a-team23\backend\src\dao\observation_dao.py", line 58, in inserer_ou_mettre_a_jour_par_lot
+    execute_values(cursor, requete, valeurs)
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ENSAI\s1\Informatique\Projet informatique\ensai-it-project-2a-team23\backend\.venv\Lib\site-packages\psycopg2\extras.py", line 1299, in execute_values
+    cur.execute(b''.join(parts))
+    ~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "D:\ENSAI\s1\Informatique\Projet informatique\ensai-it-project-2a-team23\backend\.venv\Lib\site-packages\psycopg2\extras.py", line 236, in execute
+    return super().execute(query, vars)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+psycopg2.errors.ForeignKeyViolation: insert or update on table "observation" violates foreign key constraint "observation_code_pays_fkey"
+DETAIL:  Key (code_pays)=(ARE) is not present in table "pays".
+
+31/10/2026 14:29:03 root                      INFO    - POST /admin/imports/POP_XWAP_SEX_AGE_NB - END [Status: 200]
+31/10/2026 14:36:38 root                      INFO    - GET /docs - START
+31/10/2026 14:36:38 root                      INFO    - GET /docs - END [Status: 200]
+31/10/2026 14:36:38 root                      INFO    - GET /openapi.json - START
+31/10/2026 14:36:38 root                      INFO    - GET /openapi.json - END [Status: 200]
+31/10/2026 14:36:47 __main__                  INFO    - Webservice stopped
+31/10/2026 14:36:49 root                      INFO    - --------------------------------------------------
+31/10/2026 14:36:49 root                      INFO    - Starting Webservice                           
+31/10/2026 14:36:49 root                      INFO    - --------------------------------------------------
+31/10/2026 14:36:49 root                      INFO    - Load environment variables: SUCCES
+31/10/2026 14:36:49 root                      INFO    - POSTGRES_HOST=localhost
+31/10/2026 14:36:49 root                      INFO    - POSTGRES_PORT=5432
+31/10/2026 14:36:49 root                      INFO    - POSTGRES_DATABASE=defaultdb
+31/10/2026 14:36:49 root                      INFO    - POSTGRES_USER=user
+31/10/2026 14:36:49 root                      INFO    - POSTGRES_PASSWORD=*******
+31/10/2026 14:36:49 root                      INFO    - POSTGRES_SCHEMA=project
+31/10/2026 14:36:49 root                      INFO    - UVICORN_HOST=127.0.0.1
+31/10/2026 14:36:49 root                      INFO    - UVICORN_PORT=5000
+31/10/2026 14:36:49 root                      INFO    - BACKEND_URL=http://localhost:5000
+31/10/2026 14:36:49 root                      INFO    - BACKEND_TIMEOUT=5
+31/10/2026 14:36:49 root                      INFO    - ELO_K_FACTOR=32
+31/10/2026 14:36:50 root                      INFO    - GET /docs - START
+31/10/2026 14:36:50 root                      INFO    - GET /docs - END [Status: 200]
+31/10/2026 14:36:50 root                      INFO    - GET /openapi.json - START
+31/10/2026 14:36:50 root                      INFO    - GET /openapi.json - END [Status: 200]
+31/10/2026 14:39:57 root                      INFO    - POST /admin/imports/POP_XWAP_SEX_AGE_NB - START
+31/10/2026 14:39:57 service.collecte_service  INFO    - Collecte ILOSTAT : indicateur=POP_XWAP_SEX_AGE_NB, période=2014-2026
+31/10/2026 14:39:57 service.collecte_service  INFO    - 6 année(s) déjà stockée(s) pour POP_XWAP_SEX_AGE_NB ; téléchargement ignoré
+31/10/2026 14:40:08 service.collecte_service  ERROR   - Échec de la collecte de l'indicateur POP_XWAP_SEX_AGE_NB
+Traceback (most recent call last):
+  File "D:\ENSAI\s1\Informatique\Projet informatique\ensai-it-project-2a-team23\backend\src\service\collecte_service.py", line 125, in collecter_indicateur
+    self.observation_dao.inserer_ou_mettre_a_jour_par_lot(observations)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^
+  File "D:\ENSAI\s1\Informatique\Projet informatique\ensai-it-project-2a-team23\backend\src\dao\observation_dao.py", line 58, in inserer_ou_mettre_a_jour_par_lot
+    execute_values(cursor, requete, valeurs)
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ENSAI\s1\Informatique\Projet informatique\ensai-it-project-2a-team23\backend\.venv\Lib\site-packages\psycopg2\extras.py", line 1299, in execute_values
+    cur.execute(b''.join(parts))
+    ~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "D:\ENSAI\s1\Informatique\Projet informatique\ensai-it-project-2a-team23\backend\.venv\Lib\site-packages\psycopg2\extras.py", line 236, in execute
+    return super().execute(query, vars)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+psycopg2.errors.ForeignKeyViolation: insert or update on table "observation" violates foreign key constraint "observation_code_pays_fkey"
+DETAIL:  Key (code_pays)=(ARE) is not present in table "pays".
+
+31/10/2026 14:40:08 root                      INFO    - POST /admin/imports/POP_XWAP_SEX_AGE_NB - END [Status: 200]
+31/10/2026 14:40:39 root                      INFO    - POST /admin/imports/POP_XWAP_SEX_AGE_NB - START
+31/10/2026 14:40:39 service.collecte_service  INFO    - Collecte ILOSTAT : indicateur=POP_XWAP_SEX_AGE_NB, période=2014-2026
+31/10/2026 14:40:39 service.collecte_service  INFO    - 13 année(s) déjà stockée(s) pour POP_XWAP_SEX_AGE_NB ; téléchargement ignoré
+31/10/2026 14:40:39 root                      INFO    - POST /admin/imports/POP_XWAP_SEX_AGE_NB - END [Status: 200]
+31/10/2026 14:40:40 root                      INFO    - POST /admin/imports/POP_XWAP_SEX_AGE_NB - START
+31/10/2026 14:40:40 service.collecte_service  INFO    - Collecte ILOSTAT : indicateur=POP_XWAP_SEX_AGE_NB, période=2014-2026
+31/10/2026 14:40:40 service.collecte_service  INFO    - 13 année(s) déjà stockée(s) pour POP_XWAP_SEX_AGE_NB ; téléchargement ignoré
+31/10/2026 14:40:40 root                      INFO    - POST /admin/imports/POP_XWAP_SEX_AGE_NB - END [Status: 200]
+31/10/2026 14:40:41 root                      INFO    - POST /admin/imports/POP_XWAP_SEX_AGE_NB - START
+31/10/2026 14:40:41 service.collecte_service  INFO    - Collecte ILOSTAT : indicateur=POP_XWAP_SEX_AGE_NB, période=2014-2026
+31/10/2026 14:40:41 service.collecte_service  INFO    - 13 année(s) déjà stockée(s) pour POP_XWAP_SEX_AGE_NB ; téléchargement ignoré
+31/10/2026 14:40:41 root                      INFO    - POST /admin/imports/POP_XWAP_SEX_AGE_NB - END [Status: 200]
+31/10/2026 14:40:42 root                      INFO    - POST /admin/imports/POP_XWAP_SEX_AGE_NB - START
+31/10/2026 14:40:42 service.collecte_service  INFO    - Collecte ILOSTAT : indicateur=POP_XWAP_SEX_AGE_NB, période=2014-2026
+31/10/2026 14:40:42 service.collecte_service  INFO    - 13 année(s) déjà stockée(s) pour POP_XWAP_SEX_AGE_NB ; téléchargement ignoré
+31/10/2026 14:40:42 root                      INFO    - POST /admin/imports/POP_XWAP_SEX_AGE_NB - END [Status: 200]
+31/10/2026 14:40:43 root                      INFO    - POST /admin/imports/POP_XWAP_SEX_AGE_NB - START
+31/10/2026 14:40:43 service.collecte_service  INFO    - Collecte ILOSTAT : indicateur=POP_XWAP_SEX_AGE_NB, période=2014-2026
+31/10/2026 14:40:43 service.collecte_service  INFO    - 13 année(s) déjà stockée(s) pour POP_XWAP_SEX_AGE_NB ; téléchargement ignoré
+31/10/2026 14:40:43 root                      INFO    - POST /admin/imports/POP_XWAP_SEX_AGE_NB - END [Status: 200]
+31/10/2026 14:40:43 root                      INFO    - POST /admin/imports/POP_XWAP_SEX_AGE_NB - START
+31/10/2026 14:40:43 service.collecte_service  INFO    - Collecte ILOSTAT : indicateur=POP_XWAP_SEX_AGE_NB, période=2014-2026
+31/10/2026 14:40:43 service.collecte_service  INFO    - 13 année(s) déjà stockée(s) pour POP_XWAP_SEX_AGE_NB ; téléchargement ignoré
+31/10/2026 14:40:43 root                      INFO    - POST /admin/imports/POP_XWAP_SEX_AGE_NB - END [Status: 200]
+31/10/2026 14:40:43 root                      INFO    - POST /admin/imports/POP_XWAP_SEX_AGE_NB - START
+31/10/2026 14:40:43 service.collecte_service  INFO    - Collecte ILOSTAT : indicateur=POP_XWAP_SEX_AGE_NB, période=2014-2026
+31/10/2026 14:40:43 service.collecte_service  INFO    - 13 année(s) déjà stockée(s) pour POP_XWAP_SEX_AGE_NB ; téléchargement ignoré
+31/10/2026 14:40:43 root                      INFO    - POST /admin/imports/POP_XWAP_SEX_AGE_NB - END [Status: 200]
+31/10/2026 14:40:50 root                      INFO    - POST /admin/imports/POP_XWAP_SEX_AGE_NB - START
+31/10/2026 14:40:50 service.collecte_service  INFO    - Collecte ILOSTAT : indicateur=POP_XWAP_SEX_AGE_NB, période=2014-2026
+31/10/2026 14:40:50 service.collecte_service  INFO    - 13 année(s) déjà stockée(s) pour POP_XWAP_SEX_AGE_NB ; téléchargement ignoré
+31/10/2026 14:40:50 root                      INFO    - POST /admin/imports/POP_XWAP_SEX_AGE_NB - END [Status: 200]
+31/10/2026 14:40:51 root                      INFO    - POST /admin/imports/POP_XWAP_SEX_AGE_NB - START
+31/10/2026 14:40:51 service.collecte_service  INFO    - Collecte ILOSTAT : indicateur=POP_XWAP_SEX_AGE_NB, période=2014-2026
+31/10/2026 14:40:51 service.collecte_service  INFO    - 13 année(s) déjà stockée(s) pour POP_XWAP_SEX_AGE_NB ; téléchargement ignoré
+31/10/2026 14:40:51 root                      INFO    - POST /admin/imports/POP_XWAP_SEX_AGE_NB - END [Status: 200]
+31/10/2026 14:40:51 root                      INFO    - POST /admin/imports/POP_XWAP_SEX_AGE_NB - START
+31/10/2026 14:40:51 service.collecte_service  INFO    - Collecte ILOSTAT : indicateur=POP_XWAP_SEX_AGE_NB, période=2014-2026
+31/10/2026 14:40:51 service.collecte_service  INFO    - 13 année(s) déjà stockée(s) pour POP_XWAP_SEX_AGE_NB ; téléchargement ignoré
+31/10/2026 14:40:51 root                      INFO    - POST /admin/imports/POP_XWAP_SEX_AGE_NB - END [Status: 200]
+31/10/2026 14:41:12 root                      INFO    - POST /admin/imports/POP_XWAP_SEX_AGE_NB - START
+31/10/2026 14:41:12 service.collecte_service  INFO    - Collecte ILOSTAT : indicateur=POP_XWAP_SEX_AGE_NB, période=2014-2026
+31/10/2026 14:41:25 service.collecte_service  ERROR   - Échec de la collecte de l'indicateur POP_XWAP_SEX_AGE_NB
+Traceback (most recent call last):
+  File "D:\ENSAI\s1\Informatique\Projet informatique\ensai-it-project-2a-team23\backend\src\service\collecte_service.py", line 125, in collecter_indicateur
+    self.observation_dao.inserer_ou_mettre_a_jour_par_lot(observations)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^
+  File "D:\ENSAI\s1\Informatique\Projet informatique\ensai-it-project-2a-team23\backend\src\dao\observation_dao.py", line 58, in inserer_ou_mettre_a_jour_par_lot
+    execute_values(cursor, requete, valeurs)
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ENSAI\s1\Informatique\Projet informatique\ensai-it-project-2a-team23\backend\.venv\Lib\site-packages\psycopg2\extras.py", line 1299, in execute_values
+    cur.execute(b''.join(parts))
+    ~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "D:\ENSAI\s1\Informatique\Projet informatique\ensai-it-project-2a-team23\backend\.venv\Lib\site-packages\psycopg2\extras.py", line 236, in execute
+    return super().execute(query, vars)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+psycopg2.errors.ForeignKeyViolation: insert or update on table "observation" violates foreign key constraint "observation_code_pays_fkey"
+DETAIL:  Key (code_pays)=(ARE) is not present in table "pays".
+
+31/10/2026 14:41:25 root                      INFO    - POST /admin/imports/POP_XWAP_SEX_AGE_NB - END [Status: 200]
+31/10/2026 14:42:45 root                      INFO    - POST /admin/imports/POP_XWAP_SEX_AGE_NB - START
+31/10/2026 14:42:45 service.collecte_service  INFO    - Collecte ILOSTAT : indicateur=POP_XWAP_SEX_AGE_NB, période=2014-2026
+31/10/2026 14:42:45 service.collecte_service  INFO    - 13 année(s) déjà stockée(s) pour POP_XWAP_SEX_AGE_NB ; téléchargement ignoré
+31/10/2026 14:42:45 root                      INFO    - POST /admin/imports/POP_XWAP_SEX_AGE_NB - END [Status: 200]
+31/10/2026 14:42:59 root                      INFO    - POST /admin/imports/POP_XWAP_SEX_AGE_NB - START
+31/10/2026 14:42:59 service.collecte_service  INFO    - Collecte ILOSTAT : indicateur=POP_XWAP_SEX_AGE_NB, période=2025-2026
+31/10/2026 14:43:01 service.collecte_service  ERROR   - Échec de la collecte de l'indicateur POP_XWAP_SEX_AGE_NB
+Traceback (most recent call last):
+  File "D:\ENSAI\s1\Informatique\Projet informatique\ensai-it-project-2a-team23\backend\src\service\collecte_service.py", line 125, in collecter_indicateur
+    self.observation_dao.inserer_ou_mettre_a_jour_par_lot(observations)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^
+  File "D:\ENSAI\s1\Informatique\Projet informatique\ensai-it-project-2a-team23\backend\src\dao\observation_dao.py", line 58, in inserer_ou_mettre_a_jour_par_lot
+    execute_values(cursor, requete, valeurs)
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ENSAI\s1\Informatique\Projet informatique\ensai-it-project-2a-team23\backend\.venv\Lib\site-packages\psycopg2\extras.py", line 1299, in execute_values
+    cur.execute(b''.join(parts))
+    ~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "D:\ENSAI\s1\Informatique\Projet informatique\ensai-it-project-2a-team23\backend\.venv\Lib\site-packages\psycopg2\extras.py", line 236, in execute
+    return super().execute(query, vars)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+psycopg2.errors.ForeignKeyViolation: insert or update on table "observation" violates foreign key constraint "observation_code_pays_fkey"
+DETAIL:  Key (code_pays)=(ARE) is not present in table "pays".
+
+31/10/2026 14:43:01 root                      INFO    - POST /admin/imports/POP_XWAP_SEX_AGE_NB - END [Status: 200]
+31/10/2026 15:13:45 __main__                  INFO    - Webservice stopped
+31/10/2026 15:13:51 root                      INFO    - --------------------------------------------------
+31/10/2026 15:13:51 root                      INFO    - Starting Webservice                           
+31/10/2026 15:13:51 root                      INFO    - --------------------------------------------------
+31/10/2026 15:13:51 root                      INFO    - Load environment variables: SUCCES
+31/10/2026 15:13:51 root                      INFO    - POSTGRES_HOST=localhost
+31/10/2026 15:13:51 root                      INFO    - POSTGRES_PORT=5432
+31/10/2026 15:13:51 root                      INFO    - POSTGRES_DATABASE=defaultdb
+31/10/2026 15:13:51 root                      INFO    - POSTGRES_USER=user
+31/10/2026 15:13:51 root                      INFO    - POSTGRES_PASSWORD=*******
+31/10/2026 15:13:51 root                      INFO    - POSTGRES_SCHEMA=project
+31/10/2026 15:13:51 root                      INFO    - UVICORN_HOST=127.0.0.1
+31/10/2026 15:13:51 root                      INFO    - UVICORN_PORT=5000
+31/10/2026 15:13:51 root                      INFO    - BACKEND_URL=http://localhost:5000
+31/10/2026 15:13:51 root                      INFO    - BACKEND_TIMEOUT=5
+31/10/2026 15:13:51 root                      INFO    - ELO_K_FACTOR=32
+31/10/2026 15:32:17 root                      INFO    - GET /docs - START
+31/10/2026 15:32:17 root                      INFO    - GET /docs - END [Status: 200]
+31/10/2026 15:32:17 root                      INFO    - GET /openapi.json - START
+31/10/2026 15:32:17 root                      INFO    - GET /openapi.json - END [Status: 200]
+31/10/2026 15:36:24 root                      INFO    - POST /admin/imports/POP_XWAP_SEX_AGE_NB - START
+31/10/2026 15:36:24 service.collecte_service  INFO    - Collecte ILOSTAT : indicateur=POP_XWAP_SEX_AGE_NB, période=2025-2026
+31/10/2026 15:36:24 service.collecte_service  ERROR   - Échec de la collecte de l'indicateur POP_XWAP_SEX_AGE_NB
+Traceback (most recent call last):
+  File "D:\ENSAI\s1\Informatique\Projet informatique\ensai-it-project-2a-team23\backend\src\service\collecte_service.py", line 52, in collecter_indicateur
+    
+    ...<7 lines>...
+    )
+  File "D:\ENSAI\s1\Informatique\Projet informatique\ensai-it-project-2a-team23\backend\src\dao\import_dao.py", line 23, in creer
+    cursor.execute(
+    ~~~~~~~~~~~~~~^
+        """
+        ^^^
+    ...<14 lines>...
+        ),
+        ^^
+    )
+    ^
+  File "D:\ENSAI\s1\Informatique\Projet informatique\ensai-it-project-2a-team23\backend\.venv\Lib\site-packages\psycopg2\extras.py", line 236, in execute
+    return super().execute(query, vars)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+psycopg2.OperationalError: could not receive data from server: Software caused connection abort (0x00002745/10053)
+
+31/10/2026 15:36:24 root                      ERROR   - POST /admin/imports/POP_XWAP_SEX_AGE_NB - FAILED [Status: 500] Error: 'NoneType' object has no attribute 'date_fin' and no __dict__ for setting new attributes
+31/10/2026 15:36:27 root                      INFO    - POST /admin/imports/POP_XWAP_SEX_AGE_NB - START
+31/10/2026 15:36:27 service.collecte_service  INFO    - Collecte ILOSTAT : indicateur=POP_XWAP_SEX_AGE_NB, période=2025-2026
+31/10/2026 15:36:27 service.collecte_service  ERROR   - Échec de la collecte de l'indicateur POP_XWAP_SEX_AGE_NB
+Traceback (most recent call last):
+  File "D:\ENSAI\s1\Informatique\Projet informatique\ensai-it-project-2a-team23\backend\src\service\collecte_service.py", line 52, in collecter_indicateur
+    
+    ...<7 lines>...
+    )
+  File "D:\ENSAI\s1\Informatique\Projet informatique\ensai-it-project-2a-team23\backend\src\dao\import_dao.py", line 22, in creer
+    with self.conn.cursor() as cursor:
+         ~~~~~~~~~~~~~~~~^^
+psycopg2.InterfaceError: connection already closed
+31/10/2026 15:36:27 root                      ERROR   - POST /admin/imports/POP_XWAP_SEX_AGE_NB - FAILED [Status: 500] Error: 'NoneType' object has no attribute 'date_fin' and no __dict__ for setting new attributes
+31/10/2026 15:36:41 __main__                  INFO    - Webservice stopped
+31/10/2026 15:36:45 root                      INFO    - --------------------------------------------------
+31/10/2026 15:36:45 root                      INFO    - Starting Webservice                           
+31/10/2026 15:36:45 root                      INFO    - --------------------------------------------------
+31/10/2026 15:36:45 root                      INFO    - Load environment variables: SUCCES
+31/10/2026 15:36:45 root                      INFO    - POSTGRES_HOST=localhost
+31/10/2026 15:36:45 root                      INFO    - POSTGRES_PORT=5432
+31/10/2026 15:36:45 root                      INFO    - POSTGRES_DATABASE=defaultdb
+31/10/2026 15:36:45 root                      INFO    - POSTGRES_USER=user
+31/10/2026 15:36:45 root                      INFO    - POSTGRES_PASSWORD=*******
+31/10/2026 15:36:45 root                      INFO    - POSTGRES_SCHEMA=project
+31/10/2026 15:36:45 root                      INFO    - UVICORN_HOST=127.0.0.1
+31/10/2026 15:36:45 root                      INFO    - UVICORN_PORT=5000
+31/10/2026 15:36:45 root                      INFO    - BACKEND_URL=http://localhost:5000
+31/10/2026 15:36:45 root                      INFO    - BACKEND_TIMEOUT=5
+31/10/2026 15:36:45 root                      INFO    - ELO_K_FACTOR=32
+31/10/2026 15:36:51 root                      INFO    - POST /admin/imports/POP_XWAP_SEX_AGE_NB - START
+31/10/2026 15:36:51 service.collecte_service  INFO    - Collecte ILOSTAT : indicateur=POP_XWAP_SEX_AGE_NB, période=2025-2026
+31/10/2026 15:37:04 root                      INFO    - POST /admin/imports/POP_XWAP_SEX_AGE_NB - END [Status: 200]
+31/10/2026 15:54:06 root                      INFO    - --------------------------------------------------
+31/10/2026 15:54:06 root                      INFO    - Starting Webservice                           
+31/10/2026 15:54:06 root                      INFO    - --------------------------------------------------
+31/10/2026 15:54:06 root                      INFO    - Load environment variables: SUCCES
+31/10/2026 15:54:06 root                      INFO    - POSTGRES_HOST=localhost
+31/10/2026 15:54:06 root                      INFO    - POSTGRES_PORT=5432
+31/10/2026 15:54:06 root                      INFO    - POSTGRES_DATABASE=defaultdb
+31/10/2026 15:54:06 root                      INFO    - POSTGRES_USER=user
+31/10/2026 15:54:06 root                      INFO    - POSTGRES_PASSWORD=*******
+31/10/2026 15:54:06 root                      INFO    - POSTGRES_SCHEMA=project
+31/10/2026 15:54:06 root                      INFO    - UVICORN_HOST=127.0.0.1
+31/10/2026 15:54:06 root                      INFO    - UVICORN_PORT=5000
+31/10/2026 15:54:06 root                      INFO    - BACKEND_URL=http://localhost:5000
+31/10/2026 15:54:06 root                      INFO    - BACKEND_TIMEOUT=5
+31/10/2026 15:54:06 root                      INFO    - ELO_K_FACTOR=32
+31/10/2026 15:54:10 root                      INFO    - GET /docs - START
+31/10/2026 15:54:10 root                      INFO    - GET /docs - END [Status: 200]
+31/10/2026 15:54:10 root                      INFO    - GET /docs - START
+31/10/2026 15:54:10 root                      INFO    - GET /docs - END [Status: 200]
+31/10/2026 16:06:18 root                      INFO    - POST /admin/imports/POP_XWAP_SEX_AGE_NB - START
+31/10/2026 16:06:18 service.collecte_service  INFO    - Collecte ILOSTAT : indicateur=POP_XWAP_SEX_AGE_NB, période=2025-2026
+31/10/2026 16:06:31 root                      INFO    - POST /admin/imports/POP_XWAP_SEX_AGE_NB - END [Status: 200]
+31/10/2026 16:10:22 root                      INFO    - GET /admin/imports - START
+31/10/2026 16:10:22 root                      INFO    - GET /admin/imports - END [Status: 200]
+31/10/2026 16:10:24 root                      INFO    - GET /admin/imports - START
+31/10/2026 16:10:24 root                      INFO    - GET /admin/imports - END [Status: 200]
+31/10/2026 16:10:25 root                      INFO    - GET /admin/imports - START
+31/10/2026 16:10:25 root                      INFO    - GET /admin/imports - END [Status: 200]
