@@ -17,6 +17,7 @@ def consulter_journal():
             "data": entrees
         }
     except Exception as exc:
+        # On capture toute erreur inattendue pour ne pas faire crasher l'API
         raise HTTPException(
             status_code=500, 
             detail=f"Erreur lors de la récupération du journal : {str(exc)}"

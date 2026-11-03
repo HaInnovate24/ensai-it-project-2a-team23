@@ -1,8 +1,7 @@
 """F6 : journal des actions sensibles."""
-
+from datetime import datetime
 from business_object.journal_activite import JournalActivite
 from dao.journal_dao import JournalDao
-
 
 class JournalService:
     """Enregistre chaque action sensible et permet de consulter le journal."""
@@ -18,15 +17,16 @@ class JournalService:
         details: str | None = None,
     ) -> JournalActivite:
         """Enregistre une action sensible dans le journal."""
-        # On instancie l'objet avec les données fournies. 
-        # L'ID et la date_heure seront gérés par la base de données.
-        entree = JournalActivite(
+        # Création de l'objet métier
+        nouvelle_entree = JournalActivite(
             utilisateur_id=utilisateur_id,
             action=action,
             cible=cible,
-            details=details
+            details=details,
+            date_action=datetime.now() # L'heure exacte de l'action
         )
-        return self.journal_dao.creer(entree)
+        # Sauvegarde en base via le DAO
+        return self.journal_dao.creer(nouvelle_entree)
 
     def consulter(self) -> list[JournalActivite]:
         """Renvoie les entrées du journal."""
