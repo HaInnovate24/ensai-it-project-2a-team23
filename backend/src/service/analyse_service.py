@@ -1,11 +1,14 @@
 """F3, F4, F5 et carte : construction des séries et comparaisons."""
 
 from business_object.enums import Sexe
+from business_object.indicateur import Indicateur
+from business_object.observation import Observation
+from business_object.pays import Pays
 from dao.classification_dao import ClassificationDao
 from dao.indicateur_dao import IndicateurDao
 from dao.observation_dao import ObservationDao
 from dao.pays_dao import PaysDao
-from model.analyse_model import Comparaison, Serie
+from model.analyse_model import Comparaison, PointSerie, Serie
 from utils.exceptions import DonneesInvalides, RessourceIntrouvable
 
 
@@ -201,3 +204,64 @@ class AnalyseService:
         ]
         series.sort(key=lambda serie: serie.libelle)
         return Comparaison(series=series)
+
+    # Méthodes privées (helpers appelés par les méthodes publiques)
+
+    def _sexe_ou_defaut(self, sexe: Sexe | None) -> Sexe:
+        """Renvoie le sexe demandé, ou Sexe.TOTAL si aucun n'est précisé."""
+        ...
+
+    def _trouver_indicateur(self, code_indicateur: str) -> Indicateur:
+        """Renvoie l'indicateur correspondant au code, ou lève RessourceIntrouvable."""
+        ...
+
+    def _trouver_pays(self, code_pays: str) -> Pays:
+        """Renvoie le pays correspondant au code, ou lève RessourceIntrouvable."""
+        ...
+
+    def _verifier_classification(self, code_classification: str | None) -> None:
+        """Vérifie que la classification existe (si fournie), sinon lève une erreur."""
+        ...
+
+    def _lire_serie_filtree(
+        self,
+        code_indicateur: str,
+        code_pays: str,
+        sexe: Sexe,
+        code_classification: str | None,
+    ) -> list[Observation]:
+        """Lit la série temporelle d'un pays, filtrée par sexe et classification."""
+        ...
+
+    def _lire_periode_filtree(
+        self,
+        code_indicateur: str,
+        periode: str,
+        codes_pays: list[str] | None,
+        sexe: Sexe,
+        code_classification: str | None,
+    ) -> list[Observation]:
+        """Lit les observations d'une période donnée, filtrées par sexe et classification."""
+        ...
+
+    def _derniere_observation_par_pays(
+        self,
+        code_indicateur: str,
+        codes_pays: list[str],
+        sexe: Sexe,
+        code_classification: str | None,
+    ) -> list[Observation]:
+        """Renvoie la dernière observation disponible pour chaque pays demandé."""
+        ...
+
+    def _vers_points(self, observations: list[Observation]) -> list[PointSerie]:
+        """Convertit des observations en points de série (période, valeur)."""
+        ...
+
+    def _libelle_indicateur(self, indicateur: Indicateur) -> str:
+        """Construit le libellé d'un indicateur (description et unité)."""
+        ...
+
+    def _sans_doublons(self, codes: list[str]) -> list[str]:
+        """Supprime les doublons d'une liste de codes en conservant l'ordre."""
+        ...
