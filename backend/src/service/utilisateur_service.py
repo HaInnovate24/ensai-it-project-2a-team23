@@ -21,3 +21,8 @@ class UtilisateurService:
     def lister_utilisateurs(self, ) -> list[Utilisateur]:
         """lister les utilisateurs."""
         ...
+    @classmethod
+    def modifier(cls, utilisateur) -> bool:
+        """Met à jour un compte utilisateur."""
+        ...
+
