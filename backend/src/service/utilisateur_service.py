@@ -23,6 +23,13 @@ class UtilisateurService:
     ) -> list[Utilisateur]:
         """lister les utilisateurs."""
         ...
+<<<<<<< HEAD
 
 
+=======
+    @classmethod
+    def modifier(cls, utilisateur) -> bool:
+        """Met à jour un compte utilisateur."""
+        ...
+>>>>>>> b6df9c9c686c31899b0a4a9e787d227ba5d1ba1e
 

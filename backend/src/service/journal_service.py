@@ -31,6 +31,9 @@ class JournalService:
         """
         self.journal_dao = journal_dao if journal_dao is not None else JournalDao()
 
+    def __init__(self):
+        self.journal_dao = JournalDao()
+
     def enregistrer(
         self,
         utilisateur_id: int | None,
@@ -38,6 +41,7 @@ class JournalService:
         cible: str | None = None,
         details: str | None = None,
     ) -> JournalActivite:
+
         """Enregistre une action dans le journal et renvoie l'entrée créée.
 
         utilisateur_id vaut None pour une action automatique (sans utilisateur).

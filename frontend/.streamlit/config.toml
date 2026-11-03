@@ -1,17 +1,25 @@
 [server]
 port = 8000
 
+# --- Thème éditorial : fond crème, barre latérale vert forêt, accent vert ---
+# Titres en serif (Lora), interface en sans-serif (Inter) — polices chargées
+# via CSS dans utils/ui.py (injecter_styles).
 [theme]
-# --- Thème sobre et professionnel : fond clair, accent bleu unique ---
 base = "light"
-font = "sans serif"
+primaryColor = "#2E7257"
+backgroundColor = "#F4F3EE"
+secondaryBackgroundColor = "#FFFFFF"
+textColor = "#1F2A26"
+linkColor = "#2E7257"
+font = "Inter, sans-serif"
+headingFont = "Lora, Georgia, serif"
+baseRadius = "0.7rem"
+borderColor = "#E7E6DD"
 
-# Accent unique, utilisé avec parcimonie (boutons, curseurs, liens actifs).
-primaryColor = "#2563EB"
-
-# Surfaces neutres : fond blanc, blocs/latérale en gris très clair.
-backgroundColor = "#FFFFFF"
-secondaryBackgroundColor = "#F1F5F9"
-
-# Texte ardoise foncé pour un bon contraste sans dureté.
-textColor = "#1E293B"
+# Barre latérale sombre (vert forêt), texte clair, accent menthe.
+[theme.sidebar]
+backgroundColor = "#143529"
+secondaryBackgroundColor = "#1C4435"
+textColor = "#D7E3DB"
+primaryColor = "#8FE3B8"
+borderColor = "#1C4435"
