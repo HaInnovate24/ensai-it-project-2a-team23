@@ -13,54 +13,51 @@ from utils.referentiels import (
     message_erreur,
     unite_indicateur,
 )
-from utils.ui import PALETTE_GRAPHIQUE, entete, styliser_figure
+from datetime import date
+
+from utils.ui import PALETTE_GRAPHIQUE, entete, ligne_source, styliser_figure
 
 get_page_logger("Analyse Temporelle (F3)")
 
 entete(
-    "Analyse temporelle",
+    "L'emploi au fil du temps.",
     "Visualisez l'évolution d'un indicateur sur plusieurs années.",
-    eyebrow="Analyse",
+    eyebrow="Explorateur de données · ILOSTAT",
 )
+
+ligne_source(["Données réelles", "OIT · diffusion ILOSTAT"], f"Consulté le {date.today():%d/%m/%Y}")
 
 indicateurs = get_indicateurs()
 pays_referentiel = get_pays()
 
-# --- Ligne 1 : indicateur et sexe ---
-col1, col2 = st.columns(2)
+# --- Carte de filtres ---
+with st.container(border=True):
+    col1, col2, col3 = st.columns([1.2, 1, 1])
+    with col1:
+        code_indicateur = st.selectbox(
+            "Indicateur",
+            options=list(indicateurs),
+            format_func=lambda code: indicateurs[code],
+        )
+    with col2:
+        libelle_sexe = st.selectbox("Sexe", list(SEXES))
+    with col3:
+        classifications = get_classifications(code_indicateur)
+        libelle_classification = st.selectbox(
+            "Catégorie", list(classifications), index=index_defaut(classifications)
+        )
 
-with col1:
-    code_indicateur = st.selectbox(
-        "Indicateur :",
-        options=list(indicateurs),
-        format_func=lambda code: indicateurs[code],
-    )
+    col4, col5 = st.columns([1.5, 1])
+    with col4:
+        noms_pays = st.multiselect(
+            "Pays",
+            options=list(pays_referentiel),
+            default=["France"] if "France" in pays_referentiel else [],
+        )
+    with col5:
+        nb_periodes = st.slider("Nombre d'années", min_value=1, max_value=13, value=10)
 
-with col2:
-    libelle_sexe = st.selectbox("Sexe :", list(SEXES))
-
-# --- Ligne 2 : classification (âge ou profession selon l'indicateur) ---
-classifications = get_classifications(code_indicateur)
-libelle_classification = st.selectbox(
-    "Catégorie :", list(classifications), index=index_defaut(classifications)
-)
-
-# --- Ligne 3 : pays et profondeur temporelle ---
-col3, col4 = st.columns(2)
-
-with col3:
-    noms_pays = st.multiselect(
-        "Pays :",
-        options=list(pays_referentiel),
-        default=["France"] if "France" in pays_referentiel else [],
-    )
-
-with col4:
-    nb_periodes = st.slider(
-        "Nombre d'années à afficher :", min_value=1, max_value=13, value=10
-    )
-
-st.divider()
+st.write("")
 
 if not noms_pays:
     st.warning("Sélectionnez au moins un pays pour afficher les données.")
@@ -101,23 +98,29 @@ if pays_sans_donnees:
 if lignes:
     unite = unite_indicateur(code_indicateur)
     df = pd.DataFrame(lignes).sort_values("Période")
-    fig = px.line(
-        df,
-        x="Période",
-        y="Valeur",
-        color="Pays",
-        title=f"Évolution : {indicateurs[code_indicateur]} ({libelle_sexe})",
-        markers=True,
-        labels={"Valeur": f"Valeur ({unite})" if unite else "Valeur"},
-        color_discrete_sequence=PALETTE_GRAPHIQUE,
-    )
-    fig.update_xaxes(type="category")
-    styliser_figure(fig)
-    st.plotly_chart(fig, use_container_width=True)
-    with st.expander("Voir les données"):
-        st.dataframe(
-            df.pivot_table(index="Période", columns="Pays", values="Valeur"),
-            use_container_width=True,
+    with st.container(border=True):
+        st.markdown("<div class='ls-eyebrow plain'>Évolution temporelle</div>", unsafe_allow_html=True)
+        st.markdown(
+            f"<div class='ls-serif' style='font-size:1.5rem'>{indicateurs[code_indicateur]}</div>",
+            unsafe_allow_html=True,
         )
+        st.caption(f"{libelle_classification} · {libelle_sexe} · {nb_periodes} dernières années")
+        fig = px.line(
+            df,
+            x="Période",
+            y="Valeur",
+            color="Pays",
+            markers=True,
+            labels={"Valeur": f"Valeur ({unite})" if unite else "Valeur"},
+            color_discrete_sequence=PALETTE_GRAPHIQUE,
+        )
+        fig.update_xaxes(type="category")
+        styliser_figure(fig)
+        st.plotly_chart(fig, use_container_width=True)
+        with st.expander("Voir les données"):
+            st.dataframe(
+                df.pivot_table(index="Période", columns="Pays", values="Valeur"),
+                use_container_width=True,
+            )
 elif not pays_sans_donnees:
     st.info("Aucune donnée à afficher pour cette sélection.")

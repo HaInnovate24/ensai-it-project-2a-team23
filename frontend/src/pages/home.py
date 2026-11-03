@@ -31,7 +31,7 @@ col1, col2, col3 = st.columns(3)
 
 with col1:
     with st.container(border=True):
-        st.markdown("#### Analyse temporelle")
+        st.markdown("#### Évolution temporelle")
         st.write("Suivez l'évolution d'un indicateur pour un ou plusieurs pays.")
         st.caption("Accès libre")
         st.page_link(
