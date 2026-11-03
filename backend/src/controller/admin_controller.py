@@ -10,10 +10,8 @@ from business_object.utilisateur import Utilisateur
 from business_object.observation import Observation
 from model.donnees_model import ObservationCorrection
 
-
 router = APIRouter()
 collecte_service = CollecteService()
-
 
 @router.post("/imports/{indicator_id}")
 def lancer_import(
@@ -38,14 +36,11 @@ def lancer_import(
     except requests.RequestException as exc:
         raise HTTPException(status_code=502, detail=f"Échec de la récupération ILOSTAT : {exc}") from exc
 
-
 @router.get("/imports")
 def lister_imports():
     """Renvoie l'historique des imports."""
-    # TODO : Appeler self.import_dao.lister() via un ImportService (P5)
     try:
-        imports = collecte_service.lister_imports(
-           )
+        imports = collecte_service.lister_imports()
         return {
             "message": "Historique des imports",
             "statut": "succes",
@@ -54,9 +49,7 @@ def lister_imports():
     except ValueError as exc:
         raise HTTPException(status_code=400, detail=str(exc)) from exc
     except requests.RequestException as exc:
-        raise HTTPException(status_code=502, detail=f"Échec de la récupération de la liste des données : {exc}") from exc
-
-
+        raise HTTPException(status_code=502, detail=f"Échec liste données : {exc}") from exc
 
 @router.put("/observations/{observation_id}")
 def corriger_observation(observation_id: int, observation: ObservationCorrection):
@@ -71,10 +64,7 @@ def corriger_observation(observation_id: int, observation: ObservationCorrection
     except ValueError as exc:
         raise HTTPException(status_code=400, detail=str(exc)) from exc
     except requests.RequestException as exc:
-        raise HTTPException(status_code=502, detail=f"Échec de la récupération ILOSTAT : {exc}") from exc
-
-
-
+        raise HTTPException(status_code=502, detail=f"Échec ILOSTAT : {exc}") from exc
 
 @router.delete("/observations/{observation_id}")
 def supprimer_observation(observation_id: int):
@@ -89,9 +79,7 @@ def supprimer_observation(observation_id: int):
     except ValueError as exc:
         raise HTTPException(status_code=400, detail=str(exc)) from exc
     except requests.RequestException as exc:
-        raise HTTPException(status_code=502, detail=f"Échec de la récupération ILOSTAT : {exc}") from exc
-
-
+        raise HTTPException(status_code=502, detail=f"Échec ILOSTAT : {exc}") from exc
 
 @router.get("/utilisateurs")
 def lister_utilisateurs():
@@ -106,21 +94,17 @@ def lister_utilisateurs():
     except ValueError as exc:
         raise HTTPException(status_code=400, detail=str(exc)) from exc
     except requests.RequestException as exc:
-        raise HTTPException(status_code=502, detail=f"Échec de la récupération ILOSTAT : {exc}") from exc
-
-
+        raise HTTPException(status_code=502, detail=f"Échec ILOSTAT : {exc}") from exc
 
 @router.put("/utilisateurs/{utilisateur_id}")
-def gerer_utilisateur(utilisateur_id: int, modification: Utilisateur):
+def gerer_utilisateur(utilisateur_id: int, donnees: dict):
     """Gère un compte (promotion, désactivation)."""
     try:
-        # On s'assure que l'ID de l'URL correspond à l'ID de l'objet
+        modification = Utilisateur(**donnees)
         if utilisateur_id != modification.id:
             raise ValueError("L'ID de l'URL ne correspond pas à l'ID de l'utilisateur fourni.")
             
-        # Appel du service qui va gérer la logique (et le DAO)
         succes = UtilisateurService.modifier(modification)
-        
         if succes:
             return {
                 "message": "Utilisateur mis à jour avec succès",
@@ -129,12 +113,7 @@ def gerer_utilisateur(utilisateur_id: int, modification: Utilisateur):
             }
         else:
             raise HTTPException(status_code=404, detail="Utilisateur introuvable")
-
     except ValueError as exc:
         raise HTTPException(status_code=400, detail=str(exc)) from exc
     except Exception as exc:
         raise HTTPException(status_code=500, detail=f"Erreur interne : {str(exc)}") from exc
-    
-
-
-
