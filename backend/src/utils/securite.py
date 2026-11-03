@@ -24,7 +24,7 @@ def hacher_mot_de_passe(mot_de_passe: str) -> str:
     """Transforme un mot de passe en empreinte qu'on peut stocker en base.
 
     Un "sel" aléatoire est ajouté de telle sorte que deux mêmes mots de passe donnent deux empreintes
-    différentes. Format renvoyé : algorithme$iterations$sel$empreinte (en hexadécimal).
+    différentes. Format renvoyé : algorithme$iterations$sel$empreinte (c'est en en hexadécimal).
     """
     sel = secrets.token_bytes(16)
     empreinte = hashlib.pbkdf2_hmac("sha256", mot_de_passe.encode("utf-8"), sel, ITERATIONS)
@@ -84,7 +84,9 @@ def _cle_secrete() -> str:
 
 
 
-
+#############################################
+# PARTIE AVANT MISE DE LA MIENNE
+#############################################
 
 """ import hashlib
 

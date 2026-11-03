@@ -15,3 +15,14 @@ class DonneesInvalides(ErreurMetier):
 
 class AccesRefuse(ErreurMetier):
     """Levée lorsqu'un utilisateur n'a pas les droits requis."""
+
+
+class AuthentificationEchouee(ErreurMetier):
+    """Lévée lorsque l'identité de l'utilisateur n'est pas établie
+
+    Exemple : mauvais identifiants, jeton absent, invalide ou expiré.
+    """
+
+
+class ConflitRessource(ErreurMetier):
+    """Levée lorsqu'une ressource existe déjà (ex. nom d'utilisateur déjà pris)."""
