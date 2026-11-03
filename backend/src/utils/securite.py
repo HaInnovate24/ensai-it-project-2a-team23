@@ -80,6 +80,7 @@ def _cle_secrete() -> str:
     if not cle:
         raise RuntimeError("La variable d'environnement JWT_SECRET_KEY n'est pas définie (.env).")
     return cle
+<<<<<<< HEAD
 
 
 
@@ -129,3 +130,5 @@ def verify_token(x_auth_token=Header(None)): """
     #     raise HTTPException(status_code=401, detail="Invalid token.")
 
     # return player
+=======
+>>>>>>> c75d32360d09429da8cf8301f7374434348ddb51
