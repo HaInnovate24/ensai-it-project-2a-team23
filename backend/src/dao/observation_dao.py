@@ -15,6 +15,18 @@ from dao.db_connection import DBConnection
 class ObservationDao:
     """Lecture et écriture des observations en base."""
 
+    _FILTRES_RECHERCHE = {
+        "id": "id",
+        "code_indicateur": "code_indicateur",
+        "code_pays": "code_pays",
+        "periode": "periode",
+        "valeur": "valeur",
+        "sexe": "sexe",
+        "code_classification": "code_classification",
+        "import_id": "import_id",
+        "source": "source",
+    }
+
     def __init__(self):
         self.conn = DBConnection().connection
 
@@ -101,6 +113,37 @@ class ObservationDao:
             cursor.execute(requete, tuple(parametres))
             rows = cursor.fetchall()
             return [Observation(**row) for row in rows]
+
+    def rechercher(self, **filtres: object) -> list[Observation]:
+        """Recherche des observations avec une égalité sur les filtres fournis.
+
+        Les noms de colonnes sont limités à une liste explicite et les valeurs
+        passent par les paramètres SQL de psycopg2.
+        """
+        colonnes_inconnues = set(filtres) - self._FILTRES_RECHERCHE.keys()
+        if colonnes_inconnues:
+            noms = ", ".join(sorted(colonnes_inconnues))
+            raise ValueError(f"Filtre(s) de recherche inconnu(s) : {noms}.")
+
+        conditions = []
+        parametres = []
+        for filtre, valeur in filtres.items():
+            if valeur is None:
+                conditions.append(f"{self._FILTRES_RECHERCHE[filtre]} IS NULL")
+            else:
+                conditions.append(f"{self._FILTRES_RECHERCHE[filtre]} = %s")
+                parametres.append(
+                    valeur.value if filtre == "sexe" and hasattr(valeur, "value") else valeur
+                )
+
+        requete = "SELECT * FROM observation"
+        if conditions:
+            requete += " WHERE " + " AND ".join(conditions)
+        requete += " ORDER BY code_indicateur, code_pays, periode, id;"
+
+        with self.conn.cursor() as cursor:
+            cursor.execute(requete, tuple(parametres))
+            return [Observation(**row) for row in cursor.fetchall()]
 
     def trouver_par_id(self, id: int) -> Observation | None:
         """Renvoie l'observation correspondant à l'identifiant, ou None."""
