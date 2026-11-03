@@ -1,23 +1,89 @@
 import streamlit as st
 
+from utils.api_client import api_client
+from utils.log_init import get_page_logger
+from utils.referentiels import message_erreur
+
+get_page_logger("Connexion")
+
 st.title("Connexion à LaborScope 🔒")
 
-# Faux système de connexion pour tester le menu
-col1, col2 = st.columns(2)
+# Correspondance rôle renvoyé par le backend -> libellé attendu par la
+# navigation (app.py).
+_ROLES = {"admin": "Administrateur", "utilisateur": "Utilisateur"}
 
-with col1:
-    if st.button("Se connecter en Utilisateur"):
-        st.session_state["role_utilisateur"] = "Utilisateur"
-        st.rerun()
 
-with col2:
-    if st.button("Se connecter en Administrateur"):
-        st.session_state["role_utilisateur"] = "Administrateur"
-        st.rerun()
+def _corps(reponse: dict) -> dict:
+    """Renvoie le corps JSON d'une réponse s'il s'agit d'un objet, sinon {}."""
+    return reponse["data"] if isinstance(reponse["data"], dict) else {}
 
-# Bouton de déconnexion si déjà connecté
-if "role_utilisateur" in st.session_state:
-    st.success(f"Vous êtes connecté en tant que : {st.session_state['role_utilisateur']}")
+
+def _charger_profil(jeton: str) -> bool:
+    """Alimente la session à partir du profil associé au jeton.
+
+    Renvoie True si le profil a pu être récupéré.
+    """
+    reponse = api_client.get("/auth/profil", params={"jeton": jeton})
+    if reponse["status_code"] != 200:
+        st.error(f"❌ {message_erreur(reponse)}")
+        return False
+
+    utilisateur = _corps(reponse).get("data") or {}
+    st.session_state["access_token"] = jeton
+    st.session_state["role_utilisateur"] = _ROLES.get(utilisateur.get("role"), "Utilisateur")
+    st.session_state["nom_utilisateur"] = utilisateur.get("nom_utilisateur")
+    return True
+
+
+# --- Déjà connecté : on affiche le statut et la déconnexion ---
+if st.session_state.get("access_token"):
+    st.success(
+        f"Vous êtes connecté en tant que **{st.session_state.get('nom_utilisateur', '?')}** "
+        f"({st.session_state.get('role_utilisateur', 'Utilisateur')})."
+    )
     if st.button("Se déconnecter"):
-        del st.session_state["role_utilisateur"]
+        for cle in ("access_token", "role_utilisateur", "nom_utilisateur"):
+            st.session_state.pop(cle, None)
         st.rerun()
+    st.stop()
+
+# --- Non connecté : connexion ou création de compte ---
+onglet_connexion, onglet_inscription = st.tabs(["Se connecter", "Créer un compte"])
+
+with onglet_connexion:
+    with st.form("connexion"):
+        nom = st.text_input("Nom d'utilisateur")
+        mot_de_passe = st.text_input("Mot de passe", type="password")
+        valider = st.form_submit_button("Se connecter")
+
+    if valider:
+        reponse = api_client.post(
+            "/auth/connexion",
+            json={"nom_utilisateur": nom, "mot_de_passe": mot_de_passe},
+        )
+        if reponse["status_code"] == 200:
+            data = _corps(reponse).get("data")
+            jeton = data.get("jeton") if isinstance(data, dict) else data
+            if jeton and _charger_profil(jeton):
+                st.rerun()
+            else:
+                st.error("❌ Jeton de connexion introuvable dans la réponse.")
+        else:
+            st.error(f"❌ {message_erreur(reponse)}")
+
+with onglet_inscription:
+    with st.form("inscription"):
+        nouveau_nom = st.text_input("Nom d'utilisateur", key="inscription_nom")
+        nouveau_mdp = st.text_input("Mot de passe", type="password", key="inscription_mdp")
+        st.caption("8 à 128 caractères, au moins une lettre et un chiffre.")
+        creer = st.form_submit_button("Créer le compte")
+
+    if creer:
+        reponse = api_client.post(
+            "/auth/inscription",
+            json={"nom_utilisateur": nouveau_nom, "mot_de_passe": nouveau_mdp},
+        )
+        if reponse["status_code"] == 200:
+            st.success("✅ Compte créé. Vous pouvez maintenant vous connecter.")
+        else:
+            st.error(f"❌ {message_erreur(reponse)}")
