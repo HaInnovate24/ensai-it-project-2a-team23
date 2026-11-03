@@ -117,9 +117,7 @@ class ParserService:
             return Sexe.HOMME
         if normalized in {"f", "sex_f", "female", "woman", "women", "femme", "femmes"}:
             return Sexe.FEMME
-        if normalized in {
-            "t", "sex_t", "total", "both_sexes", "both_sex", "all_sexes", "ensemble"
-        }:
+        if normalized in {"t", "sex_t", "total", "both_sexes", "both_sex", "all_sexes", "ensemble"}:
             return Sexe.TOTAL
         raise ValueError(f"Valeur de sexe ILOSTAT non reconnue : {value!r}")
 

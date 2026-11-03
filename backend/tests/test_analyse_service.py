@@ -93,9 +93,7 @@ class FauxClassificationDao:
         return self.classifications.get(code)
 
 
-def creer_observation(
-    pays, periode, valeur, sexe="total", classification=None, indicateur="EMP"
-):
+def creer_observation(pays, periode, valeur, sexe="total", classification=None, indicateur="EMP"):
     """Fabrique une observation de test (évite de répéter tous les arguments)."""
     return Observation(
         code_indicateur=indicateur,
@@ -146,9 +144,7 @@ def libelles(comparaison):
     return [serie.libelle for serie in comparaison.series]
 
 
-# ----------------------------------------------------------------------
 # F3 : évolution
-# ----------------------------------------------------------------------
 
 
 def test_evolution_trie_par_periode_et_construit_le_libelle():

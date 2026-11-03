@@ -11,8 +11,7 @@ st.set_page_config(page_title="Comparaison Multi-indicateurs", page_icon="📊")
 
 st.title("Comparaison Multi-indicateurs (F5) 📊")
 st.write(
-    "Superposez plusieurs indicateurs sur un même graphique pour dégager "
-    "visuellement des liens."
+    "Superposez plusieurs indicateurs sur un même graphique pour dégager visuellement des liens."
 )
 
 # --- Filtres de recherche ---

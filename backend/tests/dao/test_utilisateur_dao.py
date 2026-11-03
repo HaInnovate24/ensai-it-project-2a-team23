@@ -4,7 +4,7 @@ from datetime import datetime
 
 import pytest
 
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..', 'src')))
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..", "src")))
 
 from utils.config import load_environment_variables
 
@@ -19,6 +19,7 @@ from dao.utilisateur_dao import UtilisateurDao
 def dao():
     return UtilisateurDao()
 
+
 @pytest.fixture
 def nettoyage_db(dao):
     yield
@@ -26,42 +27,48 @@ def nettoyage_db(dao):
         cursor.execute("DELETE FROM utilisateur WHERE nom_utilisateur LIKE 'test_pytest_%';")
     dao.conn.commit()
 
+
 @pytest.fixture
 def utilisateur_test(dao, nettoyage_db):
     u = Utilisateur(
-        nom_utilisateur='test_pytest_base',
-        mot_de_passe_hash='hash_secret_123',
+        nom_utilisateur="test_pytest_base",
+        mot_de_passe_hash="hash_secret_123",
         role=Role.UTILISATEUR,  # Utilisation de l'Enum
-        actif=True
+        actif=True,
     )
     return dao.creer(u)
 
+
 def test_creer_utilisateur(dao, nettoyage_db):
     nouveau = Utilisateur(
-        nom_utilisateur='test_pytest_nouveau',
-        mot_de_passe_hash='hash_456',
+        nom_utilisateur="test_pytest_nouveau",
+        mot_de_passe_hash="hash_456",
         role=Role.ADMIN,  # Utilisation de l'Enum
-        actif=True
+        actif=True,
     )
     cree = dao.creer(nouveau)
     assert cree.id is not None
-    assert cree.nom_utilisateur == 'test_pytest_nouveau'
+    assert cree.nom_utilisateur == "test_pytest_nouveau"
     assert cree.date_creation is not None
+
 
 def test_trouver_par_id(dao, utilisateur_test):
     trouve = dao.trouver_par_id(utilisateur_test.id)
     assert trouve is not None
-    assert trouve.nom_utilisateur == 'test_pytest_base'
+    assert trouve.nom_utilisateur == "test_pytest_base"
+
 
 def test_trouver_par_nom(dao, utilisateur_test):
-    trouve = dao.trouver_par_nom('test_pytest_base')
+    trouve = dao.trouver_par_nom("test_pytest_base")
     assert trouve is not None
     assert trouve.id == utilisateur_test.id
+
 
 def test_lister(dao, utilisateur_test):
     liste = dao.lister()
     assert len(liste) >= 1
     assert isinstance(liste[0], Utilisateur)
+
 
 def test_modifier_utilisateur(dao, utilisateur_test):
     utilisateur_test.actif = False

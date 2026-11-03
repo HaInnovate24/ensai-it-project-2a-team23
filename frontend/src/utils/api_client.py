@@ -45,7 +45,7 @@ class APIClient:
         """
         url = f"{self.base_url}{path}"
         logger = st.session_state.get("logger")
-        logger.info(f"  {method} {url}")
+       
 
         # Automatically inject headers (including the token)
         headers = kwargs.pop("headers", {})
@@ -73,10 +73,8 @@ class APIClient:
             return {"status_code": 0, "data": str(e)}
         finally:
             # Only log if a response was actually received to avoid errors in the finally block
-            if "response" in locals():
-                logger.info(f"  {response.status_code} {response.reason}")
-                logger.debug(f"  {data}")
-
+            pass
+        
     def get(self, path: str, params=None, **kwargs):
         """Sends a GET request.
         Args:

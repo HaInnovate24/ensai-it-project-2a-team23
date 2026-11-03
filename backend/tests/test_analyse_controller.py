@@ -53,9 +53,7 @@ class FauxService:
         return self._repondre("carte", arguments, Comparaison(series=[]))
 
 
-# ----------------------------------------------------------------------
 # Traduction des erreurs
-# ----------------------------------------------------------------------
 
 
 def test_erreur_http_ressource_introuvable():

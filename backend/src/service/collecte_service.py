@@ -51,13 +51,13 @@ class CollecteService:
             )
 
             trace = self.import_dao.creer(
-            ImportDonnees(
-                indicateur_code=code_indicateur.strip(),
-                utilisateur_id=utilisateur_id,
-                date_debut=datetime.now(),
-                statut=StatutImport.EN_COURS,
-                fichier_source=IlostatClient.BASE_URL,
-            )
+                ImportDonnees(
+                    indicateur_code=code_indicateur.strip(),
+                    utilisateur_id=utilisateur_id,
+                    date_debut=datetime.now(),
+                    statut=StatutImport.EN_COURS,
+                    fichier_source=IlostatClient.BASE_URL,
+                )
             )
 
             # Le client ne télécharge que les années absentes du cache de
@@ -109,7 +109,9 @@ class CollecteService:
                 )
             observations = list(observations_uniques.values())
             if observations:
-                trace.nombre_lignes = self.observation_dao.inserer_ou_mettre_a_jour_par_lot(observations)
+                trace.nombre_lignes = self.observation_dao.inserer_ou_mettre_a_jour_par_lot(
+                    observations
+                )
             else:
                 trace.nombre_lignes = 0
             trace.statut = StatutImport.SUCCES
@@ -129,11 +131,11 @@ class CollecteService:
 
     def lister_imports(self) -> list[ImportDonnees]:
         """
-            Lister toutes les historiques d'imports 
+        Lister toutes les historiques d'imports
         """
         imports = ImportDao.lister()
         return imports
-        
+
 
 if __name__ == "__main__":
     collecte_service = CollecteService()

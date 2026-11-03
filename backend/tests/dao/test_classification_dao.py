@@ -3,7 +3,7 @@ import sys
 
 import pytest
 
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..', 'src')))
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..", "src")))
 
 from utils.config import load_environment_variables
 
@@ -17,10 +17,12 @@ try:
 except ImportError:
     TypeClassification = None
 
+
 @pytest.fixture
 def dao():
     """Fournit une instance du DAO pour les tests."""
     return ClassificationDao()
+
 
 @pytest.fixture
 def nettoyage_db(dao):
@@ -30,19 +32,22 @@ def nettoyage_db(dao):
         cursor.execute("DELETE FROM classification WHERE code = 'TEST_CLASS';")
     dao.conn.commit()
 
+
 def test_trouver_par_code_existant(dao):
     """Vérifie qu'on peut récupérer une classification de base."""
     # 'AGE_AGGREGATE_TOTAL' est inséré par pop.referentiel.sql
-    classif = dao.trouver_par_code('AGE_AGGREGATE_TOTAL')
+    classif = dao.trouver_par_code("AGE_AGGREGATE_TOTAL")
     assert classif is not None
-    assert classif.code == 'AGE_AGGREGATE_TOTAL'
+    assert classif.code == "AGE_AGGREGATE_TOTAL"
     # Le DAO renvoie la chaîne ou l'Enum, on vérifie juste que c'est le bon type
-    assert str(classif.type) == 'age' or getattr(classif.type, 'value', classif.type) == 'age'
+    assert str(classif.type) == "age" or getattr(classif.type, "value", classif.type) == "age"
+
 
 def test_trouver_par_code_inexistant(dao):
     """Vérifie le comportement si la classification n'existe pas."""
-    classif = dao.trouver_par_code('CODE_INEXISTANT')
+    classif = dao.trouver_par_code("CODE_INEXISTANT")
     assert classif is None
+
 
 def test_lister_sans_filtre(dao):
     """Vérifie que l'on récupère bien toutes les classifications (âges + occupations)."""
@@ -51,10 +56,11 @@ def test_lister_sans_filtre(dao):
     assert len(liste) >= 15
     assert isinstance(liste[0], Classification)
 
+
 def test_lister_avec_filtre(dao):
     """Vérifie que le filtrage par type fonctionne bien."""
     # On peut passer l'Enum s'il existe, sinon on passe directement la chaîne 'age'
-    filtre = TypeClassification.AGE if hasattr(TypeClassification, 'AGE') else 'age'
+    filtre = TypeClassification.AGE if hasattr(TypeClassification, "AGE") else "age"
 
     liste = dao.lister(type=filtre)
     # Il n'y a que 3 tranches d'âge dans le référentiel de base
@@ -62,21 +68,20 @@ def test_lister_avec_filtre(dao):
 
     # On vérifie que toutes les lignes retournées sont bien du type 'age'
     for classif in liste:
-        valeur_type = classif.type.value if hasattr(classif.type, 'value') else classif.type
-        assert valeur_type == 'age'
+        valeur_type = classif.type.value if hasattr(classif.type, "value") else classif.type
+        assert valeur_type == "age"
+
 
 def test_creer_classification(dao, nettoyage_db):
     """Vérifie l'insertion d'une nouvelle classification et le nettoyage."""
     nouvelle = Classification(
-        code='TEST_CLASS',
-        libelle='Classification de test automatisé',
-        type='occupation'
+        code="TEST_CLASS", libelle="Classification de test automatisé", type="occupation"
     )
 
     classif_creee = dao.creer(nouvelle)
-    assert classif_creee.code == 'TEST_CLASS'
+    assert classif_creee.code == "TEST_CLASS"
 
     # Vérification en base
-    classif_en_base = dao.trouver_par_code('TEST_CLASS')
+    classif_en_base = dao.trouver_par_code("TEST_CLASS")
     assert classif_en_base is not None
-    assert classif_en_base.libelle == 'Classification de test automatisé'
+    assert classif_en_base.libelle == "Classification de test automatisé"

@@ -3,7 +3,7 @@ import sys
 
 from psycopg2.extras import RealDictCursor
 
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..', 'src')))
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..", "src")))
 
 from utils.config import load_environment_variables
 
@@ -21,6 +21,7 @@ def test_singleton_pattern():
 
     assert db1.connection is db2.connection
 
+
 def test_connection_is_active():
     """Vérifie que la connexion est bien établie et fonctionnelle."""
     db = DBConnection()
@@ -31,7 +32,8 @@ def test_connection_is_active():
         result = cursor.fetchone()
 
         assert result is not None
-        assert result['numero'] == 1
+        assert result["numero"] == 1
+
 
 def test_real_dict_cursor_is_used():
     """Vérifie que le curseur renvoie bien des dictionnaires comme demandé."""

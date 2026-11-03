@@ -97,4 +97,3 @@ def test_rechercher_refuse_un_filtre_inconnu():
 
     with pytest.raises(ValueError, match="recherche inconnu"):
         dao.rechercher(**{"; DROP TABLE observation": "FRA"})
-
