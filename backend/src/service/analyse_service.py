@@ -263,4 +263,12 @@ class AnalyseService:
 
     def _sans_doublons(self, codes: list[str]) -> list[str]:
         """Supprime les doublons d'une liste de codes en conservant l'ordre."""
-        ...
+        if not codes:
+            return []
+        vus: set[str] = set()
+        resultat: list[str] = []
+        for code in codes:
+            if code and code not in vus:
+                vus.add(code)
+                resultat.append(code)
+        return resultat

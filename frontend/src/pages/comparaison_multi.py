@@ -12,15 +12,17 @@ from utils.referentiels import (
     index_defaut,
     message_erreur,
 )
-from utils.ui import PALETTE_GRAPHIQUE, entete, est_connecte, styliser_figure
+from datetime import date
+
+from utils.ui import PALETTE_GRAPHIQUE, entete, est_connecte, ligne_source, styliser_figure
 
 get_page_logger("Multi-indicateurs (F5)")
 
 entete(
-    "Comparaison multi-indicateurs",
+    "Plusieurs indicateurs, un pays.",
     "Superposez plusieurs indicateurs sur un même graphique pour dégager "
     "visuellement des liens.",
-    eyebrow="Analyse",
+    eyebrow="Explorateur de données · ILOSTAT",
 )
 
 # Cette analyse exige une connexion (le backend attend un jeton).
@@ -29,50 +31,50 @@ if not est_connecte():
     st.page_link("pages/login.py", label="Se connecter", icon=":material/lock:")
     st.stop()
 
+ligne_source(["Données réelles", "OIT · diffusion ILOSTAT"], f"Consulté le {date.today():%d/%m/%Y}")
+
 indicateurs = get_indicateurs()
 pays_referentiel = get_pays()
 
-# --- Filtres de recherche ---
-with st.expander("🛠️ Filtres de recherche", expanded=True):
+# --- Carte de filtres ---
+with st.container(border=True):
     col1, col2 = st.columns(2)
+    with col1:
+        nom_pays = st.selectbox("Pays cible", options=list(pays_referentiel))
+    with col2:
+        libelle_sexe = st.selectbox("Sexe", list(SEXES))
 
-with col1:
-    nom_pays = st.selectbox("Pays cible :", options=list(pays_referentiel))
+    codes_indicateur = st.multiselect(
+        "Indicateurs à croiser",
+        options=list(indicateurs),
+        format_func=lambda code: indicateurs[code],
+        default=list(indicateurs),
+    )
 
-with col2:
-    libelle_sexe = st.selectbox("Sexe :", list(SEXES))
+    # L'API applique une seule classification à tous les indicateurs : chaque
+    # indicateur n'apparaîtra que s'il possède des données pour cette catégorie.
+    classifications = get_classifications_toutes()
+    libelle_classification = st.selectbox(
+        "Catégorie (âge ou profession)",
+        list(classifications),
+        index=index_defaut(classifications),
+    )
 
-codes_indicateur = st.multiselect(
-    "Indicateurs à croiser :",
-    options=list(indicateurs),
-    format_func=lambda code: indicateurs[code],
-    default=list(indicateurs),
-)
-
-# L'API applique une seule classification à tous les indicateurs : chaque
-# indicateur n'apparaîtra que s'il possède des données pour cette catégorie.
-classifications = get_classifications_toutes()
-libelle_classification = st.selectbox(
-    "Catégorie (âge ou profession) :",
-    list(classifications),
-    index=index_defaut(classifications),
-)
-
-st.divider()
+st.write("")
 
 if not codes_indicateur:
     st.warning("Sélectionnez au moins un indicateur pour générer le graphique.")
     st.stop()
 
-# --- Appel du backend ---
+# --- Appel du backend : /analyses/comparaison-indicateurs ---
 reponse = api_client.get(
     "/analyses/comparaison-indicateurs",
     params={
         "jeton": st.session_state.get("access_token"),
         "codes_indicateur": codes_indicateur,
-        "code_pays": code_pays,
-        "sexe": code_sexe,
-        "code_classification": code_classification,
+        "code_pays": pays_referentiel[nom_pays],
+        "sexe": SEXES[libelle_sexe],
+        "code_classification": classifications[libelle_classification],
     },
 )
 
@@ -88,34 +90,31 @@ if reponse["status_code"] != 200:
     st.error(message_erreur(reponse))
     st.stop()
 
-# --- Traitement des données ---
 lignes = []
-for serie in donnees.get("series", []):
-    for point in serie.get("points", []):
+for serie in reponse["data"]["series"]:
+    for point in serie["points"]:
         lignes.append(
-            {
-                "Période": point["periode"],
-                "Indicateur": serie["libelle"],
-                "Valeur": point["valeur"]
-            }
+            {"Période": point["periode"], "Indicateur": serie["libelle"], "Valeur": point["valeur"]}
         )
 
 if not lignes:
-    st.info("📊 Aucune donnée à afficher pour cette sélection.")
+    st.info("Aucune donnée à afficher pour cette sélection.")
     st.stop()
 
 df = pd.DataFrame(lignes).sort_values("Période")
 
-fig = px.line(
-    df,
-    x="Période",
-    y="Valeur",
-    color="Indicateur",
-    title=f"Croisement des indicateurs pour : {nom_pays}",
-    markers=True,
-    color_discrete_sequence=PALETTE_GRAPHIQUE,
-)
-fig.update_xaxes(type="category")
-styliser_figure(fig)
-
-st.plotly_chart(fig, use_container_width=True)
+with st.container(border=True):
+    st.markdown("<div class='ls-eyebrow plain'>Croisement d'indicateurs</div>", unsafe_allow_html=True)
+    st.markdown(f"<div class='ls-serif' style='font-size:1.5rem'>{nom_pays}</div>", unsafe_allow_html=True)
+    st.caption(f"{libelle_classification} · {libelle_sexe}")
+    fig = px.line(
+        df,
+        x="Période",
+        y="Valeur",
+        color="Indicateur",
+        markers=True,
+        color_discrete_sequence=PALETTE_GRAPHIQUE,
+    )
+    fig.update_xaxes(type="category")
+    styliser_figure(fig)
+    st.plotly_chart(fig, use_container_width=True)

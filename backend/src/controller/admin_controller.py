@@ -8,10 +8,12 @@ from model.donnees_model import ObservationCorrection
 from service.collecte_service import CollecteService
 from service.donnees_service import DonneesService
 from service.utilisateur_service import UtilisateurService
+from business_object.utilisateur import Utilisateur
+from business_object.observation import Observation
+from model.donnees_model import ObservationCorrection
 
 router = APIRouter()
 collecte_service = CollecteService()
-
 
 @router.post("/imports/{indicator_id}")
 def lancer_import(
@@ -36,11 +38,9 @@ def lancer_import(
             status_code=502, detail=f"Échec de la récupération ILOSTAT : {exc}"
         ) from exc
 
-
 @router.get("/imports")
 def lister_imports():
     """Renvoie l'historique des imports."""
-    # TODO : Appeler self.import_dao.lister() via un ImportService (P5)
     try:
         imports = collecte_service.lister_imports()
         return {"message": "Historique des imports", "statut": "succes", "data": imports}
@@ -79,10 +79,7 @@ def supprimer_observation(observation_id: int):
     except ValueError as exc:
         raise HTTPException(status_code=400, detail=str(exc)) from exc
     except requests.RequestException as exc:
-        raise HTTPException(
-            status_code=502, detail=f"Échec de la récupération ILOSTAT : {exc}"
-        ) from exc
-
+        raise HTTPException(status_code=502, detail=f"Échec ILOSTAT : {exc}") from exc
 
 @router.get("/utilisateurs")
 def lister_utilisateurs():
@@ -93,18 +90,26 @@ def lister_utilisateurs():
     except ValueError as exc:
         raise HTTPException(status_code=400, detail=str(exc)) from exc
     except requests.RequestException as exc:
-        raise HTTPException(
-            status_code=502, detail=f"Échec de la récupération ILOSTAT : {exc}"
-        ) from exc
-
+        raise HTTPException(status_code=502, detail=f"Échec ILOSTAT : {exc}") from exc
 
 @router.put("/utilisateurs/{utilisateur_id}")
-def gerer_utilisateur(utilisateur_id: int):
+def gerer_utilisateur(utilisateur_id: int, donnees: dict):
     """Gère un compte (promotion, désactivation)."""
-    ...
-
-
-@router.get("/journal")
-def consulter_journal():
-    """Renvoie le journal des actions sensibles."""
-    ...
+    try:
+        modification = Utilisateur(**donnees)
+        if utilisateur_id != modification.id:
+            raise ValueError("L'ID de l'URL ne correspond pas à l'ID de l'utilisateur fourni.")
+            
+        succes = UtilisateurService.modifier(modification)
+        if succes:
+            return {
+                "message": "Utilisateur mis à jour avec succès",
+                "statut": "succes",
+                "utilisateur_id": utilisateur_id
+            }
+        else:
+            raise HTTPException(status_code=404, detail="Utilisateur introuvable")
+    except ValueError as exc:
+        raise HTTPException(status_code=400, detail=str(exc)) from exc
+    except Exception as exc:
+        raise HTTPException(status_code=500, detail=f"Erreur interne : {str(exc)}") from exc

@@ -1,9 +1,15 @@
-"""Système d'interface partagé par toutes les pages.
+"""Système de design éditorial partagé par toutes les pages.
 
-Objectif : une présentation homogène, sobre et professionnelle (styles globaux,
-en-têtes, barre latérale, graphiques) sans dupliquer le code dans chaque page.
-Aucun emoji, une palette restreinte et un accent unique.
+Identité : fond crème, barre latérale vert forêt, accent vert unique, cartes
+blanches, titres en serif (Lora) et interface en sans-serif (Inter). Aucun
+emoji ; les icônes sont des traits Material (:material/...:) ou des SVG inline.
+
+Ce module centralise l'injection CSS, la barre latérale (branding + navigation
+secondaire), les en-têtes éditoriaux et les composants (cartes, métriques,
+pastilles, « À retenir ») pour éviter toute duplication.
 """
+
+import html
 
 import streamlit as st
 
@@ -12,24 +18,25 @@ ROLE_ADMIN = "Administrateur"
 ROLE_UTILISATEUR = "Utilisateur"
 
 # --- Palette ----------------------------------------------------------------
-# Accent unique + nuances d'ardoise. Les couleurs ne servent qu'à hiérarchiser.
-ACCENT = "#2563EB"
-ENCRE = "#0F172A"
-TEXTE = "#1E293B"
-TEXTE_DOUX = "#64748B"
-BORDURE = "#E2E8F0"
-SURFACE = "#F8FAFC"
+VERT = "#2E7257"          # accent principal (boutons, pastilles, liens)
+VERT_FONCE = "#215540"    # survol / variantes foncées
+ENCRE = "#1F2A26"         # titres
+TEXTE = "#39443F"         # corps de texte
+TEXTE_DOUX = "#8A938D"    # légendes, libellés discrets
+CREME = "#F4F3EE"         # fond principal
+BORDURE = "#E7E6DD"       # bordures de cartes
+SIDEBAR = "#143529"       # fond barre latérale
 
-# Séquence de couleurs sobre et lisible pour les graphiques multi-séries.
+# Séquence de couleurs des graphiques (verte, ambre, violet, mauve…).
 PALETTE_GRAPHIQUE = [
-    "#2563EB",  # bleu
-    "#0F766E",  # sarcelle
-    "#B45309",  # ambre foncé
-    "#7C3AED",  # violet
-    "#475569",  # ardoise
-    "#BE123C",  # framboise
-    "#0891B2",  # cyan
-    "#4D7C0F",  # olive
+    "#2E7257",  # vert
+    "#C8895A",  # ambre / terracotta
+    "#8C7FB0",  # violet doux
+    "#B06A8E",  # mauve
+    "#4E8FA6",  # bleu-sarcelle
+    "#C7A14A",  # or
+    "#6F8F5A",  # olive
+    "#9A6B52",  # brun
 ]
 
 
@@ -50,167 +57,338 @@ def deconnexion() -> None:
     st.rerun()
 
 
+# --- Styles globaux ---------------------------------------------------------
+
 def injecter_styles() -> None:
-    """Injecte les styles globaux (typographie, espacements, cartes, boutons).
-
-    À appeler une fois par rerun, avant toute autre sortie, depuis app.py.
-    """
+    """Injecte les polices et les styles globaux. À appeler une fois par rerun."""
     st.markdown(
-        f"""
+        """
         <style>
-        /* Largeur de lecture confortable et respiration en haut de page. */
-        .block-container {{
-            max-width: 1180px;
-            padding-top: 2.6rem;
-            padding-bottom: 4rem;
-        }}
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Lora:wght@500;600;700&display=swap');
 
-        /* Titres : plus affirmés, sans espacement relâché. */
-        h1 {{ font-weight: 700; letter-spacing: -0.021em; color: {ENCRE}; }}
-        h2, h3 {{ font-weight: 650; letter-spacing: -0.012em; color: {TEXTE}; }}
-        h1, h2, h3 {{ margin-bottom: 0.2rem; }}
+        /* Police d'interface par défaut (héritée par la plupart des éléments). */
+        html, body, .stApp, button, input, select, textarea,
+        [data-testid="stMarkdownContainer"] {
+            font-family: 'Inter', -apple-system, 'Segoe UI', sans-serif;
+        }
+        /* Restaure la police des icônes Material (sinon elles s'affichent en texte). */
+        span[data-testid="stIconMaterial"], .material-symbols-rounded,
+        [class*="material-symbols"], i.material-icons {
+            font-family: 'Material Symbols Rounded', 'Material Icons' !important;
+        }
 
-        /* Cartes (st.container(border=True)) : coins doux, bordure discrète. */
-        [data-testid="stVerticalBlockBorderWrapper"] {{
-            border-radius: 12px;
-            border: 1px solid {BORDURE};
-            box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04);
-        }}
-        [data-testid="stVerticalBlockBorderWrapper"] > div {{ padding: 0.35rem 0.25rem; }}
+        /* Fond crème + largeur de lecture confortable. */
+        .stApp { background: #F4F3EE; }
+        .block-container { max-width: 1240px; padding-top: 3.4rem; padding-bottom: 4rem; }
 
-        /* Boutons : coins arrondis, graisse lisible. */
-        .stButton > button, .stForm [data-testid="stFormSubmitButton"] button {{
-            border-radius: 9px;
-            font-weight: 600;
-            border: 1px solid {BORDURE};
-            transition: border-color .15s ease, box-shadow .15s ease;
-        }}
-        .stButton > button:hover,
-        .stForm [data-testid="stFormSubmitButton"] button:hover {{
-            border-color: {ACCENT};
-            box-shadow: 0 1px 3px rgba(37, 99, 235, 0.15);
-        }}
+        /* Titres en serif. */
+        h1, h2, h3, h4,
+        .ls-serif { font-family: 'Lora', Georgia, serif !important; color: #1F2A26; }
+        h1 { font-weight: 600; letter-spacing: -0.01em; }
 
-        /* Champs de saisie et menus : bordure nette au repos. */
-        [data-baseweb="select"] > div,
-        .stTextInput input, .stNumberInput input {{
-            border-radius: 9px;
-        }}
+        /* Sur-titre « eyebrow » : petite capitale verte espacée. */
+        .ls-eyebrow {
+            display: flex; align-items: center; gap: 0.5rem;
+            font-size: 0.72rem; font-weight: 700; letter-spacing: 0.13em;
+            text-transform: uppercase; color: #2E7257; margin-bottom: 0.5rem;
+        }
+        .ls-eyebrow::before {
+            content: ""; width: 7px; height: 7px; border-radius: 50%;
+            background: #2E7257; display: inline-block;
+        }
+        .ls-eyebrow.plain::before { display: none; }
 
-        /* Barre latérale : séparée du contenu par une fine bordure. */
-        [data-testid="stSidebar"] {{
-            background: {SURFACE};
-            border-right: 1px solid {BORDURE};
-        }}
+        .ls-title { font-size: 2.9rem; line-height: 1.05; margin: 0 0 0.3rem 0; }
+        .ls-subtitle { color: #8A938D; font-size: 1.05rem; margin: 0; }
 
-        /* Liens de page (st.page_link) : aspect bouton léger. */
-        [data-testid="stPageLink-NavLink"] {{
-            border-radius: 9px;
-            padding: 0.35rem 0.5rem;
-        }}
+        /* Barre de contexte (sources, date d'extraction). */
+        .ls-meta { color: #8A938D; font-size: 0.85rem; }
+        .ls-meta .dot { color: #2E7257; }
 
-        /* Onglets : indicateur plus net. */
-        .stTabs [data-baseweb="tab-list"] {{ gap: 1.4rem; }}
-        .stTabs [data-baseweb="tab"] {{ font-weight: 600; }}
+        /* Cartes blanches. */
+        [data-testid="stVerticalBlockBorderWrapper"] {
+            background: #FFFFFF; border: 1px solid #E7E6DD; border-radius: 14px;
+            box-shadow: 0 1px 2px rgba(31,42,38,0.04);
+        }
 
-        /* Masque le bandeau « Deploy » et le menu par défaut pour un rendu épuré. */
-        [data-testid="stToolbar"] {{ display: none; }}
-        footer {{ visibility: hidden; }}
+        /* Boutons : vert plein pour l'action primaire, discret sinon. */
+        .stButton > button[kind="primary"],
+        .stForm [data-testid="stFormSubmitButton"] button[kind="primary"] {
+            background: #2E7257; border: 1px solid #2E7257; color: #fff;
+            border-radius: 10px; font-weight: 600;
+        }
+        .stButton > button[kind="primary"]:hover { background: #215540; border-color: #215540; }
+        .stButton > button[kind="secondary"] {
+            background: #fff; border: 1px solid #E7E6DD; color: #1F2A26;
+            border-radius: 10px; font-weight: 600;
+        }
+        .stButton > button[kind="secondary"]:hover { border-color: #2E7257; color: #215540; }
+
+        /* Champs et menus : bordure nette, coins doux. */
+        [data-baseweb="select"] > div, .stTextInput input, .stNumberInput input {
+            border-radius: 10px; border-color: #E7E6DD;
+        }
+        /* Libellés de champs (au-dessus des selects) : petite capitale. */
+        .stSelectbox label p, .stMultiSelect label p, .stTextInput label p,
+        .stSlider label p, .stNumberInput label p {
+            font-weight: 600; color: #39443F;
+        }
+
+        /* Métriques natives (st.metric) : chiffre en serif. */
+        [data-testid="stMetricValue"] { font-family: 'Lora', Georgia, serif; color: #1F2A26; }
+        [data-testid="stMetricLabel"] p { color: #8A938D; font-weight: 600; }
+
+        /* ---- Barre latérale sombre ---- */
+        [data-testid="stSidebar"] { border-right: none; }
+        [data-testid="stSidebar"] .block-container { padding-top: 1.4rem; }
+
+        /* Navigation (st.navigation) stylée en « pills ». */
+        [data-testid="stSidebarNav"] { margin-top: 0.2rem; }
+        [data-testid="stSidebarNav"] ul { gap: 2px; }
+        [data-testid="stSidebarNav"] a {
+            border-radius: 10px; padding: 0.5rem 0.7rem; color: #AFC4B8 !important;
+            font-weight: 500;
+        }
+        [data-testid="stSidebarNav"] a:hover { background: rgba(255,255,255,0.05); }
+        [data-testid="stSidebarNav"] a[aria-current="page"] {
+            background: #1C4435; color: #FFFFFF !important;
+        }
+        [data-testid="stSidebarNav"] a[aria-current="page"] span { color: #FFFFFF !important; }
+
+        /* En-tête de section dans la barre latérale. */
+        .ls-side-label {
+            font-size: 0.68rem; font-weight: 700; letter-spacing: 0.14em;
+            text-transform: uppercase; color: #6E8578; margin: 0.4rem 0 0.4rem 0.2rem;
+        }
+        .ls-logo { display:flex; align-items:center; gap:0.55rem; margin: 0 0 0.1rem 0.1rem; }
+        .ls-logo .name { font-family:'Lora',serif; font-weight:700; font-size:1.5rem; color:#fff; }
+        .ls-tagline {
+            font-size:0.62rem; font-weight:700; letter-spacing:0.18em;
+            text-transform:uppercase; color:#7FA592; margin:0 0 0.4rem 0.2rem;
+        }
+
+        /* Carte promo (bas de barre latérale). */
+        .ls-promo {
+            background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.07);
+            border-radius: 14px; padding: 1rem; margin-top: 0.4rem; color:#C7D6CC;
+        }
+        .ls-promo .k { font-size:0.62rem; font-weight:700; letter-spacing:0.14em;
+            text-transform:uppercase; color:#7FA592; }
+        .ls-promo .t { font-family:'Lora',serif; font-size:1.15rem; color:#EAF2EC;
+            margin:0.5rem 0 0.4rem; line-height:1.2; }
+        .ls-promo .s { font-size:0.8rem; color:#9DB3A6; }
+
+        /* Pied : utilisateur. */
+        .ls-user { display:flex; align-items:center; gap:0.6rem; padding:0.2rem; }
+        .ls-user .av {
+            width:34px; height:34px; border-radius:9px; background:#1C4435; color:#8FE3B8;
+            display:flex; align-items:center; justify-content:center; font-weight:700; font-size:0.8rem;
+        }
+        .ls-user .n { color:#EAF2EC; font-weight:600; font-size:0.86rem; line-height:1.1; }
+        .ls-user .r { color:#8AA194; font-size:0.74rem; }
+
+        /* Carte métrique personnalisée. */
+        .ls-metric {
+            background:#fff; border:1px solid #E7E6DD; border-radius:14px; padding:1.1rem 1.2rem;
+            box-shadow:0 1px 2px rgba(31,42,38,0.04); height:100%;
+        }
+        .ls-metric .lab { color:#8A938D; font-size:0.9rem; font-weight:600; }
+        .ls-metric .val { font-family:'Lora',serif; color:#1F2A26; font-size:2.4rem; line-height:1;
+            margin:0.6rem 0 0.2rem; }
+        .ls-metric .val .u { font-size:1rem; color:#8A938D; font-family:'Inter',sans-serif; margin-left:2px; }
+        .ls-metric .cap { color:#9AA39E; font-size:0.8rem; }
+
+        /* Carte « À retenir ». */
+        .ls-aside { background:#fff; border:1px solid #E7E6DD; border-radius:14px; padding:1.2rem; }
+        .ls-aside .hd { display:flex; align-items:center; gap:0.4rem; font-family:'Lora',serif;
+            font-size:1.15rem; color:#1F2A26; margin-bottom:0.8rem; }
+        .ls-aside .k { font-size:0.68rem; font-weight:700; letter-spacing:0.12em; text-transform:uppercase;
+            color:#8A938D; margin-bottom:0.5rem; }
+        .ls-aside .row { display:flex; align-items:center; justify-content:space-between;
+            padding:0.33rem 0; border-top:1px solid #F0EFE8; }
+        .ls-aside .row:first-of-type { border-top:none; }
+        .ls-aside .row .lft { display:flex; align-items:center; gap:0.5rem; color:#39443F; font-size:0.92rem; }
+        .ls-aside .row .dot { width:9px; height:9px; border-radius:50%; display:inline-block; }
+        .ls-aside .row .v { font-weight:600; color:#1F2A26; }
+        .ls-aside .note { color:#5C6862; font-size:0.9rem; line-height:1.5; margin-top:0.9rem; }
+
+        /* Pastille (chip) de sélection. */
+        .ls-chip { display:inline-flex; align-items:center; gap:0.4rem; background:#fff;
+            border:1px solid #E7E6DD; border-radius:999px; padding:0.25rem 0.7rem; font-size:0.85rem;
+            color:#39443F; margin-right:0.4rem; }
+        .ls-chip .dot { width:8px; height:8px; border-radius:50%; display:inline-block; }
+
+        /* Masque le bandeau par défaut pour un rendu épuré. */
+        [data-testid="stToolbar"], footer { display:none; }
+        #MainMenu { visibility:hidden; }
         </style>
         """,
         unsafe_allow_html=True,
     )
 
 
-def entete(titre: str, description: str = "", eyebrow: str = "") -> None:
-    """Affiche un en-tête de page cohérent : sur-titre optionnel, titre, description.
+# --- Barre latérale ---------------------------------------------------------
 
-    Args:
-        titre: Titre principal de la page.
-        description: Phrase de contexte affichée sous le titre.
-        eyebrow: Petit libellé de section au-dessus du titre (ex. « Analyse »).
-    """
-    if eyebrow:
+_LOGO_SVG = (
+    "<svg width='26' height='26' viewBox='0 0 24 24' fill='none' "
+    "xmlns='http://www.w3.org/2000/svg'>"
+    "<rect x='2' y='13' width='4' height='8' rx='1' fill='#8FE3B8'/>"
+    "<rect x='9' y='8' width='4' height='13' rx='1' fill='#FFFFFF'/>"
+    "<rect x='16' y='4' width='4' height='17' rx='1' fill='#8FE3B8'/>"
+    "</svg>"
+)
+
+
+def barre_laterale_haut() -> None:
+    """Branding en haut de la barre latérale (logo, slogan, label de section)."""
+    with st.sidebar:
         st.markdown(
-            f"<div style='font-size:0.8rem; font-weight:700; letter-spacing:0.08em; "
-            f"text-transform:uppercase; color:{ACCENT};'>{eyebrow}</div>",
+            f"<div class='ls-logo'>{_LOGO_SVG}<span class='name'>LaborScope</span></div>"
+            f"<div class='ls-tagline'>Le travail en perspective</div>"
+            f"<div class='ls-side-label'>Espace d'analyse</div>",
             unsafe_allow_html=True,
         )
-    st.title(titre)
-    if description:
-        st.markdown(
-            f"<p style='color:{TEXTE_DOUX}; font-size:1.02rem; margin-top:-0.2rem;'>"
-            f"{description}</p>",
-            unsafe_allow_html=True,
-        )
-    st.divider()
 
 
-def styliser_figure(fig, hauteur: int = 430):
-    """Applique une mise en forme sobre et homogène à une figure Plotly.
+def barre_laterale_bas() -> None:
+    """Bloc promo, sources et utilisateur en bas de la barre latérale.
 
-    Centralise le template, la typographie, les marges, la légende et la grille
-    pour que tous les graphiques partagent la même identité visuelle.
-    """
-    fig.update_layout(
-        template="plotly_white",
-        colorway=PALETTE_GRAPHIQUE,
-        font=dict(family="sans-serif", size=13, color=TEXTE),
-        title=dict(font=dict(size=17, color=ENCRE), x=0, xanchor="left", y=0.97),
-        margin=dict(l=8, r=8, t=64, b=8),
-        height=hauteur,
-        plot_bgcolor="white",
-        paper_bgcolor="white",
-        legend=dict(
-            orientation="h",
-            yanchor="bottom",
-            y=1.0,
-            xanchor="left",
-            x=0,
-            title="",
-            bgcolor="rgba(0,0,0,0)",
-        ),
-        hoverlabel=dict(bgcolor="white", bordercolor=BORDURE, font_size=12),
-    )
-    fig.update_xaxes(showgrid=False, showline=True, linecolor=BORDURE, ticks="outside",
-                     tickcolor=BORDURE)
-    fig.update_yaxes(showgrid=True, gridcolor="#EEF2F7", zeroline=False)
-    return fig
-
-
-def barre_laterale() -> None:
-    """Affiche dans la barre latérale le branding et l'état de connexion.
-
-    À appeler depuis app.py avant ``st.navigation`` pour que le bloc apparaisse
-    au-dessus du menu de navigation.
+    À appeler après ``st.navigation`` pour apparaître sous le menu.
     """
     with st.sidebar:
         st.markdown(
-            f"<div style='font-size:1.35rem; font-weight:800; letter-spacing:-0.02em; "
-            f"color:{ENCRE};'>LaborScope</div>"
-            f"<div style='font-size:0.82rem; color:{TEXTE_DOUX}; margin-bottom:0.4rem;'>"
-            f"Observatoire de l'emploi — données ILOSTAT</div>",
+            "<div class='ls-promo'>"
+            "<div class='k'>Une vue sur le monde</div>"
+            "<div class='t'>Des données pour comprendre le travail.</div>"
+            "<div class='s'>10 pays · 2 indicateurs<br>Estimations de l'OIT</div>"
+            "</div>",
             unsafe_allow_html=True,
         )
+        st.page_link("pages/home.py", label="Sources & méthodologie", icon=":material/menu_book:")
 
         if est_connecte():
-            nom = st.session_state.get("nom_utilisateur", "?")
+            nom = st.session_state.get("nom_utilisateur") or "Utilisateur"
             role = st.session_state.get("role_utilisateur", ROLE_UTILISATEUR)
+            initiales = "".join(mot[0] for mot in nom.split()[:2]).upper() or "U"
             st.markdown(
-                f"<div style='background:#ECFDF5; border:1px solid #A7F3D0; "
-                f"border-radius:9px; padding:0.5rem 0.7rem; font-size:0.9rem;'>"
-                f"<span style='color:#047857; font-weight:600;'>Connecté</span><br>"
-                f"<strong>{nom}</strong> · {role}</div>",
+                f"<div class='ls-user'><div class='av'>{html.escape(initiales)}</div>"
+                f"<div><div class='n'>{html.escape(nom)}</div>"
+                f"<div class='r'>{html.escape(role)}</div></div></div>",
                 unsafe_allow_html=True,
             )
             if st.button("Se déconnecter", use_container_width=True):
                 deconnexion()
         else:
             st.markdown(
-                f"<div style='background:#EFF6FF; border:1px solid #BFDBFE; "
-                f"border-radius:9px; padding:0.5rem 0.7rem; font-size:0.9rem; "
-                f"color:{TEXTE};'>Mode découverte — non connecté</div>",
+                "<div class='ls-user'><div class='av'>LS</div>"
+                "<div><div class='n'>Projet LaborScope</div>"
+                "<div class='r'>Observatoire du marché du travail</div></div></div>",
                 unsafe_allow_html=True,
             )
 
-        st.divider()
+
+# --- En-têtes et composants de page ----------------------------------------
+
+def entete(
+    titre: str,
+    description: str = "",
+    eyebrow: str = "",
+    action_label: str | None = None,
+    action_icon: str = ":material/download:",
+) -> bool:
+    """En-tête éditorial : sur-titre, grand titre serif, sous-titre, action.
+
+    Renvoie True si le bouton d'action (optionnel) a été cliqué.
+    """
+    col_titre, col_action = st.columns([0.78, 0.22], vertical_alignment="center")
+    with col_titre:
+        if eyebrow:
+            st.markdown(f"<div class='ls-eyebrow'>{html.escape(eyebrow)}</div>", unsafe_allow_html=True)
+        st.markdown(f"<div class='ls-serif ls-title'>{html.escape(titre)}</div>", unsafe_allow_html=True)
+        if description:
+            st.markdown(f"<p class='ls-subtitle'>{html.escape(description)}</p>", unsafe_allow_html=True)
+    clique = False
+    with col_action:
+        if action_label:
+            clique = st.button(action_label, icon=action_icon, type="primary", use_container_width=True)
+    st.write("")
+    return clique
+
+
+def ligne_source(gauche: list[str], droite: str = "") -> None:
+    """Affiche la petite ligne de contexte (source des données, date d'extrait)."""
+    morceaux = [f"<span class='dot'>●</span> {html.escape(gauche[0])}"] if gauche else []
+    morceaux += [html.escape(x) for x in gauche[1:]]
+    gauche_html = " &nbsp;·&nbsp; ".join(morceaux)
+    droite_html = f"<span style='float:right'>{html.escape(droite)}</span>" if droite else ""
+    st.markdown(f"<div class='ls-meta'>{gauche_html}{droite_html}</div>", unsafe_allow_html=True)
+
+
+def carte_metrique(label: str, valeur: str, unite: str = "", caption: str = "") -> None:
+    """Carte métrique (label, grande valeur serif + unité, légende)."""
+    u = f"<span class='u'>{html.escape(unite)}</span>" if unite else ""
+    st.markdown(
+        f"<div class='ls-metric'><div class='lab'>{html.escape(label)}</div>"
+        f"<div class='val'>{html.escape(valeur)}{u}</div>"
+        f"<div class='cap'>{html.escape(caption)}</div></div>",
+        unsafe_allow_html=True,
+    )
+
+
+def chip(libelle: str, couleur: str) -> str:
+    """Renvoie le HTML d'une pastille colorée (pour un conteneur markdown)."""
+    return (
+        f"<span class='ls-chip'><span class='dot' style='background:{couleur}'></span>"
+        f"{html.escape(libelle)}</span>"
+    )
+
+
+def carte_a_retenir(titre_section: str, lignes: list[tuple], note: str = "", bas: str = "") -> None:
+    """Carte latérale « À retenir » : liste pays/valeur + note explicative.
+
+    ``lignes`` : liste de tuples (libellé, valeur_affichée, couleur).
+    """
+    lignes_html = "".join(
+        f"<div class='row'><span class='lft'>"
+        f"<span class='dot' style='background:{coul}'></span>{html.escape(lib)}</span>"
+        f"<span class='v'>{html.escape(val)}</span></div>"
+        for lib, val, coul in lignes
+    )
+    note_html = f"<div class='note'>{html.escape(note)}</div>" if note else ""
+    bas_html = (
+        f"<div class='k' style='margin-top:1rem'>Bien lire les chiffres</div>"
+        f"<div class='note' style='margin-top:0.2rem'>{html.escape(bas)}</div>"
+        if bas else ""
+    )
+    st.markdown(
+        f"<div class='ls-aside'><div class='hd'>À retenir</div>"
+        f"<div class='k'>{html.escape(titre_section)}</div>{lignes_html}{note_html}{bas_html}</div>",
+        unsafe_allow_html=True,
+    )
+
+
+# --- Graphiques -------------------------------------------------------------
+
+def styliser_figure(fig, hauteur: int = 430):
+    """Applique une mise en forme sobre et éditoriale à une figure Plotly."""
+    fig.update_layout(
+        template="plotly_white",
+        colorway=PALETTE_GRAPHIQUE,
+        font=dict(family="Inter, sans-serif", size=13, color=TEXTE),
+        title=dict(font=dict(family="Lora, serif", size=18, color=ENCRE), x=0, xanchor="left", y=0.98),
+        margin=dict(l=8, r=8, t=56, b=8),
+        height=hauteur,
+        plot_bgcolor="white",
+        paper_bgcolor="white",
+        legend=dict(orientation="h", yanchor="bottom", y=1.0, xanchor="left", x=0, title="",
+                    bgcolor="rgba(0,0,0,0)"),
+        hoverlabel=dict(bgcolor="white", bordercolor=BORDURE, font_size=12),
+    )
+    fig.update_xaxes(showgrid=True, gridcolor="#F0EFE8", showline=False, zeroline=False)
+    fig.update_yaxes(showgrid=False, showline=False, zeroline=False)
+    return fig
+
+
+def couleur_serie(index: int) -> str:
+    """Renvoie la couleur de la palette pour la n-ième série (cyclique)."""
+    return PALETTE_GRAPHIQUE[index % len(PALETTE_GRAPHIQUE)]
