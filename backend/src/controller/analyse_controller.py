@@ -12,6 +12,8 @@ from business_object.enums import Sexe
 from model.analyse_model import Comparaison, Serie
 from service.analyse_service import AnalyseService
 from utils.exceptions import ErreurMetier, RessourceIntrouvable
+from controller.dependances import exiger_connexion
+
 
 router = APIRouter()
 
@@ -60,6 +62,7 @@ def evolution(
 
 @router.get("/comparaison-pays", response_model=Comparaison)
 def comparaison_pays(
+    jeton: str,
     code_indicateur: str,
     codes_pays: Annotated[list[str], Query()],
     periode: str | None = None,
@@ -69,6 +72,7 @@ def comparaison_pays(
 ) -> Comparaison:
     """Compare un indicateur entre plusieurs pays (du plus haut au plus bas)."""
     # TODO : exiger la connexion (dépendance de controller/dependances.py).
+    exiger_connexion(jeton)
     try:
         return service.comparer_pays(
             code_indicateur=code_indicateur,
@@ -83,6 +87,7 @@ def comparaison_pays(
 
 @router.get("/comparaison-indicateurs", response_model=Comparaison)
 def comparaison_indicateurs(
+    jeton: str,
     codes_indicateur: Annotated[list[str], Query()],
     code_pays: str,
     sexe: Sexe | None = None,
@@ -91,6 +96,8 @@ def comparaison_indicateurs(
 ) -> Comparaison:
     """Compare plusieurs indicateurs pour un même pays."""
     # TODO : exiger la connexion (dépendance de controller/dependances.py).
+    exiger_connexion(jeton)
+    
     try:
         return service.comparer_indicateurs(
             codes_indicateur=codes_indicateur,
@@ -104,14 +111,16 @@ def comparaison_indicateurs(
 
 @router.get("/carte", response_model=Comparaison)
 def carte(
+    jeton: str,
     code_indicateur: str,
     periode: str,
-    sexe: Sexe | None = None,
+    sexe: Sexe | None = None,   
     code_classification: str | None = None,
     service: AnalyseService = Depends(get_analyse_service),
 ) -> Comparaison:
     """Renvoie les valeurs par pays pour la carte."""
     # TODO : exiger la connexion (dépendance de controller/dependances.py).
+    exiger_connexion(jeton)
     try:
         return service.carte(
             code_indicateur=code_indicateur,
