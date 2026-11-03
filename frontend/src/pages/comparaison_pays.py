@@ -5,18 +5,31 @@ import streamlit as st
 from utils.api_client import api_client
 from utils.log_init import get_page_logger
 from utils.referentiels import (
-    INDICATEURS,
     SEXES,
-    classifications_pour,
+    get_classifications,
+    get_indicateurs,
     get_pays,
+    index_defaut,
     message_erreur,
+    unite_indicateur,
 )
+from utils.ui import ACCENT, entete, est_connecte, styliser_figure
 
 get_page_logger("Comparaison Pays (F4)")
 
-st.title("Comparaison entre pays (F4) 🌍")
-st.write("Comparez un indicateur entre plusieurs pays pour la période la plus récente.")
+entete(
+    "Comparaison entre pays",
+    "Comparez un indicateur entre plusieurs pays pour la période la plus récente.",
+    eyebrow="Analyse",
+)
 
+# Cette analyse exige une connexion (le backend attend un jeton).
+if not est_connecte():
+    st.info("Connectez-vous pour accéder à la comparaison entre pays.")
+    st.page_link("pages/login.py", label="Se connecter", icon=":material/lock:")
+    st.stop()
+
+indicateurs = get_indicateurs()
 pays_referentiel = get_pays()
 
 # --- Filtres ---
@@ -24,19 +37,21 @@ col1, col2 = st.columns(2)
 
 with col1:
     code_indicateur = st.selectbox(
-        "Choisissez l'indicateur :",
-        options=list(INDICATEURS),
-        format_func=lambda code: INDICATEURS[code],
+        "Indicateur :",
+        options=list(indicateurs),
+        format_func=lambda code: indicateurs[code],
     )
 
 with col2:
     libelle_sexe = st.selectbox("Sexe :", list(SEXES))
 
-classifications = classifications_pour(code_indicateur)
-libelle_classification = st.selectbox("Catégorie :", list(classifications))
+classifications = get_classifications(code_indicateur)
+libelle_classification = st.selectbox(
+    "Catégorie :", list(classifications), index=index_defaut(classifications)
+)
 
 noms_pays = st.multiselect(
-    "Sélectionnez les pays à comparer :",
+    "Pays à comparer :",
     options=list(pays_referentiel),
     default=[n for n in ("France", "Allemagne", "États-Unis") if n in pays_referentiel],
 )
@@ -44,13 +59,14 @@ noms_pays = st.multiselect(
 st.divider()
 
 if len(noms_pays) < 2:
-    st.warning("⚠️ Veuillez sélectionner au moins deux pays pour faire une comparaison.")
+    st.warning("Sélectionnez au moins deux pays pour faire une comparaison.")
     st.stop()
 
 # --- Appel du backend : /analyses/comparaison-pays ---
 reponse = api_client.get(
     "/analyses/comparaison-pays",
     params={
+        "jeton": st.session_state.get("access_token"),
         "code_indicateur": code_indicateur,
         "codes_pays": [pays_referentiel[nom] for nom in noms_pays],
         "sexe": SEXES[libelle_sexe],
@@ -59,11 +75,15 @@ reponse = api_client.get(
 )
 
 if reponse["status_code"] == 404:
-    st.warning("⚠️ Aucune donnée disponible pour cette sélection.")
+    st.warning("Aucune donnée disponible pour cette sélection.")
+    st.stop()
+
+if reponse["status_code"] in (401, 403):
+    st.error("Session expirée ou accès refusé. Reconnectez-vous pour continuer.")
     st.stop()
 
 if reponse["status_code"] != 200:
-    st.error(f"❌ {message_erreur(reponse)}")
+    st.error(message_erreur(reponse))
     st.stop()
 
 # Le backend renvoie une série d'un seul point par pays, déjà triée de la valeur
@@ -83,24 +103,35 @@ if not lignes:
     st.stop()
 
 df = pd.DataFrame(lignes)
+unite = unite_indicateur(code_indicateur)
 
 # --- Mise en évidence des extrêmes ---
+suffixe = f" {unite.lower()}" if unite else ""
 haut = df.iloc[0]
 bas = df.iloc[-1]
-st.info(
-    f"💡 **À retenir :** valeur la plus élevée en **{haut['Pays']}** "
-    f"({haut['Valeur']:.1f}) et la plus basse en **{bas['Pays']}** ({bas['Valeur']:.1f})."
+col_haut, col_bas = st.columns(2)
+col_haut.metric(
+    "Valeur la plus élevée", f"{haut['Valeur']:.1f}{suffixe}", haut["Pays"], delta_color="off"
+)
+col_bas.metric(
+    "Valeur la plus basse", f"{bas['Valeur']:.1f}{suffixe}", bas["Pays"], delta_color="off"
 )
 
+st.write("")
+
+# Une seule teinte : les pays sont déjà distingués par l'axe des abscisses.
 fig = px.bar(
     df,
     x="Pays",
     y="Valeur",
-    color="Pays",
-    title=f"Comparaison : {INDICATEURS[code_indicateur]} ({libelle_sexe})",
+    title=f"Comparaison : {indicateurs[code_indicateur]} ({libelle_sexe})",
     text="Valeur",
     hover_data=["Période"],
+    labels={"Valeur": f"Valeur ({unite})" if unite else "Valeur"},
 )
-fig.update_traces(textposition="outside")
+fig.update_traces(
+    textposition="outside", texttemplate="%{text:.1f}", marker_color=ACCENT
+)
+styliser_figure(fig)
 
 st.plotly_chart(fig, use_container_width=True)

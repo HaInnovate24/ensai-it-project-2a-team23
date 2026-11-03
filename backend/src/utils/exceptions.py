@@ -18,8 +18,11 @@ class AccesRefuse(ErreurMetier):
 
 
 class AuthentificationEchouee(ErreurMetier):
-    """Levée lorsqu'une authentification échoue (identifiants ou jeton invalides)."""
+    """Lévée lorsque l'identité de l'utilisateur n'est pas établie
+
+    Exemple : mauvais identifiants, jeton absent, invalide ou expiré.
+    """
 
 
 class ConflitRessource(ErreurMetier):
-    """Levée lorsqu'une ressource entre en conflit avec une autre (ex. nom déjà pris)."""
+    """Levée lorsqu'une ressource existe déjà (ex. nom d'utilisateur déjà pris)."""

@@ -44,7 +44,7 @@ def connexion(identifiants: Identifiants):
 def profil_courant(jeton: str):
     """Renvoie le profil de l'utilisateur connecté."""
     try:
-        utilisateur = AuthentificationService().profil_courant(jeton)
+        utilisateur = AuthentificationService().utilisateur_depuis_jeton(jeton)
         return {
             "message": "Profil de l'utilisateur",
             "statut": "succes",
