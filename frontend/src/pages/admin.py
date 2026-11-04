@@ -109,53 +109,86 @@ with st.container(border=True):
     elif not utilisateurs:
         st.info("Aucun utilisateur à afficher.")
     else:
-        lignes_u = []
-        for u in utilisateurs:
-            est_adm = str(u.get("role", "")).lower() == "admin"
-            lignes_u.append([
-                html.escape(str(u.get("id", ""))),
-                html.escape(str(u.get("nom_utilisateur", ""))),
-                badge("Admin", "ok") if est_adm else badge("Utilisateur", "neutre"),
-                badge("Actif", "ok") if u.get("actif") else badge("Inactif", "ko"),
-                _dt(u.get("date_creation")),
-                _dt(u.get("derniere_connexion")),
-            ])
-        tableau(
-            ["ID", "Utilisateur", "Rôle", "Actif", "Créé le", "Dernière connexion"],
-            lignes_u,
-            aligns=["num", "", "", "", "", ""],
+        st.caption(
+            "Modifiez le rôle ou le statut d'un compte sur sa ligne, puis enregistrez. "
+            "La suppression demande une confirmation."
         )
 
-        st.markdown("<div class='ls-divider'></div>", unsafe_allow_html=True)
-        st.caption("Modifier un compte")
-        par_nom = {u["nom_utilisateur"]: u for u in utilisateurs}
-        e1, e2, e3, e4 = st.columns([1.6, 1.2, 0.8, 1], vertical_alignment="bottom")
-        with e1:
-            choix = st.selectbox("Compte", list(par_nom), label_visibility="collapsed")
-        cible = par_nom[choix]
-        with e2:
-            est_admin_actuel = str(cible.get("role")).lower() == "admin"
-            role_label = st.selectbox(
-                "Rôle", ["Utilisateur", "Administrateur"],
-                index=1 if est_admin_actuel else 0, label_visibility="collapsed",
+        largeurs = [0.6, 2, 1.6, 0.9, 1, 1]
+        entetes = ["ID", "Utilisateur", "Rôle", "Actif", "", ""]
+        cols_h = st.columns(largeurs, vertical_alignment="center")
+        for col, titre in zip(cols_h, entetes):
+            col.markdown(
+                f"<div class='ls-eyebrow plain' style='margin:0'>{html.escape(titre)}</div>",
+                unsafe_allow_html=True,
             )
-        with e3:
-            actif = st.toggle("Actif", value=bool(cible.get("actif", True)))
-        with e4:
-            enregistrer = st.button("Enregistrer", type="primary", use_container_width=True)
+        st.markdown("<div class='ls-divider'></div>", unsafe_allow_html=True)
 
-        if enregistrer:
-            charge = dict(cible)
-            charge["role"] = "admin" if role_label == "Administrateur" else "utilisateur"
-            charge["actif"] = actif
-            rep = api_client.put(f"/admin/utilisateurs/{cible['id']}", json=charge)
-            if rep["status_code"] == 200:
-                st.success(f"Compte « {choix} » mis à jour.")
-                st.rerun()
-            else:
-                st.error(message_erreur(rep))
+        for u in utilisateurs:
+            uid = u.get("id")
+            role_actuel = "admin" if str(u.get("role", "")).lower() == "admin" else "utilisateur"
+            actif_actuel = bool(u.get("actif", False))
 
-# --- Section 2 : imports ILOSTAT --------------------------------------------
+            c = st.columns(largeurs, vertical_alignment="center")
+            c[0].markdown(
+                f"<span style='color:#8A938D'>{html.escape(str(uid))}</span>",
+                unsafe_allow_html=True,
+            )
+            c[1].markdown(html.escape(str(u.get("nom_utilisateur", ""))))
+            role_label = c[2].selectbox(
+                "Rôle", ["Utilisateur", "Administrateur"],
+                index=1 if role_actuel == "admin" else 0,
+                key=f"role_{uid}", label_visibility="collapsed",
+            )
+            actif = c[3].toggle(
+                "Actif", value=actif_actuel, key=f"actif_{uid}",
+                label_visibility="collapsed",
+            )
+            enregistrer = c[4].button(
+                "Enregistrer", key=f"save_{uid}", type="primary", use_container_width=True,
+            )
+            with c[5].popover("Supprimer", use_container_width=True):
+                st.caption(f"Supprimer définitivement « {u.get('nom_utilisateur', '')} » ?")
+                confirmer = st.button(
+                    "Confirmer la suppression", type="primary",
+                    key=f"del_{uid}", use_container_width=True,
+                )
+
+            if enregistrer:
+                role_cible = "admin" if role_label == "Administrateur" else "utilisateur"
+                erreurs: list[str] = []
+                if role_cible != role_actuel:
+                    rep = api_client.patch(
+                        f"/admin/utilisateurs/{uid}/role", json={"role": role_cible}
+                    )
+                    if rep["status_code"] != 200:
+                        erreurs.append(message_erreur(rep))
+                if actif != actif_actuel:
+                    rep = api_client.patch(
+                        f"/admin/utilisateurs/{uid}/statut", json={"actif": actif}
+                    )
+                    if rep["status_code"] != 200:
+                        erreurs.append(message_erreur(rep))
+                if erreurs:
+                    for message in erreurs:
+                        st.error(message)
+                elif role_cible != role_actuel or actif != actif_actuel:
+                    st.success(f"Compte « {u.get('nom_utilisateur', '')} » mis à jour.")
+                    st.rerun()
+                else:
+                    st.info("Aucune modification à enregistrer.")
+
+            if confirmer:
+                rep = api_client.delete(f"/admin/utilisateurs/{uid}/supprimer")
+                if rep["status_code"] in (200, 204):
+                    st.success(f"Compte « {u.get('nom_utilisateur', '')} » supprimé.")
+                    st.rerun()
+                else:
+                    st.error(message_erreur(rep))
+            
+           
+
+# --- Section 2: Imports ILOSTAT --------------------------------------------
 with st.container(border=True):
     st.markdown("<div class='ls-eyebrow plain'>Collecte</div>", unsafe_allow_html=True)
     st.markdown("<div class='ls-serif' style='font-size:1.4rem'>Imports de données</div>",
