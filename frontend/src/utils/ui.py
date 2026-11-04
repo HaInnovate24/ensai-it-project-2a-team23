@@ -639,24 +639,17 @@ def styliser_figure(fig, hauteur: int = 430):
         template="plotly_white",
         colorway=PALETTE_GRAPHIQUE,
         font=dict(family="Inter, sans-serif", size=13, color=TEXTE),
-        title=dict(
-            font=dict(family="Lora, serif", size=18, color=ENCRE), x=0, xanchor="left", y=0.98
-        ),
-        margin=dict(l=8, r=8, t=56, b=8),
+        title=dict(text="", font=dict(family="Lora, serif", size=18, color=ENCRE),
+                   x=0, xanchor="left", y=0.98),
+        margin=dict(l=8, r=16, t=40, b=8),
         height=hauteur,
         separators=", ",
         plot_bgcolor="white",
         paper_bgcolor="white",
-        legend=dict(
-            orientation="h",
-            yanchor="bottom",
-            y=1.0,
-            xanchor="left",
-            x=0,
-            title="",
-            bgcolor="rgba(0,0,0,0)",
-        ),
-        hoverlabel=dict(bgcolor="white", bordercolor=BORDURE, font_size=12),
+        legend=dict(orientation="h", yanchor="bottom", y=1.02, xanchor="left", x=0, title="",
+                    bgcolor="rgba(0,0,0,0)", font=dict(size=12.5)),
+        hoverlabel=dict(bgcolor="white", bordercolor=BORDURE, font_size=12.5,
+                        font_family="Inter, sans-serif"),
     )
     fig.update_xaxes(showgrid=True, gridcolor="#F0EFE8", griddash="dot", showline=False,
                      zeroline=False, ticksuffix="  ", tickfont=dict(color=TEXTE_DOUX))

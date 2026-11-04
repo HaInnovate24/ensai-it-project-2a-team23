@@ -28,6 +28,14 @@ class UtilisateurService:
     L'inscription d'un nouvel utilisateur est dans AuthentificationService.inscrire.
     """
 
+<<<<<<< HEAD
+    def __init__(self):
+        self.utilisateur_dao = UtilisateurDao()
+        self.journal_service = JournalService()
+
+    def lister_utilisateurs(self, acteur: Utilisateur) -> list[Utilisateur]:
+        """Liste tous les comptes utilisateurs (administrateur uniquement).
+=======
     # Deux règles protègent contre le blocage de l'application. Un administrateur
     # ne peut ni retirer ses propres droits, ni désactiver son propre compte. Il reste
     # donc toujours au moins un administrateur actif.
@@ -45,6 +53,7 @@ class UtilisateurService:
 
     def lister_utilisateurs(self, acteur: Utilisateur) -> list[Utilisateur]:
         """Renvoie tous les comptes (administrateur uniquement).
+>>>>>>> 7ebd01e54ae68a9bd0ade480f8fd31f8b65cab26
 
         Les objets renvoyés contiennent l'empreinte du mot de passe.
         La couche controller ne doit jamais la transmettre au client.
@@ -57,7 +66,7 @@ class UtilisateurService:
         self._exiger_admin(acteur)
         return self._trouver(id_utilisateur)
 
-    # Modifications (toutes tracées dans le journal)
+    # --- Modifications (toutes tracées dans le journal) ---
 
     def promouvoir_admin(self, acteur: Utilisateur, id_utilisateur: int) -> Utilisateur:
         """Donne le rôle administrateur à un compte et renvoie le compte modifié.
@@ -121,7 +130,7 @@ class UtilisateurService:
         self._enregistrer_modification(acteur, cible, action, details)
         return cible
 
-    # Méthodes privées (petits outils internes)
+    # --- Méthodes privées (outils internes) ---
 
     def _exiger_admin(self, acteur: Utilisateur | None) -> None:
         """Lève AccesRefuse si l'acteur n'est pas un administrateur actif."""
@@ -155,10 +164,7 @@ class UtilisateurService:
     def _enregistrer_modification(
         self, acteur: Utilisateur, cible: Utilisateur, action: str, details: str
     ) -> None:
-        """Enregistre la modification en base puis la trace dans le journal.
-
-        Lève RessourceIntrouvable si le compte a disparu entre-temps.
-        """
+        """Enregistre la modification en base puis la trace dans le journal."""
         if not self.utilisateur_dao.modifier(cible):
             raise RessourceIntrouvable(f"Utilisateur inconnu : {cible.id}.")
         self.journal_service.enregistrer(

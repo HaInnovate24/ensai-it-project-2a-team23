@@ -16,7 +16,18 @@ from utils.referentiels import (
     message_erreur,
     unite_indicateur,
 )
-from utils.ui import PALETTE_GRAPHIQUE, entete, ligne_source, styliser_figure
+from datetime import date
+
+from utils.rapport_pdf import construire_rapport_pdf, figure_png
+from utils.ui import (
+    PALETTE_GRAPHIQUE,
+    afficher_graphique,
+    entete,
+    entete_graphique,
+    fmt_fr,
+    ligne_source,
+    styliser_figure,
+)
 
 get_page_logger("Analyse Temporelle (F3)")
 
@@ -82,16 +93,18 @@ with st.spinner("Chargement des données…"):
             },
         )
 
-    if reponse["status_code"] == 200:
-        for point in reponse["data"]["points"]:
-            lignes.append({"Période": point["periode"], "Pays": nom, "Valeur": point["valeur"]})
-    elif reponse["status_code"] == 404:
-        pays_sans_donnees.append(nom)
-    elif reponse["status_code"] == 0:
-        st.error(message_erreur(reponse))
-        st.stop()
-    else:
-        st.error(f"{nom} : {message_erreur(reponse)}")
+        if reponse["status_code"] == 200:
+            for point in reponse["data"]["points"]:
+                lignes.append(
+                    {"Période": point["periode"], "Pays": nom, "Valeur": point["valeur"]}
+                )
+        elif reponse["status_code"] == 404:
+            pays_sans_donnees.append(nom)
+        elif reponse["status_code"] == 0:
+            st.error(message_erreur(reponse))
+            st.stop()
+        else:
+            st.error(f"{nom} : {message_erreur(reponse)}")
 
 if pays_sans_donnees:
     st.warning("Aucune donnée disponible pour : " + ", ".join(pays_sans_donnees))
@@ -100,12 +113,10 @@ if lignes:
     unite = unite_indicateur(code_indicateur)
     df = pd.DataFrame(lignes).sort_values("Période")
     with st.container(border=True):
-        st.markdown(
-            "<div class='ls-eyebrow plain'>Évolution temporelle</div>", unsafe_allow_html=True
-        )
-        st.markdown(
-            f"<div class='ls-serif' style='font-size:1.5rem'>{indicateurs[code_indicateur]}</div>",
-            unsafe_allow_html=True,
+        entete_graphique(
+            "Évolution temporelle",
+            indicateurs[code_indicateur],
+            f"{libelle_classification} · {libelle_sexe} · {nb_periodes} dernières années",
         )
         fig = px.line(
             df,

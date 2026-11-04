@@ -47,10 +47,13 @@ col1, col2, col3 = st.columns(3, gap="medium")
 
 with col1:
     with st.container(border=True):
-        st.markdown("#### Évolution temporelle")
-        st.write("Suivez l'évolution d'un indicateur pour un ou plusieurs pays.")
-        st.caption("Accès libre")
-        st.page_link("pages/analyse_temporelle.py", label="Ouvrir", icon=":material/trending_up:")
+        carte_navigation(
+            ICONE_TENDANCE, "Évolution temporelle",
+            "Suivez l'évolution d'un indicateur pour un ou plusieurs pays.",
+            tag="Accès libre",
+        )
+        st.page_link("pages/analyse_temporelle.py", label="Ouvrir l'analyse",
+                     icon=":material/arrow_forward:")
 
 with col2:
     with st.container(border=True):
@@ -61,7 +64,8 @@ with col2:
             verrou=not est_connecte(),
         )
         if est_connecte():
-            st.page_link("pages/comparaison_pays.py", label="Ouvrir", icon=":material/public:")
+            st.page_link("pages/comparaison_pays.py", label="Ouvrir la comparaison",
+                         icon=":material/arrow_forward:")
         else:
             st.page_link("pages/login.py", label="Se connecter", icon=":material/lock:")
 
@@ -82,9 +86,13 @@ with col3:
 if est_admin():
     st.write("")
     with st.container(border=True):
-        st.markdown("#### Administration")
-        st.write("Gérez les utilisateurs, lancez des imports ILOSTAT et consultez le journal.")
-        st.page_link("pages/admin.py", label="Ouvrir l'espace admin", icon=":material/settings:")
+        carte_navigation(
+            ICONE_REGLAGES, "Administration",
+            "Gérez les comptes, lancez les imports ILOSTAT et suivez l'activité.",
+            tag="Administrateur", verrou=False,
+        )
+        st.page_link("pages/admin.py", label="Ouvrir l'espace admin",
+                     icon=":material/arrow_forward:")
 
 st.divider()
 

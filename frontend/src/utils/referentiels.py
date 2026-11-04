@@ -99,24 +99,38 @@ def unite_indicateur(code_indicateur: str) -> str:
 
 
 def _get_classifications_par_type(type_classif: str) -> dict[str, str]:
-    """Renvoie ``{libelle: code}`` pour un type de classification donné."""
+    """Renvoie {libelle: code} pour le frontend.
+    Pour l'âge, verrouille strictement le menu sur les 3 tranches agrégées principales.
+    """
     cle = f"ref_classif_{type_classif}"
+
+    # --- 1. AGE : Toujours renvoyer exactement et uniquement les 3 tranches principales ---
+    if type_classif == "age":
+        tranches_age_propres = {
+            "Tous âges (15 ans et plus)": "AGE_AGGREGATE_TOTAL",
+            "15 à 24 ans": "AGE_AGGREGATE_Y15-24",
+            "25 ans et plus": "AGE_AGGREGATE_Y25-plus",
+        }
+        st.session_state[cle] = tranches_age_propres
+        return tranches_age_propres
+
+    # --- 2. OCCUPATION : Récupération des professions ---
     cache = st.session_state.get(cle)
     if cache:
         return cache
 
     reponse = api_client.get("/referentiels/classifications", params={"type": type_classif})
+    classifs_occ = {}
     if reponse["status_code"] == 200 and isinstance(reponse["data"], list) and reponse["data"]:
-        classifs = {
-            ligne["libelle"]: ligne["code"]
-            for ligne in reponse["data"]
-            if ligne.get("libelle") and ligne.get("code")
-        }
-        if classifs:
-            st.session_state[cle] = classifs
-            return classifs
+        for ligne in reponse["data"]:
+            code = ligne.get("code", "")
+            libelle = ligne.get("libelle", "")
+            if code and libelle and (code.startswith("OCU_ISCO08_") or code.startswith("OCU_SKILL_")):
+                classifs_occ[libelle] = code
 
-    return dict(_CLASSIF_OCC_FALLBACK if type_classif == "occupation" else _CLASSIF_AGE_FALLBACK)
+    resultat = classifs_occ if classifs_occ else dict(_CLASSIF_OCC_FALLBACK)
+    st.session_state[cle] = resultat
+    return resultat
 
 
 def get_classifications(code_indicateur: str) -> dict[str, str]:

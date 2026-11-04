@@ -144,51 +144,32 @@ def supprimer_observation(observation_id: int):
 def lister_utilisateurs(jeton: str):
     """Renvoie la liste des comptes (administrateur uniquement)."""
     try:
-        acteur = utilisateur_courant(jeton)
-        utilisateurs = utilisateur_service.lister_utilisateurs(acteur)
-        return {
-            "message": "Liste des utilisateurs",
-            "statut": "succes",
-            "data": [_utilisateur_public(u) for u in utilisateurs],
-        }
-    except ErreurMetier as erreur:
-        raise erreur_http(erreur) from erreur
+        utilisateurs = UtilisateurService.lister_utilisateurs()
+        return {"message": "Liste des utilisateurs", "statut": "succes", "data": utilisateurs}
+    except ValueError as exc:
+        raise HTTPException(status_code=400, detail=str(exc)) from exc
+    except requests.RequestException as exc:
+        raise HTTPException(status_code=502, detail=f"Échec ILOSTAT : {exc}") from exc
 
 
-@router.patch("/utilisateurs/{utilisateur_id}/role")
-def modifier_role_utilisateur(utilisateur_id: int, jeton: str, role: str):
-    """Promeut (role=admin) ou rétrograde (role=utilisateur) un compte."""
+@router.put("/utilisateurs/{utilisateur_id}")
+def modifier_utilisateur(utilisateur_id: int, donnees: dict):
+    """Gère un compte (promotion, désactivation)."""
     try:
-        acteur = utilisateur_courant(jeton)
-        try:
-            role_cible = Role(role)
-        except ValueError as exc:
-            raise DonneesInvalides(f"Rôle inconnu : {role}.") from exc
+        modification = Utilisateur(**donnees)
+        if utilisateur_id != modification.id:
+            raise ValueError("L'ID de l'URL ne correspond pas à l'ID de l'utilisateur fourni.")
 
-        if role_cible == Role.ADMIN:
-            cible = utilisateur_service.promouvoir_admin(acteur, utilisateur_id)
+        succes = UtilisateurService.modifier(modification)
+        if succes:
+            return {
+                "message": "Utilisateur mis à jour avec succès",
+                "statut": "succes",
+                "utilisateur_id": utilisateur_id,
+            }
         else:
-            cible = utilisateur_service.retrograder_admin(acteur, utilisateur_id)
-
-        return {
-            "message": "Rôle de l'utilisateur mis à jour",
-            "statut": "succes",
-            "data": _utilisateur_public(cible),
-        }
-    except ErreurMetier as erreur:
-        raise erreur_http(erreur) from erreur
-
-
-@router.patch("/utilisateurs/{utilisateur_id}/statut")
-def modifier_statut_utilisateur(utilisateur_id: int, jeton: str, actif: bool):
-    """Active (actif=true) ou désactive (actif=false) un compte."""
-    try:
-        acteur = utilisateur_courant(jeton)
-        cible = utilisateur_service.definir_activation(acteur, utilisateur_id, actif)
-        return {
-            "message": "Statut de l'utilisateur mis à jour",
-            "statut": "succes",
-            "data": _utilisateur_public(cible),
-        }
-    except ErreurMetier as erreur:
-        raise erreur_http(erreur) from erreur
+            raise HTTPException(status_code=404, detail="Utilisateur introuvable")
+    except ValueError as exc:
+        raise HTTPException(status_code=400, detail=str(exc)) from exc
+    except Exception as exc:
+        raise HTTPException(status_code=500, detail=f"Erreur interne : {str(exc)}") from exc
