@@ -93,7 +93,7 @@ def lister_utilisateurs():
         raise HTTPException(status_code=502, detail=f"Échec ILOSTAT : {exc}") from exc
 
 @router.put("/utilisateurs/{utilisateur_id}")
-def gerer_utilisateur(utilisateur_id: int, donnees: dict):
+def modifier_utilisateur(utilisateur_id: int, donnees: dict):
     """Gère un compte (promotion, désactivation)."""
     try:
         modification = Utilisateur(**donnees)
@@ -113,3 +113,47 @@ def gerer_utilisateur(utilisateur_id: int, donnees: dict):
         raise HTTPException(status_code=400, detail=str(exc)) from exc
     except Exception as exc:
         raise HTTPException(status_code=500, detail=f"Erreur interne : {str(exc)}") from exc
+
+def supprimer_utilisateur(utilisateur_id: int):
+    """Supprime un compte utilisateur."""
+    try:
+        UtilisateurService.supprimer(utilisateur_id)
+        return {"message": "Utilisateur supprimé avec succès", "statut": "succes", "utilisateur_id": utilisateur_id}
+    except ValueError as exc:
+        raise HTTPException(status_code=400, detail=str(exc)) from exc
+    except requests.RequestException as exc:
+        raise HTTPException(status_code=502, detail=f"Échec ILOSTAT : {exc}") from exc
+
+
+def promouvoir_utilisateur(utilisateur_id: int):
+    """Promote un compte utilisateur."""
+    try:
+        UtilisateurService.promouvoir(utilisateur_id)
+        return {"message": "Utilisateur promu avec succès", "statut": "succes", "utilisateur_id": utilisateur_id}
+    except ValueError as exc:
+        raise HTTPException(status_code=400, detail=str(exc)) from exc
+    except requests.RequestException as exc:
+        raise HTTPException(status_code=502, detail=f"Échec ILOSTAT : {exc}") from exc
+
+
+
+def desactiver_utilisateur(utilisateur_id: int):
+    """Désactive un compte utilisateur."""
+    try:
+        UtilisateurService.desactiver(utilisateur_id)
+        return {"message": "Utilisateur désactivé avec succès", "statut": "succes", "utilisateur_id": utilisateur_id}
+    except ValueError as exc:
+        raise HTTPException(status_code=400, detail=str(exc)) from exc
+    except requests.RequestException as exc:
+        raise HTTPException(status_code=502, detail=f"Échec ILOSTAT : {exc}") from exc
+
+
+def activer_utilisateur(utilisateur_id: int):
+    """Active un compte utilisateur."""
+    try:
+        UtilisateurService.reactiver(utilisateur_id)
+        return {"message": "Utilisateur activé avec succès", "statut": "succes", "utilisateur_id": utilisateur_id}
+    except ValueError as exc:
+        raise HTTPException(status_code=400, detail=str(exc)) from exc
+    except requests.RequestException as exc:
+        raise HTTPException(status_code=502, detail=f"Échec ILOSTAT : {exc}") from exc
