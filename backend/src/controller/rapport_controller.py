@@ -4,8 +4,7 @@ import os
 from fastapi import APIRouter, Depends, HTTPException, status
 from fastapi.responses import FileResponse
 
-# Adapte l'import des schémas selon le nom exact de ton fichier (ex: schemas.rapport_schema)
-from schemas.rapport_schema import RapportDemande, RapportSortie 
+from model.rapport_model import RapportDemande, RapportSortie 
 from service.rapport_service import RapportService
 
 router = APIRouter()
