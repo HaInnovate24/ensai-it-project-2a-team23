@@ -389,16 +389,6 @@ col_chart, col_aside = st.columns([0.74, 0.26], gap="large")
 
 with col_chart:
     with st.container(border=True):
-<<<<<<< HEAD
-        st.markdown(
-            "<div class='ls-eyebrow plain'>Comparaison entre pays</div>", unsafe_allow_html=True
-        )
-        st.markdown(
-            f"<div class='ls-serif' style='font-size:1.5rem'>{indicateurs[code_indicateur]}</div>",
-            unsafe_allow_html=True,
-        )
-        st.caption(f"{libelle_classification} · {libelle_sexe} · {periode} · année commune")
-=======
         tete_g, tete_d = st.columns([0.62, 0.38], vertical_alignment="center")
         with tete_g:
             st.markdown("<div class='ls-eyebrow plain'>Comparaison entre pays</div>", unsafe_allow_html=True)
@@ -417,7 +407,6 @@ with col_chart:
                 "Tri", ["Décroissant", "Croissant"], default="Décroissant",
                 label_visibility="collapsed",
             )
->>>>>>> cee9590c5cf3aadc47445192cb78e59cee250a3c
 
         contexte_periode = (
             f"{annee_fin} · année commune" if annee_commune
@@ -442,16 +431,9 @@ with col_chart:
             labels={"Valeur": f"Valeur ({unite})" if unite else "Valeur"},
         )
         fig.update_traces(
-<<<<<<< HEAD
-            texttemplate="%{text:.1f}",
-            textposition="outside",
-            cliponaxis=False,
-            marker_line_width=0,
-=======
             textposition="outside", cliponaxis=False, marker_line_width=0,
             marker_cornerradius=6,  # barres aux coins arrondis (plus « produit »)
             textfont=dict(color="#1F2A26"),
->>>>>>> cee9590c5cf3aadc47445192cb78e59cee250a3c
         )
         fig.update_layout(showlegend=False)
         styliser_figure(fig, hauteur=400)
@@ -465,24 +447,6 @@ with col_aside:
     lignes_retenir = [
         (
             r["Pays"],
-<<<<<<< HEAD
-            f"{r['Valeur']:.1f}{suffixe}",
-            couleur_par_pays.get(r["Pays"], PALETTE_GRAPHIQUE[0]),
-        )
-        for _, r in df.iterrows()
-    ]
-    note = (
-        f"En {periode}, l'écart entre {haut['Pays']} et {bas['Pays']} atteint "
-        f"{ecart:.1f}{suffixe} pour cet indicateur."
-    )
-    bas_note = (
-        f"Les valeurs sont exprimées en {unite.lower()} et correspondent à la dernière "
-        "période commune disponible."
-        if unite
-        else "Les valeurs correspondent à la dernière période commune disponible."
-    )
-    carte_a_retenir(f"{indic_court} · {periode}", lignes_retenir, note=note, bas=bas_note)
-=======
             # En repli (années différentes), on précise l'année de chaque pays.
             f"{format_fr(r['Valeur'])}{suffixe}"
             + ("" if annee_commune else f" ({annee(r['Période'])})"),
@@ -562,4 +526,3 @@ emplacement_pdf.download_button(
     icon=":material/picture_as_pdf:",
     use_container_width=True,
 )
->>>>>>> cee9590c5cf3aadc47445192cb78e59cee250a3c

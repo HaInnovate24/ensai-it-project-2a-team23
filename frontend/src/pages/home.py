@@ -47,12 +47,6 @@ col1, col2, col3 = st.columns(3, gap="medium")
 
 with col1:
     with st.container(border=True):
-<<<<<<< HEAD
-        st.markdown("#### Évolution temporelle")
-        st.write("Suivez l'évolution d'un indicateur pour un ou plusieurs pays.")
-        st.caption("Accès libre")
-        st.page_link("pages/analyse_temporelle.py", label="Ouvrir", icon=":material/trending_up:")
-=======
         carte_navigation(
             ICONE_TENDANCE, "Évolution temporelle",
             "Suivez l'évolution d'un indicateur pour un ou plusieurs pays.",
@@ -60,7 +54,6 @@ with col1:
         )
         st.page_link("pages/analyse_temporelle.py", label="Ouvrir l'analyse",
                      icon=":material/arrow_forward:")
->>>>>>> cee9590c5cf3aadc47445192cb78e59cee250a3c
 
 with col2:
     with st.container(border=True):
@@ -71,12 +64,8 @@ with col2:
             verrou=not est_connecte(),
         )
         if est_connecte():
-<<<<<<< HEAD
-            st.page_link("pages/comparaison_pays.py", label="Ouvrir", icon=":material/public:")
-=======
             st.page_link("pages/comparaison_pays.py", label="Ouvrir la comparaison",
                          icon=":material/arrow_forward:")
->>>>>>> cee9590c5cf3aadc47445192cb78e59cee250a3c
         else:
             st.page_link("pages/login.py", label="Se connecter", icon=":material/lock:")
 
@@ -97,11 +86,6 @@ with col3:
 if est_admin():
     st.write("")
     with st.container(border=True):
-<<<<<<< HEAD
-        st.markdown("#### Administration")
-        st.write("Gérez les utilisateurs, lancez des imports ILOSTAT et consultez le journal.")
-        st.page_link("pages/admin.py", label="Ouvrir l'espace admin", icon=":material/settings:")
-=======
         carte_navigation(
             ICONE_REGLAGES, "Administration",
             "Gérez les comptes, lancez les imports ILOSTAT et suivez l'activité.",
@@ -109,7 +93,6 @@ if est_admin():
         )
         st.page_link("pages/admin.py", label="Ouvrir l'espace admin",
                      icon=":material/arrow_forward:")
->>>>>>> cee9590c5cf3aadc47445192cb78e59cee250a3c
 
 st.divider()
 
