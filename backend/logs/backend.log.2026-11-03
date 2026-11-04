@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 03/11/2026 11:06:52 root                      INFO    - --------------------------------------------------
 03/11/2026 11:06:52 root                      INFO    - Starting Webservice                           
 03/11/2026 11:06:52 root                      INFO    - --------------------------------------------------
@@ -329,3 +330,687 @@
 03/11/2026 15:43:52 root                      INFO    - GET /openapi.json - START
 03/11/2026 15:43:52 root                      INFO    - GET /openapi.json - END [Status: 200]
 03/11/2026 15:44:04 __main__                  INFO    - Webservice stopped
+=======
+03/11/2026 09:41:02 root                      INFO    - --------------------------------------------------
+03/11/2026 09:41:02 root                      INFO    - Starting Webservice                           
+03/11/2026 09:41:02 root                      INFO    - --------------------------------------------------
+03/11/2026 09:41:02 root                      INFO    - Load environment variables: SUCCES
+03/11/2026 09:41:02 root                      INFO    - POSTGRES_HOST=postgresql-cnpg-507203-rw.user-vraveendiran
+03/11/2026 09:41:02 root                      INFO    - POSTGRES_PORT=5432
+03/11/2026 09:41:02 root                      INFO    - POSTGRES_DATABASE=defaultdb
+03/11/2026 09:41:02 root                      INFO    - POSTGRES_USER=user-vraveendiran
+03/11/2026 09:41:02 root                      INFO    - POSTGRES_PASSWORD=*******
+03/11/2026 09:41:02 root                      INFO    - POSTGRES_SCHEMA=project
+03/11/2026 09:41:02 root                      INFO    - UVICORN_HOST=0.0.0.0
+03/11/2026 09:41:02 root                      INFO    - UVICORN_PORT=5000
+03/11/2026 09:41:02 root                      INFO    - BACKEND_URL=http://localhost:5000
+03/11/2026 09:41:02 root                      INFO    - BACKEND_TIMEOUT=5
+03/11/2026 09:41:02 root                      INFO    - ELO_K_FACTOR=32
+03/11/2026 09:41:13 root                      INFO    - GET / - START
+03/11/2026 09:41:13 root                      INFO    - GET / - END [Status: 307]
+03/11/2026 09:41:13 root                      INFO    - GET /docs - START
+03/11/2026 09:41:13 root                      INFO    - GET /docs - END [Status: 200]
+03/11/2026 09:41:13 root                      INFO    - GET /openapi.json - START
+03/11/2026 09:41:13 root                      INFO    - GET /openapi.json - END [Status: 200]
+03/11/2026 11:03:01 root                      INFO    - GET /analyses/evolution - START
+03/11/2026 11:03:01 root                      ERROR   - GET /analyses/evolution - FAILED [Status: 500] Error: 'AnalyseService' object has no attribute '_sexe_ou_defaut'
+03/11/2026 11:03:17 root                      INFO    - GET /analyses/evolution - START
+03/11/2026 11:03:17 root                      ERROR   - GET /analyses/evolution - FAILED [Status: 500] Error: 'AnalyseService' object has no attribute '_sexe_ou_defaut'
+03/11/2026 11:03:23 root                      INFO    - GET / - START
+03/11/2026 11:03:23 root                      INFO    - GET / - END [Status: 307]
+03/11/2026 11:03:23 root                      INFO    - GET /docs - START
+03/11/2026 11:03:23 root                      INFO    - GET /docs - END [Status: 200]
+03/11/2026 11:03:23 root                      INFO    - GET /openapi.json - START
+03/11/2026 11:03:23 root                      INFO    - GET /openapi.json - END [Status: 200]
+03/11/2026 11:03:28 root                      INFO    - GET /analyses/evolution - START
+03/11/2026 11:03:28 root                      ERROR   - GET /analyses/evolution - FAILED [Status: 500] Error: 'AnalyseService' object has no attribute '_sexe_ou_defaut'
+03/11/2026 11:03:37 root                      INFO    - GET /analyses/evolution - START
+03/11/2026 11:03:37 root                      ERROR   - GET /analyses/evolution - FAILED [Status: 500] Error: 'AnalyseService' object has no attribute '_sexe_ou_defaut'
+03/11/2026 11:03:43 root                      INFO    - GET /analyses/evolution - START
+03/11/2026 11:03:43 root                      ERROR   - GET /analyses/evolution - FAILED [Status: 500] Error: 'AnalyseService' object has no attribute '_sexe_ou_defaut'
+03/11/2026 11:03:47 root                      INFO    - GET /analyses/evolution - START
+03/11/2026 11:03:47 root                      ERROR   - GET /analyses/evolution - FAILED [Status: 500] Error: 'AnalyseService' object has no attribute '_sexe_ou_defaut'
+03/11/2026 11:03:50 root                      INFO    - GET /analyses/evolution - START
+03/11/2026 11:03:50 root                      ERROR   - GET /analyses/evolution - FAILED [Status: 500] Error: 'AnalyseService' object has no attribute '_sexe_ou_defaut'
+03/11/2026 11:05:27 root                      INFO    - GET /analyses/evolution - START
+03/11/2026 11:05:27 root                      ERROR   - GET /analyses/evolution - FAILED [Status: 500] Error: 'AnalyseService' object has no attribute '_sexe_ou_defaut'
+03/11/2026 11:06:29 root                      INFO    - GET /analyses/evolution - START
+03/11/2026 11:06:29 root                      ERROR   - GET /analyses/evolution - FAILED [Status: 500] Error: 'AnalyseService' object has no attribute '_sexe_ou_defaut'
+03/11/2026 11:39:44 root                      INFO    - GET / - START
+03/11/2026 11:39:44 root                      INFO    - GET / - END [Status: 307]
+03/11/2026 11:39:44 root                      INFO    - GET /docs - START
+03/11/2026 11:39:44 root                      INFO    - GET /docs - END [Status: 200]
+03/11/2026 11:39:45 root                      INFO    - GET /openapi.json - START
+03/11/2026 11:39:45 root                      INFO    - GET /openapi.json - END [Status: 200]
+03/11/2026 15:14:49 root                      INFO    - --------------------------------------------------
+03/11/2026 15:14:49 root                      INFO    - Starting Webservice                           
+03/11/2026 15:14:49 root                      INFO    - --------------------------------------------------
+03/11/2026 15:14:49 root                      INFO    - Load environment variables: SUCCES
+03/11/2026 15:14:49 root                      INFO    - POSTGRES_HOST=postgresql-cnpg-507203-rw.user-vraveendiran
+03/11/2026 15:14:49 root                      INFO    - POSTGRES_PORT=5432
+03/11/2026 15:14:49 root                      INFO    - POSTGRES_DATABASE=defaultdb
+03/11/2026 15:14:49 root                      INFO    - POSTGRES_USER=user-vraveendiran
+03/11/2026 15:14:49 root                      INFO    - POSTGRES_PASSWORD=*******
+03/11/2026 15:14:49 root                      INFO    - POSTGRES_SCHEMA=project
+03/11/2026 15:14:49 root                      INFO    - UVICORN_HOST=0.0.0.0
+03/11/2026 15:14:49 root                      INFO    - UVICORN_PORT=5000
+03/11/2026 15:14:49 root                      INFO    - BACKEND_URL=http://localhost:5000
+03/11/2026 15:14:49 root                      INFO    - BACKEND_TIMEOUT=5
+03/11/2026 15:14:49 root                      INFO    - ELO_K_FACTOR=32
+03/11/2026 15:15:00 root                      INFO    - GET / - START
+03/11/2026 15:15:00 root                      INFO    - GET / - END [Status: 307]
+03/11/2026 15:15:00 root                      INFO    - GET /docs - START
+03/11/2026 15:15:00 root                      INFO    - GET /docs - END [Status: 200]
+03/11/2026 15:15:00 root                      INFO    - GET /openapi.json - START
+03/11/2026 15:15:00 root                      INFO    - GET /openapi.json - END [Status: 200]
+03/11/2026 15:15:21 root                      INFO    - GET /referentiels/indicateurs - START
+03/11/2026 15:15:21 root                      ERROR   - GET /referentiels/indicateurs - FAILED [Status: 500] Error: relation "indicateur" does not exist
+LINE 1: ...ndicateur, description, unite, source, actif FROM indicateur...
+                                                             ^
+
+03/11/2026 15:15:21 root                      INFO    - GET /referentiels/classifications - START
+03/11/2026 15:15:21 root                      ERROR   - GET /referentiels/classifications - FAILED [Status: 500] Error: current transaction is aborted, commands ignored until end of transaction block
+
+03/11/2026 15:15:47 root                      INFO    - GET /referentiels/indicateurs - START
+03/11/2026 15:15:47 root                      ERROR   - GET /referentiels/indicateurs - FAILED [Status: 500] Error: current transaction is aborted, commands ignored until end of transaction block
+
+03/11/2026 15:15:47 root                      INFO    - GET /referentiels/classifications - START
+03/11/2026 15:15:47 root                      ERROR   - GET /referentiels/classifications - FAILED [Status: 500] Error: current transaction is aborted, commands ignored until end of transaction block
+
+03/11/2026 15:16:13 root                      INFO    - GET /referentiels/indicateurs - START
+03/11/2026 15:16:13 root                      ERROR   - GET /referentiels/indicateurs - FAILED [Status: 500] Error: current transaction is aborted, commands ignored until end of transaction block
+
+03/11/2026 15:16:13 root                      INFO    - GET /referentiels/classifications - START
+03/11/2026 15:16:13 root                      ERROR   - GET /referentiels/classifications - FAILED [Status: 500] Error: current transaction is aborted, commands ignored until end of transaction block
+
+03/11/2026 15:17:05 root                      INFO    - GET /referentiels/indicateurs - START
+03/11/2026 15:17:05 root                      ERROR   - GET /referentiels/indicateurs - FAILED [Status: 500] Error: current transaction is aborted, commands ignored until end of transaction block
+
+03/11/2026 15:17:05 root                      INFO    - GET /referentiels/classifications - START
+03/11/2026 15:17:05 root                      ERROR   - GET /referentiels/classifications - FAILED [Status: 500] Error: current transaction is aborted, commands ignored until end of transaction block
+
+03/11/2026 15:17:07 root                      INFO    - GET /referentiels/indicateurs - START
+03/11/2026 15:17:07 root                      ERROR   - GET /referentiels/indicateurs - FAILED [Status: 500] Error: current transaction is aborted, commands ignored until end of transaction block
+
+03/11/2026 15:17:07 root                      INFO    - GET /referentiels/classifications - START
+03/11/2026 15:17:07 root                      ERROR   - GET /referentiels/classifications - FAILED [Status: 500] Error: current transaction is aborted, commands ignored until end of transaction block
+
+03/11/2026 15:17:09 root                      INFO    - GET /referentiels/indicateurs - START
+03/11/2026 15:17:09 root                      ERROR   - GET /referentiels/indicateurs - FAILED [Status: 500] Error: current transaction is aborted, commands ignored until end of transaction block
+
+03/11/2026 15:17:09 root                      INFO    - GET /referentiels/classifications - START
+03/11/2026 15:17:09 root                      ERROR   - GET /referentiels/classifications - FAILED [Status: 500] Error: current transaction is aborted, commands ignored until end of transaction block
+
+03/11/2026 15:17:18 root                      INFO    - GET /referentiels/indicateurs - START
+03/11/2026 15:17:18 root                      ERROR   - GET /referentiels/indicateurs - FAILED [Status: 500] Error: current transaction is aborted, commands ignored until end of transaction block
+
+03/11/2026 15:17:18 root                      INFO    - GET /referentiels/classifications - START
+03/11/2026 15:17:18 root                      ERROR   - GET /referentiels/classifications - FAILED [Status: 500] Error: current transaction is aborted, commands ignored until end of transaction block
+
+03/11/2026 15:17:22 root                      INFO    - GET /referentiels/indicateurs - START
+03/11/2026 15:17:22 root                      ERROR   - GET /referentiels/indicateurs - FAILED [Status: 500] Error: current transaction is aborted, commands ignored until end of transaction block
+
+03/11/2026 15:17:22 root                      INFO    - GET /referentiels/classifications - START
+03/11/2026 15:17:22 root                      ERROR   - GET /referentiels/classifications - FAILED [Status: 500] Error: current transaction is aborted, commands ignored until end of transaction block
+
+03/11/2026 15:17:28 root                      INFO    - GET /referentiels/indicateurs - START
+03/11/2026 15:17:28 root                      ERROR   - GET /referentiels/indicateurs - FAILED [Status: 500] Error: current transaction is aborted, commands ignored until end of transaction block
+
+03/11/2026 15:17:28 root                      INFO    - GET /referentiels/classifications - START
+03/11/2026 15:17:28 root                      ERROR   - GET /referentiels/classifications - FAILED [Status: 500] Error: current transaction is aborted, commands ignored until end of transaction block
+
+03/11/2026 15:17:28 root                      INFO    - GET /analyses/evolution - START
+03/11/2026 15:17:28 root                      INFO    - GET /analyses/evolution - END [Status: 404]
+03/11/2026 15:17:29 root                      INFO    - GET /referentiels/indicateurs - START
+03/11/2026 15:17:29 root                      ERROR   - GET /referentiels/indicateurs - FAILED [Status: 500] Error: current transaction is aborted, commands ignored until end of transaction block
+
+03/11/2026 15:17:29 root                      INFO    - GET /referentiels/classifications - START
+03/11/2026 15:17:29 root                      ERROR   - GET /referentiels/classifications - FAILED [Status: 500] Error: current transaction is aborted, commands ignored until end of transaction block
+
+03/11/2026 15:17:29 root                      INFO    - GET /analyses/evolution - START
+03/11/2026 15:17:29 root                      INFO    - GET /analyses/evolution - END [Status: 404]
+03/11/2026 15:17:29 root                      INFO    - GET /analyses/evolution - START
+03/11/2026 15:17:29 root                      INFO    - GET /analyses/evolution - END [Status: 404]
+03/11/2026 15:17:34 root                      INFO    - GET /referentiels/indicateurs - START
+03/11/2026 15:17:34 root                      ERROR   - GET /referentiels/indicateurs - FAILED [Status: 500] Error: current transaction is aborted, commands ignored until end of transaction block
+
+03/11/2026 15:17:34 root                      INFO    - GET /referentiels/classifications - START
+03/11/2026 15:17:34 root                      ERROR   - GET /referentiels/classifications - FAILED [Status: 500] Error: current transaction is aborted, commands ignored until end of transaction block
+
+03/11/2026 15:17:34 root                      INFO    - GET /analyses/evolution - START
+03/11/2026 15:17:34 root                      INFO    - GET /analyses/evolution - END [Status: 404]
+03/11/2026 15:17:34 root                      INFO    - GET /analyses/evolution - START
+03/11/2026 15:17:34 root                      INFO    - GET /analyses/evolution - END [Status: 404]
+03/11/2026 15:17:40 root                      INFO    - GET /referentiels/indicateurs - START
+03/11/2026 15:17:40 root                      ERROR   - GET /referentiels/indicateurs - FAILED [Status: 500] Error: current transaction is aborted, commands ignored until end of transaction block
+
+03/11/2026 15:17:40 root                      INFO    - GET /referentiels/classifications - START
+03/11/2026 15:17:40 root                      ERROR   - GET /referentiels/classifications - FAILED [Status: 500] Error: current transaction is aborted, commands ignored until end of transaction block
+
+03/11/2026 15:17:40 root                      INFO    - GET /analyses/evolution - START
+03/11/2026 15:17:40 root                      INFO    - GET /analyses/evolution - END [Status: 404]
+03/11/2026 15:17:40 root                      INFO    - GET /analyses/evolution - START
+03/11/2026 15:17:40 root                      INFO    - GET /analyses/evolution - END [Status: 404]
+03/11/2026 15:17:40 root                      INFO    - GET /analyses/evolution - START
+03/11/2026 15:17:40 root                      INFO    - GET /analyses/evolution - END [Status: 404]
+03/11/2026 15:17:43 root                      INFO    - GET /referentiels/indicateurs - START
+03/11/2026 15:17:43 root                      ERROR   - GET /referentiels/indicateurs - FAILED [Status: 500] Error: current transaction is aborted, commands ignored until end of transaction block
+
+03/11/2026 15:17:43 root                      INFO    - GET /referentiels/classifications - START
+03/11/2026 15:17:43 root                      ERROR   - GET /referentiels/classifications - FAILED [Status: 500] Error: current transaction is aborted, commands ignored until end of transaction block
+
+03/11/2026 15:17:46 root                      INFO    - GET /referentiels/indicateurs - START
+03/11/2026 15:17:46 root                      ERROR   - GET /referentiels/indicateurs - FAILED [Status: 500] Error: current transaction is aborted, commands ignored until end of transaction block
+
+03/11/2026 15:17:46 root                      INFO    - GET /referentiels/classifications - START
+03/11/2026 15:17:46 root                      ERROR   - GET /referentiels/classifications - FAILED [Status: 500] Error: current transaction is aborted, commands ignored until end of transaction block
+
+03/11/2026 15:17:51 root                      INFO    - GET /referentiels/indicateurs - START
+03/11/2026 15:17:51 root                      ERROR   - GET /referentiels/indicateurs - FAILED [Status: 500] Error: current transaction is aborted, commands ignored until end of transaction block
+
+03/11/2026 15:17:51 root                      INFO    - GET /referentiels/classifications - START
+03/11/2026 15:17:51 root                      ERROR   - GET /referentiels/classifications - FAILED [Status: 500] Error: current transaction is aborted, commands ignored until end of transaction block
+
+03/11/2026 15:17:51 root                      INFO    - GET /analyses/evolution - START
+03/11/2026 15:17:51 root                      INFO    - GET /analyses/evolution - END [Status: 404]
+03/11/2026 15:17:51 root                      INFO    - GET /analyses/evolution - START
+03/11/2026 15:17:51 root                      INFO    - GET /analyses/evolution - END [Status: 404]
+03/11/2026 15:17:51 root                      INFO    - GET /analyses/evolution - START
+03/11/2026 15:17:51 root                      INFO    - GET /analyses/evolution - END [Status: 404]
+03/11/2026 15:17:54 root                      INFO    - GET /referentiels/indicateurs - START
+03/11/2026 15:17:54 root                      ERROR   - GET /referentiels/indicateurs - FAILED [Status: 500] Error: current transaction is aborted, commands ignored until end of transaction block
+
+03/11/2026 15:17:54 root                      INFO    - GET /referentiels/classifications - START
+03/11/2026 15:17:54 root                      ERROR   - GET /referentiels/classifications - FAILED [Status: 500] Error: current transaction is aborted, commands ignored until end of transaction block
+
+03/11/2026 15:17:56 root                      INFO    - GET /referentiels/indicateurs - START
+03/11/2026 15:17:56 root                      ERROR   - GET /referentiels/indicateurs - FAILED [Status: 500] Error: current transaction is aborted, commands ignored until end of transaction block
+
+03/11/2026 15:17:56 root                      INFO    - GET /referentiels/classifications - START
+03/11/2026 15:17:56 root                      ERROR   - GET /referentiels/classifications - FAILED [Status: 500] Error: current transaction is aborted, commands ignored until end of transaction block
+
+03/11/2026 15:17:58 root                      INFO    - GET /referentiels/indicateurs - START
+03/11/2026 15:17:58 root                      ERROR   - GET /referentiels/indicateurs - FAILED [Status: 500] Error: current transaction is aborted, commands ignored until end of transaction block
+
+03/11/2026 15:17:58 root                      INFO    - GET /referentiels/classifications - START
+03/11/2026 15:17:58 root                      ERROR   - GET /referentiels/classifications - FAILED [Status: 500] Error: current transaction is aborted, commands ignored until end of transaction block
+
+03/11/2026 15:18:00 root                      INFO    - GET /referentiels/indicateurs - START
+03/11/2026 15:18:00 root                      ERROR   - GET /referentiels/indicateurs - FAILED [Status: 500] Error: current transaction is aborted, commands ignored until end of transaction block
+
+03/11/2026 15:18:39 root                      INFO    - GET /referentiels/indicateurs - START
+03/11/2026 15:18:39 root                      INFO    - GET /referentiels/indicateurs - START
+03/11/2026 15:18:39 root                      INFO    - GET /referentiels/pays - START
+03/11/2026 15:18:39 root                      INFO    - GET /referentiels/indicateurs - START
+03/11/2026 15:18:39 root                      INFO    - GET /referentiels/indicateurs - START
+03/11/2026 15:18:39 root                      INFO    - GET /referentiels/indicateurs - START
+03/11/2026 15:18:39 root                      INFO    - GET /referentiels/pays - START
+03/11/2026 15:18:39 root                      INFO    - GET /referentiels/classifications - START
+03/11/2026 15:18:39 root                      INFO    - GET /analyses/evolution - START
+03/11/2026 15:18:39 root                      ERROR   - GET /referentiels/indicateurs - FAILED [Status: 500] Error: current transaction is aborted, commands ignored until end of transaction block
+
+03/11/2026 15:18:39 root                      ERROR   - GET /referentiels/indicateurs - FAILED [Status: 500] Error: current transaction is aborted, commands ignored until end of transaction block
+
+03/11/2026 15:18:39 root                      ERROR   - GET /referentiels/pays - FAILED [Status: 500] Error: current transaction is aborted, commands ignored until end of transaction block
+
+03/11/2026 15:18:39 root                      ERROR   - GET /referentiels/indicateurs - FAILED [Status: 500] Error: current transaction is aborted, commands ignored until end of transaction block
+
+03/11/2026 15:18:39 root                      ERROR   - GET /referentiels/indicateurs - FAILED [Status: 500] Error: current transaction is aborted, commands ignored until end of transaction block
+
+03/11/2026 15:18:39 root                      ERROR   - GET /referentiels/pays - FAILED [Status: 500] Error: current transaction is aborted, commands ignored until end of transaction block
+
+03/11/2026 15:18:39 root                      ERROR   - GET /referentiels/indicateurs - FAILED [Status: 500] Error: current transaction is aborted, commands ignored until end of transaction block
+
+03/11/2026 15:18:39 root                      ERROR   - GET /referentiels/classifications - FAILED [Status: 500] Error: current transaction is aborted, commands ignored until end of transaction block
+
+03/11/2026 15:18:39 root                      INFO    - GET /analyses/evolution - END [Status: 404]
+03/11/2026 15:19:51 root                      INFO    - GET /referentiels/indicateurs - START
+03/11/2026 15:19:51 root                      ERROR   - GET /referentiels/indicateurs - FAILED [Status: 500] Error: current transaction is aborted, commands ignored until end of transaction block
+
+03/11/2026 15:19:51 root                      INFO    - GET /referentiels/classifications - START
+03/11/2026 15:19:51 root                      ERROR   - GET /referentiels/classifications - FAILED [Status: 500] Error: current transaction is aborted, commands ignored until end of transaction block
+
+03/11/2026 15:21:59 root                      INFO    - GET / - START
+03/11/2026 15:21:59 root                      INFO    - GET / - END [Status: 307]
+03/11/2026 15:25:01 root                      INFO    - --------------------------------------------------
+03/11/2026 15:25:01 root                      INFO    - Starting Webservice                           
+03/11/2026 15:25:01 root                      INFO    - --------------------------------------------------
+03/11/2026 15:25:01 root                      INFO    - Load environment variables: SUCCES
+03/11/2026 15:25:01 root                      INFO    - POSTGRES_HOST=postgresql-cnpg-507203-rw.user-vraveendiran
+03/11/2026 15:25:01 root                      INFO    - POSTGRES_PORT=5432
+03/11/2026 15:25:01 root                      INFO    - POSTGRES_DATABASE=defaultdb
+03/11/2026 15:25:01 root                      INFO    - POSTGRES_USER=user-vraveendiran
+03/11/2026 15:25:01 root                      INFO    - POSTGRES_PASSWORD=*******
+03/11/2026 15:25:01 root                      INFO    - POSTGRES_SCHEMA=project
+03/11/2026 15:25:01 root                      INFO    - UVICORN_HOST=0.0.0.0
+03/11/2026 15:25:01 root                      INFO    - UVICORN_PORT=5000
+03/11/2026 15:25:01 root                      INFO    - BACKEND_URL=http://localhost:5000
+03/11/2026 15:25:01 root                      INFO    - BACKEND_TIMEOUT=5
+03/11/2026 15:25:01 root                      INFO    - ELO_K_FACTOR=32
+03/11/2026 15:25:07 root                      INFO    - GET / - START
+03/11/2026 15:25:07 root                      INFO    - GET / - END [Status: 307]
+03/11/2026 15:25:07 root                      INFO    - GET /docs - START
+03/11/2026 15:25:07 root                      INFO    - GET /docs - END [Status: 200]
+03/11/2026 15:25:07 root                      INFO    - GET /openapi.json - START
+03/11/2026 15:25:07 root                      INFO    - GET /openapi.json - END [Status: 200]
+03/11/2026 15:25:12 root                      INFO    - GET /referentiels/indicateurs - START
+03/11/2026 15:25:12 root                      ERROR   - GET /referentiels/indicateurs - FAILED [Status: 500] Error: relation "indicateur" does not exist
+LINE 1: ...ndicateur, description, unite, source, actif FROM indicateur...
+                                                             ^
+
+03/11/2026 15:25:12 root                      INFO    - GET /referentiels/classifications - START
+03/11/2026 15:25:12 root                      ERROR   - GET /referentiels/classifications - FAILED [Status: 500] Error: current transaction is aborted, commands ignored until end of transaction block
+
+03/11/2026 15:26:21 root                      INFO    - --------------------------------------------------
+03/11/2026 15:26:21 root                      INFO    - Starting Webservice                           
+03/11/2026 15:26:21 root                      INFO    - --------------------------------------------------
+03/11/2026 15:26:21 root                      INFO    - Load environment variables: SUCCES
+03/11/2026 15:26:21 root                      INFO    - POSTGRES_HOST=postgresql-cnpg-507203-rw.user-vraveendiran
+03/11/2026 15:26:21 root                      INFO    - POSTGRES_PORT=5432
+03/11/2026 15:26:21 root                      INFO    - POSTGRES_DATABASE=defaultdb
+03/11/2026 15:26:21 root                      INFO    - POSTGRES_USER=user-vraveendiran
+03/11/2026 15:26:21 root                      INFO    - POSTGRES_PASSWORD=*******
+03/11/2026 15:26:21 root                      INFO    - POSTGRES_SCHEMA=project
+03/11/2026 15:26:21 root                      INFO    - UVICORN_HOST=0.0.0.0
+03/11/2026 15:26:21 root                      INFO    - UVICORN_PORT=5000
+03/11/2026 15:26:21 root                      INFO    - BACKEND_URL=http://localhost:5000
+03/11/2026 15:26:21 root                      INFO    - BACKEND_TIMEOUT=5
+03/11/2026 15:26:21 root                      INFO    - ELO_K_FACTOR=32
+03/11/2026 15:26:25 root                      INFO    - GET / - START
+03/11/2026 15:26:25 root                      INFO    - GET / - END [Status: 307]
+03/11/2026 15:26:26 root                      INFO    - GET /docs - START
+03/11/2026 15:26:26 root                      INFO    - GET /docs - END [Status: 200]
+03/11/2026 15:27:01 root                      INFO    - GET / - START
+03/11/2026 15:27:01 root                      INFO    - GET / - END [Status: 307]
+03/11/2026 15:27:02 root                      INFO    - GET /docs - START
+03/11/2026 15:27:02 root                      INFO    - GET /docs - END [Status: 200]
+03/11/2026 15:27:02 root                      INFO    - GET /openapi.json - START
+03/11/2026 15:27:02 root                      INFO    - GET /openapi.json - END [Status: 200]
+03/11/2026 15:27:13 root                      INFO    - GET /referentiels/indicateurs - START
+03/11/2026 15:27:13 root                      ERROR   - GET /referentiels/indicateurs - FAILED [Status: 500] Error: relation "indicateur" does not exist
+LINE 1: ...ndicateur, description, unite, source, actif FROM indicateur...
+                                                             ^
+
+03/11/2026 15:27:13 root                      INFO    - GET /referentiels/classifications - START
+03/11/2026 15:27:13 root                      ERROR   - GET /referentiels/classifications - FAILED [Status: 500] Error: current transaction is aborted, commands ignored until end of transaction block
+
+03/11/2026 15:27:13 root                      INFO    - GET /analyses/evolution - START
+03/11/2026 15:27:13 root                      INFO    - GET /analyses/evolution - END [Status: 404]
+03/11/2026 15:27:18 root                      INFO    - GET /referentiels/indicateurs - START
+03/11/2026 15:27:18 root                      ERROR   - GET /referentiels/indicateurs - FAILED [Status: 500] Error: current transaction is aborted, commands ignored until end of transaction block
+
+03/11/2026 15:27:18 root                      INFO    - GET /referentiels/classifications - START
+03/11/2026 15:27:18 root                      ERROR   - GET /referentiels/classifications - FAILED [Status: 500] Error: current transaction is aborted, commands ignored until end of transaction block
+
+03/11/2026 15:27:20 root                      INFO    - GET /referentiels/indicateurs - START
+03/11/2026 15:27:20 root                      ERROR   - GET /referentiels/indicateurs - FAILED [Status: 500] Error: current transaction is aborted, commands ignored until end of transaction block
+
+03/11/2026 15:27:20 root                      INFO    - GET /referentiels/classifications - START
+03/11/2026 15:27:20 root                      ERROR   - GET /referentiels/classifications - FAILED [Status: 500] Error: current transaction is aborted, commands ignored until end of transaction block
+
+03/11/2026 15:27:20 root                      INFO    - GET /analyses/evolution - START
+03/11/2026 15:27:20 root                      INFO    - GET /analyses/evolution - END [Status: 404]
+03/11/2026 15:27:22 root                      INFO    - GET /referentiels/indicateurs - START
+03/11/2026 15:27:22 root                      ERROR   - GET /referentiels/indicateurs - FAILED [Status: 500] Error: current transaction is aborted, commands ignored until end of transaction block
+
+03/11/2026 15:27:22 root                      INFO    - GET /referentiels/classifications - START
+03/11/2026 15:27:22 root                      ERROR   - GET /referentiels/classifications - FAILED [Status: 500] Error: current transaction is aborted, commands ignored until end of transaction block
+
+03/11/2026 15:27:22 root                      INFO    - GET /analyses/evolution - START
+03/11/2026 15:27:22 root                      INFO    - GET /analyses/evolution - END [Status: 404]
+03/11/2026 15:27:25 root                      INFO    - GET /referentiels/indicateurs - START
+03/11/2026 15:27:25 root                      ERROR   - GET /referentiels/indicateurs - FAILED [Status: 500] Error: current transaction is aborted, commands ignored until end of transaction block
+
+03/11/2026 15:27:25 root                      INFO    - GET /referentiels/classifications - START
+03/11/2026 15:27:25 root                      ERROR   - GET /referentiels/classifications - FAILED [Status: 500] Error: current transaction is aborted, commands ignored until end of transaction block
+
+03/11/2026 15:27:25 root                      INFO    - GET /analyses/evolution - START
+03/11/2026 15:27:25 root                      INFO    - GET /analyses/evolution - END [Status: 404]
+03/11/2026 15:27:28 root                      INFO    - GET /referentiels/indicateurs - START
+03/11/2026 15:27:28 root                      ERROR   - GET /referentiels/indicateurs - FAILED [Status: 500] Error: current transaction is aborted, commands ignored until end of transaction block
+
+03/11/2026 15:27:28 root                      INFO    - GET /referentiels/classifications - START
+03/11/2026 15:27:28 root                      ERROR   - GET /referentiels/classifications - FAILED [Status: 500] Error: current transaction is aborted, commands ignored until end of transaction block
+
+03/11/2026 15:27:30 root                      INFO    - GET /referentiels/indicateurs - START
+03/11/2026 15:27:30 root                      ERROR   - GET /referentiels/indicateurs - FAILED [Status: 500] Error: current transaction is aborted, commands ignored until end of transaction block
+
+03/11/2026 15:27:30 root                      INFO    - GET /referentiels/classifications - START
+03/11/2026 15:27:30 root                      ERROR   - GET /referentiels/classifications - FAILED [Status: 500] Error: current transaction is aborted, commands ignored until end of transaction block
+
+03/11/2026 15:27:30 root                      INFO    - GET /analyses/evolution - START
+03/11/2026 15:27:30 root                      INFO    - GET /analyses/evolution - END [Status: 404]
+03/11/2026 15:27:36 root                      INFO    - GET /referentiels/indicateurs - START
+03/11/2026 15:27:36 root                      ERROR   - GET /referentiels/indicateurs - FAILED [Status: 500] Error: current transaction is aborted, commands ignored until end of transaction block
+
+03/11/2026 15:27:36 root                      INFO    - GET /referentiels/classifications - START
+03/11/2026 15:27:36 root                      ERROR   - GET /referentiels/classifications - FAILED [Status: 500] Error: current transaction is aborted, commands ignored until end of transaction block
+
+03/11/2026 15:27:40 root                      INFO    - GET /referentiels/indicateurs - START
+03/11/2026 15:27:40 root                      ERROR   - GET /referentiels/indicateurs - FAILED [Status: 500] Error: current transaction is aborted, commands ignored until end of transaction block
+
+03/11/2026 15:27:40 root                      INFO    - GET /referentiels/classifications - START
+03/11/2026 15:27:40 root                      ERROR   - GET /referentiels/classifications - FAILED [Status: 500] Error: current transaction is aborted, commands ignored until end of transaction block
+
+03/11/2026 15:27:43 root                      INFO    - GET /referentiels/indicateurs - START
+03/11/2026 15:27:43 root                      ERROR   - GET /referentiels/indicateurs - FAILED [Status: 500] Error: current transaction is aborted, commands ignored until end of transaction block
+
+03/11/2026 15:27:43 root                      INFO    - GET /referentiels/classifications - START
+03/11/2026 15:27:43 root                      ERROR   - GET /referentiels/classifications - FAILED [Status: 500] Error: current transaction is aborted, commands ignored until end of transaction block
+
+03/11/2026 15:27:45 root                      INFO    - GET /referentiels/indicateurs - START
+03/11/2026 15:27:45 root                      ERROR   - GET /referentiels/indicateurs - FAILED [Status: 500] Error: current transaction is aborted, commands ignored until end of transaction block
+
+03/11/2026 15:27:46 root                      INFO    - GET /referentiels/classifications - START
+03/11/2026 15:27:46 root                      ERROR   - GET /referentiels/classifications - FAILED [Status: 500] Error: current transaction is aborted, commands ignored until end of transaction block
+
+03/11/2026 15:27:48 root                      INFO    - GET /referentiels/indicateurs - START
+03/11/2026 15:27:48 root                      ERROR   - GET /referentiels/indicateurs - FAILED [Status: 500] Error: current transaction is aborted, commands ignored until end of transaction block
+
+03/11/2026 15:27:48 root                      INFO    - GET /referentiels/classifications - START
+03/11/2026 15:27:48 root                      ERROR   - GET /referentiels/classifications - FAILED [Status: 500] Error: current transaction is aborted, commands ignored until end of transaction block
+
+03/11/2026 15:27:49 root                      INFO    - GET /referentiels/indicateurs - START
+03/11/2026 15:27:49 root                      ERROR   - GET /referentiels/indicateurs - FAILED [Status: 500] Error: current transaction is aborted, commands ignored until end of transaction block
+
+03/11/2026 15:27:49 root                      INFO    - GET /referentiels/classifications - START
+03/11/2026 15:27:49 root                      ERROR   - GET /referentiels/classifications - FAILED [Status: 500] Error: current transaction is aborted, commands ignored until end of transaction block
+
+03/11/2026 15:27:52 root                      INFO    - GET /referentiels/indicateurs - START
+03/11/2026 15:27:52 root                      ERROR   - GET /referentiels/indicateurs - FAILED [Status: 500] Error: current transaction is aborted, commands ignored until end of transaction block
+
+03/11/2026 15:27:52 root                      INFO    - GET /referentiels/classifications - START
+03/11/2026 15:27:52 root                      ERROR   - GET /referentiels/classifications - FAILED [Status: 500] Error: current transaction is aborted, commands ignored until end of transaction block
+
+03/11/2026 15:27:54 root                      INFO    - GET /referentiels/indicateurs - START
+03/11/2026 15:27:54 root                      ERROR   - GET /referentiels/indicateurs - FAILED [Status: 500] Error: current transaction is aborted, commands ignored until end of transaction block
+
+03/11/2026 15:27:54 root                      INFO    - GET /referentiels/classifications - START
+03/11/2026 15:27:54 root                      ERROR   - GET /referentiels/classifications - FAILED [Status: 500] Error: current transaction is aborted, commands ignored until end of transaction block
+
+03/11/2026 15:27:55 root                      INFO    - GET /referentiels/indicateurs - START
+03/11/2026 15:27:55 root                      ERROR   - GET /referentiels/indicateurs - FAILED [Status: 500] Error: current transaction is aborted, commands ignored until end of transaction block
+
+03/11/2026 15:27:55 root                      INFO    - GET /referentiels/classifications - START
+03/11/2026 15:27:55 root                      ERROR   - GET /referentiels/classifications - FAILED [Status: 500] Error: current transaction is aborted, commands ignored until end of transaction block
+
+03/11/2026 15:27:57 root                      INFO    - GET /referentiels/indicateurs - START
+03/11/2026 15:27:57 root                      ERROR   - GET /referentiels/indicateurs - FAILED [Status: 500] Error: current transaction is aborted, commands ignored until end of transaction block
+
+03/11/2026 15:27:57 root                      INFO    - GET /referentiels/classifications - START
+03/11/2026 15:27:57 root                      ERROR   - GET /referentiels/classifications - FAILED [Status: 500] Error: current transaction is aborted, commands ignored until end of transaction block
+
+03/11/2026 15:27:58 root                      INFO    - GET /referentiels/indicateurs - START
+03/11/2026 15:27:58 root                      ERROR   - GET /referentiels/indicateurs - FAILED [Status: 500] Error: current transaction is aborted, commands ignored until end of transaction block
+
+03/11/2026 15:27:58 root                      INFO    - GET /referentiels/classifications - START
+03/11/2026 15:27:58 root                      ERROR   - GET /referentiels/classifications - FAILED [Status: 500] Error: current transaction is aborted, commands ignored until end of transaction block
+
+03/11/2026 15:28:00 root                      INFO    - GET /referentiels/indicateurs - START
+03/11/2026 15:28:00 root                      ERROR   - GET /referentiels/indicateurs - FAILED [Status: 500] Error: current transaction is aborted, commands ignored until end of transaction block
+
+03/11/2026 15:28:00 root                      INFO    - GET /referentiels/classifications - START
+03/11/2026 15:28:00 root                      ERROR   - GET /referentiels/classifications - FAILED [Status: 500] Error: current transaction is aborted, commands ignored until end of transaction block
+
+03/11/2026 15:28:06 root                      INFO    - GET /referentiels/indicateurs - START
+03/11/2026 15:28:06 root                      ERROR   - GET /referentiels/indicateurs - FAILED [Status: 500] Error: current transaction is aborted, commands ignored until end of transaction block
+
+03/11/2026 15:28:06 root                      INFO    - GET /referentiels/classifications - START
+03/11/2026 15:28:06 root                      ERROR   - GET /referentiels/classifications - FAILED [Status: 500] Error: current transaction is aborted, commands ignored until end of transaction block
+
+03/11/2026 15:28:08 root                      INFO    - GET /referentiels/indicateurs - START
+03/11/2026 15:28:08 root                      ERROR   - GET /referentiels/indicateurs - FAILED [Status: 500] Error: current transaction is aborted, commands ignored until end of transaction block
+
+03/11/2026 15:28:08 root                      INFO    - GET /referentiels/classifications - START
+03/11/2026 15:28:08 root                      ERROR   - GET /referentiels/classifications - FAILED [Status: 500] Error: current transaction is aborted, commands ignored until end of transaction block
+
+03/11/2026 15:28:13 root                      INFO    - GET /referentiels/indicateurs - START
+03/11/2026 15:28:13 root                      ERROR   - GET /referentiels/indicateurs - FAILED [Status: 500] Error: current transaction is aborted, commands ignored until end of transaction block
+
+03/11/2026 15:28:13 root                      INFO    - GET /referentiels/classifications - START
+03/11/2026 15:28:13 root                      ERROR   - GET /referentiels/classifications - FAILED [Status: 500] Error: current transaction is aborted, commands ignored until end of transaction block
+
+03/11/2026 15:28:13 root                      INFO    - GET /analyses/evolution - START
+03/11/2026 15:28:13 root                      INFO    - GET /analyses/evolution - END [Status: 404]
+03/11/2026 15:31:50 root                      INFO    - POST /auth/inscription - START
+03/11/2026 15:31:50 root                      ERROR   - POST /auth/inscription - FAILED [Status: 500] Error: Le mot de passe doit être différent du nom d'utilisateur.
+03/11/2026 15:31:52 root                      INFO    - POST /auth/inscription - START
+03/11/2026 15:31:52 root                      ERROR   - POST /auth/inscription - FAILED [Status: 500] Error: Le mot de passe doit être différent du nom d'utilisateur.
+03/11/2026 15:31:52 root                      INFO    - POST /auth/inscription - START
+03/11/2026 15:31:52 root                      ERROR   - POST /auth/inscription - FAILED [Status: 500] Error: Le mot de passe doit être différent du nom d'utilisateur.
+03/11/2026 15:31:53 root                      INFO    - POST /auth/inscription - START
+03/11/2026 15:31:53 root                      ERROR   - POST /auth/inscription - FAILED [Status: 500] Error: Le mot de passe doit être différent du nom d'utilisateur.
+03/11/2026 15:31:53 root                      INFO    - POST /auth/inscription - START
+03/11/2026 15:31:53 root                      ERROR   - POST /auth/inscription - FAILED [Status: 500] Error: Le mot de passe doit être différent du nom d'utilisateur.
+03/11/2026 15:34:49 root                      INFO    - POST /auth/inscription - START
+03/11/2026 15:34:49 root                      ERROR   - POST /auth/inscription - FAILED [Status: 500] Error: current transaction is aborted, commands ignored until end of transaction block
+
+03/11/2026 15:34:51 root                      INFO    - POST /auth/inscription - START
+03/11/2026 15:34:51 root                      ERROR   - POST /auth/inscription - FAILED [Status: 500] Error: current transaction is aborted, commands ignored until end of transaction block
+
+03/11/2026 15:35:38 root                      INFO    - GET / - START
+03/11/2026 15:35:38 root                      INFO    - GET / - END [Status: 307]
+03/11/2026 15:35:38 root                      INFO    - GET /docs - START
+03/11/2026 15:35:38 root                      INFO    - GET /docs - END [Status: 200]
+03/11/2026 15:35:38 root                      INFO    - GET /openapi.json - START
+03/11/2026 15:35:38 root                      INFO    - GET /openapi.json - END [Status: 200]
+03/11/2026 15:43:03 root                      INFO    - GET /referentiels/indicateurs - START
+03/11/2026 15:43:03 root                      ERROR   - GET /referentiels/indicateurs - FAILED [Status: 500] Error: current transaction is aborted, commands ignored until end of transaction block
+
+03/11/2026 15:43:03 root                      INFO    - GET /referentiels/classifications - START
+03/11/2026 15:43:03 root                      ERROR   - GET /referentiels/classifications - FAILED [Status: 500] Error: current transaction is aborted, commands ignored until end of transaction block
+
+03/11/2026 15:43:03 root                      INFO    - GET /analyses/evolution - START
+03/11/2026 15:43:03 root                      INFO    - GET /analyses/evolution - END [Status: 404]
+03/11/2026 15:43:38 root                      INFO    - GET /referentiels/indicateurs - START
+03/11/2026 15:43:38 root                      ERROR   - GET /referentiels/indicateurs - FAILED [Status: 500] Error: current transaction is aborted, commands ignored until end of transaction block
+
+03/11/2026 15:43:38 root                      INFO    - GET /referentiels/classifications - START
+03/11/2026 15:43:38 root                      ERROR   - GET /referentiels/classifications - FAILED [Status: 500] Error: current transaction is aborted, commands ignored until end of transaction block
+
+03/11/2026 15:43:41 root                      INFO    - GET /referentiels/indicateurs - START
+03/11/2026 15:43:41 root                      ERROR   - GET /referentiels/indicateurs - FAILED [Status: 500] Error: current transaction is aborted, commands ignored until end of transaction block
+
+03/11/2026 15:43:41 root                      INFO    - GET /referentiels/classifications - START
+03/11/2026 15:43:41 root                      ERROR   - GET /referentiels/classifications - FAILED [Status: 500] Error: current transaction is aborted, commands ignored until end of transaction block
+
+03/11/2026 15:43:46 root                      INFO    - GET /referentiels/indicateurs - START
+03/11/2026 15:43:46 root                      ERROR   - GET /referentiels/indicateurs - FAILED [Status: 500] Error: current transaction is aborted, commands ignored until end of transaction block
+
+03/11/2026 15:43:46 root                      INFO    - GET /referentiels/classifications - START
+03/11/2026 15:43:46 root                      ERROR   - GET /referentiels/classifications - FAILED [Status: 500] Error: current transaction is aborted, commands ignored until end of transaction block
+
+03/11/2026 15:43:50 root                      INFO    - GET /referentiels/indicateurs - START
+03/11/2026 15:43:50 root                      ERROR   - GET /referentiels/indicateurs - FAILED [Status: 500] Error: current transaction is aborted, commands ignored until end of transaction block
+
+03/11/2026 15:43:50 root                      INFO    - GET /referentiels/classifications - START
+03/11/2026 15:43:50 root                      ERROR   - GET /referentiels/classifications - FAILED [Status: 500] Error: current transaction is aborted, commands ignored until end of transaction block
+
+03/11/2026 15:43:54 root                      INFO    - GET /referentiels/indicateurs - START
+03/11/2026 15:43:54 root                      ERROR   - GET /referentiels/indicateurs - FAILED [Status: 500] Error: current transaction is aborted, commands ignored until end of transaction block
+
+03/11/2026 15:43:54 root                      INFO    - GET /referentiels/classifications - START
+03/11/2026 15:43:54 root                      ERROR   - GET /referentiels/classifications - FAILED [Status: 500] Error: current transaction is aborted, commands ignored until end of transaction block
+
+03/11/2026 15:44:00 root                      INFO    - GET /referentiels/indicateurs - START
+03/11/2026 15:44:00 root                      ERROR   - GET /referentiels/indicateurs - FAILED [Status: 500] Error: current transaction is aborted, commands ignored until end of transaction block
+
+03/11/2026 15:44:00 root                      INFO    - GET /referentiels/classifications - START
+03/11/2026 15:44:00 root                      ERROR   - GET /referentiels/classifications - FAILED [Status: 500] Error: current transaction is aborted, commands ignored until end of transaction block
+
+03/11/2026 15:44:03 root                      INFO    - GET /referentiels/indicateurs - START
+03/11/2026 15:44:03 root                      ERROR   - GET /referentiels/indicateurs - FAILED [Status: 500] Error: current transaction is aborted, commands ignored until end of transaction block
+
+03/11/2026 15:44:03 root                      INFO    - GET /referentiels/classifications - START
+03/11/2026 15:44:03 root                      ERROR   - GET /referentiels/classifications - FAILED [Status: 500] Error: current transaction is aborted, commands ignored until end of transaction block
+
+03/11/2026 15:44:05 root                      INFO    - GET /referentiels/indicateurs - START
+03/11/2026 15:44:05 root                      ERROR   - GET /referentiels/indicateurs - FAILED [Status: 500] Error: current transaction is aborted, commands ignored until end of transaction block
+
+03/11/2026 15:44:05 root                      INFO    - GET /referentiels/classifications - START
+03/11/2026 15:44:05 root                      ERROR   - GET /referentiels/classifications - FAILED [Status: 500] Error: current transaction is aborted, commands ignored until end of transaction block
+
+03/11/2026 15:44:08 root                      INFO    - GET /referentiels/indicateurs - START
+03/11/2026 15:44:08 root                      ERROR   - GET /referentiels/indicateurs - FAILED [Status: 500] Error: current transaction is aborted, commands ignored until end of transaction block
+
+03/11/2026 15:44:08 root                      INFO    - GET /referentiels/classifications - START
+03/11/2026 15:44:08 root                      ERROR   - GET /referentiels/classifications - FAILED [Status: 500] Error: current transaction is aborted, commands ignored until end of transaction block
+
+03/11/2026 15:44:10 root                      INFO    - GET /referentiels/indicateurs - START
+03/11/2026 15:44:10 root                      ERROR   - GET /referentiels/indicateurs - FAILED [Status: 500] Error: current transaction is aborted, commands ignored until end of transaction block
+
+03/11/2026 15:44:10 root                      INFO    - GET /referentiels/classifications - START
+03/11/2026 15:44:10 root                      ERROR   - GET /referentiels/classifications - FAILED [Status: 500] Error: current transaction is aborted, commands ignored until end of transaction block
+
+03/11/2026 15:44:13 root                      INFO    - GET /referentiels/indicateurs - START
+03/11/2026 15:44:13 root                      ERROR   - GET /referentiels/indicateurs - FAILED [Status: 500] Error: current transaction is aborted, commands ignored until end of transaction block
+
+03/11/2026 15:44:13 root                      INFO    - GET /referentiels/classifications - START
+03/11/2026 15:44:13 root                      ERROR   - GET /referentiels/classifications - FAILED [Status: 500] Error: current transaction is aborted, commands ignored until end of transaction block
+
+03/11/2026 15:44:15 root                      INFO    - GET /referentiels/indicateurs - START
+03/11/2026 15:44:15 root                      ERROR   - GET /referentiels/indicateurs - FAILED [Status: 500] Error: current transaction is aborted, commands ignored until end of transaction block
+
+03/11/2026 15:44:15 root                      INFO    - GET /referentiels/classifications - START
+03/11/2026 15:44:15 root                      ERROR   - GET /referentiels/classifications - FAILED [Status: 500] Error: current transaction is aborted, commands ignored until end of transaction block
+
+03/11/2026 15:44:20 root                      INFO    - GET /referentiels/indicateurs - START
+03/11/2026 15:44:20 root                      ERROR   - GET /referentiels/indicateurs - FAILED [Status: 500] Error: current transaction is aborted, commands ignored until end of transaction block
+
+03/11/2026 15:44:20 root                      INFO    - GET /referentiels/classifications - START
+03/11/2026 15:44:20 root                      ERROR   - GET /referentiels/classifications - FAILED [Status: 500] Error: current transaction is aborted, commands ignored until end of transaction block
+
+03/11/2026 15:49:46 root                      INFO    - --------------------------------------------------
+03/11/2026 15:49:46 root                      INFO    - Starting Webservice                           
+03/11/2026 15:49:46 root                      INFO    - --------------------------------------------------
+03/11/2026 15:49:46 root                      INFO    - Load environment variables: SUCCES
+03/11/2026 15:49:46 root                      INFO    - POSTGRES_HOST=postgresql-cnpg-507203-rw.user-vraveendiran
+03/11/2026 15:49:46 root                      INFO    - POSTGRES_PORT=5432
+03/11/2026 15:49:46 root                      INFO    - POSTGRES_DATABASE=defaultdb
+03/11/2026 15:49:46 root                      INFO    - POSTGRES_USER=user-vraveendiran
+03/11/2026 15:49:46 root                      INFO    - POSTGRES_PASSWORD=*******
+03/11/2026 15:49:46 root                      INFO    - POSTGRES_SCHEMA=project
+03/11/2026 15:49:46 root                      INFO    - UVICORN_HOST=0.0.0.0
+03/11/2026 15:49:46 root                      INFO    - UVICORN_PORT=5000
+03/11/2026 15:49:46 root                      INFO    - BACKEND_URL=http://localhost:5000
+03/11/2026 15:49:46 root                      INFO    - BACKEND_TIMEOUT=5
+03/11/2026 15:49:46 root                      INFO    - ELO_K_FACTOR=32
+03/11/2026 15:49:50 root                      INFO    - GET / - START
+03/11/2026 15:49:50 root                      INFO    - GET / - END [Status: 307]
+03/11/2026 15:49:50 root                      INFO    - GET /docs - START
+03/11/2026 15:49:50 root                      INFO    - GET /docs - END [Status: 200]
+03/11/2026 15:49:56 root                      INFO    - GET / - START
+03/11/2026 15:49:56 root                      INFO    - GET / - END [Status: 307]
+03/11/2026 15:49:56 root                      INFO    - GET /docs - START
+03/11/2026 15:49:56 root                      INFO    - GET /docs - END [Status: 200]
+03/11/2026 15:49:56 root                      INFO    - GET /openapi.json - START
+03/11/2026 15:49:57 root                      INFO    - GET /openapi.json - END [Status: 200]
+03/11/2026 15:51:06 root                      INFO    - POST /auth/inscription - START
+03/11/2026 15:51:06 root                      ERROR   - POST /auth/inscription - FAILED [Status: 500] Error: relation "utilisateur" does not exist
+LINE 3:                 FROM utilisateur WHERE nom_utilisateur = 'a1...
+                             ^
+
+03/11/2026 15:51:08 root                      INFO    - POST /auth/inscription - START
+03/11/2026 15:51:08 root                      ERROR   - POST /auth/inscription - FAILED [Status: 500] Error: current transaction is aborted, commands ignored until end of transaction block
+
+03/11/2026 15:51:08 root                      INFO    - POST /auth/inscription - START
+03/11/2026 15:51:08 root                      ERROR   - POST /auth/inscription - FAILED [Status: 500] Error: current transaction is aborted, commands ignored until end of transaction block
+
+03/11/2026 15:51:10 root                      INFO    - POST /auth/inscription - START
+03/11/2026 15:51:10 root                      ERROR   - POST /auth/inscription - FAILED [Status: 500] Error: current transaction is aborted, commands ignored until end of transaction block
+
+03/11/2026 15:51:10 root                      INFO    - POST /auth/inscription - START
+03/11/2026 15:51:10 root                      ERROR   - POST /auth/inscription - FAILED [Status: 500] Error: current transaction is aborted, commands ignored until end of transaction block
+
+03/11/2026 15:51:11 root                      INFO    - POST /auth/inscription - START
+03/11/2026 15:51:11 root                      ERROR   - POST /auth/inscription - FAILED [Status: 500] Error: current transaction is aborted, commands ignored until end of transaction block
+
+03/11/2026 15:51:11 root                      INFO    - POST /auth/inscription - START
+03/11/2026 15:51:11 root                      ERROR   - POST /auth/inscription - FAILED [Status: 500] Error: current transaction is aborted, commands ignored until end of transaction block
+
+03/11/2026 15:52:56 __main__                  INFO    - Webservice stopped
+03/11/2026 15:53:15 root                      INFO    - --------------------------------------------------
+03/11/2026 15:53:15 root                      INFO    - Starting Webservice                           
+03/11/2026 15:53:15 root                      INFO    - --------------------------------------------------
+03/11/2026 15:53:15 root                      INFO    - Load environment variables: SUCCES
+03/11/2026 15:53:15 root                      INFO    - POSTGRES_HOST=postgresql-cnpg-507203-rw.user-vraveendiran
+03/11/2026 15:53:15 root                      INFO    - POSTGRES_PORT=5432
+03/11/2026 15:53:15 root                      INFO    - POSTGRES_DATABASE=defaultdb
+03/11/2026 15:53:15 root                      INFO    - POSTGRES_USER=user-vraveendiran
+03/11/2026 15:53:15 root                      INFO    - POSTGRES_PASSWORD=*******
+03/11/2026 15:53:15 root                      INFO    - POSTGRES_SCHEMA=project
+03/11/2026 15:53:15 root                      INFO    - UVICORN_HOST=0.0.0.0
+03/11/2026 15:53:15 root                      INFO    - UVICORN_PORT=5000
+03/11/2026 15:53:15 root                      INFO    - BACKEND_URL=http://localhost:5000
+03/11/2026 15:53:15 root                      INFO    - BACKEND_TIMEOUT=5
+03/11/2026 15:53:15 root                      INFO    - ELO_K_FACTOR=32
+03/11/2026 15:53:22 root                      INFO    - GET / - START
+03/11/2026 15:53:22 root                      INFO    - GET / - END [Status: 307]
+03/11/2026 15:53:22 root                      INFO    - GET /docs - START
+03/11/2026 15:53:22 root                      INFO    - GET /docs - END [Status: 200]
+03/11/2026 15:53:23 root                      INFO    - GET /openapi.json - START
+03/11/2026 15:53:23 root                      INFO    - GET /openapi.json - END [Status: 200]
+03/11/2026 15:53:35 root                      INFO    - POST /auth/inscription - START
+03/11/2026 15:53:35 root                      ERROR   - POST /auth/inscription - FAILED [Status: 500] Error: relation "utilisateur" does not exist
+LINE 3:                 FROM utilisateur WHERE nom_utilisateur = 'a1...
+                             ^
+
+03/11/2026 15:53:38 root                      INFO    - POST /auth/inscription - START
+03/11/2026 15:53:38 root                      ERROR   - POST /auth/inscription - FAILED [Status: 500] Error: current transaction is aborted, commands ignored until end of transaction block
+
+03/11/2026 15:53:47 __main__                  INFO    - Webservice stopped
+03/11/2026 15:54:04 root                      INFO    - --------------------------------------------------
+03/11/2026 15:54:04 root                      INFO    - Starting Webservice                           
+03/11/2026 15:54:04 root                      INFO    - --------------------------------------------------
+03/11/2026 15:54:04 root                      INFO    - Load environment variables: SUCCES
+03/11/2026 15:54:04 root                      INFO    - POSTGRES_HOST=postgresql-cnpg-507203-rw.user-vraveendiran
+03/11/2026 15:54:04 root                      INFO    - POSTGRES_PORT=5432
+03/11/2026 15:54:04 root                      INFO    - POSTGRES_DATABASE=defaultdb
+03/11/2026 15:54:04 root                      INFO    - POSTGRES_USER=user-vraveendiran
+03/11/2026 15:54:04 root                      INFO    - POSTGRES_PASSWORD=*******
+03/11/2026 15:54:04 root                      INFO    - POSTGRES_SCHEMA=project
+03/11/2026 15:54:04 root                      INFO    - UVICORN_HOST=0.0.0.0
+03/11/2026 15:54:04 root                      INFO    - UVICORN_PORT=5000
+03/11/2026 15:54:04 root                      INFO    - BACKEND_URL=http://localhost:5000
+03/11/2026 15:54:04 root                      INFO    - BACKEND_TIMEOUT=5
+03/11/2026 15:54:04 root                      INFO    - ELO_K_FACTOR=32
+03/11/2026 15:54:19 root                      INFO    - GET / - START
+03/11/2026 15:54:19 root                      INFO    - GET / - END [Status: 307]
+03/11/2026 15:54:19 root                      INFO    - GET /docs - START
+03/11/2026 15:54:19 root                      INFO    - GET /docs - END [Status: 200]
+03/11/2026 15:54:19 root                      INFO    - GET /openapi.json - START
+03/11/2026 15:54:19 root                      INFO    - GET /openapi.json - END [Status: 200]
+03/11/2026 15:54:42 root                      INFO    - POST /auth/inscription - START
+03/11/2026 15:54:42 root                      ERROR   - POST /auth/inscription - FAILED [Status: 500] Error: relation "utilisateur" does not exist
+LINE 3:                 FROM utilisateur WHERE nom_utilisateur = 'a1...
+                             ^
+
+03/11/2026 15:54:44 root                      INFO    - POST /auth/inscription - START
+03/11/2026 15:54:44 root                      ERROR   - POST /auth/inscription - FAILED [Status: 500] Error: current transaction is aborted, commands ignored until end of transaction block
+
+03/11/2026 15:55:29 __main__                  INFO    - Webservice stopped
+03/11/2026 16:03:20 root                      INFO    - --------------------------------------------------
+03/11/2026 16:03:20 root                      INFO    - Starting Webservice                           
+03/11/2026 16:03:20 root                      INFO    - --------------------------------------------------
+03/11/2026 16:03:20 root                      INFO    - Load environment variables: SUCCES
+03/11/2026 16:03:20 root                      INFO    - POSTGRES_HOST=postgresql-cnpg-507203-rw.user-vraveendiran
+03/11/2026 16:03:20 root                      INFO    - POSTGRES_PORT=5432
+03/11/2026 16:03:20 root                      INFO    - POSTGRES_DATABASE=defaultdb
+03/11/2026 16:03:20 root                      INFO    - POSTGRES_USER=user-vraveendiran
+03/11/2026 16:03:20 root                      INFO    - POSTGRES_PASSWORD=*******
+03/11/2026 16:03:20 root                      INFO    - POSTGRES_SCHEMA=project
+03/11/2026 16:03:20 root                      INFO    - UVICORN_HOST=0.0.0.0
+03/11/2026 16:03:20 root                      INFO    - UVICORN_PORT=5000
+03/11/2026 16:03:20 root                      INFO    - BACKEND_URL=http://localhost:5000
+03/11/2026 16:03:20 root                      INFO    - BACKEND_TIMEOUT=5
+03/11/2026 16:03:20 root                      INFO    - ELO_K_FACTOR=32
+03/11/2026 16:03:38 root                      INFO    - GET / - START
+03/11/2026 16:03:38 root                      INFO    - GET / - END [Status: 307]
+03/11/2026 16:03:38 root                      INFO    - GET /docs - START
+03/11/2026 16:03:38 root                      INFO    - GET /docs - END [Status: 200]
+03/11/2026 16:03:38 root                      INFO    - GET /openapi.json - START
+03/11/2026 16:03:38 root                      INFO    - GET /openapi.json - END [Status: 200]
+03/11/2026 16:04:07 root                      INFO    - POST /auth/inscription - START
+03/11/2026 16:04:07 root                      INFO    - POST /auth/inscription - END [Status: 500]
+03/11/2026 16:07:01 __main__                  INFO    - Webservice stopped
+>>>>>>> 850316810f157a1912ecc0249eb5987366fd9ef2
