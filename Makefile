@@ -2,32 +2,48 @@
 # LaborScope - Makefile d'orchestration du projet
 # =====================================================================
 # Cibles principales :
-#   make init      -> initialise TOUT le projet (deps + base de donnees)
+#   make init      -> initialise TOUT le projet (deps + base + 1er import)
 #   make run-back  -> lance l'API backend (FastAPI)
 #   make run-front -> lance le frontend (Streamlit)
 #   make help      -> liste toutes les cibles disponibles
 #
+# La base PostgreSQL est utilisee EN LOCAL (psql direct), pas via Docker.
+# Les parametres de connexion sont lus depuis le fichier .env.
+# Docker reste disponible en option (cibles up / down / db-docker / clean).
+#
 # Compatible cmd.exe / PowerShell / Git Bash : aucune recette n'utilise
-# de boucle ou de pipe shell, pour ne pas dependre de /bin/bash.
+# de boucle ou de pipe shell. psql est appele via une URI de connexion
+# (pas de prefixe PGPASSWORD=), ce qui fonctionne dans tous les shells.
 # =====================================================================
 
-# --- Parametres PostgreSQL (alignes sur docker-compose.yml) ----------
-PG_SERVICE := postgres
-PG_USER    := user
-PG_DB      := defaultdb
-PG_SCHEMA  := project
+# --- Parametres PostgreSQL (lus depuis .env, avec valeurs par defaut) -
+-include .env
 
-# Commandes de base
+POSTGRES_HOST     ?= localhost
+POSTGRES_PORT     ?= 5432
+POSTGRES_USER     ?= user
+POSTGRES_PASSWORD ?= password
+POSTGRES_DATABASE ?= defaultdb
+POSTGRES_SCHEMA   ?= project
+
+# URI de connexion complete (le mot de passe est inclus : pas besoin de
+# positionner PGPASSWORD, ce qui evite les problemes inter-shell).
+PG_URI := postgresql://$(POSTGRES_USER):$(POSTGRES_PASSWORD)@$(POSTGRES_HOST):$(POSTGRES_PORT)/$(POSTGRES_DATABASE)
+
+# Meme URI avec le search_path positionne des l'ouverture de session
+# (utile pour une console interactive). Les caracteres sont encodes :
+#   %20 = espace, %3D = '='  ->  options=-c search_path=<schema>
+PG_URI_SCHEMA := $(PG_URI)?options=-c%20search_path%3D$(POSTGRES_SCHEMA)
+
+# psql local, arret immediat a la premiere erreur SQL.
+PSQL := psql "$(PG_URI)" -v ON_ERROR_STOP=1
+
+# Positionne le search_path sur le schema applicatif. -c et -f s'executent
+# dans la MEME session : le SET persiste donc pour le fichier charge ensuite.
+SET_SCHEMA := -c "SET search_path TO $(POSTGRES_SCHEMA)"
+
+# Docker (uniquement pour la pile complete, en option).
 COMPOSE := docker compose
-
-# psql dans le conteneur, arret immediat a la premiere erreur SQL
-PSQL := $(COMPOSE) exec -T $(PG_SERVICE) psql -v ON_ERROR_STOP=1 -U $(PG_USER) -d $(PG_DB)
-
-# psql avec le search_path positionne sur le schema applicatif.
-# PGOPTIONS place search_path des l'ouverture de session (sans espace
-# pour ne pas casser l'argument -e de docker compose exec).
-PSQL_SCHEMA := $(COMPOSE) exec -T -e PGOPTIONS=--search_path=$(PG_SCHEMA) $(PG_SERVICE) \
-	psql -v ON_ERROR_STOP=1 -U $(PG_USER) -d $(PG_DB)
 
 .DEFAULT_GOAL := help
 
@@ -35,29 +51,32 @@ PSQL_SCHEMA := $(COMPOSE) exec -T -e PGOPTIONS=--search_path=$(PG_SCHEMA) $(PG_S
 .PHONY: help
 help: ## Affiche cette aide
 	@echo LaborScope - cibles disponibles :
-	@echo   make init          Initialise tout le projet : deps + base de donnees
+	@echo   make init          Initialise tout : deps + base + 1er import
 	@echo   make install       Installe les dependances backend + frontend
 	@echo   make install-back  Installe les dependances du backend
 	@echo   make install-front Installe les dependances du frontend
-	@echo   make db-up         Demarre PostgreSQL et attend qu'il soit pret
-	@echo   make db-init       Cree le schema, les tables et peuple les referentiels
-	@echo   make db-reset      Reinitialise la base de donnees
-	@echo   make db-shell      Ouvre une console psql dans le conteneur
+	@echo   make db-push       Cree le schema et les tables (init_db.sql)
+	@echo   make db-load       Charge les referentiels (pop_referentiels.sql)
+	@echo   make db-import     Importe les premieres donnees (collecte ILOSTAT)
+	@echo   make db-init       Enchaine db-push + db-load (structure + referentiels)
+	@echo   make db-reset      Reinitialise la base (db-init)
+	@echo   make db-shell      Ouvre une console psql locale
 	@echo   make run-back      Lance l'API backend FastAPI/uvicorn
 	@echo   make run-front     Lance le frontend Streamlit
-	@echo   make up            Demarre toute la pile via Docker
-	@echo   make down          Arrete tous les conteneurs
+	@echo   make up            (option Docker) Demarre toute la pile
+	@echo   make down          (option Docker) Arrete tous les conteneurs
+	@echo   make db-docker     (option Docker) Demarre uniquement PostgreSQL
 	@echo   make test          Lance tous les tests du backend
 	@echo   make test-collecte Lance uniquement les tests de la collecte
 	@echo   make cov-collecte  Couverture des modules de collecte
 	@echo   make lint          Verifie le style du code
-	@echo   make clean         Supprime les conteneurs et le volume PostgreSQL
+	@echo   make clean         (option Docker) Supprime conteneurs et volume
 
 # ---------------------------------------------------------------------
 # Initialisation complete du projet
 # ---------------------------------------------------------------------
 .PHONY: init
-init: install db-up db-init ## Initialise tout le projet (dependances + base de donnees)
+init: install db-init db-import ## Initialise tout (deps + base + premier import)
 	@echo.
 	@echo Projet initialise.
 	@echo   Lancez l'API  : make run-back
@@ -78,30 +97,37 @@ install-front: ## Installe les dependances du frontend (uv)
 	uv sync --project frontend
 
 # ---------------------------------------------------------------------
-# Base de donnees
+# Base de donnees (PostgreSQL local via psql)
 # ---------------------------------------------------------------------
-.PHONY: db-up
-db-up: ## Demarre PostgreSQL et attend qu'il soit pret (healthcheck)
-	@echo Demarrage de PostgreSQL...
-	$(COMPOSE) up -d --wait $(PG_SERVICE)
-	@echo PostgreSQL est pret.
+.PHONY: db-push
+db-push: ## Cree le schema applicatif et les tables (push de init_db.sql)
+	@echo Creation du schema $(POSTGRES_SCHEMA)...
+	$(PSQL) -c "CREATE SCHEMA IF NOT EXISTS $(POSTGRES_SCHEMA)"
+	@echo Creation des tables depuis data/init_db.sql...
+	$(PSQL) $(SET_SCHEMA) -f data/init_db.sql
+	@echo Structure de la base en place - schema $(POSTGRES_SCHEMA).
+
+.PHONY: db-load
+db-load: ## Charge les referentiels (pays, indicateurs, classifications)
+	@echo Chargement des referentiels depuis data/pop_referentiels.sql...
+	$(PSQL) $(SET_SCHEMA) -f data/pop_referentiels.sql
+	@echo Referentiels charges.
+
+.PHONY: db-import
+db-import: ## Importe les premieres donnees via la collecte ILOSTAT
+	@echo Import initial des observations (collecte ILOSTAT)...
+	uv run --project backend python backend/src/service/collecte_service.py
+	@echo Import initial termine.
 
 .PHONY: db-init
-db-init: ## Cree le schema, les tables et peuple les referentiels
-	@echo Creation du schema applicatif...
-	$(PSQL) -c "CREATE SCHEMA IF NOT EXISTS $(PG_SCHEMA)"
-	@echo Creation des tables depuis init_db.sql...
-	$(PSQL_SCHEMA) -f /data/init_db.sql
-	@echo Peuplement des referentiels depuis pop_referentiels.sql...
-	$(PSQL_SCHEMA) -f /data/pop_referentiels.sql
-	@echo Base de donnees initialisee - schema $(PG_SCHEMA).
+db-init: db-push db-load ## Structure + referentiels (push + load)
 
 .PHONY: db-reset
-db-reset: db-up db-init ## Reinitialise la base (relance init_db.sql + referentiels)
+db-reset: db-init ## Reinitialise la base (relance init_db.sql + referentiels)
 
 .PHONY: db-shell
-db-shell: ## Ouvre une console psql interactive dans le conteneur
-	$(COMPOSE) exec -e PGOPTIONS=--search_path=$(PG_SCHEMA) $(PG_SERVICE) psql -U $(PG_USER) -d $(PG_DB)
+db-shell: ## Ouvre une console psql locale interactive (search_path positionne)
+	psql "$(PG_URI_SCHEMA)"
 
 # ---------------------------------------------------------------------
 # Lancement des applications (en local via uv)
@@ -115,15 +141,19 @@ run-front: ## Lance le frontend (Streamlit)
 	cd frontend && uv run --project . streamlit run src/app.py
 
 # ---------------------------------------------------------------------
-# Docker (pile complete)
+# Docker (pile complete) - OPTIONNEL
 # ---------------------------------------------------------------------
 .PHONY: up
-up: ## Demarre toute la pile (backend + frontend + postgres) via Docker
+up: ## (option) Demarre toute la pile (backend + frontend + postgres) via Docker
 	$(COMPOSE) up --build
 
 .PHONY: down
-down: ## Arrete tous les conteneurs
+down: ## (option) Arrete tous les conteneurs
 	$(COMPOSE) down
+
+.PHONY: db-docker
+db-docker: ## (option) Demarre uniquement PostgreSQL via Docker et attend qu'il soit pret
+	$(COMPOSE) up -d --wait postgres
 
 # ---------------------------------------------------------------------
 # Qualite & tests
@@ -146,5 +176,5 @@ lint: ## Verifie le style du code (ruff)
 	uv run --project backend ruff check backend/src
 
 .PHONY: clean
-clean: ## Supprime les conteneurs et le volume de donnees PostgreSQL
+clean: ## (option) Supprime les conteneurs et le volume de donnees PostgreSQL
 	$(COMPOSE) down -v
