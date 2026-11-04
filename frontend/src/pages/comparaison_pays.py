@@ -31,8 +31,12 @@ get_page_logger("Comparaison Pays (F4)")
 # Le bouton d'export est placé dans un emplacement rempli une fois les données prêtes.
 _col_titre, _col_action = st.columns([0.76, 0.24], vertical_alignment="center")
 with _col_titre:
-    st.markdown("<div class='ls-eyebrow'>Explorateur de données · ILOSTAT</div>", unsafe_allow_html=True)
-    st.markdown("<div class='ls-serif ls-title'>Le travail, en perspective.</div>", unsafe_allow_html=True)
+    st.markdown(
+        "<div class='ls-eyebrow'>Explorateur de données · ILOSTAT</div>", unsafe_allow_html=True
+    )
+    st.markdown(
+        "<div class='ls-serif ls-title'>Le travail, en perspective.</div>", unsafe_allow_html=True
+    )
     st.markdown(
         "<p class='ls-subtitle'>Suivez les tendances. Comparez les pays. Comprenez les écarts.</p>",
         unsafe_allow_html=True,
@@ -57,8 +61,22 @@ pays_referentiel = get_pays()
 # Liste de pays proposée : on privilégie une sélection lisible (pays réels),
 # la recherche du multiselect donne accès à l'ensemble du référentiel.
 _PAYS_SUGGERES = [
-    n for n in ("France", "Maroc", "Guinée", "Sénégal", "Côte d'Ivoire", "Allemagne",
-                "Espagne", "Italie", "Royaume-Uni", "Canada", "États-Unis", "Japon", "Brésil")
+    n
+    for n in (
+        "France",
+        "Maroc",
+        "Guinée",
+        "Sénégal",
+        "Côte d'Ivoire",
+        "Allemagne",
+        "Espagne",
+        "Italie",
+        "Royaume-Uni",
+        "Canada",
+        "États-Unis",
+        "Japon",
+        "Brésil",
+    )
     if n in pays_referentiel
 ]
 _options_pays = _PAYS_SUGGERES + [n for n in pays_referentiel if n not in _PAYS_SUGGERES]
@@ -111,7 +129,9 @@ with st.container(border=True):
 noms_pays = st.session_state.get("f4_pays", _defaut_pays)
 
 # Couleur stable par pays (réutilisée pour pastilles, graphique et « À retenir »).
-couleur_par_pays = {nom: PALETTE_GRAPHIQUE[i % len(PALETTE_GRAPHIQUE)] for i, nom in enumerate(noms_pays)}
+couleur_par_pays = {
+    nom: PALETTE_GRAPHIQUE[i % len(PALETTE_GRAPHIQUE)] for i, nom in enumerate(noms_pays)
+}
 
 # Pastilles de sélection + réinitialisation.
 col_chips, col_reset = st.columns([0.8, 0.2], vertical_alignment="center")
@@ -200,9 +220,13 @@ col_chart, col_aside = st.columns([0.68, 0.32])
 
 with col_chart:
     with st.container(border=True):
-        st.markdown("<div class='ls-eyebrow plain'>Comparaison entre pays</div>", unsafe_allow_html=True)
-        st.markdown(f"<div class='ls-serif' style='font-size:1.5rem'>{indicateurs[code_indicateur]}</div>",
-                    unsafe_allow_html=True)
+        st.markdown(
+            "<div class='ls-eyebrow plain'>Comparaison entre pays</div>", unsafe_allow_html=True
+        )
+        st.markdown(
+            f"<div class='ls-serif' style='font-size:1.5rem'>{indicateurs[code_indicateur]}</div>",
+            unsafe_allow_html=True,
+        )
         st.caption(f"{libelle_classification} · {libelle_sexe} · {periode} · année commune")
 
         df_graph = df.sort_values("Valeur")  # barres horizontales : plus haut en haut
@@ -216,8 +240,12 @@ with col_chart:
             text="Valeur",
             labels={"Valeur": f"Valeur ({unite})" if unite else "Valeur"},
         )
-        fig.update_traces(texttemplate="%{text:.1f}", textposition="outside",
-                          cliponaxis=False, marker_line_width=0)
+        fig.update_traces(
+            texttemplate="%{text:.1f}",
+            textposition="outside",
+            cliponaxis=False,
+            marker_line_width=0,
+        )
         fig.update_layout(showlegend=False)
         styliser_figure(fig, hauteur=360)
         st.plotly_chart(fig, use_container_width=True)
@@ -225,7 +253,11 @@ with col_chart:
 with col_aside:
     indic_court = indicateurs[code_indicateur].split()[0].capitalize()
     lignes_retenir = [
-        (r["Pays"], f"{r['Valeur']:.1f}{suffixe}", couleur_par_pays.get(r["Pays"], PALETTE_GRAPHIQUE[0]))
+        (
+            r["Pays"],
+            f"{r['Valeur']:.1f}{suffixe}",
+            couleur_par_pays.get(r["Pays"], PALETTE_GRAPHIQUE[0]),
+        )
         for _, r in df.iterrows()
     ]
     note = (
@@ -235,7 +267,7 @@ with col_aside:
     bas_note = (
         f"Les valeurs sont exprimées en {unite.lower()} et correspondent à la dernière "
         "période commune disponible."
-        if unite else
-        "Les valeurs correspondent à la dernière période commune disponible."
+        if unite
+        else "Les valeurs correspondent à la dernière période commune disponible."
     )
     carte_a_retenir(f"{indic_court} · {periode}", lignes_retenir, note=note, bas=bas_note)

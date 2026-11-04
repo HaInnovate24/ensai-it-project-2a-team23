@@ -9,11 +9,10 @@ from typing import Annotated
 from fastapi import APIRouter, Depends, HTTPException, Query
 
 from business_object.enums import Sexe
+from controller.dependances import exiger_connexion
 from model.analyse_model import Comparaison, Serie
 from service.analyse_service import AnalyseService
 from utils.exceptions import ErreurMetier, RessourceIntrouvable
-from controller.dependances import exiger_connexion
-
 
 router = APIRouter()
 
@@ -97,7 +96,7 @@ def comparaison_indicateurs(
     """Compare plusieurs indicateurs pour un même pays."""
     # TODO : exiger la connexion (dépendance de controller/dependances.py).
     exiger_connexion(jeton)
-    
+
     try:
         return service.comparer_indicateurs(
             codes_indicateur=codes_indicateur,
@@ -114,7 +113,7 @@ def carte(
     jeton: str,
     code_indicateur: str,
     periode: str,
-    sexe: Sexe | None = None,   
+    sexe: Sexe | None = None,
     code_classification: str | None = None,
     service: AnalyseService = Depends(get_analyse_service),
 ) -> Comparaison:

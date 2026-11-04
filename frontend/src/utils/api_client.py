@@ -45,7 +45,7 @@ class APIClient:
         """
         url = f"{self.base_url}{path}"
         loggers = st.session_state.get("logger")
-       
+
         # Automatically inject headers (including the token)
         headers = kwargs.pop("headers", {})
         headers.update(self._get_headers())

@@ -122,8 +122,7 @@ def get_classifications_toutes() -> dict[str, str]:
     l'API n'accepte qu'une classification à la fois.
     """
     combinees = {
-        f"Âge — {libelle}": code
-        for libelle, code in _get_classifications_par_type("age").items()
+        f"Âge — {libelle}": code for libelle, code in _get_classifications_par_type("age").items()
     }
     combinees.update(
         {

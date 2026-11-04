@@ -1,7 +1,8 @@
+from datetime import date
+
 import pandas as pd
 import plotly.express as px
 import streamlit as st
-from utils.api_client import api_client
 
 from utils.api_client import api_client
 from utils.log_init import get_page_logger
@@ -14,8 +15,6 @@ from utils.referentiels import (
     message_erreur,
     unite_indicateur,
 )
-from datetime import date
-
 from utils.ui import PALETTE_GRAPHIQUE, entete, ligne_source, styliser_figure
 
 get_page_logger("Analyse Temporelle (F3)")
@@ -82,9 +81,7 @@ for nom in noms_pays:
 
     if reponse["status_code"] == 200:
         for point in reponse["data"]["points"]:
-            lignes.append(
-                {"Période": point["periode"], "Pays": nom, "Valeur": point["valeur"]}
-            )
+            lignes.append({"Période": point["periode"], "Pays": nom, "Valeur": point["valeur"]})
     elif reponse["status_code"] == 404:
         pays_sans_donnees.append(nom)
     elif reponse["status_code"] == 0:
@@ -100,7 +97,9 @@ if lignes:
     unite = unite_indicateur(code_indicateur)
     df = pd.DataFrame(lignes).sort_values("Période")
     with st.container(border=True):
-        st.markdown("<div class='ls-eyebrow plain'>Évolution temporelle</div>", unsafe_allow_html=True)
+        st.markdown(
+            "<div class='ls-eyebrow plain'>Évolution temporelle</div>", unsafe_allow_html=True
+        )
         st.markdown(
             f"<div class='ls-serif' style='font-size:1.5rem'>{indicateurs[code_indicateur]}</div>",
             unsafe_allow_html=True,

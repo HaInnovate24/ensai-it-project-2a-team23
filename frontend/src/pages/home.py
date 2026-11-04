@@ -7,8 +7,7 @@ get_page_logger("Accueil")
 
 entete(
     "LaborScope",
-    "Explorez et comparez les indicateurs du marché du travail dans le monde "
-    "(source : ILOSTAT).",
+    "Explorez et comparez les indicateurs du marché du travail dans le monde (source : ILOSTAT).",
     eyebrow="Observatoire de l'emploi",
 )
 
@@ -34,9 +33,7 @@ with col1:
         st.markdown("#### Évolution temporelle")
         st.write("Suivez l'évolution d'un indicateur pour un ou plusieurs pays.")
         st.caption("Accès libre")
-        st.page_link(
-            "pages/analyse_temporelle.py", label="Ouvrir", icon=":material/trending_up:"
-        )
+        st.page_link("pages/analyse_temporelle.py", label="Ouvrir", icon=":material/trending_up:")
 
 with col2:
     with st.container(border=True):
@@ -44,9 +41,7 @@ with col2:
         st.write("Comparez un indicateur entre plusieurs pays sur la dernière période.")
         st.caption("Connexion requise")
         if est_connecte():
-            st.page_link(
-                "pages/comparaison_pays.py", label="Ouvrir", icon=":material/public:"
-            )
+            st.page_link("pages/comparaison_pays.py", label="Ouvrir", icon=":material/public:")
         else:
             st.page_link("pages/login.py", label="Se connecter", icon=":material/lock:")
 
@@ -68,12 +63,8 @@ if est_admin():
     st.write("")
     with st.container(border=True):
         st.markdown("#### Administration")
-        st.write(
-            "Gérez les utilisateurs, lancez des imports ILOSTAT et consultez le journal."
-        )
-        st.page_link(
-            "pages/admin.py", label="Ouvrir l'espace admin", icon=":material/settings:"
-        )
+        st.write("Gérez les utilisateurs, lancez des imports ILOSTAT et consultez le journal.")
+        st.page_link("pages/admin.py", label="Ouvrir l'espace admin", icon=":material/settings:")
 
 st.divider()
 

@@ -1,3 +1,5 @@
+from datetime import date
+
 import pandas as pd
 import plotly.express as px
 import streamlit as st
@@ -12,16 +14,13 @@ from utils.referentiels import (
     index_defaut,
     message_erreur,
 )
-from datetime import date
-
 from utils.ui import PALETTE_GRAPHIQUE, entete, est_connecte, ligne_source, styliser_figure
 
 get_page_logger("Multi-indicateurs (F5)")
 
 entete(
     "Plusieurs indicateurs, un pays.",
-    "Superposez plusieurs indicateurs sur un même graphique pour dégager "
-    "visuellement des liens.",
+    "Superposez plusieurs indicateurs sur un même graphique pour dégager visuellement des liens.",
     eyebrow="Explorateur de données · ILOSTAT",
 )
 
@@ -104,8 +103,12 @@ if not lignes:
 df = pd.DataFrame(lignes).sort_values("Période")
 
 with st.container(border=True):
-    st.markdown("<div class='ls-eyebrow plain'>Croisement d'indicateurs</div>", unsafe_allow_html=True)
-    st.markdown(f"<div class='ls-serif' style='font-size:1.5rem'>{nom_pays}</div>", unsafe_allow_html=True)
+    st.markdown(
+        "<div class='ls-eyebrow plain'>Croisement d'indicateurs</div>", unsafe_allow_html=True
+    )
+    st.markdown(
+        f"<div class='ls-serif' style='font-size:1.5rem'>{nom_pays}</div>", unsafe_allow_html=True
+    )
     st.caption(f"{libelle_classification} · {libelle_sexe}")
     fig = px.line(
         df,
