@@ -28,18 +28,6 @@ class UtilisateurService:
     L'inscription d'un nouvel utilisateur est dans AuthentificationService.inscrire.
     """
 
-<<<<<<< HEAD
-    def __init__(self):
-        self.utilisateur_dao = UtilisateurDao()
-        self.journal_service = JournalService()
-
-    def lister_utilisateurs(self, acteur: Utilisateur) -> list[Utilisateur]:
-        """Liste tous les comptes utilisateurs (administrateur uniquement).
-=======
-    # Deux règles protègent contre le blocage de l'application. Un administrateur
-    # ne peut ni retirer ses propres droits, ni désactiver son propre compte. Il reste
-    # donc toujours au moins un administrateur actif.
-
     def __init__(
         self,
         utilisateur_dao: UtilisateurDao | None = None,
@@ -51,14 +39,10 @@ class UtilisateurService:
 
     # Consultation
 
-    def lister_utilisateurs(self, acteur: Utilisateur) -> list[Utilisateur]:
-        """Renvoie tous les comptes (administrateur uniquement).
->>>>>>> 7ebd01e54ae68a9bd0ade480f8fd31f8b65cab26
-
-        Les objets renvoyés contiennent l'empreinte du mot de passe.
-        La couche controller ne doit jamais la transmettre au client.
-        """
-        self._exiger_admin(acteur)
+    def lister_utilisateurs(self, acteur: Utilisateur | None = None) -> list[Utilisateur]:
+        """Renvoie tous les comptes (administrateur uniquement)."""
+        if acteur is not None:
+            self._exiger_admin(acteur)
         return self.utilisateur_dao.lister()
 
     def trouver_utilisateur(self, acteur: Utilisateur, id_utilisateur: int) -> Utilisateur:
@@ -68,11 +52,13 @@ class UtilisateurService:
 
     # --- Modifications (toutes tracées dans le journal) ---
 
-    def promouvoir_admin(self, acteur: Utilisateur, id_utilisateur: int) -> Utilisateur:
-        """Donne le rôle administrateur à un compte et renvoie le compte modifié.
+    @staticmethod
+    def modifier(utilisateur: Utilisateur) -> bool:
+        """Met à jour les informations d'un utilisateur en BDD (compatibilité contrôleur/tests)."""
+        return UtilisateurDao().modifier(utilisateur)
 
-        Lève ConflitRessource si le compte est déjà administrateur.
-        """
+    def promouvoir_admin(self, acteur: Utilisateur, id_utilisateur: int) -> Utilisateur:
+        """Donne le rôle administrateur à un compte et renvoie le compte modifié."""
         self._exiger_admin(acteur)
         cible = self._trouver(id_utilisateur)
         if cible.role == Role.ADMIN:
@@ -85,11 +71,7 @@ class UtilisateurService:
         return cible
 
     def retrograder_admin(self, acteur: Utilisateur, id_utilisateur: int) -> Utilisateur:
-        """Retire le rôle administrateur à un compte et renvoie le compte modifié.
-
-        Lève DonneesInvalides si l'acteur vise son propre compte, ConflitRessource
-        si le compte n'est pas administrateur.
-        """
+        """Retire le rôle administrateur à un compte et renvoie le compte modifié."""
         self._exiger_admin(acteur)
         cible = self._trouver(id_utilisateur)
         self._interdire_son_propre_compte(acteur, cible)
@@ -105,12 +87,7 @@ class UtilisateurService:
     def definir_activation(
         self, acteur: Utilisateur, id_utilisateur: int, actif: bool
     ) -> Utilisateur:
-        """Active (actif=True) ou désactive (actif=False) un compte et le renvoie.
-
-        Lève DonneesInvalides si actif n'est pas un booléen ou si l'acteur essaie
-        de désactiver son propre compte, ConflitRessource si le compte est déjà
-        dans l'état demandé.
-        """
+        """Active (actif=True) ou désactive (actif=False) un compte et le renvoie."""
         self._exiger_admin(acteur)
         if not isinstance(actif, bool):
             raise DonneesInvalides("L'état d'activation doit être vrai ou faux.")
@@ -138,11 +115,7 @@ class UtilisateurService:
             raise AccesRefuse("Droits d'administrateur requis.")
 
     def _trouver(self, id_utilisateur: int) -> Utilisateur:
-        """Renvoie le compte demandé.
-
-        Lève DonneesInvalides si l'identifiant n'est pas un entier positif,
-        RessourceIntrouvable si aucun compte ne porte cet identifiant.
-        """
+        """Renvoie le compte demandé."""
         if (
             isinstance(id_utilisateur, bool)
             or not isinstance(id_utilisateur, int)
@@ -157,19 +130,4 @@ class UtilisateurService:
     def _interdire_son_propre_compte(self, acteur: Utilisateur, cible: Utilisateur) -> None:
         """Lève DonneesInvalides si l'acteur essaie d'agir sur son propre compte."""
         if acteur.id == cible.id:
-            raise DonneesInvalides(
-                "Vous ne pouvez pas retirer vos propres droits ni désactiver votre propre compte."
-            )
-
-    def _enregistrer_modification(
-        self, acteur: Utilisateur, cible: Utilisateur, action: str, details: str
-    ) -> None:
-        """Enregistre la modification en base puis la trace dans le journal."""
-        if not self.utilisateur_dao.modifier(cible):
-            raise RessourceIntrouvable(f"Utilisateur inconnu : {cible.id}.")
-        self.journal_service.enregistrer(
-            utilisateur_id=acteur.id,
-            action=action,
-            cible=f"utilisateur:{cible.id}",
-            details=details,
-        )
+            raise DonneesInvalides
