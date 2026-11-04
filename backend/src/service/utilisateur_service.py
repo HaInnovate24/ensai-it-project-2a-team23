@@ -11,11 +11,11 @@ from utils.exceptions import (
     RessourceIntrouvable,
 )
 
-# Actions traçables pour le journal d'activité
-ACTION_PROMOTION = "PROMOTION"
-ACTION_RETROGRADATION = "RETROGRADATION"
-ACTION_REACTIVATION = "REACTIVATION"
-ACTION_DESACTIVATION = "DESACTIVATION"
+# Noms des actions écrites dans le journal d'activité.
+ACTION_PROMOTION = "PROMOTION_ADMIN"
+ACTION_RETROGRADATION = "RETROGRADATION_ADMIN"
+ACTION_DESACTIVATION = "DESACTIVATION_COMPTE"
+ACTION_REACTIVATION = "REACTIVATION_COMPTE"
 
 
 class UtilisateurService:
@@ -28,12 +28,32 @@ class UtilisateurService:
     L'inscription d'un nouvel utilisateur est dans AuthentificationService.inscrire.
     """
 
+<<<<<<< HEAD
     def __init__(self):
         self.utilisateur_dao = UtilisateurDao()
         self.journal_service = JournalService()
 
     def lister_utilisateurs(self, acteur: Utilisateur) -> list[Utilisateur]:
         """Liste tous les comptes utilisateurs (administrateur uniquement).
+=======
+    # Deux règles protègent contre le blocage de l'application. Un administrateur
+    # ne peut ni retirer ses propres droits, ni désactiver son propre compte. Il reste
+    # donc toujours au moins un administrateur actif.
+
+    def __init__(
+        self,
+        utilisateur_dao: UtilisateurDao | None = None,
+        journal_service: JournalService | None = None,
+    ):
+        """Initialise le service."""
+        self.utilisateur_dao = utilisateur_dao if utilisateur_dao is not None else UtilisateurDao()
+        self.journal_service = journal_service if journal_service is not None else JournalService()
+
+    # Consultation
+
+    def lister_utilisateurs(self, acteur: Utilisateur) -> list[Utilisateur]:
+        """Renvoie tous les comptes (administrateur uniquement).
+>>>>>>> 7ebd01e54ae68a9bd0ade480f8fd31f8b65cab26
 
         Les objets renvoyés contiennent l'empreinte du mot de passe.
         La couche controller ne doit jamais la transmettre au client.
