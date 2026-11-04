@@ -8,8 +8,10 @@ import pandas as pd
 from business_object.enums import StatutImport
 from business_object.import_donnees import ImportDonnees
 from client.ilostat_client import IlostatClient
+from dao.classification_dao import ClassificationDao
 from dao.import_dao import ImportDao
 from dao.observation_dao import ObservationDao
+from dao.pays_dao import PaysDao
 from service.parser_service import ParserService
 from utils.journalisation import get_logger
 
@@ -22,6 +24,8 @@ class CollecteService:
     def __init__(self, ilostat_client: IlostatClient | None = None):
         self.import_dao = ImportDao()
         self.observation_dao = ObservationDao()
+        self.pays_dao = PaysDao()
+        self.classification_dao = ClassificationDao()
         self.parser_service = ParserService()
         self.ilostat_client = ilostat_client or IlostatClient()
 
@@ -78,6 +82,10 @@ class CollecteService:
                 observations = self.parser_service.parser(data, code_indicateur.strip())
                 if not observations:
                     raise ValueError("Aucune observation exploitable reçue pour cet indicateur.")
+                # ILOSTAT renvoie des pays et classifications absents de nos
+                # référentiels (contraintes de clés étrangères sur observation).
+                # On écarte ces lignes pour que l'import n'échoue pas globalement.
+                observations = self._filtrer_referentiels_connus(observations)
 
             # La contrainte uq_observation est aussi appliquée par le DAO en base,
             # mais PostgreSQL ne peut pas traiter deux fois la même clé dans un
@@ -129,12 +137,40 @@ class CollecteService:
 
         return trace
 
+    def _filtrer_referentiels_connus(self, observations: list) -> list:
+        """Écarte les observations dont le pays ou la classification est inconnu.
+
+        Les colonnes ``code_pays`` et ``code_classification`` d'``observation``
+        sont des clés étrangères : une valeur absente des référentiels ferait
+        échouer tout le lot. On conserve donc uniquement les lignes compatibles
+        (classification vide autorisée).
+        """
+        codes_pays = {pays.code_pays for pays in self.pays_dao.lister()}
+        codes_classif = {c.code for c in self.classification_dao.lister()}
+
+        retenues = []
+        ignorees = 0
+        for obs in observations:
+            if obs.code_pays not in codes_pays:
+                ignorees += 1
+                continue
+            if obs.code_classification and obs.code_classification not in codes_classif:
+                ignorees += 1
+                continue
+            retenues.append(obs)
+
+        if ignorees:
+            logger.info(
+                "%s observation(s) ignorée(s) : pays ou classification hors référentiel.",
+                ignorees,
+            )
+        return retenues
+
     def lister_imports(self) -> list[ImportDonnees]:
         """
         Lister toutes les historiques d'imports
         """
-        imports = ImportDao.lister()
-        return imports
+        return self.import_dao.lister()
 
 
 if __name__ == "__main__":

@@ -1,0 +1,503 @@
+"""Système de design éditorial partagé par toutes les pages.
+
+Identité : fond crème, barre latérale vert forêt, accent vert unique, cartes
+blanches, titres en serif (Lora) et interface en sans-serif (Inter). Aucun
+emoji ; les icônes sont des traits Material (:material/...:) ou des SVG inline.
+
+Ce module centralise l'injection CSS, la barre latérale (branding + navigation
+secondaire), les en-têtes éditoriaux et les composants (cartes, métriques,
+pastilles, « À retenir ») pour éviter toute duplication.
+"""
+
+import html
+
+import streamlit as st
+
+# Libellés de rôle utilisés par la navigation (cf. app.py et login.py).
+ROLE_ADMIN = "Administrateur"
+ROLE_UTILISATEUR = "Utilisateur"
+
+# --- Palette ----------------------------------------------------------------
+VERT = "#2E7257"          # accent principal (boutons, pastilles, liens)
+VERT_FONCE = "#215540"    # survol / variantes foncées
+ENCRE = "#1F2A26"         # titres
+TEXTE = "#39443F"         # corps de texte
+TEXTE_DOUX = "#8A938D"    # légendes, libellés discrets
+CREME = "#F4F3EE"         # fond principal
+BORDURE = "#E7E6DD"       # bordures de cartes
+SIDEBAR = "#143529"       # fond barre latérale
+
+# Séquence de couleurs des graphiques (verte, ambre, violet, mauve…).
+PALETTE_GRAPHIQUE = [
+    "#2E7257",  # vert
+    "#C8895A",  # ambre / terracotta
+    "#8C7FB0",  # violet doux
+    "#B06A8E",  # mauve
+    "#4E8FA6",  # bleu-sarcelle
+    "#C7A14A",  # or
+    "#6F8F5A",  # olive
+    "#9A6B52",  # brun
+]
+
+
+def est_connecte() -> bool:
+    """Indique si un utilisateur est connecté (jeton présent en session)."""
+    return bool(st.session_state.get("access_token"))
+
+
+def est_admin() -> bool:
+    """Indique si l'utilisateur connecté est administrateur."""
+    return st.session_state.get("role_utilisateur") == ROLE_ADMIN
+
+
+def deconnexion() -> None:
+    """Purge la session de connexion et recharge l'application."""
+    for cle in ("access_token", "role_utilisateur", "nom_utilisateur"):
+        st.session_state.pop(cle, None)
+    st.rerun()
+
+
+# --- Styles globaux ---------------------------------------------------------
+
+def injecter_styles() -> None:
+    """Injecte les polices et les styles globaux. À appeler une fois par rerun."""
+    st.markdown(
+        """
+        <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Lora:wght@500;600;700&display=swap');
+
+        /* Police d'interface par défaut (héritée par la plupart des éléments). */
+        html, body, .stApp, button, input, select, textarea,
+        [data-testid="stMarkdownContainer"] {
+            font-family: 'Inter', -apple-system, 'Segoe UI', sans-serif;
+        }
+        /* Restaure la police des icônes Material (sinon elles s'affichent en texte). */
+        span[data-testid="stIconMaterial"], .material-symbols-rounded,
+        [class*="material-symbols"], i.material-icons {
+            font-family: 'Material Symbols Rounded', 'Material Icons' !important;
+        }
+
+        /* Fond crème + largeur de lecture confortable. */
+        .stApp { background: #F4F3EE; }
+        .block-container { max-width: 1240px; padding-top: 3.4rem; padding-bottom: 4rem; }
+
+        /* Titres en serif. */
+        h1, h2, h3, h4,
+        .ls-serif { font-family: 'Lora', Georgia, serif !important; color: #1F2A26; }
+        h1 { font-weight: 600; letter-spacing: -0.01em; }
+
+        /* Sur-titre « eyebrow » : petite capitale verte espacée. */
+        .ls-eyebrow {
+            display: flex; align-items: center; gap: 0.5rem;
+            font-size: 0.72rem; font-weight: 700; letter-spacing: 0.13em;
+            text-transform: uppercase; color: #2E7257; margin-bottom: 0.5rem;
+        }
+        .ls-eyebrow::before {
+            content: ""; width: 7px; height: 7px; border-radius: 50%;
+            background: #2E7257; display: inline-block;
+        }
+        .ls-eyebrow.plain::before { display: none; }
+
+        .ls-title { font-size: 2.9rem; line-height: 1.05; margin: 0 0 0.3rem 0; }
+        .ls-subtitle { color: #8A938D; font-size: 1.05rem; margin: 0; }
+
+        /* Barre de contexte (sources, date d'extraction). */
+        .ls-meta { color: #8A938D; font-size: 0.85rem; }
+        .ls-meta .dot { color: #2E7257; }
+
+        /* Cartes blanches. */
+        [data-testid="stVerticalBlockBorderWrapper"] {
+            background: #FFFFFF; border: 1px solid #E7E6DD; border-radius: 14px;
+            box-shadow: 0 1px 2px rgba(31,42,38,0.04);
+        }
+
+        /* Boutons : vert plein pour l'action primaire, discret sinon. */
+        .stButton > button[kind="primary"],
+        .stForm [data-testid="stFormSubmitButton"] button[kind="primary"] {
+            background: #2E7257; border: 1px solid #2E7257; color: #fff;
+            border-radius: 10px; font-weight: 600;
+        }
+        .stButton > button[kind="primary"]:hover { background: #215540; border-color: #215540; }
+        .stButton > button[kind="secondary"] {
+            background: #fff; border: 1px solid #E7E6DD; color: #1F2A26;
+            border-radius: 10px; font-weight: 600;
+        }
+        .stButton > button[kind="secondary"]:hover { border-color: #2E7257; color: #215540; }
+
+        /* Champs et menus : bordure nette, coins doux. */
+        [data-baseweb="select"] > div, .stTextInput input, .stNumberInput input {
+            border-radius: 10px; border-color: #E7E6DD;
+        }
+        /* Libellés de champs (au-dessus des selects) : petite capitale. */
+        .stSelectbox label p, .stMultiSelect label p, .stTextInput label p,
+        .stSlider label p, .stNumberInput label p {
+            font-weight: 600; color: #39443F;
+        }
+        /* Libellé de filtre personnalisé (avec compteur / unité à droite). */
+        .ls-flabel {
+            display:flex; align-items:baseline; justify-content:space-between;
+            font-weight:600; color:#39443F; font-size:0.92rem; margin-bottom:0.35rem;
+        }
+        .ls-flabel .muted { color:#A7AEA8; font-weight:500; font-size:0.78rem; }
+        /* Pastille d'unité (« En % ») au-dessus du graphique. */
+        .ls-pill {
+            display:inline-block; background:#F4F3EE; border:1px solid #E7E6DD;
+            border-radius:999px; padding:0.15rem 0.6rem; font-size:0.78rem;
+            font-weight:600; color:#5C6862;
+        }
+
+        /* Métriques natives (st.metric) : chiffre en serif. */
+        [data-testid="stMetricValue"] { font-family: 'Lora', Georgia, serif; color: #1F2A26; }
+        [data-testid="stMetricLabel"] p { color: #8A938D; font-weight: 600; }
+
+        /* ---- Barre latérale sombre ---- */
+        [data-testid="stSidebar"] { border-right: none; }
+        [data-testid="stSidebar"] .block-container { padding-top: 1.4rem; }
+
+        /* Navigation (st.navigation) stylée en « pills ». */
+        [data-testid="stSidebarNav"] { margin-top: 0.2rem; }
+        [data-testid="stSidebarNav"] ul { gap: 2px; }
+        [data-testid="stSidebarNav"] a {
+            border-radius: 10px; padding: 0.5rem 0.7rem; color: #AFC4B8 !important;
+            font-weight: 500;
+        }
+        [data-testid="stSidebarNav"] a:hover { background: rgba(255,255,255,0.05); }
+        [data-testid="stSidebarNav"] a[aria-current="page"] {
+            background: #1C4435; color: #FFFFFF !important;
+        }
+        [data-testid="stSidebarNav"] a[aria-current="page"] span { color: #FFFFFF !important; }
+
+        /* En-tête de section dans la barre latérale. */
+        .ls-side-label {
+            font-size: 0.68rem; font-weight: 700; letter-spacing: 0.14em;
+            text-transform: uppercase; color: #6E8578; margin: 0.4rem 0 0.4rem 0.2rem;
+        }
+        .ls-logo { display:flex; align-items:center; gap:0.55rem; margin: 0 0 0.1rem 0.1rem; }
+        .ls-logo .name { font-family:'Lora',serif; font-weight:700; font-size:1.5rem; color:#fff; }
+        .ls-tagline {
+            font-size:0.62rem; font-weight:700; letter-spacing:0.18em;
+            text-transform:uppercase; color:#7FA592; margin:0 0 0.4rem 0.2rem;
+        }
+
+        /* Carte promo (bas de barre latérale). */
+        .ls-promo {
+            background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.07);
+            border-radius: 14px; padding: 1rem; margin-top: 0.4rem; color:#C7D6CC;
+        }
+        .ls-promo .k { font-size:0.62rem; font-weight:700; letter-spacing:0.14em;
+            text-transform:uppercase; color:#7FA592; }
+        .ls-promo .t { font-family:'Lora',serif; font-size:1.15rem; color:#EAF2EC;
+            margin:0.5rem 0 0.4rem; line-height:1.2; }
+        .ls-promo .s { font-size:0.8rem; color:#9DB3A6; }
+
+        /* Pied : utilisateur. */
+        .ls-user { display:flex; align-items:center; gap:0.6rem; padding:0.2rem; }
+        .ls-user .av {
+            width:34px; height:34px; border-radius:9px; background:#1C4435; color:#8FE3B8;
+            display:flex; align-items:center; justify-content:center; font-weight:700; font-size:0.8rem;
+        }
+        .ls-user .n { color:#EAF2EC; font-weight:600; font-size:0.86rem; line-height:1.1; }
+        .ls-user .r { color:#8AA194; font-size:0.74rem; }
+
+        /* Carte métrique personnalisée. */
+        .ls-metric {
+            background:#fff; border:1px solid #E7E6DD; border-radius:14px; padding:1.1rem 1.2rem;
+            box-shadow:0 1px 2px rgba(31,42,38,0.04); height:100%;
+        }
+        .ls-metric .top { display:flex; align-items:flex-start; justify-content:space-between; gap:0.5rem; }
+        .ls-metric .ic { color:#C5CEC8; flex:0 0 auto; line-height:0; margin-top:1px; }
+        .ls-metric .lab { color:#8A938D; font-size:0.9rem; font-weight:600; }
+        .ls-metric .val { font-family:'Lora',serif; color:#1F2A26; font-size:2.4rem; line-height:1;
+            margin:0.6rem 0 0.2rem; }
+        .ls-metric .val .u { font-size:1rem; color:#8A938D; font-family:'Inter',sans-serif; margin-left:2px; }
+        .ls-metric .cap { color:#9AA39E; font-size:0.8rem; }
+
+        /* Carte « À retenir ». */
+        .ls-aside { background:#fff; border:1px solid #E7E6DD; border-radius:14px; padding:1.2rem; }
+        .ls-aside .hd { display:flex; align-items:center; gap:0.4rem; font-family:'Lora',serif;
+            font-size:1.15rem; color:#1F2A26; margin-bottom:0.8rem; }
+        .ls-aside .k { font-size:0.68rem; font-weight:700; letter-spacing:0.12em; text-transform:uppercase;
+            color:#8A938D; margin-bottom:0.5rem; }
+        .ls-aside .row { display:flex; align-items:center; justify-content:space-between;
+            padding:0.33rem 0; border-top:1px solid #F0EFE8; }
+        .ls-aside .row:first-of-type { border-top:none; }
+        .ls-aside .row .lft { display:flex; align-items:center; gap:0.5rem; color:#39443F; font-size:0.92rem; }
+        .ls-aside .row .dot { width:9px; height:9px; border-radius:50%; display:inline-block; }
+        .ls-aside .row .v { font-weight:600; color:#1F2A26; }
+        .ls-aside .note { color:#5C6862; font-size:0.9rem; line-height:1.5; margin-top:0.9rem; }
+
+        /* Pastille (chip) de sélection. */
+        .ls-chip { display:inline-flex; align-items:center; gap:0.4rem; background:#fff;
+            border:1px solid #E7E6DD; border-radius:999px; padding:0.25rem 0.7rem; font-size:0.85rem;
+            color:#39443F; margin-right:0.4rem; }
+        .ls-chip .dot { width:8px; height:8px; border-radius:50%; display:inline-block; }
+
+        /* ============ Finitions « produit » (sobre, pro, UX) ============ */
+        /* Transitions douces sur les éléments interactifs. */
+        .stButton > button, .stDownloadButton > button, [data-baseweb="select"] > div,
+        .stTextInput input, .stNumberInput input, [data-testid="stPopover"] button,
+        [data-testid="stVerticalBlockBorderWrapper"], a, .ls-metric, .ls-chip {
+            transition: border-color .15s ease, box-shadow .15s ease,
+                        background-color .15s ease, color .15s ease, transform .15s ease;
+        }
+        /* Anneau de focus accessible (vert discret) plutôt que le contour par défaut. */
+        button:focus-visible, a:focus-visible, input:focus-visible,
+        [role="button"]:focus-visible, [data-baseweb="select"] > div:focus-within {
+            outline: none !important;
+            box-shadow: 0 0 0 3px rgba(46,114,87,0.20) !important;
+        }
+        ::selection { background: rgba(46,114,87,0.16); }
+
+        /* Barre de défilement sobre. */
+        * { scrollbar-width: thin; scrollbar-color: #D6D9CF transparent; }
+        ::-webkit-scrollbar { width: 11px; height: 11px; }
+        ::-webkit-scrollbar-thumb {
+            background: #D6D9CF; border-radius: 999px; border: 3px solid #F4F3EE;
+        }
+        ::-webkit-scrollbar-thumb:hover { background: #C3C8BB; }
+
+        /* Champs : fond blanc, hauteur confortable, focus net. */
+        [data-baseweb="select"] > div { background:#fff; min-height:42px; }
+        [data-baseweb="select"] > div:hover { border-color:#CFD4C9; }
+        .stTextInput input:focus, .stNumberInput input:focus {
+            border-color:#2E7257 !important; box-shadow:0 0 0 3px rgba(46,114,87,0.14) !important;
+        }
+
+        /* Déclencheur de popover : allure d'un select (texte à gauche, cadre doux). */
+        [data-testid="stPopover"] > div > button {
+            justify-content:space-between; background:#fff; border:1px solid #E7E6DD;
+            border-radius:10px; color:#1F2A26; font-weight:500; min-height:42px;
+        }
+        [data-testid="stPopover"] > div > button:hover { border-color:#2E7257; color:#215540; }
+
+        /* Cartes : survol subtil (cadre teinté + ombre portée). */
+        [data-testid="stVerticalBlockBorderWrapper"]:hover {
+            border-color:#DADFD3; box-shadow:0 8px 24px rgba(31,42,38,0.06);
+        }
+        .ls-metric:hover {
+            border-color:#DADFD3; box-shadow:0 8px 24px rgba(31,42,38,0.06);
+            transform:translateY(-1px);
+        }
+
+        /* Chiffres alignés verticalement (tabular figures). */
+        .ls-metric .val, [data-testid="stMetricValue"], .ls-aside .v, .ls-aside .row {
+            font-variant-numeric: tabular-nums; font-feature-settings:"tnum" 1;
+        }
+
+        /* Contrôle segmenté : pastilles, sélection verte. */
+        [data-testid="stSegmentedControl"] button { border-radius:999px !important; font-weight:600; }
+        [data-testid="stSegmentedControl"] button[aria-checked="true"],
+        [data-testid="stSegmentedControl"] button[kind="segmented_controlActive"] {
+            background:#2E7257 !important; color:#fff !important; border-color:#2E7257 !important;
+        }
+
+        /* Légendes et expander. */
+        [data-testid="stCaptionContainer"] p { color:#9AA39E; }
+        [data-testid="stExpander"] { border:1px solid #E7E6DD !important; border-radius:12px; background:#fff; }
+        [data-testid="stExpander"] summary:hover { color:#215540; }
+
+        /* Spinner teinté accent. */
+        .stSpinner > div { border-top-color:#2E7257 !important; }
+
+        /* Info/warning : coins doux, ton feutré. */
+        [data-testid="stAlert"] { border-radius:12px; }
+
+        /* Masque le bandeau par défaut pour un rendu épuré. */
+        [data-testid="stToolbar"], footer { display:none; }
+        #MainMenu { visibility:hidden; }
+        [data-testid="stDecoration"] { display:none; }
+        </style>
+        """,
+        unsafe_allow_html=True,
+    )
+
+
+# --- Barre latérale ---------------------------------------------------------
+
+_LOGO_SVG = (
+    "<svg width='26' height='26' viewBox='0 0 24 24' fill='none' "
+    "xmlns='http://www.w3.org/2000/svg'>"
+    "<rect x='2' y='13' width='4' height='8' rx='1' fill='#8FE3B8'/>"
+    "<rect x='9' y='8' width='4' height='13' rx='1' fill='#FFFFFF'/>"
+    "<rect x='16' y='4' width='4' height='17' rx='1' fill='#8FE3B8'/>"
+    "</svg>"
+)
+
+
+def barre_laterale_haut() -> None:
+    """Branding en haut de la barre latérale (logo, slogan, label de section)."""
+    with st.sidebar:
+        st.markdown(
+            f"<div class='ls-logo'>{_LOGO_SVG}<span class='name'>LaborScope</span></div>"
+            f"<div class='ls-tagline'>Le travail en perspective</div>"
+            f"<div class='ls-side-label'>Espace d'analyse</div>",
+            unsafe_allow_html=True,
+        )
+
+
+def barre_laterale_bas() -> None:
+    """Bloc promo, sources et utilisateur en bas de la barre latérale.
+
+    À appeler après ``st.navigation`` pour apparaître sous le menu.
+    """
+    with st.sidebar:
+        st.markdown(
+            "<div class='ls-promo'>"
+            "<div class='k'>Une vue sur le monde</div>"
+            "<div class='t'>Des données pour comprendre le travail.</div>"
+            "<div class='s'>10 pays · 2 indicateurs<br>Estimations de l'OIT</div>"
+            "</div>",
+            unsafe_allow_html=True,
+        )
+        st.page_link("pages/home.py", label="Sources & méthodologie", icon=":material/menu_book:")
+
+        if est_connecte():
+            nom = st.session_state.get("nom_utilisateur") or "Utilisateur"
+            role = st.session_state.get("role_utilisateur", ROLE_UTILISATEUR)
+            initiales = "".join(mot[0] for mot in nom.split()[:2]).upper() or "U"
+            st.markdown(
+                f"<div class='ls-user'><div class='av'>{html.escape(initiales)}</div>"
+                f"<div><div class='n'>{html.escape(nom)}</div>"
+                f"<div class='r'>{html.escape(role)}</div></div></div>",
+                unsafe_allow_html=True,
+            )
+            if st.button("Se déconnecter", use_container_width=True):
+                deconnexion()
+        else:
+            st.markdown(
+                "<div class='ls-user'><div class='av'>LS</div>"
+                "<div><div class='n'>Projet LaborScope</div>"
+                "<div class='r'>Observatoire du marché du travail</div></div></div>",
+                unsafe_allow_html=True,
+            )
+
+
+# --- En-têtes et composants de page ----------------------------------------
+
+def entete(
+    titre: str,
+    description: str = "",
+    eyebrow: str = "",
+    action_label: str | None = None,
+    action_icon: str = ":material/download:",
+) -> bool:
+    """En-tête éditorial : sur-titre, grand titre serif, sous-titre, action.
+
+    Renvoie True si le bouton d'action (optionnel) a été cliqué.
+    """
+    col_titre, col_action = st.columns([0.78, 0.22], vertical_alignment="center")
+    with col_titre:
+        if eyebrow:
+            st.markdown(f"<div class='ls-eyebrow'>{html.escape(eyebrow)}</div>", unsafe_allow_html=True)
+        st.markdown(f"<div class='ls-serif ls-title'>{html.escape(titre)}</div>", unsafe_allow_html=True)
+        if description:
+            st.markdown(f"<p class='ls-subtitle'>{html.escape(description)}</p>", unsafe_allow_html=True)
+    clique = False
+    with col_action:
+        if action_label:
+            clique = st.button(action_label, icon=action_icon, type="primary", use_container_width=True)
+    st.write("")
+    return clique
+
+
+def ligne_source(gauche: list[str], droite: str = "") -> None:
+    """Affiche la petite ligne de contexte (source des données, date d'extrait)."""
+    morceaux = [f"<span class='dot'>●</span> {html.escape(gauche[0])}"] if gauche else []
+    morceaux += [html.escape(x) for x in gauche[1:]]
+    gauche_html = " &nbsp;·&nbsp; ".join(morceaux)
+    droite_html = f"<span style='float:right'>{html.escape(droite)}</span>" if droite else ""
+    st.markdown(f"<div class='ls-meta'>{gauche_html}{droite_html}</div>", unsafe_allow_html=True)
+
+
+def carte_metrique(
+    label: str, valeur: str, unite: str = "", caption: str = "", icone_svg: str = ""
+) -> None:
+    """Carte métrique (label, grande valeur serif + unité, légende).
+
+    ``icone_svg`` : SVG inline optionnel affiché en haut à droite (trait discret).
+    """
+    u = f"<span class='u'>{html.escape(unite)}</span>" if unite else ""
+    ic = f"<span class='ic'>{icone_svg}</span>" if icone_svg else ""
+    st.markdown(
+        f"<div class='ls-metric'><div class='top'><div class='lab'>{html.escape(label)}</div>{ic}</div>"
+        f"<div class='val'>{html.escape(valeur)}{u}</div>"
+        f"<div class='cap'>{html.escape(caption)}</div></div>",
+        unsafe_allow_html=True,
+    )
+
+
+# SVG d'angle (traits sobres) pour les cartes métriques, repris des maquettes.
+ICONE_CIBLE = (
+    "<svg width='18' height='18' viewBox='0 0 24 24' fill='none' stroke='currentColor' "
+    "stroke-width='1.6' stroke-linecap='round'><circle cx='12' cy='12' r='8'/>"
+    "<circle cx='12' cy='12' r='3.2'/></svg>"
+)
+ICONE_TENDANCE = (
+    "<svg width='18' height='18' viewBox='0 0 24 24' fill='none' stroke='currentColor' "
+    "stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'>"
+    "<path d='M3 17l6-6 4 4 7-7'/><path d='M17 5h4v4'/></svg>"
+)
+ICONE_ECART = (
+    "<svg width='18' height='18' viewBox='0 0 24 24' fill='none' stroke='currentColor' "
+    "stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'>"
+    "<path d='M8 7L4 11l4 4'/><path d='M16 7l4 4-4 4'/><path d='M4 11h16'/></svg>"
+)
+
+
+def chip(libelle: str, couleur: str) -> str:
+    """Renvoie le HTML d'une pastille colorée (pour un conteneur markdown)."""
+    return (
+        f"<span class='ls-chip'><span class='dot' style='background:{couleur}'></span>"
+        f"{html.escape(libelle)}</span>"
+    )
+
+
+def carte_a_retenir(titre_section: str, lignes: list[tuple], note: str = "", bas: str = "") -> None:
+    """Carte latérale « À retenir » : liste pays/valeur + note explicative.
+
+    ``lignes`` : liste de tuples (libellé, valeur_affichée, couleur).
+    """
+    lignes_html = "".join(
+        f"<div class='row'><span class='lft'>"
+        f"<span class='dot' style='background:{coul}'></span>{html.escape(lib)}</span>"
+        f"<span class='v'>{html.escape(val)}</span></div>"
+        for lib, val, coul in lignes
+    )
+    note_html = f"<div class='note'>{html.escape(note)}</div>" if note else ""
+    bas_html = (
+        f"<div class='k' style='margin-top:1rem'>Bien lire les chiffres</div>"
+        f"<div class='note' style='margin-top:0.2rem'>{html.escape(bas)}</div>"
+        if bas else ""
+    )
+    st.markdown(
+        f"<div class='ls-aside'><div class='hd'>À retenir</div>"
+        f"<div class='k'>{html.escape(titre_section)}</div>{lignes_html}{note_html}{bas_html}</div>",
+        unsafe_allow_html=True,
+    )
+
+
+# --- Graphiques -------------------------------------------------------------
+
+def styliser_figure(fig, hauteur: int = 430):
+    """Applique une mise en forme sobre et éditoriale à une figure Plotly."""
+    fig.update_layout(
+        template="plotly_white",
+        colorway=PALETTE_GRAPHIQUE,
+        font=dict(family="Inter, sans-serif", size=13, color=TEXTE),
+        title=dict(font=dict(family="Lora, serif", size=18, color=ENCRE), x=0, xanchor="left", y=0.98),
+        margin=dict(l=8, r=8, t=56, b=8),
+        height=hauteur,
+        plot_bgcolor="white",
+        paper_bgcolor="white",
+        legend=dict(orientation="h", yanchor="bottom", y=1.0, xanchor="left", x=0, title="",
+                    bgcolor="rgba(0,0,0,0)"),
+        hoverlabel=dict(bgcolor="white", bordercolor=BORDURE, font_size=12),
+    )
+    fig.update_xaxes(showgrid=True, gridcolor="#F0EFE8", showline=False, zeroline=False)
+    fig.update_yaxes(showgrid=False, showline=False, zeroline=False)
+    return fig
+
+
+def couleur_serie(index: int) -> str:
+    """Renvoie la couleur de la palette pour la n-ième série (cyclique)."""
+    return PALETTE_GRAPHIQUE[index % len(PALETTE_GRAPHIQUE)]

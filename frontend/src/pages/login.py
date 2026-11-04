@@ -38,60 +38,73 @@ def _charger_profil(jeton: str) -> bool:
     return True
 
 
-# --- Déjà connecté : on affiche le statut et la déconnexion ---
-if st.session_state.get("access_token"):
-    st.success(
-        f"Vous êtes connecté en tant que **{st.session_state.get('nom_utilisateur', '?')}** "
-        f"({st.session_state.get('role_utilisateur', 'Utilisateur')})."
-    )
-    if st.button("Se déconnecter"):
-        deconnexion()
-    st.stop()
+# Tout le contenu est centré dans une colonne étroite (rendu « carte de connexion »).
+_, centre, _ = st.columns([1, 1.5, 1])
 
-# --- Non connecté : connexion ou création de compte ---
-onglet_connexion, onglet_inscription = st.tabs(["Se connecter", "Créer un compte"])
+with centre:
+    # --- Déjà connecté : on affiche le statut et la déconnexion ---
+    if st.session_state.get("access_token"):
+        with st.container(border=True):
+            st.success(
+                f"Vous êtes connecté en tant que "
+                f"**{st.session_state.get('nom_utilisateur', '?')}** "
+                f"({st.session_state.get('role_utilisateur', 'Utilisateur')})."
+            )
+            if st.button("Se déconnecter", use_container_width=True):
+                deconnexion()
+        st.stop()
 
-with onglet_connexion:
-    with st.form("connexion"):
-        nom = st.text_input("Nom d'utilisateur")
-        mot_de_passe = st.text_input("Mot de passe", type="password")
-        valider = st.form_submit_button("Se connecter")
+    # --- Non connecté : connexion ou création de compte ---
+    onglet_connexion, onglet_inscription = st.tabs(["Se connecter", "Créer un compte"])
 
-    if valider:
-        reponse = api_client.post(
-            "/auth/connexion",
-            json={"nom_utilisateur": nom, "mot_de_passe": mot_de_passe},
-        )
-        if reponse["status_code"] == 200:
-            data = _corps(reponse).get("data")
-            jeton = data.get("jeton") if isinstance(data, dict) else data
-            if not jeton:
-                st.error("Jeton de connexion introuvable dans la réponse.")
+    with onglet_connexion:
+        with st.container(border=True):
+            with st.form("connexion"):
+                nom = st.text_input("Nom d'utilisateur", placeholder="votre identifiant")
+                mot_de_passe = st.text_input("Mot de passe", type="password",
+                                             placeholder="••••••••")
+                valider = st.form_submit_button("Se connecter", type="primary",
+                                                use_container_width=True)
+
+        if valider:
+            reponse = api_client.post(
+                "/auth/connexion",
+                json={"nom_utilisateur": nom, "mot_de_passe": mot_de_passe},
+            )
+            if reponse["status_code"] == 200:
+                data = _corps(reponse).get("data")
+                jeton = data.get("jeton") if isinstance(data, dict) else data
+                if not jeton:
+                    st.error("Jeton de connexion introuvable dans la réponse.")
+                else:
+                    # La connexion a réussi : on est authentifié.
+                    st.session_state["access_token"] = jeton
+                    if not _charger_profil(jeton):
+                        # Profil illisible (ex. endpoint /auth/profil indisponible) :
+                        # on ouvre une session en rôle standard par défaut.
+                        st.session_state["role_utilisateur"] = "Utilisateur"
+                        st.session_state["nom_utilisateur"] = nom
+                    st.rerun()
             else:
-                # La connexion a réussi : on est authentifié.
-                st.session_state["access_token"] = jeton
-                if not _charger_profil(jeton):
-                    # Profil illisible (ex. endpoint /auth/profil indisponible) :
-                    # on ouvre une session en rôle standard par défaut.
-                    st.session_state["role_utilisateur"] = "Utilisateur"
-                    st.session_state["nom_utilisateur"] = nom
-                st.rerun()
-        else:
-            st.error(message_erreur(reponse))
+                st.error(message_erreur(reponse))
 
-with onglet_inscription:
-    with st.form("inscription"):
-        nouveau_nom = st.text_input("Nom d'utilisateur", key="inscription_nom")
-        nouveau_mdp = st.text_input("Mot de passe", type="password", key="inscription_mdp")
-        st.caption("8 à 128 caractères, au moins une lettre et un chiffre.")
-        creer = st.form_submit_button("Créer le compte")
+    with onglet_inscription:
+        with st.container(border=True):
+            with st.form("inscription"):
+                nouveau_nom = st.text_input("Nom d'utilisateur", key="inscription_nom",
+                                            placeholder="3 à 50 caractères")
+                nouveau_mdp = st.text_input("Mot de passe", type="password",
+                                            key="inscription_mdp", placeholder="••••••••")
+                st.caption("8 à 128 caractères, au moins une lettre et un chiffre.")
+                creer = st.form_submit_button("Créer le compte", type="primary",
+                                              use_container_width=True)
 
-    if creer:
-        reponse = api_client.post(
-            "/auth/inscription",
-            json={"nom_utilisateur": nouveau_nom, "mot_de_passe": nouveau_mdp},
-        )
-        if reponse["status_code"] == 200:
-            st.success("Compte créé. Vous pouvez maintenant vous connecter.")
-        else:
-            st.error(message_erreur(reponse))
+        if creer:
+            reponse = api_client.post(
+                "/auth/inscription",
+                json={"nom_utilisateur": nouveau_nom, "mot_de_passe": nouveau_mdp},
+            )
+            if reponse["status_code"] == 200:
+                st.success("Compte créé. Vous pouvez maintenant vous connecter.")
+            else:
+                st.error(message_erreur(reponse))
