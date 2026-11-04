@@ -14,9 +14,6 @@ from utils.referentiels import (
     index_defaut,
     message_erreur,
 )
-<<<<<<< HEAD
-from utils.ui import PALETTE_GRAPHIQUE, entete, est_connecte, ligne_source, styliser_figure
-=======
 from datetime import date
 
 from utils.rapport_pdf import construire_rapport_pdf, figure_png
@@ -30,7 +27,6 @@ from utils.ui import (
     ligne_source,
     styliser_figure,
 )
->>>>>>> cee9590c5cf3aadc47445192cb78e59cee250a3c
 
 get_page_logger("Multi-indicateurs (F5)")
 
