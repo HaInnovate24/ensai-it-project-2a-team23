@@ -43,7 +43,7 @@ class RapportService:
 
         # 3. Mise à jour de la base de données
         rapport.fichier_path = chemin_complet
-        rapport.statut = StatutRapport.TERMINE
+        rapport.statut = StatutRapport.PRET
         self.dao.mettre_a_jour(rapport)
 
         return rapport
