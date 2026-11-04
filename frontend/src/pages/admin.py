@@ -74,8 +74,9 @@ def _liste(reponse: dict) -> list:
 
 
 # --- Chargements partagés ---------------------------------------------------
+jeton = st.session_state.get("access_token")
 indicateurs = get_indicateurs()
-rep_users = api_client.get("/admin/utilisateurs")
+rep_users = api_client.get("/admin/utilisateurs", params={"jeton": jeton})
 rep_imports = api_client.get("/admin/imports")
 utilisateurs = _liste(rep_users)
 imports = _liste(rep_imports)
@@ -111,11 +112,11 @@ with st.container(border=True):
     else:
         st.caption(
             "Modifiez le rôle ou le statut d'un compte sur sa ligne, puis enregistrez. "
-            "La suppression demande une confirmation."
+            "Pour retirer l'accès d'un compte, désactivez-le."
         )
 
-        largeurs = [0.6, 2, 1.6, 0.9, 1, 1]
-        entetes = ["ID", "Utilisateur", "Rôle", "Actif", "", ""]
+        largeurs = [0.6, 2, 1.6, 0.9, 1]
+        entetes = ["ID", "Utilisateur", "Rôle", "Actif", ""]
         cols_h = st.columns(largeurs, vertical_alignment="center")
         for col, titre in zip(cols_h, entetes):
             col.markdown(
@@ -147,25 +148,21 @@ with st.container(border=True):
             enregistrer = c[4].button(
                 "Enregistrer", key=f"save_{uid}", type="primary", use_container_width=True,
             )
-            with c[5].popover("Supprimer", use_container_width=True):
-                st.caption(f"Supprimer définitivement « {u.get('nom_utilisateur', '')} » ?")
-                confirmer = st.button(
-                    "Confirmer la suppression", type="primary",
-                    key=f"del_{uid}", use_container_width=True,
-                )
 
             if enregistrer:
                 role_cible = "admin" if role_label == "Administrateur" else "utilisateur"
                 erreurs: list[str] = []
                 if role_cible != role_actuel:
                     rep = api_client.patch(
-                        f"/admin/utilisateurs/{uid}/role", json={"role": role_cible}
+                        f"/admin/utilisateurs/{uid}/role",
+                        params={"jeton": jeton, "role": role_cible},
                     )
                     if rep["status_code"] != 200:
                         erreurs.append(message_erreur(rep))
                 if actif != actif_actuel:
                     rep = api_client.patch(
-                        f"/admin/utilisateurs/{uid}/statut", json={"actif": actif}
+                        f"/admin/utilisateurs/{uid}/statut",
+                        params={"jeton": jeton, "actif": actif},
                     )
                     if rep["status_code"] != 200:
                         erreurs.append(message_erreur(rep))
@@ -178,15 +175,6 @@ with st.container(border=True):
                 else:
                     st.info("Aucune modification à enregistrer.")
 
-            if confirmer:
-                rep = api_client.delete(f"/admin/utilisateurs/{uid}/supprimer")
-                if rep["status_code"] in (200, 204):
-                    st.success(f"Compte « {u.get('nom_utilisateur', '')} » supprimé.")
-                    st.rerun()
-                else:
-                    st.error(message_erreur(rep))
-            
-           
 
 # --- Section 2: Imports ILOSTAT --------------------------------------------
 with st.container(border=True):

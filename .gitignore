@@ -6,6 +6,9 @@ __pycache__/
 # C extensions
 *.so
 
+# Fichiers temporaires d'écriture atomique (ex. *.py.tmp.<pid>.<hash>)
+*.tmp.*
+
 # Distribution / packaging
 .Python
 build/
