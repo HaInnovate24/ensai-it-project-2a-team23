@@ -26,7 +26,11 @@ from controller import (  # noqa: E402
     analyse_controller,
     auth_controller,
     journal_controller,
+<<<<<<< HEAD
     # rapport_controller,
+=======
+    rapport_controller,
+>>>>>>> 59f5b51c38ac61ad2f089066d3533c0b15f88ad8
     referentiel_controller,
 )
 app = FastAPI(title="LaborScope")
@@ -53,7 +57,8 @@ app.include_router(referentiel_controller.router, prefix="/referentiels", tags=[
 app.include_router(analyse_controller.router, prefix="/analyses", tags=["Analyses"])
 #app.include_router(rapport_controller.router, prefix="/rapports", tags=["Rapports"])
 app.include_router(admin_controller.router, prefix="/admin", tags=["Administration"])
-app.include_router(journal_controller.router, prefix="/journal", tags=["Journal"]) 
+app.include_router(journal_controller.router, prefix="/journal", tags=["Journal"])
+
 
 @app.get("/", include_in_schema=False)
 async def redirect_to_docs():

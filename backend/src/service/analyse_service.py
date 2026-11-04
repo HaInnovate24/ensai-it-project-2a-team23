@@ -85,10 +85,10 @@ class AnalyseService:
         sexe: Sexe | None = None,
         code_classification: str | None = None,
     ) -> Comparaison:
-        """F4 : compare un indicateur entre plusieurs pays.
+        """Compare un indicateur entre plusieurs pays.
 
         Chaque pays donne une série d'un seul point. Les séries sont triées de la
-        valeur la plus haute à la plus basse : la première est le pays le plus
+        valeur la plus haute à la plus basse. La première est le pays le plus
         haut, la dernière le pays le plus bas.
 
         Si periode est None, on prend pour chaque pays sa période la plus récente.
@@ -122,7 +122,7 @@ class AnalyseService:
             )
             for obs in observations
         ]
-        # Tri : valeur décroissante, puis nom du pays pour départager les égalités.
+        # Valeur décroissante, puis nom du pays pour départager les égalités.
         series.sort(key=lambda serie: (-serie.points[0].valeur, serie.libelle))
         return Comparaison(series=series)
 

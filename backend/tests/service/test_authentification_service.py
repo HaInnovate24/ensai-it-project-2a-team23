@@ -1,9 +1,8 @@
 """Tests du service d'authentification, sans base de données.
 
-Principe : on donne au service un faux DAO (liste d'utilisateurs en mémoire) et une
-fausse sécurité (hachage et jetons très simples). On teste ainsi uniquement la
-logique du service. Un dernier test utilise la vraie sécurité pour vérifier que
-le branchement par défaut fonctionne.
+Principe : on donne au service un faux DAO et une fausse sécurité (hachage et jetons simples).
+On teste ainsi uniquement la logique du service. Un dernier test utilise la vraie sécurité pour
+vérifier que le branchement par défaut fonctionne.
 """
 
 from datetime import datetime

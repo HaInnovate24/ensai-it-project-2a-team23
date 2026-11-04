@@ -1,7 +1,7 @@
 """Dépendances FastAPI : lecture du jeton et contrôle d'accès."""
 
-from service.authentification_service import AuthentificationService
 from business_object.utilisateur import Utilisateur
+from service.authentification_service import AuthentificationService
 
 
 def utilisateur_courant(jeton: str) -> Utilisateur:

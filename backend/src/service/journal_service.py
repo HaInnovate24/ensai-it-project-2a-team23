@@ -41,7 +41,6 @@ class JournalService:
         cible: str | None = None,
         details: str | None = None,
     ) -> JournalActivite:
-
         """Enregistre une action dans le journal et renvoie l'entrée créée.
 
         utilisateur_id vaut None pour une action automatique (sans utilisateur).
