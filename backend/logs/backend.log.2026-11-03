@@ -1,0 +1,331 @@
+03/11/2026 11:06:52 root                      INFO    - --------------------------------------------------
+03/11/2026 11:06:52 root                      INFO    - Starting Webservice                           
+03/11/2026 11:06:52 root                      INFO    - --------------------------------------------------
+03/11/2026 11:06:52 root                      INFO    - Load environment variables: SUCCES
+03/11/2026 11:06:52 root                      INFO    - POSTGRES_HOST=postgresql-cnpg-886449-rw.user-alexandre21
+03/11/2026 11:06:52 root                      INFO    - POSTGRES_PORT=5432
+03/11/2026 11:06:52 root                      INFO    - POSTGRES_DATABASE=defaultdb
+03/11/2026 11:06:52 root                      INFO    - POSTGRES_USER=user-alexandre21
+03/11/2026 11:06:52 root                      INFO    - POSTGRES_PASSWORD=*******
+03/11/2026 11:06:52 root                      INFO    - POSTGRES_SCHEMA=project
+03/11/2026 11:06:52 root                      INFO    - UVICORN_HOST=0.0.0.0
+03/11/2026 11:06:52 root                      INFO    - UVICORN_PORT=5000
+03/11/2026 11:07:06 root                      INFO    - --------------------------------------------------
+03/11/2026 11:07:06 root                      INFO    - Starting Webservice                           
+03/11/2026 11:07:06 root                      INFO    - --------------------------------------------------
+03/11/2026 11:07:06 root                      INFO    - Load environment variables: SUCCES
+03/11/2026 11:07:06 root                      INFO    - POSTGRES_HOST=postgresql-cnpg-886449-rw.user-alexandre21
+03/11/2026 11:07:06 root                      INFO    - POSTGRES_PORT=5432
+03/11/2026 11:07:06 root                      INFO    - POSTGRES_DATABASE=defaultdb
+03/11/2026 11:07:06 root                      INFO    - POSTGRES_USER=user-alexandre21
+03/11/2026 11:07:06 root                      INFO    - POSTGRES_PASSWORD=*******
+03/11/2026 11:07:06 root                      INFO    - POSTGRES_SCHEMA=project
+03/11/2026 11:07:06 root                      INFO    - UVICORN_HOST=0.0.0.0
+03/11/2026 11:07:06 root                      INFO    - UVICORN_PORT=5000
+03/11/2026 11:10:49 root                      INFO    - --------------------------------------------------
+03/11/2026 11:10:49 root                      INFO    - Starting Webservice                           
+03/11/2026 11:10:49 root                      INFO    - --------------------------------------------------
+03/11/2026 11:10:49 root                      INFO    - Load environment variables: SUCCES
+03/11/2026 11:10:49 root                      INFO    - POSTGRES_HOST=postgresql-cnpg-886449-rw.user-alexandre21
+03/11/2026 11:10:49 root                      INFO    - POSTGRES_PORT=5432
+03/11/2026 11:10:49 root                      INFO    - POSTGRES_DATABASE=defaultdb
+03/11/2026 11:10:49 root                      INFO    - POSTGRES_USER=user-alexandre21
+03/11/2026 11:10:49 root                      INFO    - POSTGRES_PASSWORD=*******
+03/11/2026 11:10:49 root                      INFO    - POSTGRES_SCHEMA=project
+03/11/2026 11:10:49 root                      INFO    - UVICORN_HOST=0.0.0.0
+03/11/2026 11:10:49 root                      INFO    - UVICORN_PORT=5000
+03/11/2026 11:12:02 root                      INFO    - --------------------------------------------------
+03/11/2026 11:12:02 root                      INFO    - Starting Webservice                           
+03/11/2026 11:12:02 root                      INFO    - --------------------------------------------------
+03/11/2026 11:12:02 root                      INFO    - Load environment variables: SUCCES
+03/11/2026 11:12:02 root                      INFO    - POSTGRES_HOST=postgresql-cnpg-886449-rw.user-alexandre21
+03/11/2026 11:12:02 root                      INFO    - POSTGRES_PORT=5432
+03/11/2026 11:12:02 root                      INFO    - POSTGRES_DATABASE=defaultdb
+03/11/2026 11:12:02 root                      INFO    - POSTGRES_USER=user-alexandre21
+03/11/2026 11:12:02 root                      INFO    - POSTGRES_PASSWORD=*******
+03/11/2026 11:12:02 root                      INFO    - POSTGRES_SCHEMA=project
+03/11/2026 11:12:02 root                      INFO    - UVICORN_HOST=0.0.0.0
+03/11/2026 11:12:02 root                      INFO    - UVICORN_PORT=5000
+03/11/2026 11:20:44 root                      INFO    - --------------------------------------------------
+03/11/2026 11:20:44 root                      INFO    - Starting Webservice                           
+03/11/2026 11:20:44 root                      INFO    - --------------------------------------------------
+03/11/2026 11:20:44 root                      INFO    - Load environment variables: SUCCES
+03/11/2026 11:20:44 root                      INFO    - POSTGRES_HOST=postgresql-cnpg-886449-rw.user-alexandre21
+03/11/2026 11:20:44 root                      INFO    - POSTGRES_PORT=5432
+03/11/2026 11:20:44 root                      INFO    - POSTGRES_DATABASE=defaultdb
+03/11/2026 11:20:44 root                      INFO    - POSTGRES_USER=user-alexandre21
+03/11/2026 11:20:44 root                      INFO    - POSTGRES_PASSWORD=*******
+03/11/2026 11:20:44 root                      INFO    - POSTGRES_SCHEMA=project
+03/11/2026 11:20:44 root                      INFO    - UVICORN_HOST=0.0.0.0
+03/11/2026 11:20:44 root                      INFO    - UVICORN_PORT=5000
+03/11/2026 11:25:52 root                      INFO    - --------------------------------------------------
+03/11/2026 11:25:52 root                      INFO    - Starting Webservice                           
+03/11/2026 11:25:52 root                      INFO    - --------------------------------------------------
+03/11/2026 11:25:52 root                      INFO    - Load environment variables: SUCCES
+03/11/2026 11:25:52 root                      INFO    - POSTGRES_HOST=postgresql-cnpg-886449-rw.user-alexandre21
+03/11/2026 11:25:52 root                      INFO    - POSTGRES_PORT=5432
+03/11/2026 11:25:52 root                      INFO    - POSTGRES_DATABASE=defaultdb
+03/11/2026 11:25:52 root                      INFO    - POSTGRES_USER=user-alexandre21
+03/11/2026 11:25:52 root                      INFO    - POSTGRES_PASSWORD=*******
+03/11/2026 11:25:52 root                      INFO    - POSTGRES_SCHEMA=project
+03/11/2026 11:25:52 root                      INFO    - UVICORN_HOST=0.0.0.0
+03/11/2026 11:25:52 root                      INFO    - UVICORN_PORT=5000
+03/11/2026 11:26:28 root                      INFO    - --------------------------------------------------
+03/11/2026 11:26:28 root                      INFO    - Starting Webservice                           
+03/11/2026 11:26:28 root                      INFO    - --------------------------------------------------
+03/11/2026 11:26:28 root                      INFO    - Load environment variables: SUCCES
+03/11/2026 11:26:28 root                      INFO    - POSTGRES_HOST=postgresql-cnpg-886449-rw.user-alexandre21
+03/11/2026 11:26:28 root                      INFO    - POSTGRES_PORT=5432
+03/11/2026 11:26:28 root                      INFO    - POSTGRES_DATABASE=defaultdb
+03/11/2026 11:26:28 root                      INFO    - POSTGRES_USER=user-alexandre21
+03/11/2026 11:26:28 root                      INFO    - POSTGRES_PASSWORD=*******
+03/11/2026 11:26:28 root                      INFO    - POSTGRES_SCHEMA=project
+03/11/2026 11:26:28 root                      INFO    - UVICORN_HOST=0.0.0.0
+03/11/2026 11:26:28 root                      INFO    - UVICORN_PORT=5000
+03/11/2026 11:26:43 __main__                  INFO    - Webservice stopped
+03/11/2026 11:27:06 root                      INFO    - --------------------------------------------------
+03/11/2026 11:27:06 root                      INFO    - Starting Webservice                           
+03/11/2026 11:27:06 root                      INFO    - --------------------------------------------------
+03/11/2026 11:27:06 root                      INFO    - Load environment variables: SUCCES
+03/11/2026 11:27:06 root                      INFO    - POSTGRES_HOST=postgresql-cnpg-886449-rw.user-alexandre21
+03/11/2026 11:27:06 root                      INFO    - POSTGRES_PORT=5432
+03/11/2026 11:27:06 root                      INFO    - POSTGRES_DATABASE=defaultdb
+03/11/2026 11:27:06 root                      INFO    - POSTGRES_USER=user-alexandre21
+03/11/2026 11:27:06 root                      INFO    - POSTGRES_PASSWORD=*******
+03/11/2026 11:27:06 root                      INFO    - POSTGRES_SCHEMA=project
+03/11/2026 11:27:06 root                      INFO    - UVICORN_HOST=0.0.0.0
+03/11/2026 11:27:06 root                      INFO    - UVICORN_PORT=5000
+03/11/2026 11:31:00 root                      INFO    - --------------------------------------------------
+03/11/2026 11:31:00 root                      INFO    - Starting Webservice                           
+03/11/2026 11:31:00 root                      INFO    - --------------------------------------------------
+03/11/2026 11:31:00 root                      INFO    - Load environment variables: SUCCES
+03/11/2026 11:31:00 root                      INFO    - POSTGRES_HOST=postgresql-cnpg-886449-rw.user-alexandre21
+03/11/2026 11:31:00 root                      INFO    - POSTGRES_PORT=5432
+03/11/2026 11:31:00 root                      INFO    - POSTGRES_DATABASE=defaultdb
+03/11/2026 11:31:00 root                      INFO    - POSTGRES_USER=user-alexandre21
+03/11/2026 11:31:00 root                      INFO    - POSTGRES_PASSWORD=*******
+03/11/2026 11:31:00 root                      INFO    - POSTGRES_SCHEMA=project
+03/11/2026 11:31:00 root                      INFO    - UVICORN_HOST=0.0.0.0
+03/11/2026 11:31:00 root                      INFO    - UVICORN_PORT=5000
+03/11/2026 11:35:33 root                      INFO    - --------------------------------------------------
+03/11/2026 11:35:33 root                      INFO    - Starting Webservice                           
+03/11/2026 11:35:33 root                      INFO    - --------------------------------------------------
+03/11/2026 11:35:33 root                      INFO    - Load environment variables: SUCCES
+03/11/2026 11:35:33 root                      INFO    - POSTGRES_HOST=postgresql-cnpg-886449-rw.user-alexandre21
+03/11/2026 11:35:33 root                      INFO    - POSTGRES_PORT=5432
+03/11/2026 11:35:33 root                      INFO    - POSTGRES_DATABASE=defaultdb
+03/11/2026 11:35:33 root                      INFO    - POSTGRES_USER=user-alexandre21
+03/11/2026 11:35:33 root                      INFO    - POSTGRES_PASSWORD=*******
+03/11/2026 11:35:33 root                      INFO    - POSTGRES_SCHEMA=project
+03/11/2026 11:35:33 root                      INFO    - UVICORN_HOST=0.0.0.0
+03/11/2026 11:35:33 root                      INFO    - UVICORN_PORT=5000
+03/11/2026 11:35:51 root                      INFO    - GET / - START
+03/11/2026 11:35:51 root                      INFO    - GET / - END [Status: 307]
+03/11/2026 11:35:51 root                      INFO    - GET /docs - START
+03/11/2026 11:35:51 root                      INFO    - GET /docs - END [Status: 200]
+03/11/2026 11:35:51 root                      INFO    - GET /openapi.json - START
+03/11/2026 11:35:51 root                      INFO    - GET /openapi.json - END [Status: 200]
+03/11/2026 11:37:09 __main__                  INFO    - Webservice stopped
+03/11/2026 13:40:13 root                      INFO    - --------------------------------------------------
+03/11/2026 13:40:13 root                      INFO    - Starting Webservice                           
+03/11/2026 13:40:13 root                      INFO    - --------------------------------------------------
+03/11/2026 13:40:13 root                      INFO    - Load environment variables: SUCCES
+03/11/2026 13:40:13 root                      INFO    - POSTGRES_HOST=postgresql-cnpg-886449-rw.user-alexandre21
+03/11/2026 13:40:13 root                      INFO    - POSTGRES_PORT=5432
+03/11/2026 13:40:13 root                      INFO    - POSTGRES_DATABASE=defaultdb
+03/11/2026 13:40:13 root                      INFO    - POSTGRES_USER=user-alexandre21
+03/11/2026 13:40:13 root                      INFO    - POSTGRES_PASSWORD=*******
+03/11/2026 13:40:13 root                      INFO    - POSTGRES_SCHEMA=project
+03/11/2026 13:40:13 root                      INFO    - UVICORN_HOST=0.0.0.0
+03/11/2026 13:40:13 root                      INFO    - UVICORN_PORT=5000
+03/11/2026 13:41:49 root                      INFO    - --------------------------------------------------
+03/11/2026 13:41:49 root                      INFO    - Starting Webservice                           
+03/11/2026 13:41:49 root                      INFO    - --------------------------------------------------
+03/11/2026 13:41:49 root                      INFO    - Load environment variables: SUCCES
+03/11/2026 13:41:49 root                      INFO    - POSTGRES_HOST=postgresql-cnpg-886449-rw.user-alexandre21
+03/11/2026 13:41:49 root                      INFO    - POSTGRES_PORT=5432
+03/11/2026 13:41:49 root                      INFO    - POSTGRES_DATABASE=defaultdb
+03/11/2026 13:41:49 root                      INFO    - POSTGRES_USER=user-alexandre21
+03/11/2026 13:41:49 root                      INFO    - POSTGRES_PASSWORD=*******
+03/11/2026 13:41:49 root                      INFO    - POSTGRES_SCHEMA=project
+03/11/2026 13:41:49 root                      INFO    - UVICORN_HOST=0.0.0.0
+03/11/2026 13:41:49 root                      INFO    - UVICORN_PORT=5000
+03/11/2026 13:41:49 root                      INFO    - GET /journal/ - START
+03/11/2026 13:41:49 root                      INFO    - GET /journal/ - END [Status: 200]
+03/11/2026 13:41:49 root                      INFO    - GET /journal/ - START
+03/11/2026 13:41:49 root                      INFO    - GET /journal/ - END [Status: 500]
+03/11/2026 13:44:41 root                      INFO    - --------------------------------------------------
+03/11/2026 13:44:41 root                      INFO    - Starting Webservice                           
+03/11/2026 13:44:41 root                      INFO    - --------------------------------------------------
+03/11/2026 13:44:41 root                      INFO    - Load environment variables: SUCCES
+03/11/2026 13:44:41 root                      INFO    - POSTGRES_HOST=postgresql-cnpg-886449-rw.user-alexandre21
+03/11/2026 13:44:41 root                      INFO    - POSTGRES_PORT=5432
+03/11/2026 13:44:41 root                      INFO    - POSTGRES_DATABASE=defaultdb
+03/11/2026 13:44:41 root                      INFO    - POSTGRES_USER=user-alexandre21
+03/11/2026 13:44:41 root                      INFO    - POSTGRES_PASSWORD=*******
+03/11/2026 13:44:41 root                      INFO    - POSTGRES_SCHEMA=project
+03/11/2026 13:44:41 root                      INFO    - UVICORN_HOST=0.0.0.0
+03/11/2026 13:44:41 root                      INFO    - UVICORN_PORT=5000
+03/11/2026 13:45:52 root                      INFO    - --------------------------------------------------
+03/11/2026 13:45:52 root                      INFO    - Starting Webservice                           
+03/11/2026 13:45:52 root                      INFO    - --------------------------------------------------
+03/11/2026 13:45:52 root                      INFO    - Load environment variables: SUCCES
+03/11/2026 13:45:52 root                      INFO    - POSTGRES_HOST=postgresql-cnpg-886449-rw.user-alexandre21
+03/11/2026 13:45:52 root                      INFO    - POSTGRES_PORT=5432
+03/11/2026 13:45:52 root                      INFO    - POSTGRES_DATABASE=defaultdb
+03/11/2026 13:45:52 root                      INFO    - POSTGRES_USER=user-alexandre21
+03/11/2026 13:45:52 root                      INFO    - POSTGRES_PASSWORD=*******
+03/11/2026 13:45:52 root                      INFO    - POSTGRES_SCHEMA=project
+03/11/2026 13:45:52 root                      INFO    - UVICORN_HOST=0.0.0.0
+03/11/2026 13:45:52 root                      INFO    - UVICORN_PORT=5000
+03/11/2026 13:45:53 root                      INFO    - GET /journal/ - START
+03/11/2026 13:45:53 root                      INFO    - GET /journal/ - END [Status: 200]
+03/11/2026 13:45:53 root                      INFO    - GET /journal/ - START
+03/11/2026 13:45:53 root                      INFO    - GET /journal/ - END [Status: 500]
+03/11/2026 13:45:53 root                      INFO    - PUT /admin/utilisateurs/10 - START
+03/11/2026 13:45:53 root                      INFO    - PUT /admin/utilisateurs/10 - END [Status: 500]
+03/11/2026 13:47:47 root                      INFO    - --------------------------------------------------
+03/11/2026 13:47:47 root                      INFO    - Starting Webservice                           
+03/11/2026 13:47:47 root                      INFO    - --------------------------------------------------
+03/11/2026 13:47:47 root                      INFO    - Load environment variables: SUCCES
+03/11/2026 13:47:47 root                      INFO    - POSTGRES_HOST=postgresql-cnpg-886449-rw.user-alexandre21
+03/11/2026 13:47:47 root                      INFO    - POSTGRES_PORT=5432
+03/11/2026 13:47:47 root                      INFO    - POSTGRES_DATABASE=defaultdb
+03/11/2026 13:47:47 root                      INFO    - POSTGRES_USER=user-alexandre21
+03/11/2026 13:47:47 root                      INFO    - POSTGRES_PASSWORD=*******
+03/11/2026 13:47:47 root                      INFO    - POSTGRES_SCHEMA=project
+03/11/2026 13:47:47 root                      INFO    - UVICORN_HOST=0.0.0.0
+03/11/2026 13:47:47 root                      INFO    - UVICORN_PORT=5000
+03/11/2026 13:47:48 root                      INFO    - GET /journal/ - START
+03/11/2026 13:47:48 root                      INFO    - GET /journal/ - END [Status: 200]
+03/11/2026 13:47:48 root                      INFO    - GET /journal/ - START
+03/11/2026 13:47:48 root                      INFO    - GET /journal/ - END [Status: 500]
+03/11/2026 13:47:48 root                      INFO    - PUT /admin/utilisateurs/10 - START
+03/11/2026 13:47:48 root                      INFO    - PUT /admin/utilisateurs/10 - END [Status: 500]
+03/11/2026 13:50:05 root                      INFO    - --------------------------------------------------
+03/11/2026 13:50:05 root                      INFO    - Starting Webservice                           
+03/11/2026 13:50:05 root                      INFO    - --------------------------------------------------
+03/11/2026 13:50:05 root                      INFO    - Load environment variables: SUCCES
+03/11/2026 13:50:05 root                      INFO    - POSTGRES_HOST=postgresql-cnpg-886449-rw.user-alexandre21
+03/11/2026 13:50:05 root                      INFO    - POSTGRES_PORT=5432
+03/11/2026 13:50:05 root                      INFO    - POSTGRES_DATABASE=defaultdb
+03/11/2026 13:50:05 root                      INFO    - POSTGRES_USER=user-alexandre21
+03/11/2026 13:50:05 root                      INFO    - POSTGRES_PASSWORD=*******
+03/11/2026 13:50:05 root                      INFO    - POSTGRES_SCHEMA=project
+03/11/2026 13:50:05 root                      INFO    - UVICORN_HOST=0.0.0.0
+03/11/2026 13:50:05 root                      INFO    - UVICORN_PORT=5000
+03/11/2026 13:50:06 root                      INFO    - GET /journal/ - START
+03/11/2026 13:50:06 root                      INFO    - GET /journal/ - END [Status: 200]
+03/11/2026 13:50:06 root                      INFO    - GET /journal/ - START
+03/11/2026 13:50:06 root                      INFO    - GET /journal/ - END [Status: 500]
+03/11/2026 13:50:06 root                      INFO    - PUT /admin/utilisateurs/10 - START
+03/11/2026 13:50:06 root                      INFO    - PUT /admin/utilisateurs/10 - END [Status: 500]
+03/11/2026 13:52:11 root                      INFO    - --------------------------------------------------
+03/11/2026 13:52:11 root                      INFO    - Starting Webservice                           
+03/11/2026 13:52:11 root                      INFO    - --------------------------------------------------
+03/11/2026 13:52:11 root                      INFO    - Load environment variables: SUCCES
+03/11/2026 13:52:11 root                      INFO    - POSTGRES_HOST=postgresql-cnpg-886449-rw.user-alexandre21
+03/11/2026 13:52:11 root                      INFO    - POSTGRES_PORT=5432
+03/11/2026 13:52:11 root                      INFO    - POSTGRES_DATABASE=defaultdb
+03/11/2026 13:52:11 root                      INFO    - POSTGRES_USER=user-alexandre21
+03/11/2026 13:52:11 root                      INFO    - POSTGRES_PASSWORD=*******
+03/11/2026 13:52:11 root                      INFO    - POSTGRES_SCHEMA=project
+03/11/2026 13:52:11 root                      INFO    - UVICORN_HOST=0.0.0.0
+03/11/2026 13:52:11 root                      INFO    - UVICORN_PORT=5000
+03/11/2026 13:52:11 root                      INFO    - GET /journal/ - START
+03/11/2026 13:52:11 root                      INFO    - GET /journal/ - END [Status: 200]
+03/11/2026 13:52:11 root                      INFO    - GET /journal/ - START
+03/11/2026 13:52:11 root                      INFO    - GET /journal/ - END [Status: 500]
+03/11/2026 13:52:11 root                      INFO    - PUT /admin/utilisateurs/10 - START
+03/11/2026 13:52:11 root                      INFO    - PUT /admin/utilisateurs/10 - END [Status: 200]
+03/11/2026 13:52:11 root                      INFO    - PUT /admin/utilisateurs/10 - START
+03/11/2026 13:52:11 root                      INFO    - PUT /admin/utilisateurs/10 - END [Status: 400]
+03/11/2026 13:52:11 root                      INFO    - DELETE /admin/observations/456 - START
+03/11/2026 13:52:11 root                      INFO    - DELETE /admin/observations/456 - END [Status: 200]
+03/11/2026 15:23:35 root                      INFO    - --------------------------------------------------
+03/11/2026 15:23:35 root                      INFO    - Starting Webservice                           
+03/11/2026 15:23:35 root                      INFO    - --------------------------------------------------
+03/11/2026 15:23:35 root                      INFO    - Load environment variables: SUCCES
+03/11/2026 15:23:35 root                      INFO    - POSTGRES_HOST=postgresql-cnpg-886449-rw.user-alexandre21
+03/11/2026 15:23:35 root                      INFO    - POSTGRES_PORT=5432
+03/11/2026 15:23:35 root                      INFO    - POSTGRES_DATABASE=defaultdb
+03/11/2026 15:23:35 root                      INFO    - POSTGRES_USER=user-alexandre21
+03/11/2026 15:23:35 root                      INFO    - POSTGRES_PASSWORD=*******
+03/11/2026 15:23:35 root                      INFO    - POSTGRES_SCHEMA=project
+03/11/2026 15:23:35 root                      INFO    - UVICORN_HOST=0.0.0.0
+03/11/2026 15:23:35 root                      INFO    - UVICORN_PORT=5000
+03/11/2026 15:23:48 root                      INFO    - GET / - START
+03/11/2026 15:23:48 root                      INFO    - GET / - END [Status: 307]
+03/11/2026 15:23:48 root                      INFO    - GET /docs - START
+03/11/2026 15:23:48 root                      INFO    - GET /docs - END [Status: 200]
+03/11/2026 15:23:48 root                      INFO    - GET /openapi.json - START
+03/11/2026 15:23:48 root                      INFO    - GET /openapi.json - END [Status: 200]
+03/11/2026 15:24:11 __main__                  INFO    - Webservice stopped
+03/11/2026 15:35:39 root                      INFO    - --------------------------------------------------
+03/11/2026 15:35:39 root                      INFO    - Starting Webservice                           
+03/11/2026 15:35:39 root                      INFO    - --------------------------------------------------
+03/11/2026 15:35:39 root                      INFO    - Load environment variables: SUCCES
+03/11/2026 15:35:39 root                      INFO    - POSTGRES_HOST=postgresql-cnpg-886449-rw.user-alexandre21
+03/11/2026 15:35:39 root                      INFO    - POSTGRES_PORT=5432
+03/11/2026 15:35:39 root                      INFO    - POSTGRES_DATABASE=defaultdb
+03/11/2026 15:35:39 root                      INFO    - POSTGRES_USER=user-alexandre21
+03/11/2026 15:35:39 root                      INFO    - POSTGRES_PASSWORD=*******
+03/11/2026 15:35:39 root                      INFO    - POSTGRES_SCHEMA=project
+03/11/2026 15:35:39 root                      INFO    - UVICORN_HOST=0.0.0.0
+03/11/2026 15:35:39 root                      INFO    - UVICORN_PORT=5000
+03/11/2026 15:35:44 __main__                  INFO    - Webservice stopped
+03/11/2026 15:36:28 root                      INFO    - --------------------------------------------------
+03/11/2026 15:36:28 root                      INFO    - Starting Webservice                           
+03/11/2026 15:36:28 root                      INFO    - --------------------------------------------------
+03/11/2026 15:36:28 root                      INFO    - Load environment variables: SUCCES
+03/11/2026 15:36:28 root                      INFO    - POSTGRES_HOST=postgresql-cnpg-886449-rw.user-alexandre21
+03/11/2026 15:36:28 root                      INFO    - POSTGRES_PORT=5432
+03/11/2026 15:36:28 root                      INFO    - POSTGRES_DATABASE=defaultdb
+03/11/2026 15:36:28 root                      INFO    - POSTGRES_USER=user-alexandre21
+03/11/2026 15:36:28 root                      INFO    - POSTGRES_PASSWORD=*******
+03/11/2026 15:36:28 root                      INFO    - POSTGRES_SCHEMA=project
+03/11/2026 15:36:28 root                      INFO    - UVICORN_HOST=0.0.0.0
+03/11/2026 15:36:28 root                      INFO    - UVICORN_PORT=5000
+03/11/2026 15:36:32 root                      INFO    - GET / - START
+03/11/2026 15:36:32 root                      INFO    - GET / - END [Status: 307]
+03/11/2026 15:36:32 root                      INFO    - GET /docs - START
+03/11/2026 15:36:32 root                      INFO    - GET /docs - END [Status: 200]
+03/11/2026 15:36:55 __main__                  INFO    - Webservice stopped
+03/11/2026 15:37:05 root                      INFO    - --------------------------------------------------
+03/11/2026 15:37:05 root                      INFO    - Starting Webservice                           
+03/11/2026 15:37:05 root                      INFO    - --------------------------------------------------
+03/11/2026 15:37:05 root                      INFO    - Load environment variables: SUCCES
+03/11/2026 15:37:05 root                      INFO    - POSTGRES_HOST=postgresql-cnpg-886449-rw.user-alexandre21
+03/11/2026 15:37:05 root                      INFO    - POSTGRES_PORT=5432
+03/11/2026 15:37:05 root                      INFO    - POSTGRES_DATABASE=defaultdb
+03/11/2026 15:37:05 root                      INFO    - POSTGRES_USER=user-alexandre21
+03/11/2026 15:37:05 root                      INFO    - POSTGRES_PASSWORD=*******
+03/11/2026 15:37:05 root                      INFO    - POSTGRES_SCHEMA=project
+03/11/2026 15:37:05 root                      INFO    - UVICORN_HOST=0.0.0.0
+03/11/2026 15:37:05 root                      INFO    - UVICORN_PORT=5000
+03/11/2026 15:37:12 root                      INFO    - GET / - START
+03/11/2026 15:37:12 root                      INFO    - GET / - END [Status: 307]
+03/11/2026 15:37:12 root                      INFO    - GET /docs - START
+03/11/2026 15:37:12 root                      INFO    - GET /docs - END [Status: 200]
+03/11/2026 15:37:12 root                      INFO    - GET /openapi.json - START
+03/11/2026 15:37:12 root                      INFO    - GET /openapi.json - END [Status: 200]
+03/11/2026 15:37:19 __main__                  INFO    - Webservice stopped
+03/11/2026 15:43:45 root                      INFO    - --------------------------------------------------
+03/11/2026 15:43:45 root                      INFO    - Starting Webservice                           
+03/11/2026 15:43:45 root                      INFO    - --------------------------------------------------
+03/11/2026 15:43:45 root                      INFO    - Load environment variables: SUCCES
+03/11/2026 15:43:45 root                      INFO    - POSTGRES_HOST=postgresql-cnpg-886449-rw.user-alexandre21
+03/11/2026 15:43:45 root                      INFO    - POSTGRES_PORT=5432
+03/11/2026 15:43:45 root                      INFO    - POSTGRES_DATABASE=defaultdb
+03/11/2026 15:43:45 root                      INFO    - POSTGRES_USER=user-alexandre21
+03/11/2026 15:43:45 root                      INFO    - POSTGRES_PASSWORD=*******
+03/11/2026 15:43:45 root                      INFO    - POSTGRES_SCHEMA=project
+03/11/2026 15:43:45 root                      INFO    - UVICORN_HOST=0.0.0.0
+03/11/2026 15:43:45 root                      INFO    - UVICORN_PORT=5000
+03/11/2026 15:43:52 root                      INFO    - GET / - START
+03/11/2026 15:43:52 root                      INFO    - GET / - END [Status: 307]
+03/11/2026 15:43:52 root                      INFO    - GET /docs - START
+03/11/2026 15:43:52 root                      INFO    - GET /docs - END [Status: 200]
+03/11/2026 15:43:52 root                      INFO    - GET /openapi.json - START
+03/11/2026 15:43:52 root                      INFO    - GET /openapi.json - END [Status: 200]
+03/11/2026 15:44:04 __main__                  INFO    - Webservice stopped
