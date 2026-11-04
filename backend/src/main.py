@@ -26,11 +26,7 @@ from controller import (  # noqa: E402
     analyse_controller,
     auth_controller,
     journal_controller,
-<<<<<<< HEAD
-    # rapport_controller,
-=======
-    rapport_controller,
->>>>>>> 59f5b51c38ac61ad2f089066d3533c0b15f88ad8
+    #rapport_controller,
     referentiel_controller,
 )
 app = FastAPI(title="LaborScope")

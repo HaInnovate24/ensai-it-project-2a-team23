@@ -8,7 +8,7 @@ from business_object.utilisateur import Utilisateur
 from model.donnees_model import ObservationCorrection
 from service.collecte_service import CollecteService
 from service.donnees_service import DonneesService
-from service.utilisateur_service import UtilisateurService
+#from service.utilisateur_service import UtilisateurService
 
 router = APIRouter()
 collecte_service = CollecteService()
