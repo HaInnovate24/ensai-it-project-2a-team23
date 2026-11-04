@@ -1,10 +1,13 @@
 from unittest.mock import patch
 
+from fastapi import FastAPI
 from fastapi.testclient import TestClient
 
-from main import app
+from controller.journal_controller import router
 
-client = TestClient(app)
+app = FastAPI()
+app.include_router(router, prefix="/journal")
+client = TestClient(app, raise_server_exceptions=False)
 
 
 @patch("controller.journal_controller.journal_service.consulter")

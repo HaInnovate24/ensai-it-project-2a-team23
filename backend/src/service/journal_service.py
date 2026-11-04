@@ -31,9 +31,6 @@ class JournalService:
         """
         self.journal_dao = journal_dao if journal_dao is not None else JournalDao()
 
-    def __init__(self):
-        self.journal_dao = JournalDao()
-
     def enregistrer(
         self,
         utilisateur_id: int | None,
@@ -67,6 +64,10 @@ class JournalService:
             details=details,
         )
         return self.journal_dao.creer(entree)
+
+    def consulter(self) -> list[JournalActivite]:
+        """Renvoie toutes les entrées du journal sans restriction d'accès."""
+        return self.journal_dao.lister()
 
     def lister(
         self,

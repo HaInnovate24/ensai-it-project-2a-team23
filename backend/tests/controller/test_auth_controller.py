@@ -8,11 +8,14 @@ transformées en réponses HTTP appropriées.
 import requests
 from unittest.mock import patch
 
+from fastapi import FastAPI
 from fastapi.testclient import TestClient
 
 from business_object.utilisateur import Utilisateur
-from main import app
+from controller.auth_controller import router
 
+app = FastAPI()
+app.include_router(router, prefix="/auth")
 client = TestClient(app)
 
 

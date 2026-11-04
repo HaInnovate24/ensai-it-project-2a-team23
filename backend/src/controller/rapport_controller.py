@@ -22,7 +22,7 @@ def demander_rapport(
     # TODO: Remplacer par l'ID réel extrait du jeton d'authentification
     utilisateur_id = 1 
     
-    return service.generer_rapport(
+    return service.generer(
         utilisateur_id=utilisateur_id,
         titre=demande.titre,
         description=demande.description,
@@ -32,7 +32,9 @@ def demander_rapport(
 @router.get("/", response_model=list[RapportSortie])
 def lister_rapports(service: RapportService = Depends(get_rapport_service)):
     """Liste l'historique des rapports."""
-    return service.lister()
+    # TODO: Remplacer par l'ID réel extrait du jeton d'authentification
+    utilisateur_id = 1
+    return service.lister(utilisateur_id)
 
 @router.get("/{rapport_id}/telecharger")
 def telecharger_pdf(

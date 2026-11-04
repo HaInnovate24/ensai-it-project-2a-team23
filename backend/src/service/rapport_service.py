@@ -52,6 +52,10 @@ class RapportService:
         """Renvoie les rapports d'un utilisateur."""
         return self.dao.lister(utilisateur_id)
 
+    def trouver_par_id(self, rapport_id: int) -> Rapport | None:
+        """Renvoie le rapport correspondant à l'ID, ou None s'il n'existe pas."""
+        return self.dao.trouver_par_id(rapport_id)
+
     def telecharger(self, rapport_id: int) -> bytes:
         """Renvoie le contenu binaire du PDF d'un rapport."""
         rapport = self.dao.trouver_par_id(rapport_id)
