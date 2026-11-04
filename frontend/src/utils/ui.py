@@ -78,9 +78,12 @@ def injecter_styles() -> None:
             font-family: 'Material Symbols Rounded', 'Material Icons' !important;
         }
 
-        /* Fond crème + largeur de lecture confortable. */
+        /* Fond crème + zone de travail large (place aux graphiques). */
         .stApp { background: #F4F3EE; }
-        .block-container { max-width: 1240px; padding-top: 3.4rem; padding-bottom: 4rem; }
+        .block-container {
+            max-width: 1480px; padding-top: 2.6rem; padding-bottom: 4rem;
+            padding-left: 3rem; padding-right: 3rem;
+        }
 
         /* Titres en serif. */
         h1, h2, h3, h4,
@@ -134,6 +137,18 @@ def injecter_styles() -> None:
         .stSlider label p, .stNumberInput label p {
             font-weight: 600; color: #39443F;
         }
+        /* Libellé de filtre personnalisé (avec compteur / unité à droite). */
+        .ls-flabel {
+            display:flex; align-items:baseline; justify-content:space-between;
+            font-weight:600; color:#39443F; font-size:0.92rem; margin-bottom:0.35rem;
+        }
+        .ls-flabel .muted { color:#A7AEA8; font-weight:500; font-size:0.78rem; }
+        /* Pastille d'unité (« En % ») au-dessus du graphique. */
+        .ls-pill {
+            display:inline-block; background:#F4F3EE; border:1px solid #E7E6DD;
+            border-radius:999px; padding:0.15rem 0.6rem; font-size:0.78rem;
+            font-weight:600; color:#5C6862;
+        }
 
         /* Métriques natives (st.metric) : chiffre en serif. */
         [data-testid="stMetricValue"] { font-family: 'Lora', Georgia, serif; color: #1F2A26; }
@@ -143,18 +158,39 @@ def injecter_styles() -> None:
         [data-testid="stSidebar"] { border-right: none; }
         [data-testid="stSidebar"] .block-container { padding-top: 1.4rem; }
 
-        /* Navigation (st.navigation) stylée en « pills ». */
+        /* Navigation (st.navigation) stylée en « pills » soignées. */
         [data-testid="stSidebarNav"] { margin-top: 0.2rem; }
-        [data-testid="stSidebarNav"] ul { gap: 2px; }
+        [data-testid="stSidebarNav"] ul { gap: 3px; }
         [data-testid="stSidebarNav"] a {
-            border-radius: 10px; padding: 0.5rem 0.7rem; color: #AFC4B8 !important;
-            font-weight: 500;
+            position: relative; border-radius: 10px; padding: 0.55rem 0.8rem;
+            color: #AFC4B8 !important; font-weight: 500;
         }
-        [data-testid="stSidebarNav"] a:hover { background: rgba(255,255,255,0.05); }
+        [data-testid="stSidebarNav"] a:hover {
+            background: rgba(255,255,255,0.06); color: #EAF2EC !important;
+        }
+        /* Icône de menu : vert discret, blanc-vert quand actif. */
+        [data-testid="stSidebarNav"] a span[data-testid="stIconMaterial"] { color: #7FA592; }
+        [data-testid="stSidebarNav"] a:hover span[data-testid="stIconMaterial"] { color: #BFE8D3; }
         [data-testid="stSidebarNav"] a[aria-current="page"] {
-            background: #1C4435; color: #FFFFFF !important;
+            background: #1C4435; color: #FFFFFF !important; font-weight: 600;
+            box-shadow: inset 0 0 0 1px rgba(143,227,184,0.14);
+        }
+        /* Repère vertical vert sur l'élément actif. */
+        [data-testid="stSidebarNav"] a[aria-current="page"]::before {
+            content: ""; position: absolute; left: 5px; top: 50%; transform: translateY(-50%);
+            width: 3px; height: 17px; border-radius: 2px; background: #8FE3B8;
         }
         [data-testid="stSidebarNav"] a[aria-current="page"] span { color: #FFFFFF !important; }
+        [data-testid="stSidebarNav"] a[aria-current="page"] span[data-testid="stIconMaterial"] {
+            color: #8FE3B8 !important;
+        }
+        /* Intitulés de groupes (« Espace d'analyse », etc.) : petites capitales. */
+        [data-testid="stSidebarNav"] ul + div,
+        [data-testid="stNavSectionHeader"] {
+            font-size: 0.66rem !important; font-weight: 700 !important; letter-spacing: 0.14em;
+            text-transform: uppercase; color: #6E8578 !important;
+            margin: 0.9rem 0 0.3rem 0.2rem;
+        }
 
         /* En-tête de section dans la barre latérale. */
         .ls-side-label {
@@ -193,6 +229,8 @@ def injecter_styles() -> None:
             background:#fff; border:1px solid #E7E6DD; border-radius:14px; padding:1.1rem 1.2rem;
             box-shadow:0 1px 2px rgba(31,42,38,0.04); height:100%;
         }
+        .ls-metric .top { display:flex; align-items:flex-start; justify-content:space-between; gap:0.5rem; }
+        .ls-metric .ic { color:#C5CEC8; flex:0 0 auto; line-height:0; margin-top:1px; }
         .ls-metric .lab { color:#8A938D; font-size:0.9rem; font-weight:600; }
         .ls-metric .val { font-family:'Lora',serif; color:#1F2A26; font-size:2.4rem; line-height:1;
             margin:0.6rem 0 0.2rem; }
@@ -219,9 +257,118 @@ def injecter_styles() -> None:
             color:#39443F; margin-right:0.4rem; }
         .ls-chip .dot { width:8px; height:8px; border-radius:50%; display:inline-block; }
 
+        /* ============ Finitions « produit » (sobre, pro, UX) ============ */
+        /* Transitions douces sur les éléments interactifs. */
+        .stButton > button, .stDownloadButton > button, [data-baseweb="select"] > div,
+        .stTextInput input, .stNumberInput input, [data-testid="stPopover"] button,
+        [data-testid="stVerticalBlockBorderWrapper"], a, .ls-metric, .ls-chip {
+            transition: border-color .15s ease, box-shadow .15s ease,
+                        background-color .15s ease, color .15s ease, transform .15s ease;
+        }
+        /* Anneau de focus accessible (vert discret) plutôt que le contour par défaut. */
+        button:focus-visible, a:focus-visible, input:focus-visible,
+        [role="button"]:focus-visible, [data-baseweb="select"] > div:focus-within {
+            outline: none !important;
+            box-shadow: 0 0 0 3px rgba(46,114,87,0.20) !important;
+        }
+        ::selection { background: rgba(46,114,87,0.16); }
+
+        /* Barre de défilement sobre. */
+        * { scrollbar-width: thin; scrollbar-color: #D6D9CF transparent; }
+        ::-webkit-scrollbar { width: 11px; height: 11px; }
+        ::-webkit-scrollbar-thumb {
+            background: #D6D9CF; border-radius: 999px; border: 3px solid #F4F3EE;
+        }
+        ::-webkit-scrollbar-thumb:hover { background: #C3C8BB; }
+
+        /* Champs : fond blanc, hauteur confortable, focus net. */
+        [data-baseweb="select"] > div { background:#fff; min-height:42px; }
+        [data-baseweb="select"] > div:hover { border-color:#CFD4C9; }
+        .stTextInput input:focus, .stNumberInput input:focus {
+            border-color:#2E7257 !important; box-shadow:0 0 0 3px rgba(46,114,87,0.14) !important;
+        }
+
+        /* Déclencheur de popover : allure d'un select (texte à gauche, cadre doux). */
+        [data-testid="stPopover"] > div > button {
+            justify-content:space-between; background:#fff; border:1px solid #E7E6DD;
+            border-radius:10px; color:#1F2A26; font-weight:500; min-height:42px;
+        }
+        [data-testid="stPopover"] > div > button:hover { border-color:#2E7257; color:#215540; }
+
+        /* Cartes : survol subtil (cadre teinté + ombre portée). */
+        [data-testid="stVerticalBlockBorderWrapper"]:hover {
+            border-color:#DADFD3; box-shadow:0 8px 24px rgba(31,42,38,0.06);
+        }
+        .ls-metric:hover {
+            border-color:#DADFD3; box-shadow:0 8px 24px rgba(31,42,38,0.06);
+            transform:translateY(-1px);
+        }
+
+        /* Chiffres alignés verticalement (tabular figures). */
+        .ls-metric .val, [data-testid="stMetricValue"], .ls-aside .v, .ls-aside .row {
+            font-variant-numeric: tabular-nums; font-feature-settings:"tnum" 1;
+        }
+
+        /* Contrôle segmenté : pastilles, sélection verte. */
+        [data-testid="stSegmentedControl"] button { border-radius:999px !important; font-weight:600; }
+        [data-testid="stSegmentedControl"] button[aria-checked="true"],
+        [data-testid="stSegmentedControl"] button[kind="segmented_controlActive"] {
+            background:#2E7257 !important; color:#fff !important; border-color:#2E7257 !important;
+        }
+
+        /* Légendes et expander. */
+        [data-testid="stCaptionContainer"] p { color:#9AA39E; }
+        [data-testid="stExpander"] { border:1px solid #E7E6DD !important; border-radius:12px; background:#fff; }
+        [data-testid="stExpander"] summary:hover { color:#215540; }
+
+        /* Spinner teinté accent. */
+        .stSpinner > div { border-top-color:#2E7257 !important; }
+
+        /* Info/warning : coins doux, ton feutré. */
+        [data-testid="stAlert"] { border-radius:12px; }
+
+        /* Cartes de navigation (accueil) : badge d'icône, titre, description, tag. */
+        .ls-nav-ic {
+            width:42px; height:42px; border-radius:12px; background:#EAF1EC; color:#2E7257;
+            display:flex; align-items:center; justify-content:center; line-height:0;
+        }
+        .ls-nav-d { color:#5C6862; font-size:0.93rem; line-height:1.5; margin:0.5rem 0 0.7rem;
+            min-height:2.8em; }
+        .ls-tag { display:inline-block; font-size:0.68rem; font-weight:700; letter-spacing:0.09em;
+            text-transform:uppercase; padding:0.22rem 0.6rem; border-radius:999px; }
+        .ls-tag.libre { background:#EAF1EC; color:#2E7257; }
+        .ls-tag.verrou { background:#F1EFE8; color:#9AA39E; }
+
+        /* Lien de page (st.page_link) présenté comme une action discrète. */
+        [data-testid="stPageLink"] a {
+            color:#2E7257 !important; font-weight:600; border-radius:9px;
+            padding:0.3rem 0.1rem; margin-top:0.2rem;
+        }
+        [data-testid="stPageLink"] a:hover { color:#215540 !important; transform:translateX(2px); }
+        [data-testid="stPageLink"] a span[data-testid="stIconMaterial"] { color:#2E7257; }
+
+        /* Tableaux sobres (admin) avec badges de statut. */
+        .ls-table { width:100%; border-collapse:collapse; font-size:0.9rem;
+            font-variant-numeric:tabular-nums; }
+        .ls-table th { text-align:left; font-weight:700; color:#8A938D; font-size:0.68rem;
+            letter-spacing:0.07em; text-transform:uppercase; padding:0.5rem 0.65rem;
+            border-bottom:1px solid #E7E6DD; }
+        .ls-table td { padding:0.55rem 0.65rem; border-bottom:1px solid #F0EFE8; color:#39443F;
+            vertical-align:middle; }
+        .ls-table tr:last-child td { border-bottom:none; }
+        .ls-table tbody tr:hover td { background:#FAFAF7; }
+        .ls-table td.num { text-align:right; }
+        .ls-badge { display:inline-block; font-size:0.72rem; font-weight:700;
+            padding:0.16rem 0.55rem; border-radius:999px; white-space:nowrap; }
+        .ls-badge.ok { background:#E4F0E8; color:#2E7257; }
+        .ls-badge.ko { background:#F6E6E3; color:#B4532E; }
+        .ls-badge.warn { background:#F6EFDD; color:#8A6D22; }
+        .ls-badge.neutre { background:#F1EFE8; color:#6B736D; }
+
         /* Masque le bandeau par défaut pour un rendu épuré. */
         [data-testid="stToolbar"], footer { display:none; }
         #MainMenu { visibility:hidden; }
+        [data-testid="stDecoration"] { display:none; }
         </style>
         """,
         unsafe_allow_html=True,
@@ -261,12 +408,10 @@ def barre_laterale_bas() -> None:
             "<div class='ls-promo'>"
             "<div class='k'>Une vue sur le monde</div>"
             "<div class='t'>Des données pour comprendre le travail.</div>"
-            "<div class='s'>10 pays · 2 indicateurs<br>Estimations de l'OIT</div>"
+            "<div class='s'>2 indicateurs · 250+ pays<br>Estimations de l'OIT</div>"
             "</div>",
             unsafe_allow_html=True,
         )
-        st.page_link("pages/home.py", label="Sources & méthodologie", icon=":material/menu_book:")
-
         if est_connecte():
             nom = st.session_state.get("nom_utilisateur") or "Utilisateur"
             role = st.session_state.get("role_utilisateur", ROLE_UTILISATEUR)
@@ -334,13 +479,100 @@ def ligne_source(gauche: list[str], droite: str = "") -> None:
     st.markdown(f"<div class='ls-meta'>{gauche_html}{droite_html}</div>", unsafe_allow_html=True)
 
 
-def carte_metrique(label: str, valeur: str, unite: str = "", caption: str = "") -> None:
-    """Carte métrique (label, grande valeur serif + unité, légende)."""
+def carte_metrique(
+    label: str, valeur: str, unite: str = "", caption: str = "", icone_svg: str = ""
+) -> None:
+    """Carte métrique (label, grande valeur serif + unité, légende).
+
+    ``icone_svg`` : SVG inline optionnel affiché en haut à droite (trait discret).
+    """
     u = f"<span class='u'>{html.escape(unite)}</span>" if unite else ""
+    ic = f"<span class='ic'>{icone_svg}</span>" if icone_svg else ""
     st.markdown(
-        f"<div class='ls-metric'><div class='lab'>{html.escape(label)}</div>"
+        f"<div class='ls-metric'><div class='top'><div class='lab'>{html.escape(label)}</div>{ic}</div>"
         f"<div class='val'>{html.escape(valeur)}{u}</div>"
         f"<div class='cap'>{html.escape(caption)}</div></div>",
+        unsafe_allow_html=True,
+    )
+
+
+# SVG d'angle (traits sobres) pour les cartes métriques, repris des maquettes.
+ICONE_CIBLE = (
+    "<svg width='18' height='18' viewBox='0 0 24 24' fill='none' stroke='currentColor' "
+    "stroke-width='1.6' stroke-linecap='round'><circle cx='12' cy='12' r='8'/>"
+    "<circle cx='12' cy='12' r='3.2'/></svg>"
+)
+ICONE_TENDANCE = (
+    "<svg width='18' height='18' viewBox='0 0 24 24' fill='none' stroke='currentColor' "
+    "stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'>"
+    "<path d='M3 17l6-6 4 4 7-7'/><path d='M17 5h4v4'/></svg>"
+)
+ICONE_ECART = (
+    "<svg width='18' height='18' viewBox='0 0 24 24' fill='none' stroke='currentColor' "
+    "stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'>"
+    "<path d='M8 7L4 11l4 4'/><path d='M16 7l4 4-4 4'/><path d='M4 11h16'/></svg>"
+)
+# Icônes de badge pour les cartes de navigation (accueil).
+ICONE_GLOBE = (
+    "<svg width='22' height='22' viewBox='0 0 24 24' fill='none' stroke='currentColor' "
+    "stroke-width='1.6' stroke-linecap='round'><circle cx='12' cy='12' r='9'/>"
+    "<path d='M3 12h18'/><path d='M12 3c2.5 2.6 2.5 15.4 0 18M12 3c-2.5 2.6-2.5 15.4 0 18'/></svg>"
+)
+ICONE_COUCHES = (
+    "<svg width='22' height='22' viewBox='0 0 24 24' fill='none' stroke='currentColor' "
+    "stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'>"
+    "<path d='M12 3l9 5-9 5-9-5 9-5z'/><path d='M3 13l9 5 9-5'/></svg>"
+)
+ICONE_REGLAGES = (
+    "<svg width='22' height='22' viewBox='0 0 24 24' fill='none' stroke='currentColor' "
+    "stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'>"
+    "<circle cx='12' cy='12' r='3'/><path d='M19 12a7 7 0 0 0-.1-1.2l2-1.6-2-3.4-2.4 1a7 7 0 0 0-2-1.2"
+    "l-.4-2.6H9.9l-.4 2.6a7 7 0 0 0-2 1.2l-2.4-1-2 3.4 2 1.6A7 7 0 0 0 5 12a7 7 0 0 0 .1 1.2l-2 1.6 "
+    "2 3.4 2.4-1a7 7 0 0 0 2 1.2l.4 2.6h4.2l.4-2.6a7 7 0 0 0 2-1.2l2.4 1 2-3.4-2-1.6A7 7 0 0 0 19 12z'/></svg>"
+)
+
+
+def badge(texte: str, variante: str = "neutre") -> str:
+    """Renvoie le HTML d'un badge de statut (``ok``, ``ko``, ``warn``, ``neutre``)."""
+    return f"<span class='ls-badge {variante}'>{html.escape(str(texte))}</span>"
+
+
+def tableau(entetes: list[str], lignes: list[list[str]], aligns: list[str] | None = None) -> None:
+    """Rend un tableau HTML sobre.
+
+    ``lignes`` contient des cellules déjà prêtes (texte échappé par l'appelant ou
+    HTML de badge). ``aligns`` optionnel : liste de "" ou "num" par colonne.
+    """
+    aligns = aligns or [""] * len(entetes)
+    thead = "".join(f"<th>{html.escape(str(col))}</th>" for col in entetes)
+    corps = ""
+    for ligne in lignes:
+        cells = "".join(
+            f"<td class='{aligns[i] if i < len(aligns) else ''}'>{cell}</td>"
+            for i, cell in enumerate(ligne)
+        )
+        corps += f"<tr>{cells}</tr>"
+    st.markdown(
+        f"<table class='ls-table'><thead><tr>{thead}</tr></thead><tbody>{corps}</tbody></table>",
+        unsafe_allow_html=True,
+    )
+
+
+def carte_navigation(icone_svg: str, titre: str, description: str,
+                     tag: str = "", verrou: bool = False) -> None:
+    """Entête d'une carte de navigation (badge, titre serif, description, tag).
+
+    À appeler dans un ``st.container(border=True)`` ; le ``st.page_link`` est
+    ajouté juste après par l'appelant.
+    """
+    tag_html = (
+        f"<span class='ls-tag {'verrou' if verrou else 'libre'}'>{html.escape(tag)}</span>"
+        if tag else ""
+    )
+    st.markdown(
+        f"<div class='ls-nav-ic'>{icone_svg}</div>"
+        f"<div class='ls-serif' style='font-size:1.2rem;margin-top:0.55rem'>{html.escape(titre)}</div>"
+        f"<p class='ls-nav-d'>{html.escape(description)}</p>{tag_html}",
         unsafe_allow_html=True,
     )
 
@@ -378,22 +610,50 @@ def carte_a_retenir(titre_section: str, lignes: list[tuple], note: str = "", bas
     )
 
 
+# --- Format & en-têtes de graphique ----------------------------------------
+
+def fmt_fr(valeur: float, decimales: int = 1) -> str:
+    """Formate un nombre avec la virgule décimale française (ex. 7,5)."""
+    return f"{valeur:.{decimales}f}".replace(".", ",")
+
+
+def entete_graphique(eyebrow: str, titre: str, sous_titre: str = "") -> None:
+    """En-tête standard d'une carte graphique : sur-titre, titre serif, légende."""
+    st.markdown(f"<div class='ls-eyebrow plain'>{html.escape(eyebrow)}</div>", unsafe_allow_html=True)
+    st.markdown(f"<div class='ls-serif' style='font-size:1.5rem'>{html.escape(titre)}</div>",
+                unsafe_allow_html=True)
+    if sous_titre:
+        st.caption(sous_titre)
+
+
 # --- Graphiques -------------------------------------------------------------
 
 
 def styliser_figure(fig, hauteur: int = 430):
-    """Applique une mise en forme sobre et éditoriale à une figure Plotly."""
+    """Applique une mise en forme sobre et éditoriale à une figure Plotly.
+
+    ``separators=", "`` impose le format français (virgule décimale, espace
+    comme séparateur de milliers) sur les axes et les infobulles.
+    """
     fig.update_layout(
         template="plotly_white",
         colorway=PALETTE_GRAPHIQUE,
         font=dict(family="Inter, sans-serif", size=13, color=TEXTE),
+<<<<<<< HEAD
         title=dict(
             font=dict(family="Lora, serif", size=18, color=ENCRE), x=0, xanchor="left", y=0.98
         ),
         margin=dict(l=8, r=8, t=56, b=8),
+=======
+        title=dict(text="", font=dict(family="Lora, serif", size=18, color=ENCRE),
+                   x=0, xanchor="left", y=0.98),
+        margin=dict(l=8, r=16, t=40, b=8),
+>>>>>>> cee9590c5cf3aadc47445192cb78e59cee250a3c
         height=hauteur,
+        separators=", ",
         plot_bgcolor="white",
         paper_bgcolor="white",
+<<<<<<< HEAD
         legend=dict(
             orientation="h",
             yanchor="bottom",
@@ -404,10 +664,23 @@ def styliser_figure(fig, hauteur: int = 430):
             bgcolor="rgba(0,0,0,0)",
         ),
         hoverlabel=dict(bgcolor="white", bordercolor=BORDURE, font_size=12),
+=======
+        legend=dict(orientation="h", yanchor="bottom", y=1.02, xanchor="left", x=0, title="",
+                    bgcolor="rgba(0,0,0,0)", font=dict(size=12.5)),
+        hoverlabel=dict(bgcolor="white", bordercolor=BORDURE, font_size=12.5,
+                        font_family="Inter, sans-serif"),
+>>>>>>> cee9590c5cf3aadc47445192cb78e59cee250a3c
     )
-    fig.update_xaxes(showgrid=True, gridcolor="#F0EFE8", showline=False, zeroline=False)
-    fig.update_yaxes(showgrid=False, showline=False, zeroline=False)
+    fig.update_xaxes(showgrid=True, gridcolor="#F0EFE8", griddash="dot", showline=False,
+                     zeroline=False, ticksuffix="  ", tickfont=dict(color=TEXTE_DOUX))
+    fig.update_yaxes(showgrid=False, showline=False, zeroline=False,
+                     tickfont=dict(color=ENCRE))
     return fig
+
+
+def afficher_graphique(fig) -> None:
+    """Affiche une figure Plotly sans barre d'outils (rendu épuré)."""
+    st.plotly_chart(fig, use_container_width=True, config={"displayModeBar": False})
 
 
 def couleur_serie(index: int) -> str:

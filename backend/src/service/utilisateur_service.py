@@ -3,6 +3,7 @@
 from business_object.enums import Role
 from business_object.utilisateur import Utilisateur
 from dao.utilisateur_dao import UtilisateurDao
+<<<<<<< HEAD
 from service.journal_service import JournalService
 from utils.exceptions import (
     AccesRefuse,
@@ -16,6 +17,8 @@ ACTION_PROMOTION = "PROMOTION_ADMIN"
 ACTION_RETROGRADATION = "RETROGRADATION_ADMIN"
 ACTION_DESACTIVATION = "DESACTIVATION_COMPTE"
 ACTION_REACTIVATION = "REACTIVATION_COMPTE"
+=======
+>>>>>>> cee9590c5cf3aadc47445192cb78e59cee250a3c
 
 
 class UtilisateurService:
@@ -32,6 +35,7 @@ class UtilisateurService:
     # ne peut ni retirer ses propres droits, ni désactiver son propre compte. Il reste
     # donc toujours au moins un administrateur actif.
 
+<<<<<<< HEAD
     def __init__(
         self,
         utilisateur_dao: UtilisateurDao | None = None,
@@ -45,6 +49,17 @@ class UtilisateurService:
 
     def lister_utilisateurs(self, acteur: Utilisateur) -> list[Utilisateur]:
         """Renvoie tous les comptes (administrateur uniquement).
+=======
+    @classmethod
+    def lister_utilisateurs(cls) -> list[Utilisateur]:
+        """Liste tous les comptes utilisateurs."""
+        return UtilisateurDao().lister()
+
+    @classmethod
+    def modifier(cls, utilisateur: Utilisateur) -> bool:
+        """Met à jour un compte utilisateur (rôle, activation)."""
+        return UtilisateurDao().modifier(utilisateur)
+>>>>>>> cee9590c5cf3aadc47445192cb78e59cee250a3c
 
         Les objets renvoyés contiennent l'empreinte du mot de passe.
         La couche controller ne doit jamais la transmettre au client.

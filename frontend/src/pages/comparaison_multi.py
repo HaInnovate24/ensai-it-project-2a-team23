@@ -14,7 +14,23 @@ from utils.referentiels import (
     index_defaut,
     message_erreur,
 )
+<<<<<<< HEAD
 from utils.ui import PALETTE_GRAPHIQUE, entete, est_connecte, ligne_source, styliser_figure
+=======
+from datetime import date
+
+from utils.rapport_pdf import construire_rapport_pdf, figure_png
+from utils.ui import (
+    PALETTE_GRAPHIQUE,
+    afficher_graphique,
+    entete,
+    entete_graphique,
+    est_connecte,
+    fmt_fr,
+    ligne_source,
+    styliser_figure,
+)
+>>>>>>> cee9590c5cf3aadc47445192cb78e59cee250a3c
 
 get_page_logger("Multi-indicateurs (F5)")
 
@@ -30,7 +46,7 @@ if not est_connecte():
     st.page_link("pages/login.py", label="Se connecter", icon=":material/lock:")
     st.stop()
 
-ligne_source(["Données réelles", "OIT · diffusion ILOSTAT"], f"Consulté le {date.today():%d/%m/%Y}")
+ligne_source(["Données réelles", "OIT · diffusion ILOSTAT"], f"Extrait du {date.today():%d/%m/%Y}")
 
 indicateurs = get_indicateurs()
 pays_referentiel = get_pays()
@@ -66,16 +82,17 @@ if not codes_indicateur:
     st.stop()
 
 # --- Appel du backend : /analyses/comparaison-indicateurs ---
-reponse = api_client.get(
-    "/analyses/comparaison-indicateurs",
-    params={
-        "jeton": st.session_state.get("access_token"),
-        "codes_indicateur": codes_indicateur,
-        "code_pays": pays_referentiel[nom_pays],
-        "sexe": SEXES[libelle_sexe],
-        "code_classification": classifications[libelle_classification],
-    },
-)
+with st.spinner("Chargement des données…"):
+    reponse = api_client.get(
+        "/analyses/comparaison-indicateurs",
+        params={
+            "jeton": st.session_state.get("access_token"),
+            "codes_indicateur": codes_indicateur,
+            "code_pays": pays_referentiel[nom_pays],
+            "sexe": SEXES[libelle_sexe],
+            "code_classification": classifications[libelle_classification],
+        },
+    )
 
 if reponse["status_code"] == 404:
     st.warning("Aucune donnée disponible pour cette sélection.")
@@ -103,6 +120,7 @@ if not lignes:
 df = pd.DataFrame(lignes).sort_values("Période")
 
 with st.container(border=True):
+<<<<<<< HEAD
     st.markdown(
         "<div class='ls-eyebrow plain'>Croisement d'indicateurs</div>", unsafe_allow_html=True
     )
@@ -110,6 +128,9 @@ with st.container(border=True):
         f"<div class='ls-serif' style='font-size:1.5rem'>{nom_pays}</div>", unsafe_allow_html=True
     )
     st.caption(f"{libelle_classification} · {libelle_sexe}")
+=======
+    entete_graphique("Croisement d'indicateurs", nom_pays, f"{libelle_classification} · {libelle_sexe}")
+>>>>>>> cee9590c5cf3aadc47445192cb78e59cee250a3c
     fig = px.line(
         df,
         x="Période",
@@ -119,5 +140,45 @@ with st.container(border=True):
         color_discrete_sequence=PALETTE_GRAPHIQUE,
     )
     fig.update_xaxes(type="category")
+    fig.update_traces(line=dict(width=2.5), marker=dict(size=7))
     styliser_figure(fig)
-    st.plotly_chart(fig, use_container_width=True)
+    afficher_graphique(fig)
+
+# --- Rapport PDF : chiffres de synthèse + détail de tous les points ---
+chiffres_pdf = []
+lignes_pdf = []
+for indic, sous in df.groupby("Indicateur"):
+    sous = sous.sort_values("Période")
+    chiffres_pdf.append((indic, f"{fmt_fr(sous.iloc[-1]['Valeur'])} ({sous.iloc[-1]['Période']})"))
+    for _, pt in sous.iterrows():
+        lignes_pdf.append([indic, str(pt["Période"]), fmt_fr(pt["Valeur"])])
+pdf_bytes = construire_rapport_pdf(
+    titre="Multi-indicateurs",
+    sous_titre=nom_pays,
+    contexte=[
+        ("Pays cible", nom_pays),
+        ("Indicateurs", f"{df['Indicateur'].nunique()} croisé(s)"),
+        ("Catégorie", libelle_classification),
+        ("Sexe", libelle_sexe),
+    ],
+    colonnes=["Indicateur", "Période", "Valeur"],
+    lignes=lignes_pdf,
+    chiffres=chiffres_pdf[:3] or None,
+    note=(
+        f"Croisement de {df['Indicateur'].nunique()} indicateur(s) pour {nom_pays}. "
+        "Les unités pouvant différer d'un indicateur à l'autre, comparez les tendances "
+        "plutôt que les niveaux absolus."
+    ),
+    image_png=figure_png(fig),
+    legende_graphique=f"{libelle_classification} · {libelle_sexe}",
+)
+_, col_pdf = st.columns([0.7, 0.3])
+with col_pdf:
+    st.download_button(
+        "Rapport PDF",
+        data=pdf_bytes,
+        file_name=f"rapport_multi_{pays_referentiel[nom_pays]}.pdf",
+        mime="application/pdf",
+        icon=":material/picture_as_pdf:",
+        use_container_width=True,
+    )

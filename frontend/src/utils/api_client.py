@@ -109,6 +109,18 @@ class APIClient:
         """
         return self._request(method="PUT", path=path, json=json, data=data, **kwargs)
 
+    def patch(self, path: str, json=None, data=None, **kwargs):
+        """Sends a PATCH request.
+        Args:
+            path (str): The endpoint path.
+            json (dict, optional): JSON body for the request.
+            data (dict/bytes, optional): Form data or raw body.
+            **kwargs: Additional arguments for requests.request.
+        Returns:
+            dict: The response dictionary.
+        """
+        return self._request(method="PATCH", path=path, json=json, data=data, **kwargs)
+
     def delete(self, path: str, **kwargs):
         """Sends a DELETE request.
         Args:

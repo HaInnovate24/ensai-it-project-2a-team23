@@ -208,19 +208,44 @@ class AnalyseService:
 
     def _sexe_ou_defaut(self, sexe: Sexe | None) -> Sexe:
         """Renvoie le sexe demandé, ou Sexe.TOTAL si aucun n'est précisé."""
-        ...
+        return sexe if sexe is not None else Sexe.TOTAL
 
     def _trouver_indicateur(self, code_indicateur: str) -> Indicateur:
         """Renvoie l'indicateur correspondant au code, ou lève RessourceIntrouvable."""
-        ...
+        if not code_indicateur:
+            raise DonneesInvalides("Le code indicateur est obligatoire.")
+        indicateur = self.indicateur_dao.trouver_par_code(code_indicateur)
+        if indicateur is None:
+            raise RessourceIntrouvable(f"Indicateur inconnu : {code_indicateur}.")
+        return indicateur
 
     def _trouver_pays(self, code_pays: str) -> Pays:
         """Renvoie le pays correspondant au code, ou lève RessourceIntrouvable."""
-        ...
+        if not code_pays:
+            raise DonneesInvalides("Le code pays est obligatoire.")
+        pays = self.pays_dao.trouver_par_code(code_pays)
+        if pays is None:
+            raise RessourceIntrouvable(f"Pays inconnu : {code_pays}.")
+        return pays
 
     def _verifier_classification(self, code_classification: str | None) -> None:
         """Vérifie que la classification existe (si fournie), sinon lève une erreur."""
-        ...
+        if not code_classification:
+            return
+        if self.classification_dao.trouver_par_code(code_classification) is None:
+            raise RessourceIntrouvable(f"Classification inconnue : {code_classification}.")
+
+    def _observation_valide(self, obs: Observation, code_classification: str | None) -> bool:
+        """Vrai si l'observation a une valeur et correspond à la classification demandée.
+
+        Si aucune classification n'est demandée, on ne garde que les observations
+        sans classification (sinon on mélangerait les sous-catégories avec l'agrégat).
+        """
+        if obs.valeur is None:
+            return False
+        if code_classification:
+            return obs.code_classification == code_classification
+        return not obs.code_classification
 
     def _lire_serie_filtree(
         self,
@@ -230,7 +255,12 @@ class AnalyseService:
         code_classification: str | None,
     ) -> list[Observation]:
         """Lit la série temporelle d'un pays, filtrée par sexe et classification."""
-        ...
+        observations = self.observation_dao.lire_serie(
+            code_indicateur, code_pays, sexe, code_classification
+        )
+        return [
+            obs for obs in observations if self._observation_valide(obs, code_classification)
+        ]
 
     def _lire_periode_filtree(
         self,
@@ -241,7 +271,14 @@ class AnalyseService:
         code_classification: str | None,
     ) -> list[Observation]:
         """Lit les observations d'une période donnée, filtrées par sexe et classification."""
-        ...
+        observations = self.observation_dao.lire_par_periode(
+            code_indicateur, periode, codes_pays
+        )
+        return [
+            obs
+            for obs in observations
+            if obs.sexe == sexe and self._observation_valide(obs, code_classification)
+        ]
 
     def _derniere_observation_par_pays(
         self,
@@ -251,15 +288,30 @@ class AnalyseService:
         code_classification: str | None,
     ) -> list[Observation]:
         """Renvoie la dernière observation disponible pour chaque pays demandé."""
-        ...
+        dernieres: list[Observation] = []
+        for code_pays in codes_pays:
+            # La série est triée par période croissante : la dernière est la plus récente.
+            observations = self._lire_serie_filtree(
+                code_indicateur, code_pays, sexe, code_classification
+            )
+            if observations:
+                dernieres.append(observations[-1])
+        return dernieres
 
     def _vers_points(self, observations: list[Observation]) -> list[PointSerie]:
         """Convertit des observations en points de série (période, valeur)."""
-        ...
+        return [
+            PointSerie(periode=obs.periode, valeur=obs.valeur)
+            for obs in observations
+            if obs.valeur is not None
+        ]
 
     def _libelle_indicateur(self, indicateur: Indicateur) -> str:
         """Construit le libellé d'un indicateur (description et unité)."""
-        ...
+        description = indicateur.description or indicateur.code_indicateur or ""
+        if indicateur.unite:
+            return f"{description} ({indicateur.unite})"
+        return description
 
     def _sans_doublons(self, codes: list[str]) -> list[str]:
         """Supprime les doublons d'une liste de codes en conservant l'ordre."""

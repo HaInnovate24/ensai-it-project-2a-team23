@@ -58,6 +58,15 @@ def type_classification_de(code_indicateur: str) -> str:
     return "occupation" if code_indicateur.upper().endswith("_OCU_NB") else "age"
 
 
+def libelle_type_classification(code_indicateur: str) -> str:
+    """Libellé du filtre de classification selon l'indicateur.
+
+    Les indicateurs d'âge se déclinent par « Population », ceux d'occupation
+    par « Profession ». Garde l'interface cohérente avec les données du backend.
+    """
+    return "Population" if type_classification_de(code_indicateur) == "age" else "Profession"
+
+
 def get_indicateurs() -> dict[str, str]:
     """Renvoie ``{code_indicateur: description}`` depuis le backend (repli statique)."""
     cache = st.session_state.get("ref_indicateurs")
@@ -134,11 +143,23 @@ def get_classifications_toutes() -> dict[str, str]:
 
 
 def index_defaut(libelle_to_code: dict[str, str]) -> int:
-    """Renvoie l'index de la 1re classification « totale » (code finissant par TOTAL).
+    """Index de la classification agrégée à présélectionner.
 
-    Permet de présélectionner l'agrégat total plutôt qu'une sous-catégorie.
+    On vise l'agrégat « total » qui porte réellement des données dans le
+    backend : ``AGE_AGGREGATE_TOTAL`` (âge) et ``OCU_ISCO08_TOTAL`` (professions,
+    norme ISCO-08). On évite les totaux de normes anciennes (ISCO-88) qui sont
+    vides, pour ne pas afficher « aucune donnée » par défaut.
     """
-    for i, code in enumerate(libelle_to_code.values()):
+    codes = list(libelle_to_code.values())
+
+    for prefere in ("AGE_AGGREGATE_TOTAL", "OCU_ISCO08_TOTAL"):
+        if prefere in codes:
+            return codes.index(prefere)
+
+    for i, code in enumerate(codes):
+        if code and code.upper().endswith("TOTAL") and "ISCO88" not in code.upper():
+            return i
+    for i, code in enumerate(codes):
         if code and code.upper().endswith("TOTAL"):
             return i
     return 0
