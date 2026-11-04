@@ -21,15 +21,14 @@ initialize_logs("Webservice")
 load_environment_variables()
 display_values()
 
-from controller import (  # noqa: E402  (import après chargement du .env, cf. ci-dessus)
+from controller import (  # noqa: E402
     admin_controller,
     analyse_controller,
     auth_controller,
-    journal_controller,  
-    rapport_controller,
+    journal_controller,
+    # rapport_controller,
     referentiel_controller,
 )
-
 app = FastAPI(title="LaborScope")
 
 app.add_middleware(LogMiddleware)
@@ -52,7 +51,7 @@ async def validation_exception_handler(request: Request, exc: RequestValidationE
 app.include_router(auth_controller.router, prefix="/auth", tags=["Authentification"])
 app.include_router(referentiel_controller.router, prefix="/referentiels", tags=["Référentiels"])
 app.include_router(analyse_controller.router, prefix="/analyses", tags=["Analyses"])
-app.include_router(rapport_controller.router, prefix="/rapports", tags=["Rapports"])
+#app.include_router(rapport_controller.router, prefix="/rapports", tags=["Rapports"])
 app.include_router(admin_controller.router, prefix="/admin", tags=["Administration"])
 app.include_router(journal_controller.router, prefix="/journal", tags=["Journal"]) 
 
