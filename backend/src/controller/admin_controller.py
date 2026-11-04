@@ -115,8 +115,6 @@ def modifier_utilisateur(utilisateur_id: int, donnees: dict):
         raise HTTPException(status_code=400, detail=str(exc)) from exc
     except Exception as exc:
         raise HTTPException(status_code=500, detail=f"Erreur interne : {str(exc)}") from exc
-<<<<<<< HEAD
-=======
 
 
 @router.delete("/utilisateurs/{utilisateur_id}/supprimer")
@@ -152,4 +150,3 @@ def statut_utilisateur(utilisateur_id: int, actif: bool):
         raise HTTPException(status_code=400, detail=str(exc)) from exc
     except requests.RequestException as exc:
         raise HTTPException(status_code=502, detail=f"Échec ILOSTAT : {exc}") from exc
->>>>>>> cee9590c5cf3aadc47445192cb78e59cee250a3c

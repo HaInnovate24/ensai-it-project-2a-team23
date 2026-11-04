@@ -389,7 +389,6 @@ col_chart, col_aside = st.columns([0.74, 0.26], gap="large")
 
 with col_chart:
     with st.container(border=True):
-<<<<<<< HEAD
         st.markdown(
             "<div class='ls-eyebrow plain'>Comparaison entre pays</div>", unsafe_allow_html=True
         )
@@ -398,26 +397,6 @@ with col_chart:
             unsafe_allow_html=True,
         )
         st.caption(f"{libelle_classification} · {libelle_sexe} · {periode} · année commune")
-=======
-        tete_g, tete_d = st.columns([0.62, 0.38], vertical_alignment="center")
-        with tete_g:
-            st.markdown("<div class='ls-eyebrow plain'>Comparaison entre pays</div>", unsafe_allow_html=True)
-            st.markdown(
-                f"<div class='ls-serif' style='font-size:1.5rem'>{indicateurs[code_indicateur]}</div>",
-                unsafe_allow_html=True,
-            )
-        with tete_d:
-            if unite:
-                st.markdown(
-                    f"<div style='text-align:right;margin-bottom:0.3rem'>"
-                    f"<span class='ls-pill'>En {unite}</span></div>",
-                    unsafe_allow_html=True,
-                )
-            sens = st.segmented_control(
-                "Tri", ["Décroissant", "Croissant"], default="Décroissant",
-                label_visibility="collapsed",
-            )
->>>>>>> cee9590c5cf3aadc47445192cb78e59cee250a3c
 
         contexte_periode = (
             f"{annee_fin} · année commune" if annee_commune
@@ -442,16 +421,10 @@ with col_chart:
             labels={"Valeur": f"Valeur ({unite})" if unite else "Valeur"},
         )
         fig.update_traces(
-<<<<<<< HEAD
             texttemplate="%{text:.1f}",
             textposition="outside",
             cliponaxis=False,
             marker_line_width=0,
-=======
-            textposition="outside", cliponaxis=False, marker_line_width=0,
-            marker_cornerradius=6,  # barres aux coins arrondis (plus « produit »)
-            textfont=dict(color="#1F2A26"),
->>>>>>> cee9590c5cf3aadc47445192cb78e59cee250a3c
         )
         fig.update_layout(showlegend=False)
         styliser_figure(fig, hauteur=400)
@@ -465,7 +438,6 @@ with col_aside:
     lignes_retenir = [
         (
             r["Pays"],
-<<<<<<< HEAD
             f"{r['Valeur']:.1f}{suffixe}",
             couleur_par_pays.get(r["Pays"], PALETTE_GRAPHIQUE[0]),
         )
@@ -482,84 +454,3 @@ with col_aside:
         else "Les valeurs correspondent à la dernière période commune disponible."
     )
     carte_a_retenir(f"{indic_court} · {periode}", lignes_retenir, note=note, bas=bas_note)
-=======
-            # En repli (années différentes), on précise l'année de chaque pays.
-            f"{format_fr(r['Valeur'])}{suffixe}"
-            + ("" if annee_commune else f" ({annee(r['Période'])})"),
-            couleur_par_pays.get(r["Pays"], PALETTE_GRAPHIQUE[0]),
-        )
-        for _, r in df_retenir.iterrows()
-    ]
-    if not comparaison_possible:
-        note = (
-            f"Seul {df.iloc[0]['Pays']} dispose de données pour cette sélection. "
-            "Ajoutez un pays comparable pour mesurer un écart."
-        )
-        bas_note = (
-            f"Valeur exprimée en {unite.lower()}, pour l'ensemble des sexes."
-            if unite else "Valeur pour l'ensemble des sexes."
-        )
-    elif annee_commune:
-        note = (
-            f"En {annee_fin}, {haut['Pays']} devance {bas['Pays']} de "
-            f"{format_fr(ecart)} {unite_ecart}."
-        )
-        bas_note = (
-            f"Valeurs exprimées en {unite.lower()}, à l'année commune {annee_fin}, "
-            "pour l'ensemble des sexes."
-            if unite else
-            f"Valeurs à l'année commune {annee_fin}, pour l'ensemble des sexes."
-        )
-    else:
-        note = (
-            f"Dernières valeurs disponibles par pays : {haut['Pays']} devance "
-            f"{bas['Pays']} de {format_fr(ecart)} {unite_ecart}."
-        )
-        bas_note = (
-            f"Les années diffèrent selon les pays (donnée {indicateurs[code_indicateur].lower()} "
-            "éparse) ; chaque valeur indique son année entre parenthèses."
-        )
-    entete_retenir = f"{indic_court.upper()} · {annee_fin if annee_commune else 'DERNIÈRES VALEURS'}"
-    carte_a_retenir(entete_retenir, lignes_retenir, note=note, bas=bas_note)
-
-# --- Rapport PDF (généré côté front à partir des données affichées) ---
-periode_txt = annee_fin if annee_debut == annee_fin else f"{annee_debut} - {annee_fin}"
-chiffres_pdf = [
-    (f"{indic_court} · {pays_focus}",
-     f"{format_fr(valeur_focus)} {unite}".strip() if valeur_focus is not None else "—"),
-    (f"Évolution · {pays_focus}",
-     (("+" if delta_focus > 0 else "") + f"{format_fr(delta_focus)} {unite_ecart}").strip()
-     if delta_focus is not None else "—"),
-    ("Écart entre les pays",
-     f"{format_fr(ecart)} {unite_ecart}".strip() if comparaison_possible else "—"),
-]
-lignes_pdf = [
-    [r["Pays"], format_fr(r["Valeur"]), annee(r["Période"])]
-    for _, r in df_retenir.iterrows()
-]
-pdf_bytes = construire_rapport_pdf(
-    titre="Comparaison entre pays",
-    sous_titre=indicateurs[code_indicateur],
-    contexte=[
-        ("Indicateur", indicateurs[code_indicateur]),
-        ("Pays", ", ".join(noms_pays)),
-        ("Période", periode_txt),
-        (libelle_type_classification(code_indicateur), libelle_classification),
-        ("Sexe", "Ensemble des sexes"),
-    ],
-    colonnes=["Pays", f"Valeur ({unite})" if unite else "Valeur", "Année"],
-    lignes=lignes_pdf,
-    chiffres=chiffres_pdf,
-    note=f"{note} {bas_note}".strip(),
-    image_png=figure_png(fig),
-    legende_graphique=f"{libelle_classification} · Ensemble des sexes · {contexte_periode}",
-)
-emplacement_pdf.download_button(
-    "Rapport PDF",
-    data=pdf_bytes,
-    file_name=f"rapport_comparaison_{code_indicateur}_{annee_fin}.pdf",
-    mime="application/pdf",
-    icon=":material/picture_as_pdf:",
-    use_container_width=True,
-)
->>>>>>> cee9590c5cf3aadc47445192cb78e59cee250a3c
