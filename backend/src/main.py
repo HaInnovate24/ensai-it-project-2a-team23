@@ -25,7 +25,7 @@ from controller import (  # noqa: E402  (import après chargement du .env, cf. c
     admin_controller,
     analyse_controller,
     auth_controller,
-    journal_controller,  
+    journal_controller,
     rapport_controller,
     referentiel_controller,
 )
@@ -54,7 +54,8 @@ app.include_router(referentiel_controller.router, prefix="/referentiels", tags=[
 app.include_router(analyse_controller.router, prefix="/analyses", tags=["Analyses"])
 app.include_router(rapport_controller.router, prefix="/rapports", tags=["Rapports"])
 app.include_router(admin_controller.router, prefix="/admin", tags=["Administration"])
-app.include_router(journal_controller.router, prefix="/journal", tags=["Journal"]) 
+app.include_router(journal_controller.router, prefix="/journal", tags=["Journal"])
+
 
 @app.get("/", include_in_schema=False)
 async def redirect_to_docs():

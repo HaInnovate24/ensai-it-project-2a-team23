@@ -10,6 +10,7 @@ import hmac
 import os
 import secrets
 from datetime import UTC, datetime, timedelta
+
 import jwt
 
 # Nombre de tours de calcul du hachage : plus il est grand, plus un pirate est ralenti.
