@@ -41,8 +41,7 @@ class UtilisateurService:
 
     def lister_utilisateurs(self, acteur: Utilisateur | None = None) -> list[Utilisateur]:
         """Renvoie tous les comptes (administrateur uniquement)."""
-        if acteur is not None:
-            self._exiger_admin(acteur)
+        self._exiger_admin(acteur)
         return self.utilisateur_dao.lister()
 
     def trouver_utilisateur(self, acteur: Utilisateur, id_utilisateur: int) -> Utilisateur:

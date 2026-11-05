@@ -131,5 +131,37 @@ class APIClient:
         """
         return self._request(method="DELETE", path=path, **kwargs)
 
+    def download_file(self, path: str, params=None, **kwargs):
+    """Sends a GET request and returns raw bytes (ideal for PDF downloads).
+    
+    Returns:
+        dict: Contains 'status_code' and 'content' (raw bytes) or 'data' (error message).
+    """
+    url = f"{self.base_url}{path}"
+    headers = kwargs.pop("headers", {})
+    headers.update(self._get_headers())
+    timeout = kwargs.pop("timeout", self.timeout)
 
+    try:
+        response = self.session.request(
+            method="GET", url=url, timeout=timeout, headers=headers, params=params, **kwargs
+        )
+        
+        if response.status_code == 200:
+            return {"status_code": 200, "content": response.content}
+        else:
+            # Si erreur (ex: 404), on renvoie le message
+            try:
+                data = response.json()
+            except Exception:
+                data = response.text
+            return {"status_code": response.status_code, "data": data}
+
+    except requests.exceptions.Timeout:
+        return {"status_code": 0, "data": "Timeout"}
+    except requests.exceptions.ConnectionError:
+        return {"status_code": 0, "data": "Connection error"}
+    except requests.exceptions.RequestException as e:
+        return {"status_code": 0, "data": str(e)}
+        
 api_client = APIClient(API_URL)

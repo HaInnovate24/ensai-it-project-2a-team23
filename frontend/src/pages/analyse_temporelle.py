@@ -16,9 +16,6 @@ from utils.referentiels import (
     message_erreur,
     unite_indicateur,
 )
-from datetime import date
-
-from utils.rapport_pdf import construire_rapport_pdf, figure_png
 from utils.ui import (
     PALETTE_GRAPHIQUE,
     afficher_graphique,
@@ -134,60 +131,4 @@ if lignes:
         with st.expander("Voir les données"):
             st.dataframe(
                 df.pivot_table(index="Période", columns="Pays", values="Valeur"),
-                use_container_width=True,
-            )
-
-    # --- Rapport PDF : chiffres de synthèse + détail de toutes les valeurs ---
-    suffixe = f" {unite}" if unite else ""
-    chiffres_pdf = []
-    for nom in noms_pays:
-        sous = df[df["Pays"] == nom].sort_values("Période")
-        if sous.empty:
-            continue
-        variation = sous.iloc[-1]["Valeur"] - sous.iloc[0]["Valeur"]
-        chiffres_pdf.append((
-            f"{nom} · variation",
-            ("+" if variation > 0 else "") + f"{fmt_fr(variation)}{suffixe}",
-        ))
-    # Détail : toutes les valeurs, par période et par pays.
-    pivot = df.pivot_table(index="Période", columns="Pays", values="Valeur").sort_index()
-    colonnes_pdf = ["Période"] + [str(c) for c in pivot.columns]
-    lignes_pdf = [
-        [str(idx)] + [fmt_fr(v) if pd.notna(v) else "—" for v in row]
-        for idx, row in pivot.iterrows()
-    ]
-    annees = sorted(df["Période"].unique())
-    pdf_bytes = construire_rapport_pdf(
-        titre="Évolution temporelle",
-        sous_titre=indicateurs[code_indicateur],
-        contexte=[
-            ("Indicateur", indicateurs[code_indicateur]),
-            ("Pays", ", ".join(noms_pays)),
-            ("Période", f"{annees[0]} - {annees[-1]}" if annees else "—"),
-            ("Catégorie", libelle_classification),
-            ("Sexe", libelle_sexe),
-        ],
-        colonnes=colonnes_pdf,
-        lignes=lignes_pdf,
-        chiffres=chiffres_pdf[:3] or None,
-        note=(
-            f"Évolution de « {indicateurs[code_indicateur].lower()} » sur "
-            f"{len(annees)} période(s) pour {len(noms_pays)} pays. "
-            f"Valeurs exprimées en {unite.lower()}." if unite else
-            f"Évolution sur {len(annees)} période(s) pour {len(noms_pays)} pays."
-        ),
-        image_png=figure_png(fig),
-        legende_graphique=f"{libelle_classification} · {libelle_sexe} · {nb_periodes} dernières années",
-    )
-    _, col_pdf = st.columns([0.7, 0.3])
-    with col_pdf:
-        st.download_button(
-            "Rapport PDF",
-            data=pdf_bytes,
-            file_name=f"rapport_evolution_{code_indicateur}.pdf",
-            mime="application/pdf",
-            icon=":material/picture_as_pdf:",
-            use_container_width=True,
-        )
-elif not pays_sans_donnees:
-    st.info("Aucune donnée à afficher pour cette sélection.")
+                use_container_width=
