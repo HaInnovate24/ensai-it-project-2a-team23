@@ -131,4 +131,5 @@ if lignes:
         with st.expander("Voir les données"):
             st.dataframe(
                 df.pivot_table(index="Période", columns="Pays", values="Valeur"),
-                use_container_width=
+                use_container_width=True
+            )
