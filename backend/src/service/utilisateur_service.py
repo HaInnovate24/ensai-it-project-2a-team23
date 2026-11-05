@@ -130,3 +130,19 @@ class UtilisateurService:
         """Lève DonneesInvalides si l'acteur essaie d'agir sur son propre compte."""
         if acteur.id == cible.id:
             raise DonneesInvalides
+
+    def _enregistrer_modification(
+    self, acteur: Utilisateur, cible: Utilisateur, action: str, details: str
+) -> None:
+        """Met à jour l'utilisateur en BDD et trace l'action dans le journal."""
+        succes = self.utilisateur_dao.modifier(cible)
+        if not succes:
+            raise RessourceIntrouvable(f"Utilisateur inconnu : {cible.id}.")
+        
+        if hasattr(self, "journal_service") and self.journal_service:
+            self.journal_service.enregistrer(
+            utilisateur_id=acteur.id, 
+            action=action, 
+            cible=f"utilisateur:{cible.id}",
+            details=details
+        )
