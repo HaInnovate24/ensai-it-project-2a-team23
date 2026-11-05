@@ -32,10 +32,11 @@ class RapportService:
         pdf = FPDF()
         pdf.add_page()
         pdf.set_font("Helvetica", style="B", size=16)
-        pdf.cell(0, 10, txt=rapport.titre, new_x="LMARGIN", new_y="NEXT", align="C")
+        # Utilisation de ln=1 au lieu de new_x/new_y pour la compatibilité avec l'ancienne version de fpdf
+        pdf.cell(0, 10, txt=rapport.titre, ln=1, align="C")
         
         pdf.set_font("Helvetica", size=12)
-        pdf.cell(0, 10, txt=f"Indicateur : {parametres.get('code_indicateur', 'Non spécifié')}", new_x="LMARGIN", new_y="NEXT")
+        pdf.cell(0, 10, txt=f"Indicateur : {parametres.get('code_indicateur', 'Non spécifié')}", ln=1)
         if rapport.description:
             pdf.multi_cell(0, 10, txt=rapport.description)
         

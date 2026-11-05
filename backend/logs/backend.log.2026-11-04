@@ -1,0 +1,204 @@
+04/11/2026 13:34:20 root                      INFO    - --------------------------------------------------
+04/11/2026 13:34:20 root                      INFO    - Starting Webservice                           
+04/11/2026 13:34:20 root                      INFO    - --------------------------------------------------
+04/11/2026 13:34:20 root                      INFO    - Load environment variables: SUCCES
+04/11/2026 13:34:20 root                      INFO    - POSTGRES_HOST=postgresql-cnpg-886449-rw.user-alexandre21
+04/11/2026 13:34:20 root                      INFO    - POSTGRES_PORT=5432
+04/11/2026 13:34:20 root                      INFO    - POSTGRES_DATABASE=defaultdb
+04/11/2026 13:34:20 root                      INFO    - POSTGRES_USER=user-alexandre21
+04/11/2026 13:34:20 root                      INFO    - POSTGRES_PASSWORD=*******
+04/11/2026 13:34:20 root                      INFO    - POSTGRES_SCHEMA=project
+04/11/2026 13:34:20 root                      INFO    - UVICORN_HOST=0.0.0.0
+04/11/2026 13:34:20 root                      INFO    - UVICORN_PORT=5000
+04/11/2026 13:35:34 root                      INFO    - --------------------------------------------------
+04/11/2026 13:35:34 root                      INFO    - Starting Webservice                           
+04/11/2026 13:35:34 root                      INFO    - --------------------------------------------------
+04/11/2026 13:35:34 root                      INFO    - Load environment variables: SUCCES
+04/11/2026 13:35:34 root                      INFO    - POSTGRES_HOST=postgresql-cnpg-886449-rw.user-alexandre21
+04/11/2026 13:35:34 root                      INFO    - POSTGRES_PORT=5432
+04/11/2026 13:35:34 root                      INFO    - POSTGRES_DATABASE=defaultdb
+04/11/2026 13:35:34 root                      INFO    - POSTGRES_USER=user-alexandre21
+04/11/2026 13:35:34 root                      INFO    - POSTGRES_PASSWORD=*******
+04/11/2026 13:35:34 root                      INFO    - POSTGRES_SCHEMA=project
+04/11/2026 13:35:34 root                      INFO    - UVICORN_HOST=0.0.0.0
+04/11/2026 13:35:34 root                      INFO    - UVICORN_PORT=5000
+04/11/2026 13:36:28 root                      INFO    - --------------------------------------------------
+04/11/2026 13:36:28 root                      INFO    - Starting Webservice                           
+04/11/2026 13:36:28 root                      INFO    - --------------------------------------------------
+04/11/2026 13:36:28 root                      INFO    - Load environment variables: SUCCES
+04/11/2026 13:36:28 root                      INFO    - POSTGRES_HOST=postgresql-cnpg-886449-rw.user-alexandre21
+04/11/2026 13:36:28 root                      INFO    - POSTGRES_PORT=5432
+04/11/2026 13:36:28 root                      INFO    - POSTGRES_DATABASE=defaultdb
+04/11/2026 13:36:28 root                      INFO    - POSTGRES_USER=user-alexandre21
+04/11/2026 13:36:28 root                      INFO    - POSTGRES_PASSWORD=*******
+04/11/2026 13:36:28 root                      INFO    - POSTGRES_SCHEMA=project
+04/11/2026 13:36:28 root                      INFO    - UVICORN_HOST=0.0.0.0
+04/11/2026 13:36:28 root                      INFO    - UVICORN_PORT=5000
+04/11/2026 13:37:00 root                      INFO    - --------------------------------------------------
+04/11/2026 13:37:00 root                      INFO    - Starting Webservice                           
+04/11/2026 13:37:00 root                      INFO    - --------------------------------------------------
+04/11/2026 13:37:00 root                      INFO    - Load environment variables: SUCCES
+04/11/2026 13:37:00 root                      INFO    - POSTGRES_HOST=postgresql-cnpg-886449-rw.user-alexandre21
+04/11/2026 13:37:00 root                      INFO    - POSTGRES_PORT=5432
+04/11/2026 13:37:00 root                      INFO    - POSTGRES_DATABASE=defaultdb
+04/11/2026 13:37:00 root                      INFO    - POSTGRES_USER=user-alexandre21
+04/11/2026 13:37:00 root                      INFO    - POSTGRES_PASSWORD=*******
+04/11/2026 13:37:00 root                      INFO    - POSTGRES_SCHEMA=project
+04/11/2026 13:37:00 root                      INFO    - UVICORN_HOST=0.0.0.0
+04/11/2026 13:37:00 root                      INFO    - UVICORN_PORT=5000
+04/11/2026 13:37:09 root                      INFO    - GET / - START
+04/11/2026 13:37:09 root                      INFO    - GET / - END [Status: 307]
+04/11/2026 13:37:09 root                      INFO    - GET /docs - START
+04/11/2026 13:37:09 root                      INFO    - GET /docs - END [Status: 200]
+04/11/2026 13:37:09 root                      INFO    - GET /openapi.json - START
+04/11/2026 13:37:09 root                      INFO    - GET /openapi.json - END [Status: 200]
+04/11/2026 13:37:16 __main__                  INFO    - Webservice stopped
+04/11/2026 13:37:46 root                      INFO    - --------------------------------------------------
+04/11/2026 13:37:46 root                      INFO    - Starting Webservice                           
+04/11/2026 13:37:46 root                      INFO    - --------------------------------------------------
+04/11/2026 13:37:46 root                      INFO    - Load environment variables: SUCCES
+04/11/2026 13:37:46 root                      INFO    - POSTGRES_HOST=postgresql-cnpg-886449-rw.user-alexandre21
+04/11/2026 13:37:46 root                      INFO    - POSTGRES_PORT=5432
+04/11/2026 13:37:46 root                      INFO    - POSTGRES_DATABASE=defaultdb
+04/11/2026 13:37:46 root                      INFO    - POSTGRES_USER=user-alexandre21
+04/11/2026 13:37:46 root                      INFO    - POSTGRES_PASSWORD=*******
+04/11/2026 13:37:46 root                      INFO    - POSTGRES_SCHEMA=project
+04/11/2026 13:37:46 root                      INFO    - UVICORN_HOST=0.0.0.0
+04/11/2026 13:37:46 root                      INFO    - UVICORN_PORT=5000
+04/11/2026 13:37:57 root                      INFO    - GET / - START
+04/11/2026 13:37:57 root                      INFO    - GET / - END [Status: 307]
+04/11/2026 13:37:57 root                      INFO    - GET /docs - START
+04/11/2026 13:37:57 root                      INFO    - GET /docs - END [Status: 200]
+04/11/2026 13:37:57 root                      INFO    - GET /openapi.json - START
+04/11/2026 13:37:57 root                      INFO    - GET /openapi.json - END [Status: 200]
+04/11/2026 13:40:33 root                      INFO    - POST /auth/inscription - START
+04/11/2026 13:40:33 root                      ERROR   - POST /auth/inscription - FAILED [Status: 500] Error: relation "utilisateur" does not exist
+LINE 3:                 FROM utilisateur WHERE nom_utilisateur = 'al...
+                             ^
+
+04/11/2026 13:45:34 __main__                  INFO    - Webservice stopped
+04/11/2026 13:45:39 root                      INFO    - --------------------------------------------------
+04/11/2026 13:45:39 root                      INFO    - Starting Webservice                           
+04/11/2026 13:45:39 root                      INFO    - --------------------------------------------------
+04/11/2026 13:45:39 root                      INFO    - Load environment variables: SUCCES
+04/11/2026 13:45:39 root                      INFO    - POSTGRES_HOST=postgresql-cnpg-886449-rw.user-alexandre21
+04/11/2026 13:45:39 root                      INFO    - POSTGRES_PORT=5432
+04/11/2026 13:45:39 root                      INFO    - POSTGRES_DATABASE=defaultdb
+04/11/2026 13:45:39 root                      INFO    - POSTGRES_USER=user-alexandre21
+04/11/2026 13:45:39 root                      INFO    - POSTGRES_PASSWORD=*******
+04/11/2026 13:45:39 root                      INFO    - POSTGRES_SCHEMA=public
+04/11/2026 13:45:39 root                      INFO    - UVICORN_HOST=0.0.0.0
+04/11/2026 13:45:39 root                      INFO    - UVICORN_PORT=5000
+04/11/2026 13:46:10 root                      INFO    - POST /auth/inscription - START
+04/11/2026 13:46:11 root                      INFO    - POST /auth/inscription - END [Status: 200]
+04/11/2026 13:46:22 root                      INFO    - POST /auth/connexion - START
+04/11/2026 13:46:22 root                      ERROR   - POST /auth/connexion - FAILED [Status: 500] Error: La variable d'environnement JWT_SECRET_KEY n'est pas définie (.env).
+04/11/2026 13:47:44 root                      INFO    - POST /auth/connexion - START
+04/11/2026 13:47:45 root                      ERROR   - POST /auth/connexion - FAILED [Status: 500] Error: La variable d'environnement JWT_SECRET_KEY n'est pas définie (.env).
+04/11/2026 13:48:15 __main__                  INFO    - Webservice stopped
+04/11/2026 13:48:18 root                      INFO    - --------------------------------------------------
+04/11/2026 13:48:18 root                      INFO    - Starting Webservice                           
+04/11/2026 13:48:18 root                      INFO    - --------------------------------------------------
+04/11/2026 13:48:18 root                      INFO    - Load environment variables: SUCCES
+04/11/2026 13:48:18 root                      INFO    - POSTGRES_HOST=postgresql-cnpg-886449-rw.user-alexandre21
+04/11/2026 13:48:18 root                      INFO    - POSTGRES_PORT=5432
+04/11/2026 13:48:18 root                      INFO    - POSTGRES_DATABASE=defaultdb
+04/11/2026 13:48:18 root                      INFO    - POSTGRES_USER=user-alexandre21
+04/11/2026 13:48:18 root                      INFO    - POSTGRES_PASSWORD=*******
+04/11/2026 13:48:18 root                      INFO    - POSTGRES_SCHEMA=public
+04/11/2026 13:48:18 root                      INFO    - JWT_SECRET_KEY=*******
+04/11/2026 13:48:18 root                      INFO    - UVICORN_HOST=0.0.0.0
+04/11/2026 13:48:18 root                      INFO    - UVICORN_PORT=5000
+04/11/2026 13:48:26 root                      INFO    - POST /auth/connexion - START
+04/11/2026 13:48:26 root                      INFO    - POST /auth/connexion - END [Status: 200]
+04/11/2026 13:48:26 root                      INFO    - GET /auth/profil - START
+04/11/2026 13:48:26 root                      INFO    - GET /auth/profil - END [Status: 200]
+04/11/2026 13:48:41 root                      INFO    - GET /referentiels/indicateurs - START
+04/11/2026 13:48:41 root                      INFO    - GET /referentiels/indicateurs - END [Status: 200]
+04/11/2026 13:48:41 root                      INFO    - GET /referentiels/pays - START
+04/11/2026 13:48:41 root                      INFO    - GET /referentiels/pays - END [Status: 200]
+04/11/2026 13:48:41 root                      INFO    - GET /referentiels/classifications - START
+04/11/2026 13:48:41 root                      INFO    - GET /referentiels/classifications - END [Status: 200]
+04/11/2026 13:48:41 root                      INFO    - GET /analyses/evolution - START
+04/11/2026 13:48:41 root                      INFO    - GET /analyses/evolution - END [Status: 404]
+04/11/2026 13:48:45 root                      INFO    - GET /analyses/evolution - START
+04/11/2026 13:48:45 root                      INFO    - GET /analyses/evolution - END [Status: 404]
+04/11/2026 13:48:46 root                      INFO    - GET /referentiels/classifications - START
+04/11/2026 13:48:46 root                      INFO    - GET /referentiels/classifications - END [Status: 200]
+04/11/2026 13:48:46 root                      INFO    - GET /analyses/comparaison-indicateurs - START
+04/11/2026 13:48:46 root                      INFO    - GET /analyses/comparaison-indicateurs - END [Status: 404]
+04/11/2026 13:51:08 root                      INFO    - POST /auth/connexion - START
+04/11/2026 13:51:09 root                      INFO    - POST /auth/connexion - END [Status: 200]
+04/11/2026 13:51:09 root                      INFO    - GET /auth/profil - START
+04/11/2026 13:51:09 root                      INFO    - GET /auth/profil - END [Status: 200]
+04/11/2026 13:51:14 root                      INFO    - GET /referentiels/indicateurs - START
+04/11/2026 13:51:14 root                      INFO    - GET /referentiels/indicateurs - END [Status: 200]
+04/11/2026 13:51:14 root                      INFO    - GET /admin/utilisateurs - START
+04/11/2026 13:51:14 root                      INFO    - GET /admin/utilisateurs - END [Status: 200]
+04/11/2026 13:51:14 root                      INFO    - GET /admin/imports - START
+04/11/2026 13:51:14 root                      INFO    - GET /admin/imports - END [Status: 200]
+04/11/2026 13:51:14 root                      INFO    - GET /journal/ - START
+04/11/2026 13:51:14 root                      INFO    - GET /journal/ - END [Status: 200]
+04/11/2026 13:51:23 root                      INFO    - GET /admin/utilisateurs - START
+04/11/2026 13:51:23 root                      INFO    - GET /admin/utilisateurs - END [Status: 200]
+04/11/2026 13:51:23 root                      INFO    - GET /admin/imports - START
+04/11/2026 13:51:23 root                      INFO    - GET /admin/imports - END [Status: 200]
+04/11/2026 13:51:23 root                      INFO    - POST /admin/imports/EMP_TEMP_SEX_OCU_NB - START
+04/11/2026 13:51:23 service.collecte_service  INFO    - Collecte ILOSTAT : indicateur=EMP_TEMP_SEX_OCU_NB, période=2015-2025
+04/11/2026 13:51:31 service.collecte_service  INFO    - 3371 observation(s) ignorée(s) : pays ou classification hors référentiel.
+04/11/2026 13:51:41 root                      INFO    - POST /admin/imports/EMP_TEMP_SEX_OCU_NB - END [Status: 200]
+04/11/2026 13:51:41 root                      INFO    - GET /admin/utilisateurs - START
+04/11/2026 13:51:41 root                      INFO    - GET /admin/utilisateurs - END [Status: 200]
+04/11/2026 13:51:41 root                      INFO    - GET /admin/imports - START
+04/11/2026 13:51:41 root                      INFO    - GET /admin/imports - END [Status: 200]
+04/11/2026 13:51:41 root                      INFO    - GET /journal/ - START
+04/11/2026 13:51:41 root                      INFO    - GET /journal/ - END [Status: 200]
+04/11/2026 13:51:47 root                      INFO    - GET /admin/utilisateurs - START
+04/11/2026 13:51:47 root                      INFO    - GET /admin/utilisateurs - END [Status: 200]
+04/11/2026 13:51:47 root                      INFO    - GET /admin/imports - START
+04/11/2026 13:51:47 root                      INFO    - GET /admin/imports - END [Status: 200]
+04/11/2026 13:51:47 root                      INFO    - GET /journal/ - START
+04/11/2026 13:51:47 root                      INFO    - GET /journal/ - END [Status: 200]
+04/11/2026 13:51:50 root                      INFO    - GET /admin/utilisateurs - START
+04/11/2026 13:51:50 root                      INFO    - GET /admin/utilisateurs - END [Status: 200]
+04/11/2026 13:51:50 root                      INFO    - GET /admin/imports - START
+04/11/2026 13:51:50 root                      INFO    - GET /admin/imports - END [Status: 200]
+04/11/2026 13:51:51 root                      INFO    - GET /journal/ - START
+04/11/2026 13:51:51 root                      INFO    - GET /journal/ - END [Status: 200]
+04/11/2026 13:51:52 root                      INFO    - GET /admin/utilisateurs - START
+04/11/2026 13:51:52 root                      INFO    - GET /admin/utilisateurs - END [Status: 200]
+04/11/2026 13:51:52 root                      INFO    - GET /admin/imports - START
+04/11/2026 13:51:52 root                      INFO    - GET /admin/imports - END [Status: 200]
+04/11/2026 13:51:52 root                      INFO    - POST /admin/imports/POP_XWAP_SEX_AGE_NB - START
+04/11/2026 13:51:52 service.collecte_service  INFO    - Collecte ILOSTAT : indicateur=POP_XWAP_SEX_AGE_NB, période=2014-2025
+04/11/2026 13:52:10 service.collecte_service  INFO    - 7281 observation(s) ignorée(s) : pays ou classification hors référentiel.
+04/11/2026 13:52:33 root                      INFO    - POST /admin/imports/POP_XWAP_SEX_AGE_NB - END [Status: 200]
+04/11/2026 13:52:33 root                      INFO    - GET /admin/utilisateurs - START
+04/11/2026 13:52:33 root                      INFO    - GET /admin/utilisateurs - END [Status: 200]
+04/11/2026 13:52:33 root                      INFO    - GET /admin/imports - START
+04/11/2026 13:52:33 root                      INFO    - GET /admin/imports - END [Status: 200]
+04/11/2026 13:52:33 root                      INFO    - GET /journal/ - START
+04/11/2026 13:52:33 root                      INFO    - GET /journal/ - END [Status: 200]
+04/11/2026 13:52:38 root                      INFO    - GET /referentiels/pays - START
+04/11/2026 13:52:38 root                      INFO    - GET /referentiels/pays - END [Status: 200]
+04/11/2026 13:52:38 root                      INFO    - GET /referentiels/classifications - START
+04/11/2026 13:52:38 root                      INFO    - GET /referentiels/classifications - END [Status: 200]
+04/11/2026 13:52:38 root                      INFO    - GET /analyses/evolution - START
+04/11/2026 13:52:38 root                      INFO    - GET /analyses/evolution - END [Status: 200]
+04/11/2026 13:52:46 root                      INFO    - GET /analyses/evolution - START
+04/11/2026 13:52:46 root                      INFO    - GET /analyses/evolution - END [Status: 200]
+04/11/2026 15:10:11 root                      INFO    - --------------------------------------------------
+04/11/2026 15:10:11 root                      INFO    - Starting Webservice                           
+04/11/2026 15:10:11 root                      INFO    - --------------------------------------------------
+04/11/2026 15:10:11 root                      INFO    - Load environment variables: SUCCES
+04/11/2026 15:10:11 root                      INFO    - POSTGRES_HOST=postgresql-cnpg-886449-rw.user-alexandre21
+04/11/2026 15:10:11 root                      INFO    - POSTGRES_PORT=5432
+04/11/2026 15:10:11 root                      INFO    - POSTGRES_DATABASE=defaultdb
+04/11/2026 15:10:11 root                      INFO    - POSTGRES_USER=user-alexandre21
+04/11/2026 15:10:11 root                      INFO    - POSTGRES_PASSWORD=*******
+04/11/2026 15:10:11 root                      INFO    - POSTGRES_SCHEMA=public
+04/11/2026 15:10:11 root                      INFO    - JWT_SECRET_KEY=*******
+04/11/2026 15:10:11 root                      INFO    - UVICORN_HOST=0.0.0.0
+04/11/2026 15:10:11 root                      INFO    - UVICORN_PORT=5000
+04/11/2026 15:10:11 root                      INFO    - GET /admin/utilisateurs - START
+04/11/2026 15:10:11 root                      ERROR   - GET /admin/utilisateurs - FAILED [Status: 500] Error: UtilisateurService.lister_utilisateurs() missing 1 required positional argument: 'self'

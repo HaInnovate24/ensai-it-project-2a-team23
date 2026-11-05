@@ -1,0 +1,15 @@
+04/11/2026 13:48:36 root                 INFO   - --------------------------------------------------
+04/11/2026 13:48:36 root                 INFO   - Launch FRONTEND : Streamlit App
+04/11/2026 13:48:36 root                 INFO   - --------------------------------------------------
+04/11/2026 13:48:36 root                 INFO   - Load environment variables: SUCCES
+04/11/2026 13:48:36 Accueil              INFO   - Connexion -> Accueil
+04/11/2026 13:48:41 Analyse Temporelle (F3) INFO   - Accueil -> Analyse Temporelle (F3)
+04/11/2026 13:48:45 Comparaison Pays (F4) INFO   - Analyse Temporelle (F3) -> Comparaison Pays (F4)
+04/11/2026 13:48:46 Multi-indicateurs (F5) INFO   - Comparaison Pays (F4) -> Multi-indicateurs (F5)
+04/11/2026 13:50:55 root                 INFO   - --------------------------------------------------
+04/11/2026 13:50:55 root                 INFO   - Launch FRONTEND : Streamlit App
+04/11/2026 13:50:55 root                 INFO   - --------------------------------------------------
+04/11/2026 13:50:55 root                 INFO   - Load environment variables: SUCCES
+04/11/2026 13:51:14 Administration (F6)  INFO   - Connexion -> Administration (F6)
+04/11/2026 13:52:39 choreographer.browsers.chromium INFO   - Chromium init'ed with kwargs {}
+04/11/2026 13:52:47 choreographer.browsers.chromium INFO   - Chromium init'ed with kwargs {}
