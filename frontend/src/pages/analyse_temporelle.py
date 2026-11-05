@@ -131,5 +131,51 @@ if lignes:
         with st.expander("Voir les données"):
             st.dataframe(
                 df.pivot_table(index="Période", columns="Pays", values="Valeur"),
-                use_container_width=True
+                use_container_width=True,
             )
+
+    # --- Génération du Rapport PDF via le Backend ---
+    st.divider()
+    st.subheader("Générer le rapport PDF complet")
+    st.write("Demandez au serveur de générer une analyse au format PDF (incluant ce graphique et les tables).")
+    
+    # On utilise un bouton d'action pour déclencher la requête POST
+    if st.button("Demander la génération du PDF", icon="📄", type="primary"):
+        with st.spinner("Génération du rapport côté serveur en cours..."):
+            
+            # 1. Demande de création du rapport au backend
+            payload = {
+                "titre": "Évolution temporelle",
+                "description": f"{indicateurs[code_indicateur]} - {libelle_sexe} - {libelle_classification}",
+                "code_indicateur": code_indicateur,
+                "codes_pays": noms_pays
+            }
+            
+            reponse_creation = api_client.post("/rapports/", json=payload)
+            
+            if reponse_creation["status_code"] == 201:
+                rapport_id = reponse_creation["data"]["id"]
+                
+                # 2. Téléchargement du fichier binaire généré via le GET
+                reponse_telechargement = api_client.download_file(f"/rapports/{rapport_id}/telecharger")
+                
+                if reponse_telechargement["status_code"] == 200:
+                    pdf_bytes = reponse_telechargement["content"]
+                    
+                    st.success(f"Le rapport a été généré avec succès !")
+                    
+                    # 3. Affichage du bouton natif Streamlit pour sauvegarder le fichier
+                    st.download_button(
+                        label="Télécharger le fichier PDF",
+                        data=pdf_bytes,
+                        file_name=f"rapport_evolution_{code_indicateur}.pdf",
+                        mime="application/pdf",
+                        icon=":material/download:",
+                    )
+                else:
+                    st.error(f"Erreur lors du téléchargement : {message_erreur(reponse_telechargement)}")
+            else:
+                st.error(f"Erreur lors de la création en base : {message_erreur(reponse_creation)}")
+
+elif not pays_sans_donnees:
+    st.info("Aucune donnée à afficher pour cette sélection.")
