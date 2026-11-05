@@ -18,14 +18,14 @@ ROLE_ADMIN = "Administrateur"
 ROLE_UTILISATEUR = "Utilisateur"
 
 # --- Palette ----------------------------------------------------------------
-VERT = "#2E7257"          # accent principal (boutons, pastilles, liens)
-VERT_FONCE = "#215540"    # survol / variantes foncées
-ENCRE = "#1F2A26"         # titres
-TEXTE = "#39443F"         # corps de texte
-TEXTE_DOUX = "#8A938D"    # légendes, libellés discrets
-CREME = "#F4F3EE"         # fond principal
-BORDURE = "#E7E6DD"       # bordures de cartes
-SIDEBAR = "#143529"       # fond barre latérale
+VERT = "#2E7257"  # accent principal (boutons, pastilles, liens)
+VERT_FONCE = "#215540"  # survol / variantes foncées
+ENCRE = "#1F2A26"  # titres
+TEXTE = "#39443F"  # corps de texte
+TEXTE_DOUX = "#8A938D"  # légendes, libellés discrets
+CREME = "#F4F3EE"  # fond principal
+BORDURE = "#E7E6DD"  # bordures de cartes
+SIDEBAR = "#143529"  # fond barre latérale
 
 # Séquence de couleurs des graphiques (verte, ambre, violet, mauve…).
 PALETTE_GRAPHIQUE = [
@@ -58,6 +58,7 @@ def deconnexion() -> None:
 
 
 # --- Styles globaux ---------------------------------------------------------
+
 
 def injecter_styles() -> None:
     """Injecte les polices et les styles globaux. À appeler une fois par rerun."""
@@ -434,6 +435,7 @@ def barre_laterale_bas() -> None:
 
 # --- En-têtes et composants de page ----------------------------------------
 
+
 def entete(
     titre: str,
     description: str = "",
@@ -448,14 +450,22 @@ def entete(
     col_titre, col_action = st.columns([0.78, 0.22], vertical_alignment="center")
     with col_titre:
         if eyebrow:
-            st.markdown(f"<div class='ls-eyebrow'>{html.escape(eyebrow)}</div>", unsafe_allow_html=True)
-        st.markdown(f"<div class='ls-serif ls-title'>{html.escape(titre)}</div>", unsafe_allow_html=True)
+            st.markdown(
+                f"<div class='ls-eyebrow'>{html.escape(eyebrow)}</div>", unsafe_allow_html=True
+            )
+        st.markdown(
+            f"<div class='ls-serif ls-title'>{html.escape(titre)}</div>", unsafe_allow_html=True
+        )
         if description:
-            st.markdown(f"<p class='ls-subtitle'>{html.escape(description)}</p>", unsafe_allow_html=True)
+            st.markdown(
+                f"<p class='ls-subtitle'>{html.escape(description)}</p>", unsafe_allow_html=True
+            )
     clique = False
     with col_action:
         if action_label:
-            clique = st.button(action_label, icon=action_icon, type="primary", use_container_width=True)
+            clique = st.button(
+                action_label, icon=action_icon, type="primary", use_container_width=True
+            )
     st.write("")
     return clique
 
@@ -590,7 +600,8 @@ def carte_a_retenir(titre_section: str, lignes: list[tuple], note: str = "", bas
     bas_html = (
         f"<div class='k' style='margin-top:1rem'>Bien lire les chiffres</div>"
         f"<div class='note' style='margin-top:0.2rem'>{html.escape(bas)}</div>"
-        if bas else ""
+        if bas
+        else ""
     )
     st.markdown(
         f"<div class='ls-aside'><div class='hd'>À retenir</div>"
@@ -616,6 +627,7 @@ def entete_graphique(eyebrow: str, titre: str, sous_titre: str = "") -> None:
 
 
 # --- Graphiques -------------------------------------------------------------
+
 
 def styliser_figure(fig, hauteur: int = 430):
     """Applique une mise en forme sobre et éditoriale à une figure Plotly.

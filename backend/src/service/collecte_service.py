@@ -10,6 +10,7 @@ from business_object.import_donnees import ImportDonnees
 from client.ilostat_client import IlostatClient
 from dao.classification_dao import ClassificationDao
 from dao.import_dao import ImportDao
+from dao.indicateur_dao import IndicateurDao
 from dao.observation_dao import ObservationDao
 from dao.pays_dao import PaysDao
 from service.parser_service import ParserService
@@ -21,13 +22,23 @@ logger = get_logger(__name__)
 class CollecteService:
     """Télécharge un indicateur, le parse, l'enregistre et trace l'import."""
 
-    def __init__(self, ilostat_client: IlostatClient | None = None):
-        self.import_dao = ImportDao()
-        self.observation_dao = ObservationDao()
-        self.pays_dao = PaysDao()
-        self.classification_dao = ClassificationDao()
-        self.parser_service = ParserService()
+    def __init__(
+        self, 
+        ilostat_client: IlostatClient | None = None,
+        import_dao: ImportDao | None = None,
+        observation_dao: ObservationDao | None = None,
+        pays_dao: PaysDao | None = None,
+        classification_dao: ClassificationDao | None = None,
+        indicateur_dao: IndicateurDao | None = None,
+        parser_service: ParserService | None = None
+    ):
         self.ilostat_client = ilostat_client or IlostatClient()
+        self.import_dao = import_dao or ImportDao()
+        self.observation_dao = observation_dao or ObservationDao()
+        self.pays_dao = pays_dao or PaysDao()
+        self.classification_dao = classification_dao or ClassificationDao()
+        self.indicateur_dao = indicateur_dao or IndicateurDao()
+        self.parser_service = parser_service or ParserService()
 
     def collecter_indicateur(
         self,

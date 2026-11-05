@@ -1,6 +1,24 @@
+from collections import namedtuple
+
 from business_object.enums import StatutImport
 from service.collecte_service import CollecteService
 from service.parser_service import ParserService
+
+# Mini-objets pour mocker les retours des listes de référentiels
+PaysMock = namedtuple("Pays", ["code_pays"])
+ClassifMock = namedtuple("Classification", ["code"])
+
+
+class FauxPaysDao:
+    def lister(self):
+        # On renvoie les codes pays attendus dans les différents CSV des tests
+        return [PaysMock("FRA"), PaysMock("DEU")]
+
+
+class FauxClassificationDao:
+    def lister(self):
+        # On renvoie le code classification attendu dans les CSV
+        return [ClassifMock("OCU_ISCO08_1")]
 
 
 class FauxImportDao:
@@ -61,6 +79,9 @@ def creer_service(client):
     service = CollecteService.__new__(CollecteService)
     service.import_dao = FauxImportDao()
     service.observation_dao = FauxObservationDao()
+    service.pays_dao = FauxPaysDao()
+    service.classification_dao = FauxClassificationDao()
+    service.indicateur_dao = None  # Non utilisé dans cette logique métier testée
     service.parser_service = ParserService()
     service.ilostat_client = client
     return service

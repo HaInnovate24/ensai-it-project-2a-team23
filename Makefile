@@ -68,6 +68,7 @@ help: ## Affiche cette aide
 	@echo   make db-docker     (option Docker) Demarre uniquement PostgreSQL
 	@echo   make test          Lance tous les tests du backend
 	@echo   make test-collecte Lance uniquement les tests de la collecte
+	@echo   make cov           Couverture de tout le backend (console + HTML)
 	@echo   make cov-collecte  Couverture des modules de collecte
 	@echo   make lint          Verifie le style du code
 	@echo   make clean         (option Docker) Supprime conteneurs et volume
@@ -161,6 +162,12 @@ db-docker: ## (option) Demarre uniquement PostgreSQL via Docker et attend qu'il 
 .PHONY: test
 test: ## Lance tous les tests du backend
 	cd backend && uv run pytest
+
+.PHONY: cov
+cov: ## Couverture de tout le backend (rapport console + HTML)
+	cd backend && uv run --extra dev coverage run -m pytest
+	cd backend && uv run --extra dev coverage report
+	cd backend && uv run --extra dev coverage html
 
 .PHONY: test-collecte
 test-collecte: ## Lance uniquement les tests de la collecte

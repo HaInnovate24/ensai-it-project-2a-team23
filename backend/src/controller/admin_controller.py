@@ -1,19 +1,73 @@
-"""Routes HTTP d'administration : imports, données, comptes, journal."""
+"""Routes HTTP d'administration : imports, données, comptes, journal.
+
+Le controller ne contient pas de logique métier : il lit les paramètres,
+retrouve l'administrateur connecté à partir du jeton, appelle le service puis
+transforme les erreurs métier en codes HTTP. La gestion des comptes s'appuie
+sur ``UtilisateurService`` (lister / promouvoir / rétrograder / activer).
+"""
 
 import requests
 from fastapi import APIRouter, HTTPException, Query
 
+from business_object.enums import Role
 from business_object.observation import Observation
+from business_object.utilisateur import Utilisateur
+from controller.dependances import utilisateur_courant
 from model.donnees_model import ObservationCorrection
 from service.collecte_service import CollecteService
 from service.donnees_service import DonneesService
 from service.utilisateur_service import UtilisateurService
-from business_object.utilisateur import Utilisateur
-from business_object.observation import Observation
-from model.donnees_model import ObservationCorrection
+from utils.exceptions import (
+    AccesRefuse,
+    AuthentificationEchouee,
+    ConflitRessource,
+    DonneesInvalides,
+    ErreurMetier,
+    RessourceIntrouvable,
+)
 
 router = APIRouter()
 collecte_service = CollecteService()
+utilisateur_service = UtilisateurService()
+
+
+def erreur_http(erreur: ErreurMetier) -> HTTPException:
+    """Transforme une erreur métier en erreur HTTP.
+
+    - AuthentificationEchouee -> 401 (jeton absent, invalide ou expiré)
+    - AccesRefuse             -> 403 (droits insuffisants)
+    - RessourceIntrouvable    -> 404 (compte ou observation inexistant)
+    - ConflitRessource        -> 409 (état déjà atteint)
+    - toute autre erreur      -> 422 (paramètres incorrects)
+    """
+    if isinstance(erreur, AuthentificationEchouee):
+        code = 401
+    elif isinstance(erreur, AccesRefuse):
+        code = 403
+    elif isinstance(erreur, RessourceIntrouvable):
+        code = 404
+    elif isinstance(erreur, ConflitRessource):
+        code = 409
+    else:  # DonneesInvalides et autres erreurs métier
+        code = 422
+    return HTTPException(status_code=code, detail=str(erreur))
+
+
+def _utilisateur_public(utilisateur: Utilisateur) -> dict:
+    """Représentation d'un compte sans l'empreinte du mot de passe."""
+    role_val = utilisateur.role.value if isinstance(utilisateur.role, Role) else utilisateur.role
+    return {
+        "id": utilisateur.id,
+        "nom_utilisateur": utilisateur.nom_utilisateur,
+        "role": role_val,
+        "actif": utilisateur.actif,
+        "date_creation": utilisateur.date_creation,
+        "derniere_connexion": utilisateur.derniere_connexion,
+    }
+
+
+# Imports ILOSTAT
+
 
 @router.post("/imports/{indicator_id}")
 def lancer_import(
@@ -38,6 +92,7 @@ def lancer_import(
             status_code=502, detail=f"Échec de la récupération ILOSTAT : {exc}"
         ) from exc
 
+
 @router.get("/imports")
 def lister_imports():
     """Renvoie l'historique des imports."""
@@ -52,18 +107,19 @@ def lister_imports():
         ) from exc
 
 
+# Observations
+
+
 @router.put("/observations/{observation_id}")
 def corriger_observation(observation_id: int, observation: ObservationCorrection):
     """Corrige une observation."""
     try:
         DonneesService().corriger(Observation(**observation.model_dump()))
         return {"message": "Correction observation", "statut": "succes", "data": observation}
+    except ErreurMetier as erreur:
+        raise erreur_http(erreur) from erreur
     except ValueError as exc:
         raise HTTPException(status_code=400, detail=str(exc)) from exc
-    except requests.RequestException as exc:
-        raise HTTPException(
-            status_code=502, detail=f"Échec de la récupération ILOSTAT : {exc}"
-        ) from exc
 
 
 @router.delete("/observations/{observation_id}")
@@ -76,75 +132,61 @@ def supprimer_observation(observation_id: int):
             "statut": "succes",
             "observation_id": observation_id,
         }
+    except ErreurMetier as erreur:
+        raise erreur_http(erreur) from erreur
     except ValueError as exc:
         raise HTTPException(status_code=400, detail=str(exc)) from exc
-    except requests.RequestException as exc:
-        raise HTTPException(status_code=502, detail=f"Échec ILOSTAT : {exc}") from exc
+
+
+# Comptes utilisateurs (administration — F6)
+
 
 @router.get("/utilisateurs")
-def lister_utilisateurs():
-    """Renvoie la liste des comptes."""
+def lister_utilisateurs(jeton: str):
+    """Renvoie la liste des comptes (administrateur uniquement)."""
     try:
-        utilisateurs = UtilisateurService.lister_utilisateurs()
-        return {"message": "Liste des utilisateurs", "statut": "succes", "data": utilisateurs}
-    except ValueError as exc:
-        raise HTTPException(status_code=400, detail=str(exc)) from exc
-    except requests.RequestException as exc:
-        raise HTTPException(status_code=502, detail=f"Échec ILOSTAT : {exc}") from exc
-
-@router.put("/utilisateurs/{utilisateur_id}")
-def modifier_utilisateur(utilisateur_id: int, donnees: dict):
-    """Gère un compte (promotion, désactivation)."""
-    try:
-        modification = Utilisateur(**donnees)
-        if utilisateur_id != modification.id:
-            raise ValueError("L'ID de l'URL ne correspond pas à l'ID de l'utilisateur fourni.")
-            
-        succes = UtilisateurService.modifier(modification)
-        if succes:
-            return {
-                "message": "Utilisateur mis à jour avec succès",
-                "statut": "succes",
-                "utilisateur_id": utilisateur_id
-            }
-        else:
-            raise HTTPException(status_code=404, detail="Utilisateur introuvable")
-    except ValueError as exc:
-        raise HTTPException(status_code=400, detail=str(exc)) from exc
-    except Exception as exc:
-        raise HTTPException(status_code=500, detail=f"Erreur interne : {str(exc)}") from exc
-
-
-@router.delete("/utilisateurs/{utilisateur_id}/supprimer")
-def supprimer_utilisateur(utilisateur_id: int):
-    """Supprime un compte utilisateur."""
-    try:
-        UtilisateurService.supprimer(utilisateur_id)
-        return {"message": "Utilisateur supprimé avec succès", "statut": "succes", "utilisateur_id": utilisateur_id}
-    except ValueError as exc:
-        raise HTTPException(status_code=400, detail=str(exc)) from exc
-    except requests.RequestException as exc:
-        raise HTTPException(status_code=502, detail=f"Échec ILOSTAT : {exc}") from exc
+        acteur = utilisateur_courant(jeton)
+        utilisateurs = utilisateur_service.lister_utilisateurs(acteur)
+        return {
+            "message": "Liste des utilisateurs",
+            "statut": "succes",
+            "data": [_utilisateur_public(u) for u in utilisateurs],
+        }
+    except ErreurMetier as erreur:
+        raise erreur_http(erreur) from erreur
 
 
 @router.patch("/utilisateurs/{utilisateur_id}/role")
-def modifier_role_utilisateur(utilisateur_id: int, role: str):
-    """Modifie le role d'un compte utilisateur."""
+def modifier_role_utilisateur(utilisateur_id: int, role: str, jeton: str):
+    """Modifie le rôle d'un compte utilisateur (promouvoir / rétrograder)."""
     try:
-        UtilisateurService.modifier_role(utilisateur_id, role)
-        return {"message": "Utilisateur promu avec succès", "statut": "succes", "utilisateur_id": utilisateur_id}
-    except ValueError as exc:
-        raise HTTPException(status_code=400, detail=str(exc)) from exc
-    except requests.RequestException as exc:
-        raise HTTPException(status_code=502, detail=f"Échec ILOSTAT : {exc}") from exc
+        acteur = utilisateur_courant(jeton)
+        if role == "admin":
+            u = utilisateur_service.promouvoir_admin(acteur, utilisateur_id)
+        elif role == "utilisateur":
+            u = utilisateur_service.retrograder_admin(acteur, utilisateur_id)
+        else:
+            raise DonneesInvalides(f"Rôle inconnu : {role}")
+
+        return {
+            "message": "Rôle modifié avec succès",
+            "statut": "succes",
+            "data": _utilisateur_public(u),
+        }
+    except ErreurMetier as erreur:
+        raise erreur_http(erreur) from erreur
+
 
 @router.patch("/utilisateurs/{utilisateur_id}/statut")
-def statut_utilisateur(utilisateur_id: int, actif: bool):
-    """Modifie le statut d'un compte utilisateur."""
+def statut_utilisateur(utilisateur_id: int, actif: bool, jeton: str):
+    """Modifie le statut d'un compte utilisateur (activer / désactiver)."""
     try:
-        UtilisateurService.modifier_statut(utilisateur_id, actif)
-        return {"message": "Statut Utilisateur modifié avec succès", "statut": "succes", "utilisateur_id": utilisateur_id}
-    except ValueError as exc:
-        raise HTTPException(status_code=400, detail=str(exc)) from exc
-    except requests.RequestException as exc:
-        raise HTTPException(status_code=502, detail=f"Échec ILOSTAT : {exc}") from exc
+        acteur = utilisateur_courant(jeton)
+        u = utilisateur_service.definir_activation(acteur, utilisateur_id, actif)
+        return {
+            "message": "Statut utilisateur modifié avec succès",
+            "statut": "succes",
+            "data": _utilisateur_public(u),
+        }
+    except ErreurMetier as erreur:
+        raise erreur_http(erreur) from erreur

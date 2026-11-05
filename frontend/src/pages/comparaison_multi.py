@@ -1,3 +1,5 @@
+from datetime import date
+
 import pandas as pd
 import plotly.express as px
 import streamlit as st
@@ -30,8 +32,7 @@ get_page_logger("Multi-indicateurs (F5)")
 
 entete(
     "Plusieurs indicateurs, un pays.",
-    "Superposez plusieurs indicateurs sur un même graphique pour dégager "
-    "visuellement des liens.",
+    "Superposez plusieurs indicateurs sur un même graphique pour dégager visuellement des liens.",
     eyebrow="Explorateur de données · ILOSTAT",
 )
 
