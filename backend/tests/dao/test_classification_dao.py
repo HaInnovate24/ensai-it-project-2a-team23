@@ -1,87 +1,104 @@
-import os
-import sys
-
 import pytest
-
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..", "src")))
-
-from utils.config import load_environment_variables
-
-load_environment_variables()
+from unittest.mock import MagicMock, patch
 
 from business_object.classification import Classification
 from dao.classification_dao import ClassificationDao
 
-try:
-    from business_object.enums import TypeClassification
-except ImportError:
-    TypeClassification = None
+@pytest.fixture(autouse=True)
+def mock_db_cursor():
+    """Mock la connexion à la base de données pour isoler le test."""
+    with patch('dao.classification_dao.DBConnection') as mock_db_class:
+        mock_conn = MagicMock()
+        mock_db_class.return_value.connection = mock_conn
+        
+        mock_cursor = MagicMock()
+        mock_conn.cursor.return_value.__enter__.return_value = mock_cursor
+        
+        yield mock_cursor
 
 
-@pytest.fixture
-def dao():
-    """Fournit une instance du DAO pour les tests."""
-    return ClassificationDao()
-
-
-@pytest.fixture
-def nettoyage_db(dao):
-    """Nettoie la base de données après le test (Teardown)."""
-    yield
-    with dao.conn.cursor() as cursor:
-        cursor.execute("DELETE FROM classification WHERE code = 'TEST_CLASS';")
-    dao.conn.commit()
-
-
-def test_trouver_par_code_existant(dao):
+def test_trouver_par_code_existant(mock_db_cursor):
     """Vérifie qu'on peut récupérer une classification de base."""
-    # 'AGE_AGGREGATE_TOTAL' est inséré par pop.referentiel.sql
+    # On simule ce que PostgreSQL renverrait
+    mock_db_cursor.fetchone.return_value = {
+        "code": "AGE_AGGREGATE_TOTAL",
+        "libelle": "Total (tous âges)",
+        "type": "age"
+    }
+    
+    dao = ClassificationDao()
     classif = dao.trouver_par_code("AGE_AGGREGATE_TOTAL")
+    
     assert classif is not None
     assert classif.code == "AGE_AGGREGATE_TOTAL"
-    # Le DAO renvoie la chaîne ou l'Enum, on vérifie juste que c'est le bon type
-    assert str(classif.type) == "age" or getattr(classif.type, "value", classif.type) == "age"
+    assert classif.libelle == "Total (tous âges)"
+    assert classif.type == "age"
+    assert mock_db_cursor.execute.called
 
 
-def test_trouver_par_code_inexistant(dao):
-    """Vérifie le comportement si la classification n'existe pas."""
-    classif = dao.trouver_par_code("CODE_INEXISTANT")
+def test_trouver_par_code_inexistant(mock_db_cursor):
+    """Vérifie le comportement si le code n'existe pas."""
+    # On simule une réponse vide
+    mock_db_cursor.fetchone.return_value = None
+    
+    dao = ClassificationDao()
+    classif = dao.trouver_par_code("INCONNU")
+    
     assert classif is None
+    assert mock_db_cursor.execute.called
 
 
-def test_lister_sans_filtre(dao):
-    """Vérifie que l'on récupère bien toutes les classifications (âges + occupations)."""
+def test_lister_sans_filtre(mock_db_cursor):
+    """Vérifie la récupération de la liste complète des classifications."""
+    # On simule le retour d'un fetchall()
+    mock_db_cursor.fetchall.return_value = [
+        {"code": "AGE_15_24", "libelle": "15-24 ans", "type": "age"},
+        {"code": "OCU_MANAGER", "libelle": "Managers", "type": "occupation"}
+    ]
+    
+    dao = ClassificationDao()
     liste = dao.lister()
-    # pop.referentiel.sql contient 3 âges et 12 occupations = 15 lignes
-    assert len(liste) >= 15
-    assert isinstance(liste[0], Classification)
+    
+    assert len(liste) == 2
+    assert liste[0].code == "AGE_15_24"
+    assert mock_db_cursor.execute.called
 
 
-def test_lister_avec_filtre(dao):
+def test_lister_avec_filtre(mock_db_cursor):
     """Vérifie que le filtrage par type fonctionne bien."""
-    # On peut passer l'Enum s'il existe, sinon on passe directement la chaîne 'age'
-    filtre = TypeClassification.AGE if hasattr(TypeClassification, "AGE") else "age"
+    # On simule le retour d'un fetchall() filtré sur 'age'
+    mock_db_cursor.fetchall.return_value = [
+        {"code": "AGE_15_24", "libelle": "15-24 ans", "type": "age"}
+    ]
+    
+    dao = ClassificationDao()
+    liste = dao.lister(type="age")
+    
+    assert len(liste) == 1
+    assert liste[0].type == "age"
+    
+    # On vérifie que la requête envoyée contenait bien un paramètre (le filtre)
+    # arg = (requete, variables)
+    args, kwargs = mock_db_cursor.execute.call_args
+    assert args[1] == ("age",) # Les variables de la requête SQL
 
-    liste = dao.lister(type=filtre)
-    # Il n'y a que 3 tranches d'âge dans le référentiel de base
-    assert len(liste) >= 3
 
-    # On vérifie que toutes les lignes retournées sont bien du type 'age'
-    for classif in liste:
-        valeur_type = classif.type.value if hasattr(classif.type, "value") else classif.type
-        assert valeur_type == "age"
-
-
-def test_creer_classification(dao, nettoyage_db):
-    """Vérifie l'insertion d'une nouvelle classification et le nettoyage."""
+def test_creer_classification(mock_db_cursor):
+    """Vérifie l'insertion d'une nouvelle classification."""
+    # On simule le retour du RETURNING
+    mock_db_cursor.fetchone.return_value = {
+        "code": "TEST_CLASS",
+        "libelle": "Classification de test",
+        "type": "occupation"
+    }
+    
     nouvelle = Classification(
-        code="TEST_CLASS", libelle="Classification de test automatisé", type="occupation"
+        code="TEST_CLASS", libelle="Classification de test", type="occupation"
     )
-
+    
+    dao = ClassificationDao()
     classif_creee = dao.creer(nouvelle)
+    
     assert classif_creee.code == "TEST_CLASS"
-
-    # Vérification en base
-    classif_en_base = dao.trouver_par_code("TEST_CLASS")
-    assert classif_en_base is not None
-    assert classif_en_base.libelle == "Classification de test automatisé"
+    assert classif_creee.libelle == "Classification de test"
+    assert mock_db_cursor.execute.called
