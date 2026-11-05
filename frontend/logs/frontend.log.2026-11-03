@@ -1,0 +1,254 @@
+03/11/2026 09:40:24 root                 INFO   - --------------------------------------------------
+03/11/2026 09:40:24 root                 INFO   - Launch FRONTEND : Streamlit App
+03/11/2026 09:40:24 root                 INFO   - --------------------------------------------------
+03/11/2026 09:40:24 root                 INFO   - Load environment variables: SUCCES
+03/11/2026 09:40:24 root                 INFO   - BACKEND_URL=http://localhost:5000
+03/11/2026 09:40:24 root                 INFO   - BACKEND_TIMEOUT=5
+03/11/2026 10:46:46 root                 INFO   - --------------------------------------------------
+03/11/2026 10:46:46 root                 INFO   - Launch FRONTEND : Streamlit App
+03/11/2026 10:46:46 root                 INFO   - --------------------------------------------------
+03/11/2026 10:46:46 root                 INFO   - Load environment variables: SUCCES
+03/11/2026 10:46:46 root                 INFO   - BACKEND_URL=http://localhost:5000
+03/11/2026 10:46:46 root                 INFO   - BACKEND_TIMEOUT=5
+03/11/2026 11:03:15 root                 INFO   - --------------------------------------------------
+03/11/2026 11:03:15 root                 INFO   - Launch FRONTEND : Streamlit App
+03/11/2026 11:03:15 root                 INFO   - --------------------------------------------------
+03/11/2026 11:03:15 root                 INFO   - Load environment variables: SUCCES
+03/11/2026 11:03:15 root                 INFO   - BACKEND_URL=http://localhost:5000
+03/11/2026 11:03:15 root                 INFO   - BACKEND_TIMEOUT=5
+03/11/2026 11:05:25 root                 INFO   - --------------------------------------------------
+03/11/2026 11:05:25 root                 INFO   - Launch FRONTEND : Streamlit App
+03/11/2026 11:05:25 root                 INFO   - --------------------------------------------------
+03/11/2026 11:05:25 root                 INFO   - Load environment variables: SUCCES
+03/11/2026 11:05:25 root                 INFO   - BACKEND_URL=http://localhost:5000
+03/11/2026 11:05:25 root                 INFO   - BACKEND_TIMEOUT=5
+03/11/2026 11:06:27 root                 INFO   - --------------------------------------------------
+03/11/2026 11:06:27 root                 INFO   - Launch FRONTEND : Streamlit App
+03/11/2026 11:06:27 root                 INFO   - --------------------------------------------------
+03/11/2026 11:06:27 root                 INFO   - Load environment variables: SUCCES
+03/11/2026 11:06:27 root                 INFO   - BACKEND_URL=http://localhost:5000
+03/11/2026 11:06:27 root                 INFO   - BACKEND_TIMEOUT=5
+03/11/2026 11:39:28 root                 INFO   - --------------------------------------------------
+03/11/2026 11:39:28 root                 INFO   - Launch FRONTEND : Streamlit App
+03/11/2026 11:39:28 root                 INFO   - --------------------------------------------------
+03/11/2026 11:39:28 root                 INFO   - Load environment variables: SUCCES
+03/11/2026 11:39:28 root                 INFO   - BACKEND_URL=http://localhost:5000
+03/11/2026 11:39:28 root                 INFO   - BACKEND_TIMEOUT=5
+03/11/2026 15:15:04 root                 INFO   - --------------------------------------------------
+03/11/2026 15:15:04 root                 INFO   - Launch FRONTEND : Streamlit App
+03/11/2026 15:15:04 root                 INFO   - --------------------------------------------------
+03/11/2026 15:15:04 root                 INFO   - Load environment variables: SUCCES
+03/11/2026 15:15:04 root                 INFO   - BACKEND_URL=http://localhost:5000
+03/11/2026 15:15:04 root                 INFO   - BACKEND_TIMEOUT=5
+03/11/2026 15:15:04 Accueil              INFO   - None -> Accueil
+03/11/2026 15:15:21 Analyse Temporelle (F3) INFO   - Accueil -> Analyse Temporelle (F3)
+03/11/2026 15:15:21 Analyse Temporelle (F3) INFO   -   GET http://localhost:5000/referentiels/indicateurs
+03/11/2026 15:15:21 Analyse Temporelle (F3) INFO   -   500 Internal Server Error
+03/11/2026 15:15:21 Analyse Temporelle (F3) INFO   -   GET http://localhost:5000/referentiels/pays
+03/11/2026 15:15:21 Analyse Temporelle (F3) INFO   -   GET http://localhost:5000/referentiels/classifications
+03/11/2026 15:15:21 Analyse Temporelle (F3) INFO   -   500 Internal Server Error
+03/11/2026 15:15:21 Analyse Temporelle (F3) INFO   -   GET http://localhost:5000/analyses/evolution
+03/11/2026 15:15:45 Connexion            INFO   - Analyse Temporelle (F3) -> Connexion
+03/11/2026 15:15:47 Analyse Temporelle (F3) INFO   - Connexion -> Analyse Temporelle (F3)
+03/11/2026 15:15:47 Analyse Temporelle (F3) INFO   -   GET http://localhost:5000/referentiels/indicateurs
+03/11/2026 15:15:47 Analyse Temporelle (F3) INFO   -   500 Internal Server Error
+03/11/2026 15:15:47 Analyse Temporelle (F3) INFO   -   GET http://localhost:5000/referentiels/pays
+03/11/2026 15:15:47 Analyse Temporelle (F3) INFO   -   GET http://localhost:5000/referentiels/classifications
+03/11/2026 15:15:47 Analyse Temporelle (F3) INFO   -   500 Internal Server Error
+03/11/2026 15:15:47 Analyse Temporelle (F3) INFO   -   GET http://localhost:5000/analyses/evolution
+03/11/2026 15:16:11 Connexion            INFO   - Analyse Temporelle (F3) -> Connexion
+03/11/2026 15:16:13 Analyse Temporelle (F3) INFO   - Connexion -> Analyse Temporelle (F3)
+03/11/2026 15:16:13 Analyse Temporelle (F3) INFO   -   GET http://localhost:5000/referentiels/indicateurs
+03/11/2026 15:16:13 Analyse Temporelle (F3) INFO   -   500 Internal Server Error
+03/11/2026 15:16:13 Analyse Temporelle (F3) INFO   -   GET http://localhost:5000/referentiels/pays
+03/11/2026 15:16:13 Analyse Temporelle (F3) INFO   -   GET http://localhost:5000/referentiels/classifications
+03/11/2026 15:16:13 Analyse Temporelle (F3) INFO   -   500 Internal Server Error
+03/11/2026 15:16:13 Analyse Temporelle (F3) INFO   -   GET http://localhost:5000/analyses/evolution
+03/11/2026 15:17:05 Analyse Temporelle (F3) INFO   -   GET http://localhost:5000/referentiels/indicateurs
+03/11/2026 15:17:05 Analyse Temporelle (F3) INFO   -   500 Internal Server Error
+03/11/2026 15:17:05 Analyse Temporelle (F3) INFO   -   GET http://localhost:5000/referentiels/pays
+03/11/2026 15:17:05 Analyse Temporelle (F3) INFO   -   GET http://localhost:5000/referentiels/classifications
+03/11/2026 15:17:05 Analyse Temporelle (F3) INFO   -   500 Internal Server Error
+03/11/2026 15:17:05 Analyse Temporelle (F3) INFO   -   GET http://localhost:5000/analyses/evolution
+03/11/2026 15:17:07 Analyse Temporelle (F3) INFO   -   GET http://localhost:5000/referentiels/indicateurs
+03/11/2026 15:17:07 Analyse Temporelle (F3) INFO   -   500 Internal Server Error
+03/11/2026 15:17:07 Analyse Temporelle (F3) INFO   -   GET http://localhost:5000/referentiels/pays
+03/11/2026 15:17:07 Analyse Temporelle (F3) INFO   -   GET http://localhost:5000/referentiels/classifications
+03/11/2026 15:17:07 Analyse Temporelle (F3) INFO   -   500 Internal Server Error
+03/11/2026 15:17:07 Analyse Temporelle (F3) INFO   -   GET http://localhost:5000/analyses/evolution
+03/11/2026 15:17:09 Analyse Temporelle (F3) INFO   -   GET http://localhost:5000/referentiels/indicateurs
+03/11/2026 15:17:09 Analyse Temporelle (F3) INFO   -   500 Internal Server Error
+03/11/2026 15:17:09 Analyse Temporelle (F3) INFO   -   GET http://localhost:5000/referentiels/pays
+03/11/2026 15:17:09 Analyse Temporelle (F3) INFO   -   GET http://localhost:5000/referentiels/classifications
+03/11/2026 15:17:09 Analyse Temporelle (F3) INFO   -   500 Internal Server Error
+03/11/2026 15:17:09 Analyse Temporelle (F3) INFO   -   GET http://localhost:5000/analyses/evolution
+03/11/2026 15:17:18 Analyse Temporelle (F3) INFO   -   GET http://localhost:5000/referentiels/indicateurs
+03/11/2026 15:17:18 Analyse Temporelle (F3) INFO   -   500 Internal Server Error
+03/11/2026 15:17:18 Analyse Temporelle (F3) INFO   -   GET http://localhost:5000/referentiels/pays
+03/11/2026 15:17:18 Analyse Temporelle (F3) INFO   -   GET http://localhost:5000/referentiels/classifications
+03/11/2026 15:17:18 Analyse Temporelle (F3) INFO   -   500 Internal Server Error
+03/11/2026 15:17:18 Analyse Temporelle (F3) INFO   -   GET http://localhost:5000/analyses/evolution
+03/11/2026 15:17:22 Analyse Temporelle (F3) INFO   -   GET http://localhost:5000/referentiels/indicateurs
+03/11/2026 15:17:22 Analyse Temporelle (F3) INFO   -   500 Internal Server Error
+03/11/2026 15:17:22 Analyse Temporelle (F3) INFO   -   GET http://localhost:5000/referentiels/pays
+03/11/2026 15:17:22 Analyse Temporelle (F3) INFO   -   GET http://localhost:5000/referentiels/classifications
+03/11/2026 15:17:22 Analyse Temporelle (F3) INFO   -   500 Internal Server Error
+03/11/2026 15:17:28 Analyse Temporelle (F3) INFO   -   GET http://localhost:5000/referentiels/indicateurs
+03/11/2026 15:17:28 Analyse Temporelle (F3) INFO   -   500 Internal Server Error
+03/11/2026 15:17:28 Analyse Temporelle (F3) INFO   -   GET http://localhost:5000/referentiels/pays
+03/11/2026 15:17:28 Analyse Temporelle (F3) INFO   -   GET http://localhost:5000/referentiels/classifications
+03/11/2026 15:17:28 Analyse Temporelle (F3) INFO   -   500 Internal Server Error
+03/11/2026 15:17:28 Analyse Temporelle (F3) INFO   -   GET http://localhost:5000/analyses/evolution
+03/11/2026 15:17:28 Analyse Temporelle (F3) INFO   -   404 Not Found
+03/11/2026 15:17:29 Analyse Temporelle (F3) INFO   -   GET http://localhost:5000/referentiels/indicateurs
+03/11/2026 15:17:29 Analyse Temporelle (F3) INFO   -   500 Internal Server Error
+03/11/2026 15:17:29 Analyse Temporelle (F3) INFO   -   GET http://localhost:5000/referentiels/pays
+03/11/2026 15:17:29 Analyse Temporelle (F3) INFO   -   GET http://localhost:5000/referentiels/classifications
+03/11/2026 15:17:29 Analyse Temporelle (F3) INFO   -   500 Internal Server Error
+03/11/2026 15:17:29 Analyse Temporelle (F3) INFO   -   GET http://localhost:5000/analyses/evolution
+03/11/2026 15:17:29 Analyse Temporelle (F3) INFO   -   404 Not Found
+03/11/2026 15:17:29 Analyse Temporelle (F3) INFO   -   GET http://localhost:5000/analyses/evolution
+03/11/2026 15:17:29 Analyse Temporelle (F3) INFO   -   404 Not Found
+03/11/2026 15:17:34 Analyse Temporelle (F3) INFO   -   GET http://localhost:5000/referentiels/indicateurs
+03/11/2026 15:17:34 Analyse Temporelle (F3) INFO   -   500 Internal Server Error
+03/11/2026 15:17:34 Analyse Temporelle (F3) INFO   -   GET http://localhost:5000/referentiels/pays
+03/11/2026 15:17:34 Analyse Temporelle (F3) INFO   -   GET http://localhost:5000/referentiels/classifications
+03/11/2026 15:17:34 Analyse Temporelle (F3) INFO   -   500 Internal Server Error
+03/11/2026 15:17:34 Analyse Temporelle (F3) INFO   -   GET http://localhost:5000/analyses/evolution
+03/11/2026 15:17:34 Analyse Temporelle (F3) INFO   -   404 Not Found
+03/11/2026 15:17:34 Analyse Temporelle (F3) INFO   -   GET http://localhost:5000/analyses/evolution
+03/11/2026 15:17:34 Analyse Temporelle (F3) INFO   -   404 Not Found
+03/11/2026 15:17:40 Analyse Temporelle (F3) INFO   -   GET http://localhost:5000/referentiels/indicateurs
+03/11/2026 15:17:40 Analyse Temporelle (F3) INFO   -   500 Internal Server Error
+03/11/2026 15:17:40 Analyse Temporelle (F3) INFO   -   GET http://localhost:5000/referentiels/pays
+03/11/2026 15:17:40 Analyse Temporelle (F3) INFO   -   GET http://localhost:5000/referentiels/classifications
+03/11/2026 15:17:40 Analyse Temporelle (F3) INFO   -   500 Internal Server Error
+03/11/2026 15:17:40 Analyse Temporelle (F3) INFO   -   GET http://localhost:5000/analyses/evolution
+03/11/2026 15:17:40 Analyse Temporelle (F3) INFO   -   404 Not Found
+03/11/2026 15:17:40 Analyse Temporelle (F3) INFO   -   GET http://localhost:5000/analyses/evolution
+03/11/2026 15:17:40 Analyse Temporelle (F3) INFO   -   404 Not Found
+03/11/2026 15:17:40 Analyse Temporelle (F3) INFO   -   GET http://localhost:5000/analyses/evolution
+03/11/2026 15:17:40 Analyse Temporelle (F3) INFO   -   404 Not Found
+03/11/2026 15:17:43 Analyse Temporelle (F3) INFO   -   GET http://localhost:5000/referentiels/indicateurs
+03/11/2026 15:17:43 Analyse Temporelle (F3) INFO   -   500 Internal Server Error
+03/11/2026 15:17:43 Analyse Temporelle (F3) INFO   -   GET http://localhost:5000/referentiels/pays
+03/11/2026 15:17:43 Analyse Temporelle (F3) INFO   -   GET http://localhost:5000/referentiels/classifications
+03/11/2026 15:17:43 Analyse Temporelle (F3) INFO   -   500 Internal Server Error
+03/11/2026 15:17:43 Analyse Temporelle (F3) INFO   -   GET http://localhost:5000/analyses/evolution
+03/11/2026 15:17:46 Analyse Temporelle (F3) INFO   -   GET http://localhost:5000/referentiels/indicateurs
+03/11/2026 15:17:46 Analyse Temporelle (F3) INFO   -   500 Internal Server Error
+03/11/2026 15:17:46 Analyse Temporelle (F3) INFO   -   GET http://localhost:5000/referentiels/pays
+03/11/2026 15:17:46 Analyse Temporelle (F3) INFO   -   GET http://localhost:5000/referentiels/classifications
+03/11/2026 15:17:46 Analyse Temporelle (F3) INFO   -   500 Internal Server Error
+03/11/2026 15:17:46 Analyse Temporelle (F3) INFO   -   GET http://localhost:5000/analyses/evolution
+03/11/2026 15:17:51 Analyse Temporelle (F3) INFO   -   GET http://localhost:5000/referentiels/indicateurs
+03/11/2026 15:17:51 Analyse Temporelle (F3) INFO   -   500 Internal Server Error
+03/11/2026 15:17:51 Analyse Temporelle (F3) INFO   -   GET http://localhost:5000/referentiels/pays
+03/11/2026 15:17:51 Analyse Temporelle (F3) INFO   -   GET http://localhost:5000/referentiels/classifications
+03/11/2026 15:17:51 Analyse Temporelle (F3) INFO   -   500 Internal Server Error
+03/11/2026 15:17:51 Analyse Temporelle (F3) INFO   -   GET http://localhost:5000/analyses/evolution
+03/11/2026 15:17:51 Analyse Temporelle (F3) INFO   -   404 Not Found
+03/11/2026 15:17:51 Analyse Temporelle (F3) INFO   -   GET http://localhost:5000/analyses/evolution
+03/11/2026 15:17:51 Analyse Temporelle (F3) INFO   -   404 Not Found
+03/11/2026 15:17:51 Analyse Temporelle (F3) INFO   -   GET http://localhost:5000/analyses/evolution
+03/11/2026 15:17:51 Analyse Temporelle (F3) INFO   -   404 Not Found
+03/11/2026 15:17:54 Analyse Temporelle (F3) INFO   -   GET http://localhost:5000/referentiels/indicateurs
+03/11/2026 15:17:54 Analyse Temporelle (F3) INFO   -   500 Internal Server Error
+03/11/2026 15:17:54 Analyse Temporelle (F3) INFO   -   GET http://localhost:5000/referentiels/pays
+03/11/2026 15:17:54 Analyse Temporelle (F3) INFO   -   GET http://localhost:5000/referentiels/classifications
+03/11/2026 15:17:54 Analyse Temporelle (F3) INFO   -   500 Internal Server Error
+03/11/2026 15:17:56 Analyse Temporelle (F3) INFO   -   GET http://localhost:5000/referentiels/indicateurs
+03/11/2026 15:17:56 Analyse Temporelle (F3) INFO   -   500 Internal Server Error
+03/11/2026 15:17:56 Analyse Temporelle (F3) INFO   -   GET http://localhost:5000/referentiels/pays
+03/11/2026 15:17:56 Analyse Temporelle (F3) INFO   -   GET http://localhost:5000/referentiels/classifications
+03/11/2026 15:17:56 Analyse Temporelle (F3) INFO   -   500 Internal Server Error
+03/11/2026 15:17:58 Analyse Temporelle (F3) INFO   -   GET http://localhost:5000/referentiels/indicateurs
+03/11/2026 15:17:58 Analyse Temporelle (F3) INFO   -   500 Internal Server Error
+03/11/2026 15:17:58 Analyse Temporelle (F3) INFO   -   GET http://localhost:5000/referentiels/pays
+03/11/2026 15:17:58 Analyse Temporelle (F3) INFO   -   GET http://localhost:5000/referentiels/classifications
+03/11/2026 15:17:58 Analyse Temporelle (F3) INFO   -   500 Internal Server Error
+03/11/2026 15:18:00 Analyse Temporelle (F3) INFO   -   GET http://localhost:5000/referentiels/indicateurs
+03/11/2026 15:18:00 Analyse Temporelle (F3) INFO   -   500 Internal Server Error
+03/11/2026 15:18:00 Analyse Temporelle (F3) INFO   -   GET http://localhost:5000/referentiels/pays
+03/11/2026 15:18:02 Analyse Temporelle (F3) INFO   -   GET http://localhost:5000/referentiels/indicateurs
+03/11/2026 15:18:05 Analyse Temporelle (F3) INFO   -   GET http://localhost:5000/referentiels/indicateurs
+03/11/2026 15:18:10 Analyse Temporelle (F3) INFO   -   GET http://localhost:5000/referentiels/pays
+03/11/2026 15:18:12 Analyse Temporelle (F3) INFO   -   GET http://localhost:5000/referentiels/indicateurs
+03/11/2026 15:18:13 Analyse Temporelle (F3) INFO   -   GET http://localhost:5000/referentiels/indicateurs
+03/11/2026 15:18:14 Accueil              INFO   - Analyse Temporelle (F3) -> Accueil
+03/11/2026 15:18:15 Analyse Temporelle (F3) INFO   - Accueil -> Analyse Temporelle (F3)
+03/11/2026 15:18:15 Analyse Temporelle (F3) INFO   -   GET http://localhost:5000/referentiels/indicateurs
+03/11/2026 15:18:20 Analyse Temporelle (F3) INFO   -   GET http://localhost:5000/referentiels/pays
+03/11/2026 15:18:25 Analyse Temporelle (F3) INFO   -   GET http://localhost:5000/referentiels/classifications
+03/11/2026 15:18:30 Analyse Temporelle (F3) INFO   -   GET http://localhost:5000/analyses/evolution
+03/11/2026 15:19:51 Analyse Temporelle (F3) INFO   -   GET http://localhost:5000/referentiels/indicateurs
+03/11/2026 15:19:51 Analyse Temporelle (F3) INFO   -   500 Internal Server Error
+03/11/2026 15:19:51 Analyse Temporelle (F3) INFO   -   GET http://localhost:5000/referentiels/pays
+03/11/2026 15:19:51 Analyse Temporelle (F3) INFO   -   GET http://localhost:5000/referentiels/classifications
+03/11/2026 15:19:51 Analyse Temporelle (F3) INFO   -   500 Internal Server Error
+03/11/2026 15:19:51 Analyse Temporelle (F3) INFO   -   GET http://localhost:5000/analyses/evolution
+03/11/2026 15:25:10 root                 INFO   - --------------------------------------------------
+03/11/2026 15:25:10 root                 INFO   - Launch FRONTEND : Streamlit App
+03/11/2026 15:25:10 root                 INFO   - --------------------------------------------------
+03/11/2026 15:25:10 root                 INFO   - Load environment variables: SUCCES
+03/11/2026 15:25:10 root                 INFO   - BACKEND_URL=http://localhost:5000
+03/11/2026 15:25:10 root                 INFO   - BACKEND_TIMEOUT=5
+03/11/2026 15:25:10 Accueil              INFO   - None -> Accueil
+03/11/2026 15:25:12 Analyse Temporelle (F3) INFO   - Accueil -> Analyse Temporelle (F3)
+03/11/2026 15:26:54 root                 INFO   - --------------------------------------------------
+03/11/2026 15:26:54 root                 INFO   - Launch FRONTEND : Streamlit App
+03/11/2026 15:26:54 root                 INFO   - --------------------------------------------------
+03/11/2026 15:26:54 root                 INFO   - Load environment variables: SUCCES
+03/11/2026 15:26:54 root                 INFO   - BACKEND_URL=http://localhost:5000
+03/11/2026 15:26:54 root                 INFO   - BACKEND_TIMEOUT=5
+03/11/2026 15:26:54 Accueil              INFO   - None -> Accueil
+03/11/2026 15:27:13 Analyse Temporelle (F3) INFO   - Accueil -> Analyse Temporelle (F3)
+03/11/2026 15:31:19 root                 INFO   - --------------------------------------------------
+03/11/2026 15:31:19 root                 INFO   - Launch FRONTEND : Streamlit App
+03/11/2026 15:31:19 root                 INFO   - --------------------------------------------------
+03/11/2026 15:31:19 root                 INFO   - Load environment variables: SUCCES
+03/11/2026 15:31:19 root                 INFO   - BACKEND_URL=http://localhost:5000
+03/11/2026 15:31:19 root                 INFO   - BACKEND_TIMEOUT=5
+03/11/2026 15:31:22 Connexion            INFO   - Accueil -> Connexion
+03/11/2026 15:43:53 Connexion            INFO   - Analyse Temporelle (F3) -> Connexion
+03/11/2026 15:43:59 root                 INFO   - --------------------------------------------------
+03/11/2026 15:43:59 root                 INFO   - Launch FRONTEND : Streamlit App
+03/11/2026 15:43:59 root                 INFO   - --------------------------------------------------
+03/11/2026 15:43:59 root                 INFO   - Load environment variables: SUCCES
+03/11/2026 15:43:59 root                 INFO   - BACKEND_URL=http://localhost:5000
+03/11/2026 15:43:59 root                 INFO   - BACKEND_TIMEOUT=5
+03/11/2026 15:50:14 root                 INFO   - --------------------------------------------------
+03/11/2026 15:50:14 root                 INFO   - Launch FRONTEND : Streamlit App
+03/11/2026 15:50:14 root                 INFO   - --------------------------------------------------
+03/11/2026 15:50:14 root                 INFO   - Load environment variables: SUCCES
+03/11/2026 15:50:14 root                 INFO   - BACKEND_URL=http://localhost:5000
+03/11/2026 15:50:14 root                 INFO   - BACKEND_TIMEOUT=5
+03/11/2026 15:50:14 Accueil              INFO   - None -> Accueil
+03/11/2026 15:50:17 Connexion            INFO   - Accueil -> Connexion
+03/11/2026 15:53:25 root                 INFO   - --------------------------------------------------
+03/11/2026 15:53:25 root                 INFO   - Launch FRONTEND : Streamlit App
+03/11/2026 15:53:25 root                 INFO   - --------------------------------------------------
+03/11/2026 15:53:25 root                 INFO   - Load environment variables: SUCCES
+03/11/2026 15:53:25 root                 INFO   - BACKEND_URL=http://localhost:5000
+03/11/2026 15:53:25 root                 INFO   - BACKEND_TIMEOUT=5
+03/11/2026 15:54:22 root                 INFO   - --------------------------------------------------
+03/11/2026 15:54:22 root                 INFO   - Launch FRONTEND : Streamlit App
+03/11/2026 15:54:22 root                 INFO   - --------------------------------------------------
+03/11/2026 15:54:22 root                 INFO   - Load environment variables: SUCCES
+03/11/2026 15:54:22 root                 INFO   - BACKEND_URL=http://localhost:5000
+03/11/2026 15:54:22 root                 INFO   - BACKEND_TIMEOUT=5
+03/11/2026 15:54:22 Accueil              INFO   - None -> Accueil
+03/11/2026 15:54:26 Connexion            INFO   - Accueil -> Connexion
+03/11/2026 16:03:05 root                 INFO   - --------------------------------------------------
+03/11/2026 16:03:05 root                 INFO   - Launch FRONTEND : Streamlit App
+03/11/2026 16:03:05 root                 INFO   - --------------------------------------------------
+03/11/2026 16:03:05 root                 INFO   - Load environment variables: SUCCES
+03/11/2026 16:03:05 root                 INFO   - BACKEND_URL=http://localhost:5000
+03/11/2026 16:03:05 root                 INFO   - BACKEND_TIMEOUT=5
+03/11/2026 16:03:05 Accueil              INFO   - None -> Accueil
+03/11/2026 16:03:33 root                 INFO   - --------------------------------------------------
+03/11/2026 16:03:33 root                 INFO   - Launch FRONTEND : Streamlit App
+03/11/2026 16:03:33 root                 INFO   - --------------------------------------------------
+03/11/2026 16:03:33 root                 INFO   - Load environment variables: SUCCES
+03/11/2026 16:03:33 root                 INFO   - BACKEND_URL=http://localhost:5000
+03/11/2026 16:03:33 root                 INFO   - BACKEND_TIMEOUT=5

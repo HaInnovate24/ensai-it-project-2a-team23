@@ -16,8 +16,7 @@ get_page_logger("Accueil")
 
 entete(
     "LaborScope",
-    "Explorez et comparez les indicateurs du marché du travail dans le monde "
-    "(source : ILOSTAT).",
+    "Explorez et comparez les indicateurs du marché du travail dans le monde (source : ILOSTAT).",
     eyebrow="Observatoire de l'emploi",
 )
 

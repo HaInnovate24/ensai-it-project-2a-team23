@@ -1,7 +1,8 @@
+from datetime import date
+
 import pandas as pd
 import plotly.express as px
 import streamlit as st
-from utils.api_client import api_client
 
 from utils.api_client import api_client
 from utils.log_init import get_page_logger
@@ -15,9 +16,6 @@ from utils.referentiels import (
     message_erreur,
     unite_indicateur,
 )
-from datetime import date
-
-from utils.rapport_pdf import construire_rapport_pdf, figure_png
 from utils.ui import (
     PALETTE_GRAPHIQUE,
     afficher_graphique,
@@ -136,57 +134,48 @@ if lignes:
                 use_container_width=True,
             )
 
-    # --- Rapport PDF : chiffres de synthèse + détail de toutes les valeurs ---
-    suffixe = f" {unite}" if unite else ""
-    chiffres_pdf = []
-    for nom in noms_pays:
-        sous = df[df["Pays"] == nom].sort_values("Période")
-        if sous.empty:
-            continue
-        variation = sous.iloc[-1]["Valeur"] - sous.iloc[0]["Valeur"]
-        chiffres_pdf.append((
-            f"{nom} · variation",
-            ("+" if variation > 0 else "") + f"{fmt_fr(variation)}{suffixe}",
-        ))
-    # Détail : toutes les valeurs, par période et par pays.
-    pivot = df.pivot_table(index="Période", columns="Pays", values="Valeur").sort_index()
-    colonnes_pdf = ["Période"] + [str(c) for c in pivot.columns]
-    lignes_pdf = [
-        [str(idx)] + [fmt_fr(v) if pd.notna(v) else "—" for v in row]
-        for idx, row in pivot.iterrows()
-    ]
-    annees = sorted(df["Période"].unique())
-    pdf_bytes = construire_rapport_pdf(
-        titre="Évolution temporelle",
-        sous_titre=indicateurs[code_indicateur],
-        contexte=[
-            ("Indicateur", indicateurs[code_indicateur]),
-            ("Pays", ", ".join(noms_pays)),
-            ("Période", f"{annees[0]} - {annees[-1]}" if annees else "—"),
-            ("Catégorie", libelle_classification),
-            ("Sexe", libelle_sexe),
-        ],
-        colonnes=colonnes_pdf,
-        lignes=lignes_pdf,
-        chiffres=chiffres_pdf[:3] or None,
-        note=(
-            f"Évolution de « {indicateurs[code_indicateur].lower()} » sur "
-            f"{len(annees)} période(s) pour {len(noms_pays)} pays. "
-            f"Valeurs exprimées en {unite.lower()}." if unite else
-            f"Évolution sur {len(annees)} période(s) pour {len(noms_pays)} pays."
-        ),
-        image_png=figure_png(fig),
-        legende_graphique=f"{libelle_classification} · {libelle_sexe} · {nb_periodes} dernières années",
-    )
-    _, col_pdf = st.columns([0.7, 0.3])
-    with col_pdf:
-        st.download_button(
-            "Rapport PDF",
-            data=pdf_bytes,
-            file_name=f"rapport_evolution_{code_indicateur}.pdf",
-            mime="application/pdf",
-            icon=":material/picture_as_pdf:",
-            use_container_width=True,
-        )
+    # --- Génération du Rapport PDF via le Backend ---
+    st.divider()
+    st.subheader("Générer le rapport PDF complet")
+    st.write("Demandez au serveur de générer une analyse au format PDF (incluant ce graphique et les tables).")
+    
+    # On utilise un bouton d'action pour déclencher la requête POST
+    if st.button("Demander la génération du PDF", icon="📄", type="primary"):
+        with st.spinner("Génération du rapport côté serveur en cours..."):
+            
+            # 1. Demande de création du rapport au backend
+            payload = {
+                "titre": "Évolution temporelle",
+                "description": f"{indicateurs[code_indicateur]} - {libelle_sexe} - {libelle_classification}",
+                "code_indicateur": code_indicateur,
+                "codes_pays": noms_pays
+            }
+            
+            reponse_creation = api_client.post("/rapports/", json=payload)
+            
+            if reponse_creation["status_code"] == 201:
+                rapport_id = reponse_creation["data"]["id"]
+                
+                # 2. Téléchargement du fichier binaire généré via le GET
+                reponse_telechargement = api_client.download_file(f"/rapports/{rapport_id}/telecharger")
+                
+                if reponse_telechargement["status_code"] == 200:
+                    pdf_bytes = reponse_telechargement["content"]
+                    
+                    st.success(f"Le rapport a été généré avec succès !")
+                    
+                    # 3. Affichage du bouton natif Streamlit pour sauvegarder le fichier
+                    st.download_button(
+                        label="Télécharger le fichier PDF",
+                        data=pdf_bytes,
+                        file_name=f"rapport_evolution_{code_indicateur}.pdf",
+                        mime="application/pdf",
+                        icon=":material/download:",
+                    )
+                else:
+                    st.error(f"Erreur lors du téléchargement : {message_erreur(reponse_telechargement)}")
+            else:
+                st.error(f"Erreur lors de la création en base : {message_erreur(reponse_creation)}")
+
 elif not pays_sans_donnees:
     st.info("Aucune donnée à afficher pour cette sélection.")

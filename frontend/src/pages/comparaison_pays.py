@@ -79,8 +79,12 @@ with _fil_d:
 # Le bouton d'export est placé dans un emplacement rempli une fois les données prêtes.
 _col_titre, _col_action = st.columns([0.76, 0.24], vertical_alignment="center")
 with _col_titre:
-    st.markdown("<div class='ls-eyebrow'>Explorateur de données · ILOSTAT</div>", unsafe_allow_html=True)
-    st.markdown("<div class='ls-serif ls-title'>Le travail, en perspective.</div>", unsafe_allow_html=True)
+    st.markdown(
+        "<div class='ls-eyebrow'>Explorateur de données · ILOSTAT</div>", unsafe_allow_html=True
+    )
+    st.markdown(
+        "<div class='ls-serif ls-title'>Le travail, en perspective.</div>", unsafe_allow_html=True
+    )
     st.markdown(
         "<p class='ls-subtitle'>Suivez les tendances. Comparez les pays. Comprenez les écarts.</p>",
         unsafe_allow_html=True,
@@ -106,8 +110,22 @@ pays_referentiel = get_pays()
 # Liste de pays proposée : on privilégie une sélection lisible (pays réels),
 # la recherche du multiselect donne accès à l'ensemble du référentiel.
 _PAYS_SUGGERES = [
-    n for n in ("France", "Maroc", "Guinée", "Sénégal", "Côte d'Ivoire", "Allemagne",
-                "Espagne", "Italie", "Royaume-Uni", "Canada", "États-Unis", "Japon", "Brésil")
+    n
+    for n in (
+        "France",
+        "Maroc",
+        "Guinée",
+        "Sénégal",
+        "Côte d'Ivoire",
+        "Allemagne",
+        "Espagne",
+        "Italie",
+        "Royaume-Uni",
+        "Canada",
+        "États-Unis",
+        "Japon",
+        "Brésil",
+    )
     if n in pays_referentiel
 ]
 _options_pays = _PAYS_SUGGERES + [n for n in pays_referentiel if n not in _PAYS_SUGGERES]
@@ -211,7 +229,9 @@ with st.container(border=True):
             )
 
 # Couleur stable par pays (réutilisée pour pastilles, graphique et « À retenir »).
-couleur_par_pays = {nom: PALETTE_GRAPHIQUE[i % len(PALETTE_GRAPHIQUE)] for i, nom in enumerate(noms_pays)}
+couleur_par_pays = {
+    nom: PALETTE_GRAPHIQUE[i % len(PALETTE_GRAPHIQUE)] for i, nom in enumerate(noms_pays)
+}
 
 # Pastilles de sélection + réinitialisation.
 col_chips, col_reset = st.columns([0.8, 0.2], vertical_alignment="center")

@@ -142,8 +142,8 @@ class AuthentificationService:
         if utilisateur.role != Role.ADMIN:
             raise AccesRefuse("Droits d'administrateur requis.")
         return utilisateur
-    
-    def exiger_connexion(self,jeton: str) -> Utilisateur:
+
+    def exiger_connexion(self, jeton: str) -> Utilisateur:
         """Renvoie l'utilisateur s'il est connecté, sinon lève AccesRefuse."""
         utilisateur = self.utilisateur_depuis_jeton(jeton)
         if utilisateur is None:
@@ -175,7 +175,6 @@ class AuthentificationService:
                 "Le nom d'utilisateur ne peut contenir que des lettres sans accent, "
                 "des chiffres et les caractères . _ -"
             )
-    
 
     def _verifier_mot_de_passe(self, mot_de_passe: str, nom: str) -> None:
         """Vérifie que le mot de passe respecte les règles de sécurité.
