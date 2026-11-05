@@ -1,0 +1,1014 @@
+03/11/2026 09:51:09 root                 INFO   - --------------------------------------------------
+03/11/2026 09:51:09 root                 INFO   - Launch FRONTEND : Streamlit App
+03/11/2026 09:51:09 root                 INFO   - --------------------------------------------------
+03/11/2026 09:51:09 root                 INFO   - Load environment variables: SUCCES
+03/11/2026 09:51:09 root                 INFO   - BACKEND_URL=http://localhost:5000
+03/11/2026 09:51:09 root                 INFO   - BACKEND_TIMEOUT=5
+03/11/2026 12:10:16 root                 INFO   - --------------------------------------------------
+03/11/2026 12:10:16 root                 INFO   - Launch FRONTEND : Streamlit App
+03/11/2026 12:10:16 root                 INFO   - --------------------------------------------------
+03/11/2026 12:10:16 root                 INFO   - Load environment variables: SUCCES
+03/11/2026 12:10:16 root                 INFO   - BACKEND_URL=http://localhost:5000
+03/11/2026 12:10:16 root                 INFO   - BACKEND_TIMEOUT=5
+03/11/2026 12:11:57 root                 INFO   - --------------------------------------------------
+03/11/2026 12:11:57 root                 INFO   - Launch FRONTEND : Streamlit App
+03/11/2026 12:11:57 root                 INFO   - --------------------------------------------------
+03/11/2026 12:11:57 root                 INFO   - Load environment variables: SUCCES
+03/11/2026 12:11:57 root                 INFO   - BACKEND_URL=http://localhost:5000
+03/11/2026 12:11:57 root                 INFO   - BACKEND_TIMEOUT=5
+03/11/2026 12:12:27 root                 INFO   - --------------------------------------------------
+03/11/2026 12:12:27 root                 INFO   - Launch FRONTEND : Streamlit App
+03/11/2026 12:12:27 root                 INFO   - --------------------------------------------------
+03/11/2026 12:12:27 root                 INFO   - Load environment variables: SUCCES
+03/11/2026 12:12:27 root                 INFO   - BACKEND_URL=http://localhost:5000
+03/11/2026 12:12:27 root                 INFO   - BACKEND_TIMEOUT=5
+03/11/2026 12:13:10 root                 INFO   - --------------------------------------------------
+03/11/2026 12:13:10 root                 INFO   - Launch FRONTEND : Streamlit App
+03/11/2026 12:13:10 root                 INFO   - --------------------------------------------------
+03/11/2026 12:13:10 root                 INFO   - Load environment variables: SUCCES
+03/11/2026 12:13:10 root                 INFO   - BACKEND_URL=http://localhost:5000
+03/11/2026 12:13:10 root                 INFO   - BACKEND_TIMEOUT=5
+03/11/2026 12:17:39 root                 INFO   - --------------------------------------------------
+03/11/2026 12:17:39 root                 INFO   - Launch FRONTEND : Streamlit App
+03/11/2026 12:17:39 root                 INFO   - --------------------------------------------------
+03/11/2026 12:17:39 root                 INFO   - Load environment variables: SUCCES
+03/11/2026 12:17:39 root                 INFO   - BACKEND_URL=http://localhost:5000
+03/11/2026 12:17:39 root                 INFO   - BACKEND_TIMEOUT=5
+03/11/2026 14:40:26 root                 INFO   - --------------------------------------------------
+03/11/2026 14:40:26 root                 INFO   - Launch FRONTEND : Streamlit App
+03/11/2026 14:40:26 root                 INFO   - --------------------------------------------------
+03/11/2026 14:40:26 root                 INFO   - Load environment variables: SUCCES
+03/11/2026 14:40:26 root                 INFO   - BACKEND_URL=http://localhost:5000
+03/11/2026 14:40:26 root                 INFO   - BACKEND_TIMEOUT=5
+03/11/2026 15:08:46 root                 INFO   - --------------------------------------------------
+03/11/2026 15:08:46 root                 INFO   - Launch FRONTEND : Streamlit App
+03/11/2026 15:08:46 root                 INFO   - --------------------------------------------------
+03/11/2026 15:08:46 root                 INFO   - Load environment variables: SUCCES
+03/11/2026 15:08:46 root                 INFO   - BACKEND_URL=http://localhost:5000
+03/11/2026 15:08:46 root                 INFO   - BACKEND_TIMEOUT=5
+03/11/2026 15:08:46 root                 INFO   - --------------------------------------------------
+03/11/2026 15:08:46 root                 INFO   - Launch FRONTEND : Streamlit App
+03/11/2026 15:08:46 root                 INFO   - --------------------------------------------------
+03/11/2026 15:08:46 root                 INFO   - Load environment variables: SUCCES
+03/11/2026 15:08:46 root                 INFO   - BACKEND_URL=http://localhost:5000
+03/11/2026 15:08:46 root                 INFO   - BACKEND_TIMEOUT=5
+03/11/2026 15:08:53 Analyse Temporelle (F3) INFO   - None -> Analyse Temporelle (F3)
+03/11/2026 15:08:53 Analyse Temporelle (F3) INFO   -   GET http://localhost:5000/referentiels/pays
+03/11/2026 15:08:55 Analyse Temporelle (F3) INFO   -   200 OK
+03/11/2026 15:08:55 Analyse Temporelle (F3) INFO   -   GET http://localhost:5000/analyses/evolution
+03/11/2026 15:08:55 Analyse Temporelle (F3) INFO   -   404 Not Found
+03/11/2026 15:09:03 Analyse Temporelle (F3) INFO   -   GET http://localhost:5000/analyses/evolution
+03/11/2026 15:09:05 Analyse Temporelle (F3) INFO   -   404 Not Found
+03/11/2026 15:09:10 Analyse Temporelle (F3) INFO   -   GET http://localhost:5000/analyses/evolution
+03/11/2026 15:09:11 Analyse Temporelle (F3) INFO   -   GET http://localhost:5000/analyses/evolution
+03/11/2026 15:09:12 Analyse Temporelle (F3) INFO   -   404 Not Found
+03/11/2026 15:09:13 Analyse Temporelle (F3) INFO   -   404 Not Found
+03/11/2026 15:09:13 Analyse Temporelle (F3) INFO   -   GET http://localhost:5000/analyses/evolution
+03/11/2026 15:09:13 Analyse Temporelle (F3) INFO   -   404 Not Found
+03/11/2026 15:18:14 Analyse Temporelle (F3) INFO   -   GET http://localhost:5000/analyses/evolution
+03/11/2026 15:18:16 Analyse Temporelle (F3) INFO   -   404 Not Found
+03/11/2026 15:18:20 Analyse Temporelle (F3) INFO   -   GET http://localhost:5000/analyses/evolution
+03/11/2026 15:18:20 Analyse Temporelle (F3) INFO   -   404 Not Found
+03/11/2026 15:18:25 Analyse Temporelle (F3) INFO   -   GET http://localhost:5000/analyses/evolution
+03/11/2026 15:18:25 Analyse Temporelle (F3) INFO   -   404 Not Found
+03/11/2026 15:18:25 Analyse Temporelle (F3) INFO   -   GET http://localhost:5000/analyses/evolution
+03/11/2026 15:18:25 Analyse Temporelle (F3) INFO   -   404 Not Found
+03/11/2026 15:21:42 Connexion            INFO   - Analyse Temporelle (F3) -> Connexion
+03/11/2026 15:21:50 root                 INFO   - --------------------------------------------------
+03/11/2026 15:21:50 root                 INFO   - Launch FRONTEND : Streamlit App
+03/11/2026 15:21:50 root                 INFO   - --------------------------------------------------
+03/11/2026 15:21:50 root                 INFO   - Load environment variables: SUCCES
+03/11/2026 15:21:50 root                 INFO   - BACKEND_URL=http://localhost:5000
+03/11/2026 15:21:50 root                 INFO   - BACKEND_TIMEOUT=5
+03/11/2026 15:27:45 root                 INFO   - --------------------------------------------------
+03/11/2026 15:27:45 root                 INFO   - Launch FRONTEND : Streamlit App
+03/11/2026 15:27:45 root                 INFO   - --------------------------------------------------
+03/11/2026 15:27:45 root                 INFO   - Load environment variables: SUCCES
+03/11/2026 15:27:45 root                 INFO   - BACKEND_URL=http://localhost:5000
+03/11/2026 15:27:45 root                 INFO   - BACKEND_TIMEOUT=5
+03/11/2026 15:33:41 root                 INFO   - --------------------------------------------------
+03/11/2026 15:33:41 root                 INFO   - Launch FRONTEND : Streamlit App
+03/11/2026 15:33:41 root                 INFO   - --------------------------------------------------
+03/11/2026 15:33:41 root                 INFO   - Load environment variables: SUCCES
+03/11/2026 15:33:41 root                 INFO   - BACKEND_URL=http://localhost:5000
+03/11/2026 15:33:41 root                 INFO   - BACKEND_TIMEOUT=5
+03/11/2026 15:34:02 Comparaison Pays (F4) INFO   - Connexion -> Comparaison Pays (F4)
+03/11/2026 15:34:02 Comparaison Pays (F4) INFO   -   GET http://localhost:5000/referentiels/pays
+03/11/2026 15:34:04 Comparaison Pays (F4) INFO   -   200 OK
+03/11/2026 15:34:04 Comparaison Pays (F4) INFO   -   GET http://localhost:5000/analyses/comparaison-pays
+03/11/2026 15:34:04 Comparaison Pays (F4) INFO   -   422 Unprocessable Content
+03/11/2026 15:34:07 Multi-indicateurs (F5) INFO   - Comparaison Pays (F4) -> Multi-indicateurs (F5)
+03/11/2026 15:34:07 Multi-indicateurs (F5) INFO   -   GET http://localhost:5000/analyses/comparaison-indicateurs
+03/11/2026 15:34:07 Multi-indicateurs (F5) INFO   -   422 Unprocessable Content
+03/11/2026 15:34:10 Comparaison Pays (F4) INFO   - Multi-indicateurs (F5) -> Comparaison Pays (F4)
+03/11/2026 15:34:10 Comparaison Pays (F4) INFO   -   GET http://localhost:5000/analyses/comparaison-pays
+03/11/2026 15:34:10 Comparaison Pays (F4) INFO   -   422 Unprocessable Content
+03/11/2026 15:34:20 Multi-indicateurs (F5) INFO   - Analyse Temporelle (F3) -> Multi-indicateurs (F5)
+03/11/2026 15:34:20 Multi-indicateurs (F5) INFO   -   GET http://localhost:5000/analyses/comparaison-indicateurs
+03/11/2026 15:34:22 Multi-indicateurs (F5) INFO   -   422 Unprocessable Content
+03/11/2026 15:35:04 root                 INFO   - --------------------------------------------------
+03/11/2026 15:35:04 root                 INFO   - Launch FRONTEND : Streamlit App
+03/11/2026 15:35:04 root                 INFO   - --------------------------------------------------
+03/11/2026 15:35:04 root                 INFO   - Load environment variables: SUCCES
+03/11/2026 15:35:04 root                 INFO   - BACKEND_URL=http://localhost:5000
+03/11/2026 15:35:04 root                 INFO   - BACKEND_TIMEOUT=5
+03/11/2026 15:35:04 Accueil              INFO   - None -> Accueil
+03/11/2026 15:35:07 root                 INFO   - --------------------------------------------------
+03/11/2026 15:35:07 root                 INFO   - Launch FRONTEND : Streamlit App
+03/11/2026 15:35:07 root                 INFO   - --------------------------------------------------
+03/11/2026 15:35:07 root                 INFO   - Load environment variables: SUCCES
+03/11/2026 15:35:07 root                 INFO   - BACKEND_URL=http://localhost:5000
+03/11/2026 15:35:07 root                 INFO   - BACKEND_TIMEOUT=5
+03/11/2026 15:36:19 root                 INFO   - --------------------------------------------------
+03/11/2026 15:36:19 root                 INFO   - Launch FRONTEND : Streamlit App
+03/11/2026 15:36:19 root                 INFO   - --------------------------------------------------
+03/11/2026 15:36:19 root                 INFO   - Load environment variables: SUCCES
+03/11/2026 15:36:19 root                 INFO   - BACKEND_URL=http://localhost:5000
+03/11/2026 15:36:19 root                 INFO   - BACKEND_TIMEOUT=5
+03/11/2026 15:46:07 root                 INFO   - --------------------------------------------------
+03/11/2026 15:46:08 root                 INFO   - Launch FRONTEND : Streamlit App
+03/11/2026 15:46:08 root                 INFO   - --------------------------------------------------
+03/11/2026 15:46:08 root                 INFO   - Load environment variables: SUCCES
+03/11/2026 15:46:08 root                 INFO   - BACKEND_URL=http://localhost:5000
+03/11/2026 15:46:08 root                 INFO   - BACKEND_TIMEOUT=5
+03/11/2026 15:46:09 Accueil              INFO   - None -> Accueil
+03/11/2026 15:46:20 Analyse Temporelle (F3) INFO   - Accueil -> Analyse Temporelle (F3)
+03/11/2026 15:46:20 Analyse Temporelle (F3) INFO   -   GET http://localhost:5000/referentiels/indicateurs
+03/11/2026 15:46:24 Analyse Temporelle (F3) INFO   -   GET http://localhost:5000/referentiels/pays
+03/11/2026 15:46:28 Analyse Temporelle (F3) INFO   -   GET http://localhost:5000/referentiels/classifications
+03/11/2026 15:46:32 Analyse Temporelle (F3) INFO   -   GET http://localhost:5000/analyses/evolution
+03/11/2026 15:47:50 root                 INFO   - --------------------------------------------------
+03/11/2026 15:47:50 root                 INFO   - Launch FRONTEND : Streamlit App
+03/11/2026 15:47:50 root                 INFO   - --------------------------------------------------
+03/11/2026 15:47:50 root                 INFO   - Load environment variables: SUCCES
+03/11/2026 15:47:50 root                 INFO   - BACKEND_URL=http://localhost:5000
+03/11/2026 15:47:50 root                 INFO   - BACKEND_TIMEOUT=5
+03/11/2026 15:52:51 root                 INFO   - --------------------------------------------------
+03/11/2026 15:52:51 root                 INFO   - Launch FRONTEND : Streamlit App
+03/11/2026 15:52:51 root                 INFO   - --------------------------------------------------
+03/11/2026 15:52:51 root                 INFO   - Load environment variables: SUCCES
+03/11/2026 15:52:51 root                 INFO   - BACKEND_URL=http://localhost:5000
+03/11/2026 15:52:51 root                 INFO   - BACKEND_TIMEOUT=5
+03/11/2026 15:53:53 Connexion            INFO   - Analyse Temporelle (F3) -> Connexion
+03/11/2026 15:54:07 root                 INFO   - --------------------------------------------------
+03/11/2026 15:54:07 root                 INFO   - Launch FRONTEND : Streamlit App
+03/11/2026 15:54:07 root                 INFO   - --------------------------------------------------
+03/11/2026 15:54:07 root                 INFO   - Load environment variables: SUCCES
+03/11/2026 15:54:07 root                 INFO   - BACKEND_URL=http://localhost:5000
+03/11/2026 15:54:07 root                 INFO   - BACKEND_TIMEOUT=5
+03/11/2026 15:54:23 Multi-indicateurs (F5) INFO   - Connexion -> Multi-indicateurs (F5)
+03/11/2026 15:54:23 Multi-indicateurs (F5) INFO   -   GET http://localhost:5000/referentiels/classifications
+03/11/2026 15:54:25 Comparaison Pays (F4) INFO   - Multi-indicateurs (F5) -> Comparaison Pays (F4)
+03/11/2026 15:54:25 Comparaison Pays (F4) INFO   -   GET http://localhost:5000/analyses/comparaison-pays
+03/11/2026 15:54:25 Multi-indicateurs (F5) INFO   -   200 OK
+03/11/2026 15:54:27 Comparaison Pays (F4) INFO   -   422 Unprocessable Content
+03/11/2026 15:54:27 Comparaison Pays (F4) INFO   - Analyse Temporelle (F3) -> Comparaison Pays (F4)
+03/11/2026 15:54:27 Comparaison Pays (F4) INFO   -   GET http://localhost:5000/analyses/comparaison-pays
+03/11/2026 15:54:28 Multi-indicateurs (F5) INFO   - Comparaison Pays (F4) -> Multi-indicateurs (F5)
+03/11/2026 15:54:28 Multi-indicateurs (F5) INFO   -   GET http://localhost:5000/referentiels/classifications
+03/11/2026 15:54:29 Comparaison Pays (F4) INFO   -   422 Unprocessable Content
+03/11/2026 15:54:30 Multi-indicateurs (F5) INFO   -   200 OK
+03/11/2026 15:54:30 Multi-indicateurs (F5) INFO   -   GET http://localhost:5000/analyses/comparaison-indicateurs
+03/11/2026 15:54:30 Multi-indicateurs (F5) INFO   -   422 Unprocessable Content
+03/11/2026 15:54:34 Multi-indicateurs (F5) INFO   -   GET http://localhost:5000/analyses/comparaison-indicateurs
+03/11/2026 15:54:36 Multi-indicateurs (F5) INFO   -   422 Unprocessable Content
+03/11/2026 15:54:38 Multi-indicateurs (F5) INFO   -   GET http://localhost:5000/analyses/comparaison-indicateurs
+03/11/2026 15:54:40 Multi-indicateurs (F5) INFO   -   GET http://localhost:5000/analyses/comparaison-indicateurs
+03/11/2026 15:54:40 Multi-indicateurs (F5) INFO   -   422 Unprocessable Content
+03/11/2026 15:54:42 Multi-indicateurs (F5) INFO   -   422 Unprocessable Content
+03/11/2026 15:54:54 Comparaison Pays (F4) INFO   - Multi-indicateurs (F5) -> Comparaison Pays (F4)
+03/11/2026 15:54:54 Comparaison Pays (F4) INFO   -   GET http://localhost:5000/analyses/comparaison-pays
+03/11/2026 15:54:56 Comparaison Pays (F4) INFO   -   422 Unprocessable Content
+03/11/2026 15:54:58 Comparaison Pays (F4) INFO   - Analyse Temporelle (F3) -> Comparaison Pays (F4)
+03/11/2026 15:54:58 Comparaison Pays (F4) INFO   -   GET http://localhost:5000/analyses/comparaison-pays
+03/11/2026 15:55:00 Comparaison Pays (F4) INFO   -   422 Unprocessable Content
+03/11/2026 15:55:03 Multi-indicateurs (F5) INFO   - Comparaison Pays (F4) -> Multi-indicateurs (F5)
+03/11/2026 15:55:03 Multi-indicateurs (F5) INFO   -   GET http://localhost:5000/analyses/comparaison-indicateurs
+03/11/2026 15:55:04 Comparaison Pays (F4) INFO   - Multi-indicateurs (F5) -> Comparaison Pays (F4)
+03/11/2026 15:55:04 Comparaison Pays (F4) INFO   -   GET http://localhost:5000/analyses/comparaison-pays
+03/11/2026 15:55:05 Multi-indicateurs (F5) INFO   -   422 Unprocessable Content
+03/11/2026 15:55:06 Comparaison Pays (F4) INFO   -   422 Unprocessable Content
+03/11/2026 15:55:07 Comparaison Pays (F4) INFO   - Analyse Temporelle (F3) -> Comparaison Pays (F4)
+03/11/2026 15:55:07 Comparaison Pays (F4) INFO   -   GET http://localhost:5000/analyses/comparaison-pays
+03/11/2026 15:55:07 Comparaison Pays (F4) INFO   -   422 Unprocessable Content
+03/11/2026 15:55:27 Comparaison Pays (F4) INFO   - Accueil -> Comparaison Pays (F4)
+03/11/2026 15:55:27 Comparaison Pays (F4) INFO   -   GET http://localhost:5000/analyses/comparaison-pays
+03/11/2026 15:55:29 Comparaison Pays (F4) INFO   -   422 Unprocessable Content
+03/11/2026 15:55:40 Multi-indicateurs (F5) INFO   - Comparaison Pays (F4) -> Multi-indicateurs (F5)
+03/11/2026 15:55:40 Multi-indicateurs (F5) INFO   -   GET http://localhost:5000/analyses/comparaison-indicateurs
+03/11/2026 15:55:42 Multi-indicateurs (F5) INFO   -   422 Unprocessable Content
+03/11/2026 15:55:44 Comparaison Pays (F4) INFO   - Multi-indicateurs (F5) -> Comparaison Pays (F4)
+03/11/2026 15:55:44 Comparaison Pays (F4) INFO   -   GET http://localhost:5000/analyses/comparaison-pays
+03/11/2026 15:55:44 Comparaison Pays (F4) INFO   -   422 Unprocessable Content
+03/11/2026 15:56:13 Comparaison Pays (F4) INFO   - Analyse Temporelle (F3) -> Comparaison Pays (F4)
+03/11/2026 15:56:13 Comparaison Pays (F4) INFO   -   GET http://localhost:5000/analyses/comparaison-pays
+03/11/2026 15:56:14 Multi-indicateurs (F5) INFO   - Comparaison Pays (F4) -> Multi-indicateurs (F5)
+03/11/2026 15:56:14 Multi-indicateurs (F5) INFO   -   GET http://localhost:5000/analyses/comparaison-indicateurs
+03/11/2026 15:56:15 Comparaison Pays (F4) INFO   -   422 Unprocessable Content
+03/11/2026 15:56:16 Multi-indicateurs (F5) INFO   -   422 Unprocessable Content
+03/11/2026 15:56:17 Comparaison Pays (F4) INFO   - Multi-indicateurs (F5) -> Comparaison Pays (F4)
+03/11/2026 15:56:17 Comparaison Pays (F4) INFO   -   GET http://localhost:5000/analyses/comparaison-pays
+03/11/2026 15:56:17 Comparaison Pays (F4) INFO   -   422 Unprocessable Content
+03/11/2026 15:56:18 Multi-indicateurs (F5) INFO   - Comparaison Pays (F4) -> Multi-indicateurs (F5)
+03/11/2026 15:56:18 Multi-indicateurs (F5) INFO   -   GET http://localhost:5000/analyses/comparaison-indicateurs
+03/11/2026 15:56:18 Multi-indicateurs (F5) INFO   -   422 Unprocessable Content
+03/11/2026 15:56:29 Comparaison Pays (F4) INFO   - Multi-indicateurs (F5) -> Comparaison Pays (F4)
+03/11/2026 15:56:29 Comparaison Pays (F4) INFO   -   GET http://localhost:5000/analyses/comparaison-pays
+03/11/2026 15:56:31 Comparaison Pays (F4) INFO   -   422 Unprocessable Content
+03/11/2026 15:56:35 Comparaison Pays (F4) INFO   - Analyse Temporelle (F3) -> Comparaison Pays (F4)
+03/11/2026 15:56:35 Comparaison Pays (F4) INFO   -   GET http://localhost:5000/analyses/comparaison-pays
+03/11/2026 15:56:35 Comparaison Pays (F4) INFO   -   422 Unprocessable Content
+03/11/2026 15:56:37 Multi-indicateurs (F5) INFO   - Comparaison Pays (F4) -> Multi-indicateurs (F5)
+03/11/2026 15:56:37 Multi-indicateurs (F5) INFO   -   GET http://localhost:5000/analyses/comparaison-indicateurs
+03/11/2026 15:56:37 Multi-indicateurs (F5) INFO   -   422 Unprocessable Content
+03/11/2026 15:56:48 Comparaison Pays (F4) INFO   - Multi-indicateurs (F5) -> Comparaison Pays (F4)
+03/11/2026 15:56:48 Comparaison Pays (F4) INFO   -   GET http://localhost:5000/analyses/comparaison-pays
+03/11/2026 15:56:50 Comparaison Pays (F4) INFO   -   422 Unprocessable Content
+03/11/2026 15:56:53 Comparaison Pays (F4) INFO   - Analyse Temporelle (F3) -> Comparaison Pays (F4)
+03/11/2026 15:56:53 Comparaison Pays (F4) INFO   -   GET http://localhost:5000/analyses/comparaison-pays
+03/11/2026 15:56:53 Comparaison Pays (F4) INFO   -   422 Unprocessable Content
+03/11/2026 15:56:54 Multi-indicateurs (F5) INFO   - Comparaison Pays (F4) -> Multi-indicateurs (F5)
+03/11/2026 15:56:54 Multi-indicateurs (F5) INFO   -   GET http://localhost:5000/analyses/comparaison-indicateurs
+03/11/2026 15:56:54 Multi-indicateurs (F5) INFO   -   422 Unprocessable Content
+03/11/2026 15:57:03 Multi-indicateurs (F5) INFO   - Accueil -> Multi-indicateurs (F5)
+03/11/2026 15:57:03 Multi-indicateurs (F5) INFO   -   GET http://localhost:5000/analyses/comparaison-indicateurs
+03/11/2026 15:57:05 Multi-indicateurs (F5) INFO   -   422 Unprocessable Content
+03/11/2026 15:57:15 root                 INFO   - --------------------------------------------------
+03/11/2026 15:57:15 root                 INFO   - Launch FRONTEND : Streamlit App
+03/11/2026 15:57:15 root                 INFO   - --------------------------------------------------
+03/11/2026 15:57:15 root                 INFO   - Load environment variables: SUCCES
+03/11/2026 15:57:15 root                 INFO   - BACKEND_URL=http://localhost:5000
+03/11/2026 15:57:15 root                 INFO   - BACKEND_TIMEOUT=5
+03/11/2026 15:57:18 root                 INFO   - --------------------------------------------------
+03/11/2026 15:57:18 root                 INFO   - Launch FRONTEND : Streamlit App
+03/11/2026 15:57:18 root                 INFO   - --------------------------------------------------
+03/11/2026 15:57:18 root                 INFO   - Load environment variables: SUCCES
+03/11/2026 15:57:18 root                 INFO   - BACKEND_URL=http://localhost:5000
+03/11/2026 15:57:18 root                 INFO   - BACKEND_TIMEOUT=5
+03/11/2026 16:00:58 root                 INFO   - --------------------------------------------------
+03/11/2026 16:00:58 root                 INFO   - Launch FRONTEND : Streamlit App
+03/11/2026 16:00:58 root                 INFO   - --------------------------------------------------
+03/11/2026 16:00:58 root                 INFO   - Load environment variables: SUCCES
+03/11/2026 16:00:58 root                 INFO   - BACKEND_URL=http://localhost:5000
+03/11/2026 16:00:58 root                 INFO   - BACKEND_TIMEOUT=5
+03/11/2026 16:05:48 root                 INFO   - --------------------------------------------------
+03/11/2026 16:05:48 root                 INFO   - Launch FRONTEND : Streamlit App
+03/11/2026 16:05:48 root                 INFO   - --------------------------------------------------
+03/11/2026 16:05:48 root                 INFO   - Load environment variables: SUCCES
+03/11/2026 16:05:48 root                 INFO   - BACKEND_URL=http://localhost:5000
+03/11/2026 16:05:48 root                 INFO   - BACKEND_TIMEOUT=5
+03/11/2026 16:21:46 root                 INFO   - --------------------------------------------------
+03/11/2026 16:21:46 root                 INFO   - Launch FRONTEND : Streamlit App
+03/11/2026 16:21:46 root                 INFO   - --------------------------------------------------
+03/11/2026 16:21:46 root                 INFO   - Load environment variables: SUCCES
+03/11/2026 16:21:46 root                 INFO   - BACKEND_URL=http://localhost:5000
+03/11/2026 16:21:46 root                 INFO   - BACKEND_TIMEOUT=5
+03/11/2026 16:29:55 root                 INFO   - --------------------------------------------------
+03/11/2026 16:29:55 root                 INFO   - Launch FRONTEND : Streamlit App
+03/11/2026 16:29:55 root                 INFO   - --------------------------------------------------
+03/11/2026 16:29:55 root                 INFO   - Load environment variables: SUCCES
+03/11/2026 16:29:55 root                 INFO   - BACKEND_URL=http://localhost:5000
+03/11/2026 16:29:55 root                 INFO   - BACKEND_TIMEOUT=5
+03/11/2026 16:29:55 Accueil              INFO   - None -> Accueil
+03/11/2026 16:29:58 root                 INFO   - --------------------------------------------------
+03/11/2026 16:29:58 root                 INFO   - Launch FRONTEND : Streamlit App
+03/11/2026 16:29:58 root                 INFO   - --------------------------------------------------
+03/11/2026 16:29:58 root                 INFO   - Load environment variables: SUCCES
+03/11/2026 16:29:58 root                 INFO   - BACKEND_URL=http://localhost:5000
+03/11/2026 16:29:58 root                 INFO   - BACKEND_TIMEOUT=5
+03/11/2026 16:30:52 root                 INFO   - --------------------------------------------------
+03/11/2026 16:30:52 root                 INFO   - Launch FRONTEND : Streamlit App
+03/11/2026 16:30:52 root                 INFO   - --------------------------------------------------
+03/11/2026 16:30:52 root                 INFO   - Load environment variables: SUCCES
+03/11/2026 16:30:52 root                 INFO   - BACKEND_URL=http://localhost:5000
+03/11/2026 16:30:52 root                 INFO   - BACKEND_TIMEOUT=5
+03/11/2026 16:30:57 root                 INFO   - --------------------------------------------------
+03/11/2026 16:30:57 root                 INFO   - Launch FRONTEND : Streamlit App
+03/11/2026 16:30:57 root                 INFO   - --------------------------------------------------
+03/11/2026 16:30:57 root                 INFO   - Load environment variables: SUCCES
+03/11/2026 16:30:57 root                 INFO   - BACKEND_URL=http://localhost:5000
+03/11/2026 16:30:57 root                 INFO   - BACKEND_TIMEOUT=5
+03/11/2026 16:31:40 root                 INFO   - --------------------------------------------------
+03/11/2026 16:31:40 root                 INFO   - Launch FRONTEND : Streamlit App
+03/11/2026 16:31:40 root                 INFO   - --------------------------------------------------
+03/11/2026 16:31:40 root                 INFO   - Load environment variables: SUCCES
+03/11/2026 16:31:40 root                 INFO   - BACKEND_URL=http://localhost:5000
+03/11/2026 16:31:40 root                 INFO   - BACKEND_TIMEOUT=5
+03/11/2026 16:31:40 Connexion            INFO   - None -> Connexion
+03/11/2026 16:32:13 Connexion            INFO   -   POST http://localhost:5000/auth/connexion
+03/11/2026 16:32:18 root                 INFO   - --------------------------------------------------
+03/11/2026 16:32:18 root                 INFO   - Launch FRONTEND : Streamlit App
+03/11/2026 16:32:18 root                 INFO   - --------------------------------------------------
+03/11/2026 16:32:18 root                 INFO   - Load environment variables: SUCCES
+03/11/2026 16:32:18 root                 INFO   - BACKEND_URL=http://localhost:5000
+03/11/2026 16:32:18 root                 INFO   - BACKEND_TIMEOUT=5
+03/11/2026 16:32:41 root                 INFO   - --------------------------------------------------
+03/11/2026 16:32:41 root                 INFO   - Launch FRONTEND : Streamlit App
+03/11/2026 16:32:41 root                 INFO   - --------------------------------------------------
+03/11/2026 16:32:41 root                 INFO   - Load environment variables: SUCCES
+03/11/2026 16:32:41 root                 INFO   - BACKEND_URL=http://localhost:5000
+03/11/2026 16:32:41 root                 INFO   - BACKEND_TIMEOUT=5
+03/11/2026 16:39:59 root                 INFO   - --------------------------------------------------
+03/11/2026 16:39:59 root                 INFO   - Launch FRONTEND : Streamlit App
+03/11/2026 16:39:59 root                 INFO   - --------------------------------------------------
+03/11/2026 16:39:59 root                 INFO   - Load environment variables: SUCCES
+03/11/2026 16:39:59 root                 INFO   - BACKEND_URL=http://localhost:5000
+03/11/2026 16:39:59 root                 INFO   - BACKEND_TIMEOUT=5
+03/11/2026 16:40:46 Comparaison Pays (F4) INFO   - Connexion -> Comparaison Pays (F4)
+03/11/2026 16:40:46 Comparaison Pays (F4) INFO   -   GET http://localhost:5000/referentiels/indicateurs
+03/11/2026 16:40:48 Comparaison Pays (F4) INFO   -   200 OK
+03/11/2026 16:40:48 Comparaison Pays (F4) INFO   -   GET http://localhost:5000/referentiels/pays
+03/11/2026 16:40:48 Comparaison Pays (F4) INFO   -   200 OK
+03/11/2026 16:40:48 Comparaison Pays (F4) INFO   -   GET http://localhost:5000/referentiels/classifications
+03/11/2026 16:40:48 Comparaison Pays (F4) INFO   -   200 OK
+03/11/2026 16:40:48 Comparaison Pays (F4) INFO   -   GET http://localhost:5000/analyses/comparaison-pays
+03/11/2026 16:40:48 Comparaison Pays (F4) INFO   -   404 Not Found
+03/11/2026 16:41:00 Multi-indicateurs (F5) INFO   - Comparaison Pays (F4) -> Multi-indicateurs (F5)
+03/11/2026 16:41:00 Multi-indicateurs (F5) INFO   -   GET http://localhost:5000/referentiels/classifications
+03/11/2026 16:41:02 Multi-indicateurs (F5) INFO   -   200 OK
+03/11/2026 16:41:02 Multi-indicateurs (F5) INFO   -   GET http://localhost:5000/analyses/comparaison-indicateurs
+03/11/2026 16:41:02 Multi-indicateurs (F5) INFO   -   500 Internal Server Error
+03/11/2026 16:44:27 root                 INFO   - --------------------------------------------------
+03/11/2026 16:44:27 root                 INFO   - Launch FRONTEND : Streamlit App
+03/11/2026 16:44:27 root                 INFO   - --------------------------------------------------
+03/11/2026 16:44:27 root                 INFO   - Load environment variables: SUCCES
+03/11/2026 16:44:27 root                 INFO   - BACKEND_URL=http://localhost:5000
+03/11/2026 16:44:27 root                 INFO   - BACKEND_TIMEOUT=5
+03/11/2026 16:45:02 Analyse Temporelle (F3) INFO   - Comparaison Pays (F4) -> Analyse Temporelle (F3)
+03/11/2026 16:45:02 Analyse Temporelle (F3) INFO   -   GET http://localhost:5000/analyses/evolution
+03/11/2026 16:45:02 Analyse Temporelle (F3) INFO   -   404 Not Found
+03/11/2026 16:45:04 Analyse Temporelle (F3) INFO   -   GET http://localhost:5000/analyses/evolution
+03/11/2026 16:45:04 Analyse Temporelle (F3) INFO   -   404 Not Found
+03/11/2026 16:45:04 Analyse Temporelle (F3) INFO   -   GET http://localhost:5000/analyses/evolution
+03/11/2026 16:45:04 Analyse Temporelle (F3) INFO   -   404 Not Found
+03/11/2026 16:45:05 Analyse Temporelle (F3) INFO   -   GET http://localhost:5000/analyses/evolution
+03/11/2026 16:45:05 Analyse Temporelle (F3) INFO   -   404 Not Found
+03/11/2026 16:45:05 Analyse Temporelle (F3) INFO   -   GET http://localhost:5000/analyses/evolution
+03/11/2026 16:45:05 Analyse Temporelle (F3) INFO   -   404 Not Found
+03/11/2026 16:45:05 Analyse Temporelle (F3) INFO   -   GET http://localhost:5000/analyses/evolution
+03/11/2026 16:45:05 Analyse Temporelle (F3) INFO   -   404 Not Found
+03/11/2026 16:45:08 Analyse Temporelle (F3) INFO   -   GET http://localhost:5000/analyses/evolution
+03/11/2026 16:45:08 Analyse Temporelle (F3) INFO   -   404 Not Found
+03/11/2026 16:45:08 Analyse Temporelle (F3) INFO   -   GET http://localhost:5000/analyses/evolution
+03/11/2026 16:45:08 Analyse Temporelle (F3) INFO   -   404 Not Found
+03/11/2026 16:45:08 Analyse Temporelle (F3) INFO   -   GET http://localhost:5000/analyses/evolution
+03/11/2026 16:45:08 Analyse Temporelle (F3) INFO   -   404 Not Found
+03/11/2026 16:45:09 Analyse Temporelle (F3) INFO   -   GET http://localhost:5000/analyses/evolution
+03/11/2026 16:45:09 Analyse Temporelle (F3) INFO   -   404 Not Found
+03/11/2026 16:45:09 Analyse Temporelle (F3) INFO   -   GET http://localhost:5000/analyses/evolution
+03/11/2026 16:45:09 Analyse Temporelle (F3) INFO   -   404 Not Found
+03/11/2026 16:45:09 Analyse Temporelle (F3) INFO   -   GET http://localhost:5000/analyses/evolution
+03/11/2026 16:45:09 Analyse Temporelle (F3) INFO   -   404 Not Found
+03/11/2026 16:45:12 Analyse Temporelle (F3) INFO   -   GET http://localhost:5000/analyses/evolution
+03/11/2026 16:45:12 Analyse Temporelle (F3) INFO   -   404 Not Found
+03/11/2026 16:45:12 Analyse Temporelle (F3) INFO   -   GET http://localhost:5000/analyses/evolution
+03/11/2026 16:45:12 Analyse Temporelle (F3) INFO   -   404 Not Found
+03/11/2026 16:45:12 Analyse Temporelle (F3) INFO   -   GET http://localhost:5000/analyses/evolution
+03/11/2026 16:45:12 Analyse Temporelle (F3) INFO   -   404 Not Found
+03/11/2026 16:46:50 root                 INFO   - --------------------------------------------------
+03/11/2026 16:46:50 root                 INFO   - Launch FRONTEND : Streamlit App
+03/11/2026 16:46:50 root                 INFO   - --------------------------------------------------
+03/11/2026 16:46:50 root                 INFO   - Load environment variables: SUCCES
+03/11/2026 16:46:50 root                 INFO   - BACKEND_URL=http://localhost:5000
+03/11/2026 16:46:50 root                 INFO   - BACKEND_TIMEOUT=5
+03/11/2026 16:47:55 root                 INFO   - --------------------------------------------------
+03/11/2026 16:47:55 root                 INFO   - Launch FRONTEND : Streamlit App
+03/11/2026 16:47:55 root                 INFO   - --------------------------------------------------
+03/11/2026 16:47:55 root                 INFO   - Load environment variables: SUCCES
+03/11/2026 16:47:55 root                 INFO   - BACKEND_URL=http://localhost:5000
+03/11/2026 16:47:55 root                 INFO   - BACKEND_TIMEOUT=5
+03/11/2026 16:48:15 root                 INFO   - --------------------------------------------------
+03/11/2026 16:48:15 root                 INFO   - Launch FRONTEND : Streamlit App
+03/11/2026 16:48:15 root                 INFO   - --------------------------------------------------
+03/11/2026 16:48:15 root                 INFO   - Load environment variables: SUCCES
+03/11/2026 16:48:15 root                 INFO   - BACKEND_URL=http://localhost:5000
+03/11/2026 16:48:15 root                 INFO   - BACKEND_TIMEOUT=5
+03/11/2026 16:48:15 Accueil              INFO   - None -> Accueil
+03/11/2026 16:48:29 Analyse Temporelle (F3) INFO   - Accueil -> Analyse Temporelle (F3)
+03/11/2026 16:48:29 Analyse Temporelle (F3) INFO   -   GET http://localhost:5000/referentiels/indicateurs
+03/11/2026 16:48:31 Analyse Temporelle (F3) INFO   -   200 OK
+03/11/2026 16:48:31 Analyse Temporelle (F3) INFO   -   GET http://localhost:5000/referentiels/pays
+03/11/2026 16:48:31 Analyse Temporelle (F3) INFO   -   200 OK
+03/11/2026 16:48:31 Analyse Temporelle (F3) INFO   -   GET http://localhost:5000/referentiels/classifications
+03/11/2026 16:48:31 Analyse Temporelle (F3) INFO   -   200 OK
+03/11/2026 16:48:31 Analyse Temporelle (F3) INFO   -   GET http://localhost:5000/analyses/evolution
+03/11/2026 16:48:31 Analyse Temporelle (F3) INFO   -   404 Not Found
+03/11/2026 16:48:35 Analyse Temporelle (F3) INFO   -   GET http://localhost:5000/analyses/evolution
+03/11/2026 16:48:35 Analyse Temporelle (F3) INFO   -   404 Not Found
+03/11/2026 16:48:35 Analyse Temporelle (F3) INFO   -   GET http://localhost:5000/analyses/evolution
+03/11/2026 16:48:35 Analyse Temporelle (F3) INFO   -   404 Not Found
+03/11/2026 16:48:58 Analyse Temporelle (F3) INFO   -   GET http://localhost:5000/referentiels/classifications
+03/11/2026 16:48:59 Connexion            INFO   - Analyse Temporelle (F3) -> Connexion
+03/11/2026 16:49:00 Analyse Temporelle (F3) INFO   -   200 OK
+03/11/2026 16:49:06 Connexion            INFO   -   POST http://localhost:5000/auth/connexion
+03/11/2026 16:49:09 Connexion            INFO   -   200 OK
+03/11/2026 16:49:09 Connexion            INFO   -   GET http://localhost:5000/auth/profil
+03/11/2026 16:49:09 Connexion            INFO   -   200 OK
+03/11/2026 16:49:27 Connexion            INFO   -   POST http://localhost:5000/auth/inscription
+03/11/2026 16:49:29 Connexion            INFO   -   500 Internal Server Error
+03/11/2026 16:49:30 Connexion            INFO   -   POST http://localhost:5000/auth/inscription
+03/11/2026 16:49:32 Connexion            INFO   -   500 Internal Server Error
+03/11/2026 16:52:17 root                 INFO   - --------------------------------------------------
+03/11/2026 16:52:17 root                 INFO   - Launch FRONTEND : Streamlit App
+03/11/2026 16:52:17 root                 INFO   - --------------------------------------------------
+03/11/2026 16:52:17 root                 INFO   - Load environment variables: SUCCES
+03/11/2026 16:52:17 root                 INFO   - BACKEND_URL=http://localhost:5000
+03/11/2026 16:52:17 root                 INFO   - BACKEND_TIMEOUT=5
+03/11/2026 16:58:43 root                 INFO   - --------------------------------------------------
+03/11/2026 16:58:43 root                 INFO   - Launch FRONTEND : Streamlit App
+03/11/2026 16:58:43 root                 INFO   - --------------------------------------------------
+03/11/2026 16:58:43 root                 INFO   - Load environment variables: SUCCES
+03/11/2026 16:58:43 root                 INFO   - BACKEND_URL=http://localhost:5000
+03/11/2026 16:58:43 root                 INFO   - BACKEND_TIMEOUT=5
+03/11/2026 21:14:39 root                 INFO   - --------------------------------------------------
+03/11/2026 21:14:39 root                 INFO   - Launch FRONTEND : Streamlit App
+03/11/2026 21:14:39 root                 INFO   - --------------------------------------------------
+03/11/2026 21:14:39 root                 INFO   - Load environment variables: SUCCES
+03/11/2026 21:14:39 root                 INFO   - BACKEND_URL=http://localhost:5000
+03/11/2026 21:14:39 root                 INFO   - BACKEND_TIMEOUT=5
+03/11/2026 21:19:45 Comparaison Pays (F4) INFO   - Connexion -> Comparaison Pays (F4)
+03/11/2026 21:19:45 Comparaison Pays (F4) INFO   -   GET http://localhost:5000/referentiels/indicateurs
+03/11/2026 21:19:45 Comparaison Pays (F4) INFO   -   200 OK
+03/11/2026 21:19:45 Comparaison Pays (F4) INFO   -   GET http://localhost:5000/referentiels/pays
+03/11/2026 21:19:45 Comparaison Pays (F4) INFO   -   200 OK
+03/11/2026 21:19:45 Comparaison Pays (F4) INFO   -   GET http://localhost:5000/referentiels/classifications
+03/11/2026 21:19:45 Comparaison Pays (F4) INFO   -   200 OK
+03/11/2026 21:19:45 Comparaison Pays (F4) INFO   -   GET http://localhost:5000/analyses/comparaison-pays
+03/11/2026 21:19:45 Comparaison Pays (F4) INFO   -   404 Not Found
+03/11/2026 21:19:50 Multi-indicateurs (F5) INFO   - Analyse Temporelle (F3) -> Multi-indicateurs (F5)
+03/11/2026 21:19:50 Multi-indicateurs (F5) INFO   -   GET http://localhost:5000/referentiels/classifications
+03/11/2026 21:19:50 Multi-indicateurs (F5) INFO   -   200 OK
+03/11/2026 21:19:50 Multi-indicateurs (F5) INFO   -   GET http://localhost:5000/analyses/comparaison-indicateurs
+03/11/2026 21:19:50 Multi-indicateurs (F5) INFO   -   500 Internal Server Error
+03/11/2026 21:19:52 Multi-indicateurs (F5) INFO   -   GET http://localhost:5000/analyses/comparaison-indicateurs
+03/11/2026 21:19:54 Multi-indicateurs (F5) INFO   -   GET http://localhost:5000/analyses/comparaison-indicateurs
+03/11/2026 21:19:54 Comparaison Pays (F4) INFO   - Multi-indicateurs (F5) -> Comparaison Pays (F4)
+03/11/2026 21:19:54 Multi-indicateurs (F5) INFO   -   500 Internal Server Error
+03/11/2026 21:19:55 Comparaison Pays (F4) INFO   -   GET http://localhost:5000/analyses/comparaison-pays
+03/11/2026 21:19:56 Multi-indicateurs (F5) INFO   -   500 Internal Server Error
+03/11/2026 21:19:57 Comparaison Pays (F4) INFO   -   404 Not Found
+03/11/2026 21:22:03 Comparaison Pays (F4) INFO   - Analyse Temporelle (F3) -> Comparaison Pays (F4)
+03/11/2026 21:22:03 Comparaison Pays (F4) INFO   -   GET http://localhost:5000/analyses/evolution
+03/11/2026 21:22:05 Comparaison Pays (F4) INFO   -   404 Not Found
+03/11/2026 21:23:23 Multi-indicateurs (F5) INFO   - Analyse Temporelle (F3) -> Multi-indicateurs (F5)
+03/11/2026 21:23:23 Multi-indicateurs (F5) INFO   -   GET http://localhost:5000/analyses/comparaison-indicateurs
+03/11/2026 21:23:25 Multi-indicateurs (F5) INFO   -   GET http://localhost:5000/analyses/comparaison-indicateurs
+03/11/2026 21:23:25 Multi-indicateurs (F5) INFO   -   500 Internal Server Error
+03/11/2026 21:23:27 Multi-indicateurs (F5) INFO   -   500 Internal Server Error
+03/11/2026 21:23:28 Comparaison Pays (F4) INFO   - Multi-indicateurs (F5) -> Comparaison Pays (F4)
+03/11/2026 21:23:28 Comparaison Pays (F4) INFO   -   GET http://localhost:5000/analyses/evolution
+03/11/2026 21:23:30 Comparaison Pays (F4) INFO   -   404 Not Found
+03/11/2026 21:23:34 Comparaison Pays (F4) INFO   - Analyse Temporelle (F3) -> Comparaison Pays (F4)
+03/11/2026 21:23:34 Comparaison Pays (F4) INFO   -   GET http://localhost:5000/analyses/evolution
+03/11/2026 21:23:34 Comparaison Pays (F4) INFO   -   404 Not Found
+03/11/2026 21:23:36 Multi-indicateurs (F5) INFO   - Comparaison Pays (F4) -> Multi-indicateurs (F5)
+03/11/2026 21:23:36 Multi-indicateurs (F5) INFO   -   GET http://localhost:5000/analyses/comparaison-indicateurs
+03/11/2026 21:23:36 Multi-indicateurs (F5) INFO   -   500 Internal Server Error
+03/11/2026 21:23:53 Multi-indicateurs (F5) INFO   -   GET http://localhost:5000/analyses/comparaison-indicateurs
+03/11/2026 21:23:55 Multi-indicateurs (F5) INFO   -   500 Internal Server Error
+03/11/2026 21:23:56 Comparaison Pays (F4) INFO   - Multi-indicateurs (F5) -> Comparaison Pays (F4)
+03/11/2026 21:23:56 Comparaison Pays (F4) INFO   -   GET http://localhost:5000/analyses/evolution
+03/11/2026 21:23:58 Comparaison Pays (F4) INFO   -   404 Not Found
+03/11/2026 21:25:10 root                 INFO   - --------------------------------------------------
+03/11/2026 21:25:10 root                 INFO   - Launch FRONTEND : Streamlit App
+03/11/2026 21:25:10 root                 INFO   - --------------------------------------------------
+03/11/2026 21:25:10 root                 INFO   - Load environment variables: SUCCES
+03/11/2026 21:25:10 root                 INFO   - BACKEND_URL=http://localhost:5000
+03/11/2026 21:25:10 root                 INFO   - BACKEND_TIMEOUT=5
+03/11/2026 21:25:25 root                 INFO   - --------------------------------------------------
+03/11/2026 21:25:25 root                 INFO   - Launch FRONTEND : Streamlit App
+03/11/2026 21:25:25 root                 INFO   - --------------------------------------------------
+03/11/2026 21:25:25 root                 INFO   - Load environment variables: SUCCES
+03/11/2026 21:25:25 root                 INFO   - BACKEND_URL=http://localhost:5000
+03/11/2026 21:25:25 root                 INFO   - BACKEND_TIMEOUT=5
+03/11/2026 21:25:35 root                 INFO   - --------------------------------------------------
+03/11/2026 21:25:35 root                 INFO   - Launch FRONTEND : Streamlit App
+03/11/2026 21:25:35 root                 INFO   - --------------------------------------------------
+03/11/2026 21:25:35 root                 INFO   - Load environment variables: SUCCES
+03/11/2026 21:25:35 root                 INFO   - BACKEND_URL=http://localhost:5000
+03/11/2026 21:25:35 root                 INFO   - BACKEND_TIMEOUT=5
+03/11/2026 21:27:45 root                 INFO   - --------------------------------------------------
+03/11/2026 21:27:45 root                 INFO   - Launch FRONTEND : Streamlit App
+03/11/2026 21:27:45 root                 INFO   - --------------------------------------------------
+03/11/2026 21:27:45 root                 INFO   - Load environment variables: SUCCES
+03/11/2026 21:27:45 root                 INFO   - BACKEND_URL=http://localhost:5000
+03/11/2026 21:27:45 root                 INFO   - BACKEND_TIMEOUT=5
+03/11/2026 21:28:35 root                 INFO   - --------------------------------------------------
+03/11/2026 21:28:35 root                 INFO   - Launch FRONTEND : Streamlit App
+03/11/2026 21:28:35 root                 INFO   - --------------------------------------------------
+03/11/2026 21:28:35 root                 INFO   - Load environment variables: SUCCES
+03/11/2026 21:28:35 root                 INFO   - BACKEND_URL=http://localhost:5000
+03/11/2026 21:28:35 root                 INFO   - BACKEND_TIMEOUT=5
+03/11/2026 21:32:02 root                 INFO   - --------------------------------------------------
+03/11/2026 21:32:02 root                 INFO   - Launch FRONTEND : Streamlit App
+03/11/2026 21:32:02 root                 INFO   - --------------------------------------------------
+03/11/2026 21:32:02 root                 INFO   - Load environment variables: SUCCES
+03/11/2026 21:32:02 root                 INFO   - BACKEND_URL=http://localhost:5000
+03/11/2026 21:32:02 root                 INFO   - BACKEND_TIMEOUT=5
+03/11/2026 21:32:48 root                 INFO   - --------------------------------------------------
+03/11/2026 21:32:48 root                 INFO   - Launch FRONTEND : Streamlit App
+03/11/2026 21:32:48 root                 INFO   - --------------------------------------------------
+03/11/2026 21:32:48 root                 INFO   - Load environment variables: SUCCES
+03/11/2026 21:32:48 root                 INFO   - BACKEND_URL=http://localhost:5000
+03/11/2026 21:32:48 root                 INFO   - BACKEND_TIMEOUT=5
+03/11/2026 21:49:38 root                 INFO   - --------------------------------------------------
+03/11/2026 21:49:38 root                 INFO   - Launch FRONTEND : Streamlit App
+03/11/2026 21:49:38 root                 INFO   - --------------------------------------------------
+03/11/2026 21:49:38 root                 INFO   - Load environment variables: SUCCES
+03/11/2026 21:49:38 root                 INFO   - BACKEND_URL=http://localhost:5000
+03/11/2026 21:49:38 root                 INFO   - BACKEND_TIMEOUT=5
+03/11/2026 21:56:30 root                 INFO   - --------------------------------------------------
+03/11/2026 21:56:30 root                 INFO   - Launch FRONTEND : Streamlit App
+03/11/2026 21:56:30 root                 INFO   - --------------------------------------------------
+03/11/2026 21:56:30 root                 INFO   - Load environment variables: SUCCES
+03/11/2026 21:56:30 root                 INFO   - BACKEND_URL=http://localhost:5000
+03/11/2026 21:56:30 root                 INFO   - BACKEND_TIMEOUT=5
+03/11/2026 21:56:44 root                 INFO   - --------------------------------------------------
+03/11/2026 21:56:44 root                 INFO   - Launch FRONTEND : Streamlit App
+03/11/2026 21:56:44 root                 INFO   - --------------------------------------------------
+03/11/2026 21:56:44 root                 INFO   - Load environment variables: SUCCES
+03/11/2026 21:56:44 root                 INFO   - BACKEND_URL=http://localhost:5000
+03/11/2026 21:56:44 root                 INFO   - BACKEND_TIMEOUT=5
+03/11/2026 21:57:21 root                 INFO   - --------------------------------------------------
+03/11/2026 21:57:21 root                 INFO   - Launch FRONTEND : Streamlit App
+03/11/2026 21:57:21 root                 INFO   - --------------------------------------------------
+03/11/2026 21:57:21 root                 INFO   - Load environment variables: SUCCES
+03/11/2026 21:57:21 root                 INFO   - BACKEND_URL=http://localhost:5000
+03/11/2026 21:57:21 root                 INFO   - BACKEND_TIMEOUT=5
+03/11/2026 21:58:06 root                 INFO   - --------------------------------------------------
+03/11/2026 21:58:06 root                 INFO   - Launch FRONTEND : Streamlit App
+03/11/2026 21:58:06 root                 INFO   - --------------------------------------------------
+03/11/2026 21:58:06 root                 INFO   - Load environment variables: SUCCES
+03/11/2026 21:58:06 root                 INFO   - BACKEND_URL=http://localhost:5000
+03/11/2026 21:58:06 root                 INFO   - BACKEND_TIMEOUT=5
+03/11/2026 22:03:36 root                 INFO   - --------------------------------------------------
+03/11/2026 22:03:36 root                 INFO   - Launch FRONTEND : Streamlit App
+03/11/2026 22:03:36 root                 INFO   - --------------------------------------------------
+03/11/2026 22:03:36 root                 INFO   - Load environment variables: SUCCES
+03/11/2026 22:03:36 root                 INFO   - BACKEND_URL=http://localhost:5000
+03/11/2026 22:03:36 root                 INFO   - BACKEND_TIMEOUT=5
+03/11/2026 22:08:42 root                 INFO   - --------------------------------------------------
+03/11/2026 22:08:42 root                 INFO   - Launch FRONTEND : Streamlit App
+03/11/2026 22:08:42 root                 INFO   - --------------------------------------------------
+03/11/2026 22:08:42 root                 INFO   - Load environment variables: SUCCES
+03/11/2026 22:08:42 root                 INFO   - BACKEND_URL=http://localhost:5000
+03/11/2026 22:08:42 root                 INFO   - BACKEND_TIMEOUT=5
+03/11/2026 22:10:02 root                 INFO   - --------------------------------------------------
+03/11/2026 22:10:02 root                 INFO   - Launch FRONTEND : Streamlit App
+03/11/2026 22:10:02 root                 INFO   - --------------------------------------------------
+03/11/2026 22:10:02 root                 INFO   - Load environment variables: SUCCES
+03/11/2026 22:10:02 root                 INFO   - BACKEND_URL=http://localhost:5000
+03/11/2026 22:10:02 root                 INFO   - BACKEND_TIMEOUT=5
+03/11/2026 22:10:57 root                 INFO   - --------------------------------------------------
+03/11/2026 22:10:57 root                 INFO   - Launch FRONTEND : Streamlit App
+03/11/2026 22:10:57 root                 INFO   - --------------------------------------------------
+03/11/2026 22:10:57 root                 INFO   - Load environment variables: SUCCES
+03/11/2026 22:10:57 root                 INFO   - BACKEND_URL=http://localhost:5000
+03/11/2026 22:10:57 root                 INFO   - BACKEND_TIMEOUT=5
+03/11/2026 22:15:44 Administration (F6)  INFO   - Comparaison Pays (F4) -> Administration (F6)
+03/11/2026 22:15:44 Administration (F6)  INFO   -   GET http://localhost:5000/admin/utilisateurs
+03/11/2026 22:15:46 Administration (F6)  INFO   -   200 OK
+03/11/2026 22:15:46 Administration (F6)  INFO   -   GET http://localhost:5000/admin/imports
+03/11/2026 22:15:46 Administration (F6)  INFO   -   200 OK
+03/11/2026 22:15:46 Administration (F6)  INFO   -   GET http://localhost:5000/journal/
+03/11/2026 22:15:46 Administration (F6)  INFO   -   200 OK
+03/11/2026 22:15:54 Administration (F6)  INFO   -   GET http://localhost:5000/admin/utilisateurs
+03/11/2026 22:15:56 Administration (F6)  INFO   -   200 OK
+03/11/2026 22:15:56 Administration (F6)  INFO   -   GET http://localhost:5000/admin/imports
+03/11/2026 22:15:56 Administration (F6)  INFO   -   200 OK
+03/11/2026 22:15:56 Administration (F6)  INFO   -   GET http://localhost:5000/journal/
+03/11/2026 22:15:56 Administration (F6)  INFO   -   200 OK
+03/11/2026 22:38:22 Administration (F6)  INFO   - Multi-indicateurs (F5) -> Administration (F6)
+03/11/2026 22:38:22 Administration (F6)  INFO   -   GET http://localhost:5000/admin/utilisateurs
+03/11/2026 22:38:24 Administration (F6)  INFO   -   200 OK
+03/11/2026 22:38:24 Administration (F6)  INFO   -   GET http://localhost:5000/admin/imports
+03/11/2026 22:38:24 Administration (F6)  INFO   -   200 OK
+03/11/2026 22:38:24 Administration (F6)  INFO   -   GET http://localhost:5000/journal/
+03/11/2026 22:38:24 Administration (F6)  INFO   -   200 OK
+03/11/2026 22:39:07 Administration (F6)  INFO   -   GET http://localhost:5000/admin/utilisateurs
+03/11/2026 22:39:09 Administration (F6)  INFO   -   200 OK
+03/11/2026 22:39:09 Administration (F6)  INFO   -   GET http://localhost:5000/admin/imports
+03/11/2026 22:39:09 Administration (F6)  INFO   -   200 OK
+03/11/2026 22:39:09 Administration (F6)  INFO   -   GET http://localhost:5000/journal/
+03/11/2026 22:39:09 Administration (F6)  INFO   -   200 OK
+03/11/2026 22:39:33 Sources & méthodologie INFO   - Administration (F6) -> Sources & méthodologie
+03/11/2026 22:49:52 Sources & méthodologie INFO   - Multi-indicateurs (F5) -> Sources & méthodologie
+03/11/2026 23:38:37 Administration (F6)  INFO   - Comparaison Pays (F4) -> Administration (F6)
+03/11/2026 23:38:37 Administration (F6)  INFO   -   GET http://localhost:5000/admin/utilisateurs
+03/11/2026 23:38:39 Administration (F6)  INFO   -   200 OK
+03/11/2026 23:38:39 Administration (F6)  INFO   -   GET http://localhost:5000/admin/imports
+03/11/2026 23:38:39 Administration (F6)  INFO   -   200 OK
+03/11/2026 23:38:39 Administration (F6)  INFO   -   GET http://localhost:5000/journal/
+03/11/2026 23:38:39 Administration (F6)  INFO   -   200 OK
+03/11/2026 23:42:15 root                 INFO   - --------------------------------------------------
+03/11/2026 23:42:15 root                 INFO   - Launch FRONTEND : Streamlit App
+03/11/2026 23:42:15 root                 INFO   - --------------------------------------------------
+03/11/2026 23:42:15 root                 INFO   - Load environment variables: SUCCES
+03/11/2026 23:42:15 root                 INFO   - BACKEND_URL=http://localhost:5000
+03/11/2026 23:42:15 root                 INFO   - BACKEND_TIMEOUT=5
+03/11/2026 23:47:43 root                 INFO   - --------------------------------------------------
+03/11/2026 23:47:43 root                 INFO   - Launch FRONTEND : Streamlit App
+03/11/2026 23:47:43 root                 INFO   - --------------------------------------------------
+03/11/2026 23:47:43 root                 INFO   - Load environment variables: SUCCES
+03/11/2026 23:47:43 root                 INFO   - BACKEND_URL=http://localhost:5000
+03/11/2026 23:47:43 root                 INFO   - BACKEND_TIMEOUT=5
+03/11/2026 23:51:21 root                 INFO   - --------------------------------------------------
+03/11/2026 23:51:21 root                 INFO   - Launch FRONTEND : Streamlit App
+03/11/2026 23:51:21 root                 INFO   - --------------------------------------------------
+03/11/2026 23:51:21 root                 INFO   - Load environment variables: SUCCES
+03/11/2026 23:51:21 root                 INFO   - BACKEND_URL=http://localhost:5000
+03/11/2026 23:51:21 root                 INFO   - BACKEND_TIMEOUT=5
+03/11/2026 23:52:36 root                 INFO   - --------------------------------------------------
+03/11/2026 23:52:36 root                 INFO   - Launch FRONTEND : Streamlit App
+03/11/2026 23:52:36 root                 INFO   - --------------------------------------------------
+03/11/2026 23:52:36 root                 INFO   - Load environment variables: SUCCES
+03/11/2026 23:52:36 root                 INFO   - BACKEND_URL=http://localhost:5000
+03/11/2026 23:52:36 root                 INFO   - BACKEND_TIMEOUT=5
+03/11/2026 23:55:13 root                 INFO   - --------------------------------------------------
+03/11/2026 23:55:13 root                 INFO   - Launch FRONTEND : Streamlit App
+03/11/2026 23:55:13 root                 INFO   - --------------------------------------------------
+03/11/2026 23:55:13 root                 INFO   - Load environment variables: SUCCES
+03/11/2026 23:55:13 root                 INFO   - BACKEND_URL=http://localhost:5000
+03/11/2026 23:55:13 root                 INFO   - BACKEND_TIMEOUT=5
+03/11/2026 23:55:46 root                 INFO   - --------------------------------------------------
+03/11/2026 23:55:46 root                 INFO   - Launch FRONTEND : Streamlit App
+03/11/2026 23:55:46 root                 INFO   - --------------------------------------------------
+03/11/2026 23:55:46 root                 INFO   - Load environment variables: SUCCES
+03/11/2026 23:55:46 root                 INFO   - BACKEND_URL=http://localhost:5000
+03/11/2026 23:55:46 root                 INFO   - BACKEND_TIMEOUT=5
+03/11/2026 23:55:46 Accueil              INFO   - None -> Accueil
+03/11/2026 23:55:47 root                 INFO   - --------------------------------------------------
+03/11/2026 23:55:47 root                 INFO   - Launch FRONTEND : Streamlit App
+03/11/2026 23:55:47 root                 INFO   - --------------------------------------------------
+03/11/2026 23:55:47 root                 INFO   - Load environment variables: SUCCES
+03/11/2026 23:55:47 root                 INFO   - BACKEND_URL=http://localhost:5000
+03/11/2026 23:55:47 root                 INFO   - BACKEND_TIMEOUT=5
+03/11/2026 23:55:55 Analyse Temporelle (F3) INFO   - Accueil -> Analyse Temporelle (F3)
+03/11/2026 23:55:55 Analyse Temporelle (F3) INFO   -   GET http://localhost:5000/referentiels/indicateurs
+03/11/2026 23:55:57 Analyse Temporelle (F3) INFO   -   200 OK
+03/11/2026 23:55:57 Analyse Temporelle (F3) INFO   -   GET http://localhost:5000/referentiels/pays
+03/11/2026 23:55:57 Analyse Temporelle (F3) INFO   -   200 OK
+03/11/2026 23:55:57 Analyse Temporelle (F3) INFO   -   GET http://localhost:5000/referentiels/classifications
+03/11/2026 23:55:57 Analyse Temporelle (F3) INFO   -   200 OK
+03/11/2026 23:55:57 Analyse Temporelle (F3) INFO   -   GET http://localhost:5000/analyses/evolution
+03/11/2026 23:55:57 Analyse Temporelle (F3) INFO   -   200 OK
+03/11/2026 23:55:57 choreographer.browsers.chromium INFO   - Chromium init'ed with kwargs {}
+03/11/2026 23:55:57 choreographer.browsers.chromium INFO   - Found chromium path: C:\Program Files\Google\Chrome\Application\chrome.exe
+03/11/2026 23:55:57 choreographer.utils._tmpfile INFO   - Temp directory created: C:\Users\Salim\AppData\Local\Temp\tmpvmtubm0c.
+03/11/2026 23:55:57 choreographer.browser_async INFO   - Opening browser.
+03/11/2026 23:55:57 choreographer.utils._tmpfile INFO   - Temp directory created: C:\Users\Salim\AppData\Local\Temp\tmp38jjws8q.
+03/11/2026 23:55:57 choreographer.browsers.chromium INFO   - Temporary directory at: C:\Users\Salim\AppData\Local\Temp\tmp38jjws8q
+03/11/2026 23:55:58 kaleido.kaleido      INFO   - Conforming 1 to file:///C:/Users/Salim/AppData/Local/Temp/tmpvmtubm0c/index.html
+03/11/2026 23:55:59 kaleido.kaleido      INFO   - Getting tab from queue (has 1)
+03/11/2026 23:55:59 kaleido.kaleido      INFO   - Got D570
+03/11/2026 23:55:59 kaleido.kaleido      INFO   - Reloading tab D570 before return.
+03/11/2026 23:55:59 kaleido.kaleido      INFO   - Putting tab D570 back (queue size: 0).
+03/11/2026 23:55:59 kaleido.kaleido      INFO   - Waiting for all cleanups to finish.
+03/11/2026 23:55:59 kaleido.kaleido      INFO   - Exiting Kaleido.
+03/11/2026 23:55:59 choreographer.utils._tmpfile INFO   - TemporaryDirectory.cleanup() worked.
+03/11/2026 23:55:59 choreographer.utils._tmpfile INFO   - shutil.rmtree worked.
+03/11/2026 23:55:59 choreographer.browser_async INFO   - Closing browser.
+03/11/2026 23:55:59 choreographer.utils._tmpfile INFO   - TemporaryDirectory.cleanup() worked.
+03/11/2026 23:55:59 choreographer.utils._tmpfile INFO   - shutil.rmtree worked.
+03/11/2026 23:55:59 choreographer.browser_async INFO   - Closing browser.
+03/11/2026 23:55:59 kaleido.kaleido      INFO   - Cancelling tasks.
+03/11/2026 23:55:59 kaleido.kaleido      INFO   - Exiting Kaleido/Choreo.
+03/11/2026 23:56:00 choreographer.utils._tmpfile INFO   - TemporaryDirectory.cleanup() worked.
+03/11/2026 23:56:00 choreographer.utils._tmpfile INFO   - shutil.rmtree worked.
+03/11/2026 23:56:00 kaleido.kaleido      INFO   - Cancelling tasks.
+03/11/2026 23:56:00 kaleido.kaleido      INFO   - Exiting Kaleido/Choreo.
+03/11/2026 23:56:00 choreographer.utils._tmpfile INFO   - TemporaryDirectory.cleanup() worked.
+03/11/2026 23:56:00 choreographer.utils._tmpfile INFO   - shutil.rmtree worked.
+03/11/2026 23:56:03 Analyse Temporelle (F3) INFO   -   GET http://localhost:5000/analyses/evolution
+03/11/2026 23:56:05 Analyse Temporelle (F3) INFO   -   200 OK
+03/11/2026 23:56:05 choreographer.browsers.chromium INFO   - Chromium init'ed with kwargs {}
+03/11/2026 23:56:05 choreographer.browsers.chromium INFO   - Found chromium path: C:\Program Files\Google\Chrome\Application\chrome.exe
+03/11/2026 23:56:05 choreographer.utils._tmpfile INFO   - Temp directory created: C:\Users\Salim\AppData\Local\Temp\tmp9a7pocw0.
+03/11/2026 23:56:05 choreographer.browser_async INFO   - Opening browser.
+03/11/2026 23:56:05 choreographer.utils._tmpfile INFO   - Temp directory created: C:\Users\Salim\AppData\Local\Temp\tmpnzenzi66.
+03/11/2026 23:56:05 choreographer.browsers.chromium INFO   - Temporary directory at: C:\Users\Salim\AppData\Local\Temp\tmpnzenzi66
+03/11/2026 23:56:06 kaleido.kaleido      INFO   - Conforming 1 to file:///C:/Users/Salim/AppData/Local/Temp/tmp9a7pocw0/index.html
+03/11/2026 23:56:07 kaleido.kaleido      INFO   - Getting tab from queue (has 1)
+03/11/2026 23:56:07 kaleido.kaleido      INFO   - Got DC14
+03/11/2026 23:56:07 kaleido.kaleido      INFO   - Reloading tab DC14 before return.
+03/11/2026 23:56:07 kaleido.kaleido      INFO   - Putting tab DC14 back (queue size: 0).
+03/11/2026 23:56:07 kaleido.kaleido      INFO   - Waiting for all cleanups to finish.
+03/11/2026 23:56:07 kaleido.kaleido      INFO   - Exiting Kaleido.
+03/11/2026 23:56:07 choreographer.utils._tmpfile INFO   - TemporaryDirectory.cleanup() worked.
+03/11/2026 23:56:07 choreographer.utils._tmpfile INFO   - shutil.rmtree worked.
+03/11/2026 23:56:07 choreographer.browser_async INFO   - Closing browser.
+03/11/2026 23:56:07 choreographer.utils._tmpfile INFO   - TemporaryDirectory.cleanup() worked.
+03/11/2026 23:56:07 choreographer.utils._tmpfile INFO   - shutil.rmtree worked.
+03/11/2026 23:56:07 choreographer.browser_async INFO   - Closing browser.
+03/11/2026 23:56:07 kaleido.kaleido      INFO   - Cancelling tasks.
+03/11/2026 23:56:07 kaleido.kaleido      INFO   - Exiting Kaleido/Choreo.
+03/11/2026 23:56:08 choreographer.utils._tmpfile INFO   - TemporaryDirectory.cleanup() worked.
+03/11/2026 23:56:08 choreographer.utils._tmpfile INFO   - shutil.rmtree worked.
+03/11/2026 23:56:08 kaleido.kaleido      INFO   - Cancelling tasks.
+03/11/2026 23:56:08 kaleido.kaleido      INFO   - Exiting Kaleido/Choreo.
+03/11/2026 23:56:08 choreographer.utils._tmpfile INFO   - TemporaryDirectory.cleanup() worked.
+03/11/2026 23:56:08 choreographer.utils._tmpfile INFO   - shutil.rmtree worked.
+03/11/2026 23:56:55 root                 INFO   - --------------------------------------------------
+03/11/2026 23:56:55 root                 INFO   - Launch FRONTEND : Streamlit App
+03/11/2026 23:56:55 root                 INFO   - --------------------------------------------------
+03/11/2026 23:56:55 root                 INFO   - Load environment variables: SUCCES
+03/11/2026 23:56:55 root                 INFO   - BACKEND_URL=http://localhost:5000
+03/11/2026 23:56:55 root                 INFO   - BACKEND_TIMEOUT=5
+03/11/2026 23:57:05 Connexion            INFO   - Analyse Temporelle (F3) -> Connexion
+03/11/2026 23:57:14 Connexion            INFO   -   POST http://localhost:5000/auth/connexion
+03/11/2026 23:57:17 Connexion            INFO   -   200 OK
+03/11/2026 23:57:17 Connexion            INFO   -   GET http://localhost:5000/auth/profil
+03/11/2026 23:57:17 Connexion            INFO   -   200 OK
+03/11/2026 23:57:19 Administration (F6)  INFO   - Connexion -> Administration (F6)
+03/11/2026 23:57:19 Administration (F6)  INFO   -   GET http://localhost:5000/admin/utilisateurs
+03/11/2026 23:57:19 Administration (F6)  INFO   -   200 OK
+03/11/2026 23:57:19 Administration (F6)  INFO   -   GET http://localhost:5000/admin/imports
+03/11/2026 23:57:19 Administration (F6)  INFO   -   200 OK
+03/11/2026 23:57:19 Administration (F6)  INFO   -   GET http://localhost:5000/journal/
+03/11/2026 23:57:19 Administration (F6)  INFO   -   200 OK
+03/11/2026 23:57:25 Administration (F6)  INFO   -   GET http://localhost:5000/admin/utilisateurs
+03/11/2026 23:57:26 Administration (F6)  INFO   -   GET http://localhost:5000/admin/utilisateurs
+03/11/2026 23:57:27 Administration (F6)  INFO   -   200 OK
+03/11/2026 23:57:28 Administration (F6)  INFO   -   200 OK
+03/11/2026 23:57:28 Administration (F6)  INFO   -   GET http://localhost:5000/admin/imports
+03/11/2026 23:57:28 Administration (F6)  INFO   -   200 OK
+03/11/2026 23:57:28 Administration (F6)  INFO   -   GET http://localhost:5000/journal/
+03/11/2026 23:57:28 Administration (F6)  INFO   -   200 OK
+03/11/2026 23:57:30 Administration (F6)  INFO   -   GET http://localhost:5000/admin/utilisateurs
+03/11/2026 23:57:30 Administration (F6)  INFO   -   200 OK
+03/11/2026 23:57:30 Administration (F6)  INFO   -   GET http://localhost:5000/admin/imports
+03/11/2026 23:57:30 Administration (F6)  INFO   -   200 OK
+03/11/2026 23:57:30 Administration (F6)  INFO   -   POST http://localhost:5000/admin/imports/EMP_TEMP_SEX_OCU_NB
+03/11/2026 23:58:25 Administration (F6)  INFO   -   200 OK
+03/11/2026 23:58:25 Administration (F6)  INFO   -   GET http://localhost:5000/admin/utilisateurs
+03/11/2026 23:58:25 Administration (F6)  INFO   -   200 OK
+03/11/2026 23:58:25 Administration (F6)  INFO   -   GET http://localhost:5000/admin/imports
+03/11/2026 23:58:25 Administration (F6)  INFO   -   200 OK
+03/11/2026 23:58:25 Administration (F6)  INFO   -   GET http://localhost:5000/journal/
+03/11/2026 23:58:25 Administration (F6)  INFO   -   200 OK
+03/11/2026 23:59:00 Multi-indicateurs (F5) INFO   - Accueil -> Multi-indicateurs (F5)
+03/11/2026 23:59:00 Multi-indicateurs (F5) INFO   -   GET http://localhost:5000/analyses/comparaison-indicateurs
+03/11/2026 23:59:02 Multi-indicateurs (F5) INFO   -   200 OK
+03/11/2026 23:59:03 Comparaison Pays (F4) INFO   - Multi-indicateurs (F5) -> Comparaison Pays (F4)
+03/11/2026 23:59:03 Comparaison Pays (F4) INFO   -   GET http://localhost:5000/analyses/evolution
+03/11/2026 23:59:03 Comparaison Pays (F4) INFO   -   200 OK
+03/11/2026 23:59:03 Comparaison Pays (F4) INFO   -   GET http://localhost:5000/analyses/comparaison-pays
+03/11/2026 23:59:03 Comparaison Pays (F4) INFO   -   200 OK
+03/11/2026 23:59:03 Multi-indicateurs (F5) INFO   - Comparaison Pays (F4) -> Multi-indicateurs (F5)
+03/11/2026 23:59:03 Multi-indicateurs (F5) INFO   -   GET http://localhost:5000/analyses/comparaison-indicateurs
+03/11/2026 23:59:03 Multi-indicateurs (F5) INFO   -   200 OK
+04/11/2026 14:14:43 root                 INFO   - --------------------------------------------------
+04/11/2026 14:14:43 root                 INFO   - Launch FRONTEND : Streamlit App
+04/11/2026 14:14:43 root                 INFO   - --------------------------------------------------
+04/11/2026 14:14:43 root                 INFO   - Load environment variables: SUCCES
+04/11/2026 14:14:43 root                 INFO   - BACKEND_URL=http://localhost:5000
+04/11/2026 14:14:43 root                 INFO   - BACKEND_TIMEOUT=5
+04/11/2026 14:15:16 root                 INFO   - --------------------------------------------------
+04/11/2026 14:15:16 root                 INFO   - Launch FRONTEND : Streamlit App
+04/11/2026 14:15:16 root                 INFO   - --------------------------------------------------
+04/11/2026 14:15:16 root                 INFO   - Load environment variables: SUCCES
+04/11/2026 14:15:16 root                 INFO   - BACKEND_URL=http://localhost:5000
+04/11/2026 14:15:16 root                 INFO   - BACKEND_TIMEOUT=5
+04/11/2026 14:16:23 root                 INFO   - --------------------------------------------------
+04/11/2026 14:16:23 root                 INFO   - Launch FRONTEND : Streamlit App
+04/11/2026 14:16:23 root                 INFO   - --------------------------------------------------
+04/11/2026 14:16:23 root                 INFO   - Load environment variables: SUCCES
+04/11/2026 14:16:23 root                 INFO   - BACKEND_URL=http://localhost:5000
+04/11/2026 14:16:23 root                 INFO   - BACKEND_TIMEOUT=5
+04/11/2026 14:16:55 root                 INFO   - --------------------------------------------------
+04/11/2026 14:16:55 root                 INFO   - Launch FRONTEND : Streamlit App
+04/11/2026 14:16:55 root                 INFO   - --------------------------------------------------
+04/11/2026 14:16:55 root                 INFO   - Load environment variables: SUCCES
+04/11/2026 14:16:55 root                 INFO   - BACKEND_URL=http://localhost:5000
+04/11/2026 14:16:55 root                 INFO   - BACKEND_TIMEOUT=5
+04/11/2026 14:16:56 Accueil              INFO   - None -> Accueil
+04/11/2026 14:17:01 Connexion            INFO   - Accueil -> Connexion
+04/11/2026 14:20:15 Administration (F6)  INFO   - Connexion -> Administration (F6)
+04/11/2026 14:22:30 Accueil              INFO   - Administration (F6) -> Accueil
+04/11/2026 14:22:35 Comparaison Pays (F4) INFO   - Accueil -> Comparaison Pays (F4)
+04/11/2026 14:25:23 Analyse Temporelle (F3) INFO   - Comparaison Pays (F4) -> Analyse Temporelle (F3)
+04/11/2026 14:25:23 Multi-indicateurs (F5) INFO   - Analyse Temporelle (F3) -> Multi-indicateurs (F5)
+04/11/2026 14:25:29 choreographer.browsers.chromium INFO   - Chromium init'ed with kwargs {}
+04/11/2026 14:25:29 choreographer.browsers.chromium INFO   - Found chromium path: C:\Program Files\Google\Chrome\Application\chrome.exe
+04/11/2026 14:25:29 choreographer.utils._tmpfile INFO   - Temp directory created: C:\Users\Salim\AppData\Local\Temp\tmpvbcyxlq1.
+04/11/2026 14:25:29 choreographer.browser_async INFO   - Opening browser.
+04/11/2026 14:25:29 choreographer.utils._tmpfile INFO   - Temp directory created: C:\Users\Salim\AppData\Local\Temp\tmpy1u1bupu.
+04/11/2026 14:25:29 choreographer.browsers.chromium INFO   - Temporary directory at: C:\Users\Salim\AppData\Local\Temp\tmpy1u1bupu
+04/11/2026 14:25:29 kaleido.kaleido      INFO   - Conforming 1 to file:///C:/Users/Salim/AppData/Local/Temp/tmpvbcyxlq1/index.html
+04/11/2026 14:25:31 kaleido.kaleido      INFO   - Getting tab from queue (has 1)
+04/11/2026 14:25:31 kaleido.kaleido      INFO   - Got 8E21
+04/11/2026 14:25:31 kaleido.kaleido      INFO   - Reloading tab 8E21 before return.
+04/11/2026 14:25:31 kaleido.kaleido      INFO   - Putting tab 8E21 back (queue size: 0).
+04/11/2026 14:25:31 kaleido.kaleido      INFO   - Waiting for all cleanups to finish.
+04/11/2026 14:25:31 kaleido.kaleido      INFO   - Exiting Kaleido.
+04/11/2026 14:25:31 choreographer.utils._tmpfile INFO   - TemporaryDirectory.cleanup() worked.
+04/11/2026 14:25:31 choreographer.utils._tmpfile INFO   - shutil.rmtree worked.
+04/11/2026 14:25:31 choreographer.browser_async INFO   - Closing browser.
+04/11/2026 14:25:31 choreographer.utils._tmpfile INFO   - TemporaryDirectory.cleanup() worked.
+04/11/2026 14:25:31 choreographer.utils._tmpfile INFO   - shutil.rmtree worked.
+04/11/2026 14:25:31 choreographer.browser_async INFO   - Closing browser.
+04/11/2026 14:25:31 kaleido.kaleido      INFO   - Cancelling tasks.
+04/11/2026 14:25:31 kaleido.kaleido      INFO   - Exiting Kaleido/Choreo.
+04/11/2026 14:25:31 choreographer.utils._tmpfile INFO   - TemporaryDirectory.cleanup() worked.
+04/11/2026 14:25:31 choreographer.utils._tmpfile INFO   - shutil.rmtree worked.
+04/11/2026 14:25:31 kaleido.kaleido      INFO   - Cancelling tasks.
+04/11/2026 14:25:31 kaleido.kaleido      INFO   - Exiting Kaleido/Choreo.
+04/11/2026 14:25:31 choreographer.utils._tmpfile INFO   - TemporaryDirectory.cleanup() worked.
+04/11/2026 14:25:31 choreographer.utils._tmpfile INFO   - shutil.rmtree worked.
+04/11/2026 14:26:14 Comparaison Pays (F4) INFO   - Multi-indicateurs (F5) -> Comparaison Pays (F4)
+04/11/2026 14:26:14 Multi-indicateurs (F5) INFO   - Comparaison Pays (F4) -> Multi-indicateurs (F5)
+04/11/2026 14:26:19 choreographer.browsers.chromium INFO   - Chromium init'ed with kwargs {}
+04/11/2026 14:26:19 choreographer.browsers.chromium INFO   - Found chromium path: C:\Program Files\Google\Chrome\Application\chrome.exe
+04/11/2026 14:26:19 choreographer.utils._tmpfile INFO   - Temp directory created: C:\Users\Salim\AppData\Local\Temp\tmptbvraoh1.
+04/11/2026 14:26:19 choreographer.browser_async INFO   - Opening browser.
+04/11/2026 14:26:19 choreographer.utils._tmpfile INFO   - Temp directory created: C:\Users\Salim\AppData\Local\Temp\tmp7cyrdfpo.
+04/11/2026 14:26:19 choreographer.browsers.chromium INFO   - Temporary directory at: C:\Users\Salim\AppData\Local\Temp\tmp7cyrdfpo
+04/11/2026 14:26:20 kaleido.kaleido      INFO   - Conforming 1 to file:///C:/Users/Salim/AppData/Local/Temp/tmptbvraoh1/index.html
+04/11/2026 14:26:21 kaleido.kaleido      INFO   - Getting tab from queue (has 1)
+04/11/2026 14:26:21 kaleido.kaleido      INFO   - Got A3F8
+04/11/2026 14:26:21 kaleido.kaleido      INFO   - Reloading tab A3F8 before return.
+04/11/2026 14:26:21 kaleido.kaleido      INFO   - Putting tab A3F8 back (queue size: 0).
+04/11/2026 14:26:21 kaleido.kaleido      INFO   - Waiting for all cleanups to finish.
+04/11/2026 14:26:21 kaleido.kaleido      INFO   - Exiting Kaleido.
+04/11/2026 14:26:21 choreographer.utils._tmpfile INFO   - TemporaryDirectory.cleanup() worked.
+04/11/2026 14:26:21 choreographer.utils._tmpfile INFO   - shutil.rmtree worked.
+04/11/2026 14:26:21 choreographer.browser_async INFO   - Closing browser.
+04/11/2026 14:26:21 choreographer.utils._tmpfile INFO   - TemporaryDirectory.cleanup() worked.
+04/11/2026 14:26:21 choreographer.utils._tmpfile INFO   - shutil.rmtree worked.
+04/11/2026 14:26:21 choreographer.browser_async INFO   - Closing browser.
+04/11/2026 14:26:21 kaleido.kaleido      INFO   - Cancelling tasks.
+04/11/2026 14:26:21 kaleido.kaleido      INFO   - Exiting Kaleido/Choreo.
+04/11/2026 14:26:21 choreographer.utils._tmpfile INFO   - TemporaryDirectory.cleanup() worked.
+04/11/2026 14:26:21 choreographer.utils._tmpfile INFO   - shutil.rmtree worked.
+04/11/2026 14:26:21 kaleido.kaleido      INFO   - Cancelling tasks.
+04/11/2026 14:26:21 kaleido.kaleido      INFO   - Exiting Kaleido/Choreo.
+04/11/2026 14:26:22 choreographer.utils._tmpfile INFO   - TemporaryDirectory.cleanup() worked.
+04/11/2026 14:26:22 choreographer.utils._tmpfile INFO   - shutil.rmtree worked.
+04/11/2026 14:26:29 Comparaison Pays (F4) INFO   - Multi-indicateurs (F5) -> Comparaison Pays (F4)
+04/11/2026 14:27:36 Multi-indicateurs (F5) INFO   - Comparaison Pays (F4) -> Multi-indicateurs (F5)
+04/11/2026 14:27:38 Comparaison Pays (F4) INFO   - Multi-indicateurs (F5) -> Comparaison Pays (F4)
+04/11/2026 14:27:40 Analyse Temporelle (F3) INFO   - Comparaison Pays (F4) -> Analyse Temporelle (F3)
+04/11/2026 14:27:55 Comparaison Pays (F4) INFO   - Analyse Temporelle (F3) -> Comparaison Pays (F4)
+04/11/2026 14:28:56 Analyse Temporelle (F3) INFO   - Comparaison Pays (F4) -> Analyse Temporelle (F3)
+04/11/2026 14:28:57 Multi-indicateurs (F5) INFO   - Analyse Temporelle (F3) -> Multi-indicateurs (F5)
+04/11/2026 14:29:27 Comparaison Pays (F4) INFO   - Multi-indicateurs (F5) -> Comparaison Pays (F4)
+04/11/2026 14:29:37 choreographer.browsers.chromium INFO   - Chromium init'ed with kwargs {}
+04/11/2026 14:29:37 choreographer.browsers.chromium INFO   - Found chromium path: C:\Program Files\Google\Chrome\Application\chrome.exe
+04/11/2026 14:29:37 choreographer.utils._tmpfile INFO   - Temp directory created: C:\Users\Salim\AppData\Local\Temp\tmpkxqd9g06.
+04/11/2026 14:29:37 choreographer.browser_async INFO   - Opening browser.
+04/11/2026 14:29:37 choreographer.utils._tmpfile INFO   - Temp directory created: C:\Users\Salim\AppData\Local\Temp\tmp0biob8uz.
+04/11/2026 14:29:37 choreographer.browsers.chromium INFO   - Temporary directory at: C:\Users\Salim\AppData\Local\Temp\tmp0biob8uz
+04/11/2026 14:29:37 kaleido.kaleido      INFO   - Conforming 1 to file:///C:/Users/Salim/AppData/Local/Temp/tmpkxqd9g06/index.html
+04/11/2026 14:29:38 kaleido.kaleido      INFO   - Getting tab from queue (has 1)
+04/11/2026 14:29:38 kaleido.kaleido      INFO   - Got 4413
+04/11/2026 14:29:38 kaleido.kaleido      INFO   - Reloading tab 4413 before return.
+04/11/2026 14:29:38 kaleido.kaleido      INFO   - Putting tab 4413 back (queue size: 0).
+04/11/2026 14:29:38 kaleido.kaleido      INFO   - Waiting for all cleanups to finish.
+04/11/2026 14:29:38 kaleido.kaleido      INFO   - Exiting Kaleido.
+04/11/2026 14:29:38 choreographer.utils._tmpfile INFO   - TemporaryDirectory.cleanup() worked.
+04/11/2026 14:29:38 choreographer.utils._tmpfile INFO   - shutil.rmtree worked.
+04/11/2026 14:29:38 choreographer.browser_async INFO   - Closing browser.
+04/11/2026 14:29:38 choreographer.utils._tmpfile INFO   - TemporaryDirectory.cleanup() worked.
+04/11/2026 14:29:38 choreographer.utils._tmpfile INFO   - shutil.rmtree worked.
+04/11/2026 14:29:38 choreographer.browser_async INFO   - Closing browser.
+04/11/2026 14:29:38 kaleido.kaleido      INFO   - Cancelling tasks.
+04/11/2026 14:29:38 kaleido.kaleido      INFO   - Exiting Kaleido/Choreo.
+04/11/2026 14:29:38 choreographer.utils._tmpfile INFO   - TemporaryDirectory.cleanup() worked.
+04/11/2026 14:29:38 choreographer.utils._tmpfile INFO   - shutil.rmtree worked.
+04/11/2026 14:29:39 kaleido.kaleido      INFO   - Cancelling tasks.
+04/11/2026 14:29:39 kaleido.kaleido      INFO   - Exiting Kaleido/Choreo.
+04/11/2026 14:29:39 choreographer.utils._tmpfile INFO   - TemporaryDirectory.cleanup() worked.
+04/11/2026 14:29:39 choreographer.utils._tmpfile INFO   - shutil.rmtree worked.
+04/11/2026 14:29:44 Multi-indicateurs (F5) INFO   - Comparaison Pays (F4) -> Multi-indicateurs (F5)
+04/11/2026 14:29:49 choreographer.browsers.chromium INFO   - Chromium init'ed with kwargs {}
+04/11/2026 14:29:49 choreographer.browsers.chromium INFO   - Found chromium path: C:\Program Files\Google\Chrome\Application\chrome.exe
+04/11/2026 14:29:49 choreographer.utils._tmpfile INFO   - Temp directory created: C:\Users\Salim\AppData\Local\Temp\tmpnfyg53rb.
+04/11/2026 14:29:49 choreographer.browser_async INFO   - Opening browser.
+04/11/2026 14:29:49 choreographer.utils._tmpfile INFO   - Temp directory created: C:\Users\Salim\AppData\Local\Temp\tmpulxntag9.
+04/11/2026 14:29:49 choreographer.browsers.chromium INFO   - Temporary directory at: C:\Users\Salim\AppData\Local\Temp\tmpulxntag9
+04/11/2026 14:29:49 kaleido.kaleido      INFO   - Conforming 1 to file:///C:/Users/Salim/AppData/Local/Temp/tmpnfyg53rb/index.html
+04/11/2026 14:29:50 kaleido.kaleido      INFO   - Getting tab from queue (has 1)
+04/11/2026 14:29:50 kaleido.kaleido      INFO   - Got A318
+04/11/2026 14:29:50 kaleido.kaleido      INFO   - Reloading tab A318 before return.
+04/11/2026 14:29:50 kaleido.kaleido      INFO   - Putting tab A318 back (queue size: 0).
+04/11/2026 14:29:50 kaleido.kaleido      INFO   - Waiting for all cleanups to finish.
+04/11/2026 14:29:50 kaleido.kaleido      INFO   - Exiting Kaleido.
+04/11/2026 14:29:50 choreographer.utils._tmpfile INFO   - TemporaryDirectory.cleanup() worked.
+04/11/2026 14:29:50 choreographer.utils._tmpfile INFO   - shutil.rmtree worked.
+04/11/2026 14:29:50 choreographer.browser_async INFO   - Closing browser.
+04/11/2026 14:29:50 choreographer.utils._tmpfile INFO   - TemporaryDirectory.cleanup() worked.
+04/11/2026 14:29:50 choreographer.utils._tmpfile INFO   - shutil.rmtree worked.
+04/11/2026 14:29:50 choreographer.browser_async INFO   - Closing browser.
+04/11/2026 14:29:50 kaleido.kaleido      INFO   - Cancelling tasks.
+04/11/2026 14:29:50 kaleido.kaleido      INFO   - Exiting Kaleido/Choreo.
+04/11/2026 14:29:51 choreographer.utils._tmpfile INFO   - TemporaryDirectory.cleanup() worked.
+04/11/2026 14:29:51 choreographer.utils._tmpfile INFO   - shutil.rmtree worked.
+04/11/2026 14:29:51 kaleido.kaleido      INFO   - Cancelling tasks.
+04/11/2026 14:29:51 kaleido.kaleido      INFO   - Exiting Kaleido/Choreo.
+04/11/2026 14:29:51 choreographer.utils._tmpfile INFO   - TemporaryDirectory.cleanup() worked.
+04/11/2026 14:29:51 choreographer.utils._tmpfile INFO   - shutil.rmtree worked.
+04/11/2026 14:32:32 Comparaison Pays (F4) INFO   - Multi-indicateurs (F5) -> Comparaison Pays (F4)
+04/11/2026 14:32:37 choreographer.browsers.chromium INFO   - Chromium init'ed with kwargs {}
+04/11/2026 14:32:37 choreographer.browsers.chromium INFO   - Found chromium path: C:\Program Files\Google\Chrome\Application\chrome.exe
+04/11/2026 14:32:37 choreographer.utils._tmpfile INFO   - Temp directory created: C:\Users\Salim\AppData\Local\Temp\tmpro1afbt9.
+04/11/2026 14:32:37 choreographer.browser_async INFO   - Opening browser.
+04/11/2026 14:32:37 choreographer.utils._tmpfile INFO   - Temp directory created: C:\Users\Salim\AppData\Local\Temp\tmpftn0955h.
+04/11/2026 14:32:37 choreographer.browsers.chromium INFO   - Temporary directory at: C:\Users\Salim\AppData\Local\Temp\tmpftn0955h
+04/11/2026 14:32:37 kaleido.kaleido      INFO   - Conforming 1 to file:///C:/Users/Salim/AppData/Local/Temp/tmpro1afbt9/index.html
+04/11/2026 14:32:39 kaleido.kaleido      INFO   - Getting tab from queue (has 1)
+04/11/2026 14:32:39 kaleido.kaleido      INFO   - Got 61D7
+04/11/2026 14:32:39 kaleido.kaleido      INFO   - Reloading tab 61D7 before return.
+04/11/2026 14:32:39 kaleido.kaleido      INFO   - Putting tab 61D7 back (queue size: 0).
+04/11/2026 14:32:39 kaleido.kaleido      INFO   - Waiting for all cleanups to finish.
+04/11/2026 14:32:39 kaleido.kaleido      INFO   - Exiting Kaleido.
+04/11/2026 14:32:39 choreographer.utils._tmpfile INFO   - TemporaryDirectory.cleanup() worked.
+04/11/2026 14:32:39 choreographer.utils._tmpfile INFO   - shutil.rmtree worked.
+04/11/2026 14:32:39 choreographer.browser_async INFO   - Closing browser.
+04/11/2026 14:32:39 choreographer.utils._tmpfile INFO   - TemporaryDirectory.cleanup() worked.
+04/11/2026 14:32:39 choreographer.utils._tmpfile INFO   - shutil.rmtree worked.
+04/11/2026 14:32:39 choreographer.browser_async INFO   - Closing browser.
+04/11/2026 14:32:39 kaleido.kaleido      INFO   - Cancelling tasks.
+04/11/2026 14:32:39 kaleido.kaleido      INFO   - Exiting Kaleido/Choreo.
+04/11/2026 14:32:39 choreographer.utils._tmpfile INFO   - TemporaryDirectory.cleanup() worked.
+04/11/2026 14:32:39 choreographer.utils._tmpfile INFO   - shutil.rmtree worked.
+04/11/2026 14:32:39 kaleido.kaleido      INFO   - Cancelling tasks.
+04/11/2026 14:32:39 kaleido.kaleido      INFO   - Exiting Kaleido/Choreo.
+04/11/2026 14:32:39 choreographer.utils._tmpfile INFO   - TemporaryDirectory.cleanup() worked.
+04/11/2026 14:32:39 choreographer.utils._tmpfile INFO   - shutil.rmtree worked.
+04/11/2026 14:32:41 choreographer.browsers.chromium INFO   - Chromium init'ed with kwargs {}
+04/11/2026 14:32:41 choreographer.browsers.chromium INFO   - Found chromium path: C:\Program Files\Google\Chrome\Application\chrome.exe
+04/11/2026 14:32:41 choreographer.utils._tmpfile INFO   - Temp directory created: C:\Users\Salim\AppData\Local\Temp\tmpt0l54z61.
+04/11/2026 14:32:41 choreographer.browser_async INFO   - Opening browser.
+04/11/2026 14:32:41 choreographer.utils._tmpfile INFO   - Temp directory created: C:\Users\Salim\AppData\Local\Temp\tmpzcxg3l9w.
+04/11/2026 14:32:41 choreographer.browsers.chromium INFO   - Temporary directory at: C:\Users\Salim\AppData\Local\Temp\tmpzcxg3l9w
+04/11/2026 14:32:41 kaleido.kaleido      INFO   - Conforming 1 to file:///C:/Users/Salim/AppData/Local/Temp/tmpt0l54z61/index.html
+04/11/2026 14:32:43 kaleido.kaleido      INFO   - Getting tab from queue (has 1)
+04/11/2026 14:32:43 kaleido.kaleido      INFO   - Got 14C5
+04/11/2026 14:32:43 kaleido.kaleido      INFO   - Reloading tab 14C5 before return.
+04/11/2026 14:32:43 kaleido.kaleido      INFO   - Putting tab 14C5 back (queue size: 0).
+04/11/2026 14:32:43 kaleido.kaleido      INFO   - Waiting for all cleanups to finish.
+04/11/2026 14:32:43 kaleido.kaleido      INFO   - Exiting Kaleido.
+04/11/2026 14:32:43 choreographer.utils._tmpfile INFO   - TemporaryDirectory.cleanup() worked.
+04/11/2026 14:32:43 choreographer.utils._tmpfile INFO   - shutil.rmtree worked.
+04/11/2026 14:32:43 choreographer.browser_async INFO   - Closing browser.
+04/11/2026 14:32:43 choreographer.utils._tmpfile INFO   - TemporaryDirectory.cleanup() worked.
+04/11/2026 14:32:43 choreographer.utils._tmpfile INFO   - shutil.rmtree worked.
+04/11/2026 14:32:43 choreographer.browser_async INFO   - Closing browser.
+04/11/2026 14:32:43 kaleido.kaleido      INFO   - Cancelling tasks.
+04/11/2026 14:32:43 kaleido.kaleido      INFO   - Exiting Kaleido/Choreo.
+04/11/2026 14:32:43 choreographer.utils._tmpfile INFO   - TemporaryDirectory.cleanup() worked.
+04/11/2026 14:32:43 choreographer.utils._tmpfile INFO   - shutil.rmtree worked.
+04/11/2026 14:32:43 kaleido.kaleido      INFO   - Cancelling tasks.
+04/11/2026 14:32:43 kaleido.kaleido      INFO   - Exiting Kaleido/Choreo.
+04/11/2026 14:32:43 choreographer.utils._tmpfile INFO   - TemporaryDirectory.cleanup() worked.
+04/11/2026 14:32:43 choreographer.utils._tmpfile INFO   - shutil.rmtree worked.
+04/11/2026 14:32:51 Accueil              INFO   - Comparaison Pays (F4) -> Accueil
+04/11/2026 14:32:53 Analyse Temporelle (F3) INFO   - Accueil -> Analyse Temporelle (F3)
+04/11/2026 14:32:58 choreographer.browsers.chromium INFO   - Chromium init'ed with kwargs {}
+04/11/2026 14:32:58 choreographer.browsers.chromium INFO   - Found chromium path: C:\Program Files\Google\Chrome\Application\chrome.exe
+04/11/2026 14:32:58 choreographer.utils._tmpfile INFO   - Temp directory created: C:\Users\Salim\AppData\Local\Temp\tmpg3x6w22b.
+04/11/2026 14:32:58 choreographer.browser_async INFO   - Opening browser.
+04/11/2026 14:32:58 choreographer.utils._tmpfile INFO   - Temp directory created: C:\Users\Salim\AppData\Local\Temp\tmp7sep_c7k.
+04/11/2026 14:32:58 choreographer.browsers.chromium INFO   - Temporary directory at: C:\Users\Salim\AppData\Local\Temp\tmp7sep_c7k
+04/11/2026 14:32:58 kaleido.kaleido      INFO   - Conforming 1 to file:///C:/Users/Salim/AppData/Local/Temp/tmpg3x6w22b/index.html
+04/11/2026 14:33:00 kaleido.kaleido      INFO   - Getting tab from queue (has 1)
+04/11/2026 14:33:00 kaleido.kaleido      INFO   - Got B85A
+04/11/2026 14:33:00 kaleido.kaleido      INFO   - Reloading tab B85A before return.
+04/11/2026 14:33:00 kaleido.kaleido      INFO   - Putting tab B85A back (queue size: 0).
+04/11/2026 14:33:00 kaleido.kaleido      INFO   - Waiting for all cleanups to finish.
+04/11/2026 14:33:00 kaleido.kaleido      INFO   - Exiting Kaleido.
+04/11/2026 14:33:00 choreographer.utils._tmpfile INFO   - TemporaryDirectory.cleanup() worked.
+04/11/2026 14:33:00 choreographer.utils._tmpfile INFO   - shutil.rmtree worked.
+04/11/2026 14:33:00 choreographer.browser_async INFO   - Closing browser.
+04/11/2026 14:33:00 choreographer.utils._tmpfile INFO   - TemporaryDirectory.cleanup() worked.
+04/11/2026 14:33:00 choreographer.utils._tmpfile INFO   - shutil.rmtree worked.
+04/11/2026 14:33:00 choreographer.browser_async INFO   - Closing browser.
+04/11/2026 14:33:00 kaleido.kaleido      INFO   - Cancelling tasks.
+04/11/2026 14:33:00 kaleido.kaleido      INFO   - Exiting Kaleido/Choreo.
+04/11/2026 14:33:00 choreographer.utils._tmpfile INFO   - TemporaryDirectory.cleanup() worked.
+04/11/2026 14:33:00 choreographer.utils._tmpfile INFO   - shutil.rmtree worked.
+04/11/2026 14:33:00 kaleido.kaleido      INFO   - Cancelling tasks.
+04/11/2026 14:33:00 kaleido.kaleido      INFO   - Exiting Kaleido/Choreo.
+04/11/2026 14:33:00 choreographer.utils._tmpfile INFO   - TemporaryDirectory.cleanup() worked.
+04/11/2026 14:33:00 choreographer.utils._tmpfile INFO   - shutil.rmtree worked.
+04/11/2026 14:54:40 root                 INFO   - --------------------------------------------------
+04/11/2026 14:54:40 root                 INFO   - Launch FRONTEND : Streamlit App
+04/11/2026 14:54:40 root                 INFO   - --------------------------------------------------
+04/11/2026 14:54:40 root                 INFO   - Load environment variables: SUCCES
+04/11/2026 14:54:40 root                 INFO   - BACKEND_URL=http://localhost:5000
+04/11/2026 14:54:40 root                 INFO   - BACKEND_TIMEOUT=5
+04/11/2026 15:46:10 Carte mondiale (F6)  INFO   - Comparaison Pays (F4) -> Carte mondiale (F6)
+04/11/2026 15:47:40 Carte mondiale (F6)  INFO   - Multi-indicateurs (F5) -> Carte mondiale (F6)
+04/11/2026 15:49:08 Carte mondiale (F6)  INFO   - Multi-indicateurs (F5) -> Carte mondiale (F6)
+04/11/2026 15:49:48 root                 INFO   - --------------------------------------------------
+04/11/2026 15:49:48 root                 INFO   - Launch FRONTEND : Streamlit App
+04/11/2026 15:49:48 root                 INFO   - --------------------------------------------------
+04/11/2026 15:49:48 root                 INFO   - Load environment variables: SUCCES
+04/11/2026 15:49:48 root                 INFO   - BACKEND_URL=http://localhost:5000
+04/11/2026 15:49:48 root                 INFO   - BACKEND_TIMEOUT=5
+04/11/2026 15:58:25 root                 INFO   - --------------------------------------------------
+04/11/2026 15:58:25 root                 INFO   - Launch FRONTEND : Streamlit App
+04/11/2026 15:58:25 root                 INFO   - --------------------------------------------------
+04/11/2026 15:58:25 root                 INFO   - Load environment variables: SUCCES
+04/11/2026 15:58:25 root                 INFO   - BACKEND_URL=http://localhost:5000
+04/11/2026 15:58:25 root                 INFO   - BACKEND_TIMEOUT=5

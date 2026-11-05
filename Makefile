@@ -49,6 +49,7 @@ help: ## Affiche cette aide
 	@echo   make down          Arrete tous les conteneurs
 	@echo   make test          Lance tous les tests du backend
 	@echo   make test-collecte Lance uniquement les tests de la collecte
+	@echo   make cov           Couverture de tout le backend (console + HTML)
 	@echo   make cov-collecte  Couverture des modules de collecte
 	@echo   make lint          Verifie le style du code
 	@echo   make clean         Supprime les conteneurs et le volume PostgreSQL
@@ -131,6 +132,12 @@ down: ## Arrete tous les conteneurs
 .PHONY: test
 test: ## Lance tous les tests du backend
 	cd backend && uv run pytest
+
+.PHONY: cov
+cov: ## Couverture de tout le backend (rapport console + HTML)
+	cd backend && uv run --extra dev coverage run -m pytest
+	cd backend && uv run --extra dev coverage report
+	cd backend && uv run --extra dev coverage html
 
 .PHONY: test-collecte
 test-collecte: ## Lance uniquement les tests de la collecte
