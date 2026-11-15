@@ -91,7 +91,7 @@ st.write("")
 # Cette analyse exige une connexion (le backend attend un jeton).
 if not est_connecte():
     notif("Connectez-vous pour accéder à la carte mondiale.", "info")
-    st.page_link("pages/login.py", label="Se connecter", icon=":material/lock:")
+    st.page_link("vues/login.py", label="Se connecter", icon=":material/lock:")
     st.stop()
 
 ligne_source(
@@ -220,6 +220,13 @@ if df.empty:
     notif("Aucune donnée localisable pour cette sélection.", "warn")
     st.stop()
 
+# Sous-ensemble « vrais pays » (code rattaché à un continent) : écarte les
+# agrégats ILOSTAT (« World », « G20 », « BRICS »…) des indicateurs de synthèse
+# et du classement. La carte, elle, garde tous les pays codés (les agrégats ne
+# s'y tracent pas de toute façon).
+df_pays = df[df["Code"].isin(CONTINENTS)]
+_df_synthese = df_pays if not df_pays.empty else df
+
 unite = unite_indicateur(code_indicateur)
 suffixe = f" {unite}" if unite else ""
 annee_carte = annee(periode)
@@ -241,8 +248,8 @@ _quantiles = [0.0, 0.25, 0.5, 0.75, 1.0]
 _cb_tickvals = _quantiles
 _cb_ticktext = [format_fr(df["Valeur"].quantile(q)) for q in _quantiles]
 
-haut = df.loc[df["Valeur"].idxmax()]
-bas = df.loc[df["Valeur"].idxmin()]
+haut = _df_synthese.loc[_df_synthese["Valeur"].idxmax()]
+bas = _df_synthese.loc[_df_synthese["Valeur"].idxmin()]
 
 # Bouton d'export, désormais que les données sont prêtes.
 emplacement_export.download_button(
@@ -260,7 +267,7 @@ m1, m2, m3 = st.columns(3)
 with m1:
     carte_metrique(
         "Pays couverts",
-        str(len(df)),
+        str(len(_df_synthese)),
         "",
         f"Observations · {annee_carte}",
         icone_svg=ICONE_GLOBE,
@@ -390,9 +397,9 @@ st.write("")
 # La carte donne la vue d'ensemble ; ce classement ordonne TOUS les pays ayant
 # une valeur pour la sélection, avec un filtre par continent (le « métrique » est
 # l'indicateur choisi en haut de page, commun à la carte et au classement).
-# On ne garde que les vrais pays (code rattaché à un continent) : cela écarte les
-# agrégats ILOSTAT (« World », « G20 », « BRICS »…) qui ne sont pas des pays.
-df_rang = df[df["Code"].isin(CONTINENTS)].copy()
+# On réutilise le sous-ensemble « vrais pays » (déjà filtré plus haut) : cela
+# écarte les agrégats ILOSTAT (« World », « G20 », « BRICS »…).
+df_rang = df_pays.copy()
 df_rang["Continent"] = df_rang["Code"].map(CONTINENTS)
 
 with st.container(border=True):

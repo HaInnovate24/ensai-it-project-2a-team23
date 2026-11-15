@@ -35,7 +35,7 @@ with col1:
             aide_texte="Suivez l'évolution d'un indicateur pour un ou plusieurs pays, "
                        "année après année.",
         )
-        st.page_link("pages/analyse_temporelle.py", label="Ouvrir",
+        st.page_link("vues/analyse_temporelle.py", label="Ouvrir",
                      icon=":material/arrow_forward:")
 
 with col2:
@@ -47,10 +47,10 @@ with col2:
             aide_texte="Comparez un indicateur entre plusieurs pays sur une année commune.",
         )
         if est_connecte():
-            st.page_link("pages/comparaison_pays.py", label="Ouvrir",
+            st.page_link("vues/comparaison_pays.py", label="Ouvrir",
                          icon=":material/arrow_forward:")
         else:
-            st.page_link("pages/login.py", label="Se connecter", icon=":material/lock:")
+            st.page_link("vues/login.py", label="Se connecter", icon=":material/lock:")
 
 with col3:
     with st.container(border=True):
@@ -61,10 +61,10 @@ with col3:
             aide_texte="Superposez plusieurs indicateurs pour un même pays.",
         )
         if est_connecte():
-            st.page_link("pages/comparaison_multi.py", label="Ouvrir",
+            st.page_link("vues/comparaison_multi.py", label="Ouvrir",
                          icon=":material/arrow_forward:")
         else:
-            st.page_link("pages/login.py", label="Se connecter", icon=":material/lock:")
+            st.page_link("vues/login.py", label="Se connecter", icon=":material/lock:")
 
 if est_admin():
     st.write("")
@@ -74,4 +74,4 @@ if est_admin():
             tag="Administrateur",
             aide_texte="Comptes, imports ILOSTAT et journal d'activité.",
         )
-        st.page_link("pages/admin.py", label="Ouvrir", icon=":material/arrow_forward:")
+        st.page_link("vues/admin.py", label="Ouvrir", icon=":material/arrow_forward:")

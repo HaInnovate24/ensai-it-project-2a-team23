@@ -99,7 +99,7 @@ st.write("")
 # Cette analyse exige une connexion (le backend attend un jeton).
 if not est_connecte():
     notif("Connectez-vous pour accéder à la comparaison entre pays.", "info")
-    st.page_link("pages/login.py", label="Se connecter", icon=":material/lock:")
+    st.page_link("vues/login.py", label="Se connecter", icon=":material/lock:")
     st.stop()
 
 ligne_source(

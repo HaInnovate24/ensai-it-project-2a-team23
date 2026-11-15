@@ -11,7 +11,6 @@ from utils.referentiels import (
     SEXES,
     get_indicateurs,
     get_pays,
-    message_erreur,
     type_classification_de,
     unite_indicateur,
 )
@@ -38,7 +37,7 @@ entete(
 # Cette analyse exige une connexion (le backend attend un jeton).
 if not est_connecte():
     notif("Connectez-vous pour accéder à la comparaison multi-indicateurs.", "info")
-    st.page_link("pages/login.py", label="Se connecter", icon=":material/lock:")
+    st.page_link("vues/login.py", label="Se connecter", icon=":material/lock:")
     st.stop()
 
 ligne_source(["Données réelles", "OIT · diffusion ILOSTAT"], f"Extrait du {date.today():%d/%m/%Y}")

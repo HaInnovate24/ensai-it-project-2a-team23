@@ -13,4 +13,4 @@ def check_authentification():
         logging.info("Not logged in, return to the home page")
         st.error("You must be logged in to access this page. Return to the home page")
         time.sleep(1)
-        st.switch_page("pages/home.py")
+        st.switch_page("vues/home.py")
