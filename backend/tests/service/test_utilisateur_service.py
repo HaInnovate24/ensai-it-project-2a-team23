@@ -465,3 +465,31 @@ def test_desactivation_bloque_immediatement_le_jeton_existant():
 
     with pytest.raises(AccesRefuse):
         authentification.utilisateur_depuis_jeton("jeton-2")
+
+
+# Couverture ciblée : modifier statique et modification sans journalisation
+
+
+def test_modifier_statique_delegue_au_dao(monkeypatch):
+    """La méthode statique modifier délègue à UtilisateurDao().modifier."""
+    from unittest.mock import MagicMock
+
+    import service.utilisateur_service as mod
+
+    faux_dao_cls = MagicMock()
+    faux_dao_cls.return_value.modifier.return_value = True
+    monkeypatch.setattr(mod, "UtilisateurDao", faux_dao_cls)
+
+    assert UtilisateurService.modifier(Utilisateur(id=1)) is True
+    faux_dao_cls.return_value.modifier.assert_called_once()
+
+
+def test_modification_sans_journal_service_ne_leve_pas():
+    """Si journal_service est absent, la modification réussit sans journaliser."""
+    service = creer_service()
+    acteur = compte(service, "jade")  # administrateur actif
+    service.journal_service = None
+
+    resultat = service.promouvoir_admin(acteur, 2)  # vicram -> admin
+
+    assert resultat.role == Role.ADMIN

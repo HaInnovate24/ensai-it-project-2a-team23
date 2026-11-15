@@ -1,6 +1,9 @@
 from collections import namedtuple
 
+import pytest
+
 from business_object.enums import StatutImport
+from business_object.import_donnees import ImportDonnees
 from service.collecte_service import CollecteService
 from service.parser_service import ParserService
 
@@ -145,3 +148,77 @@ def test_collecter_csv_vide_renvoie_succes_sans_insertion():
     assert trace.statut == StatutImport.SUCCES
     assert trace.nombre_lignes == 0
     assert service.observation_dao.appels_insertion == 0
+
+
+# ---------------------------------------------------------------------------
+# Validations des paramètres
+# ---------------------------------------------------------------------------
+
+
+@pytest.mark.parametrize("code", ["", "   "])
+def test_collecter_code_vide_leve_value_error(code):
+    service = creer_service(FauxIlostatClient())
+
+    with pytest.raises(ValueError):
+        service.collecter_indicateur(code)
+
+
+def test_collecter_periode_inversee_leve_value_error():
+    service = creer_service(FauxIlostatClient())
+
+    with pytest.raises(ValueError):
+        service.collecter_indicateur("EMP_TEMP_SEX_OCU_NB", from_date=2022, to_date=2016)
+
+
+# ---------------------------------------------------------------------------
+# Gestion des erreurs : CSV sans observation exploitable -> ECHEC
+# ---------------------------------------------------------------------------
+
+
+def test_collecter_csv_sans_observation_exploitable_renvoie_echec():
+    # En-tête seule : le parser ne produit aucune observation -> ValueError
+    # attrapée, l'import est tracé en ECHEC (pas de crash).
+    client = FauxIlostatClient(csv="ref_area,time,sex,obs_value,classif1\n")
+    service = creer_service(client)
+
+    trace = service.collecter_indicateur("EMP_TEMP_SEX_OCU_NB", 2020, 2020)
+
+    assert trace.statut == StatutImport.ECHEC
+    assert trace.message_erreur
+    assert trace.date_fin is not None
+
+
+# ---------------------------------------------------------------------------
+# Filtrage des référentiels inconnus (pays / classification)
+# ---------------------------------------------------------------------------
+
+
+def test_collecter_ignore_pays_et_classifications_hors_referentiel():
+    csv = (
+        "ref_area,time,sex,obs_value,classif1\n"
+        "XXX,2020,SEX_T,10.0,OCU_ISCO08_1\n"  # pays inconnu -> ignoré
+        "FRA,2020,SEX_T,20.0,OCU_ISCO08_9\n"  # classification inconnue -> ignorée
+        "FRA,2021,SEX_T,30.0,OCU_ISCO08_1\n"  # conservée
+    )
+    client = FauxIlostatClient(csv=csv)
+    service = creer_service(client)
+
+    trace = service.collecter_indicateur("EMP_TEMP_SEX_OCU_NB", 2020, 2021)
+
+    assert trace.statut == StatutImport.SUCCES
+    assert trace.nombre_lignes == 1
+    assert len(service.observation_dao.observations) == 1
+    assert service.observation_dao.observations[0].code_pays == "FRA"
+
+
+# ---------------------------------------------------------------------------
+# lister_imports
+# ---------------------------------------------------------------------------
+
+
+def test_lister_imports_delegue_au_dao():
+    service = creer_service(FauxIlostatClient())
+    attendus = [ImportDonnees(id=1), ImportDonnees(id=2)]
+    service.import_dao.lister = lambda: attendus
+
+    assert service.lister_imports() == attendus

@@ -1,0 +1,88 @@
+13/11/2026 20:03:06 root                      INFO    - --------------------------------------------------
+13/11/2026 20:03:06 root                      INFO    - Starting Webservice                           
+13/11/2026 20:03:06 root                      INFO    - --------------------------------------------------
+13/11/2026 20:03:06 root                      INFO    - Load environment variables: SUCCES
+13/11/2026 20:03:06 root                      INFO    - POSTGRES_HOST=localhost
+13/11/2026 20:03:06 root                      INFO    - POSTGRES_PORT=5432
+13/11/2026 20:03:06 root                      INFO    - POSTGRES_DATABASE=defaultdb
+13/11/2026 20:03:06 root                      INFO    - POSTGRES_USER=user
+13/11/2026 20:03:06 root                      INFO    - POSTGRES_PASSWORD=*******
+13/11/2026 20:03:06 root                      INFO    - POSTGRES_SCHEMA=project
+13/11/2026 20:03:06 root                      INFO    - JWT_SECRET_KEY=*******
+13/11/2026 20:03:06 root                      INFO    - UVICORN_HOST=127.0.0.1
+13/11/2026 20:03:06 root                      INFO    - UVICORN_PORT=5000
+13/11/2026 20:03:06 root                      INFO    - BACKEND_URL=http://localhost:5000
+13/11/2026 20:03:06 root                      INFO    - BACKEND_TIMEOUT=5
+13/11/2026 20:03:06 root                      INFO    - ELO_K_FACTOR=32
+13/11/2026 20:14:49 root                      INFO    - --------------------------------------------------
+13/11/2026 20:14:49 root                      INFO    - Starting Webservice                           
+13/11/2026 20:14:49 root                      INFO    - --------------------------------------------------
+13/11/2026 20:14:49 root                      INFO    - Load environment variables: SUCCES
+13/11/2026 20:14:49 root                      INFO    - POSTGRES_HOST=localhost
+13/11/2026 20:14:49 root                      INFO    - POSTGRES_PORT=5432
+13/11/2026 20:14:49 root                      INFO    - POSTGRES_DATABASE=defaultdb
+13/11/2026 20:14:49 root                      INFO    - POSTGRES_USER=user
+13/11/2026 20:14:49 root                      INFO    - POSTGRES_PASSWORD=*******
+13/11/2026 20:14:49 root                      INFO    - POSTGRES_SCHEMA=project
+13/11/2026 20:14:49 root                      INFO    - JWT_SECRET_KEY=*******
+13/11/2026 20:14:49 root                      INFO    - UVICORN_HOST=127.0.0.1
+13/11/2026 20:14:49 root                      INFO    - UVICORN_PORT=5000
+13/11/2026 20:14:49 root                      INFO    - BACKEND_URL=http://localhost:5000
+13/11/2026 20:14:49 root                      INFO    - BACKEND_TIMEOUT=5
+13/11/2026 20:14:49 root                      INFO    - ELO_K_FACTOR=32
+13/11/2026 20:21:39 root                      INFO    - --------------------------------------------------
+13/11/2026 20:21:39 root                      INFO    - Starting Webservice                           
+13/11/2026 20:21:39 root                      INFO    - --------------------------------------------------
+13/11/2026 20:21:39 root                      INFO    - Load environment variables: SUCCES
+13/11/2026 20:21:39 root                      INFO    - POSTGRES_HOST=localhost
+13/11/2026 20:21:39 root                      INFO    - POSTGRES_PORT=5432
+13/11/2026 20:21:39 root                      INFO    - POSTGRES_DATABASE=defaultdb
+13/11/2026 20:21:39 root                      INFO    - POSTGRES_USER=user
+13/11/2026 20:21:39 root                      INFO    - POSTGRES_PASSWORD=*******
+13/11/2026 20:21:39 root                      INFO    - POSTGRES_SCHEMA=project
+13/11/2026 20:21:39 root                      INFO    - JWT_SECRET_KEY=*******
+13/11/2026 20:21:39 root                      INFO    - UVICORN_HOST=127.0.0.1
+13/11/2026 20:21:39 root                      INFO    - UVICORN_PORT=5000
+13/11/2026 20:21:39 root                      INFO    - BACKEND_URL=http://localhost:5000
+13/11/2026 20:21:39 root                      INFO    - BACKEND_TIMEOUT=5
+13/11/2026 20:21:39 root                      INFO    - ELO_K_FACTOR=32
+13/11/2026 20:27:43 root                      INFO    - --------------------------------------------------
+13/11/2026 20:27:43 root                      INFO    - Starting Webservice                           
+13/11/2026 20:27:43 root                      INFO    - --------------------------------------------------
+13/11/2026 20:27:43 root                      INFO    - Load environment variables: SUCCES
+13/11/2026 20:27:43 root                      INFO    - POSTGRES_HOST=localhost
+13/11/2026 20:27:43 root                      INFO    - POSTGRES_PORT=5432
+13/11/2026 20:27:43 root                      INFO    - POSTGRES_DATABASE=defaultdb
+13/11/2026 20:27:43 root                      INFO    - POSTGRES_USER=user
+13/11/2026 20:27:43 root                      INFO    - POSTGRES_PASSWORD=*******
+13/11/2026 20:27:43 root                      INFO    - POSTGRES_SCHEMA=project
+13/11/2026 20:27:43 root                      INFO    - JWT_SECRET_KEY=*******
+13/11/2026 20:27:43 root                      INFO    - UVICORN_HOST=127.0.0.1
+13/11/2026 20:27:43 root                      INFO    - UVICORN_PORT=5000
+13/11/2026 20:27:43 root                      INFO    - BACKEND_URL=http://localhost:5000
+13/11/2026 20:27:43 root                      INFO    - BACKEND_TIMEOUT=5
+13/11/2026 20:27:43 root                      INFO    - ELO_K_FACTOR=32
+13/11/2026 20:27:44 root                      INFO    - GET / - START
+13/11/2026 20:27:44 root                      INFO    - GET /json/version - START
+13/11/2026 20:27:44 root                      INFO    - GET / - END [Status: 307]
+13/11/2026 20:27:44 root                      INFO    - GET /json/version - END [Status: 404]
+13/11/2026 20:27:44 root                      INFO    - GET /docs - START
+13/11/2026 20:27:44 root                      INFO    - GET /docs - END [Status: 200]
+13/11/2026 20:27:44 root                      INFO    - GET / - START
+13/11/2026 20:27:44 root                      INFO    - GET / - END [Status: 307]
+13/11/2026 20:27:44 root                      INFO    - GET /docs - START
+13/11/2026 20:27:44 root                      INFO    - GET /docs - END [Status: 200]
+13/11/2026 20:27:44 root                      INFO    - GET /openapi.json - START
+13/11/2026 20:27:44 root                      INFO    - GET /openapi.json - END [Status: 200]
+13/11/2026 20:28:10 root                      INFO    - GET / - START
+13/11/2026 20:28:10 root                      INFO    - GET /json/version - START
+13/11/2026 20:28:10 root                      INFO    - GET / - END [Status: 307]
+13/11/2026 20:28:10 root                      INFO    - GET /json/version - END [Status: 404]
+13/11/2026 20:28:10 root                      INFO    - GET /docs - START
+13/11/2026 20:28:10 root                      INFO    - GET /docs - END [Status: 200]
+13/11/2026 20:28:10 root                      INFO    - GET / - START
+13/11/2026 20:28:10 root                      INFO    - GET / - END [Status: 307]
+13/11/2026 20:28:10 root                      INFO    - GET /docs - START
+13/11/2026 20:28:10 root                      INFO    - GET /docs - END [Status: 200]
+13/11/2026 20:28:10 root                      INFO    - GET /openapi.json - START
+13/11/2026 20:28:10 root                      INFO    - GET /openapi.json - END [Status: 200]

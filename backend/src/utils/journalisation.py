@@ -12,14 +12,19 @@ from starlette.middleware.base import BaseHTTPMiddleware
 def initialize_logs(name: str):
     """Initialize logging from a configuration file"""
 
-    # Create the logs folder at project root if it doesn't exist
-    logs_dir = Path(__file__).resolve().parents[2] / "logs"
-    logs_dir.mkdir(exist_ok=True)
-
     config_file = Path(__file__).resolve().parents[2] / "logging_config.yml"
 
     with open(config_file, encoding="utf-8") as stream:
         config = yaml.safe_load(stream)
+
+        # Create the parent folder of every file handler so the log files
+        # can be opened. The handler filenames may be relative to the current
+        # working directory, so we resolve them the same way Python does.
+        for handler in config.get("handlers", {}).values():
+            filename = handler.get("filename")
+            if filename:
+                Path(filename).resolve().parent.mkdir(parents=True, exist_ok=True)
+
         logging.config.dictConfig(config)
 
         logging.info("-" * 50)

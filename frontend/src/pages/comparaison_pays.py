@@ -6,6 +6,7 @@ import streamlit as st
 
 from utils.api_client import api_client
 from utils.log_init import get_page_logger
+from utils.rapport_pdf import construire_rapport_pdf, figure_png
 from utils.referentiels import (
     SEXES,
     get_classifications,
@@ -16,7 +17,6 @@ from utils.referentiels import (
     message_erreur,
     unite_indicateur,
 )
-from utils.rapport_pdf import construire_rapport_pdf, figure_png
 from utils.ui import (
     ICONE_CIBLE,
     ICONE_ECART,
@@ -27,9 +27,12 @@ from utils.ui import (
     carte_metrique,
     chip,
     est_connecte,
-    fmt_fr as format_fr,
     ligne_source,
+    notif,
     styliser_figure,
+)
+from utils.ui import (
+    fmt_fr as format_fr,
 )
 
 get_page_logger("Comparaison Pays (F4)")
@@ -95,7 +98,7 @@ st.write("")
 
 # Cette analyse exige une connexion (le backend attend un jeton).
 if not est_connecte():
-    st.info("Connectez-vous pour accéder à la comparaison entre pays.")
+    notif("Connectez-vous pour accéder à la comparaison entre pays.", "info")
     st.page_link("pages/login.py", label="Se connecter", icon=":material/lock:")
     st.stop()
 
@@ -251,11 +254,11 @@ with col_reset:
               use_container_width=True, on_click=_reinitialiser_pays)
 
 if len(noms_pays) < 2:
-    st.info("Sélectionnez au moins deux pays pour lancer la comparaison.")
+    notif("Sélectionnez au moins deux pays pour lancer la comparaison.", "info")
     st.stop()
 
 if not periodes or p_fin is None:
-    st.warning("Aucune donnée disponible pour cette sélection (indicateur / population).")
+    notif("Aucune donnée disponible pour cette sélection (indicateur / population).", "warn")
     st.stop()
 
 # --- Appel du backend : /analyses/comparaison-pays ---------------------------
@@ -295,10 +298,10 @@ def _lignes(reponse: dict) -> list[dict]:
 with st.spinner("Chargement des données…"):
     reponse = _charger_comparaison(p_fin)
 if reponse["status_code"] in (401, 403):
-    st.error("Session expirée ou accès refusé. Reconnectez-vous pour continuer.")
+    notif("Session expirée ou accès refusé. Reconnectez-vous pour continuer.", "ko")
     st.stop()
 if reponse["status_code"] == 0:
-    st.error(message_erreur(reponse))
+    notif(message_erreur(reponse), "ko")
     st.stop()
 
 lignes = _lignes(reponse)
@@ -311,7 +314,7 @@ if len(lignes) < 2:
         lignes, annee_commune = lignes_repli, False
 
 if not lignes:
-    st.warning("Aucune donnée disponible pour cette sélection.")
+    notif("Aucune donnée disponible pour cette sélection.", "warn")
     st.stop()
 
 df = pd.DataFrame(lignes)
@@ -328,10 +331,11 @@ ecart = haut["Valeur"] - bas["Valeur"]
 # Un écart n'a de sens que si au moins deux pays ont une valeur pour la sélection.
 comparaison_possible = len(df) >= 2
 if not comparaison_possible:
-    st.info(
-        f"Seul **{df.iloc[0]['Pays']}** dispose de données pour cette sélection "
+    notif(
+        f"Seul {df.iloc[0]['Pays']} dispose de données pour cette sélection "
         "(indicateur, population et période). Ajoutez un pays comparable ou changez "
-        "de population pour visualiser un écart."
+        "de population pour visualiser un écart.",
+        "info",
     )
 
 # Valeur et évolution du pays focus (1er sélectionné), calculées sur /evolution.
@@ -432,7 +436,7 @@ with col_chart:
         )
         fig.update_traces(
             textposition="outside", cliponaxis=False, marker_line_width=0,
-            marker_cornerradius=6,  # barres aux coins arrondis (plus « produit »)
+            marker_cornerradius=0,  # barres à angles vifs (cohérent avec l'interface)
             textfont=dict(color="#1F2A26"),
         )
         fig.update_layout(showlegend=False)

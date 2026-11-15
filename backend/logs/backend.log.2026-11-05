@@ -1,0 +1,867 @@
+05/11/2026 14:07:36 root                      INFO    - --------------------------------------------------
+05/11/2026 14:07:36 root                      INFO    - Starting Webservice                           
+05/11/2026 14:07:36 root                      INFO    - --------------------------------------------------
+05/11/2026 14:07:36 root                      INFO    - Load environment variables: SUCCES
+05/11/2026 14:07:36 root                      INFO    - POSTGRES_HOST=localhost
+05/11/2026 14:07:36 root                      INFO    - POSTGRES_PORT=5432
+05/11/2026 14:07:36 root                      INFO    - POSTGRES_DATABASE=defaultdb
+05/11/2026 14:07:36 root                      INFO    - POSTGRES_USER=user
+05/11/2026 14:07:36 root                      INFO    - POSTGRES_PASSWORD=*******
+05/11/2026 14:07:36 root                      INFO    - POSTGRES_SCHEMA=project
+05/11/2026 14:07:36 root                      INFO    - JWT_SECRET_KEY=*******
+05/11/2026 14:07:36 root                      INFO    - UVICORN_HOST=127.0.0.1
+05/11/2026 14:07:36 root                      INFO    - UVICORN_PORT=5000
+05/11/2026 14:07:36 root                      INFO    - BACKEND_URL=http://localhost:5000
+05/11/2026 14:07:36 root                      INFO    - BACKEND_TIMEOUT=5
+05/11/2026 14:07:36 root                      INFO    - ELO_K_FACTOR=32
+05/11/2026 14:09:00 root                      INFO    - --------------------------------------------------
+05/11/2026 14:09:00 root                      INFO    - Starting Webservice                           
+05/11/2026 14:09:00 root                      INFO    - --------------------------------------------------
+05/11/2026 14:09:00 root                      INFO    - Load environment variables: SUCCES
+05/11/2026 14:09:00 root                      INFO    - POSTGRES_HOST=localhost
+05/11/2026 14:09:00 root                      INFO    - POSTGRES_PORT=5432
+05/11/2026 14:09:00 root                      INFO    - POSTGRES_DATABASE=defaultdb
+05/11/2026 14:09:00 root                      INFO    - POSTGRES_USER=user
+05/11/2026 14:09:00 root                      INFO    - POSTGRES_PASSWORD=*******
+05/11/2026 14:09:00 root                      INFO    - POSTGRES_SCHEMA=project
+05/11/2026 14:09:00 root                      INFO    - JWT_SECRET_KEY=*******
+05/11/2026 14:09:00 root                      INFO    - UVICORN_HOST=127.0.0.1
+05/11/2026 14:09:00 root                      INFO    - UVICORN_PORT=5000
+05/11/2026 14:09:00 root                      INFO    - BACKEND_URL=http://localhost:5000
+05/11/2026 14:09:00 root                      INFO    - BACKEND_TIMEOUT=5
+05/11/2026 14:09:00 root                      INFO    - ELO_K_FACTOR=32
+05/11/2026 14:10:24 root                      INFO    - --------------------------------------------------
+05/11/2026 14:10:24 root                      INFO    - Starting Webservice                           
+05/11/2026 14:10:24 root                      INFO    - --------------------------------------------------
+05/11/2026 14:10:24 root                      INFO    - Load environment variables: SUCCES
+05/11/2026 14:10:24 root                      INFO    - POSTGRES_HOST=localhost
+05/11/2026 14:10:24 root                      INFO    - POSTGRES_PORT=5432
+05/11/2026 14:10:24 root                      INFO    - POSTGRES_DATABASE=defaultdb
+05/11/2026 14:10:24 root                      INFO    - POSTGRES_USER=user
+05/11/2026 14:10:24 root                      INFO    - POSTGRES_PASSWORD=*******
+05/11/2026 14:10:24 root                      INFO    - POSTGRES_SCHEMA=project
+05/11/2026 14:10:24 root                      INFO    - JWT_SECRET_KEY=*******
+05/11/2026 14:10:24 root                      INFO    - UVICORN_HOST=127.0.0.1
+05/11/2026 14:10:24 root                      INFO    - UVICORN_PORT=5000
+05/11/2026 14:10:24 root                      INFO    - BACKEND_URL=http://localhost:5000
+05/11/2026 14:10:24 root                      INFO    - BACKEND_TIMEOUT=5
+05/11/2026 14:10:24 root                      INFO    - ELO_K_FACTOR=32
+05/11/2026 14:10:25 root                      INFO    - GET / - START
+05/11/2026 14:10:25 root                      INFO    - GET / - END [Status: 307]
+05/11/2026 14:10:25 root                      INFO    - GET /json/version - START
+05/11/2026 14:10:25 root                      INFO    - GET /json/version - END [Status: 404]
+05/11/2026 14:10:25 root                      INFO    - GET /docs - START
+05/11/2026 14:10:25 root                      INFO    - GET /docs - END [Status: 200]
+05/11/2026 14:10:26 root                      INFO    - GET / - START
+05/11/2026 14:10:26 root                      INFO    - GET / - END [Status: 307]
+05/11/2026 14:10:26 root                      INFO    - GET /docs - START
+05/11/2026 14:10:26 root                      INFO    - GET /docs - END [Status: 200]
+05/11/2026 14:10:26 root                      INFO    - GET /openapi.json - START
+05/11/2026 14:10:26 root                      INFO    - GET /openapi.json - END [Status: 200]
+05/11/2026 14:10:31 root                      INFO    - POST /auth/connexion - START
+05/11/2026 14:10:32 root                      INFO    - POST /auth/connexion - END [Status: 200]
+05/11/2026 14:10:32 root                      INFO    - GET /auth/profil - START
+05/11/2026 14:10:32 root                      INFO    - GET /auth/profil - END [Status: 200]
+05/11/2026 14:10:44 root                      INFO    - GET /referentiels/indicateurs - START
+05/11/2026 14:10:44 root                      INFO    - GET /referentiels/indicateurs - END [Status: 200]
+05/11/2026 14:10:44 root                      INFO    - GET /referentiels/pays - START
+05/11/2026 14:10:44 root                      INFO    - GET /referentiels/pays - END [Status: 200]
+05/11/2026 14:10:44 root                      INFO    - GET /referentiels/classifications - START
+05/11/2026 14:10:44 root                      INFO    - GET /referentiels/classifications - END [Status: 200]
+05/11/2026 14:10:44 root                      INFO    - GET /analyses/evolution - START
+05/11/2026 14:10:44 root                      INFO    - GET /analyses/evolution - END [Status: 200]
+05/11/2026 14:10:58 root                      INFO    - GET /analyses/evolution - START
+05/11/2026 14:10:58 root                      INFO    - GET /analyses/evolution - END [Status: 200]
+05/11/2026 14:11:17 __main__                  INFO    - Webservice stopped
+05/11/2026 14:11:26 root                      INFO    - --------------------------------------------------
+05/11/2026 14:11:26 root                      INFO    - Starting Webservice                           
+05/11/2026 14:11:26 root                      INFO    - --------------------------------------------------
+05/11/2026 14:11:26 root                      INFO    - Load environment variables: SUCCES
+05/11/2026 14:11:26 root                      INFO    - POSTGRES_HOST=localhost
+05/11/2026 14:11:26 root                      INFO    - POSTGRES_PORT=5432
+05/11/2026 14:11:26 root                      INFO    - POSTGRES_DATABASE=defaultdb
+05/11/2026 14:11:26 root                      INFO    - POSTGRES_USER=user
+05/11/2026 14:11:26 root                      INFO    - POSTGRES_PASSWORD=*******
+05/11/2026 14:11:26 root                      INFO    - POSTGRES_SCHEMA=project
+05/11/2026 14:11:26 root                      INFO    - JWT_SECRET_KEY=*******
+05/11/2026 14:11:26 root                      INFO    - UVICORN_HOST=127.0.0.1
+05/11/2026 14:11:26 root                      INFO    - UVICORN_PORT=5000
+05/11/2026 14:11:26 root                      INFO    - BACKEND_URL=http://localhost:5000
+05/11/2026 14:11:26 root                      INFO    - BACKEND_TIMEOUT=5
+05/11/2026 14:11:26 root                      INFO    - ELO_K_FACTOR=32
+05/11/2026 14:12:26 root                      INFO    - GET / - START
+05/11/2026 14:12:26 root                      INFO    - GET /json/version - START
+05/11/2026 14:12:26 root                      INFO    - GET / - END [Status: 307]
+05/11/2026 14:12:26 root                      INFO    - GET /json/version - END [Status: 404]
+05/11/2026 14:12:26 root                      INFO    - GET /docs - START
+05/11/2026 14:12:26 root                      INFO    - GET /docs - END [Status: 200]
+05/11/2026 14:12:26 root                      INFO    - GET / - START
+05/11/2026 14:12:26 root                      INFO    - GET / - END [Status: 307]
+05/11/2026 14:12:26 root                      INFO    - GET /docs - START
+05/11/2026 14:12:26 root                      INFO    - GET /docs - END [Status: 200]
+05/11/2026 14:12:26 root                      INFO    - GET /openapi.json - START
+05/11/2026 14:12:26 root                      INFO    - GET /openapi.json - END [Status: 200]
+05/11/2026 14:13:08 root                      INFO    - POST /auth/connexion - START
+05/11/2026 14:13:08 root                      INFO    - POST /auth/connexion - END [Status: 200]
+05/11/2026 14:13:10 root                      INFO    - POST /auth/connexion - START
+05/11/2026 14:13:10 root                      INFO    - POST /auth/connexion - END [Status: 200]
+05/11/2026 14:13:10 root                      INFO    - GET /auth/profil - START
+05/11/2026 14:13:10 root                      INFO    - GET /auth/profil - END [Status: 200]
+05/11/2026 14:13:19 root                      INFO    - GET /referentiels/indicateurs - START
+05/11/2026 14:13:19 root                      INFO    - GET /referentiels/indicateurs - END [Status: 200]
+05/11/2026 14:13:19 root                      INFO    - GET /admin/utilisateurs - START
+05/11/2026 14:13:19 root                      INFO    - GET /admin/utilisateurs - END [Status: 200]
+05/11/2026 14:13:19 root                      INFO    - GET /admin/imports - START
+05/11/2026 14:13:19 root                      INFO    - GET /admin/imports - END [Status: 200]
+05/11/2026 14:13:19 root                      INFO    - GET /journal/ - START
+05/11/2026 14:13:19 root                      INFO    - GET /journal/ - END [Status: 200]
+05/11/2026 14:13:33 root                      INFO    - GET /admin/utilisateurs - START
+05/11/2026 14:13:33 root                      INFO    - GET /admin/utilisateurs - END [Status: 200]
+05/11/2026 14:13:35 root                      INFO    - GET /admin/utilisateurs - START
+05/11/2026 14:13:35 root                      INFO    - GET /admin/utilisateurs - END [Status: 200]
+05/11/2026 14:13:35 root                      INFO    - GET /admin/imports - START
+05/11/2026 14:13:35 root                      INFO    - GET /admin/imports - END [Status: 200]
+05/11/2026 14:13:35 root                      INFO    - GET /journal/ - START
+05/11/2026 14:13:35 root                      INFO    - GET /journal/ - END [Status: 200]
+05/11/2026 14:13:40 root                      INFO    - GET /admin/utilisateurs - START
+05/11/2026 14:13:40 root                      INFO    - GET /admin/utilisateurs - END [Status: 200]
+05/11/2026 14:13:40 root                      INFO    - GET /admin/imports - START
+05/11/2026 14:13:40 root                      INFO    - GET /admin/imports - END [Status: 200]
+05/11/2026 14:13:40 root                      INFO    - GET /journal/ - START
+05/11/2026 14:13:40 root                      INFO    - GET /journal/ - END [Status: 200]
+05/11/2026 14:13:58 root                      INFO    - GET /admin/utilisateurs - START
+05/11/2026 14:13:58 root                      INFO    - GET /admin/utilisateurs - END [Status: 200]
+05/11/2026 14:13:58 root                      INFO    - GET /admin/imports - START
+05/11/2026 14:13:58 root                      INFO    - GET /admin/imports - END [Status: 200]
+05/11/2026 14:13:58 root                      INFO    - GET /journal/ - START
+05/11/2026 14:13:58 root                      INFO    - GET /journal/ - END [Status: 200]
+05/11/2026 14:13:59 root                      INFO    - GET /admin/utilisateurs - START
+05/11/2026 14:13:59 root                      INFO    - GET /admin/utilisateurs - END [Status: 200]
+05/11/2026 14:13:59 root                      INFO    - GET /admin/imports - START
+05/11/2026 14:13:59 root                      INFO    - GET /admin/imports - END [Status: 200]
+05/11/2026 14:13:59 root                      INFO    - GET /journal/ - START
+05/11/2026 14:13:59 root                      INFO    - GET /journal/ - END [Status: 200]
+05/11/2026 14:14:57 root                      INFO    - GET / - START
+05/11/2026 14:14:57 root                      INFO    - GET / - END [Status: 307]
+05/11/2026 14:14:57 root                      INFO    - GET /docs - START
+05/11/2026 14:14:57 root                      INFO    - GET /docs - END [Status: 200]
+05/11/2026 14:14:57 root                      INFO    - GET /openapi.json - START
+05/11/2026 14:14:57 root                      INFO    - GET /openapi.json - END [Status: 200]
+05/11/2026 14:22:35 root                      INFO    - GET /referentiels/pays - START
+05/11/2026 14:22:35 root                      INFO    - GET /referentiels/pays - END [Status: 200]
+05/11/2026 14:22:35 root                      INFO    - GET /referentiels/classifications - START
+05/11/2026 14:22:35 root                      INFO    - GET /referentiels/classifications - END [Status: 200]
+05/11/2026 14:22:35 root                      INFO    - GET /analyses/evolution - START
+05/11/2026 14:22:35 root                      INFO    - GET /analyses/evolution - END [Status: 200]
+05/11/2026 14:22:35 root                      INFO    - GET /analyses/comparaison-pays - START
+05/11/2026 14:22:35 root                      INFO    - GET /analyses/comparaison-pays - END [Status: 200]
+05/11/2026 14:22:38 root                      INFO    - GET /analyses/evolution - START
+05/11/2026 14:22:38 root                      INFO    - GET /analyses/evolution - END [Status: 200]
+05/11/2026 14:22:50 root                      INFO    - GET /referentiels/classifications - START
+05/11/2026 14:22:50 root                      INFO    - GET /referentiels/classifications - END [Status: 200]
+05/11/2026 14:22:50 root                      INFO    - GET /analyses/evolution - START
+05/11/2026 14:22:50 root                      INFO    - GET /analyses/evolution - END [Status: 200]
+05/11/2026 14:23:09 root                      INFO    - GET /analyses/evolution - START
+05/11/2026 14:23:09 root                      INFO    - GET /analyses/evolution - END [Status: 404]
+05/11/2026 14:23:10 root                      INFO    - GET /analyses/evolution - START
+05/11/2026 14:23:10 root                      INFO    - GET /analyses/evolution - END [Status: 200]
+05/11/2026 14:23:58 root                      INFO    - GET /analyses/evolution - START
+05/11/2026 14:23:58 root                      INFO    - GET /analyses/evolution - END [Status: 200]
+05/11/2026 14:24:15 root                      INFO    - GET /analyses/evolution - START
+05/11/2026 14:24:15 root                      INFO    - GET /analyses/evolution - END [Status: 200]
+05/11/2026 14:24:31 root                      INFO    - GET /analyses/evolution - START
+05/11/2026 14:24:31 root                      INFO    - GET /analyses/evolution - END [Status: 404]
+05/11/2026 14:24:51 root                      INFO    - GET /analyses/evolution - START
+05/11/2026 14:24:51 root                      INFO    - GET /analyses/evolution - END [Status: 200]
+05/11/2026 14:24:55 root                      INFO    - GET /analyses/evolution - START
+05/11/2026 14:24:55 root                      INFO    - GET /analyses/evolution - END [Status: 200]
+05/11/2026 14:26:09 root                      INFO    - GET /analyses/evolution - START
+05/11/2026 14:26:09 root                      INFO    - GET /analyses/evolution - END [Status: 200]
+05/11/2026 14:26:09 root                      INFO    - GET /analyses/comparaison-pays - START
+05/11/2026 14:26:09 root                      INFO    - GET /analyses/comparaison-pays - END [Status: 200]
+05/11/2026 14:26:31 root                      INFO    - GET /analyses/evolution - START
+05/11/2026 14:26:31 root                      INFO    - GET /analyses/evolution - END [Status: 200]
+05/11/2026 14:26:31 root                      INFO    - GET /analyses/comparaison-pays - START
+05/11/2026 14:26:31 root                      INFO    - GET /analyses/comparaison-pays - END [Status: 200]
+05/11/2026 14:26:46 root                      INFO    - GET /analyses/evolution - START
+05/11/2026 14:26:46 root                      INFO    - GET /analyses/evolution - END [Status: 200]
+05/11/2026 14:26:46 root                      INFO    - GET /analyses/comparaison-pays - START
+05/11/2026 14:26:46 root                      INFO    - GET /analyses/comparaison-pays - END [Status: 200]
+05/11/2026 14:26:49 root                      INFO    - GET /analyses/evolution - START
+05/11/2026 14:26:49 root                      INFO    - GET /analyses/evolution - END [Status: 200]
+05/11/2026 14:26:49 root                      INFO    - GET /analyses/comparaison-pays - START
+05/11/2026 14:26:49 root                      INFO    - GET /analyses/comparaison-pays - END [Status: 200]
+05/11/2026 14:27:00 root                      INFO    - GET /analyses/evolution - START
+05/11/2026 14:27:00 root                      INFO    - GET /analyses/evolution - END [Status: 200]
+05/11/2026 14:27:00 root                      INFO    - GET /analyses/comparaison-pays - START
+05/11/2026 14:27:00 root                      INFO    - GET /analyses/comparaison-pays - END [Status: 200]
+05/11/2026 14:27:17 root                      INFO    - GET /analyses/evolution - START
+05/11/2026 14:27:17 root                      INFO    - GET /analyses/evolution - END [Status: 200]
+05/11/2026 14:27:17 root                      INFO    - GET /analyses/comparaison-pays - START
+05/11/2026 14:27:17 root                      INFO    - GET /analyses/comparaison-pays - END [Status: 200]
+05/11/2026 14:27:27 root                      INFO    - GET /analyses/evolution - START
+05/11/2026 14:27:27 root                      INFO    - GET /analyses/evolution - END [Status: 200]
+05/11/2026 14:27:27 root                      INFO    - GET /analyses/comparaison-pays - START
+05/11/2026 14:27:27 root                      INFO    - GET /analyses/comparaison-pays - END [Status: 200]
+05/11/2026 14:28:01 root                      INFO    - GET /analyses/evolution - START
+05/11/2026 14:28:01 root                      INFO    - GET /analyses/evolution - END [Status: 200]
+05/11/2026 14:28:01 root                      INFO    - GET /analyses/comparaison-pays - START
+05/11/2026 14:28:01 root                      INFO    - GET /analyses/comparaison-pays - END [Status: 200]
+05/11/2026 14:28:41 root                      INFO    - GET /analyses/evolution - START
+05/11/2026 14:28:41 root                      INFO    - GET /analyses/evolution - END [Status: 200]
+05/11/2026 14:28:41 root                      INFO    - GET /analyses/comparaison-pays - START
+05/11/2026 14:28:41 root                      INFO    - GET /analyses/comparaison-pays - END [Status: 200]
+05/11/2026 14:28:49 root                      INFO    - GET /analyses/evolution - START
+05/11/2026 14:28:49 root                      INFO    - GET /analyses/evolution - END [Status: 200]
+05/11/2026 14:28:49 root                      INFO    - GET /analyses/comparaison-pays - START
+05/11/2026 14:28:49 root                      INFO    - GET /analyses/comparaison-pays - END [Status: 200]
+05/11/2026 14:28:50 root                      INFO    - GET /analyses/evolution - START
+05/11/2026 14:28:50 root                      INFO    - GET /analyses/evolution - END [Status: 200]
+05/11/2026 14:28:50 root                      INFO    - GET /analyses/comparaison-pays - START
+05/11/2026 14:28:50 root                      INFO    - GET /analyses/comparaison-pays - END [Status: 200]
+05/11/2026 14:28:53 root                      INFO    - GET /analyses/evolution - START
+05/11/2026 14:28:53 root                      INFO    - GET /analyses/evolution - END [Status: 200]
+05/11/2026 14:28:53 root                      INFO    - GET /analyses/comparaison-pays - START
+05/11/2026 14:28:53 root                      INFO    - GET /analyses/comparaison-pays - END [Status: 200]
+05/11/2026 14:29:03 root                      INFO    - GET /analyses/evolution - START
+05/11/2026 14:29:03 root                      INFO    - GET /analyses/evolution - END [Status: 200]
+05/11/2026 14:29:03 root                      INFO    - GET /analyses/comparaison-pays - START
+05/11/2026 14:29:03 root                      INFO    - GET /analyses/comparaison-pays - END [Status: 200]
+05/11/2026 14:29:07 root                      INFO    - GET /analyses/evolution - START
+05/11/2026 14:29:07 root                      INFO    - GET /analyses/evolution - END [Status: 200]
+05/11/2026 14:29:07 root                      INFO    - GET /analyses/comparaison-pays - START
+05/11/2026 14:29:07 root                      INFO    - GET /analyses/comparaison-pays - END [Status: 200]
+05/11/2026 14:29:18 root                      INFO    - GET /analyses/evolution - START
+05/11/2026 14:29:18 root                      INFO    - GET /analyses/evolution - END [Status: 200]
+05/11/2026 14:29:18 root                      INFO    - GET /analyses/comparaison-pays - START
+05/11/2026 14:29:18 root                      INFO    - GET /analyses/comparaison-pays - END [Status: 200]
+05/11/2026 14:29:48 root                      INFO    - GET /analyses/comparaison-indicateurs - START
+05/11/2026 14:29:48 root                      INFO    - GET /analyses/comparaison-indicateurs - END [Status: 200]
+05/11/2026 14:29:53 root                      INFO    - GET /analyses/comparaison-indicateurs - START
+05/11/2026 14:29:53 root                      INFO    - GET /analyses/comparaison-indicateurs - END [Status: 404]
+05/11/2026 14:29:56 root                      INFO    - GET /analyses/comparaison-indicateurs - START
+05/11/2026 14:29:56 root                      INFO    - GET /analyses/comparaison-indicateurs - END [Status: 200]
+05/11/2026 14:30:10 root                      INFO    - GET /analyses/comparaison-indicateurs - START
+05/11/2026 14:30:10 root                      INFO    - GET /analyses/comparaison-indicateurs - END [Status: 200]
+05/11/2026 14:30:56 root                      INFO    - GET /analyses/comparaison-indicateurs - START
+05/11/2026 14:30:56 root                      INFO    - GET /analyses/comparaison-indicateurs - END [Status: 404]
+05/11/2026 14:30:59 root                      INFO    - GET /analyses/comparaison-indicateurs - START
+05/11/2026 14:30:59 root                      INFO    - GET /analyses/comparaison-indicateurs - END [Status: 200]
+05/11/2026 14:31:28 root                      INFO    - GET /analyses/comparaison-indicateurs - START
+05/11/2026 14:31:28 root                      INFO    - GET /analyses/comparaison-indicateurs - END [Status: 200]
+05/11/2026 14:31:29 root                      INFO    - GET /analyses/evolution - START
+05/11/2026 14:31:29 root                      INFO    - GET /analyses/evolution - END [Status: 200]
+05/11/2026 14:31:29 root                      INFO    - GET /analyses/carte - START
+05/11/2026 14:31:30 root                      INFO    - GET /analyses/carte - END [Status: 200]
+05/11/2026 14:36:00 root                      INFO    - GET /analyses/comparaison-indicateurs - START
+05/11/2026 14:36:00 root                      INFO    - GET /analyses/comparaison-indicateurs - END [Status: 200]
+05/11/2026 14:36:03 root                      INFO    - GET /analyses/evolution - START
+05/11/2026 14:36:03 root                      INFO    - GET /analyses/evolution - END [Status: 200]
+05/11/2026 14:36:03 root                      INFO    - GET /analyses/evolution - START
+05/11/2026 14:36:03 root                      INFO    - GET /analyses/evolution - END [Status: 200]
+05/11/2026 14:36:03 root                      INFO    - GET /analyses/comparaison-pays - START
+05/11/2026 14:36:03 root                      INFO    - GET /analyses/comparaison-pays - END [Status: 200]
+05/11/2026 14:36:07 root                      INFO    - GET /analyses/evolution - START
+05/11/2026 14:36:07 root                      INFO    - GET /analyses/evolution - END [Status: 200]
+05/11/2026 14:36:15 root                      INFO    - GET /analyses/evolution - START
+05/11/2026 14:36:15 root                      INFO    - GET /analyses/evolution - END [Status: 200]
+05/11/2026 14:36:15 root                      INFO    - GET /analyses/comparaison-pays - START
+05/11/2026 14:36:15 root                      INFO    - GET /analyses/comparaison-pays - END [Status: 200]
+05/11/2026 14:36:23 root                      INFO    - GET /analyses/evolution - START
+05/11/2026 14:36:23 root                      INFO    - GET /analyses/evolution - END [Status: 200]
+05/11/2026 14:36:24 root                      INFO    - GET /analyses/evolution - START
+05/11/2026 14:36:24 root                      INFO    - GET /analyses/evolution - END [Status: 200]
+05/11/2026 14:36:37 root                      INFO    - GET /analyses/evolution - START
+05/11/2026 14:36:37 root                      INFO    - GET /analyses/evolution - END [Status: 200]
+05/11/2026 14:36:37 root                      INFO    - GET /analyses/carte - START
+05/11/2026 14:36:37 root                      INFO    - GET /analyses/carte - END [Status: 200]
+05/11/2026 14:36:46 root                      INFO    - GET /analyses/comparaison-indicateurs - START
+05/11/2026 14:36:46 root                      INFO    - GET /analyses/comparaison-indicateurs - END [Status: 200]
+05/11/2026 14:36:52 root                      INFO    - --------------------------------------------------
+05/11/2026 14:36:52 root                      INFO    - Starting Webservice                           
+05/11/2026 14:36:52 root                      INFO    - --------------------------------------------------
+05/11/2026 14:36:52 root                      INFO    - Load environment variables: SUCCES
+05/11/2026 14:36:52 root                      INFO    - POSTGRES_HOST=localhost
+05/11/2026 14:36:52 root                      INFO    - POSTGRES_PORT=5432
+05/11/2026 14:36:52 root                      INFO    - POSTGRES_DATABASE=defaultdb
+05/11/2026 14:36:52 root                      INFO    - POSTGRES_USER=user
+05/11/2026 14:36:52 root                      INFO    - POSTGRES_PASSWORD=*******
+05/11/2026 14:36:52 root                      INFO    - POSTGRES_SCHEMA=project
+05/11/2026 14:36:52 root                      INFO    - JWT_SECRET_KEY=*******
+05/11/2026 14:36:52 root                      INFO    - UVICORN_HOST=127.0.0.1
+05/11/2026 14:36:52 root                      INFO    - UVICORN_PORT=5000
+05/11/2026 14:36:52 root                      INFO    - BACKEND_URL=http://localhost:5000
+05/11/2026 14:36:52 root                      INFO    - BACKEND_TIMEOUT=5
+05/11/2026 14:36:52 root                      INFO    - ELO_K_FACTOR=32
+05/11/2026 14:39:31 root                      INFO    - --------------------------------------------------
+05/11/2026 14:39:31 root                      INFO    - Starting Webservice                           
+05/11/2026 14:39:31 root                      INFO    - --------------------------------------------------
+05/11/2026 14:39:31 root                      INFO    - Load environment variables: SUCCES
+05/11/2026 14:39:31 root                      INFO    - POSTGRES_HOST=localhost
+05/11/2026 14:39:31 root                      INFO    - POSTGRES_PORT=5432
+05/11/2026 14:39:31 root                      INFO    - POSTGRES_DATABASE=defaultdb
+05/11/2026 14:39:31 root                      INFO    - POSTGRES_USER=user
+05/11/2026 14:39:31 root                      INFO    - POSTGRES_PASSWORD=*******
+05/11/2026 14:39:31 root                      INFO    - POSTGRES_SCHEMA=project
+05/11/2026 14:39:31 root                      INFO    - JWT_SECRET_KEY=*******
+05/11/2026 14:39:31 root                      INFO    - UVICORN_HOST=127.0.0.1
+05/11/2026 14:39:31 root                      INFO    - UVICORN_PORT=5000
+05/11/2026 14:39:31 root                      INFO    - BACKEND_URL=http://localhost:5000
+05/11/2026 14:39:31 root                      INFO    - BACKEND_TIMEOUT=5
+05/11/2026 14:39:31 root                      INFO    - ELO_K_FACTOR=32
+05/11/2026 14:44:15 root                      INFO    - --------------------------------------------------
+05/11/2026 14:44:15 root                      INFO    - Starting Webservice                           
+05/11/2026 14:44:15 root                      INFO    - --------------------------------------------------
+05/11/2026 14:44:15 root                      INFO    - Load environment variables: SUCCES
+05/11/2026 14:44:15 root                      INFO    - POSTGRES_HOST=localhost
+05/11/2026 14:44:15 root                      INFO    - POSTGRES_PORT=5432
+05/11/2026 14:44:15 root                      INFO    - POSTGRES_DATABASE=defaultdb
+05/11/2026 14:44:15 root                      INFO    - POSTGRES_USER=user
+05/11/2026 14:44:15 root                      INFO    - POSTGRES_PASSWORD=*******
+05/11/2026 14:44:15 root                      INFO    - POSTGRES_SCHEMA=project
+05/11/2026 14:44:15 root                      INFO    - JWT_SECRET_KEY=*******
+05/11/2026 14:44:15 root                      INFO    - UVICORN_HOST=127.0.0.1
+05/11/2026 14:44:15 root                      INFO    - UVICORN_PORT=5000
+05/11/2026 14:44:15 root                      INFO    - BACKEND_URL=http://localhost:5000
+05/11/2026 14:44:15 root                      INFO    - BACKEND_TIMEOUT=5
+05/11/2026 14:44:15 root                      INFO    - ELO_K_FACTOR=32
+05/11/2026 14:45:03 root                      INFO    - --------------------------------------------------
+05/11/2026 14:45:03 root                      INFO    - Starting Webservice                           
+05/11/2026 14:45:03 root                      INFO    - --------------------------------------------------
+05/11/2026 14:45:03 root                      INFO    - Load environment variables: SUCCES
+05/11/2026 14:45:03 root                      INFO    - POSTGRES_HOST=localhost
+05/11/2026 14:45:03 root                      INFO    - POSTGRES_PORT=5432
+05/11/2026 14:45:03 root                      INFO    - POSTGRES_DATABASE=defaultdb
+05/11/2026 14:45:03 root                      INFO    - POSTGRES_USER=user
+05/11/2026 14:45:03 root                      INFO    - POSTGRES_PASSWORD=*******
+05/11/2026 14:45:03 root                      INFO    - POSTGRES_SCHEMA=project
+05/11/2026 14:45:03 root                      INFO    - JWT_SECRET_KEY=*******
+05/11/2026 14:45:03 root                      INFO    - UVICORN_HOST=127.0.0.1
+05/11/2026 14:45:03 root                      INFO    - UVICORN_PORT=5000
+05/11/2026 14:45:03 root                      INFO    - BACKEND_URL=http://localhost:5000
+05/11/2026 14:45:03 root                      INFO    - BACKEND_TIMEOUT=5
+05/11/2026 14:45:03 root                      INFO    - ELO_K_FACTOR=32
+05/11/2026 14:45:04 root                      INFO    - Load environment variables: SUCCES
+05/11/2026 14:45:04 root                      INFO    - Load environment variables: SUCCES
+05/11/2026 14:45:04 root                      INFO    - Load environment variables: SUCCES
+05/11/2026 14:45:04 root                      INFO    - Load environment variables: SUCCES
+05/11/2026 14:45:04 root                      INFO    - Load environment variables: SUCCES
+05/11/2026 14:45:05 root                      INFO    - GET /admin/utilisateurs - START
+05/11/2026 14:45:05 root                      INFO    - GET /admin/utilisateurs - END [Status: 200]
+05/11/2026 14:45:05 root                      INFO    - GET /admin/utilisateurs - START
+05/11/2026 14:45:05 root                      INFO    - GET /admin/utilisateurs - END [Status: 403]
+05/11/2026 14:45:05 root                      INFO    - PATCH /admin/utilisateurs/10/role - START
+05/11/2026 14:45:05 root                      INFO    - PATCH /admin/utilisateurs/10/role - END [Status: 200]
+05/11/2026 14:45:05 root                      INFO    - PATCH /admin/utilisateurs/10/role - START
+05/11/2026 14:45:05 root                      INFO    - PATCH /admin/utilisateurs/10/role - END [Status: 200]
+05/11/2026 14:45:05 root                      INFO    - PATCH /admin/utilisateurs/10/role - START
+05/11/2026 14:45:05 root                      INFO    - PATCH /admin/utilisateurs/10/role - END [Status: 422]
+05/11/2026 14:45:05 root                      INFO    - PATCH /admin/utilisateurs/10/role - START
+05/11/2026 14:45:05 root                      INFO    - PATCH /admin/utilisateurs/10/role - END [Status: 409]
+05/11/2026 14:45:05 root                      INFO    - PATCH /admin/utilisateurs/10/statut - START
+05/11/2026 14:45:05 root                      INFO    - PATCH /admin/utilisateurs/10/statut - END [Status: 200]
+05/11/2026 14:45:05 root                      INFO    - PATCH /admin/utilisateurs/10/statut - START
+05/11/2026 14:45:05 root                      INFO    - PATCH /admin/utilisateurs/10/statut - END [Status: 404]
+05/11/2026 14:45:05 root                      INFO    - DELETE /admin/observations/456 - START
+05/11/2026 14:45:05 root                      INFO    - DELETE /admin/observations/456 - END [Status: 200]
+05/11/2026 14:45:05 root                      INFO    - GET /referentiels/pays - START
+05/11/2026 14:45:05 root                      INFO    - GET /referentiels/pays - END [Status: 200]
+05/11/2026 14:45:05 root                      INFO    - GET /referentiels/indicateurs - START
+05/11/2026 14:45:05 root                      INFO    - GET /referentiels/indicateurs - END [Status: 200]
+05/11/2026 14:45:05 root                      INFO    - GET /referentiels/classifications - START
+05/11/2026 14:45:05 root                      INFO    - GET /referentiels/classifications - END [Status: 200]
+05/11/2026 14:45:05 root                      INFO    - GET /referentiels/classifications - START
+05/11/2026 14:45:05 root                      INFO    - GET /referentiels/classifications - END [Status: 200]
+05/11/2026 14:45:06 service.collecte_service  INFO    - Collecte ILOSTAT : indicateur=EMP_TEMP_SEX_OCU_NB, période=2016-2022
+05/11/2026 14:45:06 service.collecte_service  INFO    - Collecte ILOSTAT : indicateur=EMP_TEMP_SEX_OCU_NB, période=2020-2020
+05/11/2026 14:45:06 service.collecte_service  INFO    - Collecte ILOSTAT : indicateur=EMP_TEMP_SEX_OCU_NB, période=2020-2020
+05/11/2026 14:45:06 service.collecte_service  INFO    - 1 doublon(s) écarté(s) pour l'indicateur EMP_TEMP_SEX_OCU_NB
+05/11/2026 14:45:06 service.collecte_service  INFO    - Collecte ILOSTAT : indicateur=EMP_TEMP_SEX_OCU_NB, période=2020-2020
+05/11/2026 14:45:06 matplotlib.category       INFO    - Using categorical units to plot a list of strings that are all parsable as floats or dates. If these strings should be plotted as numbers, cast to the appropriate data type before plotting.
+05/11/2026 14:45:06 matplotlib.category       INFO    - Using categorical units to plot a list of strings that are all parsable as floats or dates. If these strings should be plotted as numbers, cast to the appropriate data type before plotting.
+05/11/2026 14:45:06 matplotlib.category       INFO    - Using categorical units to plot a list of strings that are all parsable as floats or dates. If these strings should be plotted as numbers, cast to the appropriate data type before plotting.
+05/11/2026 14:45:06 matplotlib.category       INFO    - Using categorical units to plot a list of strings that are all parsable as floats or dates. If these strings should be plotted as numbers, cast to the appropriate data type before plotting.
+05/11/2026 14:45:06 matplotlib.category       INFO    - Using categorical units to plot a list of strings that are all parsable as floats or dates. If these strings should be plotted as numbers, cast to the appropriate data type before plotting.
+05/11/2026 14:45:06 matplotlib.category       INFO    - Using categorical units to plot a list of strings that are all parsable as floats or dates. If these strings should be plotted as numbers, cast to the appropriate data type before plotting.
+05/11/2026 14:45:06 matplotlib.category       INFO    - Using categorical units to plot a list of strings that are all parsable as floats or dates. If these strings should be plotted as numbers, cast to the appropriate data type before plotting.
+05/11/2026 14:45:06 matplotlib.category       INFO    - Using categorical units to plot a list of strings that are all parsable as floats or dates. If these strings should be plotted as numbers, cast to the appropriate data type before plotting.
+05/11/2026 14:45:42 root                      INFO    - --------------------------------------------------
+05/11/2026 14:45:42 root                      INFO    - Starting Webservice                           
+05/11/2026 14:45:42 root                      INFO    - --------------------------------------------------
+05/11/2026 14:45:42 root                      INFO    - Load environment variables: SUCCES
+05/11/2026 14:45:42 root                      INFO    - POSTGRES_HOST=localhost
+05/11/2026 14:45:42 root                      INFO    - POSTGRES_PORT=5432
+05/11/2026 14:45:42 root                      INFO    - POSTGRES_DATABASE=defaultdb
+05/11/2026 14:45:42 root                      INFO    - POSTGRES_USER=user
+05/11/2026 14:45:42 root                      INFO    - POSTGRES_PASSWORD=*******
+05/11/2026 14:45:42 root                      INFO    - POSTGRES_SCHEMA=project
+05/11/2026 14:45:42 root                      INFO    - JWT_SECRET_KEY=*******
+05/11/2026 14:45:42 root                      INFO    - UVICORN_HOST=127.0.0.1
+05/11/2026 14:45:42 root                      INFO    - UVICORN_PORT=5000
+05/11/2026 14:45:42 root                      INFO    - BACKEND_URL=http://localhost:5000
+05/11/2026 14:45:42 root                      INFO    - BACKEND_TIMEOUT=5
+05/11/2026 14:45:42 root                      INFO    - ELO_K_FACTOR=32
+05/11/2026 14:45:53 root                      INFO    - Load environment variables: SUCCES
+05/11/2026 14:45:53 root                      INFO    - Load environment variables: SUCCES
+05/11/2026 14:45:53 root                      INFO    - Load environment variables: SUCCES
+05/11/2026 14:45:53 root                      INFO    - Load environment variables: SUCCES
+05/11/2026 14:45:53 root                      INFO    - Load environment variables: SUCCES
+05/11/2026 14:45:58 root                      INFO    - GET /admin/utilisateurs - START
+05/11/2026 14:45:58 root                      INFO    - GET /admin/utilisateurs - END [Status: 200]
+05/11/2026 14:45:58 root                      INFO    - GET /admin/utilisateurs - START
+05/11/2026 14:45:58 root                      INFO    - GET /admin/utilisateurs - END [Status: 403]
+05/11/2026 14:45:58 root                      INFO    - PATCH /admin/utilisateurs/10/role - START
+05/11/2026 14:45:58 root                      INFO    - PATCH /admin/utilisateurs/10/role - END [Status: 200]
+05/11/2026 14:45:58 root                      INFO    - PATCH /admin/utilisateurs/10/role - START
+05/11/2026 14:45:58 root                      INFO    - PATCH /admin/utilisateurs/10/role - END [Status: 200]
+05/11/2026 14:45:58 root                      INFO    - PATCH /admin/utilisateurs/10/role - START
+05/11/2026 14:45:58 root                      INFO    - PATCH /admin/utilisateurs/10/role - END [Status: 422]
+05/11/2026 14:45:58 root                      INFO    - PATCH /admin/utilisateurs/10/role - START
+05/11/2026 14:45:58 root                      INFO    - PATCH /admin/utilisateurs/10/role - END [Status: 409]
+05/11/2026 14:45:58 root                      INFO    - PATCH /admin/utilisateurs/10/statut - START
+05/11/2026 14:45:58 root                      INFO    - PATCH /admin/utilisateurs/10/statut - END [Status: 200]
+05/11/2026 14:45:58 root                      INFO    - PATCH /admin/utilisateurs/10/statut - START
+05/11/2026 14:45:58 root                      INFO    - PATCH /admin/utilisateurs/10/statut - END [Status: 404]
+05/11/2026 14:45:58 root                      INFO    - DELETE /admin/observations/456 - START
+05/11/2026 14:45:58 root                      INFO    - DELETE /admin/observations/456 - END [Status: 200]
+05/11/2026 14:45:58 root                      INFO    - GET /referentiels/pays - START
+05/11/2026 14:45:58 root                      INFO    - GET /referentiels/pays - END [Status: 200]
+05/11/2026 14:45:58 root                      INFO    - GET /referentiels/indicateurs - START
+05/11/2026 14:45:58 root                      INFO    - GET /referentiels/indicateurs - END [Status: 200]
+05/11/2026 14:45:58 root                      INFO    - GET /referentiels/classifications - START
+05/11/2026 14:45:58 root                      INFO    - GET /referentiels/classifications - END [Status: 200]
+05/11/2026 14:45:58 root                      INFO    - GET /referentiels/classifications - START
+05/11/2026 14:45:58 root                      INFO    - GET /referentiels/classifications - END [Status: 200]
+05/11/2026 14:45:58 service.collecte_service  INFO    - Collecte ILOSTAT : indicateur=EMP_TEMP_SEX_OCU_NB, période=2016-2022
+05/11/2026 14:45:58 service.collecte_service  INFO    - Collecte ILOSTAT : indicateur=EMP_TEMP_SEX_OCU_NB, période=2020-2020
+05/11/2026 14:45:58 service.collecte_service  INFO    - Collecte ILOSTAT : indicateur=EMP_TEMP_SEX_OCU_NB, période=2020-2020
+05/11/2026 14:45:58 service.collecte_service  INFO    - 1 doublon(s) écarté(s) pour l'indicateur EMP_TEMP_SEX_OCU_NB
+05/11/2026 14:45:58 service.collecte_service  INFO    - Collecte ILOSTAT : indicateur=EMP_TEMP_SEX_OCU_NB, période=2020-2020
+05/11/2026 14:45:58 matplotlib.category       INFO    - Using categorical units to plot a list of strings that are all parsable as floats or dates. If these strings should be plotted as numbers, cast to the appropriate data type before plotting.
+05/11/2026 14:45:58 matplotlib.category       INFO    - Using categorical units to plot a list of strings that are all parsable as floats or dates. If these strings should be plotted as numbers, cast to the appropriate data type before plotting.
+05/11/2026 14:45:59 matplotlib.category       INFO    - Using categorical units to plot a list of strings that are all parsable as floats or dates. If these strings should be plotted as numbers, cast to the appropriate data type before plotting.
+05/11/2026 14:45:59 matplotlib.category       INFO    - Using categorical units to plot a list of strings that are all parsable as floats or dates. If these strings should be plotted as numbers, cast to the appropriate data type before plotting.
+05/11/2026 14:45:59 matplotlib.category       INFO    - Using categorical units to plot a list of strings that are all parsable as floats or dates. If these strings should be plotted as numbers, cast to the appropriate data type before plotting.
+05/11/2026 14:45:59 matplotlib.category       INFO    - Using categorical units to plot a list of strings that are all parsable as floats or dates. If these strings should be plotted as numbers, cast to the appropriate data type before plotting.
+05/11/2026 14:45:59 matplotlib.category       INFO    - Using categorical units to plot a list of strings that are all parsable as floats or dates. If these strings should be plotted as numbers, cast to the appropriate data type before plotting.
+05/11/2026 14:45:59 matplotlib.category       INFO    - Using categorical units to plot a list of strings that are all parsable as floats or dates. If these strings should be plotted as numbers, cast to the appropriate data type before plotting.
+05/11/2026 14:46:45 root                      INFO    - --------------------------------------------------
+05/11/2026 14:46:45 root                      INFO    - Starting Webservice                           
+05/11/2026 14:46:45 root                      INFO    - --------------------------------------------------
+05/11/2026 14:46:45 root                      INFO    - Load environment variables: SUCCES
+05/11/2026 14:46:45 root                      INFO    - POSTGRES_HOST=localhost
+05/11/2026 14:46:45 root                      INFO    - POSTGRES_PORT=5432
+05/11/2026 14:46:45 root                      INFO    - POSTGRES_DATABASE=defaultdb
+05/11/2026 14:46:45 root                      INFO    - POSTGRES_USER=user
+05/11/2026 14:46:45 root                      INFO    - POSTGRES_PASSWORD=*******
+05/11/2026 14:46:45 root                      INFO    - POSTGRES_SCHEMA=project
+05/11/2026 14:46:45 root                      INFO    - JWT_SECRET_KEY=*******
+05/11/2026 14:46:45 root                      INFO    - UVICORN_HOST=127.0.0.1
+05/11/2026 14:46:45 root                      INFO    - UVICORN_PORT=5000
+05/11/2026 14:46:45 root                      INFO    - BACKEND_URL=http://localhost:5000
+05/11/2026 14:46:45 root                      INFO    - BACKEND_TIMEOUT=5
+05/11/2026 14:46:45 root                      INFO    - ELO_K_FACTOR=32
+05/11/2026 14:46:46 root                      INFO    - Load environment variables: SUCCES
+05/11/2026 14:46:46 root                      INFO    - Load environment variables: SUCCES
+05/11/2026 14:46:46 root                      INFO    - Load environment variables: SUCCES
+05/11/2026 14:46:46 root                      INFO    - Load environment variables: SUCCES
+05/11/2026 14:46:46 root                      INFO    - Load environment variables: SUCCES
+05/11/2026 14:46:46 root                      INFO    - GET /admin/utilisateurs - START
+05/11/2026 14:46:46 root                      INFO    - GET /admin/utilisateurs - END [Status: 200]
+05/11/2026 14:46:46 root                      INFO    - GET /admin/utilisateurs - START
+05/11/2026 14:46:46 root                      INFO    - GET /admin/utilisateurs - END [Status: 403]
+05/11/2026 14:46:46 root                      INFO    - PATCH /admin/utilisateurs/10/role - START
+05/11/2026 14:46:46 root                      INFO    - PATCH /admin/utilisateurs/10/role - END [Status: 200]
+05/11/2026 14:46:46 root                      INFO    - PATCH /admin/utilisateurs/10/role - START
+05/11/2026 14:46:46 root                      INFO    - PATCH /admin/utilisateurs/10/role - END [Status: 200]
+05/11/2026 14:46:46 root                      INFO    - PATCH /admin/utilisateurs/10/role - START
+05/11/2026 14:46:46 root                      INFO    - PATCH /admin/utilisateurs/10/role - END [Status: 422]
+05/11/2026 14:46:46 root                      INFO    - PATCH /admin/utilisateurs/10/role - START
+05/11/2026 14:46:46 root                      INFO    - PATCH /admin/utilisateurs/10/role - END [Status: 409]
+05/11/2026 14:46:46 root                      INFO    - PATCH /admin/utilisateurs/10/statut - START
+05/11/2026 14:46:46 root                      INFO    - PATCH /admin/utilisateurs/10/statut - END [Status: 200]
+05/11/2026 14:46:46 root                      INFO    - PATCH /admin/utilisateurs/10/statut - START
+05/11/2026 14:46:46 root                      INFO    - PATCH /admin/utilisateurs/10/statut - END [Status: 404]
+05/11/2026 14:46:46 root                      INFO    - DELETE /admin/observations/456 - START
+05/11/2026 14:46:46 root                      INFO    - DELETE /admin/observations/456 - END [Status: 200]
+05/11/2026 14:46:47 root                      INFO    - GET /referentiels/pays - START
+05/11/2026 14:46:47 root                      INFO    - GET /referentiels/pays - END [Status: 200]
+05/11/2026 14:46:47 root                      INFO    - GET /referentiels/indicateurs - START
+05/11/2026 14:46:47 root                      INFO    - GET /referentiels/indicateurs - END [Status: 200]
+05/11/2026 14:46:47 root                      INFO    - GET /referentiels/classifications - START
+05/11/2026 14:46:47 root                      INFO    - GET /referentiels/classifications - END [Status: 200]
+05/11/2026 14:46:47 root                      INFO    - GET /referentiels/classifications - START
+05/11/2026 14:46:47 root                      INFO    - GET /referentiels/classifications - END [Status: 200]
+05/11/2026 14:46:47 service.collecte_service  INFO    - Collecte ILOSTAT : indicateur=EMP_TEMP_SEX_OCU_NB, période=2016-2022
+05/11/2026 14:46:47 service.collecte_service  INFO    - Collecte ILOSTAT : indicateur=EMP_TEMP_SEX_OCU_NB, période=2020-2020
+05/11/2026 14:46:47 service.collecte_service  INFO    - Collecte ILOSTAT : indicateur=EMP_TEMP_SEX_OCU_NB, période=2020-2020
+05/11/2026 14:46:47 service.collecte_service  INFO    - 1 doublon(s) écarté(s) pour l'indicateur EMP_TEMP_SEX_OCU_NB
+05/11/2026 14:46:47 service.collecte_service  INFO    - Collecte ILOSTAT : indicateur=EMP_TEMP_SEX_OCU_NB, période=2020-2020
+05/11/2026 14:46:47 matplotlib.category       INFO    - Using categorical units to plot a list of strings that are all parsable as floats or dates. If these strings should be plotted as numbers, cast to the appropriate data type before plotting.
+05/11/2026 14:46:47 matplotlib.category       INFO    - Using categorical units to plot a list of strings that are all parsable as floats or dates. If these strings should be plotted as numbers, cast to the appropriate data type before plotting.
+05/11/2026 14:46:47 matplotlib.category       INFO    - Using categorical units to plot a list of strings that are all parsable as floats or dates. If these strings should be plotted as numbers, cast to the appropriate data type before plotting.
+05/11/2026 14:46:47 matplotlib.category       INFO    - Using categorical units to plot a list of strings that are all parsable as floats or dates. If these strings should be plotted as numbers, cast to the appropriate data type before plotting.
+05/11/2026 14:46:47 matplotlib.category       INFO    - Using categorical units to plot a list of strings that are all parsable as floats or dates. If these strings should be plotted as numbers, cast to the appropriate data type before plotting.
+05/11/2026 14:46:47 matplotlib.category       INFO    - Using categorical units to plot a list of strings that are all parsable as floats or dates. If these strings should be plotted as numbers, cast to the appropriate data type before plotting.
+05/11/2026 14:46:47 matplotlib.category       INFO    - Using categorical units to plot a list of strings that are all parsable as floats or dates. If these strings should be plotted as numbers, cast to the appropriate data type before plotting.
+05/11/2026 14:46:47 matplotlib.category       INFO    - Using categorical units to plot a list of strings that are all parsable as floats or dates. If these strings should be plotted as numbers, cast to the appropriate data type before plotting.
+05/11/2026 14:47:35 root                      INFO    - --------------------------------------------------
+05/11/2026 14:47:35 root                      INFO    - Starting Webservice                           
+05/11/2026 14:47:35 root                      INFO    - --------------------------------------------------
+05/11/2026 14:47:35 root                      INFO    - Load environment variables: SUCCES
+05/11/2026 14:47:35 root                      INFO    - POSTGRES_HOST=localhost
+05/11/2026 14:47:35 root                      INFO    - POSTGRES_PORT=5432
+05/11/2026 14:47:35 root                      INFO    - POSTGRES_DATABASE=defaultdb
+05/11/2026 14:47:35 root                      INFO    - POSTGRES_USER=user
+05/11/2026 14:47:35 root                      INFO    - POSTGRES_PASSWORD=*******
+05/11/2026 14:47:35 root                      INFO    - POSTGRES_SCHEMA=project
+05/11/2026 14:47:35 root                      INFO    - JWT_SECRET_KEY=*******
+05/11/2026 14:47:35 root                      INFO    - UVICORN_HOST=127.0.0.1
+05/11/2026 14:47:35 root                      INFO    - UVICORN_PORT=5000
+05/11/2026 14:47:35 root                      INFO    - BACKEND_URL=http://localhost:5000
+05/11/2026 14:47:35 root                      INFO    - BACKEND_TIMEOUT=5
+05/11/2026 14:47:35 root                      INFO    - ELO_K_FACTOR=32
+05/11/2026 14:47:36 root                      INFO    - Load environment variables: SUCCES
+05/11/2026 14:47:36 root                      INFO    - Load environment variables: SUCCES
+05/11/2026 14:47:36 root                      INFO    - Load environment variables: SUCCES
+05/11/2026 14:47:36 root                      INFO    - Load environment variables: SUCCES
+05/11/2026 14:47:36 root                      INFO    - Load environment variables: SUCCES
+05/11/2026 14:47:36 root                      INFO    - GET /admin/utilisateurs - START
+05/11/2026 14:47:36 root                      INFO    - GET /admin/utilisateurs - END [Status: 200]
+05/11/2026 14:47:36 root                      INFO    - GET /admin/utilisateurs - START
+05/11/2026 14:47:36 root                      INFO    - GET /admin/utilisateurs - END [Status: 403]
+05/11/2026 14:47:36 root                      INFO    - PATCH /admin/utilisateurs/10/role - START
+05/11/2026 14:47:36 root                      INFO    - PATCH /admin/utilisateurs/10/role - END [Status: 200]
+05/11/2026 14:47:36 root                      INFO    - PATCH /admin/utilisateurs/10/role - START
+05/11/2026 14:47:36 root                      INFO    - PATCH /admin/utilisateurs/10/role - END [Status: 200]
+05/11/2026 14:47:36 root                      INFO    - PATCH /admin/utilisateurs/10/role - START
+05/11/2026 14:47:36 root                      INFO    - PATCH /admin/utilisateurs/10/role - END [Status: 422]
+05/11/2026 14:47:36 root                      INFO    - PATCH /admin/utilisateurs/10/role - START
+05/11/2026 14:47:36 root                      INFO    - PATCH /admin/utilisateurs/10/role - END [Status: 409]
+05/11/2026 14:47:36 root                      INFO    - PATCH /admin/utilisateurs/10/statut - START
+05/11/2026 14:47:36 root                      INFO    - PATCH /admin/utilisateurs/10/statut - END [Status: 200]
+05/11/2026 14:47:36 root                      INFO    - PATCH /admin/utilisateurs/10/statut - START
+05/11/2026 14:47:36 root                      INFO    - PATCH /admin/utilisateurs/10/statut - END [Status: 404]
+05/11/2026 14:47:36 root                      INFO    - DELETE /admin/observations/456 - START
+05/11/2026 14:47:36 root                      INFO    - DELETE /admin/observations/456 - END [Status: 200]
+05/11/2026 14:47:37 root                      INFO    - GET /referentiels/pays - START
+05/11/2026 14:47:37 root                      INFO    - GET /referentiels/pays - END [Status: 200]
+05/11/2026 14:47:37 root                      INFO    - GET /referentiels/indicateurs - START
+05/11/2026 14:47:37 root                      INFO    - GET /referentiels/indicateurs - END [Status: 200]
+05/11/2026 14:47:37 root                      INFO    - GET /referentiels/classifications - START
+05/11/2026 14:47:37 root                      INFO    - GET /referentiels/classifications - END [Status: 200]
+05/11/2026 14:47:37 root                      INFO    - GET /referentiels/classifications - START
+05/11/2026 14:47:37 root                      INFO    - GET /referentiels/classifications - END [Status: 200]
+05/11/2026 14:47:37 service.collecte_service  INFO    - Collecte ILOSTAT : indicateur=EMP_TEMP_SEX_OCU_NB, période=2016-2022
+05/11/2026 14:47:37 service.collecte_service  INFO    - Collecte ILOSTAT : indicateur=EMP_TEMP_SEX_OCU_NB, période=2020-2020
+05/11/2026 14:47:37 service.collecte_service  INFO    - Collecte ILOSTAT : indicateur=EMP_TEMP_SEX_OCU_NB, période=2020-2020
+05/11/2026 14:47:37 service.collecte_service  INFO    - 1 doublon(s) écarté(s) pour l'indicateur EMP_TEMP_SEX_OCU_NB
+05/11/2026 14:47:37 service.collecte_service  INFO    - Collecte ILOSTAT : indicateur=EMP_TEMP_SEX_OCU_NB, période=2020-2020
+05/11/2026 14:47:37 matplotlib.category       INFO    - Using categorical units to plot a list of strings that are all parsable as floats or dates. If these strings should be plotted as numbers, cast to the appropriate data type before plotting.
+05/11/2026 14:47:37 matplotlib.category       INFO    - Using categorical units to plot a list of strings that are all parsable as floats or dates. If these strings should be plotted as numbers, cast to the appropriate data type before plotting.
+05/11/2026 14:47:37 matplotlib.category       INFO    - Using categorical units to plot a list of strings that are all parsable as floats or dates. If these strings should be plotted as numbers, cast to the appropriate data type before plotting.
+05/11/2026 14:47:37 matplotlib.category       INFO    - Using categorical units to plot a list of strings that are all parsable as floats or dates. If these strings should be plotted as numbers, cast to the appropriate data type before plotting.
+05/11/2026 14:47:37 matplotlib.category       INFO    - Using categorical units to plot a list of strings that are all parsable as floats or dates. If these strings should be plotted as numbers, cast to the appropriate data type before plotting.
+05/11/2026 14:47:37 matplotlib.category       INFO    - Using categorical units to plot a list of strings that are all parsable as floats or dates. If these strings should be plotted as numbers, cast to the appropriate data type before plotting.
+05/11/2026 14:47:37 matplotlib.category       INFO    - Using categorical units to plot a list of strings that are all parsable as floats or dates. If these strings should be plotted as numbers, cast to the appropriate data type before plotting.
+05/11/2026 14:47:37 matplotlib.category       INFO    - Using categorical units to plot a list of strings that are all parsable as floats or dates. If these strings should be plotted as numbers, cast to the appropriate data type before plotting.
+05/11/2026 14:47:45 root                      INFO    - --------------------------------------------------
+05/11/2026 14:47:45 root                      INFO    - Starting Webservice                           
+05/11/2026 14:47:45 root                      INFO    - --------------------------------------------------
+05/11/2026 14:47:45 root                      INFO    - Load environment variables: SUCCES
+05/11/2026 14:47:45 root                      INFO    - POSTGRES_HOST=localhost
+05/11/2026 14:47:45 root                      INFO    - POSTGRES_PORT=5432
+05/11/2026 14:47:45 root                      INFO    - POSTGRES_DATABASE=defaultdb
+05/11/2026 14:47:45 root                      INFO    - POSTGRES_USER=user
+05/11/2026 14:47:45 root                      INFO    - POSTGRES_PASSWORD=*******
+05/11/2026 14:47:45 root                      INFO    - POSTGRES_SCHEMA=project
+05/11/2026 14:47:45 root                      INFO    - JWT_SECRET_KEY=*******
+05/11/2026 14:47:45 root                      INFO    - UVICORN_HOST=127.0.0.1
+05/11/2026 14:47:45 root                      INFO    - UVICORN_PORT=5000
+05/11/2026 14:47:45 root                      INFO    - BACKEND_URL=http://localhost:5000
+05/11/2026 14:47:45 root                      INFO    - BACKEND_TIMEOUT=5
+05/11/2026 14:47:45 root                      INFO    - ELO_K_FACTOR=32
+05/11/2026 14:47:46 root                      INFO    - Load environment variables: SUCCES
+05/11/2026 14:47:46 root                      INFO    - Load environment variables: SUCCES
+05/11/2026 14:47:46 root                      INFO    - Load environment variables: SUCCES
+05/11/2026 14:47:46 root                      INFO    - Load environment variables: SUCCES
+05/11/2026 14:47:46 root                      INFO    - Load environment variables: SUCCES
+05/11/2026 14:47:47 root                      INFO    - GET /admin/utilisateurs - START
+05/11/2026 14:47:47 root                      INFO    - GET /admin/utilisateurs - END [Status: 200]
+05/11/2026 14:47:47 root                      INFO    - GET /admin/utilisateurs - START
+05/11/2026 14:47:47 root                      INFO    - GET /admin/utilisateurs - END [Status: 403]
+05/11/2026 14:47:47 root                      INFO    - PATCH /admin/utilisateurs/10/role - START
+05/11/2026 14:47:47 root                      INFO    - PATCH /admin/utilisateurs/10/role - END [Status: 200]
+05/11/2026 14:47:47 root                      INFO    - PATCH /admin/utilisateurs/10/role - START
+05/11/2026 14:47:47 root                      INFO    - PATCH /admin/utilisateurs/10/role - END [Status: 200]
+05/11/2026 14:47:47 root                      INFO    - PATCH /admin/utilisateurs/10/role - START
+05/11/2026 14:47:47 root                      INFO    - PATCH /admin/utilisateurs/10/role - END [Status: 422]
+05/11/2026 14:47:47 root                      INFO    - PATCH /admin/utilisateurs/10/role - START
+05/11/2026 14:47:47 root                      INFO    - PATCH /admin/utilisateurs/10/role - END [Status: 409]
+05/11/2026 14:47:47 root                      INFO    - PATCH /admin/utilisateurs/10/statut - START
+05/11/2026 14:47:47 root                      INFO    - PATCH /admin/utilisateurs/10/statut - END [Status: 200]
+05/11/2026 14:47:47 root                      INFO    - PATCH /admin/utilisateurs/10/statut - START
+05/11/2026 14:47:47 root                      INFO    - PATCH /admin/utilisateurs/10/statut - END [Status: 404]
+05/11/2026 14:47:47 root                      INFO    - DELETE /admin/observations/456 - START
+05/11/2026 14:47:47 root                      INFO    - DELETE /admin/observations/456 - END [Status: 200]
+05/11/2026 14:47:47 root                      INFO    - GET /referentiels/pays - START
+05/11/2026 14:47:47 root                      INFO    - GET /referentiels/pays - END [Status: 200]
+05/11/2026 14:47:47 root                      INFO    - GET /referentiels/indicateurs - START
+05/11/2026 14:47:47 root                      INFO    - GET /referentiels/indicateurs - END [Status: 200]
+05/11/2026 14:47:47 root                      INFO    - GET /referentiels/classifications - START
+05/11/2026 14:47:47 root                      INFO    - GET /referentiels/classifications - END [Status: 200]
+05/11/2026 14:47:47 root                      INFO    - GET /referentiels/classifications - START
+05/11/2026 14:47:47 root                      INFO    - GET /referentiels/classifications - END [Status: 200]
+05/11/2026 14:47:47 service.collecte_service  INFO    - Collecte ILOSTAT : indicateur=EMP_TEMP_SEX_OCU_NB, période=2016-2022
+05/11/2026 14:47:47 service.collecte_service  INFO    - Collecte ILOSTAT : indicateur=EMP_TEMP_SEX_OCU_NB, période=2020-2020
+05/11/2026 14:47:47 service.collecte_service  INFO    - Collecte ILOSTAT : indicateur=EMP_TEMP_SEX_OCU_NB, période=2020-2020
+05/11/2026 14:47:47 service.collecte_service  INFO    - 1 doublon(s) écarté(s) pour l'indicateur EMP_TEMP_SEX_OCU_NB
+05/11/2026 14:47:47 service.collecte_service  INFO    - Collecte ILOSTAT : indicateur=EMP_TEMP_SEX_OCU_NB, période=2020-2020
+05/11/2026 14:47:47 matplotlib.category       INFO    - Using categorical units to plot a list of strings that are all parsable as floats or dates. If these strings should be plotted as numbers, cast to the appropriate data type before plotting.
+05/11/2026 14:47:47 matplotlib.category       INFO    - Using categorical units to plot a list of strings that are all parsable as floats or dates. If these strings should be plotted as numbers, cast to the appropriate data type before plotting.
+05/11/2026 14:47:47 matplotlib.category       INFO    - Using categorical units to plot a list of strings that are all parsable as floats or dates. If these strings should be plotted as numbers, cast to the appropriate data type before plotting.
+05/11/2026 14:47:47 matplotlib.category       INFO    - Using categorical units to plot a list of strings that are all parsable as floats or dates. If these strings should be plotted as numbers, cast to the appropriate data type before plotting.
+05/11/2026 14:47:47 matplotlib.category       INFO    - Using categorical units to plot a list of strings that are all parsable as floats or dates. If these strings should be plotted as numbers, cast to the appropriate data type before plotting.
+05/11/2026 14:47:47 matplotlib.category       INFO    - Using categorical units to plot a list of strings that are all parsable as floats or dates. If these strings should be plotted as numbers, cast to the appropriate data type before plotting.
+05/11/2026 14:47:47 matplotlib.category       INFO    - Using categorical units to plot a list of strings that are all parsable as floats or dates. If these strings should be plotted as numbers, cast to the appropriate data type before plotting.
+05/11/2026 14:47:47 matplotlib.category       INFO    - Using categorical units to plot a list of strings that are all parsable as floats or dates. If these strings should be plotted as numbers, cast to the appropriate data type before plotting.
+05/11/2026 14:48:17 root                      INFO    - --------------------------------------------------
+05/11/2026 14:48:17 root                      INFO    - Starting Webservice                           
+05/11/2026 14:48:17 root                      INFO    - --------------------------------------------------
+05/11/2026 14:48:17 root                      INFO    - Load environment variables: SUCCES
+05/11/2026 14:48:17 root                      INFO    - POSTGRES_HOST=localhost
+05/11/2026 14:48:17 root                      INFO    - POSTGRES_PORT=5432
+05/11/2026 14:48:17 root                      INFO    - POSTGRES_DATABASE=defaultdb
+05/11/2026 14:48:17 root                      INFO    - POSTGRES_USER=user
+05/11/2026 14:48:17 root                      INFO    - POSTGRES_PASSWORD=*******
+05/11/2026 14:48:17 root                      INFO    - POSTGRES_SCHEMA=project
+05/11/2026 14:48:17 root                      INFO    - JWT_SECRET_KEY=*******
+05/11/2026 14:48:17 root                      INFO    - UVICORN_HOST=127.0.0.1
+05/11/2026 14:48:17 root                      INFO    - UVICORN_PORT=5000
+05/11/2026 14:48:17 root                      INFO    - BACKEND_URL=http://localhost:5000
+05/11/2026 14:48:17 root                      INFO    - BACKEND_TIMEOUT=5
+05/11/2026 14:48:17 root                      INFO    - ELO_K_FACTOR=32
+05/11/2026 14:48:18 root                      INFO    - Load environment variables: SUCCES
+05/11/2026 14:48:18 root                      INFO    - Load environment variables: SUCCES
+05/11/2026 14:48:18 root                      INFO    - Load environment variables: SUCCES
+05/11/2026 14:48:18 root                      INFO    - Load environment variables: SUCCES
+05/11/2026 14:48:18 root                      INFO    - Load environment variables: SUCCES
+05/11/2026 14:48:19 root                      INFO    - GET /admin/utilisateurs - START
+05/11/2026 14:48:19 root                      INFO    - GET /admin/utilisateurs - END [Status: 200]
+05/11/2026 14:48:19 root                      INFO    - GET /admin/utilisateurs - START
+05/11/2026 14:48:19 root                      INFO    - GET /admin/utilisateurs - END [Status: 403]
+05/11/2026 14:48:19 root                      INFO    - PATCH /admin/utilisateurs/10/role - START
+05/11/2026 14:48:19 root                      INFO    - PATCH /admin/utilisateurs/10/role - END [Status: 200]
+05/11/2026 14:48:19 root                      INFO    - PATCH /admin/utilisateurs/10/role - START
+05/11/2026 14:48:19 root                      INFO    - PATCH /admin/utilisateurs/10/role - END [Status: 200]
+05/11/2026 14:48:19 root                      INFO    - PATCH /admin/utilisateurs/10/role - START
+05/11/2026 14:48:19 root                      INFO    - PATCH /admin/utilisateurs/10/role - END [Status: 422]
+05/11/2026 14:48:19 root                      INFO    - PATCH /admin/utilisateurs/10/role - START
+05/11/2026 14:48:19 root                      INFO    - PATCH /admin/utilisateurs/10/role - END [Status: 409]
+05/11/2026 14:48:19 root                      INFO    - PATCH /admin/utilisateurs/10/statut - START
+05/11/2026 14:48:19 root                      INFO    - PATCH /admin/utilisateurs/10/statut - END [Status: 200]
+05/11/2026 14:48:19 root                      INFO    - PATCH /admin/utilisateurs/10/statut - START
+05/11/2026 14:48:19 root                      INFO    - PATCH /admin/utilisateurs/10/statut - END [Status: 404]
+05/11/2026 14:48:19 root                      INFO    - DELETE /admin/observations/456 - START
+05/11/2026 14:48:19 root                      INFO    - DELETE /admin/observations/456 - END [Status: 200]
+05/11/2026 14:48:19 root                      INFO    - GET /referentiels/pays - START
+05/11/2026 14:48:19 root                      INFO    - GET /referentiels/pays - END [Status: 200]
+05/11/2026 14:48:19 root                      INFO    - GET /referentiels/indicateurs - START
+05/11/2026 14:48:19 root                      INFO    - GET /referentiels/indicateurs - END [Status: 200]
+05/11/2026 14:48:19 root                      INFO    - GET /referentiels/classifications - START
+05/11/2026 14:48:19 root                      INFO    - GET /referentiels/classifications - END [Status: 200]
+05/11/2026 14:48:19 root                      INFO    - GET /referentiels/classifications - START
+05/11/2026 14:48:19 root                      INFO    - GET /referentiels/classifications - END [Status: 200]
+05/11/2026 14:48:20 service.collecte_service  INFO    - Collecte ILOSTAT : indicateur=EMP_TEMP_SEX_OCU_NB, période=2016-2022
+05/11/2026 14:48:20 service.collecte_service  INFO    - Collecte ILOSTAT : indicateur=EMP_TEMP_SEX_OCU_NB, période=2020-2020
+05/11/2026 14:48:20 service.collecte_service  INFO    - Collecte ILOSTAT : indicateur=EMP_TEMP_SEX_OCU_NB, période=2020-2020
+05/11/2026 14:48:20 service.collecte_service  INFO    - 1 doublon(s) écarté(s) pour l'indicateur EMP_TEMP_SEX_OCU_NB
+05/11/2026 14:48:20 service.collecte_service  INFO    - Collecte ILOSTAT : indicateur=EMP_TEMP_SEX_OCU_NB, période=2020-2020
+05/11/2026 14:48:20 matplotlib.category       INFO    - Using categorical units to plot a list of strings that are all parsable as floats or dates. If these strings should be plotted as numbers, cast to the appropriate data type before plotting.
+05/11/2026 14:48:20 matplotlib.category       INFO    - Using categorical units to plot a list of strings that are all parsable as floats or dates. If these strings should be plotted as numbers, cast to the appropriate data type before plotting.
+05/11/2026 14:48:20 matplotlib.category       INFO    - Using categorical units to plot a list of strings that are all parsable as floats or dates. If these strings should be plotted as numbers, cast to the appropriate data type before plotting.
+05/11/2026 14:48:20 matplotlib.category       INFO    - Using categorical units to plot a list of strings that are all parsable as floats or dates. If these strings should be plotted as numbers, cast to the appropriate data type before plotting.
+05/11/2026 14:48:20 matplotlib.category       INFO    - Using categorical units to plot a list of strings that are all parsable as floats or dates. If these strings should be plotted as numbers, cast to the appropriate data type before plotting.
+05/11/2026 14:48:20 matplotlib.category       INFO    - Using categorical units to plot a list of strings that are all parsable as floats or dates. If these strings should be plotted as numbers, cast to the appropriate data type before plotting.
+05/11/2026 14:48:20 matplotlib.category       INFO    - Using categorical units to plot a list of strings that are all parsable as floats or dates. If these strings should be plotted as numbers, cast to the appropriate data type before plotting.
+05/11/2026 14:48:20 matplotlib.category       INFO    - Using categorical units to plot a list of strings that are all parsable as floats or dates. If these strings should be plotted as numbers, cast to the appropriate data type before plotting.
+05/11/2026 14:52:20 root                      INFO    - --------------------------------------------------
+05/11/2026 14:52:20 root                      INFO    - Starting Webservice                           
+05/11/2026 14:52:20 root                      INFO    - --------------------------------------------------
+05/11/2026 14:52:20 root                      INFO    - Load environment variables: SUCCES
+05/11/2026 14:52:20 root                      INFO    - POSTGRES_HOST=localhost
+05/11/2026 14:52:20 root                      INFO    - POSTGRES_PORT=5432
+05/11/2026 14:52:20 root                      INFO    - POSTGRES_DATABASE=defaultdb
+05/11/2026 14:52:20 root                      INFO    - POSTGRES_USER=user
+05/11/2026 14:52:20 root                      INFO    - POSTGRES_PASSWORD=*******
+05/11/2026 14:52:20 root                      INFO    - POSTGRES_SCHEMA=project
+05/11/2026 14:52:20 root                      INFO    - JWT_SECRET_KEY=*******
+05/11/2026 14:52:20 root                      INFO    - UVICORN_HOST=127.0.0.1
+05/11/2026 14:52:20 root                      INFO    - UVICORN_PORT=5000
+05/11/2026 14:52:20 root                      INFO    - BACKEND_URL=http://localhost:5000
+05/11/2026 14:52:20 root                      INFO    - BACKEND_TIMEOUT=5
+05/11/2026 14:52:20 root                      INFO    - ELO_K_FACTOR=32
+05/11/2026 14:52:20 root                      INFO    - Load environment variables: SUCCES
+05/11/2026 14:52:20 root                      INFO    - Load environment variables: SUCCES
+05/11/2026 14:52:20 root                      INFO    - Load environment variables: SUCCES
+05/11/2026 14:52:20 root                      INFO    - Load environment variables: SUCCES
+05/11/2026 14:52:20 root                      INFO    - Load environment variables: SUCCES
+05/11/2026 14:52:21 root                      INFO    - GET /admin/utilisateurs - START
+05/11/2026 14:52:21 root                      INFO    - GET /admin/utilisateurs - END [Status: 200]
+05/11/2026 14:52:21 root                      INFO    - GET /admin/utilisateurs - START
+05/11/2026 14:52:21 root                      INFO    - GET /admin/utilisateurs - END [Status: 403]
+05/11/2026 14:52:21 root                      INFO    - PATCH /admin/utilisateurs/10/role - START
+05/11/2026 14:52:21 root                      INFO    - PATCH /admin/utilisateurs/10/role - END [Status: 200]
+05/11/2026 14:52:21 root                      INFO    - PATCH /admin/utilisateurs/10/role - START
+05/11/2026 14:52:21 root                      INFO    - PATCH /admin/utilisateurs/10/role - END [Status: 200]
+05/11/2026 14:52:21 root                      INFO    - PATCH /admin/utilisateurs/10/role - START
+05/11/2026 14:52:21 root                      INFO    - PATCH /admin/utilisateurs/10/role - END [Status: 422]
+05/11/2026 14:52:21 root                      INFO    - PATCH /admin/utilisateurs/10/role - START
+05/11/2026 14:52:21 root                      INFO    - PATCH /admin/utilisateurs/10/role - END [Status: 409]
+05/11/2026 14:52:21 root                      INFO    - PATCH /admin/utilisateurs/10/statut - START
+05/11/2026 14:52:21 root                      INFO    - PATCH /admin/utilisateurs/10/statut - END [Status: 200]
+05/11/2026 14:52:21 root                      INFO    - PATCH /admin/utilisateurs/10/statut - START
+05/11/2026 14:52:21 root                      INFO    - PATCH /admin/utilisateurs/10/statut - END [Status: 404]
+05/11/2026 14:52:21 root                      INFO    - DELETE /admin/observations/456 - START
+05/11/2026 14:52:21 root                      INFO    - DELETE /admin/observations/456 - END [Status: 200]
+05/11/2026 14:52:21 root                      INFO    - GET /referentiels/pays - START
+05/11/2026 14:52:21 root                      INFO    - GET /referentiels/pays - END [Status: 200]
+05/11/2026 14:52:21 root                      INFO    - GET /referentiels/indicateurs - START
+05/11/2026 14:52:21 root                      INFO    - GET /referentiels/indicateurs - END [Status: 200]
+05/11/2026 14:52:21 root                      INFO    - GET /referentiels/classifications - START
+05/11/2026 14:52:21 root                      INFO    - GET /referentiels/classifications - END [Status: 200]
+05/11/2026 14:52:21 root                      INFO    - GET /referentiels/classifications - START
+05/11/2026 14:52:21 root                      INFO    - GET /referentiels/classifications - END [Status: 200]
+05/11/2026 14:52:21 service.collecte_service  INFO    - Collecte ILOSTAT : indicateur=EMP_TEMP_SEX_OCU_NB, période=2016-2022
+05/11/2026 14:52:22 service.collecte_service  INFO    - Collecte ILOSTAT : indicateur=EMP_TEMP_SEX_OCU_NB, période=2020-2020
+05/11/2026 14:52:22 service.collecte_service  INFO    - Collecte ILOSTAT : indicateur=EMP_TEMP_SEX_OCU_NB, période=2020-2020
+05/11/2026 14:52:22 service.collecte_service  INFO    - 1 doublon(s) écarté(s) pour l'indicateur EMP_TEMP_SEX_OCU_NB
+05/11/2026 14:52:22 service.collecte_service  INFO    - Collecte ILOSTAT : indicateur=EMP_TEMP_SEX_OCU_NB, période=2020-2020
+05/11/2026 14:52:22 matplotlib.category       INFO    - Using categorical units to plot a list of strings that are all parsable as floats or dates. If these strings should be plotted as numbers, cast to the appropriate data type before plotting.
+05/11/2026 14:52:22 matplotlib.category       INFO    - Using categorical units to plot a list of strings that are all parsable as floats or dates. If these strings should be plotted as numbers, cast to the appropriate data type before plotting.
+05/11/2026 14:52:22 matplotlib.category       INFO    - Using categorical units to plot a list of strings that are all parsable as floats or dates. If these strings should be plotted as numbers, cast to the appropriate data type before plotting.
+05/11/2026 14:52:22 matplotlib.category       INFO    - Using categorical units to plot a list of strings that are all parsable as floats or dates. If these strings should be plotted as numbers, cast to the appropriate data type before plotting.
+05/11/2026 14:52:22 matplotlib.category       INFO    - Using categorical units to plot a list of strings that are all parsable as floats or dates. If these strings should be plotted as numbers, cast to the appropriate data type before plotting.
+05/11/2026 14:52:22 matplotlib.category       INFO    - Using categorical units to plot a list of strings that are all parsable as floats or dates. If these strings should be plotted as numbers, cast to the appropriate data type before plotting.
+05/11/2026 14:52:22 matplotlib.category       INFO    - Using categorical units to plot a list of strings that are all parsable as floats or dates. If these strings should be plotted as numbers, cast to the appropriate data type before plotting.
+05/11/2026 14:52:22 matplotlib.category       INFO    - Using categorical units to plot a list of strings that are all parsable as floats or dates. If these strings should be plotted as numbers, cast to the appropriate data type before plotting.
+05/11/2026 14:55:47 root                      INFO    - --------------------------------------------------
+05/11/2026 14:55:47 root                      INFO    - Starting Webservice                           
+05/11/2026 14:55:47 root                      INFO    - --------------------------------------------------
+05/11/2026 14:55:47 root                      INFO    - Load environment variables: SUCCES
+05/11/2026 14:55:47 root                      INFO    - POSTGRES_HOST=localhost
+05/11/2026 14:55:47 root                      INFO    - POSTGRES_PORT=5432
+05/11/2026 14:55:47 root                      INFO    - POSTGRES_DATABASE=defaultdb
+05/11/2026 14:55:47 root                      INFO    - POSTGRES_USER=user
+05/11/2026 14:55:47 root                      INFO    - POSTGRES_PASSWORD=*******
+05/11/2026 14:55:47 root                      INFO    - POSTGRES_SCHEMA=project
+05/11/2026 14:55:47 root                      INFO    - JWT_SECRET_KEY=*******
+05/11/2026 14:55:47 root                      INFO    - UVICORN_HOST=127.0.0.1
+05/11/2026 14:55:47 root                      INFO    - UVICORN_PORT=5000
+05/11/2026 14:55:47 root                      INFO    - BACKEND_URL=http://localhost:5000
+05/11/2026 14:55:47 root                      INFO    - BACKEND_TIMEOUT=5
+05/11/2026 14:55:47 root                      INFO    - ELO_K_FACTOR=32
+05/11/2026 14:55:48 root                      INFO    - Load environment variables: SUCCES
+05/11/2026 14:55:48 root                      INFO    - Load environment variables: SUCCES
+05/11/2026 14:55:48 root                      INFO    - Load environment variables: SUCCES
+05/11/2026 14:55:48 root                      INFO    - Load environment variables: SUCCES
+05/11/2026 14:55:48 root                      INFO    - Load environment variables: SUCCES
+05/11/2026 14:55:49 root                      INFO    - GET /admin/utilisateurs - START
+05/11/2026 14:55:49 root                      INFO    - GET /admin/utilisateurs - END [Status: 200]
+05/11/2026 14:55:49 root                      INFO    - GET /admin/utilisateurs - START
+05/11/2026 14:55:49 root                      INFO    - GET /admin/utilisateurs - END [Status: 403]
+05/11/2026 14:55:49 root                      INFO    - PATCH /admin/utilisateurs/10/role - START
+05/11/2026 14:55:49 root                      INFO    - PATCH /admin/utilisateurs/10/role - END [Status: 200]
+05/11/2026 14:55:49 root                      INFO    - PATCH /admin/utilisateurs/10/role - START
+05/11/2026 14:55:49 root                      INFO    - PATCH /admin/utilisateurs/10/role - END [Status: 200]
+05/11/2026 14:55:49 root                      INFO    - PATCH /admin/utilisateurs/10/role - START
+05/11/2026 14:55:49 root                      INFO    - PATCH /admin/utilisateurs/10/role - END [Status: 422]
+05/11/2026 14:55:49 root                      INFO    - PATCH /admin/utilisateurs/10/role - START
+05/11/2026 14:55:49 root                      INFO    - PATCH /admin/utilisateurs/10/role - END [Status: 409]
+05/11/2026 14:55:49 root                      INFO    - PATCH /admin/utilisateurs/10/statut - START
+05/11/2026 14:55:49 root                      INFO    - PATCH /admin/utilisateurs/10/statut - END [Status: 200]
+05/11/2026 14:55:49 root                      INFO    - PATCH /admin/utilisateurs/10/statut - START
+05/11/2026 14:55:49 root                      INFO    - PATCH /admin/utilisateurs/10/statut - END [Status: 404]
+05/11/2026 14:55:49 root                      INFO    - DELETE /admin/observations/456 - START
+05/11/2026 14:55:49 root                      INFO    - DELETE /admin/observations/456 - END [Status: 200]
+05/11/2026 14:55:49 root                      INFO    - GET /referentiels/pays - START
+05/11/2026 14:55:49 root                      INFO    - GET /referentiels/pays - END [Status: 200]
+05/11/2026 14:55:49 root                      INFO    - GET /referentiels/indicateurs - START
+05/11/2026 14:55:49 root                      INFO    - GET /referentiels/indicateurs - END [Status: 200]
+05/11/2026 14:55:49 root                      INFO    - GET /referentiels/classifications - START
+05/11/2026 14:55:49 root                      INFO    - GET /referentiels/classifications - END [Status: 200]
+05/11/2026 14:55:49 root                      INFO    - GET /referentiels/classifications - START
+05/11/2026 14:55:49 root                      INFO    - GET /referentiels/classifications - END [Status: 200]
+05/11/2026 14:55:49 service.collecte_service  INFO    - Collecte ILOSTAT : indicateur=EMP_TEMP_SEX_OCU_NB, période=2016-2022
+05/11/2026 14:55:49 service.collecte_service  INFO    - Collecte ILOSTAT : indicateur=EMP_TEMP_SEX_OCU_NB, période=2020-2020
+05/11/2026 14:55:49 service.collecte_service  INFO    - Collecte ILOSTAT : indicateur=EMP_TEMP_SEX_OCU_NB, période=2020-2020
+05/11/2026 14:55:49 service.collecte_service  INFO    - 1 doublon(s) écarté(s) pour l'indicateur EMP_TEMP_SEX_OCU_NB
+05/11/2026 14:55:49 service.collecte_service  INFO    - Collecte ILOSTAT : indicateur=EMP_TEMP_SEX_OCU_NB, période=2020-2020
+05/11/2026 14:55:49 matplotlib.category       INFO    - Using categorical units to plot a list of strings that are all parsable as floats or dates. If these strings should be plotted as numbers, cast to the appropriate data type before plotting.
+05/11/2026 14:55:49 matplotlib.category       INFO    - Using categorical units to plot a list of strings that are all parsable as floats or dates. If these strings should be plotted as numbers, cast to the appropriate data type before plotting.
+05/11/2026 14:55:49 matplotlib.category       INFO    - Using categorical units to plot a list of strings that are all parsable as floats or dates. If these strings should be plotted as numbers, cast to the appropriate data type before plotting.
+05/11/2026 14:55:49 matplotlib.category       INFO    - Using categorical units to plot a list of strings that are all parsable as floats or dates. If these strings should be plotted as numbers, cast to the appropriate data type before plotting.
+05/11/2026 14:55:49 matplotlib.category       INFO    - Using categorical units to plot a list of strings that are all parsable as floats or dates. If these strings should be plotted as numbers, cast to the appropriate data type before plotting.
+05/11/2026 14:55:49 matplotlib.category       INFO    - Using categorical units to plot a list of strings that are all parsable as floats or dates. If these strings should be plotted as numbers, cast to the appropriate data type before plotting.
+05/11/2026 14:55:50 matplotlib.category       INFO    - Using categorical units to plot a list of strings that are all parsable as floats or dates. If these strings should be plotted as numbers, cast to the appropriate data type before plotting.
+05/11/2026 14:55:50 matplotlib.category       INFO    - Using categorical units to plot a list of strings that are all parsable as floats or dates. If these strings should be plotted as numbers, cast to the appropriate data type before plotting.
+05/11/2026 14:58:32 root                      INFO    - --------------------------------------------------
+05/11/2026 14:58:32 root                      INFO    - Starting Webservice                           
+05/11/2026 14:58:32 root                      INFO    - --------------------------------------------------
+05/11/2026 14:58:32 root                      INFO    - Load environment variables: SUCCES
+05/11/2026 14:58:32 root                      INFO    - POSTGRES_HOST=localhost
+05/11/2026 14:58:32 root                      INFO    - POSTGRES_PORT=5432
+05/11/2026 14:58:32 root                      INFO    - POSTGRES_DATABASE=defaultdb
+05/11/2026 14:58:32 root                      INFO    - POSTGRES_USER=user
+05/11/2026 14:58:32 root                      INFO    - POSTGRES_PASSWORD=*******
+05/11/2026 14:58:32 root                      INFO    - POSTGRES_SCHEMA=project
+05/11/2026 14:58:32 root                      INFO    - JWT_SECRET_KEY=*******
+05/11/2026 14:58:32 root                      INFO    - UVICORN_HOST=127.0.0.1
+05/11/2026 14:58:32 root                      INFO    - UVICORN_PORT=5000
+05/11/2026 14:58:32 root                      INFO    - BACKEND_URL=http://localhost:5000
+05/11/2026 14:58:32 root                      INFO    - BACKEND_TIMEOUT=5
+05/11/2026 14:58:32 root                      INFO    - ELO_K_FACTOR=32
+05/11/2026 14:58:32 root                      INFO    - Load environment variables: SUCCES
+05/11/2026 14:58:32 root                      INFO    - Load environment variables: SUCCES
+05/11/2026 14:58:32 root                      INFO    - Load environment variables: SUCCES
+05/11/2026 14:58:32 root                      INFO    - Load environment variables: SUCCES
+05/11/2026 14:58:32 root                      INFO    - Load environment variables: SUCCES
+05/11/2026 14:58:33 root                      INFO    - GET /admin/utilisateurs - START
+05/11/2026 14:58:33 root                      INFO    - GET /admin/utilisateurs - END [Status: 200]
+05/11/2026 14:58:33 root                      INFO    - GET /admin/utilisateurs - START
+05/11/2026 14:58:33 root                      INFO    - GET /admin/utilisateurs - END [Status: 403]
+05/11/2026 14:58:33 root                      INFO    - PATCH /admin/utilisateurs/10/role - START
+05/11/2026 14:58:33 root                      INFO    - PATCH /admin/utilisateurs/10/role - END [Status: 200]
+05/11/2026 14:58:33 root                      INFO    - PATCH /admin/utilisateurs/10/role - START
+05/11/2026 14:58:33 root                      INFO    - PATCH /admin/utilisateurs/10/role - END [Status: 200]
+05/11/2026 14:58:33 root                      INFO    - PATCH /admin/utilisateurs/10/role - START
+05/11/2026 14:58:33 root                      INFO    - PATCH /admin/utilisateurs/10/role - END [Status: 422]
+05/11/2026 14:58:33 root                      INFO    - PATCH /admin/utilisateurs/10/role - START
+05/11/2026 14:58:33 root                      INFO    - PATCH /admin/utilisateurs/10/role - END [Status: 409]
+05/11/2026 14:58:33 root                      INFO    - PATCH /admin/utilisateurs/10/statut - START
+05/11/2026 14:58:33 root                      INFO    - PATCH /admin/utilisateurs/10/statut - END [Status: 200]
+05/11/2026 14:58:33 root                      INFO    - PATCH /admin/utilisateurs/10/statut - START
+05/11/2026 14:58:33 root                      INFO    - PATCH /admin/utilisateurs/10/statut - END [Status: 404]
+05/11/2026 14:58:33 root                      INFO    - DELETE /admin/observations/456 - START
+05/11/2026 14:58:33 root                      INFO    - DELETE /admin/observations/456 - END [Status: 200]
+05/11/2026 14:58:33 root                      INFO    - GET /referentiels/pays - START
+05/11/2026 14:58:33 root                      INFO    - GET /referentiels/pays - END [Status: 200]
+05/11/2026 14:58:33 root                      INFO    - GET /referentiels/indicateurs - START
+05/11/2026 14:58:33 root                      INFO    - GET /referentiels/indicateurs - END [Status: 200]
+05/11/2026 14:58:33 root                      INFO    - GET /referentiels/classifications - START
+05/11/2026 14:58:33 root                      INFO    - GET /referentiels/classifications - END [Status: 200]
+05/11/2026 14:58:33 root                      INFO    - GET /referentiels/classifications - START
+05/11/2026 14:58:33 root                      INFO    - GET /referentiels/classifications - END [Status: 200]
+05/11/2026 14:58:33 service.collecte_service  INFO    - Collecte ILOSTAT : indicateur=EMP_TEMP_SEX_OCU_NB, période=2016-2022
+05/11/2026 14:58:33 service.collecte_service  INFO    - Collecte ILOSTAT : indicateur=EMP_TEMP_SEX_OCU_NB, période=2020-2020
+05/11/2026 14:58:33 service.collecte_service  INFO    - Collecte ILOSTAT : indicateur=EMP_TEMP_SEX_OCU_NB, période=2020-2020
+05/11/2026 14:58:33 service.collecte_service  INFO    - 1 doublon(s) écarté(s) pour l'indicateur EMP_TEMP_SEX_OCU_NB
+05/11/2026 14:58:33 service.collecte_service  INFO    - Collecte ILOSTAT : indicateur=EMP_TEMP_SEX_OCU_NB, période=2020-2020
+05/11/2026 14:58:33 matplotlib.category       INFO    - Using categorical units to plot a list of strings that are all parsable as floats or dates. If these strings should be plotted as numbers, cast to the appropriate data type before plotting.
+05/11/2026 14:58:33 matplotlib.category       INFO    - Using categorical units to plot a list of strings that are all parsable as floats or dates. If these strings should be plotted as numbers, cast to the appropriate data type before plotting.
+05/11/2026 14:58:34 matplotlib.category       INFO    - Using categorical units to plot a list of strings that are all parsable as floats or dates. If these strings should be plotted as numbers, cast to the appropriate data type before plotting.
+05/11/2026 14:58:34 matplotlib.category       INFO    - Using categorical units to plot a list of strings that are all parsable as floats or dates. If these strings should be plotted as numbers, cast to the appropriate data type before plotting.
+05/11/2026 14:58:34 matplotlib.category       INFO    - Using categorical units to plot a list of strings that are all parsable as floats or dates. If these strings should be plotted as numbers, cast to the appropriate data type before plotting.
+05/11/2026 14:58:34 matplotlib.category       INFO    - Using categorical units to plot a list of strings that are all parsable as floats or dates. If these strings should be plotted as numbers, cast to the appropriate data type before plotting.
+05/11/2026 14:58:34 matplotlib.category       INFO    - Using categorical units to plot a list of strings that are all parsable as floats or dates. If these strings should be plotted as numbers, cast to the appropriate data type before plotting.
+05/11/2026 14:58:34 matplotlib.category       INFO    - Using categorical units to plot a list of strings that are all parsable as floats or dates. If these strings should be plotted as numbers, cast to the appropriate data type before plotting.

@@ -64,6 +64,14 @@ def test_trouver_par_nom(dao, utilisateur_test):
     assert trouve.id == utilisateur_test.id
 
 
+def test_trouver_par_id_inexistant_renvoie_none(dao):
+    assert dao.trouver_par_id(-1) is None
+
+
+def test_trouver_par_nom_inexistant_renvoie_none(dao):
+    assert dao.trouver_par_nom("test_pytest_inexistant_xyz") is None
+
+
 def test_lister(dao, utilisateur_test):
     liste = dao.lister()
     assert len(liste) >= 1

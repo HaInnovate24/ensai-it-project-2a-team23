@@ -12,8 +12,8 @@ secondaryBackgroundColor = "#FFFFFF"
 textColor = "#1F2A26"
 linkColor = "#2E7257"
 font = "Inter, sans-serif"
-headingFont = "Lora, Georgia, serif"
-baseRadius = "0.7rem"
+headingFont = "Schibsted Grotesk, sans-serif"
+baseRadius = "0rem"
 borderColor = "#E7E6DD"
 
 # Barre latérale sombre (vert forêt), texte clair, accent menthe.

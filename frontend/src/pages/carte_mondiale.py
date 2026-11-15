@@ -1,3 +1,4 @@
+import html
 from datetime import date
 
 import pandas as pd
@@ -6,7 +7,7 @@ import plotly.graph_objects as go
 import streamlit as st
 
 from utils.api_client import api_client
-from utils.centroides_pays import CENTROIDES
+from utils.centroides_pays import CENTROIDES, CONTINENTS
 from utils.log_init import get_page_logger
 from utils.referentiels import (
     SEXES,
@@ -24,10 +25,14 @@ from utils.ui import (
     ICONE_GLOBE,
     afficher_graphique,
     carte_metrique,
+    entete_graphique,
     est_connecte,
-    fmt_fr as format_fr,
     ligne_source,
+    notif,
     styliser_figure,
+)
+from utils.ui import (
+    fmt_fr as format_fr,
 )
 
 get_page_logger("Carte mondiale (F6)")
@@ -85,7 +90,7 @@ st.write("")
 
 # Cette analyse exige une connexion (le backend attend un jeton).
 if not est_connecte():
-    st.info("Connectez-vous pour accéder à la carte mondiale.")
+    notif("Connectez-vous pour accéder à la carte mondiale.", "info")
     st.page_link("pages/login.py", label="Se connecter", icon=":material/lock:")
     st.stop()
 
@@ -172,7 +177,7 @@ with st.container(border=True):
             )
 
 if not periode:
-    st.warning("Aucune donnée disponible pour cette sélection (indicateur / population).")
+    notif("Aucune donnée disponible pour cette sélection (indicateur / population).", "warn")
     st.stop()
 
 # --- Appel du backend : /analyses/carte --------------------------------------
@@ -189,13 +194,13 @@ with st.spinner("Chargement de la carte…"):
     )
 
 if reponse["status_code"] in (401, 403):
-    st.error("Session expirée ou accès refusé. Reconnectez-vous pour continuer.")
+    notif("Session expirée ou accès refusé. Reconnectez-vous pour continuer.", "ko")
     st.stop()
 if reponse["status_code"] == 404:
-    st.warning(f"Aucune donnée disponible pour l'année {annee(periode)} avec cette sélection.")
+    notif(f"Aucune donnée disponible pour l'année {annee(periode)} avec cette sélection.", "warn")
     st.stop()
 if reponse["status_code"] != 200:
-    st.error(message_erreur(reponse))
+    notif(message_erreur(reponse), "ko")
     st.stop()
 
 lignes = [
@@ -212,7 +217,7 @@ df = pd.DataFrame(lignes)
 df = df.dropna(subset=["Code"])
 
 if df.empty:
-    st.warning("Aucune donnée localisable pour cette sélection.")
+    notif("Aucune donnée localisable pour cette sélection.", "warn")
     st.stop()
 
 unite = unite_indicateur(code_indicateur)
@@ -378,3 +383,61 @@ st.caption(
     f"très peuplé n'écrase l'échelle. Survolez un pays pour lire sa valeur exacte "
     f"(la légende indique les seuils en {unite.lower() if unite else 'valeur'})."
 )
+
+st.write("")
+
+# --- Classement complet des pays (filtre par continent) ----------------------
+# La carte donne la vue d'ensemble ; ce classement ordonne TOUS les pays ayant
+# une valeur pour la sélection, avec un filtre par continent (le « métrique » est
+# l'indicateur choisi en haut de page, commun à la carte et au classement).
+# On ne garde que les vrais pays (code rattaché à un continent) : cela écarte les
+# agrégats ILOSTAT (« World », « G20 », « BRICS »…) qui ne sont pas des pays.
+df_rang = df[df["Code"].isin(CONTINENTS)].copy()
+df_rang["Continent"] = df_rang["Code"].map(CONTINENTS)
+
+with st.container(border=True):
+    tete_g, tete_d = st.columns([0.55, 0.45], vertical_alignment="center")
+    with tete_g:
+        entete_graphique("Classement", f"Tous les pays — {indicateurs[code_indicateur]}")
+    with tete_d:
+        continents = ["Tous"] + [
+            c for c in ("Afrique", "Amériques", "Asie", "Europe", "Océanie")
+            if (df_rang["Continent"] == c).any()
+        ]
+        continent_sel = st.segmented_control(
+            "Continent", continents, default="Tous", label_visibility="collapsed",
+        ) or "Tous"
+
+    df_aff = (
+        df_rang if continent_sel == "Tous" else df_rang[df_rang["Continent"] == continent_sel]
+    ).sort_values("Valeur", ascending=False).reset_index(drop=True)
+
+    st.caption(
+        f"{libelle_classification} · Ensemble des sexes · {annee_carte} · {len(df_aff)} pays"
+        + (f" · {continent_sel}" if continent_sel != "Tous" else " · tous continents")
+    )
+
+    if df_aff.empty:
+        notif("Aucun pays pour ce continent avec cette sélection.", "info")
+    else:
+        valeur_max = float(df_aff["Valeur"].max()) or 1.0
+        colonnes = ["Rang", "Pays", "Continent", "", f"Valeur ({unite})" if unite else "Valeur"]
+        thead = "".join(f"<th>{html.escape(c)}</th>" for c in colonnes)
+        corps = ""
+        for i, r in df_aff.iterrows():
+            pct = max(2.0, float(r["Valeur"]) / valeur_max * 100)
+            barre = f"<span class='ls-bar'><span style='width:{pct:.1f}%'></span></span>"
+            corps += (
+                "<tr>"
+                f"<td class='num'><span class='ls-rank-no'>{i + 1}</span></td>"
+                f"<td>{html.escape(str(r['Pays']))}</td>"
+                f"<td>{html.escape(str(r['Continent']))}</td>"
+                f"<td>{barre}</td>"
+                f"<td class='num'>{format_fr(r['Valeur'])}{suffixe}</td>"
+                "</tr>"
+            )
+        st.markdown(
+            f"<div class='ls-scroll'><table class='ls-table'><thead><tr>{thead}</tr></thead>"
+            f"<tbody>{corps}</tbody></table></div>",
+            unsafe_allow_html=True,
+        )

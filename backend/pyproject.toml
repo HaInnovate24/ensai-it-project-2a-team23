@@ -46,6 +46,11 @@ src = ["src", "tests"]
 select = ["E", "F", "W", "I", "B", "UP"]
 ignore = ["B008", "E501"]
 
+[tool.ruff.lint.per-file-ignores]
+# Les tests DAO chargent les variables d'environnement avant d'importer les
+# modules qui en dépendent : l'ordre des imports est volontaire.
+"tests/**" = ["E402"]
+
 [tool.ruff.format]
 quote-style = "double"
 indent-style = "space"

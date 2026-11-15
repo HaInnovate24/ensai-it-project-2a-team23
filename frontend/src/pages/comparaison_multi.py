@@ -6,17 +6,15 @@ import streamlit as st
 
 from utils.api_client import api_client
 from utils.log_init import get_page_logger
+from utils.rapport_pdf import construire_rapport_pdf, figure_png
 from utils.referentiels import (
     SEXES,
-    get_classifications_toutes,
     get_indicateurs,
     get_pays,
-    index_defaut,
     message_erreur,
+    type_classification_de,
+    unite_indicateur,
 )
-from datetime import date
-
-from utils.rapport_pdf import construire_rapport_pdf, figure_png
 from utils.ui import (
     PALETTE_GRAPHIQUE,
     afficher_graphique,
@@ -25,6 +23,7 @@ from utils.ui import (
     est_connecte,
     fmt_fr,
     ligne_source,
+    notif,
     styliser_figure,
 )
 
@@ -38,7 +37,7 @@ entete(
 
 # Cette analyse exige une connexion (le backend attend un jeton).
 if not est_connecte():
-    st.info("Connectez-vous pour accéder à la comparaison multi-indicateurs.")
+    notif("Connectez-vous pour accéder à la comparaison multi-indicateurs.", "info")
     st.page_link("pages/login.py", label="Se connecter", icon=":material/lock:")
     st.stop()
 
@@ -62,61 +61,89 @@ with st.container(border=True):
         default=list(indicateurs),
     )
 
-    # L'API applique une seule classification à tous les indicateurs : chaque
-    # indicateur n'apparaîtra que s'il possède des données pour cette catégorie.
-    classifications = get_classifications_toutes()
-    libelle_classification = st.selectbox(
-        "Catégorie (âge ou profession)",
-        list(classifications),
-        index=index_defaut(classifications),
-    )
-
 st.write("")
 
 if not codes_indicateur:
-    st.warning("Sélectionnez au moins un indicateur pour générer le graphique.")
+    notif("Sélectionnez au moins un indicateur pour générer le graphique.", "warn")
     st.stop()
 
-# --- Appel du backend : /analyses/comparaison-indicateurs ---
-with st.spinner("Chargement des données…"):
-    reponse = api_client.get(
-        "/analyses/comparaison-indicateurs",
-        params={
-            "jeton": st.session_state.get("access_token"),
-            "codes_indicateur": codes_indicateur,
-            "code_pays": pays_referentiel[nom_pays],
-            "sexe": SEXES[libelle_sexe],
-            "code_classification": classifications[libelle_classification],
-        },
+
+def _classification_total(code: str) -> str:
+    """Code de classification « total » adapté au type de l'indicateur.
+
+    L'emploi se décline par profession, la population par âge : chaque
+    indicateur est interrogé avec SON total agrégé (qui porte les données).
+    """
+    return (
+        "AGE_AGGREGATE_TOTAL"
+        if type_classification_de(code) == "age"
+        else "OCU_ISCO08_TOTAL"
     )
 
-if reponse["status_code"] == 404:
-    st.warning("Aucune donnée disponible pour cette sélection.")
-    st.stop()
 
-if reponse["status_code"] in (401, 403):
-    st.error("Session expirée ou accès refusé. Reconnectez-vous pour continuer.")
-    st.stop()
-
-if reponse["status_code"] != 200:
-    st.error(message_erreur(reponse))
-    st.stop()
-
-lignes = []
-for serie in reponse["data"]["series"]:
-    for point in serie["points"]:
-        lignes.append(
-            {"Période": point["periode"], "Indicateur": serie["libelle"], "Valeur": point["valeur"]}
+# --- Données : une courbe par indicateur ------------------------------------
+# L'endpoint /analyses/comparaison-indicateurs impose UNE classification unique
+# pour tous les indicateurs — incompatible avec le fait que l'emploi se classe
+# par profession et la population par âge (une des courbes disparaîtrait). On
+# interroge donc /analyses/evolution indicateur par indicateur, chacun avec son
+# total agrégé, pour que TOUTES les courbes s'affichent.
+lignes: list[dict] = []
+indic_sans_donnees: list[str] = []
+with st.spinner("Chargement des données…"):
+    for code in codes_indicateur:
+        rep = api_client.get(
+            "/analyses/evolution",
+            params={
+                "code_indicateur": code,
+                "code_pays": pays_referentiel[nom_pays],
+                "sexe": SEXES[libelle_sexe],
+                "code_classification": _classification_total(code),
+            },
         )
+        if rep["status_code"] in (401, 403):
+            notif("Session expirée ou accès refusé. Reconnectez-vous pour continuer.", "ko")
+            st.stop()
+        points = rep["data"].get("points", []) if rep["status_code"] == 200 else []
+        if points:
+            lignes.extend(
+                {"Période": p["periode"], "Indicateur": indicateurs[code], "Valeur": p["valeur"]}
+                for p in points
+            )
+        else:
+            indic_sans_donnees.append(indicateurs[code])
+
+if indic_sans_donnees:
+    notif("Aucune donnée pour : " + ", ".join(indic_sans_donnees), "warn")
 
 if not lignes:
-    st.info("Aucune donnée à afficher pour cette sélection.")
+    notif("Aucune donnée à afficher pour cette sélection.", "info")
     st.stop()
 
 df = pd.DataFrame(lignes).sort_values("Période")
+# Unités des indicateurs effectivement tracés (pour l'axe / la pastille).
+unites_tracees = sorted({
+    unite_indicateur(code) for code in codes_indicateur
+    if indicateurs[code] in set(df["Indicateur"])
+} - {""})
 
 with st.container(border=True):
-    entete_graphique("Croisement d'indicateurs", nom_pays, f"{libelle_classification} · {libelle_sexe}")
+    tete_g, tete_d = st.columns([0.66, 0.34], vertical_alignment="center")
+    with tete_g:
+        entete_graphique("Croisement d'indicateurs", nom_pays, f"Totaux agrégés · {libelle_sexe}")
+    with tete_d:
+        if len(unites_tracees) == 1:
+            st.markdown(
+                f"<div style='text-align:right;margin-bottom:0.3rem'>"
+                f"<span class='ls-pill'>En {unites_tracees[0]}</span></div>",
+                unsafe_allow_html=True,
+            )
+
+    if len(unites_tracees) > 1:
+        st.caption(
+            "Les unités diffèrent d'un indicateur à l'autre : comparez les tendances "
+            "plutôt que les niveaux absolus."
+        )
+
     fig = px.line(
         df,
         x="Période",
@@ -128,6 +155,10 @@ with st.container(border=True):
     fig.update_xaxes(type="category")
     fig.update_traces(line=dict(width=2.5), marker=dict(size=7))
     styliser_figure(fig)
+    fig.update_yaxes(title_text=unites_tracees[0] if len(unites_tracees) == 1 else "")
+    # Légende sous le titre, horizontale, pour que les deux courbes soient
+    # clairement identifiées sans empiéter sur le tracé.
+    fig.update_layout(legend=dict(title_text=""))
     afficher_graphique(fig)
 
 # --- Rapport PDF : chiffres de synthèse + détail de tous les points ---
@@ -144,7 +175,7 @@ pdf_bytes = construire_rapport_pdf(
     contexte=[
         ("Pays cible", nom_pays),
         ("Indicateurs", f"{df['Indicateur'].nunique()} croisé(s)"),
-        ("Catégorie", libelle_classification),
+        ("Classification", "Totaux agrégés"),
         ("Sexe", libelle_sexe),
     ],
     colonnes=["Indicateur", "Période", "Valeur"],
@@ -156,7 +187,7 @@ pdf_bytes = construire_rapport_pdf(
         "plutôt que les niveaux absolus."
     ),
     image_png=figure_png(fig),
-    legende_graphique=f"{libelle_classification} · {libelle_sexe}",
+    legende_graphique=f"Totaux agrégés · {libelle_sexe}",
 )
 _, col_pdf = st.columns([0.7, 0.3])
 with col_pdf:

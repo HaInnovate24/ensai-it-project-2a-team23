@@ -409,3 +409,31 @@ def test_parcours_complet_avec_la_vraie_securite(monkeypatch):
         service.connecter("alice", "MauvaisMotdepasse9")
     with pytest.raises(AuthentificationEchouee):
         service.utilisateur_depuis_jeton(jeton + "x")
+
+
+# exiger_connexion
+
+
+def test_exiger_connexion_renvoie_true_si_connecte():
+    """Avec un jeton valide, exiger_connexion renvoie True."""
+    service = creer_service_avec_compte("bob", "Motdepasse1")
+    jeton = service.connecter("bob", "Motdepasse1")
+
+    assert service.exiger_connexion(jeton) is True
+
+
+def test_exiger_connexion_sans_jeton_leve_authentification_echouee():
+    """Sans jeton, exiger_connexion propage AuthentificationEchouee."""
+    service = creer_service()
+
+    with pytest.raises(AuthentificationEchouee):
+        service.exiger_connexion("")
+
+
+def test_exiger_connexion_utilisateur_absent_leve_acces_refuse(monkeypatch):
+    """Si l'utilisateur résolu est None, exiger_connexion lève AccesRefuse."""
+    service = creer_service()
+    monkeypatch.setattr(service, "utilisateur_depuis_jeton", lambda jeton: None)
+
+    with pytest.raises(AccesRefuse):
+        service.exiger_connexion("jeton-1")

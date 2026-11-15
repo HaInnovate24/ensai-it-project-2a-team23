@@ -5,9 +5,9 @@ On vérifie que les paramètres sont bien transmis et que les erreurs métier so
 transformées en réponses HTTP appropriées.
 """
 
-import requests
 from unittest.mock import patch
 
+import requests
 from fastapi import FastAPI
 from fastapi.testclient import TestClient
 

@@ -64,24 +64,24 @@ class AnalyseService:
         self._verifier_classification(code_classification)
 
         observations = self._lire_serie_filtree(
-        code_indicateur, code_pays, sexe, code_classification
-            )
+            code_indicateur, code_pays, sexe, code_classification
+        )
         if not observations:
-        # Si on ne cherchait pas de classification précise, on vérifie 
-        # s'il existe au moins des données classifiées pour cet indicateur/pays/sexe.
+            # Si on ne cherchait pas de classification précise, on vérifie
+            # s'il existe au moins des données classifiées pour cet indicateur/pays/sexe.
             if not code_classification:
                 toutes_les_observations = self.observation_dao.lire_serie(
                     code_indicateur, code_pays, sexe, None
-            )
-            if toutes_les_observations:
-                raise DonneesInvalides(
-                    "Des données existent mais nécessitent une classification."
                 )
-        
-        # Sinon, c'est que rien n'existe du tout
+                if toutes_les_observations:
+                    raise DonneesInvalides(
+                        "Des données existent mais nécessitent une classification."
+                    )
+
+            # Sinon, c'est que rien n'existe du tout
             raise RessourceIntrouvable(
-            f"Aucune donnée pour l'indicateur {code_indicateur} et le pays {code_pays}."
-        )
+                f"Aucune donnée pour l'indicateur {code_indicateur} et le pays {code_pays}."
+            )
 
         if nb_periodes is not None:
             observations = observations[-nb_periodes:]
@@ -222,15 +222,15 @@ class AnalyseService:
         """Renvoie le Sexe correspondant, ou TOTAL par défaut."""
         if not sexe:
             return Sexe.TOTAL
-        
+
         if isinstance(sexe, Sexe):
             return sexe
-        
+
         # Si c'est une chaîne de caractères, on tente de la convertir
         try:
             return Sexe(sexe)
-        except ValueError:
-            raise DonneesInvalides(f"Sexe invalide : {sexe}")
+        except ValueError as err:
+            raise DonneesInvalides(f"Sexe invalide : {sexe}") from err
 
 
     def _trouver_indicateur(self, code_indicateur: str) -> Indicateur:
