@@ -9,28 +9,18 @@ import pytest
 from fastapi import HTTPException
 
 from business_object.enums import Sexe
-from controller import analyse_controller
 from controller.analyse_controller import (
     carte,
     comparaison_indicateurs,
     comparaison_pays,
-    erreur_http,
     evolution,
 )
 from model.analyse_model import Comparaison, PointSerie, Serie
-from utils.exceptions import AccesRefuse, DonneesInvalides, RessourceIntrouvable
-
-JETON_FAUX = "jeton-test"
-
-
-@pytest.fixture(autouse=True)
-def _patch_exiger_connexion(monkeypatch):
-    """Neutralise exiger_connexion pour éviter tout appel réel à la base."""
-    monkeypatch.setattr(analyse_controller, "exiger_connexion", lambda jeton: None)
+from utils.exceptions import DonneesInvalides, RessourceIntrouvable
 
 
 class FauxService:
-    """Faux service : il note les appels reçus et renvoie un résultat fixe (ou une erreur)."""
+    """Faux service, il note les appels reçus et renvoie un résultat fixe (ou une erreur)."""
 
     def __init__(self, erreur=None):
         """Si une erreur est fournie, chaque méthode la lève au lieu de répondre."""
@@ -62,30 +52,7 @@ class FauxService:
         return self._repondre("carte", arguments, Comparaison(series=[]))
 
 
-# Traduction des erreurs
-
-
-def test_erreur_http_ressource_introuvable():
-    """RessourceIntrouvable devient une erreur 404 avec le message d'origine."""
-    resultat = erreur_http(RessourceIntrouvable("Pays inconnu : XXX."))
-
-    assert resultat.status_code == 404
-    assert resultat.detail == "Pays inconnu : XXX."
-
-
-def test_erreur_http_donnees_invalides():
-    """DonneesInvalides devient une erreur 422."""
-    assert erreur_http(DonneesInvalides("Paramètre incorrect.")).status_code == 422
-
-
-def test_erreur_http_autre_erreur_metier():
-    """Toute autre erreur métier devient aussi une erreur 422."""
-    assert erreur_http(AccesRefuse("Interdit.")).status_code == 422
-
-
-# ----------------------------------------------------------------------
 # Évolution
-# ----------------------------------------------------------------------
 
 
 def test_evolution_transmet_les_parametres_et_renvoie_la_serie():
@@ -134,9 +101,7 @@ def test_evolution_donnees_invalides_renvoie_422():
     assert erreur.value.status_code == 422
 
 
-# ----------------------------------------------------------------------
 # Comparaison entre pays
-# ----------------------------------------------------------------------
 
 
 def test_comparaison_pays_transmet_les_parametres():
@@ -144,7 +109,6 @@ def test_comparaison_pays_transmet_les_parametres():
     service = FauxService()
 
     resultat = comparaison_pays(
-        jeton=JETON_FAUX,
         code_indicateur="EMP",
         codes_pays=["FRA", "DEU"],
         periode="2024Q1",
@@ -162,7 +126,7 @@ def test_comparaison_pays_introuvable_renvoie_404():
     service = FauxService(erreur=RessourceIntrouvable("Pays inconnu : XXX."))
 
     with pytest.raises(HTTPException) as erreur:
-        comparaison_pays(jeton=JETON_FAUX, code_indicateur="EMP", codes_pays=["XXX"], service=service)
+        comparaison_pays(code_indicateur="EMP", codes_pays=["XXX"], service=service)
 
     assert erreur.value.status_code == 404
 
@@ -172,14 +136,12 @@ def test_comparaison_pays_donnees_invalides_renvoie_422():
     service = FauxService(erreur=DonneesInvalides("Indiquez au moins un pays."))
 
     with pytest.raises(HTTPException) as erreur:
-        comparaison_pays(jeton=JETON_FAUX, code_indicateur="EMP", codes_pays=[], service=service)
+        comparaison_pays(code_indicateur="EMP", codes_pays=[], service=service)
 
     assert erreur.value.status_code == 422
 
 
-# ----------------------------------------------------------------------
 # Comparaison entre indicateurs
-# ----------------------------------------------------------------------
 
 
 def test_comparaison_indicateurs_transmet_les_parametres():
@@ -187,7 +149,6 @@ def test_comparaison_indicateurs_transmet_les_parametres():
     service = FauxService()
 
     resultat = comparaison_indicateurs(
-        jeton=JETON_FAUX,
         codes_indicateur=["EMP", "TAUX"], code_pays="FRA", service=service
     )
 
@@ -202,21 +163,19 @@ def test_comparaison_indicateurs_introuvable_renvoie_404():
     service = FauxService(erreur=RessourceIntrouvable("Indicateur inconnu : X."))
 
     with pytest.raises(HTTPException) as erreur:
-        comparaison_indicateurs(jeton=JETON_FAUX, codes_indicateur=["X"], code_pays="FRA", service=service)
+        comparaison_indicateurs(codes_indicateur=["X"], code_pays="FRA", service=service)
 
     assert erreur.value.status_code == 404
 
 
-# ----------------------------------------------------------------------
 # Carte
-# ----------------------------------------------------------------------
 
 
 def test_carte_transmet_les_parametres():
     """La route transmet l'indicateur et la période au service."""
     service = FauxService()
 
-    resultat = carte(jeton=JETON_FAUX, code_indicateur="EMP", periode="2024Q1", service=service)
+    resultat = carte(code_indicateur="EMP", periode="2024Q1", service=service)
 
     assert isinstance(resultat, Comparaison)
     assert service.appel[0] == "carte"
@@ -229,6 +188,6 @@ def test_carte_aucune_donnee_renvoie_404():
     service = FauxService(erreur=RessourceIntrouvable("Aucune donnée."))
 
     with pytest.raises(HTTPException) as erreur:
-        carte(jeton=JETON_FAUX, code_indicateur="EMP", periode="1900Q1", service=service)
+        carte(code_indicateur="EMP", periode="1900Q1", service=service)
 
     assert erreur.value.status_code == 404

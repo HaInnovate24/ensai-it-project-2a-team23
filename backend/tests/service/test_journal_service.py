@@ -1,10 +1,11 @@
-import pytest
 from unittest.mock import MagicMock
+
+import pytest
 
 from business_object.enums import Role
 from business_object.journal_activite import JournalActivite
 from business_object.utilisateur import Utilisateur
-from service.journal_service import JournalService, LONGUEUR_ACTION_MAX, LONGUEUR_CIBLE_MAX
+from service.journal_service import LONGUEUR_ACTION_MAX, LONGUEUR_CIBLE_MAX, JournalService
 from utils.exceptions import AccesRefuse, DonneesInvalides
 
 
@@ -32,13 +33,14 @@ def user_classique():
 # Tests pour Enregistrer
 # ==============================================================================
 
+
 def test_enregistrer_succes(service, mock_journal_dao):
     mock_journal_dao.creer.return_value = JournalActivite(id=1, action="TEST")
-    
+
     resultat = service.enregistrer(
         utilisateur_id=42, action=" CONNEXION ", cible="Système", details="Détails"
     )
-    
+
     assert resultat.id == 1
     mock_journal_dao.creer.assert_called_once()
     # Vérifie que les espaces autour de l'action ont été supprimés (.strip())
@@ -71,11 +73,12 @@ def test_enregistrer_cible_trop_longue_leve_erreur(service):
 # Tests pour Consulter
 # ==============================================================================
 
+
 def test_consulter(service, mock_journal_dao):
     mock_journal_dao.lister.return_value = [JournalActivite(id=1), JournalActivite(id=2)]
-    
+
     resultat = service.consulter()
-    
+
     assert len(resultat) == 2
     mock_journal_dao.lister.assert_called_once()
 
@@ -84,13 +87,14 @@ def test_consulter(service, mock_journal_dao):
 # Tests pour Lister (Réservé Admin)
 # ==============================================================================
 
+
 def test_lister_sans_filtre(service, mock_journal_dao, admin):
     mock_journal_dao.lister.return_value = [
         JournalActivite(id=1, utilisateur_id=10, action="LOGIN"),
         JournalActivite(id=2, utilisateur_id=10, action="LOGOUT"),
         JournalActivite(id=3, utilisateur_id=20, action="LOGIN"),
     ]
-    
+
     resultats = service.lister(acteur=admin)
     assert len(resultats) == 3
 
@@ -100,7 +104,7 @@ def test_lister_avec_filtre_utilisateur(service, mock_journal_dao, admin):
         JournalActivite(id=1, utilisateur_id=10, action="LOGIN"),
         JournalActivite(id=2, utilisateur_id=20, action="LOGOUT"),
     ]
-    
+
     resultats = service.lister(acteur=admin, utilisateur_id=10)
     assert len(resultats) == 1
     assert resultats[0].id == 1
@@ -111,7 +115,7 @@ def test_lister_avec_filtre_action(service, mock_journal_dao, admin):
         JournalActivite(id=1, utilisateur_id=10, action="LOGIN"),
         JournalActivite(id=2, utilisateur_id=10, action="LOGOUT"),
     ]
-    
+
     resultats = service.lister(acteur=admin, action="LOGOUT")
     assert len(resultats) == 1
     assert resultats[0].id == 2
@@ -119,9 +123,11 @@ def test_lister_avec_filtre_action(service, mock_journal_dao, admin):
 
 def test_lister_avec_limite(service, mock_journal_dao, admin):
     mock_journal_dao.lister.return_value = [
-        JournalActivite(id=1), JournalActivite(id=2), JournalActivite(id=3)
+        JournalActivite(id=1),
+        JournalActivite(id=2),
+        JournalActivite(id=3),
     ]
-    
+
     resultats = service.lister(acteur=admin, limite=2)
     assert len(resultats) == 2
 

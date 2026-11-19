@@ -27,11 +27,11 @@ class Graphiques:
         ax.tick_params(axis="x", rotation=45)
         fig.tight_layout()
 
-        tampon = io.BytesIO() #Fichier en mémoire RAM, comme si on écrit une image sur un fichier
-        fig.savefig(tampon, format="png", dpi=150) #On écrit l'image généré dans le tampon
+        tampon = io.BytesIO()  # Fichier en mémoire RAM, comme si on écrit une image sur un fichier
+        fig.savefig(tampon, format="png", dpi=150)  # On écrit l'image généré dans le tampon
         plt.close(fig)
 
-        return tampon.getvalue() #On récupère les bytes bruts de l'image
+        return tampon.getvalue()  # On récupère les bytes bruts de l'image
 
     def barres(self, donnees: list[Serie]) -> bytes:
         """Trace un diagramme en barres et renvoie l'image.
@@ -55,13 +55,15 @@ class Graphiques:
                 valeurs,
                 width=largeur_barre,
                 label=serie.libelle,
-            ) #On calcule les positions de chaque série correspondant à une barre
+            )  # On calcule les positions de chaque série correspondant à une barre
 
         if donnees[0].points:
             ax.set_xticks(
                 [j + (len(donnees) - 1) * largeur_barre / 2 for j in range(len(donnees[0].points))]
-            ) #permet de placer la marque sous la barre de chaque pays
-            ax.set_xticklabels([p.periode for p in donnees[0].points], rotation=45) #affichage des libellés à 45°
+            )  # permet de placer la marque sous la barre de chaque pays
+            ax.set_xticklabels(
+                [p.periode for p in donnees[0].points], rotation=45
+            )  # affichage des libellés à 45°
         ax.set_ylabel("Valeur")
         ax.legend()
         fig.tight_layout()

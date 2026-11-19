@@ -125,7 +125,11 @@ def _get_classifications_par_type(type_classif: str) -> dict[str, str]:
         for ligne in reponse["data"]:
             code = ligne.get("code", "")
             libelle = ligne.get("libelle", "")
-            if code and libelle and (code.startswith("OCU_ISCO08_") or code.startswith("OCU_SKILL_")):
+            if (
+                code
+                and libelle
+                and (code.startswith("OCU_ISCO08_") or code.startswith("OCU_SKILL_"))
+            ):
                 classifs_occ[libelle] = code
 
     resultat = classifs_occ if classifs_occ else dict(_CLASSIF_OCC_FALLBACK)

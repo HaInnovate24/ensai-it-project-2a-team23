@@ -6,6 +6,7 @@ import streamlit as st
 
 from utils.api_client import api_client
 from utils.log_init import get_page_logger
+from utils.rapport_pdf import construire_rapport_pdf, figure_png
 from utils.referentiels import (
     SEXES,
     get_classifications,
@@ -16,7 +17,6 @@ from utils.referentiels import (
     message_erreur,
     unite_indicateur,
 )
-from utils.rapport_pdf import construire_rapport_pdf, figure_png
 from utils.ui import (
     ICONE_CIBLE,
     ICONE_ECART,
@@ -27,15 +27,18 @@ from utils.ui import (
     carte_metrique,
     chip,
     est_connecte,
-    fmt_fr as format_fr,
     ligne_source,
     styliser_figure,
+)
+from utils.ui import (
+    fmt_fr as format_fr,
 )
 
 get_page_logger("Comparaison Pays (F4)")
 
 
 # --- Petits utilitaires de présentation --------------------------------------
+
 
 def annee(periode: str) -> str:
     """Renvoie l'année d'une période (4 premiers chiffres) ou la période brute."""
@@ -52,10 +55,10 @@ def nom_court_indicateur(description: str) -> str:
     texte = description.strip()
     for prefixe in ("Taux de ", "Taux d'", "Taux ", "Nombre de ", "Nombre d'"):
         if texte.lower().startswith(prefixe.lower()):
-            reste = texte[len(prefixe):]
+            reste = texte[len(prefixe) :]
             return reste[:1].upper() + reste[1:]
-    base = texte.split(" par ")[0].strip()      # retire « … par sexe et âge »
-    if len(base) > 22:                            # encore trop long -> 1er mot
+    base = texte.split(" par ")[0].strip()  # retire « … par sexe et âge »
+    if len(base) > 22:  # encore trop long -> 1er mot
         base = base.split()[0]
     return base[:1].upper() + base[1:]
 
@@ -130,7 +133,9 @@ _PAYS_SUGGERES = [
 ]
 _options_pays = _PAYS_SUGGERES + [n for n in pays_referentiel if n not in _PAYS_SUGGERES]
 # Défaut : des pays couverts par les deux indicateurs (comparaison parlante d'emblée).
-_defaut_pays = [n for n in ("France", "Allemagne", "Espagne") if n in pays_referentiel][:3] or _options_pays[:3]
+_defaut_pays = [n for n in ("France", "Allemagne", "Espagne") if n in pays_referentiel][
+    :3
+] or _options_pays[:3]
 
 # Sexe fixé à « Ensemble » (affiché dans le sous-titre du graphique, pas en filtre).
 sexe_backend = SEXES["Ensemble"]
@@ -142,8 +147,7 @@ with st.container(border=True):
     with col_pays:
         noms_courants = st.session_state.get("f4_pays", _defaut_pays)
         st.markdown(
-            "<div class='ls-flabel'>Pays"
-            f"<span class='muted'>{len(noms_courants)} / 5</span></div>",
+            f"<div class='ls-flabel'>Pays<span class='muted'>{len(noms_courants)} / 5</span></div>",
             unsafe_allow_html=True,
         )
         with st.popover(
@@ -217,16 +221,17 @@ with st.container(border=True):
                 "Début", periodes, index=0, format_func=annee, label_visibility="collapsed"
             )
             p_fin = sc2.selectbox(
-                "Fin", periodes, index=len(periodes) - 1, format_func=annee,
+                "Fin",
+                periodes,
+                index=len(periodes) - 1,
+                format_func=annee,
                 label_visibility="collapsed",
             )
             if p_fin < p_debut:
                 p_debut, p_fin = p_fin, p_debut
         else:
             p_debut = p_fin = None
-            st.selectbox(
-                "Période", ["Aucune donnée"], disabled=True, label_visibility="collapsed"
-            )
+            st.selectbox("Période", ["Aucune donnée"], disabled=True, label_visibility="collapsed")
 
 # Couleur stable par pays (réutilisée pour pastilles, graphique et « À retenir »).
 couleur_par_pays = {
@@ -247,8 +252,12 @@ with col_reset:
     def _reinitialiser_pays():
         st.session_state["f4_pays"] = _defaut_pays
 
-    st.button("Réinitialiser", icon=":material/restart_alt:",
-              use_container_width=True, on_click=_reinitialiser_pays)
+    st.button(
+        "Réinitialiser",
+        icon=":material/restart_alt:",
+        use_container_width=True,
+        on_click=_reinitialiser_pays,
+    )
 
 if len(noms_pays) < 2:
     st.info("Sélectionnez au moins deux pays pour lancer la comparaison.")
@@ -366,7 +375,9 @@ with m1:
 with m2:
     carte_metrique(
         f"Évolution · {pays_focus}",
-        (("+" if delta_focus > 0 else "") + format_fr(delta_focus)) if delta_focus is not None else "—",
+        (("+" if delta_focus > 0 else "") + format_fr(delta_focus))
+        if delta_focus is not None
+        else "—",
         unite_ecart if delta_focus is not None else "",
         f"{annee_debut} → {annee_fin} · {mot_variation}",
         icone_svg=ICONE_TENDANCE,
@@ -376,8 +387,12 @@ with m3:
         "Écart entre les pays",
         format_fr(ecart) if comparaison_possible else "—",
         unite_ecart if comparaison_possible else "",
-        (f"Maximum − minimum · {annee_fin}" if annee_commune
-         else "Maximum − minimum · dernières valeurs") if comparaison_possible
+        (
+            f"Maximum − minimum · {annee_fin}"
+            if annee_commune
+            else "Maximum − minimum · dernières valeurs"
+        )
+        if comparaison_possible
         else "un seul pays disponible",
         icone_svg=ICONE_ECART,
     )
@@ -391,7 +406,9 @@ with col_chart:
     with st.container(border=True):
         tete_g, tete_d = st.columns([0.62, 0.38], vertical_alignment="center")
         with tete_g:
-            st.markdown("<div class='ls-eyebrow plain'>Comparaison entre pays</div>", unsafe_allow_html=True)
+            st.markdown(
+                "<div class='ls-eyebrow plain'>Comparaison entre pays</div>", unsafe_allow_html=True
+            )
             st.markdown(
                 f"<div class='ls-serif' style='font-size:1.5rem'>{indicateurs[code_indicateur]}</div>",
                 unsafe_allow_html=True,
@@ -404,17 +421,18 @@ with col_chart:
                     unsafe_allow_html=True,
                 )
             sens = st.segmented_control(
-                "Tri", ["Décroissant", "Croissant"], default="Décroissant",
+                "Tri",
+                ["Décroissant", "Croissant"],
+                default="Décroissant",
                 label_visibility="collapsed",
             )
 
         contexte_periode = (
-            f"{annee_fin} · année commune" if annee_commune
+            f"{annee_fin} · année commune"
+            if annee_commune
             else "dernière année disponible par pays"
         )
-        st.caption(
-            f"{libelle_classification} · Ensemble des sexes · {contexte_periode}"
-        )
+        st.caption(f"{libelle_classification} · Ensemble des sexes · {contexte_periode}")
 
         croissant = sens == "Croissant"
         # Barres horizontales : la plus longue en haut quand « Décroissant ».
@@ -431,7 +449,9 @@ with col_chart:
             labels={"Valeur": f"Valeur ({unite})" if unite else "Valeur"},
         )
         fig.update_traces(
-            textposition="outside", cliponaxis=False, marker_line_width=0,
+            textposition="outside",
+            cliponaxis=False,
+            marker_line_width=0,
             marker_cornerradius=6,  # barres aux coins arrondis (plus « produit »)
             textfont=dict(color="#1F2A26"),
         )
@@ -461,7 +481,8 @@ with col_aside:
         )
         bas_note = (
             f"Valeur exprimée en {unite.lower()}, pour l'ensemble des sexes."
-            if unite else "Valeur pour l'ensemble des sexes."
+            if unite
+            else "Valeur pour l'ensemble des sexes."
         )
     elif annee_commune:
         note = (
@@ -471,8 +492,8 @@ with col_aside:
         bas_note = (
             f"Valeurs exprimées en {unite.lower()}, à l'année commune {annee_fin}, "
             "pour l'ensemble des sexes."
-            if unite else
-            f"Valeurs à l'année commune {annee_fin}, pour l'ensemble des sexes."
+            if unite
+            else f"Valeurs à l'année commune {annee_fin}, pour l'ensemble des sexes."
         )
     else:
         note = (
@@ -483,23 +504,31 @@ with col_aside:
             f"Les années diffèrent selon les pays (donnée {indicateurs[code_indicateur].lower()} "
             "éparse) ; chaque valeur indique son année entre parenthèses."
         )
-    entete_retenir = f"{indic_court.upper()} · {annee_fin if annee_commune else 'DERNIÈRES VALEURS'}"
+    entete_retenir = (
+        f"{indic_court.upper()} · {annee_fin if annee_commune else 'DERNIÈRES VALEURS'}"
+    )
     carte_a_retenir(entete_retenir, lignes_retenir, note=note, bas=bas_note)
 
 # --- Rapport PDF (généré côté front à partir des données affichées) ---
 periode_txt = annee_fin if annee_debut == annee_fin else f"{annee_debut} - {annee_fin}"
 chiffres_pdf = [
-    (f"{indic_court} · {pays_focus}",
-     f"{format_fr(valeur_focus)} {unite}".strip() if valeur_focus is not None else "—"),
-    (f"Évolution · {pays_focus}",
-     (("+" if delta_focus > 0 else "") + f"{format_fr(delta_focus)} {unite_ecart}").strip()
-     if delta_focus is not None else "—"),
-    ("Écart entre les pays",
-     f"{format_fr(ecart)} {unite_ecart}".strip() if comparaison_possible else "—"),
+    (
+        f"{indic_court} · {pays_focus}",
+        f"{format_fr(valeur_focus)} {unite}".strip() if valeur_focus is not None else "—",
+    ),
+    (
+        f"Évolution · {pays_focus}",
+        (("+" if delta_focus > 0 else "") + f"{format_fr(delta_focus)} {unite_ecart}").strip()
+        if delta_focus is not None
+        else "—",
+    ),
+    (
+        "Écart entre les pays",
+        f"{format_fr(ecart)} {unite_ecart}".strip() if comparaison_possible else "—",
+    ),
 ]
 lignes_pdf = [
-    [r["Pays"], format_fr(r["Valeur"]), annee(r["Période"])]
-    for _, r in df_retenir.iterrows()
+    [r["Pays"], format_fr(r["Valeur"]), annee(r["Période"])] for _, r in df_retenir.iterrows()
 ]
 pdf_bytes = construire_rapport_pdf(
     titre="Comparaison entre pays",

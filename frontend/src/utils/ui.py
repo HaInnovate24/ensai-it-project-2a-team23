@@ -558,8 +558,9 @@ def tableau(entetes: list[str], lignes: list[list[str]], aligns: list[str] | Non
     )
 
 
-def carte_navigation(icone_svg: str, titre: str, description: str,
-                     tag: str = "", verrou: bool = False) -> None:
+def carte_navigation(
+    icone_svg: str, titre: str, description: str, tag: str = "", verrou: bool = False
+) -> None:
     """Entête d'une carte de navigation (badge, titre serif, description, tag).
 
     À appeler dans un ``st.container(border=True)`` ; le ``st.page_link`` est
@@ -567,7 +568,8 @@ def carte_navigation(icone_svg: str, titre: str, description: str,
     """
     tag_html = (
         f"<span class='ls-tag {'verrou' if verrou else 'libre'}'>{html.escape(tag)}</span>"
-        if tag else ""
+        if tag
+        else ""
     )
     st.markdown(
         f"<div class='ls-nav-ic'>{icone_svg}</div>"
@@ -612,6 +614,7 @@ def carte_a_retenir(titre_section: str, lignes: list[tuple], note: str = "", bas
 
 # --- Format & en-têtes de graphique ----------------------------------------
 
+
 def fmt_fr(valeur: float, decimales: int = 1) -> str:
     """Formate un nombre avec la virgule décimale française (ex. 7,5)."""
     return f"{valeur:.{decimales}f}".replace(".", ",")
@@ -619,9 +622,13 @@ def fmt_fr(valeur: float, decimales: int = 1) -> str:
 
 def entete_graphique(eyebrow: str, titre: str, sous_titre: str = "") -> None:
     """En-tête standard d'une carte graphique : sur-titre, titre serif, légende."""
-    st.markdown(f"<div class='ls-eyebrow plain'>{html.escape(eyebrow)}</div>", unsafe_allow_html=True)
-    st.markdown(f"<div class='ls-serif' style='font-size:1.5rem'>{html.escape(titre)}</div>",
-                unsafe_allow_html=True)
+    st.markdown(
+        f"<div class='ls-eyebrow plain'>{html.escape(eyebrow)}</div>", unsafe_allow_html=True
+    )
+    st.markdown(
+        f"<div class='ls-serif' style='font-size:1.5rem'>{html.escape(titre)}</div>",
+        unsafe_allow_html=True,
+    )
     if sous_titre:
         st.caption(sous_titre)
 
@@ -639,22 +646,42 @@ def styliser_figure(fig, hauteur: int = 430):
         template="plotly_white",
         colorway=PALETTE_GRAPHIQUE,
         font=dict(family="Inter, sans-serif", size=13, color=TEXTE),
-        title=dict(text="", font=dict(family="Lora, serif", size=18, color=ENCRE),
-                   x=0, xanchor="left", y=0.98),
+        title=dict(
+            text="",
+            font=dict(family="Lora, serif", size=18, color=ENCRE),
+            x=0,
+            xanchor="left",
+            y=0.98,
+        ),
         margin=dict(l=8, r=16, t=40, b=8),
         height=hauteur,
         separators=", ",
         plot_bgcolor="white",
         paper_bgcolor="white",
-        legend=dict(orientation="h", yanchor="bottom", y=1.02, xanchor="left", x=0, title="",
-                    bgcolor="rgba(0,0,0,0)", font=dict(size=12.5)),
-        hoverlabel=dict(bgcolor="white", bordercolor=BORDURE, font_size=12.5,
-                        font_family="Inter, sans-serif"),
+        legend=dict(
+            orientation="h",
+            yanchor="bottom",
+            y=1.02,
+            xanchor="left",
+            x=0,
+            title="",
+            bgcolor="rgba(0,0,0,0)",
+            font=dict(size=12.5),
+        ),
+        hoverlabel=dict(
+            bgcolor="white", bordercolor=BORDURE, font_size=12.5, font_family="Inter, sans-serif"
+        ),
     )
-    fig.update_xaxes(showgrid=True, gridcolor="#F0EFE8", griddash="dot", showline=False,
-                     zeroline=False, ticksuffix="  ", tickfont=dict(color=TEXTE_DOUX))
-    fig.update_yaxes(showgrid=False, showline=False, zeroline=False,
-                     tickfont=dict(color=ENCRE))
+    fig.update_xaxes(
+        showgrid=True,
+        gridcolor="#F0EFE8",
+        griddash="dot",
+        showline=False,
+        zeroline=False,
+        ticksuffix="  ",
+        tickfont=dict(color=TEXTE_DOUX),
+    )
+    fig.update_yaxes(showgrid=False, showline=False, zeroline=False, tickfont=dict(color=ENCRE))
     return fig
 
 

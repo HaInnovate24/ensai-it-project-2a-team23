@@ -133,7 +133,7 @@ class APIClient:
 
     def download_file(self, path: str, params=None, **kwargs):
         """Sends a GET request and returns raw bytes (ideal for PDF downloads).
-    
+
         Returns:
             dict: Contains 'status_code' and 'content' (raw bytes) or 'data' (error message).
         """
@@ -146,7 +146,7 @@ class APIClient:
             response = self.session.request(
                 method="GET", url=url, timeout=timeout, headers=headers, params=params, **kwargs
             )
-            
+
             if response.status_code == 200:
                 return {"status_code": 200, "content": response.content}
             else:
@@ -163,5 +163,6 @@ class APIClient:
             return {"status_code": 0, "data": "Connection error"}
         except requests.exceptions.RequestException as e:
             return {"status_code": 0, "data": str(e)}
-        
+
+
 api_client = APIClient(API_URL)

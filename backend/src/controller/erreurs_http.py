@@ -42,7 +42,7 @@ def code_http(erreur: ErreurMetier) -> int:
 def en_tetes(code: int) -> dict[str, str] | None:
     """Renvoie les en-têtes à ajouter à la réponse.
 
-    Une réponse 401 doit indiquer comment s'authentifier (norme HTTP).
+    Une réponse 401 indique comment s'authentifier (norme HTTP).
     """
     if code == 401:
         return {"WWW-Authenticate": "Bearer"}
@@ -56,9 +56,9 @@ def erreur_http(erreur: ErreurMetier) -> HTTPException:
 
 
 async def gerer_erreur_metier(request: Request, erreur: ErreurMetier) -> JSONResponse:
-    """Gestionnaire global : transforme toute erreur métier non interceptée en réponse JSON.
+    """Gestionnaire global, transforme toute erreur métier non interceptée en réponse JSON.
 
-    Grâce à lui, les routes n'ont pas besoin de try/except, elles laissent
+    Grâce à lui, les routes n'ont pas besoin de try/except. elles laissent
     l'erreur métier remonter et FastAPI appelle cette fonction.
     """
     code = code_http(erreur)

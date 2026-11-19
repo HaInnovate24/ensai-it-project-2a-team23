@@ -1,10 +1,13 @@
 """FO3 : génération des rapports PDF."""
 
 import os
+
 from fpdf import FPDF
-from business_object.rapport import Rapport
+
 from business_object.enums import StatutRapport
+from business_object.rapport import Rapport
 from dao.rapport_dao import RapportDao
+
 
 class RapportService:
     """Assemble séries, résumé statistique, graphiques et conclusion dans un PDF."""
@@ -21,25 +24,27 @@ class RapportService:
             utilisateur_id=utilisateur_id,
             titre=parametres.get("titre", "Analyse"),
             description=parametres.get("description", ""),
-            statut=StatutRapport.EN_ATTENTE
+            statut=StatutRapport.EN_ATTENTE,
         )
         rapport = self.dao.creer(rapport_initial)
 
         # 2. Génération PDF
         nom_fichier = f"rapport_{rapport.id}.pdf"
         chemin_complet = os.path.join(self.dossier_stockage, nom_fichier)
-        
+
         pdf = FPDF()
         pdf.add_page()
         pdf.set_font("Helvetica", style="B", size=16)
         # Utilisation de ln=1 au lieu de new_x/new_y pour la compatibilité avec l'ancienne version de fpdf
         pdf.cell(0, 10, txt=rapport.titre, ln=1, align="C")
-        
+
         pdf.set_font("Helvetica", size=12)
-        pdf.cell(0, 10, txt=f"Indicateur : {parametres.get('code_indicateur', 'Non spécifié')}", ln=1)
+        pdf.cell(
+            0, 10, txt=f"Indicateur : {parametres.get('code_indicateur', 'Non spécifié')}", ln=1
+        )
         if rapport.description:
             pdf.multi_cell(0, 10, txt=rapport.description)
-        
+
         pdf.output(chemin_complet)
 
         # 3. Mise à jour de la base de données
@@ -62,6 +67,6 @@ class RapportService:
         rapport = self.dao.trouver_par_id(rapport_id)
         if not rapport or not rapport.fichier_path or not os.path.exists(rapport.fichier_path):
             raise FileNotFoundError("PDF introuvable.")
-            
+
         with open(rapport.fichier_path, "rb") as fichier:
             return fichier.read()

@@ -18,9 +18,9 @@ class AccesRefuse(ErreurMetier):
 
 
 class AuthentificationEchouee(ErreurMetier):
-    """Lévée lorsque l'identité de l'utilisateur n'est pas établie
+    """Levée lorsque l'identité de l'utilisateur n'est pas établie.
 
-    Exemple : mauvais identifiants, jeton absent, invalide ou expiré.
+    Exemples : mauvais identifiants, jeton absent, invalide ou expiré.
     """
 
 

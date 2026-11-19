@@ -1,6 +1,6 @@
 """Routes HTTP d'administration des comptes et du journal (administrateurs uniquement).
 
-Ce routeur complète admin_controller (imports, données), il se branche sur le même
+Ce routeur complète admin_controller (imports, données). il se branche sur le même
 préfixe /admin dans main.py. Les erreurs métier sont transformées en codes HTTP par
 le gestionnaire global (controller/erreurs_http.py).
 """
@@ -24,7 +24,7 @@ def get_utilisateur_service() -> UtilisateurService:
 
 
 def get_journal_service() -> JournalService:
-    """Fournit le service du journal."""
+    """Fournit le service du journal (remplaçable dans les tests)."""
     return JournalService()
 
 
@@ -64,7 +64,8 @@ def changer_activation(
 ) -> UtilisateurSortie:
     """Active (true) ou désactive (false) un compte.
 
-    Réponses : 200, 404 compte inconnu, 409 déjà dans cet état, 422 si on désactive son propre compte.
+    Réponses : 200, 404 compte inconnu, 409 déjà dans cet état, 422 si on
+    désactive son propre compte.
     """
     cible = service.definir_activation(acteur, id_utilisateur, changement.actif)
     return UtilisateurSortie.model_validate(cible)

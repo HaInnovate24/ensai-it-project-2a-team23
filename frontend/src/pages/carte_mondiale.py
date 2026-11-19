@@ -25,9 +25,11 @@ from utils.ui import (
     afficher_graphique,
     carte_metrique,
     est_connecte,
-    fmt_fr as format_fr,
     ligne_source,
     styliser_figure,
+)
+from utils.ui import (
+    fmt_fr as format_fr,
 )
 
 get_page_logger("Carte mondiale (F6)")
@@ -167,9 +169,7 @@ with st.container(border=True):
             )
         else:
             periode = None
-            st.selectbox(
-                "Période", ["Aucune donnée"], disabled=True, label_visibility="collapsed"
-            )
+            st.selectbox("Période", ["Aucune donnée"], disabled=True, label_visibility="collapsed")
 
 if not periode:
     st.warning("Aucune donnée disponible pour cette sélection (indicateur / population).")
@@ -342,8 +342,8 @@ with st.container(border=True):
         countrycolor="#ECEAE0",
         countrywidth=0.5,
         showland=True,
-        landcolor="#EFEEE6",        # pays sans donnée : crème neutre
-        showocean=False,            # océan transparent -> fond de la carte
+        landcolor="#EFEEE6",  # pays sans donnée : crème neutre
+        showocean=False,  # océan transparent -> fond de la carte
         showlakes=False,
         lataxis_showgrid=False,
         lonaxis_showgrid=False,

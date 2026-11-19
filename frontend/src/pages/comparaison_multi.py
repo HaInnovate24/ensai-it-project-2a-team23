@@ -6,6 +6,7 @@ import streamlit as st
 
 from utils.api_client import api_client
 from utils.log_init import get_page_logger
+from utils.rapport_pdf import construire_rapport_pdf, figure_png
 from utils.referentiels import (
     SEXES,
     get_classifications_toutes,
@@ -14,9 +15,6 @@ from utils.referentiels import (
     index_defaut,
     message_erreur,
 )
-from datetime import date
-
-from utils.rapport_pdf import construire_rapport_pdf, figure_png
 from utils.ui import (
     PALETTE_GRAPHIQUE,
     afficher_graphique,
@@ -116,7 +114,9 @@ if not lignes:
 df = pd.DataFrame(lignes).sort_values("Période")
 
 with st.container(border=True):
-    entete_graphique("Croisement d'indicateurs", nom_pays, f"{libelle_classification} · {libelle_sexe}")
+    entete_graphique(
+        "Croisement d'indicateurs", nom_pays, f"{libelle_classification} · {libelle_sexe}"
+    )
     fig = px.line(
         df,
         x="Période",

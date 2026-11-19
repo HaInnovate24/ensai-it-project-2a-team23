@@ -1,55 +1,57 @@
-"""Routes HTTP d'authentification : inscription, connexion, profil courant."""
+"""Routes HTTP d'authentification : inscription, connexion, profil courant.
 
-import requests
-from fastapi import APIRouter, HTTPException
+Les routes ne contiennent aucun try/except. les erreurs (identifiants
+incorrects, nom déjà pris) sont transformées en codes HTTP par le gestionnaire
+global (controller/erreurs_http.py, branché dans main.py).
+"""
 
+from fastapi import APIRouter, Depends
+
+from business_object.utilisateur import Utilisateur
+from controller.dependances import exiger_connexion, get_authentification_service
 from model.auth_model import Identifiants
+from model.utilisateur_model import UtilisateurSortie
 from service.authentification_service import AuthentificationService
 
 router = APIRouter()
 
 
 @router.post("/inscription")
-def inscription(identifiants: Identifiants):
-    """Inscrit un nouvel utilisateur."""
-    try:
-        utilisateur = AuthentificationService().inscrire(
-            identifiants.nom_utilisateur, identifiants.mot_de_passe
-        )
-        return {"message": "Utilisateur inscrit", "statut": "succes", "data": utilisateur}
-    except ValueError as exc:
-        raise HTTPException(status_code=400, detail=str(exc)) from exc
-    except requests.RequestException as exc:
-        raise HTTPException(
-            status_code=502, detail=f"Échec de la récupération ILOSTAT : {exc}"
-        ) from exc
+def inscription(
+    identifiants: Identifiants,
+    service: AuthentificationService = Depends(get_authentification_service),
+):
+    """Inscrit un nouvel utilisateur (accès libre).
+
+    Réponses : 200 compte créé, 409 nom déjà pris, 422 nom ou mot de passe invalide.
+    """
+    utilisateur = service.inscrire(identifiants.nom_utilisateur, identifiants.mot_de_passe)
+    return {
+        "message": "Utilisateur inscrit",
+        "statut": "succes",
+        "data": UtilisateurSortie.model_validate(utilisateur),
+    }
 
 
 @router.post("/connexion")
-def connexion(identifiants: Identifiants):
-    """Authentifie un utilisateur et renvoie un jeton."""
-    try:
-        jeton = AuthentificationService().connecter(
-            identifiants.nom_utilisateur, identifiants.mot_de_passe
-        )
-        return {"message": "Utilisateur connecté", "statut": "succes", "data": jeton}
-    except ValueError as exc:
-        raise HTTPException(status_code=400, detail=str(exc)) from exc
-    except requests.RequestException as exc:
-        raise HTTPException(
-            status_code=502, detail=f"Échec de la récupération ILOSTAT : {exc}"
-        ) from exc
+def connexion(
+    identifiants: Identifiants,
+    service: AuthentificationService = Depends(get_authentification_service),
+):
+    """Authentifie un utilisateur et renvoie un jeton (accès libre).
+
+    Le jeton est à envoyer ensuite dans l'en-tête "Authorization: Bearer <jeton>".
+    Réponses : 200 jeton, 401 identifiants incorrects, 403 compte désactivé.
+    """
+    jeton = service.connecter(identifiants.nom_utilisateur, identifiants.mot_de_passe)
+    return {"message": "Utilisateur connecté", "statut": "succes", "data": jeton}
 
 
 @router.get("/profil")
-def profil_courant(jeton: str):
-    """Renvoie le profil de l'utilisateur connecté."""
-    try:
-        utilisateur = AuthentificationService().utilisateur_depuis_jeton(jeton)
-        return {"message": "Profil de l'utilisateur", "statut": "succes", "data": utilisateur}
-    except ValueError as exc:
-        raise HTTPException(status_code=400, detail=str(exc)) from exc
-    except requests.RequestException as exc:
-        raise HTTPException(
-            status_code=502, detail=f"Échec de la récupération ILOSTAT : {exc}"
-        ) from exc
+def profil_courant(utilisateur: Utilisateur = Depends(exiger_connexion)):
+    """Renvoie le profil de l'utilisateur connecté (jeton exigé dans l'en-tête Authorization)."""
+    return {
+        "message": "Profil de l'utilisateur",
+        "statut": "succes",
+        "data": UtilisateurSortie.model_validate(utilisateur),
+    }

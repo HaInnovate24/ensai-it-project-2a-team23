@@ -23,14 +23,14 @@ class CollecteService:
     """Télécharge un indicateur, le parse, l'enregistre et trace l'import."""
 
     def __init__(
-        self, 
+        self,
         ilostat_client: IlostatClient | None = None,
         import_dao: ImportDao | None = None,
         observation_dao: ObservationDao | None = None,
         pays_dao: PaysDao | None = None,
         classification_dao: ClassificationDao | None = None,
         indicateur_dao: IndicateurDao | None = None,
-        parser_service: ParserService | None = None
+        parser_service: ParserService | None = None,
     ):
         self.ilostat_client = ilostat_client or IlostatClient()
         self.import_dao = import_dao or ImportDao()

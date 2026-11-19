@@ -45,6 +45,7 @@ def _badge_statut(statut) -> str:
         return badge("En cours", "warn")
     return badge(statut or "—", "neutre")
 
+
 get_page_logger("Administration (F6)")
 
 # Garde-fou : la navigation masque déjà cette page, mais on protège l'accès
@@ -83,27 +84,40 @@ imports = _liste(rep_imports)
 
 # --- Bandeau de synthèse ----------------------------------------------------
 nb_admins = sum(1 for u in utilisateurs if str(u.get("role")).lower() == "admin")
-imports_ok = sum(1 for i in imports if str(i.get("statut")).lower() in ("succes", "statutimport.succes"))
+imports_ok = sum(
+    1 for i in imports if str(i.get("statut")).lower() in ("succes", "statutimport.succes")
+)
 
 st.write("")
 c1, c2, c3 = st.columns(3)
 with c1:
-    carte_metrique("Comptes", str(len(utilisateurs)), "", f"dont {nb_admins} administrateur(s)",
-                   icone_svg=ICONE_CIBLE)
+    carte_metrique(
+        "Comptes",
+        str(len(utilisateurs)),
+        "",
+        f"dont {nb_admins} administrateur(s)",
+        icone_svg=ICONE_CIBLE,
+    )
 with c2:
     carte_metrique("Indicateurs suivis", str(len(indicateurs)), "", "référentiel ILOSTAT")
 with c3:
     total_lignes = sum(int(i.get("nombre_lignes") or 0) for i in imports)
-    carte_metrique("Imports réalisés", str(len(imports)), "",
-                   f"{imports_ok} réussi(s) · {total_lignes:,} lignes".replace(",", " "))
+    carte_metrique(
+        "Imports réalisés",
+        str(len(imports)),
+        "",
+        f"{imports_ok} réussi(s) · {total_lignes:,} lignes".replace(",", " "),
+    )
 
 st.write("")
 
 # --- Section 1 : comptes utilisateurs ---------------------------------------
 with st.container(border=True):
     st.markdown("<div class='ls-eyebrow plain'>Comptes</div>", unsafe_allow_html=True)
-    st.markdown("<div class='ls-serif' style='font-size:1.4rem'>Gestion des utilisateurs</div>",
-                unsafe_allow_html=True)
+    st.markdown(
+        "<div class='ls-serif' style='font-size:1.4rem'>Gestion des utilisateurs</div>",
+        unsafe_allow_html=True,
+    )
 
     if rep_users["status_code"] != 200:
         st.error(message_erreur(rep_users))
@@ -137,16 +151,23 @@ with st.container(border=True):
             )
             c[1].markdown(html.escape(str(u.get("nom_utilisateur", ""))))
             role_label = c[2].selectbox(
-                "Rôle", ["Utilisateur", "Administrateur"],
+                "Rôle",
+                ["Utilisateur", "Administrateur"],
                 index=1 if role_actuel == "admin" else 0,
-                key=f"role_{uid}", label_visibility="collapsed",
+                key=f"role_{uid}",
+                label_visibility="collapsed",
             )
             actif = c[3].toggle(
-                "Actif", value=actif_actuel, key=f"actif_{uid}",
+                "Actif",
+                value=actif_actuel,
+                key=f"actif_{uid}",
                 label_visibility="collapsed",
             )
             enregistrer = c[4].button(
-                "Enregistrer", key=f"save_{uid}", type="primary", use_container_width=True,
+                "Enregistrer",
+                key=f"save_{uid}",
+                type="primary",
+                use_container_width=True,
             )
 
             if enregistrer:
@@ -179,19 +200,24 @@ with st.container(border=True):
 # --- Section 2: Imports ILOSTAT --------------------------------------------
 with st.container(border=True):
     st.markdown("<div class='ls-eyebrow plain'>Collecte</div>", unsafe_allow_html=True)
-    st.markdown("<div class='ls-serif' style='font-size:1.4rem'>Imports de données</div>",
-                unsafe_allow_html=True)
+    st.markdown(
+        "<div class='ls-serif' style='font-size:1.4rem'>Imports de données</div>",
+        unsafe_allow_html=True,
+    )
     st.caption("Télécharge les observations depuis ILOSTAT (OIT) et met la base à jour.")
 
     i1, i2, i3 = st.columns([2, 1.4, 1], vertical_alignment="bottom")
     with i1:
         code_indicateur = st.selectbox(
-            "Indicateur", options=list(indicateurs),
+            "Indicateur",
+            options=list(indicateurs),
             format_func=lambda code: indicateurs[code],
         )
     with i2:
         annee_min, annee_max = st.select_slider(
-            "Période", options=list(range(2014, 2027)), value=(2015, 2025),
+            "Période",
+            options=list(range(2014, 2027)),
+            value=(2015, 2025),
         )
     with i3:
         lancer = st.button("Lancer l'import", type="primary", use_container_width=True)
@@ -206,8 +232,10 @@ with st.container(border=True):
         if reponse["status_code"] == 200:
             corps = _corps(reponse)
             statut = str(corps.get("statut", "")).lower()
-            msg = (f"Import terminé — statut : {corps.get('statut')}, "
-                   f"lignes insérées : {corps.get('lignes_inserees')}")
+            msg = (
+                f"Import terminé — statut : {corps.get('statut')}, "
+                f"lignes insérées : {corps.get('lignes_inserees')}"
+            )
             if "succes" in statut:
                 st.success(msg)
             else:
@@ -227,15 +255,17 @@ with st.container(border=True):
         for i in sorted(imports, key=lambda x: x.get("id", 0), reverse=True):
             err = str(i.get("message_erreur") or "")
             err_court = (err[:60] + "…") if len(err) > 60 else (err or "—")
-            lignes_i.append([
-                html.escape(str(i.get("id", ""))),
-                html.escape(str(i.get("indicateur_code", ""))),
-                _badge_statut(i.get("statut")),
-                _n(i.get("nombre_lignes")),
-                _dt(i.get("date_debut")),
-                _dt(i.get("date_fin")),
-                html.escape(err_court),
-            ])
+            lignes_i.append(
+                [
+                    html.escape(str(i.get("id", ""))),
+                    html.escape(str(i.get("indicateur_code", ""))),
+                    _badge_statut(i.get("statut")),
+                    _n(i.get("nombre_lignes")),
+                    _dt(i.get("date_debut")),
+                    _dt(i.get("date_fin")),
+                    html.escape(err_court),
+                ]
+            )
         tableau(
             ["ID", "Indicateur", "Statut", "Lignes", "Début", "Fin", "Détail"],
             lignes_i,
@@ -245,8 +275,10 @@ with st.container(border=True):
 # --- Section 3 : journal d'activité -----------------------------------------
 with st.container(border=True):
     st.markdown("<div class='ls-eyebrow plain'>Traçabilité</div>", unsafe_allow_html=True)
-    st.markdown("<div class='ls-serif' style='font-size:1.4rem'>Journal d'activité</div>",
-                unsafe_allow_html=True)
+    st.markdown(
+        "<div class='ls-serif' style='font-size:1.4rem'>Journal d'activité</div>",
+        unsafe_allow_html=True,
+    )
 
     rep_journal = api_client.get("/journal/")
     if rep_journal["status_code"] == 200:

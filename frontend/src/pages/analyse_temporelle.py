@@ -21,7 +21,6 @@ from utils.ui import (
     afficher_graphique,
     entete,
     entete_graphique,
-    fmt_fr,
     ligne_source,
     styliser_figure,
 )
@@ -92,9 +91,7 @@ with st.spinner("Chargement des données…"):
 
         if reponse["status_code"] == 200:
             for point in reponse["data"]["points"]:
-                lignes.append(
-                    {"Période": point["periode"], "Pays": nom, "Valeur": point["valeur"]}
-                )
+                lignes.append({"Période": point["periode"], "Pays": nom, "Valeur": point["valeur"]})
         elif reponse["status_code"] == 404:
             pays_sans_donnees.append(nom)
         elif reponse["status_code"] == 0:
@@ -137,33 +134,36 @@ if lignes:
     # --- Génération du Rapport PDF via le Backend ---
     st.divider()
     st.subheader("Générer le rapport PDF complet")
-    st.write("Demandez au serveur de générer une analyse au format PDF (incluant ce graphique et les tables).")
-    
+    st.write(
+        "Demandez au serveur de générer une analyse au format PDF (incluant ce graphique et les tables)."
+    )
+
     # On utilise un bouton d'action pour déclencher la requête POST
     if st.button("Demander la génération du PDF", icon="📄", type="primary"):
         with st.spinner("Génération du rapport côté serveur en cours..."):
-            
             # 1. Demande de création du rapport au backend
             payload = {
                 "titre": "Évolution temporelle",
                 "description": f"{indicateurs[code_indicateur]} - {libelle_sexe} - {libelle_classification}",
                 "code_indicateur": code_indicateur,
-                "codes_pays": noms_pays
+                "codes_pays": noms_pays,
             }
-            
+
             reponse_creation = api_client.post("/rapports/", json=payload)
-            
+
             if reponse_creation["status_code"] == 201:
                 rapport_id = reponse_creation["data"]["id"]
-                
+
                 # 2. Téléchargement du fichier binaire généré via le GET
-                reponse_telechargement = api_client.download_file(f"/rapports/{rapport_id}/telecharger")
-                
+                reponse_telechargement = api_client.download_file(
+                    f"/rapports/{rapport_id}/telecharger"
+                )
+
                 if reponse_telechargement["status_code"] == 200:
                     pdf_bytes = reponse_telechargement["content"]
-                    
-                    st.success(f"Le rapport a été généré avec succès !")
-                    
+
+                    st.success("Le rapport a été généré avec succès !")
+
                     # 3. Affichage du bouton natif Streamlit pour sauvegarder le fichier
                     st.download_button(
                         label="Télécharger le fichier PDF",
@@ -173,7 +173,9 @@ if lignes:
                         icon=":material/download:",
                     )
                 else:
-                    st.error(f"Erreur lors du téléchargement : {message_erreur(reponse_telechargement)}")
+                    st.error(
+                        f"Erreur lors du téléchargement : {message_erreur(reponse_telechargement)}"
+                    )
             else:
                 st.error(f"Erreur lors de la création en base : {message_erreur(reponse_creation)}")
 

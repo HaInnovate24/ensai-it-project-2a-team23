@@ -61,10 +61,12 @@ with centre:
         with st.container(border=True):
             with st.form("connexion"):
                 nom = st.text_input("Nom d'utilisateur", placeholder="votre identifiant")
-                mot_de_passe = st.text_input("Mot de passe", type="password",
-                                             placeholder="••••••••")
-                valider = st.form_submit_button("Se connecter", type="primary",
-                                                use_container_width=True)
+                mot_de_passe = st.text_input(
+                    "Mot de passe", type="password", placeholder="••••••••"
+                )
+                valider = st.form_submit_button(
+                    "Se connecter", type="primary", use_container_width=True
+                )
 
         if valider:
             reponse = api_client.post(
@@ -91,13 +93,16 @@ with centre:
     with onglet_inscription:
         with st.container(border=True):
             with st.form("inscription"):
-                nouveau_nom = st.text_input("Nom d'utilisateur", key="inscription_nom",
-                                            placeholder="3 à 50 caractères")
-                nouveau_mdp = st.text_input("Mot de passe", type="password",
-                                            key="inscription_mdp", placeholder="••••••••")
+                nouveau_nom = st.text_input(
+                    "Nom d'utilisateur", key="inscription_nom", placeholder="3 à 50 caractères"
+                )
+                nouveau_mdp = st.text_input(
+                    "Mot de passe", type="password", key="inscription_mdp", placeholder="••••••••"
+                )
                 st.caption("8 à 128 caractères, au moins une lettre et un chiffre.")
-                creer = st.form_submit_button("Créer le compte", type="primary",
-                                              use_container_width=True)
+                creer = st.form_submit_button(
+                    "Créer le compte", type="primary", use_container_width=True
+                )
 
         if creer:
             reponse = api_client.post(

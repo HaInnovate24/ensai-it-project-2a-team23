@@ -62,7 +62,11 @@ def test_demander_rapport_succes(mock_service):
 
     response = client.post(
         "/rapports/",
-        json={"titre": "Analyse France", "description": "Emploi par région", "code_indicateur": "EMP"},
+        json={
+            "titre": "Analyse France",
+            "description": "Emploi par région",
+            "code_indicateur": "EMP",
+        },
     )
 
     assert response.status_code == 201

@@ -20,9 +20,16 @@ BORDURE = (225, 224, 214)
 CREME = (244, 243, 238)
 
 _REMPLACEMENTS = {
-    "—": "-", "–": "-", "−": "-",      # — – −
-    "’": "'", "‘": "'", "“": '"', "”": '"',
-    "…": "...", "•": "-", " ": " ",
+    "—": "-",
+    "–": "-",
+    "−": "-",  # — – −
+    "’": "'",
+    "‘": "'",
+    "“": '"',
+    "”": '"',
+    "…": "...",
+    "•": "-",
+    " ": " ",
 }
 
 
@@ -45,8 +52,7 @@ class _RapportPDF(FPDF):
         self.set_y(-12)
         self.set_font("Helvetica", size=8)
         self.set_text_color(*DOUX)
-        self.cell(0, 6, _s("Source : OIT - ILOSTAT  ·  Genere par LaborScope"),
-                  align="L")
+        self.cell(0, 6, _s("Source : OIT - ILOSTAT  ·  Genere par LaborScope"), align="L")
         self.cell(0, 6, _s(f"Page {self.page_no()}/{{nb}}"), align="R")
 
 
@@ -95,8 +101,7 @@ def construire_rapport_pdf(
         pdf.cell(0, 7, _s(sous_titre), new_x=XPos.LMARGIN, new_y=YPos.NEXT)
     pdf.set_font("Helvetica", "", 9)
     pdf.set_text_color(*DOUX)
-    pdf.cell(0, 6, _s(f"Extrait du {date.today():%d/%m/%Y}"),
-             new_x=XPos.LMARGIN, new_y=YPos.NEXT)
+    pdf.cell(0, 6, _s(f"Extrait du {date.today():%d/%m/%Y}"), new_x=XPos.LMARGIN, new_y=YPos.NEXT)
     pdf.ln(2)
     pdf.set_draw_color(*VERT)
     pdf.set_line_width(0.6)
@@ -176,8 +181,9 @@ def construire_rapport_pdf(
             pdf.set_fill_color(249, 249, 245) if r % 2 == 1 else pdf.set_fill_color(255, 255, 255)
             for i, cellule in enumerate(ligne):
                 aligne = "L" if i == 0 else "R"
-                pdf.cell(larg[i], 7, _ajuster(pdf, cellule, larg[i]),
-                         border="B", align=aligne, fill=True)
+                pdf.cell(
+                    larg[i], 7, _ajuster(pdf, cellule, larg[i]), border="B", align=aligne, fill=True
+                )
             pdf.ln(7)
         pdf.ln(5)
 

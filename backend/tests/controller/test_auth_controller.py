@@ -1,165 +1,108 @@
-"""Tests du controller d'authentification.
+"""Tests des routes d'authentification, avec un faux service.
 
-On patche AuthentificationService pour éviter tout accès réel à la base ou à l'extérieur.
-On vérifie que les paramètres sont bien transmis et que les erreurs métier sont
-transformées en réponses HTTP appropriées.
+On appelle directement les fonctions des routes. On vérifie les paramètres transmis,
+le contenu des réponses (jamais d'empreinte de mot de passe) et que les erreurs
+métier remontent sans être interceptées (le gestionnaire global les transformera).
 """
 
-import requests
-from unittest.mock import patch
+from datetime import datetime
 
-from fastapi import FastAPI
-from fastapi.testclient import TestClient
+import pytest
 
+from business_object.enums import Role
 from business_object.utilisateur import Utilisateur
-from controller.auth_controller import router
-
-app = FastAPI()
-app.include_router(router, prefix="/auth")
-client = TestClient(app)
-
-
-# ----------------------------------------------------------------------
-# Inscription
-# ----------------------------------------------------------------------
+from controller.auth_controller import connexion, inscription, profil_courant
+from model.auth_model import Identifiants
+from model.utilisateur_model import UtilisateurSortie
+from utils.exceptions import AuthentificationEchouee, ConflitRessource
 
 
-@patch("controller.auth_controller.AuthentificationService")
-def test_inscription_succes(mock_service_cls):
-    """Une inscription réussie renvoie 200 et le message de confirmation."""
-    utilisateur = Utilisateur(id=5, nom_utilisateur="nouveau", role=None, actif=True)
-    mock_service_cls.return_value.inscrire.return_value = utilisateur
+class FauxAuthentificationService:
+    """Faux service : il note les appels et renvoie des résultats fixes (ou une erreur)."""
 
-    response = client.post(
-        "/auth/inscription",
-        json={"nom_utilisateur": "nouveau", "mot_de_passe": "motdepasse123"},
+    def __init__(self, erreur=None):
+        """Si une erreur est fournie, chaque méthode la lève."""
+        self.erreur = erreur
+        self.appel = None
+
+    def inscrire(self, nom_utilisateur, mot_de_passe):
+        """Imite AuthentificationService.inscrire (renvoie un compte avec son empreinte)."""
+        self.appel = ("inscrire", nom_utilisateur, mot_de_passe)
+        if self.erreur is not None:
+            raise self.erreur
+        return Utilisateur(
+            id=1,
+            nom_utilisateur=nom_utilisateur,
+            mot_de_passe_hash="hash-secret",
+            role=Role.UTILISATEUR,
+            actif=True,
+            date_creation=datetime(2026, 11, 3),
+        )
+
+    def connecter(self, nom_utilisateur, mot_de_passe):
+        """Imite AuthentificationService.connecter."""
+        self.appel = ("connecter", nom_utilisateur, mot_de_passe)
+        if self.erreur is not None:
+            raise self.erreur
+        return "jeton-123"
+
+
+def test_inscription_transmet_les_donnees_et_ne_renvoie_pas_d_empreinte():
+    """La route transmet nom et mot de passe, puis renvoie le compte sans empreinte."""
+    service = FauxAuthentificationService()
+    identifiants = Identifiants(nom_utilisateur="alice", mot_de_passe="Motdepasse1")
+
+    resultat = inscription(identifiants, service=service)
+
+    assert service.appel == ("inscrire", "alice", "Motdepasse1")
+    assert resultat["statut"] == "succes"
+    assert resultat["message"] == "Utilisateur inscrit"
+    compte = resultat["data"]
+    assert isinstance(compte, UtilisateurSortie)
+    assert compte.nom_utilisateur == "alice"
+    assert compte.role is Role.UTILISATEUR
+    assert "hash-secret" not in compte.model_dump_json()
+    assert "Motdepasse1" not in compte.model_dump_json()
+
+
+def test_inscription_laisse_remonter_le_conflit():
+    """Un nom déjà pris (ConflitRessource) remonte tel quel, le gestionnaire global donnera 409."""
+    service = FauxAuthentificationService(erreur=ConflitRessource("Nom déjà utilisé."))
+    identifiants = Identifiants(nom_utilisateur="alice", mot_de_passe="Motdepasse1")
+
+    with pytest.raises(ConflitRessource):
+        inscription(identifiants, service=service)
+
+
+def test_connexion_renvoie_le_jeton():
+    """La route renvoie le jeton du service dans le champ data."""
+    service = FauxAuthentificationService()
+    identifiants = Identifiants(nom_utilisateur="alice", mot_de_passe="Motdepasse1")
+
+    resultat = connexion(identifiants, service=service)
+
+    assert service.appel == ("connecter", "alice", "Motdepasse1")
+    assert resultat == {"message": "Utilisateur connecté", "statut": "succes", "data": "jeton-123"}
+
+
+def test_connexion_laisse_remonter_l_echec():
+    """Des identifiants incorrects (AuthentificationEchouee) remontent, 401 via le gestionnaire."""
+    service = FauxAuthentificationService(erreur=AuthentificationEchouee("Incorrect."))
+    identifiants = Identifiants(nom_utilisateur="alice", mot_de_passe="mauvais")
+
+    with pytest.raises(AuthentificationEchouee):
+        connexion(identifiants, service=service)
+
+
+def test_profil_courant_ne_renvoie_pas_d_empreinte():
+    """Le profil de l'utilisateur connecté ne contient jamais l'empreinte du mot de passe."""
+    utilisateur = Utilisateur(
+        id=2, nom_utilisateur="bob", mot_de_passe_hash="hash-secret", role=Role.ADMIN, actif=True
     )
 
-    assert response.status_code == 200
-    body = response.json()
-    assert body["statut"] == "succes"
-    assert body["message"] == "Utilisateur inscrit"
-    assert body["data"]["nom_utilisateur"] == "nouveau"
-    mock_service_cls.return_value.inscrire.assert_called_once_with("nouveau", "motdepasse123")
+    resultat = profil_courant(utilisateur=utilisateur)
 
-
-@patch("controller.auth_controller.AuthentificationService")
-def test_inscription_utilisateur_existant_renvoie_400(mock_service_cls):
-    """Un nom d'utilisateur déjà pris donne une erreur HTTP 400."""
-    mock_service_cls.return_value.inscrire.side_effect = ValueError("Nom d'utilisateur déjà utilisé.")
-
-    response = client.post(
-        "/auth/inscription",
-        json={"nom_utilisateur": "dupont", "mot_de_passe": "secret"},
-    )
-
-    assert response.status_code == 400
-    assert "déjà utilisé" in response.json()["detail"]
-
-
-@patch("controller.auth_controller.AuthentificationService")
-def test_inscription_erreur_reseau_renvoie_502(mock_service_cls):
-    """Une erreur réseau lors de la récupération ILOSTAT donne une erreur 502."""
-    mock_service_cls.return_value.inscrire.side_effect = requests.RequestException("Connexion refusée.")
-
-    response = client.post(
-        "/auth/inscription",
-        json={"nom_utilisateur": "nouveau", "mot_de_passe": "motdepasse123"},
-    )
-
-    assert response.status_code == 502
-    assert "ILOSTAT" in response.json()["detail"]
-
-
-# ----------------------------------------------------------------------
-# Connexion
-# ----------------------------------------------------------------------
-
-
-@patch("controller.auth_controller.AuthentificationService")
-def test_connexion_succes(mock_service_cls):
-    """Une connexion réussie renvoie 200 et un jeton."""
-    mock_service_cls.return_value.connecter.return_value = {"jeton": "abc123", "type": "bearer"}
-
-    response = client.post(
-        "/auth/connexion",
-        json={"nom_utilisateur": "dupont", "mot_de_passe": "secret"},
-    )
-
-    assert response.status_code == 200
-    body = response.json()
-    assert body["statut"] == "succes"
-    assert body["message"] == "Utilisateur connecté"
-    assert body["data"]["jeton"] == "abc123"
-    mock_service_cls.return_value.connecter.assert_called_once_with("dupont", "secret")
-
-
-@patch("controller.auth_controller.AuthentificationService")
-def test_connexion_identifiants_invalides_renvoie_400(mock_service_cls):
-    """Des identifiants incorrects donnent une erreur HTTP 400."""
-    mock_service_cls.return_value.connecter.side_effect = ValueError("Identifiants incorrects.")
-
-    response = client.post(
-        "/auth/connexion",
-        json={"nom_utilisateur": "dupont", "mot_de_passe": "mauvais"},
-    )
-
-    assert response.status_code == 400
-    assert "incorrects" in response.json()["detail"]
-
-
-@patch("controller.auth_controller.AuthentificationService")
-def test_connexion_erreur_reseau_renvoie_502(mock_service_cls):
-    """Une erreur réseau lors de la récupération ILOSTAT donne une erreur 502."""
-    mock_service_cls.return_value.connecter.side_effect = requests.RequestException("Timeout.")
-
-    response = client.post(
-        "/auth/connexion",
-        json={"nom_utilisateur": "dupont", "mot_de_passe": "secret"},
-    )
-
-    assert response.status_code == 502
-    assert "ILOSTAT" in response.json()["detail"]
-
-
-# ----------------------------------------------------------------------
-# Profil courant
-# ----------------------------------------------------------------------
-
-
-@patch("controller.auth_controller.AuthentificationService")
-def test_profil_courant_succes(mock_service_cls):
-    """Avec un jeton valide, renvoie 200 et le profil de l'utilisateur."""
-    utilisateur = Utilisateur(id=1, nom_utilisateur="dupont", role=None, actif=True)
-    mock_service_cls.return_value.utilisateur_depuis_jeton.return_value = utilisateur
-
-    response = client.get("/auth/profil", params={"jeton": "abc123"})
-
-    assert response.status_code == 200
-    body = response.json()
-    assert body["statut"] == "succes"
-    assert body["message"] == "Profil de l'utilisateur"
-    assert body["data"]["nom_utilisateur"] == "dupont"
-    mock_service_cls.return_value.utilisateur_depuis_jeton.assert_called_once_with("abc123")
-
-
-@patch("controller.auth_controller.AuthentificationService")
-def test_profil_courant_jeton_invalide_renvoie_400(mock_service_cls):
-    """Un jeton expiré ou invalide donne une erreur HTTP 400."""
-    mock_service_cls.return_value.utilisateur_depuis_jeton.side_effect = ValueError("Jeton invalide.")
-
-    response = client.get("/auth/profil", params={"jeton": "faux-jeton"})
-
-    assert response.status_code == 400
-    assert "invalide" in response.json()["detail"]
-
-
-@patch("controller.auth_controller.AuthentificationService")
-def test_profil_courant_erreur_reseau_renvoie_502(mock_service_cls):
-    """Une erreur réseau lors de la récupération ILOSTAT donne une erreur 502."""
-    mock_service_cls.return_value.utilisateur_depuis_jeton.side_effect = requests.RequestException("Indisponible.")
-
-    response = client.get("/auth/profil", params={"jeton": "abc123"})
-
-    assert response.status_code == 502
-    assert "ILOSTAT" in response.json()["detail"]
+    assert resultat["statut"] == "succes"
+    assert resultat["data"].id == 2
+    assert resultat["data"].role is Role.ADMIN
+    assert "hash-secret" not in resultat["data"].model_dump_json()

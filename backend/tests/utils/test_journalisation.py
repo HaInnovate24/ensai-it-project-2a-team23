@@ -4,9 +4,7 @@ import logging
 
 import pytest
 
-from utils import journalisation
 from utils.journalisation import LogIndentation, get_logger, log
-
 
 # --- Fixtures ---
 

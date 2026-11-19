@@ -7,7 +7,6 @@ import pytest
 
 from utils import config
 
-
 # --- mask_value ---
 
 

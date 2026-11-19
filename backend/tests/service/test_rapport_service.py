@@ -1,9 +1,10 @@
 import os
+
 import pytest
 
-from business_object.rapport import Rapport
 from business_object.enums import StatutRapport
 from service.rapport_service import RapportService
+
 
 class FauxRapportDao:
     def __init__(self):
@@ -33,7 +34,7 @@ def creer_service(tmp_path):
     """
     service = RapportService.__new__(RapportService)
     service.dao = FauxRapportDao()
-    # Utilisation d'un dossier temporaire fourni par pytest pour éviter de 
+    # Utilisation d'un dossier temporaire fourni par pytest pour éviter de
     # polluer le vrai projet avec des PDF de test.
     service.dossier_stockage = str(tmp_path)
     os.makedirs(service.dossier_stockage, exist_ok=True)
@@ -42,14 +43,14 @@ def creer_service(tmp_path):
 
 def test_generer_rapport(tmp_path):
     service = creer_service(tmp_path)
-    
+
     rapport = service.generer(
         utilisateur_id=1,
         titre="Analyse de test",
         description="Ceci est un test",
-        code_indicateur="EMP_TEMP"
+        code_indicateur="EMP_TEMP",
     )
-    
+
     assert rapport.id == 1
     assert rapport.titre == "Analyse de test"
     assert rapport.description == "Ceci est un test"
@@ -64,7 +65,7 @@ def test_lister(tmp_path):
     service.generer(utilisateur_id=1, titre="Rapport A")
     service.generer(utilisateur_id=1, titre="Rapport B")
     service.generer(utilisateur_id=2, titre="Rapport C")
-    
+
     rapports_u1 = service.lister(1)
     assert len(rapports_u1) == 2
     assert rapports_u1[0].titre == "Rapport A"
@@ -73,20 +74,20 @@ def test_lister(tmp_path):
 def test_trouver_par_id(tmp_path):
     service = creer_service(tmp_path)
     rapport = service.generer(utilisateur_id=1)
-    
+
     trouve = service.trouver_par_id(rapport.id)
     assert trouve is not None
     assert trouve.id == rapport.id
-    
+
     assert service.trouver_par_id(999) is None
 
 
 def test_telecharger(tmp_path):
     service = creer_service(tmp_path)
     rapport = service.generer(utilisateur_id=1)
-    
+
     contenu = service.telecharger(rapport.id)
-    
+
     assert isinstance(contenu, bytes)
     assert len(contenu) > 0
     # On vérifie la signature magique d'un fichier PDF (qui commence toujours par %PDF-)
@@ -95,14 +96,14 @@ def test_telecharger(tmp_path):
 
 def test_telecharger_echoue_si_introuvable(tmp_path):
     service = creer_service(tmp_path)
-    
+
     # Cas 1 : Le rapport n'existe pas en base
     with pytest.raises(FileNotFoundError, match="PDF introuvable."):
         service.telecharger(999)
-        
+
     # Cas 2 : Le rapport existe, mais le fichier PDF a été supprimé physiquement du disque
     rapport = service.generer(utilisateur_id=1)
     os.remove(rapport.fichier_path)
-    
+
     with pytest.raises(FileNotFoundError, match="PDF introuvable."):
         service.telecharger(rapport.id)
