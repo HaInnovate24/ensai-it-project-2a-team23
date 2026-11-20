@@ -44,9 +44,11 @@ cd ensai-it-project-2a-team23
 
 ## 3. Configuration (`.env`)
 
-Le projet lit sa configuration depuis un fichier **`.env`** à la racine. Créez-le
-en copiant le modèle ci-dessous et en adaptant les valeurs à votre installation
-PostgreSQL :
+Le projet lit sa configuration depuis un fichier `.env` à la racine. Créez-le  
+en copiant le modèle ci-dessous et en adaptant les valeurs à votre installation  
+PostgreSQL : 
+
+A adapter en fonction des vos informations de connexion
 
 ```dotenv
 # --- Base de données PostgreSQL ---
@@ -61,7 +63,7 @@ POSTGRES_SCHEMA=project
 JWT_SECRET_KEY=changez-moi-par-une-chaine-longue-et-aleatoire
 
 # --- Serveur API (backend) ---
-UVICORN_HOST=127.0.0.1
+UVICORN_HOST=0.0.0.0
 UVICORN_PORT=5000
 
 # --- Accès à l'API depuis le frontend ---
@@ -75,10 +77,10 @@ ELO_K_FACTOR=32
 Points importants :
 
 - `POSTGRES_USER` doit pouvoir **créer une base** (`CREATEDB`) pour que `make init`
-  crée automatiquement `POSTGRES_DATABASE` si elle n'existe pas. Sinon, créez la base
-  manuellement au préalable.
+crée automatiquement `POSTGRES_DATABASE` si elle n'existe pas. Sinon, créez la base
+manuellement au préalable.
 - `POSTGRES_SCHEMA` est le schéma applicatif (créé automatiquement) — pas besoin de
-  le créer à la main.
+le créer à la main.
 - Changez `JWT_SECRET_KEY` par une valeur secrète (utilisée pour signer les jetons).
 
 ---
@@ -93,12 +95,14 @@ make init
 
 Cette commande fait **tout** :
 
-1. **`install`** — installe les dépendances du backend et du frontend (via `uv`).
-2. **`db-create`** — crée la base PostgreSQL `POSTGRES_DATABASE` si elle n'existe pas.
-3. **`db-push`** — crée le schéma applicatif et les tables (`data/init_db.sql`).
-4. **`db-load`** — charge les référentiels : pays, indicateurs, classifications
+1. `install` — installe les dépendances du backend et du frontend (via `uv`).
+2. `db-create` — crée la base PostgreSQL `POSTGRES_DATABASE` si elle n'existe pas.
+3. `db-push` — crée le schéma applicatif et les tables (`data/init_db.sql`).
+4. `db-load` — charge les référentiels : pays, indicateurs, classifications
+
    (`data/pop_referentiels.sql`).
-5. **`db-import`** — collecte depuis ILOSTAT **tous les indicateurs actifs** du
+5. `db-import` — collecte depuis ILOSTAT **tous les indicateurs actifs** du
+
    référentiel, soit :
    - `EMP_TEMP_SEX_OCU_NB` — Emploi par sexe et profession ;
    - `POP_XWAP_SEX_AGE_NB` — Population en âge de travailler par sexe et âge.
@@ -132,13 +136,13 @@ communique avec l'API via `BACKEND_URL`.
 ### Créer un compte et un administrateur
 
 - Les utilisateurs se créent via la page **Inscription** de l'interface (compte
-  standard).
+standard).
 - Pour obtenir un **administrateur** (accès à la page d'administration, imports,
-  gestion des comptes), promouvez un compte existant directement en base :
-
+gestion des comptes), promouvez un compte existant directement en base :
   ```bash
   make db-shell
   ```
+
   puis, dans la console `psql` :
   ```sql
   UPDATE utilisateur SET role = 'admin' WHERE nom_utilisateur = '<votre_nom>';
