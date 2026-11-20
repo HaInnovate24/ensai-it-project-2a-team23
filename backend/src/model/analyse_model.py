@@ -25,16 +25,26 @@ class PointSerie(BaseModel):
 
 
 class Serie(BaseModel):
-    """Série temporelle en sortie."""
+    """Série temporelle en sortie.
+
+    periodes_manquantes liste les périodes sans donnée dans la fenêtre analysée
+    (vide quand il n'y en a pas, ou quand le format des périodes est inconnu).
+    """
 
     libelle: str
     points: list[PointSerie]
+    periodes_manquantes: list[str] = []
 
 
 class Comparaison(BaseModel):
-    """Comparaison de plusieurs séries en sortie."""
+    """Comparaison de plusieurs séries en sortie.
+
+    sans_donnees liste les pays ou indicateurs demandés pour lesquels aucune
+    donnée n'a été trouvée (ils n'apparaissent donc pas dans series).
+    """
 
     series: list[Serie]
+    sans_donnees: list[str] = []
 
 
 class ResumeSerie(BaseModel):
@@ -43,6 +53,8 @@ class ResumeSerie(BaseModel):
     Les variations valent None quand elles ne sont pas calculables.
     série d'un seul point (absolue et relative) ou valeur de départ égale
     à zéro (relative seulement). La variation relative est en pourcentage.
+    Les statistiques portent sur les points disponibles. periodes_manquantes
+    indique les périodes de la fenêtre sans donnée.
     """
 
     libelle: str
@@ -56,3 +68,4 @@ class ResumeSerie(BaseModel):
     moyenne: float
     variation_absolue: float | None
     variation_relative: float | None
+    periodes_manquantes: list[str] = []

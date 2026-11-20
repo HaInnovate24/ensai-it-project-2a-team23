@@ -1,12 +1,21 @@
-"""Schéma Pydantic du journal d'activité (sortie)."""
+"""Schémas Pydantic du journal d'activité."""
 
 from datetime import datetime
 
 from pydantic import BaseModel, ConfigDict
 
 
+class JournalEntreeCreation(BaseModel):
+    """Entrée de journal reçue en entrée (corps de requête)."""
+
+    utilisateur_id: int
+    action: str
+    cible: str | None = None
+    details: str | None = None
+
+
 class JournalSortie(BaseModel):
-    """Entrée du journal renvoyée au client."""
+    """Entrée de journal renvoyée au client (lecture du journal)."""
 
     model_config = ConfigDict(from_attributes=True)
 

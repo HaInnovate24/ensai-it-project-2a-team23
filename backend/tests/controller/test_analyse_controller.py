@@ -1,7 +1,7 @@
 """Tests du controller d'analyse, sans base de données ni vrai service.
 
 On appelle directement les fonctions des routes en leur donnant un faux service.
-On vérifie deux choses : les paramètres sont bien transmis au service, et les
+On vérifie deux choses, les paramètres sont bien transmis au service, et les
 erreurs métier sont bien transformées en erreurs HTTP.
 """
 
@@ -14,13 +14,14 @@ from controller.analyse_controller import (
     comparaison_indicateurs,
     comparaison_pays,
     evolution,
+    resume_evolution,
 )
-from model.analyse_model import Comparaison, PointSerie, Serie
+from model.analyse_model import Comparaison, PointSerie, ResumeSerie, Serie
 from utils.exceptions import DonneesInvalides, RessourceIntrouvable
 
 
 class FauxService:
-    """Faux service, il note les appels reçus et renvoie un résultat fixe (ou une erreur)."""
+    """Faux service : il note les appels reçus et renvoie un résultat fixe (ou une erreur)."""
 
     def __init__(self, erreur=None):
         """Si une erreur est fournie, chaque méthode la lève au lieu de répondre."""
@@ -38,6 +39,23 @@ class FauxService:
         """Imite AnalyseService.evolution."""
         serie = Serie(libelle="Emploi - France", points=[PointSerie(periode="2024Q1", valeur=1.0)])
         return self._repondre("evolution", arguments, serie)
+
+    def resumer_evolution(self, **arguments):
+        """Imite AnalyseService.resumer_evolution."""
+        resume = ResumeSerie(
+            libelle="Emploi - France",
+            nb_points=2,
+            periode_debut="2024Q1",
+            periode_fin="2024Q2",
+            valeur_debut=10.0,
+            valeur_fin=12.0,
+            minimum=10.0,
+            maximum=12.0,
+            moyenne=11.0,
+            variation_absolue=2.0,
+            variation_relative=20.0,
+        )
+        return self._repondre("resumer_evolution", arguments, resume)
 
     def comparer_pays(self, **arguments):
         """Imite AnalyseService.comparer_pays."""
@@ -191,3 +209,73 @@ def test_carte_aucune_donnee_renvoie_404():
         carte(code_indicateur="EMP", periode="1900Q1", service=service)
 
     assert erreur.value.status_code == 404
+
+
+# Résumé de l'évolution et base 100
+
+
+def test_resume_evolution_transmet_les_parametres_et_renvoie_le_resume():
+    """La route transmet les paramètres au service et renvoie son résumé."""
+    service = FauxService()
+
+    resultat = resume_evolution(
+        code_indicateur="EMP",
+        code_pays="FRA",
+        sexe=Sexe.FEMME,
+        code_classification="AGE_15_24",
+        nb_periodes=8,
+        service=service,
+    )
+
+    assert isinstance(resultat, ResumeSerie)
+    assert resultat.variation_relative == 20.0
+    assert service.appel == (
+        "resumer_evolution",
+        {
+            "code_indicateur": "EMP",
+            "code_pays": "FRA",
+            "sexe": Sexe.FEMME,
+            "code_classification": "AGE_15_24",
+            "nb_periodes": 8,
+        },
+    )
+
+
+def test_resume_evolution_introuvable_renvoie_404():
+    """Une ressource introuvable donne une erreur HTTP 404."""
+    service = FauxService(erreur=RessourceIntrouvable("Pays inconnu : XXX."))
+
+    with pytest.raises(HTTPException) as erreur:
+        resume_evolution(code_indicateur="EMP", code_pays="XXX", service=service)
+
+    assert erreur.value.status_code == 404
+
+
+def test_resume_evolution_donnees_invalides_renvoie_422():
+    """Des données invalides donnent une erreur HTTP 422."""
+    service = FauxService(erreur=DonneesInvalides("Nombre de périodes invalide."))
+
+    with pytest.raises(HTTPException) as erreur:
+        resume_evolution(code_indicateur="EMP", code_pays="FRA", nb_periodes=0, service=service)
+
+    assert erreur.value.status_code == 422
+
+
+def test_comparaison_indicateurs_transmet_base_100():
+    """Le paramètre base_100 est transmis au service."""
+    service = FauxService()
+
+    comparaison_indicateurs(
+        codes_indicateur=["EMP", "TAUX"], code_pays="FRA", base_100=True, service=service
+    )
+
+    assert service.appel[1]["base_100"] is True
+
+
+def test_comparaison_indicateurs_base_100_faux_par_defaut():
+    """Sans précision, la base 100 est désactivée."""
+    service = FauxService()
+
+    comparaison_indicateurs(codes_indicateur=["EMP"], code_pays="FRA", service=service)
+
+    assert service.appel[1]["base_100"] is False

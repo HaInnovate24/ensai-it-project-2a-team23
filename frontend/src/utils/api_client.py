@@ -44,7 +44,7 @@ class APIClient:
             dict: A dictionary containing the 'status_code' and the response 'data'.
         """
         url = f"{self.base_url}{path}"
-        loggers = st.session_state.get("logger")
+        # loggers = st.session_state.get("logger") Je mets en commentaire, car crée m1 jam1 utilisée
 
         # Automatically inject headers (including the token)
         headers = kwargs.pop("headers", {})

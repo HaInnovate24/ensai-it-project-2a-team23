@@ -7,16 +7,16 @@ sans être interceptées (le gestionnaire global les transformera en codes HTTP)
 from datetime import datetime
 
 import pytest
+
+from business_object.enums import Role
+from business_object.journal_activite import JournalActivite
+from business_object.utilisateur import Utilisateur
 from controller.admin_comptes_controller import (
     changer_activation,
     changer_role,
     consulter_journal,
     lister_utilisateurs,
 )
-
-from business_object.enums import Role
-from business_object.journal_activite import JournalActivite
-from business_object.utilisateur import Utilisateur
 from model.utilisateur_model import ChangementActivation, ChangementRole
 from utils.exceptions import ConflitRessource, RessourceIntrouvable
 

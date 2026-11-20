@@ -9,7 +9,7 @@ from utils.config import load_environment_variables
 
 load_environment_variables()
 
-from dao.db_connection import DBConnection
+from dao.db_connection import DBConnection  # noqa: E402
 
 
 def test_singleton_pattern():

@@ -11,7 +11,7 @@ from fastapi import APIRouter, Depends, Query
 from business_object.enums import Sexe
 from controller.dependances import exiger_connexion
 from controller.erreurs_http import erreur_http
-from model.analyse_model import Comparaison, Serie
+from model.analyse_model import Comparaison, ResumeSerie, Serie
 from service.analyse_service import AnalyseService
 from utils.exceptions import ErreurMetier
 
@@ -40,6 +40,28 @@ def evolution(
     """Renvoie l'évolution temporelle d'un indicateur (accès libre)."""
     try:
         return service.evolution(
+            code_indicateur=code_indicateur,
+            code_pays=code_pays,
+            sexe=sexe,
+            code_classification=code_classification,
+            nb_periodes=nb_periodes,
+        )
+    except ErreurMetier as erreur:
+        raise erreur_http(erreur) from erreur
+
+
+@router.get("/resume-evolution", response_model=ResumeSerie)
+def resume_evolution(
+    code_indicateur: str,
+    code_pays: str,
+    sexe: Sexe | None = None,
+    code_classification: str | None = None,
+    nb_periodes: int | None = None,
+    service: AnalyseService = Depends(get_analyse_service),
+) -> ResumeSerie:
+    """Renvoie le résumé de l'évolution : minimum, maximum, moyenne et variation (accès libre)."""
+    try:
+        return service.resumer_evolution(
             code_indicateur=code_indicateur,
             code_pays=code_pays,
             sexe=sexe,
@@ -82,15 +104,20 @@ def comparaison_indicateurs(
     code_pays: str,
     sexe: Sexe | None = None,
     code_classification: str | None = None,
+    base_100: bool = False,
     service: AnalyseService = Depends(get_analyse_service),
 ) -> Comparaison:
-    """Compare plusieurs indicateurs pour un même pays (connexion exigée)."""
+    """Compare plusieurs indicateurs pour un même pays (connexion exigée).
+
+    Avec base_100=true, les séries sont ramenées à 100 à la première période commune.
+    """
     try:
         return service.comparer_indicateurs(
             codes_indicateur=codes_indicateur,
             code_pays=code_pays,
             sexe=sexe,
             code_classification=code_classification,
+            base_100=base_100,
         )
     except ErreurMetier as erreur:
         raise erreur_http(erreur) from erreur

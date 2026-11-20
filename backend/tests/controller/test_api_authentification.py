@@ -1,4 +1,4 @@
-"""Tests de bout en bout. Vraies requêtes HTTP sur les vrais services, avec une fausse base.
+"""Tests de bout en bout : vraies requêtes HTTP sur les vrais services, avec une fausse base.
 
 On assemble une petite application FastAPI avec les vrais routeurs, le gestionnaire
 d'erreurs et les vrais services (AuthentificationService, UtilisateurService,
@@ -6,7 +6,7 @@ JournalService) branchés sur des faux DAO. On vérifie ainsi les codes HTTP, le
 en-têtes et le contenu des réponses.
 
 Ces tests ont besoin du paquet httpx (utilisé par le client de test FastAPI). S'il
-n'est pas installé, ils sont simplement ignorés : uv add --project backend --dev httpx
+n'est pas installé, ils sont simplement ignorés (au besoin : uv add --project backend --dev httpx)
 """
 
 from datetime import datetime
@@ -14,7 +14,7 @@ from datetime import datetime
 import pytest
 
 from business_object.enums import Role
-from model.analyse_model import Comparaison, PointSerie, Serie
+from model.analyse_model import Comparaison, PointSerie, ResumeSerie, Serie
 from service.authentification_service import AuthentificationService
 from service.journal_service import JournalService
 from service.utilisateur_service import UtilisateurService
@@ -100,6 +100,22 @@ class FauxAnalyseService:
     def evolution(self, **arguments):
         """Imite AnalyseService.evolution."""
         return Serie(libelle="Emploi", points=[PointSerie(periode="2024Q1", valeur=1.0)])
+
+    def resumer_evolution(self, **arguments):
+        """Imite AnalyseService.resumer_evolution."""
+        return ResumeSerie(
+            libelle="Emploi",
+            nb_points=1,
+            periode_debut="2024Q1",
+            periode_fin="2024Q1",
+            valeur_debut=1.0,
+            valeur_fin=1.0,
+            minimum=1.0,
+            maximum=1.0,
+            moyenne=1.0,
+            variation_absolue=None,
+            variation_relative=None,
+        )
 
     def comparer_pays(self, **arguments):
         """Imite AnalyseService.comparer_pays."""
@@ -305,7 +321,9 @@ def test_compte_desactive_renvoie_403_avec_un_jeton_existant(api):
     assert reponse.status_code == 403
 
 
+# ----------------------------------------------------------------------
 # Accès aux analyses : évolution libre, le reste avec connexion
+# ----------------------------------------------------------------------
 
 
 def test_evolution_accessible_sans_connexion(api):
@@ -313,6 +331,33 @@ def test_evolution_accessible_sans_connexion(api):
     client, _ = api
 
     reponse = client.get("/analyses/evolution", params={"code_indicateur": "E", "code_pays": "FRA"})
+
+    assert reponse.status_code == 200
+
+
+def test_resume_evolution_accessible_sans_connexion(api):
+    """Le résumé de l'évolution (F3) est en accès libre, comme l'évolution."""
+    client, _ = api
+
+    reponse = client.get(
+        "/analyses/resume-evolution", params={"code_indicateur": "E", "code_pays": "FRA"}
+    )
+
+    assert reponse.status_code == 200
+    assert reponse.json()["moyenne"] == 1.0
+    assert reponse.json()["variation_relative"] is None
+
+
+def test_comparaison_indicateurs_accepte_base_100(api):
+    """Le paramètre base_100 est accepté par la route (avec connexion)."""
+    client, _ = api
+    en_tete = inscrire_et_connecter(client, "alice")
+
+    reponse = client.get(
+        "/analyses/comparaison-indicateurs",
+        params={"codes_indicateur": ["E", "T"], "code_pays": "FRA", "base_100": "true"},
+        headers=en_tete,
+    )
 
     assert reponse.status_code == 200
 

@@ -1,0 +1,88 @@
+[1mdiff --git a/backend/pyproject.toml b/backend/pyproject.toml[m
+[1mindex daaa20e..26abf1d 100644[m
+[1m--- a/backend/pyproject.toml[m
+[1m+++ b/backend/pyproject.toml[m
+[36m@@ -69,6 +69,7 @@[m [mdirectory = "coverage_report"[m
+ [m
+ [dependency-groups][m
+ dev = [[m
+[32m+[m[32m    "httpx>=0.28.1",[m
+     "mypy>=2.3.1",[m
+     "pandas-stubs>=3.0.5.260730",[m
+     "pytest>=9.0.2",[m
+[1mdiff --git a/backend/src/controller/admin_compte_controller.py b/backend/src/controller/admin_compte_controller.py[m
+[1mdeleted file mode 100644[m
+[1mindex 1c78037..0000000[m
+[1m--- a/backend/src/controller/admin_compte_controller.py[m
+[1m+++ /dev/null[m
+[36m@@ -1,84 +0,0 @@[m
+[31m-"""Routes HTTP d'administration des comptes et du journal (administrateurs uniquement).[m
+[31m-[m
+[31m-Ce routeur complète admin_controller (imports, données). il se branche sur le même[m
+[31m-préfixe /admin dans main.py. Les erreurs métier sont transformées en codes HTTP par[m
+[31m-le gestionnaire global (controller/erreurs_http.py).[m
+[31m-"""[m
+[31m-[m
+[31m-from fastapi import APIRouter, Depends[m
+[31m-[m
+[31m-from business_object.enums import Role[m
+[31m-from business_object.utilisateur import Utilisateur[m
+[31m-from controller.dependances import exiger_admin[m
+[31m-from model.journal_model import JournalSortie[m
+[31m-from model.utilisateur_model import ChangementActivation, ChangementRole, UtilisateurSortie[m
+[31m-from service.journal_service import LIMITE_PAR_DEFAUT, JournalService[m
+[31m-from service.utilisateur_service import UtilisateurService[m
+[31m-[m
+[31m-router = APIRouter()[m
+[31m-[m
+[31m-[m
+[31m-def get_utilisateur_service() -> UtilisateurService:[m
+[31m-    """Fournit le service de gestion des comptes (remplaçable dans les tests)."""[m
+[31m-    return UtilisateurService()[m
+[31m-[m
+[31m-[m
+[31m-def get_journal_service() -> JournalService:[m
+[31m-    """Fournit le service du journal (remplaçable dans les tests)."""[m
+[31m-    return JournalService()[m
+[31m-[m
+[31m-[m
+[31m-@router.get("/utilisateurs", response_model=list[UtilisateurSortie])[m
+[31m-def lister_utilisateurs([m
+[31m-    acteur: Utilisateur = Depends(exiger_admin),[m
+[31m-    service: UtilisateurService = Depends(get_utilisateur_service),[m
+[31m-) -> list[UtilisateurSortie]:[m
+[31m-    """Liste tous les comptes, sans mot de passe ni empreinte."""[m
+[31m-    return [UtilisateurSortie.model_validate(u) for u in service.lister_utilisateurs(acteur)][m
+[31m-[m
+[31m-[m
+[31m-@router.patch("/utilisateurs/{id_utilisateur}/role", response_model=UtilisateurSortie)[m
+[31m-def changer_role([m
+[31m-    id_utilisateur: int,[m
+[31m-    changement: ChangementRole,[m
+[31m-    acteur: Utilisateur = Depends(exiger_admin),[m
+[31m-    service: UtilisateurService = Depends(get_utilisateur_service),[m
+[31m-) -> UtilisateurSortie:[m
+[31m-    """Promeut ("admin") ou rétrograde ("utilisateur") un compte.[m
+[31m-[m
+[31m-    Réponses : 200, 404 compte inconnu, 409 rôle déjà attribué, 422 si on vise son propre compte.[m
+[31m-    """[m
+[31m-    if changement.role == Role.ADMIN:[m
+[31m-        cible = service.promouvoir_admin(acteur, id_utilisateur)[m
+[31m-    else:[m
+[31m-        cible = service.retrograder_admin(acteur, id_utilisateur)[m
+[31m-    return UtilisateurSortie.model_validate(cible)[m
+[31m-[m
+[31m-[m
+[31m-@router.patch("/utilisateurs/{id_utilisateur}/activation", response_model=UtilisateurSortie)[m
+[31m-def changer_activation([m
+[31m-    id_utilisateur: int,[m
+[31m-    changement: ChangementActivation,[m
+[31m-    acteur: Utilisateur = Depends(exiger_admin),[m
+[31m-    service: UtilisateurService = Depends(get_utilisateur_service),[m
+[31m-) -> UtilisateurSortie:[m
+[31m-    """Active (true) ou désactive (false) un compte.[m
+[31m-[m
+[31m-    Réponses : 200, 404 compte inconnu, 409 déjà dans cet état, 422 si on[m
+[31m-    désactive son propre compte.[m
+[31m-    """[m
+[31m-    cible = service.definir_activation(acteur, id_uti

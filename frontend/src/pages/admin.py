@@ -132,7 +132,7 @@ with st.container(border=True):
         largeurs = [0.6, 2, 1.6, 0.9, 1]
         entetes = ["ID", "Utilisateur", "Rôle", "Actif", ""]
         cols_h = st.columns(largeurs, vertical_alignment="center")
-        for col, titre in zip(cols_h, entetes):
+        for col, titre in zip(cols_h, entetes, strict=False):
             col.markdown(
                 f"<div class='ls-eyebrow plain' style='margin:0'>{html.escape(titre)}</div>",
                 unsafe_allow_html=True,
