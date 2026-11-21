@@ -770,9 +770,9 @@ $ upright("Part des femmes") = upright("Emploi des femmes") / upright("Emploi to
   align: (left,left,left,),
   table.header([Indicateur], [Interprétation], [Intervalle],),
   table.hline(),
-  [Taux d'emploi], [Part de la population en âge de travailler qui occupe un emploi], [$\[ 0 thin \; 100 \]$],
-  [Part des femmes], [Féminisation d'une profession (50 = parité)], [$\[ 0 thin \; 100 \]$],
-  [Variation annuelle], [Évolution relative d'un indicateur d'une année à l'autre], [$\] - 100 thin \; + oo \[$],
+  [Taux d'emploi], [Part de la population en âge de travailler qui occupe un emploi], [$\[0 thin\;100\]$],
+  [Part des femmes], [Féminisation d'une profession (50 = parité)], [$\[0 thin\;100\]$],
+  [Variation annuelle], [Évolution relative d'un indicateur d'une année à l'autre], [$\]- 100 thin\;+ oo\[$],
 )
 === Difficultés liées aux données
 <difficultés-liées-aux-données>
@@ -837,7 +837,19 @@ LaborScope repose sur une architecture client-serveur découplée, articulée au
 ] <fig-archi>
 Le diagramme de packages ci-dessus illustre la manière dont les différentes couches de l'application interagissent entre elles. La première couche correspond au frontend, qui permet à l'utilisateur de se connecter, de naviguer dans l'interface et d'afficher les visualisations graphiques. La deuxième couche est l'API (controller et model), qui réceptionne et valide les requêtes de l'utilisateur avant de les transmettre au serveur. La couche de services (service et business\_object) prend ensuite le relais pour appliquer les règles métier et effectuer les calculs statistiques demandés. Enfin, elle s'appuie sur la couche d'accès aux données (client et dao) : les flux externes sont récupérés et normalisés, puis transmis aux DAO afin d'être stockés et interrogés dans la base PostgreSQL avant d'être renvoyés sous forme de résultats JSON au frontend. Développé en Python, le projet utilise le gestionnaire uv (pyproject.toml et uv.lock) afin de garantir une résolution rapide des dépendances et une stricte reproductibilité entre postes locaux et conteneurs.
 
-Des outils d'assurance qualité (pytest, coverage, ruff, mypy, bandit) complètent cette stack pour vérifier les tests, le typage statique et la conformité du code (détaillés en Partie 5). 2.3 Communication, sécurité et déploiement 2.3.1 Communication client-serveur et accès aux données Les échanges entre l'interface et le serveur reposent exclusivement sur des requêtes HTTP au format JSON. Côté frontend, l'ensemble des appels vers l'API est centralisé dans une classe dédiée (APIClient) qui s'appuie sur une session persistante : cela évite de disperser la logique réseau dans les différentes pages et permet de gérer uniformément les délais d'attente ou les erreurs de connexion. Côté serveur, l'API FastAPI organise ses points d'entrée autour de routeurs thématiques (/auth, /referentiels, /analyses, /admin et /journal). Pour interagir avec PostgreSQL, la classe DBConnection implémente le patron de conception Singleton afin de partager une unique connexion sur tout le cycle de vie du backend, évitant ainsi le coût d'ouvertures répétées lors des requêtes analytiques. 2.3.2 Sécurisation des accès Afin de protéger les comptes utilisateurs et de restreindre l'accès aux fonctionnalités d'administration, aucun mot de passe n'est stocké en clair en base de données : ils sont protégés par un algorithme de hachage sécurisé associé à un sel aléatoire unique. Une fois l'utilisateur connecté, le serveur lui délivre un jeton temporaire (JWT) que l'interface conserve le temps de la session et transmet automatiquement à chaque requête vers une ressource protégée. 2.3.3 Conteneurisation et déploiement L'application est conteneurisée avec Docker et orchestrée via docker-compose.yml autour de trois services isolés communiquant sur un réseau interne dédié : postgres (port 5432) : base de données PostgreSQL 16 dotée d'un volume persistant et initialisée automatiquement au démarrage via les scripts SQL du dossier data/ \; backend (port 5000) : serveur API FastAPI exécuté sous Python 3.13 \; frontend (port 8000) : application web Streamlit dialoguant directement avec le backend via le réseau interne Docker.
+Des outils d'assurance qualité (pytest, coverage, ruff, mypy, bandit) complètent cette stack pour vérifier les tests, le typage statique et la conformité du code (détaillés en Partie 5).
+
+== Communication, sécurité et déploiement
+<communication-sécurité-et-déploiement>
+=== Communication client-serveur et accès aux données
+<communication-client-serveur-et-accès-aux-données>
+Les échanges entre l'interface et le serveur reposent exclusivement sur des requêtes HTTP au format JSON. Côté frontend, l'ensemble des appels vers l'API est centralisé dans une classe dédiée (APIClient) qui s'appuie sur une session persistante : cela évite de disperser la logique réseau dans les différentes pages et permet de gérer uniformément les délais d'attente ou les erreurs de connexion. Côté serveur, l'API FastAPI organise ses points d'entrée autour de routeurs thématiques (/auth, /referentiels, /analyses, /admin et /journal). Pour interagir avec PostgreSQL, la classe DBConnection implémente le patron de conception Singleton afin de partager une unique connexion sur tout le cycle de vie du backend, évitant ainsi le coût d'ouvertures répétées lors des requêtes analytiques.
+
+=== Sécurisation des accès
+<sécurisation-des-accès>
+Afin de protéger les comptes utilisateurs et de restreindre l'accès aux fonctionnalités d'administration, aucun mot de passe n'est stocké en clair en base de données : ils sont protégés par un algorithme de hachage sécurisé associé à un sel aléatoire unique. Une fois l'utilisateur connecté, le serveur lui délivre un jeton temporaire (JWT) que l'interface conserve le temps de la session et transmet automatiquement à chaque requête vers une ressource protégée. \#\#\# Conteneurisation et déploiement
+
+L'application est conteneurisée avec Docker et orchestrée via docker-compose.yml autour de trois services isolés communiquant sur un réseau interne dédié : postgres (port 5432) : base de données PostgreSQL 16 dotée d'un volume persistant et initialisée automatiquement au démarrage via les scripts SQL du dossier data/ \; backend (port 5000) : serveur API FastAPI exécuté sous Python 3.13 \; frontend (port 8000) : application web Streamlit dialoguant directement avec le backend via le réseau interne Docker.
 
 #block[
 #callout(
@@ -960,7 +972,7 @@ La consultation d'un indicateur d'emploi traverse toutes les couches, de la requ
 + #strong[Que fait l'utilisateur ?] …
 + #strong[Validation et sécurité.] …
 + #strong[Traitement métier.] …
-+ #strong[Accès aux données.] ..
++ #strong[Accès aux données.] \..
 
 === Zoom sur l'authentification
 <zoom-sur-lauthentification>
