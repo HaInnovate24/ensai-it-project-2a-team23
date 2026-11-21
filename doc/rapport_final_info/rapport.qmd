@@ -385,13 +385,19 @@ Développé en Python, le projet utilise le gestionnaire uv (pyproject.toml et u
 
 
 Des outils d'assurance qualité (pytest, coverage, ruff, mypy, bandit) complètent cette stack pour vérifier les tests, le typage statique et la conformité du code (détaillés en Partie 5).
-2.3 Communication, sécurité et déploiement
-2.3.1 Communication client-serveur et accès aux données
+
+## Communication, sécurité et déploiement
+
+### Communication client-serveur et accès aux données
+
 Les échanges entre l'interface et le serveur reposent exclusivement sur des requêtes HTTP au format JSON. Côté frontend, l'ensemble des appels vers l'API est centralisé dans une classe dédiée (APIClient) qui s'appuie sur une session persistante : cela évite de disperser la logique réseau dans les différentes pages et permet de gérer uniformément les délais d'attente ou les erreurs de connexion.
 Côté serveur, l'API FastAPI organise ses points d'entrée autour de routeurs thématiques (/auth, /referentiels, /analyses, /admin et /journal). Pour interagir avec PostgreSQL, la classe DBConnection implémente le patron de conception Singleton afin de partager une unique connexion sur tout le cycle de vie du backend, évitant ainsi le coût d'ouvertures répétées lors des requêtes analytiques.
-2.3.2 Sécurisation des accès
+
+### Sécurisation des accès
+
 Afin de protéger les comptes utilisateurs et de restreindre l'accès aux fonctionnalités d'administration, aucun mot de passe n'est stocké en clair en base de données : ils sont protégés par un algorithme de hachage sécurisé associé à un sel aléatoire unique. Une fois l'utilisateur connecté, le serveur lui délivre un jeton temporaire (JWT) que l'interface conserve le temps de la session et transmet automatiquement à chaque requête vers une ressource protégée.
-2.3.3 Conteneurisation et déploiement
+### Conteneurisation et déploiement
+
 L'application est conteneurisée avec Docker et orchestrée via docker-compose.yml autour de trois services isolés communiquant sur un réseau interne dédié :
 postgres (port 5432) : base de données PostgreSQL 16 dotée d'un volume persistant et initialisée automatiquement au démarrage via les scripts SQL du dossier data/ ;
 backend (port 5000) : serveur API FastAPI exécuté sous Python 3.13 ;
