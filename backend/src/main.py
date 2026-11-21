@@ -1,6 +1,6 @@
 """Point d'entrée du service web FastAPI.
 
-Crée l'application, branche les routeurs et démarre le planificateur.
+Crée l'application et branche les routeurs.
 """
 
 from fastapi import FastAPI, Request, status
@@ -29,9 +29,16 @@ from controller import (  # noqa: E402
     #rapport_controller,
     referentiel_controller,
 )
+from controller.erreurs import installer_gestionnaires_erreurs  # noqa: E402
+
 app = FastAPI(title="LaborScope")
 
 app.add_middleware(LogMiddleware)
+
+# Traduit les erreurs métier (utils.exceptions) en codes HTTP au niveau de
+# l'application : toute ErreurMetier non attrapée dans un controller est
+# convertie en 401/403/404/409/422 au lieu de remonter en 500.
+installer_gestionnaires_erreurs(app)
 
 
 @app.exception_handler(RequestValidationError)

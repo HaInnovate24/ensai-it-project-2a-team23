@@ -1,3 +1,4 @@
+import html
 from datetime import date
 
 import pandas as pd
@@ -6,7 +7,7 @@ import plotly.graph_objects as go
 import streamlit as st
 
 from utils.api_client import api_client
-from utils.centroides_pays import CENTROIDES
+from utils.centroides_pays import CENTROIDES, CONTINENTS
 from utils.log_init import get_page_logger
 from utils.referentiels import (
     SEXES,
@@ -24,10 +25,14 @@ from utils.ui import (
     ICONE_GLOBE,
     afficher_graphique,
     carte_metrique,
+    entete_graphique,
     est_connecte,
-    fmt_fr as format_fr,
     ligne_source,
+    notif,
     styliser_figure,
+)
+from utils.ui import (
+    fmt_fr as format_fr,
 )
 
 get_page_logger("Carte mondiale (F6)")
@@ -85,8 +90,8 @@ st.write("")
 
 # Cette analyse exige une connexion (le backend attend un jeton).
 if not est_connecte():
-    st.info("Connectez-vous pour accéder à la carte mondiale.")
-    st.page_link("pages/login.py", label="Se connecter", icon=":material/lock:")
+    notif("Connectez-vous pour accéder à la carte mondiale.", "info")
+    st.page_link("vues/login.py", label="Se connecter", icon=":material/lock:")
     st.stop()
 
 ligne_source(
@@ -172,7 +177,7 @@ with st.container(border=True):
             )
 
 if not periode:
-    st.warning("Aucune donnée disponible pour cette sélection (indicateur / population).")
+    notif("Aucune donnée disponible pour cette sélection (indicateur / population).", "warn")
     st.stop()
 
 # --- Appel du backend : /analyses/carte --------------------------------------
@@ -189,13 +194,13 @@ with st.spinner("Chargement de la carte…"):
     )
 
 if reponse["status_code"] in (401, 403):
-    st.error("Session expirée ou accès refusé. Reconnectez-vous pour continuer.")
+    notif("Session expirée ou accès refusé. Reconnectez-vous pour continuer.", "ko")
     st.stop()
 if reponse["status_code"] == 404:
-    st.warning(f"Aucune donnée disponible pour l'année {annee(periode)} avec cette sélection.")
+    notif(f"Aucune donnée disponible pour l'année {annee(periode)} avec cette sélection.", "warn")
     st.stop()
 if reponse["status_code"] != 200:
-    st.error(message_erreur(reponse))
+    notif(message_erreur(reponse), "ko")
     st.stop()
 
 lignes = [
@@ -212,8 +217,15 @@ df = pd.DataFrame(lignes)
 df = df.dropna(subset=["Code"])
 
 if df.empty:
-    st.warning("Aucune donnée localisable pour cette sélection.")
+    notif("Aucune donnée localisable pour cette sélection.", "warn")
     st.stop()
+
+# Sous-ensemble « vrais pays » (code rattaché à un continent) : écarte les
+# agrégats ILOSTAT (« World », « G20 », « BRICS »…) des indicateurs de synthèse
+# et du classement. La carte, elle, garde tous les pays codés (les agrégats ne
+# s'y tracent pas de toute façon).
+df_pays = df[df["Code"].isin(CONTINENTS)]
+_df_synthese = df_pays if not df_pays.empty else df
 
 unite = unite_indicateur(code_indicateur)
 suffixe = f" {unite}" if unite else ""
@@ -236,8 +248,8 @@ _quantiles = [0.0, 0.25, 0.5, 0.75, 1.0]
 _cb_tickvals = _quantiles
 _cb_ticktext = [format_fr(df["Valeur"].quantile(q)) for q in _quantiles]
 
-haut = df.loc[df["Valeur"].idxmax()]
-bas = df.loc[df["Valeur"].idxmin()]
+haut = _df_synthese.loc[_df_synthese["Valeur"].idxmax()]
+bas = _df_synthese.loc[_df_synthese["Valeur"].idxmin()]
 
 # Bouton d'export, désormais que les données sont prêtes.
 emplacement_export.download_button(
@@ -255,7 +267,7 @@ m1, m2, m3 = st.columns(3)
 with m1:
     carte_metrique(
         "Pays couverts",
-        str(len(df)),
+        str(len(_df_synthese)),
         "",
         f"Observations · {annee_carte}",
         icone_svg=ICONE_GLOBE,
@@ -378,3 +390,61 @@ st.caption(
     f"très peuplé n'écrase l'échelle. Survolez un pays pour lire sa valeur exacte "
     f"(la légende indique les seuils en {unite.lower() if unite else 'valeur'})."
 )
+
+st.write("")
+
+# --- Classement complet des pays (filtre par continent) ----------------------
+# La carte donne la vue d'ensemble ; ce classement ordonne TOUS les pays ayant
+# une valeur pour la sélection, avec un filtre par continent (le « métrique » est
+# l'indicateur choisi en haut de page, commun à la carte et au classement).
+# On réutilise le sous-ensemble « vrais pays » (déjà filtré plus haut) : cela
+# écarte les agrégats ILOSTAT (« World », « G20 », « BRICS »…).
+df_rang = df_pays.copy()
+df_rang["Continent"] = df_rang["Code"].map(CONTINENTS)
+
+with st.container(border=True):
+    tete_g, tete_d = st.columns([0.55, 0.45], vertical_alignment="center")
+    with tete_g:
+        entete_graphique("Classement", f"Tous les pays — {indicateurs[code_indicateur]}")
+    with tete_d:
+        continents = ["Tous"] + [
+            c for c in ("Afrique", "Amériques", "Asie", "Europe", "Océanie")
+            if (df_rang["Continent"] == c).any()
+        ]
+        continent_sel = st.segmented_control(
+            "Continent", continents, default="Tous", label_visibility="collapsed",
+        ) or "Tous"
+
+    df_aff = (
+        df_rang if continent_sel == "Tous" else df_rang[df_rang["Continent"] == continent_sel]
+    ).sort_values("Valeur", ascending=False).reset_index(drop=True)
+
+    st.caption(
+        f"{libelle_classification} · Ensemble des sexes · {annee_carte} · {len(df_aff)} pays"
+        + (f" · {continent_sel}" if continent_sel != "Tous" else " · tous continents")
+    )
+
+    if df_aff.empty:
+        notif("Aucun pays pour ce continent avec cette sélection.", "info")
+    else:
+        valeur_max = float(df_aff["Valeur"].max()) or 1.0
+        colonnes = ["Rang", "Pays", "Continent", "", f"Valeur ({unite})" if unite else "Valeur"]
+        thead = "".join(f"<th>{html.escape(c)}</th>" for c in colonnes)
+        corps = ""
+        for i, r in df_aff.iterrows():
+            pct = max(2.0, float(r["Valeur"]) / valeur_max * 100)
+            barre = f"<span class='ls-bar'><span style='width:{pct:.1f}%'></span></span>"
+            corps += (
+                "<tr>"
+                f"<td class='num'><span class='ls-rank-no'>{i + 1}</span></td>"
+                f"<td>{html.escape(str(r['Pays']))}</td>"
+                f"<td>{html.escape(str(r['Continent']))}</td>"
+                f"<td>{barre}</td>"
+                f"<td class='num'>{format_fr(r['Valeur'])}{suffixe}</td>"
+                "</tr>"
+            )
+        st.markdown(
+            f"<div class='ls-scroll'><table class='ls-table'><thead><tr>{thead}</tr></thead>"
+            f"<tbody>{corps}</tbody></table></div>",
+            unsafe_allow_html=True,
+        )

@@ -30,21 +30,21 @@ if "logs_initialized" not in st.session_state:
 
 # --- DÉCLARATION DE TOUTES LES PAGES ---
 # Icônes Material (traits sobres, pas d'emoji) pour une navigation lisible.
-page_accueil = st.Page("pages/home.py", title="Accueil", icon=":material/home:", default=True)
-page_connexion = st.Page("pages/login.py", title="Connexion", icon=":material/lock:")
+page_accueil = st.Page("vues/home.py", title="Accueil", icon=":material/home:", default=True)
+page_connexion = st.Page("vues/login.py", title="Connexion", icon=":material/lock:")
 page_analyse_f3 = st.Page(
-    "pages/analyse_temporelle.py", title="Évolution temporelle", icon=":material/trending_up:"
+    "vues/analyse_temporelle.py", title="Évolution temporelle", icon=":material/trending_up:"
 )
 page_comparaison_f4 = st.Page(
-    "pages/comparaison_pays.py", title="Comparaison pays", icon=":material/public:"
+    "vues/comparaison_pays.py", title="Comparaison pays", icon=":material/public:"
 )
 page_multi_f5 = st.Page(
-    "pages/comparaison_multi.py", title="Multi-indicateurs", icon=":material/stacked_line_chart:"
+    "vues/comparaison_multi.py", title="Multi-indicateurs", icon=":material/stacked_line_chart:"
 )
 page_carte_f6 = st.Page(
-    "pages/carte_mondiale.py", title="Carte mondiale", icon=":material/map:"
+    "vues/carte_mondiale.py", title="Carte mondiale", icon=":material/map:"
 )
-page_admin = st.Page("pages/admin.py", title="Administration", icon=":material/settings:")
+page_admin = st.Page("vues/admin.py", title="Administration", icon=":material/settings:")
 
 # --- BARRE LATÉRALE : branding (haut) ---
 barre_laterale_haut()

@@ -13,17 +13,14 @@ from business_object.enums import Role
 from business_object.observation import Observation
 from business_object.utilisateur import Utilisateur
 from controller.dependances import utilisateur_courant
+from controller.erreurs import code_http
 from model.donnees_model import ObservationCorrection
 from service.collecte_service import CollecteService
 from service.donnees_service import DonneesService
 from service.utilisateur_service import UtilisateurService
 from utils.exceptions import (
-    AccesRefuse,
-    AuthentificationEchouee,
-    ConflitRessource,
     DonneesInvalides,
     ErreurMetier,
-    RessourceIntrouvable,
 )
 
 router = APIRouter()
@@ -32,25 +29,8 @@ utilisateur_service = UtilisateurService()
 
 
 def erreur_http(erreur: ErreurMetier) -> HTTPException:
-    """Transforme une erreur métier en erreur HTTP.
-
-    - AuthentificationEchouee -> 401 (jeton absent, invalide ou expiré)
-    - AccesRefuse             -> 403 (droits insuffisants)
-    - RessourceIntrouvable    -> 404 (compte ou observation inexistant)
-    - ConflitRessource        -> 409 (état déjà atteint)
-    - toute autre erreur      -> 422 (paramètres incorrects)
-    """
-    if isinstance(erreur, AuthentificationEchouee):
-        code = 401
-    elif isinstance(erreur, AccesRefuse):
-        code = 403
-    elif isinstance(erreur, RessourceIntrouvable):
-        code = 404
-    elif isinstance(erreur, ConflitRessource):
-        code = 409
-    else:  # DonneesInvalides et autres erreurs métier
-        code = 422
-    return HTTPException(status_code=code, detail=str(erreur))
+    """Transforme une erreur métier en erreur HTTP (mapping partagé)."""
+    return HTTPException(status_code=code_http(erreur), detail=str(erreur))
 
 
 def _utilisateur_public(utilisateur: Utilisateur) -> dict:

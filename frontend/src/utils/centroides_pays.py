@@ -55,3 +55,40 @@ CENTROIDES: dict[str, tuple[float, float]] = {
     # --- Océanie ---
     "AUS": (-25.7, 134.5), "NZL": (-41.8, 172.9), "PNG": (-6.3, 143.9), "FJI": (-17.7, 178.0),
 }
+
+
+# Rattachement continental (code ISO-3 -> continent), aligné sur les regroupements
+# ci-dessus. Sert au filtre « par continent » du classement des pays (carte
+# mondiale). La Russie et la Turquie sont rattachées à l'Europe, le Caucase
+# (AZE/GEO/ARM) à l'Asie — choix cohérents avec la carte.
+CONTINENTS: dict[str, str] = {
+    # Europe
+    **{code: "Europe" for code in (
+        "FRA", "DEU", "GBR", "ESP", "ITA", "PRT", "NLD", "BEL", "LUX", "CHE", "AUT",
+        "IRL", "DNK", "SWE", "NOR", "FIN", "ISL", "POL", "CZE", "SVK", "HUN", "ROU",
+        "BGR", "GRC", "HRV", "SVN", "SRB", "BIH", "MKD", "ALB", "MNE", "EST", "LVA",
+        "LTU", "UKR", "BLR", "MDA", "RUS", "TUR", "CYP", "MLT",
+    )},
+    # Amériques
+    **{code: "Amériques" for code in (
+        "USA", "CAN", "MEX", "BRA", "ARG", "CHL", "COL", "PER", "VEN", "ECU", "BOL",
+        "PRY", "URY", "GUY", "SUR", "PAN", "CRI", "NIC", "HND", "SLV", "GTM", "CUB",
+        "DOM", "HTI", "JAM",
+    )},
+    # Afrique
+    **{code: "Afrique" for code in (
+        "MAR", "DZA", "TUN", "LBY", "EGY", "SEN", "GIN", "CIV", "GHA", "NGA", "MLI",
+        "NER", "BFA", "TGO", "BEN", "CMR", "GAB", "COG", "COD", "KEN", "ETH", "TZA",
+        "UGA", "RWA", "ZMB", "ZWE", "MOZ", "AGO", "ZAF", "NAM", "BWA", "MWI", "MDG",
+        "TCD", "SDN", "SSD", "SOM", "MRT", "GMB", "SLE", "LBR", "BDI",
+    )},
+    # Asie / Moyen-Orient
+    **{code: "Asie" for code in (
+        "CHN", "IND", "JPN", "KOR", "PRK", "IDN", "PHL", "VNM", "THA", "MMR", "MYS",
+        "SGP", "KHM", "LAO", "BGD", "PAK", "AFG", "IRN", "IRQ", "SAU", "YEM", "OMN",
+        "ARE", "QAT", "KWT", "BHR", "JOR", "ISR", "LBN", "SYR", "NPL", "LKA", "KAZ",
+        "UZB", "TKM", "KGZ", "TJK", "AZE", "GEO", "ARM", "MNG",
+    )},
+    # Océanie
+    **{code: "Océanie" for code in ("AUS", "NZL", "PNG", "FJI")},
+}

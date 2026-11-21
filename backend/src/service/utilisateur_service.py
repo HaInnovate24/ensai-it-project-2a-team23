@@ -138,11 +138,11 @@ class UtilisateurService:
         succes = self.utilisateur_dao.modifier(cible)
         if not succes:
             raise RessourceIntrouvable(f"Utilisateur inconnu : {cible.id}.")
-        
+
         if hasattr(self, "journal_service") and self.journal_service:
             self.journal_service.enregistrer(
-            utilisateur_id=acteur.id, 
-            action=action, 
+            utilisateur_id=acteur.id,
+            action=action,
             cible=f"utilisateur:{cible.id}",
             details=details
         )

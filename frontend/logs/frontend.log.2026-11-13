@@ -1,0 +1,22 @@
+13/11/2026 19:58:46 root                 INFO   - --------------------------------------------------
+13/11/2026 19:58:46 root                 INFO   - Launch FRONTEND : Streamlit App
+13/11/2026 19:58:46 root                 INFO   - --------------------------------------------------
+13/11/2026 19:58:46 root                 INFO   - Load environment variables: SUCCES
+13/11/2026 19:58:46 root                 INFO   - BACKEND_URL=http://localhost:5000
+13/11/2026 19:58:46 root                 INFO   - BACKEND_TIMEOUT=5
+13/11/2026 19:58:46 Accueil              INFO   - None -> Accueil
+13/11/2026 19:58:47 root                 INFO   - --------------------------------------------------
+13/11/2026 19:58:47 root                 INFO   - Launch FRONTEND : Streamlit App
+13/11/2026 19:58:47 root                 INFO   - --------------------------------------------------
+13/11/2026 19:58:47 root                 INFO   - Load environment variables: SUCCES
+13/11/2026 19:58:47 root                 INFO   - BACKEND_URL=http://localhost:5000
+13/11/2026 19:58:47 root                 INFO   - BACKEND_TIMEOUT=5
+13/11/2026 20:28:59 root                 INFO   - --------------------------------------------------
+13/11/2026 20:28:59 root                 INFO   - Launch FRONTEND : Streamlit App
+13/11/2026 20:28:59 root                 INFO   - --------------------------------------------------
+13/11/2026 20:28:59 root                 INFO   - Load environment variables: SUCCES
+13/11/2026 20:28:59 root                 INFO   - BACKEND_URL=http://localhost:5000
+13/11/2026 20:28:59 root                 INFO   - BACKEND_TIMEOUT=5
+13/11/2026 20:28:59 Accueil              INFO   - None -> Accueil
+13/11/2026 20:29:05 Connexion            INFO   - Accueil -> Connexion
+13/11/2026 20:29:07 Accueil              INFO   - Connexion -> Accueil

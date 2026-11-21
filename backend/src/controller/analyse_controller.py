@@ -10,9 +10,10 @@ from fastapi import APIRouter, Depends, HTTPException, Query
 
 from business_object.enums import Sexe
 from controller.dependances import exiger_connexion
+from controller.erreurs import code_http
 from model.analyse_model import Comparaison, Serie
 from service.analyse_service import AnalyseService
-from utils.exceptions import ErreurMetier, RessourceIntrouvable
+from utils.exceptions import ErreurMetier
 
 router = APIRouter()
 
@@ -27,14 +28,8 @@ def get_analyse_service() -> AnalyseService:
 
 
 def erreur_http(erreur: ErreurMetier) -> HTTPException:
-    """Transforme une erreur métier en erreur HTTP.
-
-    - RessourceIntrouvable -> 404 (élément ou donnée inexistante)
-    - toute autre erreur métier (DonneesInvalides, ...) -> 422 (paramètres incorrects)
-    """
-    if isinstance(erreur, RessourceIntrouvable):
-        return HTTPException(status_code=404, detail=str(erreur))
-    return HTTPException(status_code=422, detail=str(erreur))
+    """Transforme une erreur métier en erreur HTTP (mapping partagé)."""
+    return HTTPException(status_code=code_http(erreur), detail=str(erreur))
 
 
 @router.get("/evolution", response_model=Serie)

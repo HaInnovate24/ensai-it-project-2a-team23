@@ -3,13 +3,13 @@ import streamlit as st
 from utils.api_client import api_client
 from utils.log_init import get_page_logger
 from utils.referentiels import message_erreur
-from utils.ui import deconnexion, entete
+from utils.ui import deconnexion, entete, notif
 
 get_page_logger("Connexion")
 
 entete(
     "Connexion",
-    "Connectez-vous ou créez un compte pour accéder aux analyses avancées.",
+    "Accédez aux analyses avancées.",
     eyebrow="Votre espace",
 )
 
@@ -45,10 +45,10 @@ with centre:
     # --- Déjà connecté : on affiche le statut et la déconnexion ---
     if st.session_state.get("access_token"):
         with st.container(border=True):
-            st.success(
-                f"Vous êtes connecté en tant que "
-                f"**{st.session_state.get('nom_utilisateur', '?')}** "
-                f"({st.session_state.get('role_utilisateur', 'Utilisateur')})."
+            notif(
+                f"Connecté en tant que {st.session_state.get('nom_utilisateur', '?')} "
+                f"({st.session_state.get('role_utilisateur', 'Utilisateur')}).",
+                "ok",
             )
             if st.button("Se déconnecter", use_container_width=True):
                 deconnexion()
@@ -75,7 +75,7 @@ with centre:
                 data = _corps(reponse).get("data")
                 jeton = data.get("jeton") if isinstance(data, dict) else data
                 if not jeton:
-                    st.error("Jeton de connexion introuvable dans la réponse.")
+                    notif("Jeton de connexion introuvable dans la réponse.", "ko")
                 else:
                     # La connexion a réussi : on est authentifié.
                     st.session_state["access_token"] = jeton
@@ -86,7 +86,7 @@ with centre:
                         st.session_state["nom_utilisateur"] = nom
                     st.rerun()
             else:
-                st.error(message_erreur(reponse))
+                notif(message_erreur(reponse), "ko")
 
     with onglet_inscription:
         with st.container(border=True):
@@ -105,6 +105,6 @@ with centre:
                 json={"nom_utilisateur": nouveau_nom, "mot_de_passe": nouveau_mdp},
             )
             if reponse["status_code"] == 200:
-                st.success("Compte créé. Vous pouvez maintenant vous connecter.")
+                notif("Compte créé. Vous pouvez maintenant vous connecter.", "ok")
             else:
-                st.error(message_erreur(reponse))
+                notif(message_erreur(reponse), "ko")

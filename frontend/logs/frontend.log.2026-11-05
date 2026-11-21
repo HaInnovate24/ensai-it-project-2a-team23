@@ -1,0 +1,952 @@
+05/11/2026 14:09:16 root                 INFO   - --------------------------------------------------
+05/11/2026 14:09:16 root                 INFO   - Launch FRONTEND : Streamlit App
+05/11/2026 14:09:16 root                 INFO   - --------------------------------------------------
+05/11/2026 14:09:16 root                 INFO   - Load environment variables: SUCCES
+05/11/2026 14:09:16 root                 INFO   - BACKEND_URL=http://localhost:5000
+05/11/2026 14:09:16 root                 INFO   - BACKEND_TIMEOUT=5
+05/11/2026 14:09:16 Accueil              INFO   - None -> Accueil
+05/11/2026 14:09:22 Connexion            INFO   - Accueil -> Connexion
+05/11/2026 14:10:42 Analyse Temporelle (F3) INFO   - Connexion -> Analyse Temporelle (F3)
+05/11/2026 14:10:45 choreographer.browsers.chromium INFO   - Chromium init'ed with kwargs {}
+05/11/2026 14:10:45 choreographer.browsers.chromium INFO   - Found chromium path: C:\Program Files\Google\Chrome\Application\chrome.exe
+05/11/2026 14:10:45 choreographer.utils._tmpfile INFO   - Temp directory created: C:\Users\Salim\AppData\Local\Temp\tmp6o03onk3.
+05/11/2026 14:10:45 choreographer.browser_async INFO   - Opening browser.
+05/11/2026 14:10:45 choreographer.utils._tmpfile INFO   - Temp directory created: C:\Users\Salim\AppData\Local\Temp\tmpl53ulf7p.
+05/11/2026 14:10:45 choreographer.browsers.chromium INFO   - Temporary directory at: C:\Users\Salim\AppData\Local\Temp\tmpl53ulf7p
+05/11/2026 14:10:45 kaleido.kaleido      INFO   - Conforming 1 to file:///C:/Users/Salim/AppData/Local/Temp/tmp6o03onk3/index.html
+05/11/2026 14:10:46 kaleido.kaleido      INFO   - Getting tab from queue (has 1)
+05/11/2026 14:10:46 kaleido.kaleido      INFO   - Got AB2D
+05/11/2026 14:10:46 kaleido.kaleido      INFO   - Reloading tab AB2D before return.
+05/11/2026 14:10:47 kaleido.kaleido      INFO   - Putting tab AB2D back (queue size: 0).
+05/11/2026 14:10:47 kaleido.kaleido      INFO   - Waiting for all cleanups to finish.
+05/11/2026 14:10:47 kaleido.kaleido      INFO   - Exiting Kaleido.
+05/11/2026 14:10:47 choreographer.utils._tmpfile INFO   - TemporaryDirectory.cleanup() worked.
+05/11/2026 14:10:47 choreographer.utils._tmpfile INFO   - shutil.rmtree worked.
+05/11/2026 14:10:47 choreographer.browser_async INFO   - Closing browser.
+05/11/2026 14:10:47 choreographer.utils._tmpfile INFO   - TemporaryDirectory.cleanup() worked.
+05/11/2026 14:10:47 choreographer.utils._tmpfile INFO   - shutil.rmtree worked.
+05/11/2026 14:10:47 choreographer.browser_async INFO   - Closing browser.
+05/11/2026 14:10:47 kaleido.kaleido      INFO   - Cancelling tasks.
+05/11/2026 14:10:47 kaleido.kaleido      INFO   - Exiting Kaleido/Choreo.
+05/11/2026 14:10:47 choreographer.utils._tmpfile INFO   - TemporaryDirectory.cleanup() worked.
+05/11/2026 14:10:47 choreographer.utils._tmpfile INFO   - shutil.rmtree worked.
+05/11/2026 14:10:47 kaleido.kaleido      INFO   - Cancelling tasks.
+05/11/2026 14:10:47 kaleido.kaleido      INFO   - Exiting Kaleido/Choreo.
+05/11/2026 14:10:47 choreographer.utils._tmpfile INFO   - TemporaryDirectory.cleanup() worked.
+05/11/2026 14:10:47 choreographer.utils._tmpfile INFO   - shutil.rmtree worked.
+05/11/2026 14:10:58 choreographer.browsers.chromium INFO   - Chromium init'ed with kwargs {}
+05/11/2026 14:10:58 choreographer.browsers.chromium INFO   - Found chromium path: C:\Program Files\Google\Chrome\Application\chrome.exe
+05/11/2026 14:10:58 choreographer.utils._tmpfile INFO   - Temp directory created: C:\Users\Salim\AppData\Local\Temp\tmp4ll6ztk4.
+05/11/2026 14:10:58 choreographer.browser_async INFO   - Opening browser.
+05/11/2026 14:10:58 choreographer.utils._tmpfile INFO   - Temp directory created: C:\Users\Salim\AppData\Local\Temp\tmpdpp_17x1.
+05/11/2026 14:10:58 choreographer.browsers.chromium INFO   - Temporary directory at: C:\Users\Salim\AppData\Local\Temp\tmpdpp_17x1
+05/11/2026 14:10:59 kaleido.kaleido      INFO   - Conforming 1 to file:///C:/Users/Salim/AppData/Local/Temp/tmp4ll6ztk4/index.html
+05/11/2026 14:11:00 kaleido.kaleido      INFO   - Getting tab from queue (has 1)
+05/11/2026 14:11:00 kaleido.kaleido      INFO   - Got 8FA9
+05/11/2026 14:11:00 kaleido.kaleido      INFO   - Reloading tab 8FA9 before return.
+05/11/2026 14:11:00 kaleido.kaleido      INFO   - Putting tab 8FA9 back (queue size: 0).
+05/11/2026 14:11:00 kaleido.kaleido      INFO   - Waiting for all cleanups to finish.
+05/11/2026 14:11:00 kaleido.kaleido      INFO   - Exiting Kaleido.
+05/11/2026 14:11:00 choreographer.utils._tmpfile INFO   - TemporaryDirectory.cleanup() worked.
+05/11/2026 14:11:00 choreographer.utils._tmpfile INFO   - shutil.rmtree worked.
+05/11/2026 14:11:00 choreographer.browser_async INFO   - Closing browser.
+05/11/2026 14:11:00 choreographer.utils._tmpfile INFO   - TemporaryDirectory.cleanup() worked.
+05/11/2026 14:11:00 choreographer.utils._tmpfile INFO   - shutil.rmtree worked.
+05/11/2026 14:11:00 choreographer.browser_async INFO   - Closing browser.
+05/11/2026 14:11:00 kaleido.kaleido      INFO   - Cancelling tasks.
+05/11/2026 14:11:00 kaleido.kaleido      INFO   - Exiting Kaleido/Choreo.
+05/11/2026 14:11:00 choreographer.utils._tmpfile INFO   - TemporaryDirectory.cleanup() worked.
+05/11/2026 14:11:00 choreographer.utils._tmpfile INFO   - shutil.rmtree worked.
+05/11/2026 14:11:00 kaleido.kaleido      INFO   - Cancelling tasks.
+05/11/2026 14:11:00 kaleido.kaleido      INFO   - Exiting Kaleido/Choreo.
+05/11/2026 14:11:00 choreographer.utils._tmpfile INFO   - TemporaryDirectory.cleanup() worked.
+05/11/2026 14:11:00 choreographer.utils._tmpfile INFO   - shutil.rmtree worked.
+05/11/2026 14:11:00 Accueil              INFO   - Analyse Temporelle (F3) -> Accueil
+05/11/2026 14:12:25 root                 INFO   - --------------------------------------------------
+05/11/2026 14:12:25 root                 INFO   - Launch FRONTEND : Streamlit App
+05/11/2026 14:12:25 root                 INFO   - --------------------------------------------------
+05/11/2026 14:12:25 root                 INFO   - Load environment variables: SUCCES
+05/11/2026 14:12:25 root                 INFO   - BACKEND_URL=http://localhost:5000
+05/11/2026 14:12:25 root                 INFO   - BACKEND_TIMEOUT=5
+05/11/2026 14:12:25 Accueil              INFO   - None -> Accueil
+05/11/2026 14:12:29 Connexion            INFO   - Accueil -> Connexion
+05/11/2026 14:12:31 Accueil              INFO   - Connexion -> Accueil
+05/11/2026 14:12:50 Connexion            INFO   - Accueil -> Connexion
+05/11/2026 14:13:17 Administration (F6)  INFO   - Connexion -> Administration (F6)
+05/11/2026 14:22:33 Comparaison Pays (F4) INFO   - Administration (F6) -> Comparaison Pays (F4)
+05/11/2026 14:22:35 choreographer.browsers.chromium INFO   - Chromium init'ed with kwargs {}
+05/11/2026 14:22:35 choreographer.browsers.chromium INFO   - Found chromium path: C:\Program Files\Google\Chrome\Application\chrome.exe
+05/11/2026 14:22:35 choreographer.utils._tmpfile INFO   - Temp directory created: C:\Users\Salim\AppData\Local\Temp\tmp1cse4uyh.
+05/11/2026 14:22:35 choreographer.browser_async INFO   - Opening browser.
+05/11/2026 14:22:35 choreographer.utils._tmpfile INFO   - Temp directory created: C:\Users\Salim\AppData\Local\Temp\tmpufil5x7v.
+05/11/2026 14:22:35 choreographer.browsers.chromium INFO   - Temporary directory at: C:\Users\Salim\AppData\Local\Temp\tmpufil5x7v
+05/11/2026 14:22:35 kaleido.kaleido      INFO   - Conforming 1 to file:///C:/Users/Salim/AppData/Local/Temp/tmp1cse4uyh/index.html
+05/11/2026 14:22:36 kaleido.kaleido      INFO   - Getting tab from queue (has 1)
+05/11/2026 14:22:36 kaleido.kaleido      INFO   - Got FC36
+05/11/2026 14:22:37 kaleido.kaleido      INFO   - Reloading tab FC36 before return.
+05/11/2026 14:22:37 kaleido.kaleido      INFO   - Putting tab FC36 back (queue size: 0).
+05/11/2026 14:22:37 kaleido.kaleido      INFO   - Waiting for all cleanups to finish.
+05/11/2026 14:22:37 kaleido.kaleido      INFO   - Exiting Kaleido.
+05/11/2026 14:22:37 choreographer.utils._tmpfile INFO   - TemporaryDirectory.cleanup() worked.
+05/11/2026 14:22:37 choreographer.utils._tmpfile INFO   - shutil.rmtree worked.
+05/11/2026 14:22:37 choreographer.browser_async INFO   - Closing browser.
+05/11/2026 14:22:37 choreographer.utils._tmpfile INFO   - TemporaryDirectory.cleanup() worked.
+05/11/2026 14:22:37 choreographer.utils._tmpfile INFO   - shutil.rmtree worked.
+05/11/2026 14:22:37 choreographer.browser_async INFO   - Closing browser.
+05/11/2026 14:22:37 kaleido.kaleido      INFO   - Cancelling tasks.
+05/11/2026 14:22:37 kaleido.kaleido      INFO   - Exiting Kaleido/Choreo.
+05/11/2026 14:22:37 choreographer.utils._tmpfile INFO   - TemporaryDirectory.cleanup() worked.
+05/11/2026 14:22:37 choreographer.utils._tmpfile INFO   - shutil.rmtree worked.
+05/11/2026 14:22:37 kaleido.kaleido      INFO   - Cancelling tasks.
+05/11/2026 14:22:37 kaleido.kaleido      INFO   - Exiting Kaleido/Choreo.
+05/11/2026 14:22:37 choreographer.utils._tmpfile INFO   - TemporaryDirectory.cleanup() worked.
+05/11/2026 14:22:37 choreographer.utils._tmpfile INFO   - shutil.rmtree worked.
+05/11/2026 14:22:38 Analyse Temporelle (F3) INFO   - Comparaison Pays (F4) -> Analyse Temporelle (F3)
+05/11/2026 14:22:38 choreographer.browsers.chromium INFO   - Chromium init'ed with kwargs {}
+05/11/2026 14:22:38 choreographer.browsers.chromium INFO   - Found chromium path: C:\Program Files\Google\Chrome\Application\chrome.exe
+05/11/2026 14:22:38 choreographer.utils._tmpfile INFO   - Temp directory created: C:\Users\Salim\AppData\Local\Temp\tmpvy4rsdeb.
+05/11/2026 14:22:38 choreographer.browser_async INFO   - Opening browser.
+05/11/2026 14:22:38 choreographer.utils._tmpfile INFO   - Temp directory created: C:\Users\Salim\AppData\Local\Temp\tmpj4_iawwy.
+05/11/2026 14:22:38 choreographer.browsers.chromium INFO   - Temporary directory at: C:\Users\Salim\AppData\Local\Temp\tmpj4_iawwy
+05/11/2026 14:22:38 kaleido.kaleido      INFO   - Conforming 1 to file:///C:/Users/Salim/AppData/Local/Temp/tmpvy4rsdeb/index.html
+05/11/2026 14:22:39 kaleido.kaleido      INFO   - Getting tab from queue (has 1)
+05/11/2026 14:22:39 kaleido.kaleido      INFO   - Got 9CD8
+05/11/2026 14:22:39 kaleido.kaleido      INFO   - Reloading tab 9CD8 before return.
+05/11/2026 14:22:40 kaleido.kaleido      INFO   - Putting tab 9CD8 back (queue size: 0).
+05/11/2026 14:22:40 kaleido.kaleido      INFO   - Waiting for all cleanups to finish.
+05/11/2026 14:22:40 kaleido.kaleido      INFO   - Exiting Kaleido.
+05/11/2026 14:22:40 choreographer.utils._tmpfile INFO   - TemporaryDirectory.cleanup() worked.
+05/11/2026 14:22:40 choreographer.utils._tmpfile INFO   - shutil.rmtree worked.
+05/11/2026 14:22:40 choreographer.browser_async INFO   - Closing browser.
+05/11/2026 14:22:40 choreographer.utils._tmpfile INFO   - TemporaryDirectory.cleanup() worked.
+05/11/2026 14:22:40 choreographer.utils._tmpfile INFO   - shutil.rmtree worked.
+05/11/2026 14:22:40 choreographer.browser_async INFO   - Closing browser.
+05/11/2026 14:22:40 kaleido.kaleido      INFO   - Cancelling tasks.
+05/11/2026 14:22:40 kaleido.kaleido      INFO   - Exiting Kaleido/Choreo.
+05/11/2026 14:22:40 choreographer.utils._tmpfile INFO   - TemporaryDirectory.cleanup() worked.
+05/11/2026 14:22:40 choreographer.utils._tmpfile INFO   - shutil.rmtree worked.
+05/11/2026 14:22:40 kaleido.kaleido      INFO   - Cancelling tasks.
+05/11/2026 14:22:40 kaleido.kaleido      INFO   - Exiting Kaleido/Choreo.
+05/11/2026 14:22:40 choreographer.utils._tmpfile INFO   - TemporaryDirectory.cleanup() worked.
+05/11/2026 14:22:40 choreographer.utils._tmpfile INFO   - shutil.rmtree worked.
+05/11/2026 14:22:50 choreographer.browsers.chromium INFO   - Chromium init'ed with kwargs {}
+05/11/2026 14:22:50 choreographer.browsers.chromium INFO   - Found chromium path: C:\Program Files\Google\Chrome\Application\chrome.exe
+05/11/2026 14:22:50 choreographer.utils._tmpfile INFO   - Temp directory created: C:\Users\Salim\AppData\Local\Temp\tmpo8g5z4u1.
+05/11/2026 14:22:50 choreographer.browser_async INFO   - Opening browser.
+05/11/2026 14:22:50 choreographer.utils._tmpfile INFO   - Temp directory created: C:\Users\Salim\AppData\Local\Temp\tmpnx66ppir.
+05/11/2026 14:22:50 choreographer.browsers.chromium INFO   - Temporary directory at: C:\Users\Salim\AppData\Local\Temp\tmpnx66ppir
+05/11/2026 14:22:50 kaleido.kaleido      INFO   - Conforming 1 to file:///C:/Users/Salim/AppData/Local/Temp/tmpo8g5z4u1/index.html
+05/11/2026 14:22:51 kaleido.kaleido      INFO   - Getting tab from queue (has 1)
+05/11/2026 14:22:51 kaleido.kaleido      INFO   - Got 83BD
+05/11/2026 14:22:51 kaleido.kaleido      INFO   - Reloading tab 83BD before return.
+05/11/2026 14:22:51 kaleido.kaleido      INFO   - Putting tab 83BD back (queue size: 0).
+05/11/2026 14:22:51 kaleido.kaleido      INFO   - Waiting for all cleanups to finish.
+05/11/2026 14:22:51 kaleido.kaleido      INFO   - Exiting Kaleido.
+05/11/2026 14:22:51 choreographer.utils._tmpfile INFO   - TemporaryDirectory.cleanup() worked.
+05/11/2026 14:22:51 choreographer.utils._tmpfile INFO   - shutil.rmtree worked.
+05/11/2026 14:22:51 choreographer.browser_async INFO   - Closing browser.
+05/11/2026 14:22:51 choreographer.utils._tmpfile INFO   - TemporaryDirectory.cleanup() worked.
+05/11/2026 14:22:51 choreographer.utils._tmpfile INFO   - shutil.rmtree worked.
+05/11/2026 14:22:51 choreographer.browser_async INFO   - Closing browser.
+05/11/2026 14:22:51 kaleido.kaleido      INFO   - Cancelling tasks.
+05/11/2026 14:22:51 kaleido.kaleido      INFO   - Exiting Kaleido/Choreo.
+05/11/2026 14:22:52 choreographer.utils._tmpfile INFO   - TemporaryDirectory.cleanup() worked.
+05/11/2026 14:22:52 choreographer.utils._tmpfile INFO   - shutil.rmtree worked.
+05/11/2026 14:22:52 kaleido.kaleido      INFO   - Cancelling tasks.
+05/11/2026 14:22:52 kaleido.kaleido      INFO   - Exiting Kaleido/Choreo.
+05/11/2026 14:22:52 choreographer.utils._tmpfile INFO   - TemporaryDirectory.cleanup() worked.
+05/11/2026 14:22:52 choreographer.utils._tmpfile INFO   - shutil.rmtree worked.
+05/11/2026 14:23:11 choreographer.browsers.chromium INFO   - Chromium init'ed with kwargs {}
+05/11/2026 14:23:11 choreographer.browsers.chromium INFO   - Found chromium path: C:\Program Files\Google\Chrome\Application\chrome.exe
+05/11/2026 14:23:11 choreographer.utils._tmpfile INFO   - Temp directory created: C:\Users\Salim\AppData\Local\Temp\tmpwzgicp7z.
+05/11/2026 14:23:11 choreographer.browser_async INFO   - Opening browser.
+05/11/2026 14:23:11 choreographer.utils._tmpfile INFO   - Temp directory created: C:\Users\Salim\AppData\Local\Temp\tmp6jeq49pf.
+05/11/2026 14:23:11 choreographer.browsers.chromium INFO   - Temporary directory at: C:\Users\Salim\AppData\Local\Temp\tmp6jeq49pf
+05/11/2026 14:23:11 kaleido.kaleido      INFO   - Conforming 1 to file:///C:/Users/Salim/AppData/Local/Temp/tmpwzgicp7z/index.html
+05/11/2026 14:23:12 kaleido.kaleido      INFO   - Getting tab from queue (has 1)
+05/11/2026 14:23:12 kaleido.kaleido      INFO   - Got 0C40
+05/11/2026 14:23:12 kaleido.kaleido      INFO   - Reloading tab 0C40 before return.
+05/11/2026 14:23:12 kaleido.kaleido      INFO   - Putting tab 0C40 back (queue size: 0).
+05/11/2026 14:23:12 kaleido.kaleido      INFO   - Waiting for all cleanups to finish.
+05/11/2026 14:23:12 kaleido.kaleido      INFO   - Exiting Kaleido.
+05/11/2026 14:23:12 choreographer.utils._tmpfile INFO   - TemporaryDirectory.cleanup() worked.
+05/11/2026 14:23:12 choreographer.utils._tmpfile INFO   - shutil.rmtree worked.
+05/11/2026 14:23:12 choreographer.browser_async INFO   - Closing browser.
+05/11/2026 14:23:12 choreographer.utils._tmpfile INFO   - TemporaryDirectory.cleanup() worked.
+05/11/2026 14:23:12 choreographer.utils._tmpfile INFO   - shutil.rmtree worked.
+05/11/2026 14:23:12 choreographer.browser_async INFO   - Closing browser.
+05/11/2026 14:23:12 kaleido.kaleido      INFO   - Cancelling tasks.
+05/11/2026 14:23:12 kaleido.kaleido      INFO   - Exiting Kaleido/Choreo.
+05/11/2026 14:23:12 choreographer.utils._tmpfile INFO   - TemporaryDirectory.cleanup() worked.
+05/11/2026 14:23:12 choreographer.utils._tmpfile INFO   - shutil.rmtree worked.
+05/11/2026 14:23:12 kaleido.kaleido      INFO   - Cancelling tasks.
+05/11/2026 14:23:12 kaleido.kaleido      INFO   - Exiting Kaleido/Choreo.
+05/11/2026 14:23:12 choreographer.utils._tmpfile INFO   - TemporaryDirectory.cleanup() worked.
+05/11/2026 14:23:12 choreographer.utils._tmpfile INFO   - shutil.rmtree worked.
+05/11/2026 14:23:59 choreographer.browsers.chromium INFO   - Chromium init'ed with kwargs {}
+05/11/2026 14:23:59 choreographer.browsers.chromium INFO   - Found chromium path: C:\Program Files\Google\Chrome\Application\chrome.exe
+05/11/2026 14:23:59 choreographer.utils._tmpfile INFO   - Temp directory created: C:\Users\Salim\AppData\Local\Temp\tmpk0m022bv.
+05/11/2026 14:23:59 choreographer.browser_async INFO   - Opening browser.
+05/11/2026 14:23:59 choreographer.utils._tmpfile INFO   - Temp directory created: C:\Users\Salim\AppData\Local\Temp\tmp6k0dqaca.
+05/11/2026 14:23:59 choreographer.browsers.chromium INFO   - Temporary directory at: C:\Users\Salim\AppData\Local\Temp\tmp6k0dqaca
+05/11/2026 14:23:59 kaleido.kaleido      INFO   - Conforming 1 to file:///C:/Users/Salim/AppData/Local/Temp/tmpk0m022bv/index.html
+05/11/2026 14:24:00 kaleido.kaleido      INFO   - Getting tab from queue (has 1)
+05/11/2026 14:24:00 kaleido.kaleido      INFO   - Got F646
+05/11/2026 14:24:00 kaleido.kaleido      INFO   - Reloading tab F646 before return.
+05/11/2026 14:24:00 kaleido.kaleido      INFO   - Putting tab F646 back (queue size: 0).
+05/11/2026 14:24:00 kaleido.kaleido      INFO   - Waiting for all cleanups to finish.
+05/11/2026 14:24:00 kaleido.kaleido      INFO   - Exiting Kaleido.
+05/11/2026 14:24:00 choreographer.utils._tmpfile INFO   - TemporaryDirectory.cleanup() worked.
+05/11/2026 14:24:00 choreographer.utils._tmpfile INFO   - shutil.rmtree worked.
+05/11/2026 14:24:00 choreographer.browser_async INFO   - Closing browser.
+05/11/2026 14:24:00 choreographer.utils._tmpfile INFO   - TemporaryDirectory.cleanup() worked.
+05/11/2026 14:24:00 choreographer.utils._tmpfile INFO   - shutil.rmtree worked.
+05/11/2026 14:24:00 choreographer.browser_async INFO   - Closing browser.
+05/11/2026 14:24:00 kaleido.kaleido      INFO   - Cancelling tasks.
+05/11/2026 14:24:00 kaleido.kaleido      INFO   - Exiting Kaleido/Choreo.
+05/11/2026 14:24:00 choreographer.utils._tmpfile INFO   - TemporaryDirectory.cleanup() worked.
+05/11/2026 14:24:00 choreographer.utils._tmpfile INFO   - shutil.rmtree worked.
+05/11/2026 14:24:00 kaleido.kaleido      INFO   - Cancelling tasks.
+05/11/2026 14:24:00 kaleido.kaleido      INFO   - Exiting Kaleido/Choreo.
+05/11/2026 14:24:00 choreographer.utils._tmpfile INFO   - TemporaryDirectory.cleanup() worked.
+05/11/2026 14:24:00 choreographer.utils._tmpfile INFO   - shutil.rmtree worked.
+05/11/2026 14:24:15 choreographer.browsers.chromium INFO   - Chromium init'ed with kwargs {}
+05/11/2026 14:24:15 choreographer.browsers.chromium INFO   - Found chromium path: C:\Program Files\Google\Chrome\Application\chrome.exe
+05/11/2026 14:24:15 choreographer.utils._tmpfile INFO   - Temp directory created: C:\Users\Salim\AppData\Local\Temp\tmpw28fw9la.
+05/11/2026 14:24:15 choreographer.browser_async INFO   - Opening browser.
+05/11/2026 14:24:15 choreographer.utils._tmpfile INFO   - Temp directory created: C:\Users\Salim\AppData\Local\Temp\tmpg3q9eoa6.
+05/11/2026 14:24:15 choreographer.browsers.chromium INFO   - Temporary directory at: C:\Users\Salim\AppData\Local\Temp\tmpg3q9eoa6
+05/11/2026 14:24:15 kaleido.kaleido      INFO   - Conforming 1 to file:///C:/Users/Salim/AppData/Local/Temp/tmpw28fw9la/index.html
+05/11/2026 14:24:16 kaleido.kaleido      INFO   - Getting tab from queue (has 1)
+05/11/2026 14:24:16 kaleido.kaleido      INFO   - Got C6B7
+05/11/2026 14:24:16 kaleido.kaleido      INFO   - Reloading tab C6B7 before return.
+05/11/2026 14:24:16 kaleido.kaleido      INFO   - Putting tab C6B7 back (queue size: 0).
+05/11/2026 14:24:16 kaleido.kaleido      INFO   - Waiting for all cleanups to finish.
+05/11/2026 14:24:16 kaleido.kaleido      INFO   - Exiting Kaleido.
+05/11/2026 14:24:16 choreographer.utils._tmpfile INFO   - TemporaryDirectory.cleanup() worked.
+05/11/2026 14:24:16 choreographer.utils._tmpfile INFO   - shutil.rmtree worked.
+05/11/2026 14:24:16 choreographer.browser_async INFO   - Closing browser.
+05/11/2026 14:24:16 choreographer.utils._tmpfile INFO   - TemporaryDirectory.cleanup() worked.
+05/11/2026 14:24:16 choreographer.utils._tmpfile INFO   - shutil.rmtree worked.
+05/11/2026 14:24:16 choreographer.browser_async INFO   - Closing browser.
+05/11/2026 14:24:16 kaleido.kaleido      INFO   - Cancelling tasks.
+05/11/2026 14:24:16 kaleido.kaleido      INFO   - Exiting Kaleido/Choreo.
+05/11/2026 14:24:16 choreographer.utils._tmpfile INFO   - TemporaryDirectory.cleanup() worked.
+05/11/2026 14:24:16 choreographer.utils._tmpfile INFO   - shutil.rmtree worked.
+05/11/2026 14:24:16 kaleido.kaleido      INFO   - Cancelling tasks.
+05/11/2026 14:24:16 kaleido.kaleido      INFO   - Exiting Kaleido/Choreo.
+05/11/2026 14:24:17 choreographer.utils._tmpfile INFO   - TemporaryDirectory.cleanup() worked.
+05/11/2026 14:24:17 choreographer.utils._tmpfile INFO   - shutil.rmtree worked.
+05/11/2026 14:24:51 choreographer.browsers.chromium INFO   - Chromium init'ed with kwargs {}
+05/11/2026 14:24:51 choreographer.browsers.chromium INFO   - Found chromium path: C:\Program Files\Google\Chrome\Application\chrome.exe
+05/11/2026 14:24:51 choreographer.utils._tmpfile INFO   - Temp directory created: C:\Users\Salim\AppData\Local\Temp\tmp3p1q9tk4.
+05/11/2026 14:24:51 choreographer.browser_async INFO   - Opening browser.
+05/11/2026 14:24:51 choreographer.utils._tmpfile INFO   - Temp directory created: C:\Users\Salim\AppData\Local\Temp\tmpn414bgib.
+05/11/2026 14:24:51 choreographer.browsers.chromium INFO   - Temporary directory at: C:\Users\Salim\AppData\Local\Temp\tmpn414bgib
+05/11/2026 14:24:52 kaleido.kaleido      INFO   - Conforming 1 to file:///C:/Users/Salim/AppData/Local/Temp/tmp3p1q9tk4/index.html
+05/11/2026 14:24:53 kaleido.kaleido      INFO   - Getting tab from queue (has 1)
+05/11/2026 14:24:53 kaleido.kaleido      INFO   - Got A2F2
+05/11/2026 14:24:53 kaleido.kaleido      INFO   - Reloading tab A2F2 before return.
+05/11/2026 14:24:53 kaleido.kaleido      INFO   - Putting tab A2F2 back (queue size: 0).
+05/11/2026 14:24:53 kaleido.kaleido      INFO   - Waiting for all cleanups to finish.
+05/11/2026 14:24:53 kaleido.kaleido      INFO   - Exiting Kaleido.
+05/11/2026 14:24:53 choreographer.utils._tmpfile INFO   - TemporaryDirectory.cleanup() worked.
+05/11/2026 14:24:53 choreographer.utils._tmpfile INFO   - shutil.rmtree worked.
+05/11/2026 14:24:53 choreographer.browser_async INFO   - Closing browser.
+05/11/2026 14:24:53 choreographer.utils._tmpfile INFO   - TemporaryDirectory.cleanup() worked.
+05/11/2026 14:24:53 choreographer.utils._tmpfile INFO   - shutil.rmtree worked.
+05/11/2026 14:24:53 choreographer.browser_async INFO   - Closing browser.
+05/11/2026 14:24:53 kaleido.kaleido      INFO   - Cancelling tasks.
+05/11/2026 14:24:53 kaleido.kaleido      INFO   - Exiting Kaleido/Choreo.
+05/11/2026 14:24:53 choreographer.utils._tmpfile INFO   - TemporaryDirectory.cleanup() worked.
+05/11/2026 14:24:53 choreographer.utils._tmpfile INFO   - shutil.rmtree worked.
+05/11/2026 14:24:53 kaleido.kaleido      INFO   - Cancelling tasks.
+05/11/2026 14:24:53 kaleido.kaleido      INFO   - Exiting Kaleido/Choreo.
+05/11/2026 14:24:53 choreographer.utils._tmpfile INFO   - TemporaryDirectory.cleanup() worked.
+05/11/2026 14:24:53 choreographer.utils._tmpfile INFO   - shutil.rmtree worked.
+05/11/2026 14:24:55 choreographer.browsers.chromium INFO   - Chromium init'ed with kwargs {}
+05/11/2026 14:24:55 choreographer.browsers.chromium INFO   - Found chromium path: C:\Program Files\Google\Chrome\Application\chrome.exe
+05/11/2026 14:24:55 choreographer.utils._tmpfile INFO   - Temp directory created: C:\Users\Salim\AppData\Local\Temp\tmpa1xs9syl.
+05/11/2026 14:24:55 choreographer.browser_async INFO   - Opening browser.
+05/11/2026 14:24:55 choreographer.utils._tmpfile INFO   - Temp directory created: C:\Users\Salim\AppData\Local\Temp\tmp_clwq0sn.
+05/11/2026 14:24:55 choreographer.browsers.chromium INFO   - Temporary directory at: C:\Users\Salim\AppData\Local\Temp\tmp_clwq0sn
+05/11/2026 14:24:55 kaleido.kaleido      INFO   - Conforming 1 to file:///C:/Users/Salim/AppData/Local/Temp/tmpa1xs9syl/index.html
+05/11/2026 14:24:56 kaleido.kaleido      INFO   - Getting tab from queue (has 1)
+05/11/2026 14:24:56 kaleido.kaleido      INFO   - Got 7BE3
+05/11/2026 14:24:56 kaleido.kaleido      INFO   - Reloading tab 7BE3 before return.
+05/11/2026 14:24:56 kaleido.kaleido      INFO   - Putting tab 7BE3 back (queue size: 0).
+05/11/2026 14:24:56 kaleido.kaleido      INFO   - Waiting for all cleanups to finish.
+05/11/2026 14:24:56 kaleido.kaleido      INFO   - Exiting Kaleido.
+05/11/2026 14:24:56 choreographer.utils._tmpfile INFO   - TemporaryDirectory.cleanup() worked.
+05/11/2026 14:24:56 choreographer.utils._tmpfile INFO   - shutil.rmtree worked.
+05/11/2026 14:24:56 choreographer.browser_async INFO   - Closing browser.
+05/11/2026 14:24:56 choreographer.utils._tmpfile INFO   - TemporaryDirectory.cleanup() worked.
+05/11/2026 14:24:56 choreographer.utils._tmpfile INFO   - shutil.rmtree worked.
+05/11/2026 14:24:56 choreographer.browser_async INFO   - Closing browser.
+05/11/2026 14:24:56 kaleido.kaleido      INFO   - Cancelling tasks.
+05/11/2026 14:24:56 kaleido.kaleido      INFO   - Exiting Kaleido/Choreo.
+05/11/2026 14:24:56 choreographer.utils._tmpfile INFO   - TemporaryDirectory.cleanup() worked.
+05/11/2026 14:24:56 choreographer.utils._tmpfile INFO   - shutil.rmtree worked.
+05/11/2026 14:24:56 kaleido.kaleido      INFO   - Cancelling tasks.
+05/11/2026 14:24:56 kaleido.kaleido      INFO   - Exiting Kaleido/Choreo.
+05/11/2026 14:24:57 choreographer.utils._tmpfile INFO   - TemporaryDirectory.cleanup() worked.
+05/11/2026 14:24:57 choreographer.utils._tmpfile INFO   - shutil.rmtree worked.
+05/11/2026 14:26:07 Comparaison Pays (F4) INFO   - Analyse Temporelle (F3) -> Comparaison Pays (F4)
+05/11/2026 14:26:09 choreographer.browsers.chromium INFO   - Chromium init'ed with kwargs {}
+05/11/2026 14:26:09 choreographer.browsers.chromium INFO   - Found chromium path: C:\Program Files\Google\Chrome\Application\chrome.exe
+05/11/2026 14:26:09 choreographer.utils._tmpfile INFO   - Temp directory created: C:\Users\Salim\AppData\Local\Temp\tmpzh9xr2xi.
+05/11/2026 14:26:09 choreographer.browser_async INFO   - Opening browser.
+05/11/2026 14:26:09 choreographer.utils._tmpfile INFO   - Temp directory created: C:\Users\Salim\AppData\Local\Temp\tmpam7nhs0k.
+05/11/2026 14:26:09 choreographer.browsers.chromium INFO   - Temporary directory at: C:\Users\Salim\AppData\Local\Temp\tmpam7nhs0k
+05/11/2026 14:26:09 kaleido.kaleido      INFO   - Conforming 1 to file:///C:/Users/Salim/AppData/Local/Temp/tmpzh9xr2xi/index.html
+05/11/2026 14:26:10 kaleido.kaleido      INFO   - Getting tab from queue (has 1)
+05/11/2026 14:26:10 kaleido.kaleido      INFO   - Got 8DA0
+05/11/2026 14:26:10 kaleido.kaleido      INFO   - Reloading tab 8DA0 before return.
+05/11/2026 14:26:11 kaleido.kaleido      INFO   - Putting tab 8DA0 back (queue size: 0).
+05/11/2026 14:26:11 kaleido.kaleido      INFO   - Waiting for all cleanups to finish.
+05/11/2026 14:26:11 kaleido.kaleido      INFO   - Exiting Kaleido.
+05/11/2026 14:26:11 choreographer.utils._tmpfile INFO   - TemporaryDirectory.cleanup() worked.
+05/11/2026 14:26:11 choreographer.utils._tmpfile INFO   - shutil.rmtree worked.
+05/11/2026 14:26:11 choreographer.browser_async INFO   - Closing browser.
+05/11/2026 14:26:11 choreographer.utils._tmpfile INFO   - TemporaryDirectory.cleanup() worked.
+05/11/2026 14:26:11 choreographer.utils._tmpfile INFO   - shutil.rmtree worked.
+05/11/2026 14:26:11 choreographer.browser_async INFO   - Closing browser.
+05/11/2026 14:26:11 kaleido.kaleido      INFO   - Cancelling tasks.
+05/11/2026 14:26:11 kaleido.kaleido      INFO   - Exiting Kaleido/Choreo.
+05/11/2026 14:26:11 choreographer.utils._tmpfile INFO   - TemporaryDirectory.cleanup() worked.
+05/11/2026 14:26:11 choreographer.utils._tmpfile INFO   - shutil.rmtree worked.
+05/11/2026 14:26:11 kaleido.kaleido      INFO   - Cancelling tasks.
+05/11/2026 14:26:11 kaleido.kaleido      INFO   - Exiting Kaleido/Choreo.
+05/11/2026 14:26:11 choreographer.utils._tmpfile INFO   - TemporaryDirectory.cleanup() worked.
+05/11/2026 14:26:11 choreographer.utils._tmpfile INFO   - shutil.rmtree worked.
+05/11/2026 14:26:31 choreographer.browsers.chromium INFO   - Chromium init'ed with kwargs {}
+05/11/2026 14:26:31 choreographer.browsers.chromium INFO   - Found chromium path: C:\Program Files\Google\Chrome\Application\chrome.exe
+05/11/2026 14:26:31 choreographer.utils._tmpfile INFO   - Temp directory created: C:\Users\Salim\AppData\Local\Temp\tmpnmpxb3sj.
+05/11/2026 14:26:31 choreographer.browser_async INFO   - Opening browser.
+05/11/2026 14:26:31 choreographer.utils._tmpfile INFO   - Temp directory created: C:\Users\Salim\AppData\Local\Temp\tmpvx0enxke.
+05/11/2026 14:26:31 choreographer.browsers.chromium INFO   - Temporary directory at: C:\Users\Salim\AppData\Local\Temp\tmpvx0enxke
+05/11/2026 14:26:31 kaleido.kaleido      INFO   - Conforming 1 to file:///C:/Users/Salim/AppData/Local/Temp/tmpnmpxb3sj/index.html
+05/11/2026 14:26:33 kaleido.kaleido      INFO   - Getting tab from queue (has 1)
+05/11/2026 14:26:33 kaleido.kaleido      INFO   - Got FC2D
+05/11/2026 14:26:33 kaleido.kaleido      INFO   - Reloading tab FC2D before return.
+05/11/2026 14:26:33 kaleido.kaleido      INFO   - Putting tab FC2D back (queue size: 0).
+05/11/2026 14:26:33 kaleido.kaleido      INFO   - Waiting for all cleanups to finish.
+05/11/2026 14:26:33 kaleido.kaleido      INFO   - Exiting Kaleido.
+05/11/2026 14:26:33 choreographer.utils._tmpfile INFO   - TemporaryDirectory.cleanup() worked.
+05/11/2026 14:26:33 choreographer.utils._tmpfile INFO   - shutil.rmtree worked.
+05/11/2026 14:26:33 choreographer.browser_async INFO   - Closing browser.
+05/11/2026 14:26:33 choreographer.utils._tmpfile INFO   - TemporaryDirectory.cleanup() worked.
+05/11/2026 14:26:33 choreographer.utils._tmpfile INFO   - shutil.rmtree worked.
+05/11/2026 14:26:33 choreographer.browser_async INFO   - Closing browser.
+05/11/2026 14:26:33 kaleido.kaleido      INFO   - Cancelling tasks.
+05/11/2026 14:26:33 kaleido.kaleido      INFO   - Exiting Kaleido/Choreo.
+05/11/2026 14:26:33 choreographer.utils._tmpfile INFO   - TemporaryDirectory.cleanup() worked.
+05/11/2026 14:26:33 choreographer.utils._tmpfile INFO   - shutil.rmtree worked.
+05/11/2026 14:26:33 kaleido.kaleido      INFO   - Cancelling tasks.
+05/11/2026 14:26:33 kaleido.kaleido      INFO   - Exiting Kaleido/Choreo.
+05/11/2026 14:26:33 choreographer.utils._tmpfile INFO   - TemporaryDirectory.cleanup() worked.
+05/11/2026 14:26:33 choreographer.utils._tmpfile INFO   - shutil.rmtree worked.
+05/11/2026 14:26:46 choreographer.browsers.chromium INFO   - Chromium init'ed with kwargs {}
+05/11/2026 14:26:46 choreographer.browsers.chromium INFO   - Found chromium path: C:\Program Files\Google\Chrome\Application\chrome.exe
+05/11/2026 14:26:46 choreographer.utils._tmpfile INFO   - Temp directory created: C:\Users\Salim\AppData\Local\Temp\tmpvvptp1dv.
+05/11/2026 14:26:46 choreographer.browser_async INFO   - Opening browser.
+05/11/2026 14:26:46 choreographer.utils._tmpfile INFO   - Temp directory created: C:\Users\Salim\AppData\Local\Temp\tmpcv_dtav8.
+05/11/2026 14:26:46 choreographer.browsers.chromium INFO   - Temporary directory at: C:\Users\Salim\AppData\Local\Temp\tmpcv_dtav8
+05/11/2026 14:26:47 kaleido.kaleido      INFO   - Conforming 1 to file:///C:/Users/Salim/AppData/Local/Temp/tmpvvptp1dv/index.html
+05/11/2026 14:26:48 kaleido.kaleido      INFO   - Getting tab from queue (has 1)
+05/11/2026 14:26:48 kaleido.kaleido      INFO   - Got 706C
+05/11/2026 14:26:48 kaleido.kaleido      INFO   - Reloading tab 706C before return.
+05/11/2026 14:26:48 kaleido.kaleido      INFO   - Putting tab 706C back (queue size: 0).
+05/11/2026 14:26:48 kaleido.kaleido      INFO   - Waiting for all cleanups to finish.
+05/11/2026 14:26:48 kaleido.kaleido      INFO   - Exiting Kaleido.
+05/11/2026 14:26:48 choreographer.utils._tmpfile INFO   - TemporaryDirectory.cleanup() worked.
+05/11/2026 14:26:48 choreographer.utils._tmpfile INFO   - shutil.rmtree worked.
+05/11/2026 14:26:48 choreographer.browser_async INFO   - Closing browser.
+05/11/2026 14:26:48 choreographer.utils._tmpfile INFO   - TemporaryDirectory.cleanup() worked.
+05/11/2026 14:26:48 choreographer.utils._tmpfile INFO   - shutil.rmtree worked.
+05/11/2026 14:26:48 choreographer.browser_async INFO   - Closing browser.
+05/11/2026 14:26:48 kaleido.kaleido      INFO   - Cancelling tasks.
+05/11/2026 14:26:48 kaleido.kaleido      INFO   - Exiting Kaleido/Choreo.
+05/11/2026 14:26:48 choreographer.utils._tmpfile INFO   - TemporaryDirectory.cleanup() worked.
+05/11/2026 14:26:48 choreographer.utils._tmpfile INFO   - shutil.rmtree worked.
+05/11/2026 14:26:48 kaleido.kaleido      INFO   - Cancelling tasks.
+05/11/2026 14:26:48 kaleido.kaleido      INFO   - Exiting Kaleido/Choreo.
+05/11/2026 14:26:48 choreographer.utils._tmpfile INFO   - TemporaryDirectory.cleanup() worked.
+05/11/2026 14:26:48 choreographer.utils._tmpfile INFO   - shutil.rmtree worked.
+05/11/2026 14:26:50 choreographer.browsers.chromium INFO   - Chromium init'ed with kwargs {}
+05/11/2026 14:26:50 choreographer.browsers.chromium INFO   - Found chromium path: C:\Program Files\Google\Chrome\Application\chrome.exe
+05/11/2026 14:26:50 choreographer.utils._tmpfile INFO   - Temp directory created: C:\Users\Salim\AppData\Local\Temp\tmpr6v6myau.
+05/11/2026 14:26:50 choreographer.browser_async INFO   - Opening browser.
+05/11/2026 14:26:50 choreographer.utils._tmpfile INFO   - Temp directory created: C:\Users\Salim\AppData\Local\Temp\tmp5enqttsh.
+05/11/2026 14:26:50 choreographer.browsers.chromium INFO   - Temporary directory at: C:\Users\Salim\AppData\Local\Temp\tmp5enqttsh
+05/11/2026 14:26:50 kaleido.kaleido      INFO   - Conforming 1 to file:///C:/Users/Salim/AppData/Local/Temp/tmpr6v6myau/index.html
+05/11/2026 14:26:51 kaleido.kaleido      INFO   - Getting tab from queue (has 1)
+05/11/2026 14:26:51 kaleido.kaleido      INFO   - Got 95B9
+05/11/2026 14:26:51 kaleido.kaleido      INFO   - Reloading tab 95B9 before return.
+05/11/2026 14:26:51 kaleido.kaleido      INFO   - Putting tab 95B9 back (queue size: 0).
+05/11/2026 14:26:51 kaleido.kaleido      INFO   - Waiting for all cleanups to finish.
+05/11/2026 14:26:51 kaleido.kaleido      INFO   - Exiting Kaleido.
+05/11/2026 14:26:51 choreographer.utils._tmpfile INFO   - TemporaryDirectory.cleanup() worked.
+05/11/2026 14:26:51 choreographer.utils._tmpfile INFO   - shutil.rmtree worked.
+05/11/2026 14:26:51 choreographer.browser_async INFO   - Closing browser.
+05/11/2026 14:26:51 choreographer.utils._tmpfile INFO   - TemporaryDirectory.cleanup() worked.
+05/11/2026 14:26:51 choreographer.utils._tmpfile INFO   - shutil.rmtree worked.
+05/11/2026 14:26:51 choreographer.browser_async INFO   - Closing browser.
+05/11/2026 14:26:51 kaleido.kaleido      INFO   - Cancelling tasks.
+05/11/2026 14:26:51 kaleido.kaleido      INFO   - Exiting Kaleido/Choreo.
+05/11/2026 14:26:52 choreographer.utils._tmpfile INFO   - TemporaryDirectory.cleanup() worked.
+05/11/2026 14:26:52 choreographer.utils._tmpfile INFO   - shutil.rmtree worked.
+05/11/2026 14:26:52 kaleido.kaleido      INFO   - Cancelling tasks.
+05/11/2026 14:26:52 kaleido.kaleido      INFO   - Exiting Kaleido/Choreo.
+05/11/2026 14:26:52 choreographer.utils._tmpfile INFO   - TemporaryDirectory.cleanup() worked.
+05/11/2026 14:26:52 choreographer.utils._tmpfile INFO   - shutil.rmtree worked.
+05/11/2026 14:27:00 choreographer.browsers.chromium INFO   - Chromium init'ed with kwargs {}
+05/11/2026 14:27:00 choreographer.browsers.chromium INFO   - Found chromium path: C:\Program Files\Google\Chrome\Application\chrome.exe
+05/11/2026 14:27:00 choreographer.utils._tmpfile INFO   - Temp directory created: C:\Users\Salim\AppData\Local\Temp\tmpwyu0kjrh.
+05/11/2026 14:27:00 choreographer.browser_async INFO   - Opening browser.
+05/11/2026 14:27:00 choreographer.utils._tmpfile INFO   - Temp directory created: C:\Users\Salim\AppData\Local\Temp\tmpakgpu3b_.
+05/11/2026 14:27:00 choreographer.browsers.chromium INFO   - Temporary directory at: C:\Users\Salim\AppData\Local\Temp\tmpakgpu3b_
+05/11/2026 14:27:01 kaleido.kaleido      INFO   - Conforming 1 to file:///C:/Users/Salim/AppData/Local/Temp/tmpwyu0kjrh/index.html
+05/11/2026 14:27:02 kaleido.kaleido      INFO   - Getting tab from queue (has 1)
+05/11/2026 14:27:02 kaleido.kaleido      INFO   - Got E181
+05/11/2026 14:27:02 kaleido.kaleido      INFO   - Reloading tab E181 before return.
+05/11/2026 14:27:02 kaleido.kaleido      INFO   - Putting tab E181 back (queue size: 0).
+05/11/2026 14:27:02 kaleido.kaleido      INFO   - Waiting for all cleanups to finish.
+05/11/2026 14:27:02 kaleido.kaleido      INFO   - Exiting Kaleido.
+05/11/2026 14:27:02 choreographer.utils._tmpfile INFO   - TemporaryDirectory.cleanup() worked.
+05/11/2026 14:27:02 choreographer.utils._tmpfile INFO   - shutil.rmtree worked.
+05/11/2026 14:27:02 choreographer.browser_async INFO   - Closing browser.
+05/11/2026 14:27:02 choreographer.utils._tmpfile INFO   - TemporaryDirectory.cleanup() worked.
+05/11/2026 14:27:02 choreographer.utils._tmpfile INFO   - shutil.rmtree worked.
+05/11/2026 14:27:02 choreographer.browser_async INFO   - Closing browser.
+05/11/2026 14:27:02 kaleido.kaleido      INFO   - Cancelling tasks.
+05/11/2026 14:27:02 kaleido.kaleido      INFO   - Exiting Kaleido/Choreo.
+05/11/2026 14:27:03 choreographer.utils._tmpfile INFO   - TemporaryDirectory.cleanup() worked.
+05/11/2026 14:27:03 choreographer.utils._tmpfile INFO   - shutil.rmtree worked.
+05/11/2026 14:27:03 kaleido.kaleido      INFO   - Cancelling tasks.
+05/11/2026 14:27:03 kaleido.kaleido      INFO   - Exiting Kaleido/Choreo.
+05/11/2026 14:27:03 choreographer.utils._tmpfile INFO   - TemporaryDirectory.cleanup() worked.
+05/11/2026 14:27:03 choreographer.utils._tmpfile INFO   - shutil.rmtree worked.
+05/11/2026 14:27:17 choreographer.browsers.chromium INFO   - Chromium init'ed with kwargs {}
+05/11/2026 14:27:17 choreographer.browsers.chromium INFO   - Found chromium path: C:\Program Files\Google\Chrome\Application\chrome.exe
+05/11/2026 14:27:17 choreographer.utils._tmpfile INFO   - Temp directory created: C:\Users\Salim\AppData\Local\Temp\tmpra75gqc_.
+05/11/2026 14:27:17 choreographer.browser_async INFO   - Opening browser.
+05/11/2026 14:27:17 choreographer.utils._tmpfile INFO   - Temp directory created: C:\Users\Salim\AppData\Local\Temp\tmp0bssl6bp.
+05/11/2026 14:27:17 choreographer.browsers.chromium INFO   - Temporary directory at: C:\Users\Salim\AppData\Local\Temp\tmp0bssl6bp
+05/11/2026 14:27:17 kaleido.kaleido      INFO   - Conforming 1 to file:///C:/Users/Salim/AppData/Local/Temp/tmpra75gqc_/index.html
+05/11/2026 14:27:19 kaleido.kaleido      INFO   - Getting tab from queue (has 1)
+05/11/2026 14:27:19 kaleido.kaleido      INFO   - Got A6EB
+05/11/2026 14:27:19 kaleido.kaleido      INFO   - Reloading tab A6EB before return.
+05/11/2026 14:27:19 kaleido.kaleido      INFO   - Putting tab A6EB back (queue size: 0).
+05/11/2026 14:27:19 kaleido.kaleido      INFO   - Waiting for all cleanups to finish.
+05/11/2026 14:27:19 kaleido.kaleido      INFO   - Exiting Kaleido.
+05/11/2026 14:27:19 choreographer.utils._tmpfile INFO   - TemporaryDirectory.cleanup() worked.
+05/11/2026 14:27:19 choreographer.utils._tmpfile INFO   - shutil.rmtree worked.
+05/11/2026 14:27:19 choreographer.browser_async INFO   - Closing browser.
+05/11/2026 14:27:19 choreographer.utils._tmpfile INFO   - TemporaryDirectory.cleanup() worked.
+05/11/2026 14:27:19 choreographer.utils._tmpfile INFO   - shutil.rmtree worked.
+05/11/2026 14:27:19 choreographer.browser_async INFO   - Closing browser.
+05/11/2026 14:27:19 kaleido.kaleido      INFO   - Cancelling tasks.
+05/11/2026 14:27:19 kaleido.kaleido      INFO   - Exiting Kaleido/Choreo.
+05/11/2026 14:27:19 choreographer.utils._tmpfile INFO   - TemporaryDirectory.cleanup() worked.
+05/11/2026 14:27:19 choreographer.utils._tmpfile INFO   - shutil.rmtree worked.
+05/11/2026 14:27:19 kaleido.kaleido      INFO   - Cancelling tasks.
+05/11/2026 14:27:19 kaleido.kaleido      INFO   - Exiting Kaleido/Choreo.
+05/11/2026 14:27:19 choreographer.utils._tmpfile INFO   - TemporaryDirectory.cleanup() worked.
+05/11/2026 14:27:19 choreographer.utils._tmpfile INFO   - shutil.rmtree worked.
+05/11/2026 14:27:27 choreographer.browsers.chromium INFO   - Chromium init'ed with kwargs {}
+05/11/2026 14:27:27 choreographer.browsers.chromium INFO   - Found chromium path: C:\Program Files\Google\Chrome\Application\chrome.exe
+05/11/2026 14:27:27 choreographer.utils._tmpfile INFO   - Temp directory created: C:\Users\Salim\AppData\Local\Temp\tmporxuu5lj.
+05/11/2026 14:27:27 choreographer.browser_async INFO   - Opening browser.
+05/11/2026 14:27:27 choreographer.utils._tmpfile INFO   - Temp directory created: C:\Users\Salim\AppData\Local\Temp\tmppropx4br.
+05/11/2026 14:27:27 choreographer.browsers.chromium INFO   - Temporary directory at: C:\Users\Salim\AppData\Local\Temp\tmppropx4br
+05/11/2026 14:27:27 kaleido.kaleido      INFO   - Conforming 1 to file:///C:/Users/Salim/AppData/Local/Temp/tmporxuu5lj/index.html
+05/11/2026 14:27:29 kaleido.kaleido      INFO   - Getting tab from queue (has 1)
+05/11/2026 14:27:29 kaleido.kaleido      INFO   - Got E59A
+05/11/2026 14:27:29 kaleido.kaleido      INFO   - Reloading tab E59A before return.
+05/11/2026 14:27:29 kaleido.kaleido      INFO   - Putting tab E59A back (queue size: 0).
+05/11/2026 14:27:29 kaleido.kaleido      INFO   - Waiting for all cleanups to finish.
+05/11/2026 14:27:29 kaleido.kaleido      INFO   - Exiting Kaleido.
+05/11/2026 14:27:29 choreographer.utils._tmpfile INFO   - TemporaryDirectory.cleanup() worked.
+05/11/2026 14:27:29 choreographer.utils._tmpfile INFO   - shutil.rmtree worked.
+05/11/2026 14:27:29 choreographer.browser_async INFO   - Closing browser.
+05/11/2026 14:27:29 choreographer.utils._tmpfile INFO   - TemporaryDirectory.cleanup() worked.
+05/11/2026 14:27:29 choreographer.utils._tmpfile INFO   - shutil.rmtree worked.
+05/11/2026 14:27:29 choreographer.browser_async INFO   - Closing browser.
+05/11/2026 14:27:29 kaleido.kaleido      INFO   - Cancelling tasks.
+05/11/2026 14:27:29 kaleido.kaleido      INFO   - Exiting Kaleido/Choreo.
+05/11/2026 14:27:29 choreographer.utils._tmpfile INFO   - TemporaryDirectory.cleanup() worked.
+05/11/2026 14:27:29 choreographer.utils._tmpfile INFO   - shutil.rmtree worked.
+05/11/2026 14:27:29 kaleido.kaleido      INFO   - Cancelling tasks.
+05/11/2026 14:27:29 kaleido.kaleido      INFO   - Exiting Kaleido/Choreo.
+05/11/2026 14:27:29 choreographer.utils._tmpfile INFO   - TemporaryDirectory.cleanup() worked.
+05/11/2026 14:27:29 choreographer.utils._tmpfile INFO   - shutil.rmtree worked.
+05/11/2026 14:28:01 choreographer.browsers.chromium INFO   - Chromium init'ed with kwargs {}
+05/11/2026 14:28:01 choreographer.browsers.chromium INFO   - Found chromium path: C:\Program Files\Google\Chrome\Application\chrome.exe
+05/11/2026 14:28:01 choreographer.utils._tmpfile INFO   - Temp directory created: C:\Users\Salim\AppData\Local\Temp\tmpbcia6wwd.
+05/11/2026 14:28:01 choreographer.browser_async INFO   - Opening browser.
+05/11/2026 14:28:01 choreographer.utils._tmpfile INFO   - Temp directory created: C:\Users\Salim\AppData\Local\Temp\tmp74hoqtdi.
+05/11/2026 14:28:01 choreographer.browsers.chromium INFO   - Temporary directory at: C:\Users\Salim\AppData\Local\Temp\tmp74hoqtdi
+05/11/2026 14:28:02 kaleido.kaleido      INFO   - Conforming 1 to file:///C:/Users/Salim/AppData/Local/Temp/tmpbcia6wwd/index.html
+05/11/2026 14:28:03 kaleido.kaleido      INFO   - Getting tab from queue (has 1)
+05/11/2026 14:28:03 kaleido.kaleido      INFO   - Got 8731
+05/11/2026 14:28:03 kaleido.kaleido      INFO   - Reloading tab 8731 before return.
+05/11/2026 14:28:03 kaleido.kaleido      INFO   - Putting tab 8731 back (queue size: 0).
+05/11/2026 14:28:03 kaleido.kaleido      INFO   - Waiting for all cleanups to finish.
+05/11/2026 14:28:03 kaleido.kaleido      INFO   - Exiting Kaleido.
+05/11/2026 14:28:03 choreographer.utils._tmpfile INFO   - TemporaryDirectory.cleanup() worked.
+05/11/2026 14:28:03 choreographer.utils._tmpfile INFO   - shutil.rmtree worked.
+05/11/2026 14:28:03 choreographer.browser_async INFO   - Closing browser.
+05/11/2026 14:28:03 choreographer.utils._tmpfile INFO   - TemporaryDirectory.cleanup() worked.
+05/11/2026 14:28:03 choreographer.utils._tmpfile INFO   - shutil.rmtree worked.
+05/11/2026 14:28:03 choreographer.browser_async INFO   - Closing browser.
+05/11/2026 14:28:03 kaleido.kaleido      INFO   - Cancelling tasks.
+05/11/2026 14:28:03 kaleido.kaleido      INFO   - Exiting Kaleido/Choreo.
+05/11/2026 14:28:03 choreographer.utils._tmpfile INFO   - TemporaryDirectory.cleanup() worked.
+05/11/2026 14:28:03 choreographer.utils._tmpfile INFO   - shutil.rmtree worked.
+05/11/2026 14:28:03 kaleido.kaleido      INFO   - Cancelling tasks.
+05/11/2026 14:28:03 kaleido.kaleido      INFO   - Exiting Kaleido/Choreo.
+05/11/2026 14:28:04 choreographer.utils._tmpfile INFO   - TemporaryDirectory.cleanup() worked.
+05/11/2026 14:28:04 choreographer.utils._tmpfile INFO   - shutil.rmtree worked.
+05/11/2026 14:28:41 choreographer.browsers.chromium INFO   - Chromium init'ed with kwargs {}
+05/11/2026 14:28:41 choreographer.browsers.chromium INFO   - Found chromium path: C:\Program Files\Google\Chrome\Application\chrome.exe
+05/11/2026 14:28:41 choreographer.utils._tmpfile INFO   - Temp directory created: C:\Users\Salim\AppData\Local\Temp\tmp62kphf4i.
+05/11/2026 14:28:41 choreographer.browser_async INFO   - Opening browser.
+05/11/2026 14:28:41 choreographer.utils._tmpfile INFO   - Temp directory created: C:\Users\Salim\AppData\Local\Temp\tmp8utl63k5.
+05/11/2026 14:28:41 choreographer.browsers.chromium INFO   - Temporary directory at: C:\Users\Salim\AppData\Local\Temp\tmp8utl63k5
+05/11/2026 14:28:41 kaleido.kaleido      INFO   - Conforming 1 to file:///C:/Users/Salim/AppData/Local/Temp/tmp62kphf4i/index.html
+05/11/2026 14:28:42 kaleido.kaleido      INFO   - Getting tab from queue (has 1)
+05/11/2026 14:28:42 kaleido.kaleido      INFO   - Got 108F
+05/11/2026 14:28:42 kaleido.kaleido      INFO   - Reloading tab 108F before return.
+05/11/2026 14:28:42 kaleido.kaleido      INFO   - Putting tab 108F back (queue size: 0).
+05/11/2026 14:28:42 kaleido.kaleido      INFO   - Waiting for all cleanups to finish.
+05/11/2026 14:28:42 kaleido.kaleido      INFO   - Exiting Kaleido.
+05/11/2026 14:28:42 choreographer.utils._tmpfile INFO   - TemporaryDirectory.cleanup() worked.
+05/11/2026 14:28:42 choreographer.utils._tmpfile INFO   - shutil.rmtree worked.
+05/11/2026 14:28:42 choreographer.browser_async INFO   - Closing browser.
+05/11/2026 14:28:43 choreographer.utils._tmpfile INFO   - TemporaryDirectory.cleanup() worked.
+05/11/2026 14:28:43 choreographer.utils._tmpfile INFO   - shutil.rmtree worked.
+05/11/2026 14:28:43 choreographer.browser_async INFO   - Closing browser.
+05/11/2026 14:28:43 kaleido.kaleido      INFO   - Cancelling tasks.
+05/11/2026 14:28:43 kaleido.kaleido      INFO   - Exiting Kaleido/Choreo.
+05/11/2026 14:28:43 choreographer.utils._tmpfile INFO   - TemporaryDirectory.cleanup() worked.
+05/11/2026 14:28:43 choreographer.utils._tmpfile INFO   - shutil.rmtree worked.
+05/11/2026 14:28:43 kaleido.kaleido      INFO   - Cancelling tasks.
+05/11/2026 14:28:43 kaleido.kaleido      INFO   - Exiting Kaleido/Choreo.
+05/11/2026 14:28:43 choreographer.utils._tmpfile INFO   - TemporaryDirectory.cleanup() worked.
+05/11/2026 14:28:43 choreographer.utils._tmpfile INFO   - shutil.rmtree worked.
+05/11/2026 14:28:49 choreographer.browsers.chromium INFO   - Chromium init'ed with kwargs {}
+05/11/2026 14:28:49 choreographer.browsers.chromium INFO   - Found chromium path: C:\Program Files\Google\Chrome\Application\chrome.exe
+05/11/2026 14:28:49 choreographer.utils._tmpfile INFO   - Temp directory created: C:\Users\Salim\AppData\Local\Temp\tmpu5lli4gr.
+05/11/2026 14:28:49 choreographer.browser_async INFO   - Opening browser.
+05/11/2026 14:28:49 choreographer.utils._tmpfile INFO   - Temp directory created: C:\Users\Salim\AppData\Local\Temp\tmp0fwo4_q0.
+05/11/2026 14:28:49 choreographer.browsers.chromium INFO   - Temporary directory at: C:\Users\Salim\AppData\Local\Temp\tmp0fwo4_q0
+05/11/2026 14:28:49 kaleido.kaleido      INFO   - Conforming 1 to file:///C:/Users/Salim/AppData/Local/Temp/tmpu5lli4gr/index.html
+05/11/2026 14:28:50 choreographer.browsers.chromium INFO   - Chromium init'ed with kwargs {}
+05/11/2026 14:28:50 choreographer.browsers.chromium INFO   - Found chromium path: C:\Program Files\Google\Chrome\Application\chrome.exe
+05/11/2026 14:28:50 choreographer.utils._tmpfile INFO   - Temp directory created: C:\Users\Salim\AppData\Local\Temp\tmpq34i5isi.
+05/11/2026 14:28:50 choreographer.browser_async INFO   - Opening browser.
+05/11/2026 14:28:50 choreographer.utils._tmpfile INFO   - Temp directory created: C:\Users\Salim\AppData\Local\Temp\tmp_zgd646b.
+05/11/2026 14:28:50 choreographer.browsers.chromium INFO   - Temporary directory at: C:\Users\Salim\AppData\Local\Temp\tmp_zgd646b
+05/11/2026 14:28:50 kaleido.kaleido      INFO   - Conforming 1 to file:///C:/Users/Salim/AppData/Local/Temp/tmpq34i5isi/index.html
+05/11/2026 14:28:50 kaleido.kaleido      INFO   - Getting tab from queue (has 1)
+05/11/2026 14:28:50 kaleido.kaleido      INFO   - Got BD99
+05/11/2026 14:28:51 kaleido.kaleido      INFO   - Reloading tab BD99 before return.
+05/11/2026 14:28:51 kaleido.kaleido      INFO   - Putting tab BD99 back (queue size: 0).
+05/11/2026 14:28:51 kaleido.kaleido      INFO   - Waiting for all cleanups to finish.
+05/11/2026 14:28:51 kaleido.kaleido      INFO   - Exiting Kaleido.
+05/11/2026 14:28:51 choreographer.utils._tmpfile INFO   - TemporaryDirectory.cleanup() worked.
+05/11/2026 14:28:51 choreographer.utils._tmpfile INFO   - shutil.rmtree worked.
+05/11/2026 14:28:51 choreographer.browser_async INFO   - Closing browser.
+05/11/2026 14:28:51 choreographer.utils._tmpfile INFO   - TemporaryDirectory.cleanup() worked.
+05/11/2026 14:28:51 choreographer.utils._tmpfile INFO   - shutil.rmtree worked.
+05/11/2026 14:28:51 choreographer.browser_async INFO   - Closing browser.
+05/11/2026 14:28:51 kaleido.kaleido      INFO   - Cancelling tasks.
+05/11/2026 14:28:51 kaleido.kaleido      INFO   - Exiting Kaleido/Choreo.
+05/11/2026 14:28:51 choreographer.utils._tmpfile INFO   - TemporaryDirectory.cleanup() worked.
+05/11/2026 14:28:51 choreographer.utils._tmpfile INFO   - shutil.rmtree worked.
+05/11/2026 14:28:51 kaleido.kaleido      INFO   - Cancelling tasks.
+05/11/2026 14:28:51 kaleido.kaleido      INFO   - Exiting Kaleido/Choreo.
+05/11/2026 14:28:51 choreographer.utils._tmpfile INFO   - TemporaryDirectory.cleanup() worked.
+05/11/2026 14:28:51 choreographer.utils._tmpfile INFO   - shutil.rmtree worked.
+05/11/2026 14:28:51 kaleido.kaleido      INFO   - Getting tab from queue (has 1)
+05/11/2026 14:28:51 kaleido.kaleido      INFO   - Got 1462
+05/11/2026 14:28:51 kaleido.kaleido      INFO   - Reloading tab 1462 before return.
+05/11/2026 14:28:51 kaleido.kaleido      INFO   - Putting tab 1462 back (queue size: 0).
+05/11/2026 14:28:51 kaleido.kaleido      INFO   - Waiting for all cleanups to finish.
+05/11/2026 14:28:51 kaleido.kaleido      INFO   - Exiting Kaleido.
+05/11/2026 14:28:51 choreographer.utils._tmpfile INFO   - TemporaryDirectory.cleanup() worked.
+05/11/2026 14:28:51 choreographer.utils._tmpfile INFO   - shutil.rmtree worked.
+05/11/2026 14:28:51 choreographer.browser_async INFO   - Closing browser.
+05/11/2026 14:28:52 choreographer.utils._tmpfile INFO   - TemporaryDirectory.cleanup() worked.
+05/11/2026 14:28:52 choreographer.utils._tmpfile INFO   - shutil.rmtree worked.
+05/11/2026 14:28:52 choreographer.browser_async INFO   - Closing browser.
+05/11/2026 14:28:52 kaleido.kaleido      INFO   - Cancelling tasks.
+05/11/2026 14:28:52 kaleido.kaleido      INFO   - Exiting Kaleido/Choreo.
+05/11/2026 14:28:52 choreographer.utils._tmpfile INFO   - TemporaryDirectory.cleanup() worked.
+05/11/2026 14:28:52 choreographer.utils._tmpfile INFO   - shutil.rmtree worked.
+05/11/2026 14:28:52 kaleido.kaleido      INFO   - Cancelling tasks.
+05/11/2026 14:28:52 kaleido.kaleido      INFO   - Exiting Kaleido/Choreo.
+05/11/2026 14:28:52 choreographer.utils._tmpfile INFO   - TemporaryDirectory.cleanup() worked.
+05/11/2026 14:28:52 choreographer.utils._tmpfile INFO   - shutil.rmtree worked.
+05/11/2026 14:28:53 choreographer.browsers.chromium INFO   - Chromium init'ed with kwargs {}
+05/11/2026 14:28:53 choreographer.browsers.chromium INFO   - Found chromium path: C:\Program Files\Google\Chrome\Application\chrome.exe
+05/11/2026 14:28:53 choreographer.utils._tmpfile INFO   - Temp directory created: C:\Users\Salim\AppData\Local\Temp\tmpuksy18iy.
+05/11/2026 14:28:53 choreographer.browser_async INFO   - Opening browser.
+05/11/2026 14:28:53 choreographer.utils._tmpfile INFO   - Temp directory created: C:\Users\Salim\AppData\Local\Temp\tmpbt39z53b.
+05/11/2026 14:28:53 choreographer.browsers.chromium INFO   - Temporary directory at: C:\Users\Salim\AppData\Local\Temp\tmpbt39z53b
+05/11/2026 14:28:53 kaleido.kaleido      INFO   - Conforming 1 to file:///C:/Users/Salim/AppData/Local/Temp/tmpuksy18iy/index.html
+05/11/2026 14:28:54 kaleido.kaleido      INFO   - Getting tab from queue (has 1)
+05/11/2026 14:28:54 kaleido.kaleido      INFO   - Got 759F
+05/11/2026 14:28:54 kaleido.kaleido      INFO   - Reloading tab 759F before return.
+05/11/2026 14:28:54 kaleido.kaleido      INFO   - Putting tab 759F back (queue size: 0).
+05/11/2026 14:28:54 kaleido.kaleido      INFO   - Waiting for all cleanups to finish.
+05/11/2026 14:28:54 kaleido.kaleido      INFO   - Exiting Kaleido.
+05/11/2026 14:28:54 choreographer.utils._tmpfile INFO   - TemporaryDirectory.cleanup() worked.
+05/11/2026 14:28:54 choreographer.utils._tmpfile INFO   - shutil.rmtree worked.
+05/11/2026 14:28:54 choreographer.browser_async INFO   - Closing browser.
+05/11/2026 14:28:54 choreographer.utils._tmpfile INFO   - TemporaryDirectory.cleanup() worked.
+05/11/2026 14:28:54 choreographer.utils._tmpfile INFO   - shutil.rmtree worked.
+05/11/2026 14:28:54 choreographer.browser_async INFO   - Closing browser.
+05/11/2026 14:28:54 kaleido.kaleido      INFO   - Cancelling tasks.
+05/11/2026 14:28:54 kaleido.kaleido      INFO   - Exiting Kaleido/Choreo.
+05/11/2026 14:28:54 choreographer.utils._tmpfile INFO   - TemporaryDirectory.cleanup() worked.
+05/11/2026 14:28:54 choreographer.utils._tmpfile INFO   - shutil.rmtree worked.
+05/11/2026 14:28:54 kaleido.kaleido      INFO   - Cancelling tasks.
+05/11/2026 14:28:54 kaleido.kaleido      INFO   - Exiting Kaleido/Choreo.
+05/11/2026 14:28:54 choreographer.utils._tmpfile INFO   - TemporaryDirectory.cleanup() worked.
+05/11/2026 14:28:54 choreographer.utils._tmpfile INFO   - shutil.rmtree worked.
+05/11/2026 14:29:03 choreographer.browsers.chromium INFO   - Chromium init'ed with kwargs {}
+05/11/2026 14:29:03 choreographer.browsers.chromium INFO   - Found chromium path: C:\Program Files\Google\Chrome\Application\chrome.exe
+05/11/2026 14:29:03 choreographer.utils._tmpfile INFO   - Temp directory created: C:\Users\Salim\AppData\Local\Temp\tmpqkdlpmw7.
+05/11/2026 14:29:03 choreographer.browser_async INFO   - Opening browser.
+05/11/2026 14:29:03 choreographer.utils._tmpfile INFO   - Temp directory created: C:\Users\Salim\AppData\Local\Temp\tmphl4hnom8.
+05/11/2026 14:29:03 choreographer.browsers.chromium INFO   - Temporary directory at: C:\Users\Salim\AppData\Local\Temp\tmphl4hnom8
+05/11/2026 14:29:03 kaleido.kaleido      INFO   - Conforming 1 to file:///C:/Users/Salim/AppData/Local/Temp/tmpqkdlpmw7/index.html
+05/11/2026 14:29:04 kaleido.kaleido      INFO   - Getting tab from queue (has 1)
+05/11/2026 14:29:04 kaleido.kaleido      INFO   - Got DC2F
+05/11/2026 14:29:04 kaleido.kaleido      INFO   - Reloading tab DC2F before return.
+05/11/2026 14:29:04 kaleido.kaleido      INFO   - Putting tab DC2F back (queue size: 0).
+05/11/2026 14:29:04 kaleido.kaleido      INFO   - Waiting for all cleanups to finish.
+05/11/2026 14:29:04 kaleido.kaleido      INFO   - Exiting Kaleido.
+05/11/2026 14:29:04 choreographer.utils._tmpfile INFO   - TemporaryDirectory.cleanup() worked.
+05/11/2026 14:29:04 choreographer.utils._tmpfile INFO   - shutil.rmtree worked.
+05/11/2026 14:29:04 choreographer.browser_async INFO   - Closing browser.
+05/11/2026 14:29:05 choreographer.utils._tmpfile INFO   - TemporaryDirectory.cleanup() worked.
+05/11/2026 14:29:05 choreographer.utils._tmpfile INFO   - shutil.rmtree worked.
+05/11/2026 14:29:05 choreographer.browser_async INFO   - Closing browser.
+05/11/2026 14:29:05 kaleido.kaleido      INFO   - Cancelling tasks.
+05/11/2026 14:29:05 kaleido.kaleido      INFO   - Exiting Kaleido/Choreo.
+05/11/2026 14:29:05 choreographer.utils._tmpfile INFO   - TemporaryDirectory.cleanup() worked.
+05/11/2026 14:29:05 choreographer.utils._tmpfile INFO   - shutil.rmtree worked.
+05/11/2026 14:29:05 kaleido.kaleido      INFO   - Cancelling tasks.
+05/11/2026 14:29:05 kaleido.kaleido      INFO   - Exiting Kaleido/Choreo.
+05/11/2026 14:29:05 choreographer.utils._tmpfile INFO   - TemporaryDirectory.cleanup() worked.
+05/11/2026 14:29:05 choreographer.utils._tmpfile INFO   - shutil.rmtree worked.
+05/11/2026 14:29:07 choreographer.browsers.chromium INFO   - Chromium init'ed with kwargs {}
+05/11/2026 14:29:07 choreographer.browsers.chromium INFO   - Found chromium path: C:\Program Files\Google\Chrome\Application\chrome.exe
+05/11/2026 14:29:07 choreographer.utils._tmpfile INFO   - Temp directory created: C:\Users\Salim\AppData\Local\Temp\tmpcbmke9d5.
+05/11/2026 14:29:07 choreographer.browser_async INFO   - Opening browser.
+05/11/2026 14:29:07 choreographer.utils._tmpfile INFO   - Temp directory created: C:\Users\Salim\AppData\Local\Temp\tmpv9xs04qp.
+05/11/2026 14:29:07 choreographer.browsers.chromium INFO   - Temporary directory at: C:\Users\Salim\AppData\Local\Temp\tmpv9xs04qp
+05/11/2026 14:29:08 kaleido.kaleido      INFO   - Conforming 1 to file:///C:/Users/Salim/AppData/Local/Temp/tmpcbmke9d5/index.html
+05/11/2026 14:29:09 kaleido.kaleido      INFO   - Getting tab from queue (has 1)
+05/11/2026 14:29:09 kaleido.kaleido      INFO   - Got 855A
+05/11/2026 14:29:09 kaleido.kaleido      INFO   - Reloading tab 855A before return.
+05/11/2026 14:29:09 kaleido.kaleido      INFO   - Putting tab 855A back (queue size: 0).
+05/11/2026 14:29:09 kaleido.kaleido      INFO   - Waiting for all cleanups to finish.
+05/11/2026 14:29:09 kaleido.kaleido      INFO   - Exiting Kaleido.
+05/11/2026 14:29:09 choreographer.utils._tmpfile INFO   - TemporaryDirectory.cleanup() worked.
+05/11/2026 14:29:09 choreographer.utils._tmpfile INFO   - shutil.rmtree worked.
+05/11/2026 14:29:09 choreographer.browser_async INFO   - Closing browser.
+05/11/2026 14:29:09 choreographer.utils._tmpfile INFO   - TemporaryDirectory.cleanup() worked.
+05/11/2026 14:29:09 choreographer.utils._tmpfile INFO   - shutil.rmtree worked.
+05/11/2026 14:29:09 choreographer.browser_async INFO   - Closing browser.
+05/11/2026 14:29:09 kaleido.kaleido      INFO   - Cancelling tasks.
+05/11/2026 14:29:09 kaleido.kaleido      INFO   - Exiting Kaleido/Choreo.
+05/11/2026 14:29:09 choreographer.utils._tmpfile INFO   - TemporaryDirectory.cleanup() worked.
+05/11/2026 14:29:09 choreographer.utils._tmpfile INFO   - shutil.rmtree worked.
+05/11/2026 14:29:09 kaleido.kaleido      INFO   - Cancelling tasks.
+05/11/2026 14:29:09 kaleido.kaleido      INFO   - Exiting Kaleido/Choreo.
+05/11/2026 14:29:09 choreographer.utils._tmpfile INFO   - TemporaryDirectory.cleanup() worked.
+05/11/2026 14:29:09 choreographer.utils._tmpfile INFO   - shutil.rmtree worked.
+05/11/2026 14:29:18 choreographer.browsers.chromium INFO   - Chromium init'ed with kwargs {}
+05/11/2026 14:29:18 choreographer.browsers.chromium INFO   - Found chromium path: C:\Program Files\Google\Chrome\Application\chrome.exe
+05/11/2026 14:29:18 choreographer.utils._tmpfile INFO   - Temp directory created: C:\Users\Salim\AppData\Local\Temp\tmp1nd129yp.
+05/11/2026 14:29:18 choreographer.browser_async INFO   - Opening browser.
+05/11/2026 14:29:18 choreographer.utils._tmpfile INFO   - Temp directory created: C:\Users\Salim\AppData\Local\Temp\tmpvjok3ehc.
+05/11/2026 14:29:18 choreographer.browsers.chromium INFO   - Temporary directory at: C:\Users\Salim\AppData\Local\Temp\tmpvjok3ehc
+05/11/2026 14:29:18 kaleido.kaleido      INFO   - Conforming 1 to file:///C:/Users/Salim/AppData/Local/Temp/tmp1nd129yp/index.html
+05/11/2026 14:29:19 kaleido.kaleido      INFO   - Getting tab from queue (has 1)
+05/11/2026 14:29:19 kaleido.kaleido      INFO   - Got 9D21
+05/11/2026 14:29:20 kaleido.kaleido      INFO   - Reloading tab 9D21 before return.
+05/11/2026 14:29:20 kaleido.kaleido      INFO   - Putting tab 9D21 back (queue size: 0).
+05/11/2026 14:29:20 kaleido.kaleido      INFO   - Waiting for all cleanups to finish.
+05/11/2026 14:29:20 kaleido.kaleido      INFO   - Exiting Kaleido.
+05/11/2026 14:29:20 choreographer.utils._tmpfile INFO   - TemporaryDirectory.cleanup() worked.
+05/11/2026 14:29:20 choreographer.utils._tmpfile INFO   - shutil.rmtree worked.
+05/11/2026 14:29:20 choreographer.browser_async INFO   - Closing browser.
+05/11/2026 14:29:20 choreographer.utils._tmpfile INFO   - TemporaryDirectory.cleanup() worked.
+05/11/2026 14:29:20 choreographer.utils._tmpfile INFO   - shutil.rmtree worked.
+05/11/2026 14:29:20 choreographer.browser_async INFO   - Closing browser.
+05/11/2026 14:29:20 kaleido.kaleido      INFO   - Cancelling tasks.
+05/11/2026 14:29:20 kaleido.kaleido      INFO   - Exiting Kaleido/Choreo.
+05/11/2026 14:29:20 choreographer.utils._tmpfile INFO   - TemporaryDirectory.cleanup() worked.
+05/11/2026 14:29:20 choreographer.utils._tmpfile INFO   - shutil.rmtree worked.
+05/11/2026 14:29:20 kaleido.kaleido      INFO   - Cancelling tasks.
+05/11/2026 14:29:20 kaleido.kaleido      INFO   - Exiting Kaleido/Choreo.
+05/11/2026 14:29:20 choreographer.utils._tmpfile INFO   - TemporaryDirectory.cleanup() worked.
+05/11/2026 14:29:20 choreographer.utils._tmpfile INFO   - shutil.rmtree worked.
+05/11/2026 14:29:46 Multi-indicateurs (F5) INFO   - Comparaison Pays (F4) -> Multi-indicateurs (F5)
+05/11/2026 14:29:48 choreographer.browsers.chromium INFO   - Chromium init'ed with kwargs {}
+05/11/2026 14:29:48 choreographer.browsers.chromium INFO   - Found chromium path: C:\Program Files\Google\Chrome\Application\chrome.exe
+05/11/2026 14:29:48 choreographer.utils._tmpfile INFO   - Temp directory created: C:\Users\Salim\AppData\Local\Temp\tmp3p0ry0b9.
+05/11/2026 14:29:48 choreographer.browser_async INFO   - Opening browser.
+05/11/2026 14:29:48 choreographer.utils._tmpfile INFO   - Temp directory created: C:\Users\Salim\AppData\Local\Temp\tmp4i7ky7rt.
+05/11/2026 14:29:48 choreographer.browsers.chromium INFO   - Temporary directory at: C:\Users\Salim\AppData\Local\Temp\tmp4i7ky7rt
+05/11/2026 14:29:49 kaleido.kaleido      INFO   - Conforming 1 to file:///C:/Users/Salim/AppData/Local/Temp/tmp3p0ry0b9/index.html
+05/11/2026 14:29:50 kaleido.kaleido      INFO   - Getting tab from queue (has 1)
+05/11/2026 14:29:50 kaleido.kaleido      INFO   - Got 15D3
+05/11/2026 14:29:50 kaleido.kaleido      INFO   - Reloading tab 15D3 before return.
+05/11/2026 14:29:50 kaleido.kaleido      INFO   - Putting tab 15D3 back (queue size: 0).
+05/11/2026 14:29:50 kaleido.kaleido      INFO   - Waiting for all cleanups to finish.
+05/11/2026 14:29:50 kaleido.kaleido      INFO   - Exiting Kaleido.
+05/11/2026 14:29:50 choreographer.utils._tmpfile INFO   - TemporaryDirectory.cleanup() worked.
+05/11/2026 14:29:50 choreographer.utils._tmpfile INFO   - shutil.rmtree worked.
+05/11/2026 14:29:50 choreographer.browser_async INFO   - Closing browser.
+05/11/2026 14:29:50 choreographer.utils._tmpfile INFO   - TemporaryDirectory.cleanup() worked.
+05/11/2026 14:29:50 choreographer.utils._tmpfile INFO   - shutil.rmtree worked.
+05/11/2026 14:29:50 choreographer.browser_async INFO   - Closing browser.
+05/11/2026 14:29:50 kaleido.kaleido      INFO   - Cancelling tasks.
+05/11/2026 14:29:50 kaleido.kaleido      INFO   - Exiting Kaleido/Choreo.
+05/11/2026 14:29:50 choreographer.utils._tmpfile INFO   - TemporaryDirectory.cleanup() worked.
+05/11/2026 14:29:50 choreographer.utils._tmpfile INFO   - shutil.rmtree worked.
+05/11/2026 14:29:50 kaleido.kaleido      INFO   - Cancelling tasks.
+05/11/2026 14:29:50 kaleido.kaleido      INFO   - Exiting Kaleido/Choreo.
+05/11/2026 14:29:50 choreographer.utils._tmpfile INFO   - TemporaryDirectory.cleanup() worked.
+05/11/2026 14:29:50 choreographer.utils._tmpfile INFO   - shutil.rmtree worked.
+05/11/2026 14:29:56 choreographer.browsers.chromium INFO   - Chromium init'ed with kwargs {}
+05/11/2026 14:29:56 choreographer.browsers.chromium INFO   - Found chromium path: C:\Program Files\Google\Chrome\Application\chrome.exe
+05/11/2026 14:29:56 choreographer.utils._tmpfile INFO   - Temp directory created: C:\Users\Salim\AppData\Local\Temp\tmpl363cegs.
+05/11/2026 14:29:56 choreographer.browser_async INFO   - Opening browser.
+05/11/2026 14:29:56 choreographer.utils._tmpfile INFO   - Temp directory created: C:\Users\Salim\AppData\Local\Temp\tmpsuao4gg1.
+05/11/2026 14:29:56 choreographer.browsers.chromium INFO   - Temporary directory at: C:\Users\Salim\AppData\Local\Temp\tmpsuao4gg1
+05/11/2026 14:29:57 kaleido.kaleido      INFO   - Conforming 1 to file:///C:/Users/Salim/AppData/Local/Temp/tmpl363cegs/index.html
+05/11/2026 14:29:58 kaleido.kaleido      INFO   - Getting tab from queue (has 1)
+05/11/2026 14:29:58 kaleido.kaleido      INFO   - Got A370
+05/11/2026 14:29:58 kaleido.kaleido      INFO   - Reloading tab A370 before return.
+05/11/2026 14:29:58 kaleido.kaleido      INFO   - Putting tab A370 back (queue size: 0).
+05/11/2026 14:29:58 kaleido.kaleido      INFO   - Waiting for all cleanups to finish.
+05/11/2026 14:29:58 kaleido.kaleido      INFO   - Exiting Kaleido.
+05/11/2026 14:29:58 choreographer.utils._tmpfile INFO   - TemporaryDirectory.cleanup() worked.
+05/11/2026 14:29:58 choreographer.utils._tmpfile INFO   - shutil.rmtree worked.
+05/11/2026 14:29:58 choreographer.browser_async INFO   - Closing browser.
+05/11/2026 14:29:58 choreographer.utils._tmpfile INFO   - TemporaryDirectory.cleanup() worked.
+05/11/2026 14:29:58 choreographer.utils._tmpfile INFO   - shutil.rmtree worked.
+05/11/2026 14:29:58 choreographer.browser_async INFO   - Closing browser.
+05/11/2026 14:29:58 kaleido.kaleido      INFO   - Cancelling tasks.
+05/11/2026 14:29:58 kaleido.kaleido      INFO   - Exiting Kaleido/Choreo.
+05/11/2026 14:29:58 choreographer.utils._tmpfile INFO   - TemporaryDirectory.cleanup() worked.
+05/11/2026 14:29:58 choreographer.utils._tmpfile INFO   - shutil.rmtree worked.
+05/11/2026 14:29:58 kaleido.kaleido      INFO   - Cancelling tasks.
+05/11/2026 14:29:58 kaleido.kaleido      INFO   - Exiting Kaleido/Choreo.
+05/11/2026 14:29:58 choreographer.utils._tmpfile INFO   - TemporaryDirectory.cleanup() worked.
+05/11/2026 14:29:58 choreographer.utils._tmpfile INFO   - shutil.rmtree worked.
+05/11/2026 14:30:10 choreographer.browsers.chromium INFO   - Chromium init'ed with kwargs {}
+05/11/2026 14:30:10 choreographer.browsers.chromium INFO   - Found chromium path: C:\Program Files\Google\Chrome\Application\chrome.exe
+05/11/2026 14:30:10 choreographer.utils._tmpfile INFO   - Temp directory created: C:\Users\Salim\AppData\Local\Temp\tmp6fsvrtdm.
+05/11/2026 14:30:10 choreographer.browser_async INFO   - Opening browser.
+05/11/2026 14:30:10 choreographer.utils._tmpfile INFO   - Temp directory created: C:\Users\Salim\AppData\Local\Temp\tmp646zfezu.
+05/11/2026 14:30:10 choreographer.browsers.chromium INFO   - Temporary directory at: C:\Users\Salim\AppData\Local\Temp\tmp646zfezu
+05/11/2026 14:30:10 kaleido.kaleido      INFO   - Conforming 1 to file:///C:/Users/Salim/AppData/Local/Temp/tmp6fsvrtdm/index.html
+05/11/2026 14:30:11 kaleido.kaleido      INFO   - Getting tab from queue (has 1)
+05/11/2026 14:30:11 kaleido.kaleido      INFO   - Got E65D
+05/11/2026 14:30:12 kaleido.kaleido      INFO   - Reloading tab E65D before return.
+05/11/2026 14:30:12 kaleido.kaleido      INFO   - Putting tab E65D back (queue size: 0).
+05/11/2026 14:30:12 kaleido.kaleido      INFO   - Waiting for all cleanups to finish.
+05/11/2026 14:30:12 kaleido.kaleido      INFO   - Exiting Kaleido.
+05/11/2026 14:30:12 choreographer.utils._tmpfile INFO   - TemporaryDirectory.cleanup() worked.
+05/11/2026 14:30:12 choreographer.utils._tmpfile INFO   - shutil.rmtree worked.
+05/11/2026 14:30:12 choreographer.browser_async INFO   - Closing browser.
+05/11/2026 14:30:12 choreographer.utils._tmpfile INFO   - TemporaryDirectory.cleanup() worked.
+05/11/2026 14:30:12 choreographer.utils._tmpfile INFO   - shutil.rmtree worked.
+05/11/2026 14:30:12 choreographer.browser_async INFO   - Closing browser.
+05/11/2026 14:30:12 kaleido.kaleido      INFO   - Cancelling tasks.
+05/11/2026 14:30:12 kaleido.kaleido      INFO   - Exiting Kaleido/Choreo.
+05/11/2026 14:30:12 choreographer.utils._tmpfile INFO   - TemporaryDirectory.cleanup() worked.
+05/11/2026 14:30:12 choreographer.utils._tmpfile INFO   - shutil.rmtree worked.
+05/11/2026 14:30:12 kaleido.kaleido      INFO   - Cancelling tasks.
+05/11/2026 14:30:12 kaleido.kaleido      INFO   - Exiting Kaleido/Choreo.
+05/11/2026 14:30:12 choreographer.utils._tmpfile INFO   - TemporaryDirectory.cleanup() worked.
+05/11/2026 14:30:12 choreographer.utils._tmpfile INFO   - shutil.rmtree worked.
+05/11/2026 14:30:59 choreographer.browsers.chromium INFO   - Chromium init'ed with kwargs {}
+05/11/2026 14:30:59 choreographer.browsers.chromium INFO   - Found chromium path: C:\Program Files\Google\Chrome\Application\chrome.exe
+05/11/2026 14:30:59 choreographer.utils._tmpfile INFO   - Temp directory created: C:\Users\Salim\AppData\Local\Temp\tmpy11uzpsx.
+05/11/2026 14:30:59 choreographer.browser_async INFO   - Opening browser.
+05/11/2026 14:30:59 choreographer.utils._tmpfile INFO   - Temp directory created: C:\Users\Salim\AppData\Local\Temp\tmp2mu1newt.
+05/11/2026 14:30:59 choreographer.browsers.chromium INFO   - Temporary directory at: C:\Users\Salim\AppData\Local\Temp\tmp2mu1newt
+05/11/2026 14:30:59 kaleido.kaleido      INFO   - Conforming 1 to file:///C:/Users/Salim/AppData/Local/Temp/tmpy11uzpsx/index.html
+05/11/2026 14:31:00 kaleido.kaleido      INFO   - Getting tab from queue (has 1)
+05/11/2026 14:31:00 kaleido.kaleido      INFO   - Got E85E
+05/11/2026 14:31:01 kaleido.kaleido      INFO   - Reloading tab E85E before return.
+05/11/2026 14:31:01 kaleido.kaleido      INFO   - Putting tab E85E back (queue size: 0).
+05/11/2026 14:31:01 kaleido.kaleido      INFO   - Waiting for all cleanups to finish.
+05/11/2026 14:31:01 kaleido.kaleido      INFO   - Exiting Kaleido.
+05/11/2026 14:31:01 choreographer.utils._tmpfile INFO   - TemporaryDirectory.cleanup() worked.
+05/11/2026 14:31:01 choreographer.utils._tmpfile INFO   - shutil.rmtree worked.
+05/11/2026 14:31:01 choreographer.browser_async INFO   - Closing browser.
+05/11/2026 14:31:01 choreographer.utils._tmpfile INFO   - TemporaryDirectory.cleanup() worked.
+05/11/2026 14:31:01 choreographer.utils._tmpfile INFO   - shutil.rmtree worked.
+05/11/2026 14:31:01 choreographer.browser_async INFO   - Closing browser.
+05/11/2026 14:31:01 kaleido.kaleido      INFO   - Cancelling tasks.
+05/11/2026 14:31:01 kaleido.kaleido      INFO   - Exiting Kaleido/Choreo.
+05/11/2026 14:31:01 choreographer.utils._tmpfile INFO   - TemporaryDirectory.cleanup() worked.
+05/11/2026 14:31:01 choreographer.utils._tmpfile INFO   - shutil.rmtree worked.
+05/11/2026 14:31:01 kaleido.kaleido      INFO   - Cancelling tasks.
+05/11/2026 14:31:01 kaleido.kaleido      INFO   - Exiting Kaleido/Choreo.
+05/11/2026 14:31:01 choreographer.utils._tmpfile INFO   - TemporaryDirectory.cleanup() worked.
+05/11/2026 14:31:01 choreographer.utils._tmpfile INFO   - shutil.rmtree worked.
+05/11/2026 14:31:28 choreographer.browsers.chromium INFO   - Chromium init'ed with kwargs {}
+05/11/2026 14:31:28 choreographer.browsers.chromium INFO   - Found chromium path: C:\Program Files\Google\Chrome\Application\chrome.exe
+05/11/2026 14:31:28 choreographer.utils._tmpfile INFO   - Temp directory created: C:\Users\Salim\AppData\Local\Temp\tmpu484p21z.
+05/11/2026 14:31:28 choreographer.browser_async INFO   - Opening browser.
+05/11/2026 14:31:28 choreographer.utils._tmpfile INFO   - Temp directory created: C:\Users\Salim\AppData\Local\Temp\tmp_0ym9ub9.
+05/11/2026 14:31:28 choreographer.browsers.chromium INFO   - Temporary directory at: C:\Users\Salim\AppData\Local\Temp\tmp_0ym9ub9
+05/11/2026 14:31:28 kaleido.kaleido      INFO   - Conforming 1 to file:///C:/Users/Salim/AppData/Local/Temp/tmpu484p21z/index.html
+05/11/2026 14:31:29 kaleido.kaleido      INFO   - Getting tab from queue (has 1)
+05/11/2026 14:31:29 kaleido.kaleido      INFO   - Got 5765
+05/11/2026 14:31:29 kaleido.kaleido      INFO   - Reloading tab 5765 before return.
+05/11/2026 14:31:29 kaleido.kaleido      INFO   - Putting tab 5765 back (queue size: 0).
+05/11/2026 14:31:29 kaleido.kaleido      INFO   - Waiting for all cleanups to finish.
+05/11/2026 14:31:29 kaleido.kaleido      INFO   - Exiting Kaleido.
+05/11/2026 14:31:29 choreographer.utils._tmpfile INFO   - TemporaryDirectory.cleanup() worked.
+05/11/2026 14:31:29 choreographer.utils._tmpfile INFO   - shutil.rmtree worked.
+05/11/2026 14:31:29 choreographer.browser_async INFO   - Closing browser.
+05/11/2026 14:31:29 choreographer.utils._tmpfile INFO   - TemporaryDirectory.cleanup() worked.
+05/11/2026 14:31:29 choreographer.utils._tmpfile INFO   - shutil.rmtree worked.
+05/11/2026 14:31:29 choreographer.browser_async INFO   - Closing browser.
+05/11/2026 14:31:29 kaleido.kaleido      INFO   - Cancelling tasks.
+05/11/2026 14:31:29 kaleido.kaleido      INFO   - Exiting Kaleido/Choreo.
+05/11/2026 14:31:29 Carte mondiale (F6)  INFO   - Multi-indicateurs (F5) -> Carte mondiale (F6)
+05/11/2026 14:31:30 choreographer.utils._tmpfile INFO   - TemporaryDirectory.cleanup() worked.
+05/11/2026 14:31:30 choreographer.utils._tmpfile INFO   - shutil.rmtree worked.
+05/11/2026 14:31:30 kaleido.kaleido      INFO   - Cancelling tasks.
+05/11/2026 14:31:30 kaleido.kaleido      INFO   - Exiting Kaleido/Choreo.
+05/11/2026 14:31:30 choreographer.utils._tmpfile INFO   - TemporaryDirectory.cleanup() worked.
+05/11/2026 14:31:30 choreographer.utils._tmpfile INFO   - shutil.rmtree worked.
+05/11/2026 14:35:58 Multi-indicateurs (F5) INFO   - Carte mondiale (F6) -> Multi-indicateurs (F5)
+05/11/2026 14:36:00 choreographer.browsers.chromium INFO   - Chromium init'ed with kwargs {}
+05/11/2026 14:36:00 choreographer.browsers.chromium INFO   - Found chromium path: C:\Program Files\Google\Chrome\Application\chrome.exe
+05/11/2026 14:36:00 choreographer.utils._tmpfile INFO   - Temp directory created: C:\Users\Salim\AppData\Local\Temp\tmp7g7o99p4.
+05/11/2026 14:36:00 choreographer.browser_async INFO   - Opening browser.
+05/11/2026 14:36:00 choreographer.utils._tmpfile INFO   - Temp directory created: C:\Users\Salim\AppData\Local\Temp\tmpjws2is2c.
+05/11/2026 14:36:00 choreographer.browsers.chromium INFO   - Temporary directory at: C:\Users\Salim\AppData\Local\Temp\tmpjws2is2c
+05/11/2026 14:36:00 kaleido.kaleido      INFO   - Conforming 1 to file:///C:/Users/Salim/AppData/Local/Temp/tmp7g7o99p4/index.html
+05/11/2026 14:36:01 kaleido.kaleido      INFO   - Getting tab from queue (has 1)
+05/11/2026 14:36:01 kaleido.kaleido      INFO   - Got E6EC
+05/11/2026 14:36:01 kaleido.kaleido      INFO   - Reloading tab E6EC before return.
+05/11/2026 14:36:01 kaleido.kaleido      INFO   - Putting tab E6EC back (queue size: 0).
+05/11/2026 14:36:01 kaleido.kaleido      INFO   - Waiting for all cleanups to finish.
+05/11/2026 14:36:01 kaleido.kaleido      INFO   - Exiting Kaleido.
+05/11/2026 14:36:01 choreographer.utils._tmpfile INFO   - TemporaryDirectory.cleanup() worked.
+05/11/2026 14:36:01 choreographer.utils._tmpfile INFO   - shutil.rmtree worked.
+05/11/2026 14:36:01 choreographer.browser_async INFO   - Closing browser.
+05/11/2026 14:36:01 choreographer.utils._tmpfile INFO   - TemporaryDirectory.cleanup() worked.
+05/11/2026 14:36:01 choreographer.utils._tmpfile INFO   - shutil.rmtree worked.
+05/11/2026 14:36:01 choreographer.browser_async INFO   - Closing browser.
+05/11/2026 14:36:01 kaleido.kaleido      INFO   - Cancelling tasks.
+05/11/2026 14:36:01 kaleido.kaleido      INFO   - Exiting Kaleido/Choreo.
+05/11/2026 14:36:02 choreographer.utils._tmpfile INFO   - TemporaryDirectory.cleanup() worked.
+05/11/2026 14:36:02 choreographer.utils._tmpfile INFO   - shutil.rmtree worked.
+05/11/2026 14:36:02 kaleido.kaleido      INFO   - Cancelling tasks.
+05/11/2026 14:36:02 kaleido.kaleido      INFO   - Exiting Kaleido/Choreo.
+05/11/2026 14:36:02 choreographer.utils._tmpfile INFO   - TemporaryDirectory.cleanup() worked.
+05/11/2026 14:36:02 choreographer.utils._tmpfile INFO   - shutil.rmtree worked.
+05/11/2026 14:36:03 Analyse Temporelle (F3) INFO   - Multi-indicateurs (F5) -> Analyse Temporelle (F3)
+05/11/2026 14:36:03 Comparaison Pays (F4) INFO   - Analyse Temporelle (F3) -> Comparaison Pays (F4)
+05/11/2026 14:36:04 choreographer.browsers.chromium INFO   - Chromium init'ed with kwargs {}
+05/11/2026 14:36:04 choreographer.browsers.chromium INFO   - Found chromium path: C:\Program Files\Google\Chrome\Application\chrome.exe
+05/11/2026 14:36:04 choreographer.utils._tmpfile INFO   - Temp directory created: C:\Users\Salim\AppData\Local\Temp\tmp3xouxhbj.
+05/11/2026 14:36:04 choreographer.browser_async INFO   - Opening browser.
+05/11/2026 14:36:04 choreographer.utils._tmpfile INFO   - Temp directory created: C:\Users\Salim\AppData\Local\Temp\tmpeqgrbmwg.
+05/11/2026 14:36:04 choreographer.browsers.chromium INFO   - Temporary directory at: C:\Users\Salim\AppData\Local\Temp\tmpeqgrbmwg
+05/11/2026 14:36:04 kaleido.kaleido      INFO   - Conforming 1 to file:///C:/Users/Salim/AppData/Local/Temp/tmp3xouxhbj/index.html
+05/11/2026 14:36:05 kaleido.kaleido      INFO   - Getting tab from queue (has 1)
+05/11/2026 14:36:05 kaleido.kaleido      INFO   - Got 367C
+05/11/2026 14:36:05 kaleido.kaleido      INFO   - Reloading tab 367C before return.
+05/11/2026 14:36:05 kaleido.kaleido      INFO   - Putting tab 367C back (queue size: 0).
+05/11/2026 14:36:05 kaleido.kaleido      INFO   - Waiting for all cleanups to finish.
+05/11/2026 14:36:05 kaleido.kaleido      INFO   - Exiting Kaleido.
+05/11/2026 14:36:05 choreographer.utils._tmpfile INFO   - TemporaryDirectory.cleanup() worked.
+05/11/2026 14:36:05 choreographer.utils._tmpfile INFO   - shutil.rmtree worked.
+05/11/2026 14:36:05 choreographer.browser_async INFO   - Closing browser.
+05/11/2026 14:36:05 choreographer.utils._tmpfile INFO   - TemporaryDirectory.cleanup() worked.
+05/11/2026 14:36:05 choreographer.utils._tmpfile INFO   - shutil.rmtree worked.
+05/11/2026 14:36:05 choreographer.browser_async INFO   - Closing browser.
+05/11/2026 14:36:05 kaleido.kaleido      INFO   - Cancelling tasks.
+05/11/2026 14:36:05 kaleido.kaleido      INFO   - Exiting Kaleido/Choreo.
+05/11/2026 14:36:05 choreographer.utils._tmpfile INFO   - TemporaryDirectory.cleanup() worked.
+05/11/2026 14:36:05 choreographer.utils._tmpfile INFO   - shutil.rmtree worked.
+05/11/2026 14:36:05 kaleido.kaleido      INFO   - Cancelling tasks.
+05/11/2026 14:36:05 kaleido.kaleido      INFO   - Exiting Kaleido/Choreo.
+05/11/2026 14:36:05 choreographer.utils._tmpfile INFO   - TemporaryDirectory.cleanup() worked.
+05/11/2026 14:36:05 choreographer.utils._tmpfile INFO   - shutil.rmtree worked.
+05/11/2026 14:36:07 Analyse Temporelle (F3) INFO   - Comparaison Pays (F4) -> Analyse Temporelle (F3)
+05/11/2026 14:36:13 Comparaison Pays (F4) INFO   - Analyse Temporelle (F3) -> Comparaison Pays (F4)
+05/11/2026 14:36:15 choreographer.browsers.chromium INFO   - Chromium init'ed with kwargs {}
+05/11/2026 14:36:15 choreographer.browsers.chromium INFO   - Found chromium path: C:\Program Files\Google\Chrome\Application\chrome.exe
+05/11/2026 14:36:15 choreographer.utils._tmpfile INFO   - Temp directory created: C:\Users\Salim\AppData\Local\Temp\tmpbn90__op.
+05/11/2026 14:36:15 choreographer.browser_async INFO   - Opening browser.
+05/11/2026 14:36:15 choreographer.utils._tmpfile INFO   - Temp directory created: C:\Users\Salim\AppData\Local\Temp\tmpjbc0_824.
+05/11/2026 14:36:15 choreographer.browsers.chromium INFO   - Temporary directory at: C:\Users\Salim\AppData\Local\Temp\tmpjbc0_824
+05/11/2026 14:36:15 kaleido.kaleido      INFO   - Conforming 1 to file:///C:/Users/Salim/AppData/Local/Temp/tmpbn90__op/index.html
+05/11/2026 14:36:16 kaleido.kaleido      INFO   - Getting tab from queue (has 1)
+05/11/2026 14:36:16 kaleido.kaleido      INFO   - Got 0171
+05/11/2026 14:36:16 kaleido.kaleido      INFO   - Reloading tab 0171 before return.
+05/11/2026 14:36:17 kaleido.kaleido      INFO   - Putting tab 0171 back (queue size: 0).
+05/11/2026 14:36:17 kaleido.kaleido      INFO   - Waiting for all cleanups to finish.
+05/11/2026 14:36:17 kaleido.kaleido      INFO   - Exiting Kaleido.
+05/11/2026 14:36:17 choreographer.utils._tmpfile INFO   - TemporaryDirectory.cleanup() worked.
+05/11/2026 14:36:17 choreographer.utils._tmpfile INFO   - shutil.rmtree worked.
+05/11/2026 14:36:17 choreographer.browser_async INFO   - Closing browser.
+05/11/2026 14:36:17 choreographer.utils._tmpfile INFO   - TemporaryDirectory.cleanup() worked.
+05/11/2026 14:36:17 choreographer.utils._tmpfile INFO   - shutil.rmtree worked.
+05/11/2026 14:36:17 choreographer.browser_async INFO   - Closing browser.
+05/11/2026 14:36:17 kaleido.kaleido      INFO   - Cancelling tasks.
+05/11/2026 14:36:17 kaleido.kaleido      INFO   - Exiting Kaleido/Choreo.
+05/11/2026 14:36:17 choreographer.utils._tmpfile INFO   - TemporaryDirectory.cleanup() worked.
+05/11/2026 14:36:17 choreographer.utils._tmpfile INFO   - shutil.rmtree worked.
+05/11/2026 14:36:17 kaleido.kaleido      INFO   - Cancelling tasks.
+05/11/2026 14:36:17 kaleido.kaleido      INFO   - Exiting Kaleido/Choreo.
+05/11/2026 14:36:17 choreographer.utils._tmpfile INFO   - TemporaryDirectory.cleanup() worked.
+05/11/2026 14:36:17 choreographer.utils._tmpfile INFO   - shutil.rmtree worked.
+05/11/2026 14:36:21 Analyse Temporelle (F3) INFO   - Comparaison Pays (F4) -> Analyse Temporelle (F3)
+05/11/2026 14:36:35 Carte mondiale (F6)  INFO   - Analyse Temporelle (F3) -> Carte mondiale (F6)
+05/11/2026 14:36:44 Multi-indicateurs (F5) INFO   - Carte mondiale (F6) -> Multi-indicateurs (F5)
+05/11/2026 14:36:46 choreographer.browsers.chromium INFO   - Chromium init'ed with kwargs {}
+05/11/2026 14:36:46 choreographer.browsers.chromium INFO   - Found chromium path: C:\Program Files\Google\Chrome\Application\chrome.exe
+05/11/2026 14:36:46 choreographer.utils._tmpfile INFO   - Temp directory created: C:\Users\Salim\AppData\Local\Temp\tmp12sa140w.
+05/11/2026 14:36:46 choreographer.browser_async INFO   - Opening browser.
+05/11/2026 14:36:46 choreographer.utils._tmpfile INFO   - Temp directory created: C:\Users\Salim\AppData\Local\Temp\tmpfvzey3m6.
+05/11/2026 14:36:46 choreographer.browsers.chromium INFO   - Temporary directory at: C:\Users\Salim\AppData\Local\Temp\tmpfvzey3m6
+05/11/2026 14:36:46 kaleido.kaleido      INFO   - Conforming 1 to file:///C:/Users/Salim/AppData/Local/Temp/tmp12sa140w/index.html
+05/11/2026 14:36:48 kaleido.kaleido      INFO   - Getting tab from queue (has 1)
+05/11/2026 14:36:48 kaleido.kaleido      INFO   - Got 1AA2
+05/11/2026 14:36:48 kaleido.kaleido      INFO   - Reloading tab 1AA2 before return.
+05/11/2026 14:36:48 kaleido.kaleido      INFO   - Putting tab 1AA2 back (queue size: 0).
+05/11/2026 14:36:48 kaleido.kaleido      INFO   - Waiting for all cleanups to finish.
+05/11/2026 14:36:48 kaleido.kaleido      INFO   - Exiting Kaleido.
+05/11/2026 14:36:48 choreographer.utils._tmpfile INFO   - TemporaryDirectory.cleanup() worked.
+05/11/2026 14:36:48 choreographer.utils._tmpfile INFO   - shutil.rmtree worked.
+05/11/2026 14:36:48 choreographer.browser_async INFO   - Closing browser.
+05/11/2026 14:36:48 choreographer.utils._tmpfile INFO   - TemporaryDirectory.cleanup() worked.
+05/11/2026 14:36:48 choreographer.utils._tmpfile INFO   - shutil.rmtree worked.
+05/11/2026 14:36:48 choreographer.browser_async INFO   - Closing browser.
+05/11/2026 14:36:48 kaleido.kaleido      INFO   - Cancelling tasks.
+05/11/2026 14:36:48 kaleido.kaleido      INFO   - Exiting Kaleido/Choreo.
+05/11/2026 14:36:48 choreographer.utils._tmpfile INFO   - TemporaryDirectory.cleanup() worked.
+05/11/2026 14:36:48 choreographer.utils._tmpfile INFO   - shutil.rmtree worked.
+05/11/2026 14:36:48 kaleido.kaleido      INFO   - Cancelling tasks.
+05/11/2026 14:36:48 kaleido.kaleido      INFO   - Exiting Kaleido/Choreo.
+05/11/2026 14:36:48 choreographer.utils._tmpfile INFO   - TemporaryDirectory.cleanup() worked.
+05/11/2026 14:36:48 choreographer.utils._tmpfile INFO   - shutil.rmtree worked.

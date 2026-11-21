@@ -21,8 +21,8 @@ from utils.ui import (
     afficher_graphique,
     entete,
     entete_graphique,
-    fmt_fr,
     ligne_source,
+    notif,
     styliser_figure,
 )
 
@@ -70,7 +70,7 @@ with st.container(border=True):
 st.write("")
 
 if not noms_pays:
-    st.warning("Sélectionnez au moins un pays pour afficher les données.")
+    notif("Sélectionnez au moins un pays pour afficher les données.", "warn")
     st.stop()
 
 # --- Appel du backend : une série par pays via /analyses/evolution ---
@@ -98,13 +98,13 @@ with st.spinner("Chargement des données…"):
         elif reponse["status_code"] == 404:
             pays_sans_donnees.append(nom)
         elif reponse["status_code"] == 0:
-            st.error(message_erreur(reponse))
+            notif(message_erreur(reponse), "ko")
             st.stop()
         else:
-            st.error(f"{nom} : {message_erreur(reponse)}")
+            notif(f"{nom} : {message_erreur(reponse)}", "ko")
 
 if pays_sans_donnees:
-    st.warning("Aucune donnée disponible pour : " + ", ".join(pays_sans_donnees))
+    notif("Aucune donnée disponible pour : " + ", ".join(pays_sans_donnees), "warn")
 
 if lignes:
     unite = unite_indicateur(code_indicateur)
@@ -138,11 +138,11 @@ if lignes:
     st.divider()
     st.subheader("Générer le rapport PDF complet")
     st.write("Demandez au serveur de générer une analyse au format PDF (incluant ce graphique et les tables).")
-    
+
     # On utilise un bouton d'action pour déclencher la requête POST
     if st.button("Demander la génération du PDF", icon="📄", type="primary"):
         with st.spinner("Génération du rapport côté serveur en cours..."):
-            
+
             # 1. Demande de création du rapport au backend
             payload = {
                 "titre": "Évolution temporelle",
@@ -150,20 +150,19 @@ if lignes:
                 "code_indicateur": code_indicateur,
                 "codes_pays": noms_pays
             }
-            
+
             reponse_creation = api_client.post("/rapports/", json=payload)
-            
+
             if reponse_creation["status_code"] == 201:
                 rapport_id = reponse_creation["data"]["id"]
-                
+
                 # 2. Téléchargement du fichier binaire généré via le GET
                 reponse_telechargement = api_client.download_file(f"/rapports/{rapport_id}/telecharger")
-                
+
                 if reponse_telechargement["status_code"] == 200:
                     pdf_bytes = reponse_telechargement["content"]
-                    
-                    st.success(f"Le rapport a été généré avec succès !")
-                    
+                    notif("Rapport généré avec succès.", "ok")
+
                     # 3. Affichage du bouton natif Streamlit pour sauvegarder le fichier
                     st.download_button(
                         label="Télécharger le fichier PDF",
@@ -173,9 +172,9 @@ if lignes:
                         icon=":material/download:",
                     )
                 else:
-                    st.error(f"Erreur lors du téléchargement : {message_erreur(reponse_telechargement)}")
+                    notif(f"Erreur lors du téléchargement : {message_erreur(reponse_telechargement)}", "ko")
             else:
-                st.error(f"Erreur lors de la création en base : {message_erreur(reponse_creation)}")
+                notif(f"Erreur lors de la création en base : {message_erreur(reponse_creation)}", "ko")
 
 elif not pays_sans_donnees:
-    st.info("Aucune donnée à afficher pour cette sélection.")
+    notif("Aucune donnée à afficher pour cette sélection.", "info")

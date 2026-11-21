@@ -18,7 +18,7 @@ from controller.analyse_controller import (
     evolution,
 )
 from model.analyse_model import Comparaison, PointSerie, Serie
-from utils.exceptions import AccesRefuse, DonneesInvalides, RessourceIntrouvable
+from utils.exceptions import AccesRefuse, DonneesInvalides, ErreurMetier, RessourceIntrouvable
 
 JETON_FAUX = "jeton-test"
 
@@ -78,9 +78,14 @@ def test_erreur_http_donnees_invalides():
     assert erreur_http(DonneesInvalides("Paramètre incorrect.")).status_code == 422
 
 
+def test_erreur_http_acces_refuse():
+    """AccesRefuse devient une erreur 403 (mapping partagé)."""
+    assert erreur_http(AccesRefuse("Interdit.")).status_code == 403
+
+
 def test_erreur_http_autre_erreur_metier():
-    """Toute autre erreur métier devient aussi une erreur 422."""
-    assert erreur_http(AccesRefuse("Interdit.")).status_code == 422
+    """Une erreur métier générique devient une erreur 422."""
+    assert erreur_http(ErreurMetier("Erreur.")).status_code == 422
 
 
 # ----------------------------------------------------------------------

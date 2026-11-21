@@ -615,3 +615,39 @@ def test_carte_sexe_par_defaut_est_total():
     resultat = service.carte("EMP", "2024Q1")
 
     assert [serie.points[0].valeur for serie in resultat.series] == [10.0]
+
+
+# Couverture ciblée : codes vides, série absente avec classification, pays sans donnée
+
+
+def test_evolution_code_indicateur_vide():
+    """Un code indicateur vide lève DonneesInvalides (via _trouver_indicateur)."""
+    service = creer_service([])
+
+    with pytest.raises(DonneesInvalides):
+        service.evolution("", "FRA")
+
+
+def test_trouver_pays_code_vide():
+    """Un code pays vide lève DonneesInvalides (via _trouver_pays)."""
+    service = creer_service([])
+
+    with pytest.raises(DonneesInvalides):
+        service._trouver_pays("")
+
+
+def test_evolution_sans_donnees_avec_classification_leve_ressource_introuvable():
+    """Aucune observation avec une classification valide demandée -> RessourceIntrouvable."""
+    service = creer_service([])
+
+    with pytest.raises(RessourceIntrouvable):
+        service.evolution("EMP", "FRA", code_classification="AGE_15_24")
+
+
+def test_comparer_pays_ignore_les_pays_sans_donnee():
+    """Un pays sans observation est simplement absent de la comparaison."""
+    service = creer_service([creer_observation("FRA", "2024", 10.0)])
+
+    comparaison = service.comparer_pays("EMP", ["FRA", "DEU"])
+
+    assert libelles(comparaison) == ["France"]

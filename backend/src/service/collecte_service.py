@@ -23,7 +23,7 @@ class CollecteService:
     """Télécharge un indicateur, le parse, l'enregistre et trace l'import."""
 
     def __init__(
-        self, 
+        self,
         ilostat_client: IlostatClient | None = None,
         import_dao: ImportDao | None = None,
         observation_dao: ObservationDao | None = None,
@@ -184,7 +184,7 @@ class CollecteService:
         return self.import_dao.lister()
 
 
-if __name__ == "__main__":
+if __name__ == "__main__":  # pragma: no cover
     collecte_service = CollecteService()
     trace = collecte_service.collecter_indicateur("SR_LMP_SEX_AGE_NB")
     print(trace)

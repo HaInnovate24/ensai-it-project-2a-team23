@@ -1,10 +1,10 @@
 """Tests unitaires pour RapportDao."""
 
-from unittest.mock import MagicMock, patch
 from datetime import datetime
+from unittest.mock import MagicMock, patch
 
-from business_object.rapport import Rapport
 from business_object.enums import StatutRapport
+from business_object.rapport import Rapport
 from dao.rapport_dao import RapportDao
 
 
@@ -15,7 +15,7 @@ def test_creer_rapport(mock_db_connection):
     mock_cursor = MagicMock()
     mock_db_connection.return_value.connection = mock_conn
     mock_conn.cursor.return_value.__enter__.return_value = mock_cursor
-    
+
     mock_cursor.fetchone.return_value = {
         "id": 100,
         "utilisateur_id": 1,
@@ -33,12 +33,12 @@ def test_creer_rapport(mock_db_connection):
         description="Données 2026",
         statut=StatutRapport.EN_ATTENTE
     )
-    
+
     resultat = dao.creer(nouveau_rapport)
 
     assert resultat.id == 100
     assert resultat.titre == "Analyse Chômage"
-    
+
     args = mock_cursor.execute.call_args[0]
     assert "INSERT INTO rapport" in args[0]
     assert args[1][0] == 1  # utilisateur_id
@@ -51,7 +51,7 @@ def test_mettre_a_jour_rapport(mock_db_connection):
     mock_cursor = MagicMock()
     mock_db_connection.return_value.connection = mock_conn
     mock_conn.cursor.return_value.__enter__.return_value = mock_cursor
-    
+
     mock_cursor.rowcount = 1
 
     dao = RapportDao()
@@ -60,7 +60,7 @@ def test_mettre_a_jour_rapport(mock_db_connection):
         statut=StatutRapport.PRET,
         fichier_path="/rapports_generes/rapport_100.pdf"
     )
-    
+
     succes = dao.mettre_a_jour(rapport_a_maj)
 
     assert succes is True
@@ -77,7 +77,7 @@ def test_trouver_par_id(mock_db_connection):
     mock_cursor = MagicMock()
     mock_db_connection.return_value.connection = mock_conn
     mock_conn.cursor.return_value.__enter__.return_value = mock_cursor
-    
+
     mock_cursor.fetchone.return_value = {
         "id": 50,
         "utilisateur_id": 2,
@@ -102,7 +102,7 @@ def test_lister_rapports_avec_filtre(mock_db_connection):
     mock_cursor = MagicMock()
     mock_db_connection.return_value.connection = mock_conn
     mock_conn.cursor.return_value.__enter__.return_value = mock_cursor
-        
+
     mock_cursor.fetchall.return_value = [
         {"id": 1, "utilisateur_id": 1, "titre": "R1", "description": "", "date_creation": None, "fichier_path": "", "statut": "pret"}  # Correction ici : "pret" au lieu de "termine"
         ]
@@ -113,7 +113,38 @@ def test_lister_rapports_avec_filtre(mock_db_connection):
     assert len(resultats) == 1
     assert resultats[0].titre == "R1"
     assert resultats[0].statut == StatutRapport.PRET
-        
+
     args = mock_cursor.execute.call_args[0]
     assert "WHERE utilisateur_id = %s" in args[0]
     assert args[1][0] == 1
+
+
+@patch("dao.rapport_dao.DBConnection")
+def test_trouver_par_id_inexistant_renvoie_none(mock_db_connection):
+    """Si aucune ligne n'est trouvée, trouver_par_id renvoie None."""
+    mock_conn = MagicMock()
+    mock_cursor = MagicMock()
+    mock_db_connection.return_value.connection = mock_conn
+    mock_conn.cursor.return_value.__enter__.return_value = mock_cursor
+    mock_cursor.fetchone.return_value = None
+
+    dao = RapportDao()
+
+    assert dao.trouver_par_id(999) is None
+
+
+@patch("dao.rapport_dao.DBConnection")
+def test_lister_rapports_sans_filtre(mock_db_connection):
+    """Sans utilisateur_id, lister ne pose pas de clause WHERE."""
+    mock_conn = MagicMock()
+    mock_cursor = MagicMock()
+    mock_db_connection.return_value.connection = mock_conn
+    mock_conn.cursor.return_value.__enter__.return_value = mock_cursor
+    mock_cursor.fetchall.return_value = []
+
+    dao = RapportDao()
+    resultats = dao.lister()
+
+    assert resultats == []
+    args = mock_cursor.execute.call_args[0]
+    assert "WHERE" not in args[0]

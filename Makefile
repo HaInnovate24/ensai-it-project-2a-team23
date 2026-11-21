@@ -55,10 +55,11 @@ help: ## Affiche cette aide
 	@echo   make install       Installe les dependances backend + frontend
 	@echo   make install-back  Installe les dependances du backend
 	@echo   make install-front Installe les dependances du frontend
+	@echo   make db-create     Cree la base PostgreSQL si elle n'existe pas
 	@echo   make db-push       Cree le schema et les tables (init_db.sql)
 	@echo   make db-load       Charge les referentiels (pop_referentiels.sql)
-	@echo   make db-import     Importe les premieres donnees (collecte ILOSTAT)
-	@echo   make db-init       Enchaine db-push + db-load (structure + referentiels)
+	@echo   make db-import     Collecte les indicateurs actifs (ILOSTAT)
+	@echo   make db-init       Enchaine db-create + db-push + db-load
 	@echo   make db-reset      Reinitialise la base (db-init)
 	@echo   make db-shell      Ouvre une console psql locale
 	@echo   make run-back      Lance l'API backend FastAPI/uvicorn
@@ -77,9 +78,9 @@ help: ## Affiche cette aide
 # Initialisation complete du projet
 # ---------------------------------------------------------------------
 .PHONY: init
-init: install db-init db-import ## Initialise tout (deps + base + premier import)
+init: install db-init db-import ## Initialise tout (deps + base + referentiels + indicateurs)
 	@echo.
-	@echo Projet initialise.
+	@echo Projet initialise (base creee, structure + referentiels + indicateurs importes).
 	@echo   Lancez l'API  : make run-back
 	@echo   Lancez le web : make run-front
 
@@ -100,6 +101,11 @@ install-front: ## Installe les dependances du frontend (uv)
 # ---------------------------------------------------------------------
 # Base de donnees (PostgreSQL local via psql)
 # ---------------------------------------------------------------------
+.PHONY: db-create
+db-create: ## Cree la base PostgreSQL cible si elle n'existe pas encore
+	@echo Verification / creation de la base $(POSTGRES_DATABASE)...
+	uv run --project backend python backend/src/utils/creer_base.py
+
 .PHONY: db-push
 db-push: ## Cree le schema applicatif et les tables (push de init_db.sql)
 	@echo Creation du schema $(POSTGRES_SCHEMA)...
@@ -115,13 +121,13 @@ db-load: ## Charge les referentiels (pays, indicateurs, classifications)
 	@echo Referentiels charges.
 
 .PHONY: db-import
-db-import: ## Importe les premieres donnees via la collecte ILOSTAT
-	@echo Import initial des observations (collecte ILOSTAT)...
-	uv run --project backend python backend/src/service/collecte_service.py
+db-import: ## Collecte tous les indicateurs actifs du referentiel (ILOSTAT)
+	@echo Import initial des observations (collecte ILOSTAT des indicateurs actifs)...
+	uv run --project backend python backend/src/service/init_donnees.py
 	@echo Import initial termine.
 
 .PHONY: db-init
-db-init: db-push db-load ## Structure + referentiels (push + load)
+db-init: db-create db-push db-load ## Base + structure + referentiels (create + push + load)
 
 .PHONY: db-reset
 db-reset: db-init ## Reinitialise la base (relance init_db.sql + referentiels)
