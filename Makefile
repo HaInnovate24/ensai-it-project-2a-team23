@@ -122,7 +122,7 @@ db-load: ## Charge les referentiels (pays, indicateurs, classifications)
 
 .PHONY: db-import
 db-import: ## Collecte tous les indicateurs actifs du referentiel (ILOSTAT)
-	@echo Import initial des observations (collecte ILOSTAT des indicateurs actifs)...
+	@echo "Import initial des observations (collecte ILOSTAT des indicateurs actifs)..."
 	uv run --project backend python backend/src/service/init_donnees.py
 	@echo Import initial termine.
 

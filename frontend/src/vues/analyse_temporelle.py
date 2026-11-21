@@ -6,6 +6,7 @@ import streamlit as st
 
 from utils.api_client import api_client
 from utils.log_init import get_page_logger
+from utils.rapport_pdf import construire_rapport_pdf, figure_png
 from utils.referentiels import (
     SEXES,
     get_classifications,
@@ -134,47 +135,226 @@ if lignes:
                 use_container_width=True,
             )
 
-    # --- Génération du Rapport PDF via le Backend ---
+    # --- Rapport PDF (généré côté client) ---
     st.divider()
-    st.subheader("Générer le rapport PDF complet")
-    st.write("Demandez au serveur de générer une analyse au format PDF (incluant ce graphique et les tables).")
+    st.subheader("Rapport PDF")
+    st.write("Génèrez un rapport PDF de cette analyse (graphique + tableau de données).")
 
-    # On utilise un bouton d'action pour déclencher la requête POST
-    if st.button("Demander la génération du PDF", icon="📄", type="primary"):
-        with st.spinner("Génération du rapport côté serveur en cours..."):
+    if st.button("Générer le rapport PDF", icon=":material/picture_as_pdf:", type="primary", key="f3_btn_pdf"):
+        chiffres_pdf = []
+        for nom in noms_pays:
+            sous = df[df["Pays"] == nom]
+            if not sous.empty:
+                derniere_val = sous.iloc[-1]["Valeur"]
+                derniere_per = sous.iloc[-1]["Période"]
+                unite_txt = f" {unite}" if unite else ""
+                chiffres_pdf.append((nom, f"{derniere_val:,.1f}{unite_txt} ({derniere_per})"))
 
-            # 1. Demande de création du rapport au backend
-            payload = {
-                "titre": "Évolution temporelle",
-                "description": f"{indicateurs[code_indicateur]} - {libelle_sexe} - {libelle_classification}",
-                "code_indicateur": code_indicateur,
-                "codes_pays": noms_pays
-            }
+        lignes_pdf = []
+        periodes_df = sorted(df["Période"].unique())
+        for per in periodes_df:
+            ligne = [per[:4]]
+            for nom in noms_pays:
+                val = df[(df["Période"] == per) & (df["Pays"] == nom)]["Valeur"]
+                ligne.append(f"{val.iloc[0]:,.1f}" if not val.empty else "—")
+            lignes_pdf.append(ligne)
 
-            reponse_creation = api_client.post("/rapports/", json=payload)
+        colonnes_pdf = ["Année"] + noms_pays
+        periode_min = periodes_df[0][:4] if periodes_df else ""
+        periode_max = periodes_df[-1][:4] if periodes_df else ""
 
-            if reponse_creation["status_code"] == 201:
-                rapport_id = reponse_creation["data"]["id"]
-
-                # 2. Téléchargement du fichier binaire généré via le GET
-                reponse_telechargement = api_client.download_file(f"/rapports/{rapport_id}/telecharger")
-
-                if reponse_telechargement["status_code"] == 200:
-                    pdf_bytes = reponse_telechargement["content"]
-                    notif("Rapport généré avec succès.", "ok")
-
-                    # 3. Affichage du bouton natif Streamlit pour sauvegarder le fichier
-                    st.download_button(
-                        label="Télécharger le fichier PDF",
-                        data=pdf_bytes,
-                        file_name=f"rapport_evolution_{code_indicateur}.pdf",
-                        mime="application/pdf",
-                        icon=":material/download:",
-                    )
-                else:
-                    notif(f"Erreur lors du téléchargement : {message_erreur(reponse_telechargement)}", "ko")
-            else:
-                notif(f"Erreur lors de la création en base : {message_erreur(reponse_creation)}", "ko")
+        pdf_bytes = construire_rapport_pdf(
+            titre="Évolution temporelle",
+            sous_titre=indicateurs[code_indicateur],
+            contexte=[
+                ("Indicateur", indicateurs[code_indicateur]),
+                ("Pays", ", ".join(noms_pays)),
+                ("Période", f"{periode_min} - {periode_max}"),
+                ("Sexe", libelle_sexe),
+                ("Classification", libelle_classification),
+                ("Source", "OIT - ILOSTAT"),
+            ],
+            colonnes=colonnes_pdf,
+            lignes=lignes_pdf,
+            chiffres=chiffres_pdf[:4] or None,
+            note=f"Évolution de {indicateurs[code_indicateur]} pour {len(noms_pays)} pays ({libelle_sexe}, {libelle_classification}).",
+            image_png=figure_png(fig),
+            legende_graphique=f"{libelle_classification} · {libelle_sexe} · {nb_periodes} années",
+        )
+        st.download_button(
+            label="Télécharger le rapport PDF",
+            data=pdf_bytes,
+            file_name=f"rapport_evolution_{code_indicateur}.pdf",
+            mime="application/pdf",
+            icon=":material/download:",
+            key="f3_dl_pdf",
+        )
 
 elif not pays_sans_donnees:
     notif("Aucune donnée à afficher pour cette sélection.", "info")
+# =====================================================================
+# Taux d'emploi (calculé : Emploi / Population * 100)
+# =====================================================================
+st.divider()
+st.subheader("Taux d'emploi")
+st.caption("Taux d'emploi = Emploi (toutes professions) / Population (15 ans et plus) × 100")
+
+col_tx, col_ty = st.columns([1, 1])
+with col_tx:
+    nom_pays_taux = st.selectbox(
+        "Pays (taux d'emploi)",
+        options=list(pays_referentiel),
+        key="f3_taux_pays",
+    )
+with col_ty:
+    nb_periodes_taux = st.slider(
+        "Nombre d'années (taux)", min_value=2, max_value=13, value=10, key="f3_taux_n"
+    )
+
+st.write("")
+
+with st.spinner("Calcul des taux d'emploi…"):
+    rep_taux = api_client.get(
+        "/analyses/taux-emploi",
+        params={"code_pays": pays_referentiel[nom_pays_taux], "nb_periodes": nb_periodes_taux},
+    )
+
+if rep_taux["status_code"] == 0:
+    notif(message_erreur(rep_taux), "ko")
+elif rep_taux["status_code"] != 200:
+    notif(f"Erreur lors du calcul des taux : {message_erreur(rep_taux)}", "ko")
+else:
+    data_taux = rep_taux["data"]
+
+    lignes_taux = []
+    for pt in data_taux["taux_total"]:
+        lignes_taux.append({"Période": pt["periode"], "Série": "Taux total", "Valeur": pt["taux"]})
+    for pt in data_taux["taux_homme"]:
+        lignes_taux.append({"Période": pt["periode"], "Série": "Hommes", "Valeur": pt["taux"]})
+    for pt in data_taux["taux_femme"]:
+        lignes_taux.append({"Période": pt["periode"], "Série": "Femmes", "Valeur": pt["taux"]})
+
+    if lignes_taux:
+        df_taux = pd.DataFrame(lignes_taux).sort_values("Période")
+
+        with st.container(border=True):
+            entete_graphique(
+                "Taux d'emploi",
+                nom_pays_taux,
+                f"{nb_periodes_taux} dernières années · %",
+            )
+            fig_taux = px.line(
+                df_taux,
+                x="Période",
+                y="Valeur",
+                color="Série",
+                markers=True,
+                labels={"Valeur": "Taux d'emploi (%)"},
+                color_discrete_sequence=PALETTE_GRAPHIQUE,
+            )
+            fig_taux.update_xaxes(type="category")
+            fig_taux.update_traces(line=dict(width=2.5), marker=dict(size=7))
+            styliser_figure(fig_taux)
+            afficher_graphique(fig_taux)
+
+        st.subheader("Variations annuelles du taux d'emploi (en points)")
+
+        lignes_var = []
+        for pt in data_taux["variation_taux_total"]:
+            lignes_var.append({"Période": pt["periode"], "Série": "Total", "Valeur": pt["taux"]})
+        for pt in data_taux["variation_taux_homme"]:
+            lignes_var.append({"Période": pt["periode"], "Série": "Hommes", "Valeur": pt["taux"]})
+        for pt in data_taux["variation_taux_femme"]:
+            lignes_var.append({"Période": pt["periode"], "Série": "Femmes", "Valeur": pt["taux"]})
+
+        if lignes_var:
+            df_var = pd.DataFrame(lignes_var).sort_values("Période")
+
+            with st.container(border=True):
+                entete_graphique(
+                    "Variations annuelles",
+                    nom_pays_taux,
+                    "En points (différence entre deux années consécutives)",
+                )
+                fig_var = px.line(
+                    df_var,
+                    x="Période",
+                    y="Valeur",
+                    color="Série",
+                    markers=True,
+                    labels={"Valeur": "Variation (points)"},
+                    color_discrete_sequence=PALETTE_GRAPHIQUE,
+                )
+                fig_var.update_xaxes(type="category")
+                fig_var.update_traces(line=dict(width=2.5), marker=dict(size=7))
+                fig_var.add_hline(y=0, line_dash="dash", line_color="#999", line_width=1)
+                styliser_figure(fig_var)
+                afficher_graphique(fig_var)
+
+        st.subheader("Détail des taux")
+        df_detail = pd.DataFrame(lignes_taux)
+        st.dataframe(
+            df_detail.pivot_table(index="Période", columns="Série", values="Valeur"),
+            use_container_width=True,
+        )
+
+        st.write("")
+        if st.button("Générer le rapport PDF (taux + évolutions)", icon=":material/description:", type="primary"):
+            derniers_total = data_taux["taux_total"][-1]["taux"] if data_taux["taux_total"] else 0
+            derniers_homme = data_taux["taux_homme"][-1]["taux"] if data_taux["taux_homme"] else 0
+            derniers_femme = data_taux["taux_femme"][-1]["taux"] if data_taux["taux_femme"] else 0
+            annee_derniere = data_taux["taux_total"][-1]["periode"][:4] if data_taux["taux_total"] else ""
+            ecart_genre = abs(derniers_homme - derniers_femme)
+            derniere_var = data_taux["variation_taux_total"][-1]["taux"] if data_taux["variation_taux_total"] else 0
+
+            chiffres_pdf = [
+                ("Taux total", f"{derniers_total:.1f}%"),
+                ("Hommes", f"{derniers_homme:.1f}%"),
+                ("Femmes", f"{derniers_femme:.1f}%"),
+                ("Écart genre", f"{ecart_genre:.1f} pts"),
+            ]
+
+            lignes_pdf = []
+            periodes_emploi = sorted(set(p["periode"] for p in data_taux["taux_total"]))
+            for periode in periodes_emploi:
+                tt = next((p["taux"] for p in data_taux["taux_total"] if p["periode"] == periode), None)
+                th = next((p["taux"] for p in data_taux["taux_homme"] if p["periode"] == periode), None)
+                tf = next((p["taux"] for p in data_taux["taux_femme"] if p["periode"] == periode), None)
+                vt = next((p["taux"] for p in data_taux["variation_taux_total"] if p["periode"] == periode), None)
+                lignes_pdf.append([
+                    periode[:4],
+                    f"{tt:.1f}%" if tt is not None else "—",
+                    f"{th:.1f}%" if th is not None else "—",
+                    f"{tf:.1f}%" if tf is not None else "—",
+                    f"{vt:+.1f} pts" if vt is not None else "—",
+                ])
+
+            pdf_bytes = construire_rapport_pdf(
+                titre="Taux d'emploi et évolutions",
+                sous_titre=f"{nom_pays_taux} — {annee_derniere}",
+                contexte=[
+                    ("Pays", nom_pays_taux),
+                    ("Période", f"{periodes_emploi[0][:4]} - {periodes_emploi[-1][:4]}" if periodes_emploi else "—"),
+                    ("Formule", "Emploi / Population (15+) x 100"),
+                    ("Source", "OIT - ILOSTAT"),
+                ],
+                colonnes=["Année", "Taux total", "Hommes", "Femmes", "Variation"],
+                lignes=lignes_pdf,
+                chiffres=chiffres_pdf,
+                note=(
+                    f"En {annee_derniere}, le taux d'emploi global est de {derniers_total:.1f}% "
+                    f"(variation de {derniere_var:+.1f} pts). "
+                    f"L'écart entre les taux masculin et féminin est de {ecart_genre:.1f} points."
+                ),
+                image_png=figure_png(fig_taux),
+                legende_graphique=f"Taux d'emploi par sexe — {nom_pays_taux}",
+            )
+            st.download_button(
+                label="Télécharger le rapport PDF",
+                data=pdf_bytes,
+                file_name=f"rapport_taux_emploi_{nom_pays_taux}.pdf",
+                mime="application/pdf",
+                icon=":material/download:",
+            )
+    else:
+        notif("Aucun taux calculable (données emploi ou population manquantes).", "warn")
