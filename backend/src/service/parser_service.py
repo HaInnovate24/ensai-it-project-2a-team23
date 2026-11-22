@@ -130,6 +130,9 @@ class ParserService:
                 "AGE_AGGREGATE_YGE15": "AGE_AGGREGATE_TOTAL",
                 "AGE_AGGREGATE_YGE25": "AGE_AGGREGATE_Y25-PLUS",
                 "AGE_AGGREGATE_Y25-PLUS": "AGE_AGGREGATE_Y25-plus",
+                "AGE_YTHADULT_YGE15": "AGE_AGGREGATE_TOTAL",
+                "AGE_YTHADULT_Y15-24": "AGE_AGGREGATE_Y15-24",
+                "AGE_YTHADULT_YGE25": "AGE_AGGREGATE_Y25-plus",
             }
             return aliases.get(code, code)
         return code

@@ -1,0 +1,85 @@
+erDiagram
+    utilisateur {
+        SERIAL id PK
+        VARCHAR50 nom_utilisateur UK
+        VARCHAR256 mot_de_passe_hash
+        VARCHAR20 role
+        BOOLEAN actif
+        TIMESTAMP date_creation
+        TIMESTAMP derniere_connexion
+    }
+
+    pays {
+        VARCHAR10 code_pays PK
+        VARCHAR100 nom_pays
+    }
+
+    indicateur {
+        VARCHAR50 code_indicateur PK
+        VARCHAR255 description
+        VARCHAR50 unite
+        VARCHAR100 source
+        BOOLEAN actif
+    }
+
+    classification {
+        VARCHAR50 code PK
+        VARCHAR255 libelle
+        VARCHAR20 type
+        INTEGER age_min
+        INTEGER age_max
+        VARCHAR100 valeur
+    }
+
+    import_donnees {
+        SERIAL id PK
+        VARCHAR50 indicateur_code FK
+        INTEGER utilisateur_id FK
+        TIMESTAMP date_debut
+        TIMESTAMP date_fin
+        VARCHAR20 statut
+        INTEGER nombre_lignes
+        VARCHAR255 fichier_source
+        TEXT message_erreur
+    }
+
+    observation {
+        BIGSERIAL id PK
+        VARCHAR50 code_indicateur FK
+        VARCHAR10 code_pays FK
+        VARCHAR20 periode
+        NUMERIC valeur
+        VARCHAR10 sexe
+        VARCHAR50 code_classification FK
+        INTEGER import_id FK
+        VARCHAR100 source
+        TIMESTAMP date_import
+    }
+
+    journal_activite {
+        BIGSERIAL id PK
+        INTEGER utilisateur_id FK
+        VARCHAR100 action
+        VARCHAR255 cible
+        TEXT details
+        TIMESTAMP date_heure
+    }
+
+    rapport {
+        SERIAL id PK
+        INTEGER utilisateur_id FK
+        VARCHAR255 titre
+        TEXT description
+        TIMESTAMP date_creation
+        VARCHAR255 fichier_path
+        VARCHAR20 statut
+    }
+
+    indicateur ||--o{ import_donnees : "indicateur_code"
+    utilisateur ||--o{ import_donnees : "utilisateur_id"
+    indicateur ||--o{ observation : "code_indicateur"
+    pays ||--o{ observation : "code_pays"
+    classification ||--o{ observation : "code_classification"
+    import_donnees ||--o{ observation : "import_id"
+    utilisateur ||--o{ journal_activite : "utilisateur_id"
+    utilisateur ||--o{ rapport : "utilisateur_id"
