@@ -2,6 +2,7 @@ from datetime import date
 
 import pandas as pd
 import plotly.express as px
+import plotly.graph_objects as go
 import streamlit as st
 
 from utils.api_client import api_client
@@ -444,6 +445,12 @@ with col_chart:
         # Marge à droite pour que les étiquettes des barres ne soient pas coupées.
         fig.update_xaxes(showticklabels=False, range=[0, df["Valeur"].max() * 1.15])
         afficher_graphique(fig)
+        with st.expander("Voir les données"):
+            st.dataframe(
+                df[["Pays", "Valeur", "Période"]],
+                use_container_width=True,
+                hide_index=True,
+            )
 
 with col_aside:
     df_retenir = df.sort_values("Valeur", ascending=False)
@@ -643,33 +650,43 @@ with st.container(border=True):
 
     st.caption(f"{len(noms_pays)} pays · {nb_periodes_taux4} dernières années · Taux = Emploi / Population (15+) × 100")
 
-    if sens_taux4 == "Évolution":
-        fig_taux4 = px.line(
-            df_taux,
-            x="Période",
-            y="Valeur",
-            color="Pays",
-            markers=True,
-            labels={"Valeur": "Taux d'emploi (%)"},
-            color_discrete_sequence=PALETTE_GRAPHIQUE,
-        )
-    else:
-        if df_var.empty:
-            st.info("Pas assez de périodes pour calculer les variations.")
-            st.stop()
-        fig_taux4 = px.line(
-            df_var,
-            x="Période",
-            y="Valeur",
-            color="Pays",
-            markers=True,
-            labels={"Valeur": "Variation (points)"},
-            color_discrete_sequence=PALETTE_GRAPHIQUE,
-        )
+    # Axe X numérique (année) + connectgaps dynamique :
+    #   gap <= 2 ans → on relie ; gap >= 3 ans → rupture visible.
+    df_tracer = df_taux if sens_taux4 == "Évolution" else df_var
+    df_tracer = df_tracer.copy()
+    df_tracer["Année"] = df_tracer["Période"].str[:4].astype(int)
+    df_tracer = df_tracer.sort_values("Année")
+
+    if sens_taux4 == "Variations" and df_var.empty:
+        st.info("Pas assez de périodes pour calculer les variations.")
+        st.stop()
+
+    fig_taux4 = go.Figure()
+    couleurs = list(PALETTE_GRAPHIQUE)
+    for i, (pays, sous_df) in enumerate(df_tracer.groupby("Pays", sort=False)):
+        sous_df = sous_df.sort_values("Année")
+        annees = sous_df["Année"].tolist()
+        valeurs = sous_df["Valeur"].tolist()
+        gaps = [annees[j + 1] - annees[j] for j in range(len(annees) - 1)]
+        max_gap = max(gaps) if gaps else 0
+        connecter = max_gap < 3
+        fig_taux4.add_trace(go.Scatter(
+            x=annees,
+            y=valeurs,
+            mode="lines+markers",
+            name=pays,
+            line=dict(width=2.5, color=couleurs[i % len(couleurs)]),
+            marker=dict(size=7, color=couleurs[i % len(couleurs)]),
+            connectgaps=connecter,
+        ))
+
+    fig_taux4.update_layout(
+        yaxis_title="Taux d'emploi (%)" if sens_taux4 == "Évolution" else "Variation (points)",
+    )
+    fig_taux4.update_xaxes(type="linear", dtick=1, tickformat=".0f", title="Année")
+    if sens_taux4 == "Variations":
         fig_taux4.add_hline(y=0, line_dash="dash", line_color="#999", line_width=1)
 
-    fig_taux4.update_xaxes(type="category")
-    fig_taux4.update_traces(line=dict(width=2.5), marker=dict(size=7))
     styliser_figure(fig_taux4, hauteur=400)
     afficher_graphique(fig_taux4)
 

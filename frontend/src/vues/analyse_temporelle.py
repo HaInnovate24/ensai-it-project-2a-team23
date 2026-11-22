@@ -1,7 +1,7 @@
 from datetime import date
 
 import pandas as pd
-import plotly.express as px
+import plotly.graph_objects as go
 import streamlit as st
 
 from utils.api_client import api_client
@@ -116,17 +116,36 @@ if lignes:
             indicateurs[code_indicateur],
             f"{libelle_classification} · {libelle_sexe} · {nb_periodes} dernières années",
         )
-        fig = px.line(
-            df,
-            x="Période",
-            y="Valeur",
-            color="Pays",
-            markers=True,
-            labels={"Valeur": f"Valeur ({unite})" if unite else "Valeur"},
-            color_discrete_sequence=PALETTE_GRAPHIQUE,
-        )
-        fig.update_xaxes(type="category")
-        fig.update_traces(line=dict(width=2.5), marker=dict(size=7))
+        # Construire la figure avec un axe X numérique (année) pour garantir
+        # un ordre correct même avec des données manquantes.
+        # Règle de connectgaps :
+        #   - gap <= 2 ans → on relie les points (connectgaps=True)
+        #   - gap >= 3 ans → rupture visible (connectgaps=False)
+        df["Année"] = df["Période"].str[:4].astype(int)
+        fig = go.Figure()
+        couleurs = list(PALETTE_GRAPHIQUE)
+
+        for i, (pays, sous_df) in enumerate(df.groupby("Pays", sort=False)):
+            sous_df = sous_df.sort_values("Année")
+            annees = sous_df["Année"].tolist()
+            valeurs = sous_df["Valeur"].tolist()
+
+            gaps = [annees[j + 1] - annees[j] for j in range(len(annees) - 1)]
+            max_gap = max(gaps) if gaps else 0
+            connecter = max_gap < 3
+
+            fig.add_trace(go.Scatter(
+                x=annees,
+                y=valeurs,
+                mode="lines+markers",
+                name=pays,
+                line=dict(width=2.5, color=couleurs[i % len(couleurs)]),
+                marker=dict(size=7, color=couleurs[i % len(couleurs)]),
+                connectgaps=connecter,
+            ))
+
+        fig.update_layout(yaxis_title=f"Valeur ({unite})" if unite else "Valeur")
+        fig.update_xaxes(type="linear", dtick=1, tickformat=".0f", title="Année")
         styliser_figure(fig)
         afficher_graphique(fig)
         with st.expander("Voir les données"):
@@ -243,17 +262,26 @@ else:
                 nom_pays_taux,
                 f"{nb_periodes_taux} dernières années · %",
             )
-            fig_taux = px.line(
-                df_taux,
-                x="Période",
-                y="Valeur",
-                color="Série",
-                markers=True,
-                labels={"Valeur": "Taux d'emploi (%)"},
-                color_discrete_sequence=PALETTE_GRAPHIQUE,
-            )
-            fig_taux.update_xaxes(type="category")
-            fig_taux.update_traces(line=dict(width=2.5), marker=dict(size=7))
+            df_taux["Année"] = df_taux["Période"].str[:4].astype(int)
+            fig_taux = go.Figure()
+            for i, (serie, sous_df) in enumerate(df_taux.groupby("Série", sort=False)):
+                sous_df = sous_df.sort_values("Année")
+                annees = sous_df["Année"].tolist()
+                valeurs = sous_df["Valeur"].tolist()
+                gaps = [annees[j + 1] - annees[j] for j in range(len(annees) - 1)]
+                max_gap = max(gaps) if gaps else 0
+                connecter = max_gap < 3
+                fig_taux.add_trace(go.Scatter(
+                    x=annees,
+                    y=valeurs,
+                    mode="lines+markers",
+                    name=serie,
+                    line=dict(width=2.5, color=PALETTE_GRAPHIQUE[i % len(PALETTE_GRAPHIQUE)]),
+                    marker=dict(size=7, color=PALETTE_GRAPHIQUE[i % len(PALETTE_GRAPHIQUE)]),
+                    connectgaps=connecter,
+                ))
+            fig_taux.update_layout(yaxis_title="Taux d'emploi (%)")
+            fig_taux.update_xaxes(type="linear", dtick=1, tickformat=".0f", title="Année")
             styliser_figure(fig_taux)
             afficher_graphique(fig_taux)
 
@@ -276,17 +304,26 @@ else:
                     nom_pays_taux,
                     "En points (différence entre deux années consécutives)",
                 )
-                fig_var = px.line(
-                    df_var,
-                    x="Période",
-                    y="Valeur",
-                    color="Série",
-                    markers=True,
-                    labels={"Valeur": "Variation (points)"},
-                    color_discrete_sequence=PALETTE_GRAPHIQUE,
-                )
-                fig_var.update_xaxes(type="category")
-                fig_var.update_traces(line=dict(width=2.5), marker=dict(size=7))
+                df_var["Année"] = df_var["Période"].str[:4].astype(int)
+                fig_var = go.Figure()
+                for i, (serie, sous_df) in enumerate(df_var.groupby("Série", sort=False)):
+                    sous_df = sous_df.sort_values("Année")
+                    annees = sous_df["Année"].tolist()
+                    valeurs = sous_df["Valeur"].tolist()
+                    gaps = [annees[j + 1] - annees[j] for j in range(len(annees) - 1)]
+                    max_gap = max(gaps) if gaps else 0
+                    connecter = max_gap < 3
+                    fig_var.add_trace(go.Scatter(
+                        x=annees,
+                        y=valeurs,
+                        mode="lines+markers",
+                        name=serie,
+                        line=dict(width=2.5, color=PALETTE_GRAPHIQUE[i % len(PALETTE_GRAPHIQUE)]),
+                        marker=dict(size=7, color=PALETTE_GRAPHIQUE[i % len(PALETTE_GRAPHIQUE)]),
+                        connectgaps=connecter,
+                    ))
+                fig_var.update_layout(yaxis_title="Variation (points)")
+                fig_var.update_xaxes(type="linear", dtick=1, tickformat=".0f", title="Année")
                 fig_var.add_hline(y=0, line_dash="dash", line_color="#999", line_width=1)
                 styliser_figure(fig_var)
                 afficher_graphique(fig_var)
