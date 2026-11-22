@@ -45,6 +45,15 @@ SET_SCHEMA := -c "SET search_path TO $(POSTGRES_SCHEMA)"
 # Docker (uniquement pour la pile complete, en option).
 COMPOSE := docker compose
 
+# Service PostgreSQL de la pile Docker (voir docker-compose.yml).
+PG_SERVICE := postgres
+
+# psql execute DANS le conteneur Docker : utile quand le client psql n'est
+# PAS installe sur la machine hote. -T desactive le TTY (execution hors
+# terminal interactif) ; les fichiers SQL sont lus depuis /data, monte par
+# docker-compose.yml (./data:/data:ro).
+PSQL_DOCKER := $(COMPOSE) exec -T -e PGPASSWORD=$(POSTGRES_PASSWORD) $(PG_SERVICE) psql -U $(POSTGRES_USER) -d $(POSTGRES_DATABASE) -v ON_ERROR_STOP=1
+
 .DEFAULT_GOAL := help
 
 # ---------------------------------------------------------------------
@@ -67,6 +76,11 @@ help: ## Affiche cette aide
 	@echo   make up            (option Docker) Demarre toute la pile
 	@echo   make down          (option Docker) Arrete tous les conteneurs
 	@echo   make db-docker     (option Docker) Demarre uniquement PostgreSQL
+	@echo   make db-push-docker  (Docker) Cree schema + tables dans le conteneur
+	@echo   make db-load-docker  (Docker) Charge les referentiels dans le conteneur
+	@echo   make db-init-docker  (Docker) Structure + referentiels dans le conteneur
+	@echo   make db-reset-docker (Docker) Reinitialise la base du conteneur
+	@echo   make db-shell-docker (Docker) Console psql dans le conteneur
 	@echo   make test          Lance tous les tests du backend
 	@echo   make test-collecte Lance uniquement les tests de la collecte
 	@echo   make cov           Couverture de tout le backend (console + HTML)
@@ -161,6 +175,37 @@ down: ## (option) Arrete tous les conteneurs
 .PHONY: db-docker
 db-docker: ## (option) Demarre uniquement PostgreSQL via Docker et attend qu'il soit pret
 	$(COMPOSE) up -d --wait postgres
+
+# ---------------------------------------------------------------------
+# Base de donnees - variante DOCKER (psql execute DANS le conteneur)
+# ---------------------------------------------------------------------
+# A utiliser quand le client psql n'est PAS installe sur l'hote. Chaque
+# cible demarre d'abord le conteneur postgres (dependance db-docker), puis
+# execute psql a l'interieur via "docker compose exec". Les fichiers SQL
+# sont lus depuis /data (montage ./data:/data:ro de docker-compose.yml).
+.PHONY: db-push-docker
+db-push-docker: db-docker ## (Docker) Cree le schema et les tables dans le conteneur
+	@echo Creation du schema $(POSTGRES_SCHEMA) dans le conteneur...
+	$(PSQL_DOCKER) -c "CREATE SCHEMA IF NOT EXISTS $(POSTGRES_SCHEMA)"
+	@echo Creation des tables depuis /data/init_db.sql...
+	$(PSQL_DOCKER) $(SET_SCHEMA) -f /data/init_db.sql
+	@echo Structure en place (conteneur) - schema $(POSTGRES_SCHEMA).
+
+.PHONY: db-load-docker
+db-load-docker: db-docker ## (Docker) Charge les referentiels dans le conteneur
+	@echo Chargement des referentiels depuis /data/pop_referentiels.sql...
+	$(PSQL_DOCKER) $(SET_SCHEMA) -f /data/pop_referentiels.sql
+	@echo Referentiels charges (conteneur).
+
+.PHONY: db-init-docker
+db-init-docker: db-push-docker db-load-docker ## (Docker) Structure + referentiels dans le conteneur
+
+.PHONY: db-reset-docker
+db-reset-docker: db-init-docker ## (Docker) Reinitialise la base du conteneur (push + load)
+
+.PHONY: db-shell-docker
+db-shell-docker: db-docker ## (Docker) Ouvre une console psql interactive dans le conteneur
+	$(COMPOSE) exec -e PGPASSWORD=$(POSTGRES_PASSWORD) -e PGOPTIONS=--search_path=$(POSTGRES_SCHEMA) $(PG_SERVICE) psql -U $(POSTGRES_USER) -d $(POSTGRES_DATABASE)
 
 # ---------------------------------------------------------------------
 # Qualite & tests

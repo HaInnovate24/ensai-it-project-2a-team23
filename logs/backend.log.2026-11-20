@@ -1,0 +1,206 @@
+20/11/2026 14:05:33 root                      INFO    - --------------------------------------------------
+20/11/2026 14:05:33 root                      INFO    - Starting Webservice                           
+20/11/2026 14:05:33 root                      INFO    - --------------------------------------------------
+20/11/2026 14:05:33 root                      INFO    - Load environment variables: SUCCES
+20/11/2026 14:05:33 root                      INFO    - POSTGRES_HOST=localhost
+20/11/2026 14:05:33 root                      INFO    - POSTGRES_PORT=5432
+20/11/2026 14:05:33 root                      INFO    - POSTGRES_DATABASE=defaultdb
+20/11/2026 14:05:33 root                      INFO    - POSTGRES_USER=user
+20/11/2026 14:05:33 root                      INFO    - POSTGRES_PASSWORD=*******
+20/11/2026 14:05:33 root                      INFO    - POSTGRES_SCHEMA=project
+20/11/2026 14:05:33 root                      INFO    - JWT_SECRET_KEY=*******
+20/11/2026 14:05:33 root                      INFO    - UVICORN_HOST=127.0.0.1
+20/11/2026 14:05:33 root                      INFO    - UVICORN_PORT=5000
+20/11/2026 14:05:33 root                      INFO    - BACKEND_URL=http://localhost:5000
+20/11/2026 14:05:33 root                      INFO    - BACKEND_TIMEOUT=5
+20/11/2026 14:05:33 root                      INFO    - ELO_K_FACTOR=32
+20/11/2026 14:05:36 root                      INFO    - --------------------------------------------------
+20/11/2026 14:05:36 root                      INFO    - Starting Webservice                           
+20/11/2026 14:05:36 root                      INFO    - --------------------------------------------------
+20/11/2026 14:05:36 root                      INFO    - Load environment variables: SUCCES
+20/11/2026 14:05:36 root                      INFO    - POSTGRES_HOST=localhost
+20/11/2026 14:05:36 root                      INFO    - POSTGRES_PORT=5432
+20/11/2026 14:05:36 root                      INFO    - POSTGRES_DATABASE=defaultdb
+20/11/2026 14:05:36 root                      INFO    - POSTGRES_USER=user
+20/11/2026 14:05:36 root                      INFO    - POSTGRES_PASSWORD=*******
+20/11/2026 14:05:36 root                      INFO    - POSTGRES_SCHEMA=project
+20/11/2026 14:05:36 root                      INFO    - JWT_SECRET_KEY=*******
+20/11/2026 14:05:36 root                      INFO    - UVICORN_HOST=127.0.0.1
+20/11/2026 14:05:36 root                      INFO    - UVICORN_PORT=5000
+20/11/2026 14:05:36 root                      INFO    - BACKEND_URL=http://localhost:5000
+20/11/2026 14:05:36 root                      INFO    - BACKEND_TIMEOUT=5
+20/11/2026 14:05:36 root                      INFO    - ELO_K_FACTOR=32
+20/11/2026 14:06:04 root                      INFO    - GET / - START
+20/11/2026 14:06:04 root                      INFO    - GET /json/version - START
+20/11/2026 14:06:04 root                      INFO    - GET / - END [Status: 307]
+20/11/2026 14:06:04 root                      INFO    - GET /json/version - END [Status: 404]
+20/11/2026 14:06:04 root                      INFO    - GET /docs - START
+20/11/2026 14:06:04 root                      INFO    - GET /docs - END [Status: 200]
+20/11/2026 14:06:05 root                      INFO    - GET / - START
+20/11/2026 14:06:05 root                      INFO    - GET / - END [Status: 307]
+20/11/2026 14:06:05 root                      INFO    - GET /docs - START
+20/11/2026 14:06:05 root                      INFO    - GET /docs - END [Status: 200]
+20/11/2026 14:06:39 root                      INFO    - GET /referentiels/indicateurs - START
+20/11/2026 14:06:39 root                      INFO    - GET /referentiels/indicateurs - END [Status: 200]
+20/11/2026 14:06:39 root                      INFO    - GET /referentiels/pays - START
+20/11/2026 14:06:39 root                      INFO    - GET /referentiels/pays - END [Status: 200]
+20/11/2026 14:06:39 root                      INFO    - GET /referentiels/classifications - START
+20/11/2026 14:06:39 root                      INFO    - GET /referentiels/classifications - END [Status: 200]
+20/11/2026 14:06:39 root                      INFO    - GET /analyses/evolution - START
+20/11/2026 14:06:39 root                      INFO    - GET /analyses/evolution - END [Status: 200]
+20/11/2026 14:06:51 root                      INFO    - GET /analyses/evolution - START
+20/11/2026 14:06:51 root                      INFO    - GET /analyses/evolution - END [Status: 200]
+20/11/2026 14:06:51 root                      INFO    - GET /analyses/evolution - START
+20/11/2026 14:06:51 root                      INFO    - GET /analyses/evolution - END [Status: 200]
+20/11/2026 14:06:59 root                      INFO    - GET /analyses/evolution - START
+20/11/2026 14:06:59 root                      INFO    - GET /analyses/evolution - END [Status: 200]
+20/11/2026 14:07:21 root                      INFO    - POST /auth/connexion - START
+20/11/2026 14:07:21 root                      INFO    - POST /auth/connexion - END [Status: 401]
+20/11/2026 14:07:23 root                      INFO    - POST /auth/connexion - START
+20/11/2026 14:07:23 root                      INFO    - POST /auth/connexion - END [Status: 401]
+20/11/2026 14:07:26 root                      INFO    - POST /auth/connexion - START
+20/11/2026 14:07:26 root                      INFO    - POST /auth/connexion - END [Status: 401]
+20/11/2026 14:08:24 root                      INFO    - POST /auth/connexion - START
+20/11/2026 14:08:24 root                      INFO    - POST /auth/connexion - END [Status: 401]
+20/11/2026 14:09:08 root                      INFO    - POST /auth/inscription - START
+20/11/2026 14:09:09 root                      INFO    - POST /auth/inscription - END [Status: 200]
+20/11/2026 14:09:19 root                      INFO    - POST /auth/connexion - START
+20/11/2026 14:09:20 root                      INFO    - POST /auth/connexion - END [Status: 200]
+20/11/2026 14:09:20 root                      INFO    - GET /auth/profil - START
+20/11/2026 14:09:20 root                      INFO    - GET /auth/profil - END [Status: 200]
+20/11/2026 14:09:28 root                      INFO    - GET /analyses/evolution - START
+20/11/2026 14:09:28 root                      INFO    - GET /analyses/evolution - END [Status: 200]
+20/11/2026 14:09:28 root                      INFO    - GET /analyses/evolution - START
+20/11/2026 14:09:28 root                      INFO    - GET /analyses/evolution - END [Status: 200]
+20/11/2026 14:09:43 root                      INFO    - GET /analyses/evolution - START
+20/11/2026 14:09:43 root                      INFO    - GET /analyses/evolution - END [Status: 200]
+20/11/2026 14:09:43 root                      INFO    - GET /analyses/carte - START
+20/11/2026 14:09:43 root                      INFO    - GET /analyses/carte - END [Status: 200]
+20/11/2026 14:10:12 root                      INFO    - POST /auth/connexion - START
+20/11/2026 14:10:13 root                      INFO    - POST /auth/connexion - END [Status: 200]
+20/11/2026 14:10:13 root                      INFO    - GET /auth/profil - START
+20/11/2026 14:10:13 root                      INFO    - GET /auth/profil - END [Status: 200]
+20/11/2026 14:11:12 root                      INFO    - GET /referentiels/indicateurs - START
+20/11/2026 14:11:12 root                      INFO    - GET /referentiels/indicateurs - END [Status: 200]
+20/11/2026 14:11:12 root                      INFO    - GET /referentiels/pays - START
+20/11/2026 14:11:12 root                      INFO    - GET /referentiels/pays - END [Status: 200]
+20/11/2026 14:11:12 root                      INFO    - GET /referentiels/classifications - START
+20/11/2026 14:11:12 root                      INFO    - GET /referentiels/classifications - END [Status: 200]
+20/11/2026 14:11:12 root                      INFO    - GET /analyses/evolution - START
+20/11/2026 14:11:12 root                      INFO    - GET /analyses/evolution - END [Status: 200]
+20/11/2026 14:11:12 root                      INFO    - GET /analyses/carte - START
+20/11/2026 14:11:13 root                      INFO    - GET /analyses/carte - END [Status: 200]
+20/11/2026 14:11:31 root                      INFO    - GET /analyses/evolution - START
+20/11/2026 14:11:31 root                      INFO    - GET /analyses/evolution - END [Status: 200]
+20/11/2026 14:11:32 root                      INFO    - GET /analyses/evolution - START
+20/11/2026 14:11:32 root                      INFO    - GET /analyses/evolution - END [Status: 200]
+20/11/2026 14:11:34 root                      INFO    - GET /analyses/evolution - START
+20/11/2026 14:11:34 root                      INFO    - GET /analyses/evolution - END [Status: 200]
+20/11/2026 14:11:34 root                      INFO    - GET /analyses/comparaison-pays - START
+20/11/2026 14:11:34 root                      INFO    - GET /analyses/comparaison-pays - END [Status: 200]
+20/11/2026 14:11:48 root                      INFO    - GET /analyses/evolution - START
+20/11/2026 14:11:48 root                      INFO    - GET /analyses/evolution - END [Status: 200]
+20/11/2026 14:11:48 root                      INFO    - GET /analyses/evolution - START
+20/11/2026 14:11:48 root                      INFO    - GET /analyses/evolution - END [Status: 200]
+20/11/2026 14:12:31 root                      INFO    - POST /auth/connexion - START
+20/11/2026 14:12:31 root                      INFO    - POST /auth/connexion - END [Status: 200]
+20/11/2026 14:12:31 root                      INFO    - GET /auth/profil - START
+20/11/2026 14:12:31 root                      INFO    - GET /auth/profil - END [Status: 200]
+20/11/2026 14:12:35 root                      INFO    - GET /referentiels/indicateurs - START
+20/11/2026 14:12:35 root                      INFO    - GET /referentiels/indicateurs - END [Status: 200]
+20/11/2026 14:12:35 root                      INFO    - GET /referentiels/pays - START
+20/11/2026 14:12:35 root                      INFO    - GET /referentiels/pays - END [Status: 200]
+20/11/2026 14:12:35 root                      INFO    - GET /referentiels/classifications - START
+20/11/2026 14:12:35 root                      INFO    - GET /referentiels/classifications - END [Status: 200]
+20/11/2026 14:12:35 root                      INFO    - GET /analyses/evolution - START
+20/11/2026 14:12:35 root                      INFO    - GET /analyses/evolution - END [Status: 200]
+20/11/2026 14:12:35 root                      INFO    - GET /analyses/carte - START
+20/11/2026 14:12:36 root                      INFO    - GET /analyses/carte - END [Status: 200]
+20/11/2026 14:12:46 root                      INFO    - GET /analyses/evolution - START
+20/11/2026 14:12:46 root                      INFO    - GET /analyses/evolution - END [Status: 200]
+20/11/2026 14:12:46 root                      INFO    - GET /analyses/carte - START
+20/11/2026 14:12:47 root                      INFO    - GET /analyses/carte - END [Status: 200]
+20/11/2026 14:12:59 root                      INFO    - GET /analyses/evolution - START
+20/11/2026 14:12:59 root                      INFO    - GET /analyses/evolution - END [Status: 200]
+20/11/2026 14:12:59 root                      INFO    - GET /analyses/carte - START
+20/11/2026 14:13:00 root                      INFO    - GET /analyses/carte - END [Status: 200]
+20/11/2026 14:14:01 root                      INFO    - GET /analyses/evolution - START
+20/11/2026 14:14:01 root                      INFO    - GET /analyses/evolution - END [Status: 200]
+20/11/2026 14:14:01 root                      INFO    - GET /analyses/comparaison-pays - START
+20/11/2026 14:14:01 root                      INFO    - GET /analyses/comparaison-pays - END [Status: 200]
+20/11/2026 14:14:13 root                      INFO    - GET /analyses/evolution - START
+20/11/2026 14:14:13 root                      INFO    - GET /analyses/evolution - END [Status: 200]
+20/11/2026 14:14:13 root                      INFO    - GET /analyses/evolution - START
+20/11/2026 14:14:13 root                      INFO    - GET /analyses/evolution - END [Status: 200]
+20/11/2026 14:14:30 root                      INFO    - GET /analyses/evolution - START
+20/11/2026 14:14:30 root                      INFO    - GET /analyses/evolution - END [Status: 200]
+20/11/2026 14:14:30 root                      INFO    - GET /analyses/carte - START
+20/11/2026 14:14:30 root                      INFO    - GET /analyses/carte - END [Status: 200]
+20/11/2026 14:51:12 root                      INFO    - GET /analyses/evolution - START
+20/11/2026 14:51:12 root                      INFO    - GET /analyses/evolution - END [Status: 200]
+20/11/2026 14:51:12 root                      INFO    - GET /analyses/carte - START
+20/11/2026 14:51:12 root                      INFO    - GET /analyses/carte - END [Status: 200]
+20/11/2026 14:51:14 root                      INFO    - GET /analyses/evolution - START
+20/11/2026 14:51:14 root                      INFO    - GET /analyses/evolution - END [Status: 200]
+20/11/2026 14:51:14 root                      INFO    - GET /analyses/carte - START
+20/11/2026 14:51:14 root                      INFO    - GET /analyses/carte - END [Status: 200]
+20/11/2026 14:51:15 root                      INFO    - GET /analyses/evolution - START
+20/11/2026 14:51:15 root                      INFO    - GET /analyses/evolution - END [Status: 200]
+20/11/2026 14:51:15 root                      INFO    - GET /analyses/carte - START
+20/11/2026 14:51:15 root                      INFO    - GET /analyses/carte - END [Status: 200]
+20/11/2026 14:51:17 root                      INFO    - GET /analyses/evolution - START
+20/11/2026 14:51:17 root                      INFO    - GET /analyses/evolution - END [Status: 200]
+20/11/2026 14:51:17 root                      INFO    - GET /analyses/carte - START
+20/11/2026 14:51:17 root                      INFO    - GET /analyses/carte - END [Status: 200]
+20/11/2026 14:51:21 root                      INFO    - GET /analyses/evolution - START
+20/11/2026 14:51:21 root                      INFO    - GET /analyses/evolution - END [Status: 200]
+20/11/2026 14:51:21 root                      INFO    - GET /analyses/carte - START
+20/11/2026 14:51:21 root                      INFO    - GET /analyses/carte - END [Status: 200]
+20/11/2026 14:52:00 root                      INFO    - GET /analyses/evolution - START
+20/11/2026 14:52:00 root                      INFO    - GET /analyses/evolution - END [Status: 200]
+20/11/2026 14:52:56 root                      INFO    - GET /analyses/evolution - START
+20/11/2026 14:52:56 root                      INFO    - GET /analyses/evolution - END [Status: 200]
+20/11/2026 14:53:08 root                      INFO    - GET /analyses/evolution - START
+20/11/2026 14:53:08 root                      INFO    - GET /analyses/evolution - END [Status: 200]
+20/11/2026 14:53:44 root                      INFO    - GET /analyses/evolution - START
+20/11/2026 14:53:44 root                      INFO    - GET /analyses/evolution - END [Status: 200]
+20/11/2026 14:53:44 root                      INFO    - GET /analyses/comparaison-pays - START
+20/11/2026 14:53:44 root                      INFO    - GET /analyses/comparaison-pays - END [Status: 200]
+20/11/2026 14:53:51 root                      INFO    - GET /analyses/evolution - START
+20/11/2026 14:53:51 root                      INFO    - GET /analyses/evolution - END [Status: 200]
+20/11/2026 14:53:51 root                      INFO    - GET /analyses/evolution - START
+20/11/2026 14:53:51 root                      INFO    - GET /analyses/evolution - END [Status: 200]
+20/11/2026 14:54:12 root                      INFO    - GET /analyses/evolution - START
+20/11/2026 14:54:12 root                      INFO    - GET /analyses/evolution - END [Status: 200]
+20/11/2026 14:54:12 root                      INFO    - GET /analyses/evolution - START
+20/11/2026 14:54:12 root                      INFO    - GET /analyses/evolution - END [Status: 200]
+20/11/2026 14:54:16 root                      INFO    - GET /analyses/evolution - START
+20/11/2026 14:54:16 root                      INFO    - GET /analyses/evolution - END [Status: 200]
+20/11/2026 14:54:16 root                      INFO    - GET /analyses/evolution - START
+20/11/2026 14:54:16 root                      INFO    - GET /analyses/evolution - END [Status: 200]
+20/11/2026 14:54:31 root                      INFO    - GET /analyses/evolution - START
+20/11/2026 14:54:31 root                      INFO    - GET /analyses/evolution - END [Status: 200]
+20/11/2026 14:54:31 root                      INFO    - GET /analyses/evolution - START
+20/11/2026 14:54:31 root                      INFO    - GET /analyses/evolution - END [Status: 200]
+20/11/2026 14:54:59 root                      INFO    - GET /analyses/evolution - START
+20/11/2026 14:54:59 root                      INFO    - GET /analyses/evolution - END [Status: 200]
+20/11/2026 14:54:59 root                      INFO    - GET /analyses/carte - START
+20/11/2026 14:55:00 root                      INFO    - GET /analyses/carte - END [Status: 200]
+20/11/2026 14:56:20 root                      INFO    - GET /analyses/evolution - START
+20/11/2026 14:56:20 root                      INFO    - GET /analyses/evolution - END [Status: 200]
+20/11/2026 14:56:22 root                      INFO    - GET /analyses/evolution - START
+20/11/2026 14:56:22 root                      INFO    - GET /analyses/evolution - END [Status: 200]
+20/11/2026 14:56:24 root                      INFO    - GET /referentiels/indicateurs - START
+20/11/2026 14:56:24 root                      INFO    - GET /referentiels/indicateurs - END [Status: 200]
+20/11/2026 14:56:24 root                      INFO    - GET /referentiels/pays - START
+20/11/2026 14:56:24 root                      INFO    - GET /referentiels/pays - END [Status: 200]
+20/11/2026 14:56:25 root                      INFO    - GET /referentiels/classifications - START
+20/11/2026 14:56:25 root                      INFO    - GET /referentiels/classifications - END [Status: 200]
+20/11/2026 14:56:25 root                      INFO    - GET /analyses/evolution - START
+20/11/2026 14:56:25 root                      INFO    - GET /analyses/evolution - END [Status: 200]
+20/11/2026 14:56:37 root                      INFO    - GET /analyses/evolution - START
+20/11/2026 14:56:37 root                      INFO    - GET /analyses/evolution - END [Status: 200]
+20/11/2026 14:57:45 root                      INFO    - GET /analyses/evolution - START
+20/11/2026 14:57:45 root                      INFO    - GET /analyses/evolution - END [Status: 200]
+20/11/2026 14:58:31 root                      INFO    - GET /analyses/evolution - START
+20/11/2026 14:58:31 root                      INFO    - GET /analyses/evolution - END [Status: 200]

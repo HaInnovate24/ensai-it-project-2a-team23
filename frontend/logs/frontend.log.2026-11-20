@@ -1,0 +1,63 @@
+20/11/2026 14:06:04 root                 INFO   - --------------------------------------------------
+20/11/2026 14:06:04 root                 INFO   - Launch FRONTEND : Streamlit App
+20/11/2026 14:06:04 root                 INFO   - --------------------------------------------------
+20/11/2026 14:06:04 root                 INFO   - Load environment variables: SUCCES
+20/11/2026 14:06:04 root                 INFO   - BACKEND_URL=http://localhost:5000
+20/11/2026 14:06:04 root                 INFO   - BACKEND_TIMEOUT=5
+20/11/2026 14:06:04 Accueil              INFO   - None -> Accueil
+20/11/2026 14:06:18 root                 INFO   - --------------------------------------------------
+20/11/2026 14:06:18 root                 INFO   - Launch FRONTEND : Streamlit App
+20/11/2026 14:06:18 root                 INFO   - --------------------------------------------------
+20/11/2026 14:06:18 root                 INFO   - Load environment variables: SUCCES
+20/11/2026 14:06:18 root                 INFO   - BACKEND_URL=http://localhost:5000
+20/11/2026 14:06:18 root                 INFO   - BACKEND_TIMEOUT=5
+20/11/2026 14:06:37 Analyse Temporelle (F3) INFO   - Accueil -> Analyse Temporelle (F3)
+20/11/2026 14:07:06 Connexion            INFO   - Analyse Temporelle (F3) -> Connexion
+20/11/2026 14:09:26 Multi-indicateurs (F5) INFO   - Connexion -> Multi-indicateurs (F5)
+20/11/2026 14:09:28 choreographer.browsers.chromium INFO   - Chromium init'ed with kwargs {}
+20/11/2026 14:09:28 choreographer.browsers.chromium INFO   - Found chromium path: C:\Program Files\Google\Chrome\Application\chrome.exe
+20/11/2026 14:09:28 choreographer.utils._tmpfile INFO   - Temp directory created: C:\Users\Salim\AppData\Local\Temp\tmpnw7us6xt.
+20/11/2026 14:09:28 choreographer.browser_async INFO   - Opening browser.
+20/11/2026 14:09:28 choreographer.utils._tmpfile INFO   - Temp directory created: C:\Users\Salim\AppData\Local\Temp\tmplbslk7dq.
+20/11/2026 14:09:28 choreographer.browsers.chromium INFO   - Temporary directory at: C:\Users\Salim\AppData\Local\Temp\tmplbslk7dq
+20/11/2026 14:09:29 kaleido.kaleido      INFO   - Conforming 1 to file:///C:/Users/Salim/AppData/Local/Temp/tmpnw7us6xt/index.html
+20/11/2026 14:09:30 kaleido.kaleido      INFO   - Getting tab from queue (has 1)
+20/11/2026 14:09:30 kaleido.kaleido      INFO   - Got 48BF
+20/11/2026 14:09:30 kaleido.kaleido      INFO   - Reloading tab 48BF before return.
+20/11/2026 14:09:30 kaleido.kaleido      INFO   - Putting tab 48BF back (queue size: 0).
+20/11/2026 14:09:30 kaleido.kaleido      INFO   - Waiting for all cleanups to finish.
+20/11/2026 14:09:30 kaleido.kaleido      INFO   - Exiting Kaleido.
+20/11/2026 14:09:30 choreographer.utils._tmpfile INFO   - TemporaryDirectory.cleanup() worked.
+20/11/2026 14:09:30 choreographer.utils._tmpfile INFO   - shutil.rmtree worked.
+20/11/2026 14:09:30 choreographer.browser_async INFO   - Closing browser.
+20/11/2026 14:09:30 choreographer.utils._tmpfile INFO   - TemporaryDirectory.cleanup() worked.
+20/11/2026 14:09:30 choreographer.utils._tmpfile INFO   - shutil.rmtree worked.
+20/11/2026 14:09:30 choreographer.browser_async INFO   - Closing browser.
+20/11/2026 14:09:30 kaleido.kaleido      INFO   - Cancelling tasks.
+20/11/2026 14:09:30 kaleido.kaleido      INFO   - Exiting Kaleido/Choreo.
+20/11/2026 14:09:31 choreographer.utils._tmpfile INFO   - TemporaryDirectory.cleanup() worked.
+20/11/2026 14:09:31 choreographer.utils._tmpfile INFO   - shutil.rmtree worked.
+20/11/2026 14:09:31 kaleido.kaleido      INFO   - Cancelling tasks.
+20/11/2026 14:09:31 kaleido.kaleido      INFO   - Exiting Kaleido/Choreo.
+20/11/2026 14:09:31 choreographer.utils._tmpfile INFO   - TemporaryDirectory.cleanup() worked.
+20/11/2026 14:09:31 choreographer.utils._tmpfile INFO   - shutil.rmtree worked.
+20/11/2026 14:09:40 Carte mondiale (F6)  INFO   - Multi-indicateurs (F5) -> Carte mondiale (F6)
+20/11/2026 14:10:02 root                 INFO   - --------------------------------------------------
+20/11/2026 14:10:02 root                 INFO   - Launch FRONTEND : Streamlit App
+20/11/2026 14:10:02 root                 INFO   - --------------------------------------------------
+20/11/2026 14:10:02 root                 INFO   - Load environment variables: SUCCES
+20/11/2026 14:10:02 root                 INFO   - BACKEND_URL=http://localhost:5000
+20/11/2026 14:10:02 root                 INFO   - BACKEND_TIMEOUT=5
+20/11/2026 14:11:34 Comparaison Pays (F4) INFO   - Multi-indicateurs (F5) -> Comparaison Pays (F4)
+20/11/2026 14:12:19 root                 INFO   - --------------------------------------------------
+20/11/2026 14:12:19 root                 INFO   - Launch FRONTEND : Streamlit App
+20/11/2026 14:12:19 root                 INFO   - --------------------------------------------------
+20/11/2026 14:12:19 root                 INFO   - Load environment variables: SUCCES
+20/11/2026 14:12:19 root                 INFO   - BACKEND_URL=http://localhost:5000
+20/11/2026 14:12:19 root                 INFO   - BACKEND_TIMEOUT=5
+20/11/2026 14:56:24 root                 INFO   - --------------------------------------------------
+20/11/2026 14:56:24 root                 INFO   - Launch FRONTEND : Streamlit App
+20/11/2026 14:56:24 root                 INFO   - --------------------------------------------------
+20/11/2026 14:56:24 root                 INFO   - Load environment variables: SUCCES
+20/11/2026 14:56:24 root                 INFO   - BACKEND_URL=http://localhost:5000
+20/11/2026 14:56:24 root                 INFO   - BACKEND_TIMEOUT=5

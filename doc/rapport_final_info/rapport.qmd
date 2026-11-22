@@ -745,11 +745,11 @@ Une équipe organisée, des outils partagés, des tests isolés et un code robus
 
 ## Sidy Mohamed Salim Diallo {.unnumbered}
 
-**Mon rôle et mes réalisations.** `#todo[(inspires toi de ce qui est mis en crochet chez Jade…]`{=typst}
+**Mon rôle et mes réalisations.** En tant que chef de projet, j'ai coordonné l'équipe (répartition des tâches, suivi, intégration) tout en posant les fondations techniques du projet: l'ossature de départ et l'environnement commun de travail. J'ai participé à la réalisartion de l'interface utilisateur (navigation, identité visuelle et la plupart des écrans d'analyse) et participé à plusieurs parties du serveur, notamment la sécurité des comptes et la gestion des accès.
 
-**Mon vécu du travail en groupe.** `#todo[…]`{=typst}
+**Mon vécu du travail en groupe.** Concilier la coordination de l'équipe et une forte charge de travail personnelle a été l'équilibre le plus difficile à tenir. Ma partie servant de point de rencontre entre les travaux de chacun, j'ai géré l'essentiel des fusions de code et des tensions qui en découlaient, accentuées par les écarts de niveau et des règles de collaboration fixées trop tard. Les trois journées en présentiel ont été décisives pour débloquer ces frictions.
 
-**Enseignements et conseils aux futurs 2A.** `#todo[…]`{=typst}
+**Enseignements et conseils aux futurs 2A.** Mettez-vous d'accord sur la façon dont les parties vont s'emboîter *avant* de travailler chacun de son côté, et clarifiez tôt les rôles et les échéances. Soignez l'organisation du travail commun dès le départ, et ne sous-estimez jamais le moment où il faut tout réunir : commencez cette étape tôt.
 
 ## Alexandre Fratter-Bardy {.unnumbered}
 

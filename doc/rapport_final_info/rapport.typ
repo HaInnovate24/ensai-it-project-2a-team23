@@ -881,7 +881,9 @@ white
 <conception-orientée-objet-et-réponse-aux-besoins>
 == Modélisation objet et principes de conception
 <modélisation-objet-et-principes-de-conception>
-Plutôt qu'un diagramme unique et illisible, la conception est présentée couche par couche : objets métier, puis services, DAO et client externe. Que des exemples.
+=== Architecture en couches
+<architecture-en-couches>
+LaborScope est organisé selon une architecture en quatre couches, où chaque couche n'appelle que la couche inférieure. Ce découpage garantit que la logique métier reste indépendante du framework web, et que l'accès aux données est encapsulé.
 
 #figure(caption: [Diagramme de classes simplifié : objets métier.])[
   #align(center)[
@@ -914,73 +916,65 @@ Plutôt qu'un diagramme unique et illisible, la conception est présentée couch
       cls([ILOSTATClient], [telecharger(filtres)], w: 3.8cm))
   ]
 ]
-=== Les concepts de programmation objet mobilisés
-<les-concepts-de-programmation-objet-mobilisés>
-…
+=== Diagramme de classes : couche objets métiers
+<diagramme-de-classes-couche-objets-métiers>
+=== Diagramme de classes : couche services et dépendances
+<diagramme-de-classes-couche-services-et-dépendances>
+== Zoom détaillé sur un processus central : la collecte de données (F1)
+<zoom-détaillé-sur-un-processus-central-la-collecte-de-données-f1>
+La collecte est le processus le plus riche de l'application car il traverse toutes les couches et interagit avec trois systèmes externes : l'API ILOSTAT (HTTP), le système de fichiers local (cache CSV) et la base PostgreSQL.
 
-== Zoom sur un processus central : consulter des statistiques
-<zoom-sur-un-processus-central-consulter-des-statistiques>
-La consultation d'un indicateur d'emploi traverse toutes les couches, de la requête de l'utilisateur jusqu'à la base de données.
+=== Ce que fait l'administrateur
+<ce-que-fait-ladministrateur>
+L'administrateur clique sur un bouton « Importer les données » dans l'interface. Il peut choisir :
 
-#let xs = (1.3cm, 4.5cm, 7.7cm, 10.9cm, 14.1cm)
-#let names = ([Utilisateur], [Contrôleur], [Service], [DAO], [Client ILOSTAT])
-#let msg(i, j, y, label, ret: false) = {
-  let x1 = xs.at(i)
-  let x2 = xs.at(j)
-  let col = if ret { muted } else { brand }
-  let lx = if x1 < x2 { x1 } else { x2 }
-  place(top + left, line(start: (x1, y), end: (x2, y),
-    stroke: (paint: col, thickness: 0.8pt, dash: if ret { "dashed" } else { "solid" })))
-  place(top + left, dx: if x2 > x1 { x2 - 2.2mm } else { x2 - 0.3mm }, dy: y - 1.7mm,
-    text(size: 6pt, fill: col)[#if x2 > x1 [▶] else [◀]])
-  place(top + left, dx: lx, dy: y - 3.8mm,
-    box(width: calc.abs(x2 - x1), align(center, text(size: 7pt, fill: black)[#box(fill: white, inset: (x: 2pt))[#label]])))
-}
-#let selfmsg(i, y, label) = {
-  let x = xs.at(i)
-  place(top + left, dx: x, dy: y, rect(width: 5mm, height: 5mm, stroke: (top: 0.8pt + brand, right: 0.8pt + brand, bottom: 0.8pt + brand)))
-  place(top + left, dx: x + 6.5mm, dy: y + 0.8mm, text(size: 7pt)[#label])
-}
-#figure(caption: [Diagramme de séquence de la consultation d'un indicateur.])[
-  #block(width: 100%, height: 10.6cm, breakable: false)[
-    #place(top + left, dx: xs.at(2) - 1.2cm, dy: 5.0cm,
-      rect(width: 15.4cm - xs.at(2) + 1.2cm - 0.1cm, height: 2.7cm, fill: ocean.lighten(90%), stroke: 0.8pt + ocean))
-    #place(top + left, dx: xs.at(2) - 1.2cm, dy: 5.0cm,
-      box(fill: ocean, inset: 2pt)[#text(size: 6pt, fill: white, weight: "bold")[alt]])
-    #place(top + left, dx: xs.at(2) - 0.7cm, dy: 5.05cm,
-      text(size: 6pt, fill: ocean)[ cache absent ou périmé])
-    #for k in range(5) {
-      place(top + left, line(start: (xs.at(k), 0.75cm), end: (xs.at(k), 10.4cm), stroke: (paint: muted.lighten(30%), thickness: 0.6pt, dash: "dashed")))
-      place(top + left, dx: xs.at(k) - 1.2cm, dy: 0pt,
-        box(width: 2.4cm, fill: brand, radius: 2pt, inset: 4pt, align(center, text(size: 7.5pt, fill: white, weight: "bold")[#names.at(k)])))
-    }
-    #msg(0, 1, 1.5cm, [GET /stats/emploi])
-    #selfmsg(1, 2.0cm, [valider, vérifier le jeton])
-    #msg(1, 2, 3.3cm, [obtenir_statistiques(filtres)])
-    #msg(2, 3, 4.1cm, [rechercher(filtres)])
-    #msg(3, 2, 4.7cm, [observations (ou vide)], ret: true)
-    #msg(2, 4, 5.9cm, [telecharger(filtres)])
-    #msg(4, 2, 6.6cm, [données JSON], ret: true)
-    #msg(2, 3, 7.3cm, [enregistrer(observations)])
-    #selfmsg(2, 8.0cm, [calculer les indicateurs])
-    #msg(2, 1, 9.2cm, [résultat], ret: true)
-    #msg(1, 0, 9.9cm, [200 OK + JSON], ret: true)
-  ]
-] <fig-seq>
-=== Déroulement pas à pas
-<déroulement-pas-à-pas>
-+ #strong[Que fait l'utilisateur ?] …
-+ #strong[Validation et sécurité.] …
-+ #strong[Traitement métier.] …
-+ #strong[Accès aux données.] \..
+l'indicateur à collecter (ou tous les indicateurs actifs du référentiel) \; la période de temps (par défaut 2014--2026).
 
-=== Zoom sur l'authentification
-<zoom-sur-lauthentification>
-#todo[Précision de l'algorithme de hachage, de la durée de validité, l'invalidation des jetons et autres qu'on doit compléter]
+=== Ce que fait l'application étape par étape
+<ce-que-fait-lapplication-étape-par-étape>
+Étape 1 --- Création de la trace d'import
+
+Dès le lancement de la collecte, l'application enregistre immédiatement une trace de l'opération en base de données avec le statut « en cours ». Cette entrée fait office de journal de suivi. Ainsi, même si le processus venait à échouer en cours de route, l'administrateur pourra toujours consulter l'historique pour savoir quel indicateur a été demandé, à quelle date et pour quel motif l'import n'a pas abouti.
+
+Étape 2 --- Téléchargement sélectif via le cache
+
+Plutôt que de télécharger systématiquement l'intégralité de la période demandée, l'application commence par vérifier les fichiers déjà archivés localement pour l'indicateur concerné. En identifiant les années déjà couvertes, elle isole uniquement les périodes manquantes et les regroupe par plages consécutives afin de limiter le nombre de requêtes envoyées à l'API d'ILOSTAT. Chaque fichier récupéré est d'abord écrit de façon temporaire avant d'être validé définitivement, ce qui évite de conserver un fichier corrompu en cas de coupure. L'ensemble des fichiers de la période est ensuite rassemblé en mémoire en éliminant les lignes en double. Grâce à ce mécanisme de cache, seul le premier import nécessite de télécharger tout l'historique tandis que les mises à jour suivantes ne récupèrent que les nouvelles données manquantes.
+
+Étape 3 --- Parsing
+
+Une fois le fichier CSV consolidé, l'application en analyse le contenu ligne par ligne pour le transformer en données exploitables. Pour chaque enregistrement, elle extrait les informations essentielles, c'est-à-dire l'indicateur, le code pays, la période (année ou trimestre) et la valeur numérique,tout en identifiant le sexe (homme, femme ou total) ainsi que la classification éventuelle (tranche d'âge ou profession). Les valeurs non numériques, notamment les données manquantes codées « … » par ILOSTAT, sont quant à elles détectées et traitées comme des valeurs vides afin de ne pas fausser les analyses.
+
+Étape 4 --- Filtrage par référentiels connus
+
+Avant d'enregistrer les données, l'application vérifie leur cohérence en écartant toutes les observations rattachées à un pays ou à une classification absents de nos référentiels locaux. ILOSTAT renvoie en effet parfois des zones géographiques ou des codes inconnus qui, sans ce filtrage préalable, seraient rejetés par la base de données pour préserver l'intégrité des informations.
+
+Étape 5 --- Déduplication et upsert
+
+Avant l'enregistrement, l'application élimine en mémoire les éventuels doublons en vérifiant chaque combinaison unique d'indicateur, de pays, de période, de sexe et de classification, afin d'éviter tout conflit lors de l'envoi groupé. Les données sont ensuite transmises en bloc à la base de données via une opération qui insère les nouvelles observations et met à jour celles déjà existantes. Ce fonctionnement permet de relancer un import sur une même période, ne crée aucun doublon et se contente d'actualiser les valeurs déjà enregistrées.
+
+Étape 6 --- Mise à jour de la trace d'import
+
+Quelle que soit l'issue de la collecte, l'application clôture le suivi en mettant à jour la trace d'import avec son statut final (succès ou échec), le nombre de lignes traitées, la date de fin et, le cas échéant, le message d'erreur. Si un incident survient durant l'enregistrement des données, l'opération en cours est immédiatement annulée afin de laisser la base de données dans un état sain, ce qui permet ensuite de consigner l'échec dans l'historique.
+
+mettre ici le diagramme de séquence de la collecte
+
+=== Points clés de conception dans ce processus
+<points-clés-de-conception-dans-ce-processus>
+Le processus d'import est conçu pour être idempotent c'est-à-dire que relancer une collecte sur les mêmes données ne crée ni doublons ni effets indésirables, les enregistrements existants étant simplement mis à jour. Pour éviter de re-télécharger l'intégralité des fichiers à chaque mise à jour, IlostatClient ne récupère que les données manquantes (par exemple l'année 2025 si la période 2020-2024 est déjà présente). En ce qui concerne la tolérance aux erreurs, une valeur invalide dans les données sources ne fait pas échouer l'ensemble de l'import, elle est simplement ignorée tandis que le reste des données est traité normalement. Par ailleurs, si un import échoue à mi-chemin, la base de données est remise dans un état propre afin qu'aucune transaction ne reste bloquée. Enfin, chaque opération est journalisée via ImportDonnees avec sa date, son volume et son statut (succès ou échec), permettant à l'administrateur de consulter l'historique complet.
 
 == Aperçu synthétique des autres fonctionnalités
 <aperçu-synthétique-des-autres-fonctionnalités>
-#todo[...]
+F2 --- Filtrage et consultation La consultation des données repose sur un mécanisme de recherche qui s'adapte aux critères sélectionnés par l'utilisateur (pays, indicateur, période, etc.). Afin de garantir la sécurité de la base de données et de prévenir tout risque d'injection SQL, seuls les critères de filtrage explicitement autorisés sont acceptés, toute demande non reconnue étant immédiatement rejetée. De plus, les valeurs recherchées sont transmises de manière sécurisée et isolée, sans jamais être insérées directement dans le texte des requêtes envoyées à la base.
+
+F4 --- Comparaison entre pays La comparaison entre pays s'appuie sur la même logique de récupération des données que la fonctionnalité F3, mais est adaptée à une vue d'ensemble : plutôt que d'extraire tout l'historique d'un pays, le système ne récupère que la donnée la plus récente pour chacun des pays sélectionnés. Les résultats sont classés par ordre décroissant, ce qui permet à l'interface de mettre en évidence les valeurs extrêmes sans nécessiter de traitement supplémentaire lors de l'affichage. Ainsi, le pays le plus élevé en tête et le plus bas en fin de liste.
+
+F5 --- Croisement d'indicateurs La comparaison de plusieurs indicateurs consiste à construire une série de données distincte pour chacun des indicateurs sélectionnés, avant de les regrouper au sein pour une meilleure visualisation. Comme les indicateurs comparés reposent sur des échelles différentes, l'unité de mesure est intégrée dans le titre de chaque série afin d'en assurer une lecture claire. Enfin, si aucune donnée n'est disponible pour un indicateur sur le pays choisi, celui-ci est automatiquement écarté pour éviter d'afficher des courbes vides sur le graphique.
+
+F6 --- Authentification et gestion des droits L'accès à l'application est sécurisé par un système de jetons de connexion signés, tandis que les mots de passe ne sont jamais conservés en clair mais protégés par un hachage sécurisé avec sel aléatoire. Le contrôle des droits repose sur deux vérifications. La première est de s'assurer que l'utilisateur est bien authentifié. La seconde est de vérifier qu'il dispose du statut d'administrateur pour les opérations sensibles. Un choix de conception important a été de recontrôler le rôle et l'état du compte en base de données à chaque requête plutôt que de se fier uniquement aux informations contenues dans le jeton : ainsi, la promotion ou la désactivation d'un compte prend effet immédiatement, sans avoir à attendre l'expiration de la session (24 heures). En parallèle, un mécanisme de traçabilité enregistre chaque action significative réalisée sur la plateforme (connexion, lancement d'une collecte, modification ou suppression de données). Chaque entrée consignée associe l'auteur de l'opération, l'horodatage, la nature de l'action et un descriptif qui permet aux administrateurs de consulter l'historique et de suivre précisément qui a effectué quelle action.
+
+FO1 --- Cartographie interactive La vue cartographique récupère les données d'une période unique pour l'ensemble des pays disponibles, afin d'associer une seule valeur à chaque pays. L'interface utilise ensuite ces résultats pour colorer dynamiquement une carte interactive selon un dégradé de couleurs proportionnel aux valeurs observées. Enfin, la réutilisation de la même structure de données que celle des comparaisons entre pays (F4) simplifie la conception de l'interface. Une seule logique d'affichage permet ainsi de gérer à la fois les graphiques en barres et la carte.
+
+FO2 --- Génération de rapports PDF La création d'un rapport automatisé repose sur un processus en trois temps. Le système commence par récupérer les séries de données via les modules d'analyse existants (F3 et F4), génère ensuite les graphiques correspondants sous forme d'images, puis assemble l'ensemble dans un document PDF réunissant ces visuels, un tableau récapitulatif et une synthèse automatique des principaux résultats. Une fois produit, le fichier est directement archivé en base de données afin que l'utilisateur puisse le retrouver et le télécharger à tout moment depuis son historique.
 
 == Cas d'utilisation concret
 <cas-dutilisation-concret>
@@ -1274,11 +1268,11 @@ white
 
 #heading(level: 2, numbering: none)[Sidy Mohamed Salim Diallo]
 <sidy-mohamed-salim-diallo>
-#strong[Mon rôle et mes réalisations.] #todo[(inspires toi de ce qui est mis en crochet chez Jade…]
+#strong[Mon rôle et mes réalisations.] En tant que chef de projet, j'ai coordonné l'équipe (répartition des tâches, suivi, intégration) tout en posant les fondations techniques du projet : l'ossature de départ et l'environnement commun de travail. J'ai réalisé l'essentiel de l'interface utilisateur (navigation, identité visuelle et la plupart des écrans d'analyse) et participé à plusieurs parties du serveur, notamment la sécurité des comptes et la gestion des accès.
 
-#strong[Mon vécu du travail en groupe.] #todo[…]
+#strong[Mon vécu du travail en groupe.] Concilier la coordination de l'équipe et une forte charge de travail personnelle a été l'équilibre le plus difficile à tenir. Ma partie servant de point de rencontre entre les travaux de chacun, j'ai géré l'essentiel des fusions de code et des tensions qui en découlaient, accentuées par les écarts de niveau et des règles de collaboration fixées trop tard. Les trois journées en présentiel ont été décisives pour débloquer ces frictions.
 
-#strong[Enseignements et conseils aux futurs 2A.] #todo[…]
+#strong[Enseignements et conseils aux futurs 2A.] Mettez-vous d'accord sur la façon dont les parties vont s'emboîter #emph[avant] de travailler chacun de son côté, et clarifiez tôt les rôles et les échéances. Soignez l'organisation du travail commun dès le départ, et ne sous-estimez jamais le moment où il faut tout réunir : commencez cette étape tôt.
 
 #heading(level: 2, numbering: none)[Alexandre Fratter-Bardy]
 <alexandre-fratter-bardy>
