@@ -1145,11 +1145,10 @@ Le modèle physique de données traduit le diagramme de classes en schéma relat
 #let mpd-row(nom, typ, flags) = {
   let pk = flags.contains("PK")
   let fk = flags.contains("FK")
-  let nn = flags.contains("NN")
   let uq = flags.contains("UQ")
   grid(columns: (1fr, auto), column-gutter: 3pt,
     [#text(weight: if pk { "bold" } else { "regular" })[#nom]#if pk [#text(fill: sun.darken(25%), size: 5.5pt, weight: "bold")[ PK]]#if fk [#text(fill: ocean, size: 5.5pt, weight: "bold")[ FK]]#if uq [#text(fill: brand, size: 5.5pt, weight: "bold")[ UQ]]],
-    text(fill: muted, size: 6pt)[#typ#if nn [#text(fill: brand, size: 5pt, weight: "bold")[ NN]]])
+    text(fill: muted, size: 6pt)[#typ])
 }
 #let mpd-table(nom, col, x, y, w, rows) = place(top + left, dx: x, dy: y,
   block(width: w, height: mpd-h(rows.len()), clip: true, stroke: 0.7pt + col, radius: 2.5pt, fill: white)[
@@ -1162,68 +1161,79 @@ Le modèle physique de données traduit le diagramme de classes en schéma relat
     }
   ])
 #figure(caption: [Modèle physique des données de LaborScope.])[
-  #block(width: 100%, height: 16.3cm, breakable: false)[
+  #block(width: 100%, height: 13.2cm, breakable: false)[
     // --- connecteurs (dessinés d'abord, sous les tables) ---
-    #mpd-line(7.7cm, 1.79cm, 7.7cm, 3.2cm)
-    #mpd-line(7.7cm, 7.72cm, 7.7cm, 9.4cm)
-    #mpd-line(4.6cm, 5.185cm, 5.5cm, 5.185cm)
-    #mpd-line(10.8cm, 5.315cm, 10.35cm, 5.315cm)
-    #mpd-line(10.35cm, 5.315cm, 10.35cm, 4.405cm)
-    #mpd-line(10.35cm, 4.405cm, 9.9cm, 4.405cm)
-    #mpd-line(10.8cm, 9.015cm, 10.2cm, 9.015cm)
-    #mpd-line(10.2cm, 9.015cm, 10.2cm, 5.575cm)
-    #mpd-line(10.2cm, 5.575cm, 9.9cm, 5.575cm)
-    #mpd-line(13.1cm, 4.5cm, 13.1cm, 3.74cm)
-    #mpd-line(4.6cm, 13.415cm, 5.5cm, 13.415cm)
-    #mpd-line(9.9cm, 13.415cm, 10.8cm, 13.415cm)
+    // Indicateur -> Observation
+    #mpd-line(7.7cm, 2.57cm, 7.7cm, 3.7cm)
+    // Pays -> Observation
+    #mpd-line(4.6cm, 4.315cm, 5.0cm, 4.315cm)
+    #mpd-line(5.0cm, 4.315cm, 5.0cm, 5.295cm)
+    #mpd-line(5.0cm, 5.295cm, 5.4cm, 5.295cm)
+    // Classification -> Observation
+    #mpd-line(4.6cm, 6.515cm, 5.0cm, 6.515cm)
+    #mpd-line(5.0cm, 6.515cm, 5.0cm, 6.855cm)
+    #mpd-line(5.0cm, 6.855cm, 5.4cm, 6.855cm)
+    // Import_donnees -> Observation
+    #mpd-line(10.8cm, 3.215cm, 10.4cm, 3.215cm)
+    #mpd-line(10.4cm, 3.215cm, 10.4cm, 7.245cm)
+    #mpd-line(10.4cm, 7.245cm, 10.0cm, 7.245cm)
+    // Indicateur -> Import_donnees
+    #mpd-line(10.0cm, 0.815cm, 13.1cm, 0.815cm)
+    #mpd-line(13.1cm, 0.815cm, 13.1cm, 2.4cm)
+    // Utilisateur -> Import_donnees
+    #mpd-line(9.6cm, 9.7cm, 9.6cm, 8.96cm)
+    #mpd-line(9.6cm, 8.96cm, 13.1cm, 8.96cm)
+    #mpd-line(13.1cm, 8.96cm, 13.1cm, 6.53cm)
+    // Utilisateur -> Journal_activite
+    #mpd-line(4.6cm, 10.515cm, 5.4cm, 10.515cm)
+    // Utilisateur -> Rapport
+    #mpd-line(10.0cm, 10.515cm, 10.8cm, 10.515cm)
     // --- cardinalités ---
-    #mpd-lab(7.8cm, 1.82cm, [1])
-    #mpd-lab(7.8cm, 2.85cm, [N])
-    #mpd-lab(7.8cm, 7.75cm, [N])
-    #mpd-lab(7.8cm, 9.0cm, [0..1])
-    #mpd-lab(4.62cm, 4.85cm, [0..1])
-    #mpd-lab(5.2cm, 4.85cm, [N])
-    #mpd-lab(10.45cm, 5.0cm, [1])
-    #mpd-lab(9.93cm, 4.1cm, [N])
-    #mpd-lab(10.45cm, 8.7cm, [0..1])
-    #mpd-lab(9.93cm, 5.25cm, [N])
-    #mpd-lab(13.2cm, 4.22cm, [1])
-    #mpd-lab(13.2cm, 3.76cm, [N])
-    #mpd-lab(5.15cm, 13.05cm, [1])
-    #mpd-lab(4.62cm, 13.05cm, [N])
-    #mpd-lab(10.2cm, 13.05cm, [1])
-    #mpd-lab(10.62cm, 13.05cm, [N])
+    #mpd-lab(7.8cm, 2.6cm, [1])
+    #mpd-lab(7.8cm, 3.35cm, [N])
+    #mpd-lab(4.62cm, 3.98cm, [1])
+    #mpd-lab(5.12cm, 4.96cm, [N])
+    #mpd-lab(4.62cm, 6.18cm, [1])
+    #mpd-lab(5.12cm, 6.52cm, [N])
+    #mpd-lab(10.45cm, 2.88cm, [1])
+    #mpd-lab(10.03cm, 6.93cm, [N])
+    #mpd-lab(10.05cm, 0.48cm, [1])
+    #mpd-lab(13.2cm, 2.05cm, [N])
+    #mpd-lab(9.7cm, 9.35cm, [1])
+    #mpd-lab(13.2cm, 6.58cm, [N])
+    #mpd-lab(5.15cm, 10.18cm, [1])
+    #mpd-lab(4.62cm, 10.18cm, [N])
+    #mpd-lab(10.2cm, 10.18cm, [1])
+    #mpd-lab(10.62cm, 10.18cm, [N])
     // --- référentiels ---
-    #mpd-table("Pays", ocean, 5.5cm, 0cm, 4.4cm, (
-      ("code_pays", "varchar", "PK"), ("nom_pays", "varchar", "NN"), ("continent", "varchar", "")))
-    #mpd-table("Sexe", ocean, 0cm, 4.37cm, 4.6cm, (
-      ("code_sexe", "varchar", "PK"), ("libelle", "varchar", "NN")))
-    #mpd-table("Indicateur", ocean, 10.8cm, 4.5cm, 4.6cm, (
-      ("code_indicateur", "varchar", "PK"), ("libelle", "varchar", "NN"), ("unite", "varchar", ""),
-      ("source", "varchar", ""), ("actif", "boolean", "")))
-    #mpd-table("Age", ocean, 10.8cm, 8.2cm, 4.6cm, (
-      ("code_age", "varchar", "PK"), ("libelle", "varchar", "NN"), ("age_min", "integer", ""), ("age_max", "integer", "")))
-    #mpd-table("Occupation", ocean, 5.5cm, 9.4cm, 4.4cm, (
-      ("code_occupation", "varchar", "PK"), ("libelle", "varchar", "NN"), ("valeur", "varchar", "")))
+    #mpd-table("Indicateur", ocean, 5.4cm, 0cm, 4.6cm, (
+      ("code_indicateur", "varchar(50)", "PK"), ("description", "varchar(255)", ""), ("unite", "varchar(50)", ""),
+      ("source", "varchar(100)", ""), ("actif", "boolean", "")))
+    #mpd-table("Pays", ocean, 0cm, 3.5cm, 4.6cm, (
+      ("code_pays", "varchar(10)", "PK"), ("nom_pays", "varchar(100)", "")))
+    #mpd-table("Classification", ocean, 0cm, 5.7cm, 4.6cm, (
+      ("code", "varchar(50)", "PK"), ("libelle", "varchar(255)", ""), ("type", "varchar(20)", ""),
+      ("age_min", "integer", ""), ("age_max", "integer", ""), ("valeur", "varchar(100)", "")))
     // --- données collectées ---
-    #mpd-table("Observation", brand, 5.5cm, 3.2cm, 4.4cm, (
-      ("id", "bigint", "PK"), ("code_indicateur", "varchar", "FK NN"), ("code_pays", "varchar", "FK NN"),
-      ("code_sexe", "varchar", "FK"), ("code_age", "varchar", "FK"), ("code_occupation", "varchar", "FK"),
-      ("periode", "varchar", "NN"), ("valeur", "decimal", ""), ("source", "varchar", ""), ("date_import", "timestamp", "")))
-    #mpd-table("Import_donnees", brand, 10.8cm, 0cm, 4.6cm, (
-      ("id", "integer", "PK"), ("code_indicateur", "varchar", "FK NN"), ("date_debut", "timestamp", ""),
-      ("date_fin", "timestamp", ""), ("statut", "varchar", "NN"), ("nombre_lignes", "integer", ""),
-      ("fichier_source", "varchar", ""), ("message_erreur", "text", "")))
+    #mpd-table("Observation", brand, 5.4cm, 3.7cm, 4.6cm, (
+      ("id", "bigserial", "PK"), ("code_indicateur", "varchar(50)", "FK"), ("code_pays", "varchar(10)", "FK"),
+      ("periode", "varchar(20)", ""), ("valeur", "numeric", ""), ("sexe", "varchar(10)", ""),
+      ("code_classification", "varchar(50)", "FK"), ("import_id", "integer", "FK"),
+      ("source", "varchar(100)", ""), ("date_import", "timestamp", "")))
+    #mpd-table("Import_donnees", brand, 10.8cm, 2.4cm, 4.6cm, (
+      ("id", "serial", "PK"), ("indicateur_code", "varchar(50)", "FK"), ("utilisateur_id", "integer", "FK"),
+      ("date_debut", "timestamp", ""), ("date_fin", "timestamp", ""), ("statut", "varchar(20)", ""),
+      ("nombre_lignes", "integer", ""), ("fichier_source", "varchar(255)", ""), ("message_erreur", "text", "")))
     // --- comptes et traçabilité ---
-    #mpd-table("Utilisateur", sun.darken(20%), 5.5cm, 12.6cm, 4.4cm, (
-      ("id", "integer", "PK"), ("nom_utilisateur", "varchar", "UQ NN"), ("mot_de_passe_hash", "varchar", "NN"),
-      ("role", "varchar", "NN"), ("actif", "boolean", "NN"), ("date_creation", "timestamp", ""), ("derniere_connexion", "timestamp", "")))
-    #mpd-table("Journal_activite", sun.darken(20%), 0cm, 12.21cm, 4.6cm, (
-      ("id", "bigint", "PK"), ("utilisateur_id", "integer", "FK NN"), ("action", "varchar", "NN"),
-      ("cible", "varchar", ""), ("details", "text", ""), ("date_heure", "timestamp", "NN")))
-    #mpd-table("Rapport", sun.darken(20%), 10.8cm, 12.21cm, 4.6cm, (
-      ("id", "integer", "PK"), ("utilisateur_id", "integer", "FK NN"), ("titre", "varchar", ""),
-      ("description", "text", ""), ("date_creation", "timestamp", ""), ("fichier_path", "varchar", ""), ("statut", "varchar", "")))
+    #mpd-table("Utilisateur", sun.darken(20%), 5.4cm, 9.7cm, 4.6cm, (
+      ("id", "serial", "PK"), ("nom_utilisateur", "varchar(50)", "UQ"), ("mot_de_passe_hash", "varchar(256)", ""),
+      ("role", "varchar(20)", ""), ("actif", "boolean", ""), ("date_creation", "timestamp", ""), ("derniere_connexion", "timestamp", "")))
+    #mpd-table("Journal_activite", sun.darken(20%), 0cm, 9.31cm, 4.6cm, (
+      ("id", "bigserial", "PK"), ("utilisateur_id", "integer", "FK"), ("action", "varchar(100)", ""),
+      ("cible", "varchar(255)", ""), ("details", "text", ""), ("date_heure", "timestamp", "")))
+    #mpd-table("Rapport", sun.darken(20%), 10.8cm, 9.31cm, 4.6cm, (
+      ("id", "serial", "PK"), ("utilisateur_id", "integer", "FK"), ("titre", "varchar(255)", ""),
+      ("description", "text", ""), ("date_creation", "timestamp", ""), ("fichier_path", "varchar(255)", ""), ("statut", "varchar(20)", "")))
     // --- légende ---
     #place(top + left, dx: 0cm, dy: 0cm, block(width: 4.6cm, stroke: 0.6pt + brand.lighten(60%), radius: 3pt, inset: 7pt, fill: mist)[
       #set text(size: 7pt)
@@ -1234,7 +1244,7 @@ Le modèle physique de données traduit le diagramme de classes en schéma relat
       #box(width: 7pt, height: 7pt, fill: sun.darken(20%), radius: 1pt, baseline: 1pt) #h(3pt) Comptes et traçabilité \
       #v(2pt)
       #text(fill: sun.darken(25%), weight: "bold")[PK] clé primaire · #text(fill: ocean, weight: "bold")[FK] clé étrangère \
-      #text(fill: brand, weight: "bold")[NN] non nul · #text(fill: brand, weight: "bold")[UQ] unique])
+      #text(fill: brand, weight: "bold")[UQ] unique])
   ]
 ]
 === Justification des choix de modélisation
