@@ -621,7 +621,7 @@ Afin de répondre aux différents besoins d'exploration et de sécurisation des 
 
 #figure(caption: [Diagramme de cas d'utilisation de LaborScope.])[
   #let profil(titre, body) = block(width: 100%, stroke: (left: 3pt + ocean), fill: ocean.lighten(92%),
-    inset: (left: 9pt, rest: 7pt), above: 8pt, below: 0pt)[
+    inset: (left: 9pt, rest: 7pt), above: 8pt, below: 0pt)[s
     #text(weight: "bold", fill: brand, font: sans, size: 9.5pt)[#titre] \ #body]
   #grid(columns: (7cm, 1fr), column-gutter: 16pt, align: horizon,
     block(stroke: 0.6pt + brand.lighten(60%), radius: 3pt, inset: 7pt, fill: white,
@@ -741,48 +741,6 @@ Les fonctionnalités $F_i$ forment le socle obligatoire \; les fonctionnalités 
 - #strong[Utilisateur inscrit] (chargé d'études, étudiant, journaliste) : exploite pleinement les statistiques, compare et conserve ses recherches.
 - #strong[Administrateur] : garantit le bon fonctionnement du service, gère les comptes et la fraîcheur des données.
 
-== Les données au cœur de l'application. #todo[Je propose qu'on enlève tout ce bloc, il me paraît inutile]
-<les-données-au-cœur-de-lapplication.>
-=== La source : ILOSTAT
-<la-source-ilostat>
-Les données proviennent d'#strong[ILOSTAT], la base statistique ouverte de l'Organisation internationale du Travail, accessible par une API. Elle fournit, pour de nombreux pays et régions, des séries annuelles sur l'emploi, le chômage ou la population en âge de travailler, ventilées par sexe, âge et profession, en tableaux (CSV) ou en format structuré (JSON). #todo[On doit préciser les endpoints interrogés, le format retenu, les limites de requêtage]
-
-=== Dictionnaire des variables
-<dictionnaire-des-variables>
-#table(
-  columns: (22.67%, 12%, 65.33%),
-  align: (left,left,left,),
-  table.header([Variable], [Type], [Signification métier],),
-  table.hline(),
-  [#NormalTok("ref_area");], [texte], [Pays ou région (code à trois lettres)],
-  [#NormalTok("indicator");], [texte], [Code de l'indicateur statistique],
-  [#NormalTok("sex");], [texte], [Sexe : femmes, hommes ou total],
-  [#NormalTok("classif1");], [texte], [Classification : profession ou tranche d'âge],
-  [#NormalTok("time");], [entier], [Année de la mesure],
-  [#NormalTok("obs_value");], [réel], [Valeur observée (milliers de personnes ou pourcentage)],
-  [#NormalTok("obs_status");], [texte], [Qualité de la valeur (estimée, provisoire…)],
-)
-=== Indicateurs calculés
-<indicateurs-calculés>
-$ upright("Taux d’emploi") = upright("Emploi") / upright("Population en âge de travailler") times 100 $
-
-$ upright("Part des femmes") = upright("Emploi des femmes") / upright("Emploi total") times 100 $
-
-#table(
-  columns: (24.1%, 61.45%, 14.46%),
-  align: (left,left,left,),
-  table.header([Indicateur], [Interprétation], [Intervalle],),
-  table.hline(),
-  [Taux d'emploi], [Part de la population en âge de travailler qui occupe un emploi], [$\[ 0 thin \; 100 \]$],
-  [Part des femmes], [Féminisation d'une profession (50 = parité)], [$\[ 0 thin \; 100 \]$],
-  [Variation annuelle], [Évolution relative d'un indicateur d'une année à l'autre], [$\] - 100 thin \; + oo \[$],
-)
-=== Difficultés liées aux données
-<difficultés-liées-aux-données>
-- #strong[Valeurs manquantes] : certains pays ne publient pas toutes les années \; l'application l'indique explicitement plutôt que d'inventer une valeur.
-- #strong[Formats hétérogènes] : dates, codes pays et unités sont harmonisés avant toute comparaison.
-- #strong[Limites de requêtage] : interroger la source à chaque demande serait lent et fragile \; d'où la mise en cache décrite au chapitre 4.
-
 #block[
 #callout(
 body: 
@@ -817,27 +775,6 @@ white
 <structure-de-lapplication>
 LaborScope repose sur une architecture client-serveur découplée, articulée autour de deux applications communiquant exclusivement par requêtes HTTP au format JSON. Le backend (API REST FastAPI) centralise la logique métier, les calculs d'indicateurs, le contrôle des droits d'accès, les requêtes vers PostgreSQL ainsi que la collecte et le nettoyage des flux externes ILOSTAT. Le frontend (application web Streamlit) constitue l'interface utilisateur, gère la navigation et la session, produit les visualisations interactives et assemble les rapports PDF téléchargeables sans jamais accéder directement à la base de données.
 
-#figure(caption: [Architecture en couches : chaque flèche est une dépendance autorisée.])[
-  #block(width: 9.4cm, inset: 4pt)[
-    #align(center, box(fill: mist, stroke: 0.6pt + brand, radius: 3pt, inset: 6pt)[#text(size: 9pt, font: sans)[Utilisateur]])
-    #down
-    #layer([Présentation], [documentation interactive (Swagger), JSON], col: ocean)
-    #down
-    #layer([Contrôleurs], [routes, validation des entrées, authentification])
-    #down
-    #layer([Services], [logique métier, calcul des indicateurs, droits], col: brand.lighten(15%))
-    #down
-    #grid(columns: (1fr, 1fr), column-gutter: 4pt,
-      layer([Client API], [accès à ILOSTAT], col: ocean.darken(10%), w: 4.4cm),
-      layer([DAO], [accès à la base], col: ocean.darken(10%), w: 4.4cm))
-    #grid(columns: (1fr, 1fr), column-gutter: 4pt, down, down)
-    #grid(columns: (1fr, 1fr), column-gutter: 4pt,
-      align(center, box(width: 4.4cm, stroke: (dash: "dashed", paint: sun, thickness: 1pt), fill: sun.lighten(85%), radius: 3pt, inset: 7pt)[
-        #align(center, text(size: 9pt, font: sans)[API ILOSTAT (OIT)])]),
-      align(center, box(width: 4.4cm, stroke: 1pt + brand, fill: sun.lighten(70%), radius: 8pt, inset: 7pt)[
-        #align(center, text(size: 9pt, font: sans)[PostgreSQL])]))
-  ]
-] <fig-archi>
 Le diagramme de packages #todo[on mettra en annexe] illustre la manière dont les différentes couches de l'application interagissent entre elles. La première couche correspond au frontend, qui permet à l'utilisateur de se connecter, de naviguer dans l'interface et d'afficher les visualisations graphiques. La deuxième couche est l'API (controller et model), qui réceptionne et valide les requêtes de l'utilisateur avant de les transmettre au serveur. La couche de services (#NormalTok("service"); et #NormalTok("business_object");) prend ensuite le relais pour appliquer les règles métier et effectuer les calculs statistiques demandés. Enfin, elle s'appuie sur la couche d'accès aux données (#NormalTok("client"); et #NormalTok("dao");). Les flux externes sont récupérés et normalisés, puis transmis aux DAO afin d'être stockés et interrogés dans la base PostgreSQL avant d'être renvoyés sous forme de résultats JSON au frontend.
 
 == Stack technologique et justification des choix
@@ -930,49 +867,27 @@ white
 <architecture-en-couches>
 LaborScope est organisé selon une architecture en quatre couches, où chaque couche n'appelle que la couche inférieure. Ce découpage garantit que la logique métier reste indépendante du framework web, et que l'accès aux données est encapsulé.
 
-#figure(caption: [Diagramme de classes simplifié : objets métier.])[
-  #align(center)[
-    #grid(columns: (3.7cm, 1.9cm, 3.7cm, 1.9cm, 3.7cm), row-gutter: 14pt,
-      cls([Pays], [code_iso3 : str \ nom : str \ region : str]),
-      link[1 ◄──── \* \ concerne],
-      cls([Observation], [annee : int \ sexe : str \ valeur : float]),
-      link[\* ────► 1 \ mesure],
-      cls([Indicateur], [code : str \ libelle : str \ unite : str]),
-      cls([Administrateur], [gerer_comptes()]),
-      link[──────▷ \ hérite],
-      cls([Utilisateur], [id : int \ email : str \ peut(action) : bool], tag: "abstraite"),
-      link[◁────── \ hérite],
-      cls([UtilisateurInscrit], [favoris : list]))
+#figure(caption: [Architecture en couches : chaque flèche est une dépendance autorisée.])[
+  #block(width: 9.4cm, inset: 4pt)[
+    #align(center, box(fill: mist, stroke: 0.6pt + brand, radius: 3pt, inset: 6pt)[#text(size: 9pt, font: sans)[Utilisateur]])
+    #down
+    #layer([Présentation], [documentation interactive (Swagger), JSON], col: ocean)
+    #down
+    #layer([Contrôleurs], [routes, validation des entrées, authentification])
+    #down
+    #layer([Services], [logique métier, calcul des indicateurs, droits], col: brand.lighten(15%))
+    #down
+    #grid(columns: (1fr, 1fr), column-gutter: 4pt,
+      layer([Client API], [accès à ILOSTAT], col: ocean.darken(10%), w: 4.4cm),
+      layer([DAO], [accès à la base], col: ocean.darken(10%), w: 4.4cm))
+    #grid(columns: (1fr, 1fr), column-gutter: 4pt, down, down)
+    #grid(columns: (1fr, 1fr), column-gutter: 4pt,
+      align(center, box(width: 4.4cm, stroke: (dash: "dashed", paint: sun, thickness: 1pt), fill: sun.lighten(85%), radius: 3pt, inset: 7pt)[
+        #align(center, text(size: 9pt, font: sans)[API ILOSTAT (OIT)])]),
+      align(center, box(width: 4.4cm, stroke: 1pt + brand, fill: sun.lighten(70%), radius: 8pt, inset: 7pt)[
+        #align(center, text(size: 9pt, font: sans)[PostgreSQL])]))
   ]
-]
-#figure(caption: [Services, DAO et client externe (pointillés = dépendances, ▷ = héritage ou réalisation).])[
-  #align(center)[
-    #grid(columns: (3.8cm, 3.8cm, 3.8cm), column-gutter: 8pt, row-gutter: 6pt,
-      cls([AuthService], [inscrire() \ connecter() \ verifier_jeton()], w: 3.8cm),
-      cls([StatistiquesService], [obtenir_statistiques() \ comparer_pays()], w: 3.8cm),
-      align(horizon, text(size: 8pt, fill: ocean)[◄ dépend aussi de \ l'interface SourceDonnees ↓]),
-      link[⇣ utilise], link[⇣ utilise], [],
-      cls([UtilisateurDAO], [trouver_par_email() \ creer()], w: 3.8cm),
-      cls([ObservationDAO], [rechercher() \ enregistrer()], w: 3.8cm),
-      cls([SourceDonnees], [telecharger(filtres)], w: 3.8cm, tag: "interface"),
-      link[▽ hérite de], link[▽ hérite de], link[△ réalise],
-      cls([AbstractDAO], [creer() \ supprimer()], w: 3.8cm, tag: "interface"),
-      [],
-      cls([ILOSTATClient], [telecharger(filtres)], w: 3.8cm))
-  ]
-]
-=== Diagramme de classes : couche objets métiers
-<diagramme-de-classes-couche-objets-métiers>
-#figure(caption: [Diagramme de classes : couche objets métiers.])[
-  #block(width: 100%, height: 7cm, fill: mist, stroke: 0.6pt + muted.lighten(40%), radius: 2pt)[
-    #align(center + horizon, text(size: 9pt, fill: muted, font: sans)[*Diagramme de classes (objets métiers)* — à insérer ici])]
-]
-=== Diagramme de classes : couche services et dépendances
-<diagramme-de-classes-couche-services-et-dépendances>
-#figure(caption: [Diagramme de classes : couche services et dépendances.])[
-  #block(width: 100%, height: 7cm, fill: mist, stroke: 0.6pt + muted.lighten(40%), radius: 2pt)[
-    #align(center + horizon, text(size: 9pt, fill: muted, font: sans)[*Diagramme de classes (services et dépendances)* — à insérer ici])]
-]
+] <fig-archi>
 == Zoom détaillé sur un processus central : la collecte de données (F1)
 <zoom-détaillé-sur-un-processus-central-la-collecte-de-données-f1>
 La collecte est le processus le plus riche de l'application car il traverse toutes les couches et interagit avec trois systèmes externes : l'API ILOSTAT (HTTP), le système de fichiers local (cache CSV) et la base PostgreSQL.
@@ -1008,8 +923,8 @@ Avant l'enregistrement, l'application élimine en mémoire les éventuels doublo
 Quelle que soit l'issue de la collecte, l'application clôture le suivi en mettant à jour la trace d'import avec son statut final (succès ou échec), le nombre de lignes traitées, la date de fin et, le cas échéant, le message d'erreur. Si un incident survient durant l'enregistrement des données, l'opération en cours est immédiatement annulée afin de laisser la base de données dans un état sain, ce qui permet ensuite de consigner l'échec dans l'historique.
 
 #figure(caption: [Diagramme de séquence de la collecte de données.])[
-  #block(width: 100%, height: 9cm, fill: mist, stroke: 0.6pt + muted.lighten(40%), radius: 2pt)[
-    #align(center + horizon, text(size: 9pt, fill: muted, font: sans)[*Diagramme de séquence de la collecte* — à insérer ici])]
+  #align(center, block(width: 100%, stroke: 0.6pt + brand.lighten(55%), radius: 3pt, clip: true, inset: 0pt, fill: white)[
+    #image("images/diagramme_sequence_collecte.png", width: 100%)])
 ]
 === Points clés de conception dans ce processus
 <points-clés-de-conception-dans-ce-processus>
@@ -1303,7 +1218,7 @@ white
 <méthode-de-travail>
 Dès la phase de conception, notre équipe, composée de cinq étudiants, a défini des périmètres de responsabilité stricts, qui ont été respectés tout au long du développement afin de faciliter des méthodes de travail communes (Chef de projet / Qualité, Data Engineer, BDD / DAO, Backend / API, et Frontend / DataViz).
 
-Plutôt que de diviser le travail par fonctionnalité où un membre développe une feature de bout en bout, nous avons opté pour une répartition du travail par couche technique. Chaque membre est ainsi devenu garant de la solidité et de la logique de son propre composant. Si ce choix a permis à chacun de monter rapidement en compétence sur sa technologie (PostgreSQL, FastAPI, Streamlit), il a également exigé une communication et une rigueur en matière d'organisation : les formats de données et les interfaces entre la DAO, les Services et l'API devaient être parfaitement définis en amont pour que les couches s'emboîtent sans erreur.
+Plutôt que de diviser le travail par fonctionnalité où un membre développe une feature de bout en bout, nous avons opté pour une répartition du travail par couche technique. Chaque membre est ainsi devenu garant de la solidité et de la logique de son propre composant. Si ce choix a permis à chacun de monter rapidement en compétence sur sa technologie (PostgreSQL, FastAPI, Streamlit), il a également exigé une communication et une rigueur en matière d'organisation, les formats de données et les interfaces entre la DAO, les Services et l'API devaient être parfaitement définis en amont pour que les couches s'emboîtent sans erreur.
 
 === Planification
 <planification>
@@ -1335,10 +1250,6 @@ Cependant, ces décalages ont été totalement maîtrisés et résorbés grâce 
 <outils-de-communication-et-de-suivi>
 Travailler à cinq sur une architecture découpée en couches techniques nécessitait une bonne synchronisation. Nous avons utilisé WhatsApp pour les échanges rapides au quotidien et Notion pour le suivi de l'avancement des tâches.
 
-#figure(caption: [Suivi des tâches sur Notion.])[
-  #block(width: 100%, height: 5.5cm, fill: mist, stroke: 0.6pt + muted.lighten(40%), radius: 2pt)[
-    #align(center + horizon, text(size: 9pt, fill: muted, font: sans)[*Capture d'écran* du tableau Notion — à insérer ici])]
-]
 === Gestion du code avec GitHub
 <gestion-du-code-avec-github>
 Pour la gestion du code, l'utilisation de GitHub était indispensable. Chacun développait ses composants sur des branches séparées. Une fois qu'un palier d'avancement était atteint, nous ne fusionnions pas le code de manière isolée. Nous organisions des réunions lors desquelles le responsable qualité effectuait une revue du code de chacun pour repérer d'éventuels problèmes ou conflits d'intégration. Ce n'est qu'après cette validation que le travail était fusionné sur la branche principale. Ce n'est qu'à l'issue de chaque fusion que l'ensemble de l'équipe mettait à jour son environnement local à partir de cette nouvelle branche principale pour poursuivre le développement sur une base commune.
@@ -1354,50 +1265,7 @@ Puisque plusieurs membres intervenaient sur la même base de code, il a fallu fi
 <démarche-dassurance-qualité-performances-et-robustesse>
 === Stratégie de tests
 <stratégie-de-tests>
-Afin de garantir la stabilité de l'application, nous avons mis en place une suite de tests unitaires avec le framework pytest, couvrant les trois couches du back-end. Nous avons ainsi testé la construction des requêtes SQL au niveau des DAO, la logique de nettoyage et de gestion des erreurs des services métiers, ainsi que les codes de retour HTTP des contrôleurs de l'API. Pour garantir des tests rapides sans risquer de polluer notre base de données locale, nous avons isolé notre code grâce à l'utilisation de mocks via la bibliothèque #NormalTok("unittest.mock");. Cela consiste concrètement à simuler la base de données pour vérifier les requêtes des DAO sans les exécuter, et nous simulons le client HTTP pour tester les services sans déclencher de vrais téléchargements. Cette méthode permet de réduire le temps d'exécution des tests ainsi que de tester des cas aux limites difficiles à reproduire manuellement, comme une perte de connexion réseau ou la réception d'un fichier corrompu.
-
-=== Gestion des temps de traitement longs
-<gestion-des-temps-de-traitement-longs>
-Pour éviter les problèmes de performances liés à l'extraction et l'insertion de millions de lignes via l'API ILOSTAT nous avons fait en sorte que le script vérifie les fichiers déjà présents sur la base de données locale pour ne télécharger que les données manquantes, ce qui réduit considérablement le temps d'exécution. En ce qui concerne la base de données, une insertion ligne par ligne des observations aurait été beaucoup trop lourde. Nous avons donc utilisé une fonction qui permet de faire des insertions en lot avec une seule requête, tout en traitant également les doublons.
-
-=== Résilience face au changement de source de données
-<résilience-face-au-changement-de-source-de-données>
-Si l'API ILOSTAT venait à fermer demain ou devait être remplacée, nous avons fait en sorte que l'impact sur notre code serait le plus minime possible. Cela est rendu possible par notre découpage en couches et la séparation des responsabilités. Dans notre architecture, l'intégralité du programme, que ce soit la base de données, l'API ou encore les contrôleurs ignorent l'existence d'ILOSTAT. Le traitement de cette source est centralisé dans deux scripts : le script #NormalTok("ilostat_client.py"); gère l'URL et les requêtes, tandis que #NormalTok("parser_service.py"); adapte les données brutes d'ILOSTAT et les transforment en nos objets Python génériques. En cas de changement de source des données, il suffirait de créer un nouveau fichier client et d'ajuster le dictionnaire de renommage. Ainsi, les tables PostgreSQL, les objets métiers et le reste de l'application n'auraient besoin d'aucune modification.
-
-=== Planification
-<planification-1>
-#let phases = (
-  ([Cadrage], 1, 2), ([Conception], 2, 4), ([Socle (F1 à F6)], 4, 9),
-  ([Fonctions optionnelles], 9, 11), ([Tests et qualité], 8, 13), ([Rapport], 11, 14))
-#figure(kind: image, supplement: [Figure], caption: [Planification du projet.])[
-  #table(columns: (3.6cm,) + (1fr,) * 14, align: center + horizon,
-    inset: (x: 2pt, y: 4pt),
-    stroke: (x, y) => (bottom: 0.3pt + muted.lighten(50%)),
-    table.cell(fill: none)[],
-    ..range(1, 15).map(w => table.cell(fill: brand)[#text(size: 6.5pt, fill: white)[#w]]),
-    ..phases.map(p => (
-      table.cell(align: left)[#text(size: 8pt, font: sans)[#p.at(0)]],
-      ..range(1, 15).map(w => table.cell(fill: if w >= p.at(1) and w <= p.at(2) { ocean } else { none })[]))).flatten(),
-    table.cell(align: left)[#text(size: 8pt, font: sans, weight: "bold")[Soutenance]],
-    ..range(1, 14).map(w => []),
-    table.cell(fill: sun)[])
-]
-#todo[On doit remplacer par le planning réel et commenter les écarts entre prévisionnel et réalité]
-
-== Outils collaboratifs et normes de développement
-<outils-collaboratifs-et-normes-de-développement-1>
-- #strong[Environnement] : Git et GitHub (versionnage, revue de code), IDE de l'équipe, DBeaver pour explorer la base. #todo[Ajuster]
-- #strong[Communication] : messagerie instantanée et réunions hebdomadaires. #todo[à ajuster]
-- #strong[Rédaction] : Quarto, pour un rapport reproductible.
-- #strong[Normes de codage] : conventions de nommage #strong[PEP 8], #strong[typage statique] systématique, #strong[docstrings] sur les classes et méthodes publiques.
-
-== Démarche d'assurance qualité, performances et robustesse
-<démarche-dassurance-qualité-performances-et-robustesse-1>
-=== Stratégie de tests
-<stratégie-de-tests-1>
-Les DAO et les services sont testés isolément. Les tests de la couche DAO s'exécutent sur un #strong[schéma de base dédié], recréé avant et nettoyé après chaque test, de sorte qu'ils n'altèrent jamais les données réelles. L'API ILOSTAT est #strong[simulée] (#emph[mocking]) : les tests sont rapides, reproductibles et indépendants du réseau. Chaque test suit le canevas #emph[given / when / then].
-
-\`\`\`
+Afin de garantir la stabilité de l'application, nous avons mis en place une suite de tests unitaires avec le framework pytest, couvrant les trois couches du back-end. Nous avons ainsi testé la construction des requêtes SQL au niveau des DAO, la logique de nettoyage et de gestion des erreurs des services métiers, ainsi que les codes de retour HTTP des contrôleurs de l'API. Pour garantir des tests rapides sans risquer de polluer notre base de données locale, nous avons isolé notre code grâce à l'utilisation de mocks via la bibliothèque #NormalTok("unittest.mock");. Cela consiste concrètement à simuler la base de données pour vérifier les requêtes des DAO sans les exécuter, et nous simulons le client HTTP pour tester les services sans déclencher de vrais téléchargements. Cette méthode permet de réduire le temps d'exécution des tests ainsi que de tester des cas aux limites difficiles à reproduire manuellement, comme une perte de connexion réseau ou la réception d'un fichier corrompu. Chaque test suit le canevas #emph[given / when / then].
 
 #table(
   columns: 3,
@@ -1410,16 +1278,12 @@ Les DAO et les services sont testés isolément. Les tests de la couche DAO s'ex
   [#strong[Total]], [#todo[XX %]], [],
 )
 === Gestion des temps de traitement longs
-<gestion-des-temps-de-traitement-longs-1>
-Les principales lenteurs venaient de l'API distante et des requêtes volumineuses. Nous les avons réduites par trois leviers : mise en cache en base, pagination des résultats et requêtes ciblées sur les seuls indicateurs demandés. #todo[On doit citer des mesures avant/après si possible]
+<gestion-des-temps-de-traitement-longs>
+Pour éviter les problèmes de performances liés à l'extraction et l'insertion de millions de lignes via l'API ILOSTAT nous avons fait en sorte que le script vérifie les fichiers déjà présents sur la base de données locale pour ne télécharger que les données manquantes, ce qui réduit considérablement le temps d'exécution. En ce qui concerne la base de données, une insertion ligne par ligne des observations aurait été beaucoup trop lourde. Nous avons donc utilisé une fonction qui permet de faire des insertions en lot avec une seule requête, tout en traitant également les doublons.
 
 === Résilience face au changement de source de données
-<résilience-face-au-changement-de-source-de-données-1>
-Si ILOSTAT venait à disparaître ou à changer de format, seul le #strong[client] qui implémente l'interface #NormalTok("SourceDonnees"); devrait être réécrit. Services, contrôleurs et base resteraient intacts, c'est l'intérêt direct du découpage en couches.
-
-=== Évolutivité et fonctionnalités écartées
-<évolutivité-et-fonctionnalités-écartées>
-#todo[Listons ici les fonctionnalités mises de côté et expliquons, pour chacune, où elle s'insérerait, nouvelle route, nouveau service, nouvelle DAO]
+<résilience-face-au-changement-de-source-de-données>
+Si l'API ILOSTAT venait à fermer demain ou devait être remplacée, nous avons fait en sorte que l'impact sur notre code serait le plus minime possible. Cela est rendu possible par notre découpage en couches et la séparation des responsabilités. Dans notre architecture, l'intégralité du programme, que ce soit la base de données, l'API ou encore les contrôleurs ignorent l'existence d'ILOSTAT. Le traitement de cette source est centralisé dans deux scripts : le script #NormalTok("ilostat_client.py"); gère l'URL et les requêtes, tandis que #NormalTok("parser_service.py"); adapte les données brutes d'ILOSTAT et les transforment en nos objets Python génériques. En cas de changement de source des données, il suffirait de créer un nouveau fichier client et d'ajuster le dictionnaire de renommage. Ainsi, les tables PostgreSQL, les objets métiers et le reste de l'application n'auraient besoin d'aucune modification.
 
 #block[
 #callout(
