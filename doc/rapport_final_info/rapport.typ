@@ -773,9 +773,9 @@ $ upright("Part des femmes") = upright("Emploi des femmes") / upright("Emploi to
   align: (left,left,left,),
   table.header([Indicateur], [Interprétation], [Intervalle],),
   table.hline(),
-  [Taux d'emploi], [Part de la population en âge de travailler qui occupe un emploi], [$\[ 0 thin \; 100 \]$],
-  [Part des femmes], [Féminisation d'une profession (50 = parité)], [$\[ 0 thin \; 100 \]$],
-  [Variation annuelle], [Évolution relative d'un indicateur d'une année à l'autre], [$\] - 100 thin \; + oo \[$],
+  [Taux d'emploi], [Part de la population en âge de travailler qui occupe un emploi], [$\[0 thin\;100\]$],
+  [Part des femmes], [Féminisation d'une profession (50 = parité)], [$\[0 thin\;100\]$],
+  [Variation annuelle], [Évolution relative d'un indicateur d'une année à l'autre], [$\]- 100 thin\;+ oo\[$],
 )
 === Difficultés liées aux données
 <difficultés-liées-aux-données>
@@ -996,7 +996,7 @@ Dès le lancement de la collecte, l'application enregistre immédiatement une tr
 Plutôt que de télécharger systématiquement l'intégralité de la période demandée, l'application commence par vérifier les fichiers déjà archivés localement pour l'indicateur concerné. En identifiant les années déjà couvertes, elle isole uniquement les périodes manquantes et les regroupe par plages consécutives afin de limiter le nombre de requêtes envoyées à l'API d'ILOSTAT. Chaque fichier récupéré est d'abord écrit de façon temporaire avant d'être validé définitivement, ce qui évite de conserver un fichier corrompu en cas de coupure. L'ensemble des fichiers de la période est ensuite rassemblé en mémoire en éliminant les lignes en double. Grâce à ce mécanisme de cache, seul le premier import nécessite de télécharger tout l'historique tandis que les mises à jour suivantes ne récupèrent que les nouvelles données manquantes.
 
 #etape[Étape 3 — Parsing]
-Une fois le fichier CSV consolidé, l'application en analyse le contenu ligne par ligne pour le transformer en données exploitables. Pour chaque enregistrement, elle extrait les informations essentielles, c'est-à-dire l'indicateur, le code pays, la période (année ou trimestre) et la valeur numérique,tout en identifiant le sexe (homme, femme ou total) ainsi que la classification éventuelle (tranche d'âge ou profession). Les valeurs non numériques, notamment les données manquantes codées « ... » par ILOSTAT, sont quant à elles détectées et traitées comme des valeurs vides afin de ne pas fausser les analyses.
+Une fois le fichier CSV consolidé, l'application en analyse le contenu ligne par ligne pour le transformer en données exploitables. Pour chaque enregistrement, elle extrait les informations essentielles, c'est-à-dire l'indicateur, le code pays, la période (année ou trimestre) et la valeur numérique,tout en identifiant le sexe (homme, femme ou total) ainsi que la classification éventuelle (tranche d'âge ou profession). Les valeurs non numériques, notamment les données manquantes codées « \... » par ILOSTAT, sont quant à elles détectées et traitées comme des valeurs vides afin de ne pas fausser les analyses.
 
 #etape[Étape 4 — Filtrage par référentiels connus]
 Avant d'enregistrer les données, l'application vérifie leur cohérence en écartant toutes les observations rattachées à un pays ou à une classification absents de nos référentiels locaux. ILOSTAT renvoie en effet parfois des zones géographiques ou des codes inconnus qui, sans ce filtrage préalable, seraient rejetés par la base de données pour préserver l'intégrité des informations.
@@ -1098,7 +1098,7 @@ Comme la majorité des pays, le Luxembourg a connu une baisse du taux d'emploi a
 Marie passe en mode « Comparaison pays » et sélectionne le Luxembourg, la France, le Royaume-Uni et l'Italie. Elle décide de comparer les taux d'emploi entre les pays :
 
 #capture("images/capture_comparaison_pays.png", [Comparaison du taux d'emploi entre les quatre pays.])
-La plupart des pays ont connu une baisse ou une stagnation du taux d'emploi de 2019 à 2021. Cependant le Luxembourg voit une nette augmentation de 2020 à 2021. Marie souhaite illustrer cette nette différence en passant sur le mode “Variations” :
+La plupart des pays ont connu une baisse ou une stagnation du taux d'emploi de 2019 à 2021. Cependant le Luxembourg voit une nette augmentation de 2020 à 2021. Marie souhaite illustrer cette nette différence en passant sur le mode "Variations" :
 
 #capture("images/capture_variations_pays.png", [Variations annuelles du taux d'emploi par pays.])
 La différence est claire, une augmentation de 2% sur une année, la plus haute variation parmi les pays cités. Marie peut désormais retranscrire ses informations dans son rapport.
@@ -1249,9 +1249,9 @@ Le modèle physique de données traduit le diagramme de classes en schéma relat
 ]
 === Justification des choix de modélisation
 <justification-des-choix-de-modélisation>
-Le modèle physique de LaborScope repose sur une table centrale “observation” qui joue le rôle de table d'association : elle relie simultanément “Indicateur”, “Pays”, “Sexe” et la classification (“Age” ou “Occupation”). Cette approche évite de créer des tables de jointure séparées pour chaque relation NàN, car une observation est portée par cette table uniquement. Par exemple, l'observation du taux d'emploi des femmes de 25-34 ans en France en 2023 se retrouve dans une seule ligne qui référence à la fois l'indicateur, le pays, le sexe et la classification d'âge, sans duplication des attributs de ces entités dans d'autres tables.
+Le modèle physique de LaborScope repose sur une table centrale "observation" qui joue le rôle de table d'association : elle relie simultanément "Indicateur", "Pays", "Sexe" et la classification ("Age" ou "Occupation"). Cette approche évite de créer des tables de jointure séparées pour chaque relation NàN, car une observation est portée par cette table uniquement. Par exemple, l'observation du taux d'emploi des femmes de 25-34 ans en France en 2023 se retrouve dans une seule ligne qui référence à la fois l'indicateur, le pays, le sexe et la classification d'âge, sans duplication des attributs de ces entités dans d'autres tables.
 
-Les contraintes SQL mises en place garantissent la cohérence des données sans surcharger le modèle. Les clés étrangères assurent qu'une “observation” ne peut exister que si l'indicateur, le pays et, lorsqu'ils sont renseignés, le sexe et la classification qu'elle cite sont effectivement présents dans leurs tables respectives. Les contraintes #NormalTok("CHECK"); bornent les valeurs possibles à un ensemble connu (par exemple, le #NormalTok("statut"); d'un import est limité à #NormalTok("'en_cours'");, #NormalTok("'succes'"); ou #NormalTok("'echec'");), ce qui élimine les données incohérentes. Enfin, la contrainte d'unicité #NormalTok("(code_indicateur, code_pays, periode, code_sexe, code_age, code_occupation)"); sur #NormalTok("observation"); garantit qu'une même mesure n'est jamais enregistrée deux fois.
+Les contraintes SQL mises en place garantissent la cohérence des données sans surcharger le modèle. Les clés étrangères assurent qu'une "observation" ne peut exister que si l'indicateur, le pays et, lorsqu'ils sont renseignés, le sexe et la classification qu'elle cite sont effectivement présents dans leurs tables respectives. Les contraintes #NormalTok("CHECK"); bornent les valeurs possibles à un ensemble connu (par exemple, le #NormalTok("statut"); d'un import est limité à #NormalTok("'en_cours'");, #NormalTok("'succes'"); ou #NormalTok("'echec'");), ce qui élimine les données incohérentes. Enfin, la contrainte d'unicité #NormalTok("(code_indicateur, code_pays, periode, code_sexe, code_age, code_occupation)"); sur #NormalTok("observation"); garantit qu'une même mesure n'est jamais enregistrée deux fois.
 
 == Stockage des données
 <stockage-des-données>
