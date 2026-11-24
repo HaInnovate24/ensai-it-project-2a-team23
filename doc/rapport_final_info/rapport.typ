@@ -111,6 +111,7 @@
           subfloat-numbering(n-super, subfloat-idx)
         })
         show figure.where(kind: kind): set figure.caption(position: position)
+        show figure.where(kind: kind): set figure(outlined: false)
 
         show figure: it => {
           let num = numbering(subcapnumbering, n-super, quartosubfloatcounter.get().first() + 1)
@@ -289,6 +290,10 @@
   toc_title: none,
   toc_depth: none,
   toc_indent: 1.5em,
+  lof: false,
+  lof-title: none,
+  lot: false,
+  lot-title: none,
   doc,
 ) = {
   // Set document metadata for PDF accessibility
@@ -386,10 +391,22 @@
     }
     block(above: 0em, below: 2em)[
     #outline(
-      title: toc_title,
+      title: title,
       depth: toc_depth,
       indent: toc_indent
     );
+    ]
+  }
+
+  if lof {
+    block(above: 0em, below: 2em)[
+    #outline(title: lof-title, target: figure.where(kind: "quarto-float-fig"));
+    ]
+  }
+
+  if lot {
+    block(above: 0em, below: 2em)[
+    #outline(title: lot-title, target: figure.where(kind: "quarto-float-tbl"));
     ]
   }
 
@@ -614,7 +631,7 @@ Dans la continuité des enjeux soulevés en introduction, LaborScope a été pen
 - #strong[Filtrage et consultation (F2)] : L'utilisateur peut explorer les données de la base en appliquant divers filtres d'analyse (pays, sexe, tranche d'âge, profession).
 - #strong[Analyse temporelle (F3)] : À partir d'un indicateur et d'une fenêtre de temps définis par l'utilisateur, l'API calcule l'évolution de la métrique et le frontend l'affiche sous forme de graphique pour observer les dynamiques du marché.
 - #strong[Comparaison entre pays (F4)] : Sur la période la plus récente disponible en base, l'application permet de comparer un même indicateur sur une sélection de pays. Les valeurs extrêmes (les plus hautes et les plus basses) sont mises en évidence sur l'interface.
-- #strong[Croisement d'indicateurs (F5)] : L'outil permet de superposer plusieurs indicateurs sur un même graphique et une même échelle de temps, facilitant ainsi l'identification visuelle de potentielles corrélations.
+- #strong[Croisement d'indicateurs (F5)] : L'outil permet de superposer plusieurs indicateurs sur un même graphique et une même échelle de temps, facilitant ainsi l'identification de potentielles corrélations.
 - #strong[Authentification et gestion des droits (F6)] : L'accès est sécurisé par mot de passe avec deux profils d'utilisateurs. Les profils standards disposent d'un accès en consultation, tandis que les administrateurs ont les droits de gestion sur les données stockées. Toute modification en base est par ailleurs tracée dans un journal de suivi des activités (logs).
 
 === Fonctionnalités additionnelles
@@ -627,15 +644,14 @@ Dans la continuité des enjeux soulevés en introduction, LaborScope a été pen
   align: (left,left,left,),
   table.header([Réf.], [Fonctionnalité], [Nature],),
   table.hline(),
-  [$F_1$], [Consulter l'emploi selon le sexe et la profession], [Obligatoire],
+  [$F_1$], [Automatiser le flux de données (F1)], [Obligatoire],
   [$F_2$], [Consulter la population en âge de travailler selon le sexe et l'âge], [Obligatoire],
-  [$F_3$], [Comparer plusieurs pays sur un même indicateur], [Obligatoire],
-  [$F_4$], [Suivre l'évolution d'un indicateur dans le temps], [Obligatoire],
-  [$F_5$], [Créer un compte, se connecter, se déconnecter], [Obligatoire],
+  [$F_3$], [Suivre l'évolution d'un indicateur dans le temps], [Obligatoire],
+  [$F_4$], [Comparer plusieurs pays sur un même indicateur], [Obligatoire],
+  [$F_5$], [Comparer plusieurs indicateurs], [Obligatoire],
   [$F_6$], [Gérer des niveaux d'accès], [Obligatoire],
   [$F O_1$], [Cartographie interactive], [Optionnelle],
   [$F O_2$], [Génération automatique de rapports], [Optionnelle],
-  [$F O_3$], [Favoris], [Optionnelle],
 )
 == Profils des utilisateurs
 <profils-des-utilisateurs>
@@ -712,11 +728,34 @@ La donnée issue d'ILOSTAT, bien qu'officielle, présente de nombreuses irrégul
 - Parfois, les données reçues contiennent des statistiques liées à des #strong[régions ou des classements que nous ne gérons pas]. Pour éviter que ces anomalies ne bloquent le système, notre outil les détecte et les écarte d'office.
 - Pour pallier les éventuelles redondances lors du téléchargement, les données sont d'abord #strong[filtrées en mémoire] pour ne conserver que la valeur la plus récente. Lors de l'enregistrement final, une règle de mise à jour spécifique garantit qu'une nouvelle collecte actualise proprement les données existantes sans jamais créer de doublons.
 
-#synthese(1)[LaborScope simplifie l'accès aux statistiques de l'OIT pour trois profils d'utilisateurs, avec des données harmonisées et des indicateurs comparables d'un pays à l'autre.]
+#block[
+#callout(
+body: 
+[
+LaborScope simplifie l'accès aux statistiques de l'OIT pour trois profils d'utilisateurs, avec des données harmonisées et des indicateurs comparables d'un pays à l'autre.
+
+]
+, 
+title: 
+[
+Synthèse du chapitre 1
+]
+, 
+background_color: 
+rgb("#dae6fb")
+, 
+icon_color: 
+rgb("#0758E5")
+, 
+icon: 
+none
+, 
+body_background_color: 
+white
+)
+]
 = Architecture générale et choix technologiques
 <architecture-générale-et-choix-technologiques>
-== Nature de l'application et découpage en couches
-<nature-de-lapplication-et-découpage-en-couches>
 == Structure de l'application
 <structure-de-lapplication>
 LaborScope repose sur une architecture client-serveur découplée, articulée autour de deux applications communiquant exclusivement par requêtes HTTP au format JSON. Le backend (API REST FastAPI) centralise la logique métier, les calculs d'indicateurs, le contrôle des droits d'accès, les requêtes vers PostgreSQL ainsi que la collecte et le nettoyage des flux externes ILOSTAT. Le frontend (application web Streamlit) constitue l'interface utilisateur, gère la navigation et la session, produit les visualisations interactives et assemble les rapports PDF téléchargeables sans jamais accéder directement à la base de données.
@@ -841,7 +880,7 @@ La collecte est le processus le plus riche de l'application car il traverse tout
 L'administrateur clique sur un bouton « Importer les données » dans l'interface. Il peut choisir :
 
 - l'indicateur à collecter (ou tous les indicateurs actifs du référentiel) \;
-- la période de temps (par défaut 2014--2026).
+- la période de temps (par défaut 2014-2026).
 
 === Ce que fait l'application étape par étape
 <ce-que-fait-lapplication-étape-par-étape>
@@ -880,9 +919,13 @@ Le processus d'import est conçu pour être idempotent c'est-à-dire que relance
 <f2---filtrage-et-consultation>
 La consultation des données repose sur un mécanisme de recherche qui s'adapte aux critères sélectionnés par l'utilisateur (pays, indicateur, période, etc.). Afin de garantir la sécurité de la base de données et de prévenir tout risque d'injection SQL, seuls les critères de filtrage explicitement autorisés sont acceptés, toute demande non reconnue étant immédiatement rejetée. De plus, les valeurs recherchées sont transmises de manière sécurisée et isolée, sans jamais être insérées directement dans le texte des requêtes envoyées à la base.
 
+=== F3 - Analyse temporelle
+<f3---analyse-temporelle>
+L'analyse temporelle permet d'observer l'évolution d'un indicateur au fil des années pour un pays ou un ensemble de pays donné. L'utilisateur sélectionne l'indicateur, le pays et la période qui l'intéressent, et le système lui présente la série de valeurs collectées, année après année. On peut également visualiser l'évolution du taux d'emploi et la variation de celui-ci aux cours des années.
+
 === F4 - Comparaison entre pays
 <f4---comparaison-entre-pays>
-La comparaison entre pays s'appuie sur la même logique de récupération des données que la fonctionnalité F3, mais est adaptée à une vue d'ensemble : plutôt que d'extraire tout l'historique d'un pays, le système ne récupère que la donnée la plus récente pour chacun des pays sélectionnés. Les résultats sont classés par ordre décroissant, ce qui permet à l'interface de mettre en évidence les valeurs extrêmes sans nécessiter de traitement supplémentaire lors de l'affichage. Ainsi, le pays le plus élevé figure en tête et le plus bas en fin de liste.
+La comparaison entre pays s'appuie sur la même logique de récupération des données que la fonctionnalité F3, mais est adaptée à une vue d'ensemble : plutôt que d'extraire tout l'historique d'un pays, le système ne récupère que la donnée la plus récente pour chacun des pays sélectionnés. Les résultats sont classés par ordre décroissant, ce qui permet à l'interface de mettre en évidence les valeurs extrêmes sans nécessiter de traitement supplémentaire lors de l'affichage. Ainsi, le pays le plus élevé figure en tête et le plus bas en fin de liste. L'utilisateur peut également comparer le taux d'emploi et sa variation au cours du temps, entre les pays.
 
 === F5 - Croisement d'indicateurs
 <f5---croisement-dindicateurs>
@@ -1081,7 +1124,7 @@ Le modèle physique de données traduit le diagramme de classes en schéma relat
     #mpd-table("Import_donnees", brand, 10.8cm, 2.4cm, 4.6cm, (
       ("id", "serial", "PK"), ("indicateur_code", "varchar(50)", "FK"), ("utilisateur_id", "integer", "FK"),
       ("date_debut", "timestamp", ""), ("date_fin", "timestamp", ""), ("statut", "varchar(20)", ""),
-      ("nombre_lignes", "integer", ""), ("fichier_source", "varchar(255)", ""), ("message_erreur", "text", ""), ("date_import", "timestamp", "")))
+      ("nombre_lignes", "integer", ""), ("fichier_source", "varchar(255)", ""), ("message_erreur", "text", "")))
     // --- comptes et traçabilité ---
     #mpd-table("Utilisateur", sun.darken(20%), 5.4cm, 9.7cm, 4.6cm, (
       ("id", "serial", "PK"), ("nom_utilisateur", "varchar(50)", "UK"), ("mot_de_passe_hash", "varchar(256)", ""),
