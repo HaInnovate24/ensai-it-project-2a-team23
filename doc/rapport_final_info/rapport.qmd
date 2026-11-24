@@ -792,15 +792,14 @@ Le modèle physique de données traduit le diagramme de classes en schéma relat
     #mpd-table("Observation", brand, 5.4cm, 3.7cm, 4.6cm, (
       ("id", "bigserial", "PK"), ("code_indicateur", "varchar(50)", "FK"), ("code_pays", "varchar(10)", "FK"),
       ("periode", "varchar(20)", ""), ("valeur", "numeric", ""), ("sexe", "varchar(10)", ""),
-      ("code_classification", "varchar(50)", "FK"), ("import_id", "integer", "FK"),
-      ("source", "varchar(100)", ""), ("date_import", "timestamp", "")))
+      ("code_classification", "varchar(50)", "FK"), ("import_id", "integer", "FK")))
     #mpd-table("Import_donnees", brand, 10.8cm, 2.4cm, 4.6cm, (
       ("id", "serial", "PK"), ("indicateur_code", "varchar(50)", "FK"), ("utilisateur_id", "integer", "FK"),
       ("date_debut", "timestamp", ""), ("date_fin", "timestamp", ""), ("statut", "varchar(20)", ""),
-      ("nombre_lignes", "integer", ""), ("fichier_source", "varchar(255)", ""), ("message_erreur", "text", "")))
+      ("nombre_lignes", "integer", ""), ("fichier_source", "varchar(255)", ""), ("message_erreur", "text", ""), ("date_import", "timestamp", "")))
     // --- comptes et traçabilité ---
     #mpd-table("Utilisateur", sun.darken(20%), 5.4cm, 9.7cm, 4.6cm, (
-      ("id", "serial", "PK"), ("nom_utilisateur", "varchar(50)", "UQ"), ("mot_de_passe_hash", "varchar(256)", ""),
+      ("id", "serial", "PK"), ("nom_utilisateur", "varchar(50)", "UK"), ("mot_de_passe_hash", "varchar(256)", ""),
       ("role", "varchar(20)", ""), ("actif", "boolean", ""), ("date_creation", "timestamp", ""), ("derniere_connexion", "timestamp", "")))
     #mpd-table("Journal_activite", sun.darken(20%), 0cm, 9.31cm, 4.6cm, (
       ("id", "bigserial", "PK"), ("utilisateur_id", "integer", "FK"), ("action", "varchar(100)", ""),
@@ -818,7 +817,7 @@ Le modèle physique de données traduit le diagramme de classes en schéma relat
       #box(width: 7pt, height: 7pt, fill: sun.darken(20%), radius: 1pt, baseline: 1pt) #h(3pt) Comptes et traçabilité \
       #v(2pt)
       #text(fill: sun.darken(25%), weight: "bold")[PK] clé primaire · #text(fill: ocean, weight: "bold")[FK] clé étrangère \
-      #text(fill: brand, weight: "bold")[UQ] unique])
+      #text(fill: brand, weight: "bold")[UK] unique])
   ]
 ]
 ```
@@ -839,11 +838,11 @@ Le système met en place un mécanisme pour éviter de sur-solliciter l’ILOSTA
 
 Notre schéma a été conçu en respectant les trois premières formes normales. Ci-dessous, chaque forme est illustrée par un exemple concret tiré de notre modèle.
 
-- **1FN (atomicité)** : La table observation respecte la première forme normale, elle possède une clé primaire id (`BIGSERIAL`), chaque cellule ne contient qu'une seule valeur atomique et il n'y a pas de groupe répété ni de liste dans un attribut. Par exemple, l'attribut valeur de type NUMERIC(18, 4) stocke un unique chiffre par ligne (ex. 24.5300), et l'attribut `sexe` ne prend qu'une seule valeur parmi `homme`, `femme` ou `total`. Chaque table du schéma suit ce principe : pays a `code_pays` comme clé, indicateur a `code_indicateur`, et aucun attribut ne contient un ensemble de valeurs multiples.
+- **1FN (atomicité)** : La table observation respecte la première forme normale, elle possède une clé primaire id (`BIGSERIAL`), chaque cellule ne contient qu'une seule valeur atomique et il n'y a pas de groupe répété ni de liste dans un attribut. Par exemple, l'attribut valeur de type `NUMERIC` stocke un unique chiffre par ligne (ex. 24.5300), et l'attribut `sexe` ne prend qu'une seule valeur parmi `homme`, `femme` ou `total`. Chaque table du schéma suit ce principe : pays a `code_pays` comme clé, indicateur a `code_indicateur`, et aucun attribut ne contient un ensemble de valeurs multiples.
 
-- **2FN** : Toutes les clés primaires du schéma sont simples (un seul attribut), ce qui fait que la 2FN est formellement respectée puisqu'il n'existe pas de dépendance partielle possible (un attribut non-clé ne peut pas dépendre d'une partie d'une clé composite). Par exemple, dans la table observation, la clé primaire est `id` et tous les autres attributs (`code_indicateur`, `code_pays`, `periode`, `valeur`, etc.) dépendent entièrement de cette clé. Cependant, la table classification présente une différence, les attributs `age_min`, `age_max` et valeur ne sont pas toutes pertinentes pour chaque ligne (si type = `age`, seules `age_min` et `age_max` sont remplies, tandis que si type = `occupation`, seule `valeur` l'est). C'est une dépendance découverte qui, dans un schéma strictement normalisé, justifierait la séparation en deux tables distinctes (`classification_age` et `classification_occupation`).
+- **2FN** : Toutes les clés primaires du schéma sont simples (un seul attribut), ce qui fait que la 2FN est formellement respectée puisqu'il n'existe pas de dépendance partielle possible (un attribut non-clé ne peut pas dépendre d'une partie d'une clé composite). Par exemple, dans la table observation, la clé primaire est `id` et tous les autres attributs (`code_indicateur`, `code_pays`, `periode`, `valeur`, etc.) dépendent entièrement de cette clé. Cependant, la table classification présente une différence : les attributs `age_min`, `age_max` et `valeur` ne sont pas tous pertinents pour chaque ligne (si `type` = `age`, seule `valeur` est nulle ; si `type` = `occupation`, seuls `age_min` et `age_max` sont nuls). C'est un attribut conditionnel qui, permet de séparer la classification pour les deux indicateurs (`occupation` pour emploi par sexe et profession, et `âge` pour population en âge de travailler par sexe et âge). Cette table respecte tout de même la 2FN.
 
-- **3FN** : La 3FN impose qu'aucun attribut non-clé ne dépende d'un autre attribut non-clé (dépendance transitique). La table utilisateur en est un bon exemple de respect, `mot_de_passe_hashè`, `role`, `actif` dépendent tous directement de `id` sans passer par un autre attribut. En revanche, la table observation présente une légère dépendance transitique, les attributs `source` et `date_import` sont redondantes avec les informations déjà présentes dans la table `import_donnees` (accessible via la clé étrangère `import_id`). En effet, import_donnees.fichier_source correspond à observation.source et import_donnees.date_debut à `observation.date_import`. Ce choix constitue une dénormalisation légère assumée pour des raisons de performance (éviter un JOIN supplémentaire lors des requêtes d'analyse) et de pérennité (conserver la trace de la source même si l'import est supprimé).
+- **3FN** : La 3FN impose qu'aucun attribut non-clé ne dépende d'un autre attribut non-clé (dépendance transitique). La table utilisateur en est un bon exemple de respect, `mot_de_passe_hash`, `role`, `actif` dépendent tous directement de `id` sans passer par un autre attribut. Le modèle physique des données respecte donc les 3 formes normales.
 
 
 ::: {.callout-note title="Synthèse du chapitre 4" icon=false}
