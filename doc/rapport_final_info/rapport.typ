@@ -111,7 +111,6 @@
           subfloat-numbering(n-super, subfloat-idx)
         })
         show figure.where(kind: kind): set figure.caption(position: position)
-        show figure.where(kind: kind): set figure(outlined: false)
 
         show figure: it => {
           let num = numbering(subcapnumbering, n-super, quartosubfloatcounter.get().first() + 1)
@@ -290,10 +289,6 @@
   toc_title: none,
   toc_depth: none,
   toc_indent: 1.5em,
-  lof: false,
-  lof-title: none,
-  lot: false,
-  lot-title: none,
   doc,
 ) = {
   // Set document metadata for PDF accessibility
@@ -391,22 +386,10 @@
     }
     block(above: 0em, below: 2em)[
     #outline(
-      title: title,
+      title: toc_title,
       depth: toc_depth,
       indent: toc_indent
     );
-    ]
-  }
-
-  if lof {
-    block(above: 0em, below: 2em)[
-    #outline(title: lof-title, target: figure.where(kind: "quarto-float-fig"));
-    ]
-  }
-
-  if lot {
-    block(above: 0em, below: 2em)[
-    #outline(title: lot-title, target: figure.where(kind: "quarto-float-tbl"));
     ]
   }
 
@@ -1387,11 +1370,11 @@ Ce projet m'a permis de progresser bien plus que je ne l'aurais imaginé, avec u
 
 #heading(level: 2, numbering: none)[Sidy Mohamed Salim Diallo]
 <sidy-mohamed-salim-diallo>
-#strong[Mon rôle et mes réalisations.] #todo[(inspires toi de ce qui est mis en crochet chez Jade…]
+#strong[Mon rôle et mes réalisations.] J'ai été chef d'équipe : coordination du projet, répartition des responsabilités et suivi de l'avancement de chacun. En gardant une vision d'ensemble, j'ai veillé à la cohérence des interfaces entre les couches (base, services, API, frontend) et touché à toutes les parties de l'application : architecture en couches, base de données et DAO, logique métier, sécurité (authentification par jeton et rôles) et lien avec le frontend. J'ai aussi porté l'outillage qui simplifie l'installation et la démonstration : une commande unique de lancement (#NormalTok("make go");), un import de données reproductible et hors ligne, et une suite de tests entièrement simulée (#emph[mocking]) exécutable sans base.
 
-#strong[Mon vécu du travail en groupe.] #todo[…]
+#strong[Mon vécu du travail en groupe.] Diriger une équipe de cinq aux niveaux variés a été l'aspect le plus formateur : répartir les tâches selon les forces de chacun, faire le lien entre les personnes et anticiper les blocages à l'intégration, là où les couches s'emboîtent. Les trois jours d'immersion en présentiel ont été décisifs pour résorber rapidement les points de friction entre l'API, la base et le frontend.
 
-#strong[Enseignements et conseils aux futurs 2A.] #todo[…]
+#strong[Enseignements et conseils aux futurs 2A.] J'ai retenu qu'organiser et suivre le travail d'une équipe compte autant que la technique, et qu'un projet ne vaut que s'il se lance et se teste facilement. Mon conseil : désigner clairement un coordinateur, définir tôt les interfaces entre les couches, versionner proprement et communiquer en continu.
 
 #heading(level: 2, numbering: none)[Alexandre Fratter-Bardy]
 <alexandre-fratter-bardy>
@@ -1423,12 +1406,18 @@ Une des choses fondamentales que je retiens de ce projet est qu'il est toujours 
   #align(center, block(width: 100%, stroke: 0.6pt + brand.lighten(55%), radius: 3pt, clip: true, inset: 0pt, fill: white)[
     #image("images/diagramme_packages.png", width: 100%)])
 ] <fig-packages>
-=== Diagramme de classes (utilisateurs, journal d'activité et rapports)
+=== Diagramme de classes --- domaine de l'emploi
+<diagramme-de-classes-domaine-de-lemploi>
+#figure(caption: [Diagramme de classes : indicateurs, pays, classifications (âge / occupation par héritage), observations et imports, avec constructeurs et associations.])[
+  #align(center, block(width: 100%, stroke: 0.6pt + brand.lighten(55%), radius: 3pt, clip: true, inset: 0pt, fill: white)[
+    #image("images/diag_class_emploi.png", width: 100%)])
+] <fig-classes-emploi>
+=== Diagramme de classes --- utilisateurs, journal d'activité et rapports
 <diagramme-de-classes-utilisateurs-journal-dactivité-et-rapports>
-#figure(caption: [Diagramme de classes : utilisateurs, journal d'activité et rapports.])[
-  #align(center, block(width: 9cm, stroke: 0.6pt + brand.lighten(55%), radius: 3pt, clip: true, inset: 0pt, fill: white)[
-    #image("images/diagramme_classes_utilisateur.png", width: 100%)])
-]
+#figure(caption: [Diagramme de classes : utilisateurs, journal d'activité et rapports, avec constructeurs et associations.])[
+  #align(center, block(width: 100%, stroke: 0.6pt + brand.lighten(55%), radius: 3pt, clip: true, inset: 0pt, fill: white)[
+    #image("images/diag_class_user.png", width: 100%)])
+] <fig-classes-user>
 
 
 

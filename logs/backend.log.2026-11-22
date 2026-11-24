@@ -1,0 +1,458 @@
+22/11/2026 00:01:43 root                      INFO    - --------------------------------------------------
+22/11/2026 00:01:43 root                      INFO    - Starting Webservice                           
+22/11/2026 00:01:43 root                      INFO    - --------------------------------------------------
+22/11/2026 00:01:43 root                      INFO    - Load environment variables: SUCCES
+22/11/2026 00:01:43 root                      INFO    - POSTGRES_HOST=localhost
+22/11/2026 00:01:43 root                      INFO    - POSTGRES_PORT=5432
+22/11/2026 00:01:43 root                      INFO    - POSTGRES_DATABASE=defaultdb
+22/11/2026 00:01:43 root                      INFO    - POSTGRES_USER=user
+22/11/2026 00:01:43 root                      INFO    - POSTGRES_PASSWORD=*******
+22/11/2026 00:01:43 root                      INFO    - POSTGRES_SCHEMA=project
+22/11/2026 00:01:43 root                      INFO    - JWT_SECRET_KEY=*******
+22/11/2026 00:01:43 root                      INFO    - UVICORN_HOST=127.0.0.1
+22/11/2026 00:01:43 root                      INFO    - UVICORN_PORT=5000
+22/11/2026 00:01:43 root                      INFO    - BACKEND_URL=http://localhost:5000
+22/11/2026 00:01:43 root                      INFO    - BACKEND_TIMEOUT=5
+22/11/2026 00:01:43 root                      INFO    - ELO_K_FACTOR=32
+22/11/2026 00:02:12 root                      INFO    - GET / - START
+22/11/2026 00:02:12 root                      INFO    - GET /json/version - START
+22/11/2026 00:02:12 root                      INFO    - GET / - END [Status: 307]
+22/11/2026 00:02:12 root                      INFO    - GET /json/version - END [Status: 404]
+22/11/2026 00:02:12 root                      INFO    - GET /docs - START
+22/11/2026 00:02:12 root                      INFO    - GET /docs - END [Status: 200]
+22/11/2026 00:02:13 root                      INFO    - GET / - START
+22/11/2026 00:02:13 root                      INFO    - GET / - END [Status: 307]
+22/11/2026 00:02:13 root                      INFO    - GET /docs - START
+22/11/2026 00:02:13 root                      INFO    - GET /docs - END [Status: 200]
+22/11/2026 00:02:13 root                      INFO    - GET /openapi.json - START
+22/11/2026 00:02:13 root                      INFO    - GET /openapi.json - END [Status: 200]
+22/11/2026 00:02:14 root                      INFO    - GET /referentiels/indicateurs - START
+22/11/2026 00:02:14 root                      INFO    - GET /referentiels/indicateurs - END [Status: 200]
+22/11/2026 00:02:14 root                      INFO    - GET /referentiels/pays - START
+22/11/2026 00:02:14 root                      INFO    - GET /referentiels/pays - END [Status: 200]
+22/11/2026 00:02:14 root                      INFO    - GET /analyses/evolution - START
+22/11/2026 00:02:14 root                      INFO    - GET /analyses/evolution - END [Status: 404]
+22/11/2026 00:02:14 root                      INFO    - GET /analyses/taux-emploi - START
+22/11/2026 00:02:14 root                      INFO    - GET /analyses/taux-emploi - END [Status: 404]
+22/11/2026 00:02:22 root                      INFO    - GET /referentiels/indicateurs - START
+22/11/2026 00:02:22 root                      INFO    - GET /referentiels/indicateurs - END [Status: 200]
+22/11/2026 00:02:23 root                      INFO    - GET /referentiels/indicateurs - START
+22/11/2026 00:02:23 root                      INFO    - GET /referentiels/indicateurs - END [Status: 200]
+22/11/2026 00:02:23 root                      INFO    - GET /referentiels/pays - START
+22/11/2026 00:02:23 root                      INFO    - GET /referentiels/pays - END [Status: 200]
+22/11/2026 00:02:23 root                      INFO    - GET /analyses/evolution - START
+22/11/2026 00:02:23 root                      INFO    - GET /analyses/evolution - END [Status: 404]
+22/11/2026 00:02:23 root                      INFO    - GET /analyses/taux-emploi - START
+22/11/2026 00:02:23 root                      INFO    - GET /analyses/taux-emploi - END [Status: 404]
+22/11/2026 00:02:31 root                      INFO    - GET /referentiels/indicateurs - START
+22/11/2026 00:02:31 root                      INFO    - GET /referentiels/indicateurs - END [Status: 200]
+22/11/2026 00:02:31 root                      INFO    - GET /referentiels/pays - START
+22/11/2026 00:02:31 root                      INFO    - GET /referentiels/pays - END [Status: 200]
+22/11/2026 00:02:31 root                      INFO    - GET /analyses/evolution - START
+22/11/2026 00:02:31 root                      INFO    - GET /analyses/evolution - END [Status: 404]
+22/11/2026 00:02:31 root                      INFO    - GET /analyses/taux-emploi - START
+22/11/2026 00:02:31 root                      INFO    - GET /analyses/taux-emploi - END [Status: 404]
+22/11/2026 00:02:40 root                      INFO    - GET /referentiels/indicateurs - START
+22/11/2026 00:02:40 root                      INFO    - GET /referentiels/indicateurs - END [Status: 200]
+22/11/2026 00:02:40 root                      INFO    - GET /referentiels/pays - START
+22/11/2026 00:02:40 root                      INFO    - GET /referentiels/pays - END [Status: 200]
+22/11/2026 00:02:40 root                      INFO    - GET /analyses/evolution - START
+22/11/2026 00:02:40 root                      INFO    - GET /analyses/evolution - END [Status: 404]
+22/11/2026 00:02:40 root                      INFO    - GET /analyses/evolution - START
+22/11/2026 00:02:40 root                      INFO    - GET /analyses/evolution - END [Status: 404]
+22/11/2026 00:02:40 root                      INFO    - GET /analyses/taux-emploi - START
+22/11/2026 00:02:40 root                      INFO    - GET /analyses/taux-emploi - END [Status: 404]
+22/11/2026 00:03:11 root                      INFO    - POST /auth/connexion - START
+22/11/2026 00:03:11 root                      INFO    - POST /auth/connexion - END [Status: 401]
+22/11/2026 00:03:13 root                      INFO    - POST /auth/connexion - START
+22/11/2026 00:03:13 root                      INFO    - POST /auth/connexion - END [Status: 401]
+22/11/2026 00:03:21 root                      INFO    - POST /auth/connexion - START
+22/11/2026 00:03:21 root                      INFO    - POST /auth/connexion - END [Status: 401]
+22/11/2026 00:03:48 root                      INFO    - POST /auth/inscription - START
+22/11/2026 00:03:48 root                      INFO    - POST /auth/inscription - END [Status: 200]
+22/11/2026 00:03:56 root                      INFO    - POST /auth/connexion - START
+22/11/2026 00:03:56 root                      INFO    - POST /auth/connexion - END [Status: 200]
+22/11/2026 00:03:57 root                      INFO    - POST /auth/connexion - START
+22/11/2026 00:03:57 root                      INFO    - POST /auth/connexion - END [Status: 200]
+22/11/2026 00:03:57 root                      INFO    - GET /auth/profil - START
+22/11/2026 00:03:57 root                      INFO    - GET /auth/profil - END [Status: 200]
+22/11/2026 00:03:59 root                      INFO    - GET /referentiels/indicateurs - START
+22/11/2026 00:03:59 root                      INFO    - GET /referentiels/indicateurs - END [Status: 200]
+22/11/2026 00:03:59 root                      INFO    - GET /referentiels/pays - START
+22/11/2026 00:03:59 root                      INFO    - GET /referentiels/pays - END [Status: 200]
+22/11/2026 00:03:59 root                      INFO    - GET /analyses/evolution - START
+22/11/2026 00:03:59 root                      INFO    - GET /analyses/evolution - END [Status: 404]
+22/11/2026 00:03:59 root                      INFO    - GET /analyses/evolution - START
+22/11/2026 00:03:59 root                      INFO    - GET /analyses/evolution - END [Status: 404]
+22/11/2026 00:03:59 root                      INFO    - GET /analyses/evolution - START
+22/11/2026 00:03:59 root                      INFO    - GET /analyses/evolution - END [Status: 404]
+22/11/2026 00:03:59 root                      INFO    - GET /analyses/evolution - START
+22/11/2026 00:03:59 root                      INFO    - GET /analyses/evolution - END [Status: 404]
+22/11/2026 00:03:59 root                      INFO    - GET /analyses/evolution - START
+22/11/2026 00:03:59 root                      INFO    - GET /analyses/evolution - END [Status: 404]
+22/11/2026 00:04:03 root                      INFO    - GET /referentiels/indicateurs - START
+22/11/2026 00:04:03 root                      INFO    - GET /referentiels/indicateurs - END [Status: 200]
+22/11/2026 00:04:03 root                      INFO    - GET /referentiels/pays - START
+22/11/2026 00:04:03 root                      INFO    - GET /referentiels/pays - END [Status: 200]
+22/11/2026 00:04:03 root                      INFO    - GET /analyses/evolution - START
+22/11/2026 00:04:03 root                      INFO    - GET /analyses/evolution - END [Status: 404]
+22/11/2026 00:04:03 root                      INFO    - GET /analyses/evolution - START
+22/11/2026 00:04:03 root                      INFO    - GET /analyses/evolution - END [Status: 404]
+22/11/2026 00:04:05 root                      INFO    - GET /referentiels/indicateurs - START
+22/11/2026 00:04:05 root                      INFO    - GET /referentiels/indicateurs - END [Status: 200]
+22/11/2026 00:04:05 root                      INFO    - GET /referentiels/pays - START
+22/11/2026 00:04:05 root                      INFO    - GET /referentiels/pays - END [Status: 200]
+22/11/2026 00:04:05 root                      INFO    - GET /analyses/evolution - START
+22/11/2026 00:04:05 root                      INFO    - GET /analyses/evolution - END [Status: 404]
+22/11/2026 00:04:06 root                      INFO    - GET /referentiels/indicateurs - START
+22/11/2026 00:04:06 root                      INFO    - GET /referentiels/indicateurs - END [Status: 200]
+22/11/2026 00:04:06 root                      INFO    - GET /referentiels/pays - START
+22/11/2026 00:04:06 root                      INFO    - GET /referentiels/pays - END [Status: 200]
+22/11/2026 00:04:06 root                      INFO    - GET /analyses/evolution - START
+22/11/2026 00:04:06 root                      INFO    - GET /analyses/evolution - END [Status: 404]
+22/11/2026 00:04:06 root                      INFO    - GET /analyses/taux-emploi - START
+22/11/2026 00:04:06 root                      INFO    - GET /analyses/taux-emploi - END [Status: 404]
+22/11/2026 00:08:35 root                      INFO    - POST /auth/connexion - START
+22/11/2026 00:08:35 root                      INFO    - POST /auth/connexion - END [Status: 200]
+22/11/2026 00:08:36 root                      INFO    - POST /auth/connexion - START
+22/11/2026 00:08:37 root                      INFO    - POST /auth/connexion - END [Status: 200]
+22/11/2026 00:08:37 root                      INFO    - GET /auth/profil - START
+22/11/2026 00:08:37 root                      INFO    - GET /auth/profil - END [Status: 200]
+22/11/2026 00:08:40 root                      INFO    - GET /referentiels/indicateurs - START
+22/11/2026 00:08:40 root                      INFO    - GET /referentiels/indicateurs - END [Status: 200]
+22/11/2026 00:08:40 root                      INFO    - GET /admin/utilisateurs - START
+22/11/2026 00:08:40 root                      INFO    - GET /admin/utilisateurs - END [Status: 200]
+22/11/2026 00:08:40 root                      INFO    - GET /admin/imports - START
+22/11/2026 00:08:40 root                      INFO    - GET /admin/imports - END [Status: 200]
+22/11/2026 00:08:40 root                      INFO    - GET /journal/ - START
+22/11/2026 00:08:40 root                      INFO    - GET /journal/ - END [Status: 200]
+22/11/2026 00:08:43 root                      INFO    - GET /referentiels/indicateurs - START
+22/11/2026 00:08:43 root                      INFO    - GET /referentiels/indicateurs - END [Status: 200]
+22/11/2026 00:08:43 root                      INFO    - GET /admin/utilisateurs - START
+22/11/2026 00:08:43 root                      INFO    - GET /admin/utilisateurs - END [Status: 200]
+22/11/2026 00:08:43 root                      INFO    - GET /admin/imports - START
+22/11/2026 00:08:43 root                      INFO    - GET /admin/imports - END [Status: 200]
+22/11/2026 00:08:43 root                      INFO    - GET /journal/ - START
+22/11/2026 00:08:43 root                      INFO    - GET /journal/ - END [Status: 200]
+22/11/2026 00:08:45 root                      INFO    - GET /referentiels/indicateurs - START
+22/11/2026 00:08:45 root                      INFO    - GET /referentiels/indicateurs - END [Status: 200]
+22/11/2026 00:08:45 root                      INFO    - GET /admin/utilisateurs - START
+22/11/2026 00:08:45 root                      INFO    - GET /admin/utilisateurs - END [Status: 200]
+22/11/2026 00:08:45 root                      INFO    - GET /admin/imports - START
+22/11/2026 00:08:45 root                      INFO    - GET /admin/imports - END [Status: 200]
+22/11/2026 00:08:45 root                      INFO    - GET /journal/ - START
+22/11/2026 00:08:45 root                      INFO    - GET /journal/ - END [Status: 200]
+22/11/2026 00:08:47 root                      INFO    - GET /referentiels/indicateurs - START
+22/11/2026 00:08:47 root                      INFO    - GET /referentiels/indicateurs - END [Status: 200]
+22/11/2026 00:08:47 root                      INFO    - GET /admin/utilisateurs - START
+22/11/2026 00:08:47 root                      INFO    - GET /admin/utilisateurs - END [Status: 200]
+22/11/2026 00:08:47 root                      INFO    - GET /admin/imports - START
+22/11/2026 00:08:47 root                      INFO    - GET /admin/imports - END [Status: 200]
+22/11/2026 00:08:47 root                      INFO    - GET /journal/ - START
+22/11/2026 00:08:47 root                      INFO    - GET /journal/ - END [Status: 200]
+22/11/2026 00:08:48 root                      INFO    - GET /referentiels/indicateurs - START
+22/11/2026 00:08:48 root                      INFO    - GET /referentiels/indicateurs - END [Status: 200]
+22/11/2026 00:08:48 root                      INFO    - GET /admin/utilisateurs - START
+22/11/2026 00:08:48 root                      INFO    - GET /admin/utilisateurs - END [Status: 200]
+22/11/2026 00:08:48 root                      INFO    - GET /admin/imports - START
+22/11/2026 00:08:48 root                      INFO    - GET /admin/imports - END [Status: 200]
+22/11/2026 00:08:48 root                      INFO    - GET /journal/ - START
+22/11/2026 00:08:48 root                      INFO    - GET /journal/ - END [Status: 200]
+22/11/2026 00:08:49 root                      INFO    - POST /admin/imports/POP_XWAP_SEX_AGE_NB - START
+22/11/2026 00:08:49 service.collecte_service  INFO    - Collecte ILOSTAT : indicateur=POP_XWAP_SEX_AGE_NB, période=2014-2026
+22/11/2026 00:08:49 service.collecte_service  ERROR   - Échec de la collecte de l'indicateur POP_XWAP_SEX_AGE_NB
+Traceback (most recent call last):
+  File "D:\ENSAI\s1\Informatique\Projet informatique\ensai-it-project-2a-team23\backend\src\service\collecte_service.py", line 68, in collecter_indicateur
+    trace = self.import_dao.creer(
+        ImportDonnees(
+    ...<5 lines>...
+        )
+    )
+  File "D:\ENSAI\s1\Informatique\Projet informatique\ensai-it-project-2a-team23\backend\src\dao\import_dao.py", line 23, in creer
+    cursor.execute(
+    ~~~~~~~~~~~~~~^
+        """
+        ^^^
+    ...<14 lines>...
+        ),
+        ^^
+    )
+    ^
+  File "D:\ENSAI\s1\Informatique\Projet informatique\ensai-it-project-2a-team23\backend\.venv\Lib\site-packages\psycopg2\extras.py", line 236, in execute
+    return super().execute(query, vars)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+psycopg2.errors.ForeignKeyViolation: insert or update on table "import_donnees" violates foreign key constraint "import_donnees_indicateur_code_fkey"
+DETAIL:  Key (indicateur_code)=(POP_XWAP_SEX_AGE_NB) is not present in table "indicateur".
+
+22/11/2026 00:08:49 root                      ERROR   - POST /admin/imports/POP_XWAP_SEX_AGE_NB - FAILED [Status: 500] Error: 'NoneType' object has no attribute 'date_fin' and no __dict__ for setting new attributes
+22/11/2026 00:08:51 root                      INFO    - GET /referentiels/indicateurs - START
+22/11/2026 00:08:51 root                      INFO    - GET /referentiels/indicateurs - END [Status: 200]
+22/11/2026 00:08:51 root                      INFO    - GET /admin/utilisateurs - START
+22/11/2026 00:08:51 root                      INFO    - GET /admin/utilisateurs - END [Status: 200]
+22/11/2026 00:08:51 root                      INFO    - GET /admin/imports - START
+22/11/2026 00:08:51 root                      INFO    - GET /admin/imports - END [Status: 200]
+22/11/2026 00:08:51 root                      INFO    - GET /journal/ - START
+22/11/2026 00:08:51 root                      INFO    - GET /journal/ - END [Status: 200]
+22/11/2026 00:10:23 root                      INFO    - GET /referentiels/indicateurs - START
+22/11/2026 00:10:23 root                      INFO    - GET /referentiels/indicateurs - END [Status: 200]
+22/11/2026 00:10:23 root                      INFO    - GET /admin/utilisateurs - START
+22/11/2026 00:10:23 root                      INFO    - GET /admin/utilisateurs - END [Status: 200]
+22/11/2026 00:10:23 root                      INFO    - GET /admin/imports - START
+22/11/2026 00:10:23 root                      INFO    - GET /admin/imports - END [Status: 200]
+22/11/2026 00:10:23 root                      INFO    - GET /journal/ - START
+22/11/2026 00:10:23 root                      INFO    - GET /journal/ - END [Status: 200]
+22/11/2026 00:10:25 root                      INFO    - POST /admin/imports/POP_XWAP_SEX_AGE_NB - START
+22/11/2026 00:10:25 service.collecte_service  INFO    - Collecte ILOSTAT : indicateur=POP_XWAP_SEX_AGE_NB, période=2014-2026
+22/11/2026 00:10:25 service.collecte_service  ERROR   - Échec de la collecte de l'indicateur POP_XWAP_SEX_AGE_NB
+Traceback (most recent call last):
+  File "D:\ENSAI\s1\Informatique\Projet informatique\ensai-it-project-2a-team23\backend\src\service\collecte_service.py", line 68, in collecter_indicateur
+    trace = self.import_dao.creer(
+        ImportDonnees(
+    ...<5 lines>...
+        )
+    )
+  File "D:\ENSAI\s1\Informatique\Projet informatique\ensai-it-project-2a-team23\backend\src\dao\import_dao.py", line 23, in creer
+    cursor.execute(
+    ~~~~~~~~~~~~~~^
+        """
+        ^^^
+    ...<14 lines>...
+        ),
+        ^^
+    )
+    ^
+  File "D:\ENSAI\s1\Informatique\Projet informatique\ensai-it-project-2a-team23\backend\.venv\Lib\site-packages\psycopg2\extras.py", line 236, in execute
+    return super().execute(query, vars)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+psycopg2.errors.ForeignKeyViolation: insert or update on table "import_donnees" violates foreign key constraint "import_donnees_indicateur_code_fkey"
+DETAIL:  Key (indicateur_code)=(POP_XWAP_SEX_AGE_NB) is not present in table "indicateur".
+
+22/11/2026 00:10:25 root                      ERROR   - POST /admin/imports/POP_XWAP_SEX_AGE_NB - FAILED [Status: 500] Error: 'NoneType' object has no attribute 'date_fin' and no __dict__ for setting new attributes
+22/11/2026 00:10:27 root                      INFO    - GET /referentiels/indicateurs - START
+22/11/2026 00:10:27 root                      INFO    - GET /referentiels/indicateurs - END [Status: 200]
+22/11/2026 00:10:27 root                      INFO    - GET /admin/utilisateurs - START
+22/11/2026 00:10:27 root                      INFO    - GET /admin/utilisateurs - END [Status: 200]
+22/11/2026 00:10:27 root                      INFO    - GET /admin/imports - START
+22/11/2026 00:10:27 root                      INFO    - GET /admin/imports - END [Status: 200]
+22/11/2026 00:10:27 root                      INFO    - GET /journal/ - START
+22/11/2026 00:10:27 root                      INFO    - GET /journal/ - END [Status: 200]
+22/11/2026 00:13:36 root                      INFO    - GET /referentiels/indicateurs - START
+22/11/2026 00:13:36 root                      INFO    - GET /referentiels/indicateurs - END [Status: 200]
+22/11/2026 00:13:36 root                      INFO    - GET /admin/utilisateurs - START
+22/11/2026 00:13:36 root                      INFO    - GET /admin/utilisateurs - END [Status: 200]
+22/11/2026 00:13:36 root                      INFO    - GET /admin/imports - START
+22/11/2026 00:13:36 root                      INFO    - GET /admin/imports - END [Status: 200]
+22/11/2026 00:13:36 root                      INFO    - GET /journal/ - START
+22/11/2026 00:13:36 root                      INFO    - GET /journal/ - END [Status: 200]
+22/11/2026 00:13:38 root                      INFO    - POST /admin/imports/POP_XWAP_SEX_AGE_NB - START
+22/11/2026 00:13:38 service.collecte_service  INFO    - Collecte ILOSTAT : indicateur=POP_XWAP_SEX_AGE_NB, période=2014-2026
+22/11/2026 00:13:38 service.collecte_service  ERROR   - Échec de la collecte de l'indicateur POP_XWAP_SEX_AGE_NB
+Traceback (most recent call last):
+  File "D:\ENSAI\s1\Informatique\Projet informatique\ensai-it-project-2a-team23\backend\src\service\collecte_service.py", line 68, in collecter_indicateur
+    trace = self.import_dao.creer(
+        ImportDonnees(
+    ...<5 lines>...
+        )
+    )
+  File "D:\ENSAI\s1\Informatique\Projet informatique\ensai-it-project-2a-team23\backend\src\dao\import_dao.py", line 23, in creer
+    cursor.execute(
+    ~~~~~~~~~~~~~~^
+        """
+        ^^^
+    ...<14 lines>...
+        ),
+        ^^
+    )
+    ^
+  File "D:\ENSAI\s1\Informatique\Projet informatique\ensai-it-project-2a-team23\backend\.venv\Lib\site-packages\psycopg2\extras.py", line 236, in execute
+    return super().execute(query, vars)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+psycopg2.errors.ForeignKeyViolation: insert or update on table "import_donnees" violates foreign key constraint "import_donnees_indicateur_code_fkey"
+DETAIL:  Key (indicateur_code)=(POP_XWAP_SEX_AGE_NB) is not present in table "indicateur".
+
+22/11/2026 00:13:38 root                      ERROR   - POST /admin/imports/POP_XWAP_SEX_AGE_NB - FAILED [Status: 500] Error: 'NoneType' object has no attribute 'date_fin' and no __dict__ for setting new attributes
+22/11/2026 00:13:40 root                      INFO    - GET /referentiels/indicateurs - START
+22/11/2026 00:13:40 root                      INFO    - GET /referentiels/indicateurs - END [Status: 200]
+22/11/2026 00:13:40 root                      INFO    - GET /admin/utilisateurs - START
+22/11/2026 00:13:40 root                      INFO    - GET /admin/utilisateurs - END [Status: 401]
+22/11/2026 00:13:40 root                      INFO    - GET /admin/imports - START
+22/11/2026 00:13:40 root                      INFO    - GET /admin/imports - END [Status: 200]
+22/11/2026 00:13:40 root                      INFO    - GET /journal/ - START
+22/11/2026 00:13:40 root                      INFO    - GET /journal/ - END [Status: 200]
+22/11/2026 00:13:58 root                      INFO    - POST /auth/connexion - START
+22/11/2026 00:13:58 root                      INFO    - POST /auth/connexion - END [Status: 401]
+22/11/2026 00:13:59 root                      INFO    - POST /auth/connexion - START
+22/11/2026 00:13:59 root                      INFO    - POST /auth/connexion - END [Status: 401]
+22/11/2026 00:18:59 root                      INFO    - POST /auth/connexion - START
+22/11/2026 00:18:59 root                      INFO    - POST /auth/connexion - END [Status: 200]
+22/11/2026 00:18:59 root                      INFO    - GET /auth/profil - START
+22/11/2026 00:18:59 root                      INFO    - GET /auth/profil - END [Status: 200]
+22/11/2026 00:19:03 root                      INFO    - GET /admin/utilisateurs - START
+22/11/2026 00:19:03 root                      INFO    - GET /admin/utilisateurs - END [Status: 200]
+22/11/2026 00:19:03 root                      INFO    - GET /admin/imports - START
+22/11/2026 00:19:03 root                      INFO    - GET /admin/imports - END [Status: 200]
+22/11/2026 00:19:03 root                      INFO    - GET /journal/ - START
+22/11/2026 00:19:03 root                      INFO    - GET /journal/ - END [Status: 200]
+22/11/2026 00:19:06 root                      INFO    - GET /admin/utilisateurs - START
+22/11/2026 00:19:06 root                      INFO    - GET /admin/utilisateurs - END [Status: 200]
+22/11/2026 00:19:06 root                      INFO    - GET /admin/imports - START
+22/11/2026 00:19:06 root                      INFO    - GET /admin/imports - END [Status: 200]
+22/11/2026 00:19:06 root                      INFO    - GET /journal/ - START
+22/11/2026 00:19:06 root                      INFO    - GET /journal/ - END [Status: 200]
+22/11/2026 00:19:07 root                      INFO    - GET /admin/utilisateurs - START
+22/11/2026 00:19:07 root                      INFO    - GET /admin/utilisateurs - END [Status: 200]
+22/11/2026 00:19:07 root                      INFO    - GET /admin/imports - START
+22/11/2026 00:19:07 root                      INFO    - GET /admin/imports - END [Status: 200]
+22/11/2026 00:19:07 root                      INFO    - GET /journal/ - START
+22/11/2026 00:19:07 root                      INFO    - GET /journal/ - END [Status: 200]
+22/11/2026 00:19:08 root                      INFO    - GET /admin/utilisateurs - START
+22/11/2026 00:19:08 root                      INFO    - GET /admin/utilisateurs - END [Status: 200]
+22/11/2026 00:19:08 root                      INFO    - GET /admin/imports - START
+22/11/2026 00:19:08 root                      INFO    - GET /admin/imports - END [Status: 200]
+22/11/2026 00:19:08 root                      INFO    - GET /journal/ - START
+22/11/2026 00:19:08 root                      INFO    - GET /journal/ - END [Status: 200]
+22/11/2026 00:19:10 root                      INFO    - GET /admin/utilisateurs - START
+22/11/2026 00:19:10 root                      INFO    - GET /admin/utilisateurs - END [Status: 200]
+22/11/2026 00:19:10 root                      INFO    - GET /admin/imports - START
+22/11/2026 00:19:10 root                      INFO    - GET /admin/imports - END [Status: 200]
+22/11/2026 00:19:10 root                      INFO    - GET /journal/ - START
+22/11/2026 00:19:10 root                      INFO    - GET /journal/ - END [Status: 200]
+22/11/2026 00:19:11 root                      INFO    - GET /admin/utilisateurs - START
+22/11/2026 00:19:11 root                      INFO    - GET /admin/utilisateurs - END [Status: 200]
+22/11/2026 00:19:11 root                      INFO    - GET /admin/imports - START
+22/11/2026 00:19:11 root                      INFO    - GET /admin/imports - END [Status: 200]
+22/11/2026 00:19:11 root                      INFO    - GET /journal/ - START
+22/11/2026 00:19:11 root                      INFO    - GET /journal/ - END [Status: 200]
+22/11/2026 00:19:12 root                      INFO    - POST /admin/imports/EMP_TEMP_SEX_OCU_NB - START
+22/11/2026 00:19:12 service.collecte_service  INFO    - Collecte ILOSTAT : indicateur=EMP_TEMP_SEX_OCU_NB, période=2025-2026
+22/11/2026 00:19:17 root                      INFO    - POST /admin/imports/EMP_TEMP_SEX_OCU_NB - END [Status: 200]
+22/11/2026 00:19:17 root                      INFO    - GET /admin/utilisateurs - START
+22/11/2026 00:19:17 root                      INFO    - GET /admin/utilisateurs - END [Status: 200]
+22/11/2026 00:19:17 root                      INFO    - GET /admin/imports - START
+22/11/2026 00:19:17 root                      INFO    - GET /admin/imports - END [Status: 200]
+22/11/2026 00:19:17 root                      INFO    - GET /journal/ - START
+22/11/2026 00:19:17 root                      INFO    - GET /journal/ - END [Status: 200]
+22/11/2026 00:19:21 root                      INFO    - GET /referentiels/pays - START
+22/11/2026 00:19:21 root                      INFO    - GET /referentiels/pays - END [Status: 200]
+22/11/2026 00:19:21 root                      INFO    - GET /referentiels/classifications - START
+22/11/2026 00:19:21 root                      INFO    - GET /referentiels/classifications - END [Status: 200]
+22/11/2026 00:19:21 root                      INFO    - GET /analyses/evolution - START
+22/11/2026 00:19:21 root                      INFO    - GET /analyses/evolution - END [Status: 200]
+22/11/2026 00:19:22 root                      INFO    - GET /analyses/taux-emploi - START
+22/11/2026 00:19:22 root                      INFO    - GET /analyses/taux-emploi - END [Status: 404]
+22/11/2026 00:19:30 root                      INFO    - GET /admin/utilisateurs - START
+22/11/2026 00:19:30 root                      INFO    - GET /admin/utilisateurs - END [Status: 200]
+22/11/2026 00:19:30 root                      INFO    - GET /admin/imports - START
+22/11/2026 00:19:30 root                      INFO    - GET /admin/imports - END [Status: 200]
+22/11/2026 00:19:30 root                      INFO    - GET /journal/ - START
+22/11/2026 00:19:30 root                      INFO    - GET /journal/ - END [Status: 200]
+22/11/2026 00:19:32 root                      INFO    - GET /admin/utilisateurs - START
+22/11/2026 00:19:32 root                      INFO    - GET /admin/utilisateurs - END [Status: 200]
+22/11/2026 00:19:32 root                      INFO    - GET /admin/imports - START
+22/11/2026 00:19:32 root                      INFO    - GET /admin/imports - END [Status: 200]
+22/11/2026 00:19:32 root                      INFO    - GET /journal/ - START
+22/11/2026 00:19:32 root                      INFO    - GET /journal/ - END [Status: 200]
+22/11/2026 00:19:34 root                      INFO    - GET /admin/utilisateurs - START
+22/11/2026 00:19:34 root                      INFO    - GET /admin/utilisateurs - END [Status: 200]
+22/11/2026 00:19:34 root                      INFO    - GET /admin/imports - START
+22/11/2026 00:19:34 root                      INFO    - GET /admin/imports - END [Status: 200]
+22/11/2026 00:19:34 root                      INFO    - GET /journal/ - START
+22/11/2026 00:19:34 root                      INFO    - GET /journal/ - END [Status: 200]
+22/11/2026 00:19:34 root                      INFO    - GET /admin/utilisateurs - START
+22/11/2026 00:19:34 root                      INFO    - GET /admin/utilisateurs - END [Status: 200]
+22/11/2026 00:19:34 root                      INFO    - GET /admin/imports - START
+22/11/2026 00:19:34 root                      INFO    - GET /admin/imports - END [Status: 200]
+22/11/2026 00:19:34 root                      INFO    - GET /journal/ - START
+22/11/2026 00:19:34 root                      INFO    - GET /journal/ - END [Status: 200]
+22/11/2026 00:19:36 root                      INFO    - POST /admin/imports/EMP_TEMP_SEX_OCU_NB - START
+22/11/2026 00:19:36 service.collecte_service  INFO    - Collecte ILOSTAT : indicateur=EMP_TEMP_SEX_OCU_NB, période=2014-2026
+22/11/2026 00:19:42 service.collecte_service  INFO    - 3371 observation(s) ignorée(s) : pays ou classification hors référentiel.
+22/11/2026 00:20:27 root                      INFO    - POST /admin/imports/EMP_TEMP_SEX_OCU_NB - END [Status: 200]
+22/11/2026 00:20:27 root                      INFO    - GET /admin/utilisateurs - START
+22/11/2026 00:20:27 root                      INFO    - GET /admin/utilisateurs - END [Status: 200]
+22/11/2026 00:20:27 root                      INFO    - GET /admin/imports - START
+22/11/2026 00:20:27 root                      INFO    - GET /admin/imports - END [Status: 200]
+22/11/2026 00:20:27 root                      INFO    - GET /journal/ - START
+22/11/2026 00:20:27 root                      INFO    - GET /journal/ - END [Status: 200]
+22/11/2026 00:20:31 root                      INFO    - GET /admin/utilisateurs - START
+22/11/2026 00:20:31 root                      INFO    - GET /admin/utilisateurs - END [Status: 200]
+22/11/2026 00:20:31 root                      INFO    - GET /admin/imports - START
+22/11/2026 00:20:31 root                      INFO    - GET /admin/imports - END [Status: 200]
+22/11/2026 00:20:31 root                      INFO    - GET /journal/ - START
+22/11/2026 00:20:31 root                      INFO    - GET /journal/ - END [Status: 200]
+22/11/2026 00:20:33 root                      INFO    - GET /admin/utilisateurs - START
+22/11/2026 00:20:33 root                      INFO    - GET /admin/utilisateurs - END [Status: 200]
+22/11/2026 00:20:33 root                      INFO    - GET /admin/imports - START
+22/11/2026 00:20:33 root                      INFO    - GET /admin/imports - END [Status: 200]
+22/11/2026 00:20:33 root                      INFO    - GET /journal/ - START
+22/11/2026 00:20:33 root                      INFO    - GET /journal/ - END [Status: 200]
+22/11/2026 00:20:35 root                      INFO    - POST /admin/imports/POP_XWAP_SEX_AGE_NB - START
+22/11/2026 00:20:35 service.collecte_service  INFO    - Collecte ILOSTAT : indicateur=POP_XWAP_SEX_AGE_NB, période=2014-2026
+22/11/2026 00:20:48 service.collecte_service  INFO    - 7281 observation(s) ignorée(s) : pays ou classification hors référentiel.
+22/11/2026 00:22:29 root                      INFO    - POST /admin/imports/POP_XWAP_SEX_AGE_NB - END [Status: 200]
+22/11/2026 00:22:29 root                      INFO    - GET /admin/utilisateurs - START
+22/11/2026 00:22:29 root                      INFO    - GET /admin/utilisateurs - END [Status: 200]
+22/11/2026 00:22:29 root                      INFO    - GET /admin/imports - START
+22/11/2026 00:22:29 root                      INFO    - GET /admin/imports - END [Status: 200]
+22/11/2026 00:22:29 root                      INFO    - GET /journal/ - START
+22/11/2026 00:22:29 root                      INFO    - GET /journal/ - END [Status: 200]
+22/11/2026 00:22:39 root                      INFO    - GET /analyses/evolution - START
+22/11/2026 00:22:39 root                      INFO    - GET /analyses/evolution - END [Status: 200]
+22/11/2026 00:22:39 root                      INFO    - GET /analyses/taux-emploi - START
+22/11/2026 00:22:39 root                      INFO    - GET /analyses/taux-emploi - END [Status: 200]
+22/11/2026 00:24:29 root                      INFO    - GET /analyses/evolution - START
+22/11/2026 00:24:29 root                      INFO    - GET /analyses/evolution - END [Status: 200]
+22/11/2026 00:24:29 root                      INFO    - GET /analyses/comparaison-pays - START
+22/11/2026 00:24:29 root                      INFO    - GET /analyses/comparaison-pays - END [Status: 200]
+22/11/2026 00:24:31 root                      INFO    - GET /analyses/taux-emploi - START
+22/11/2026 00:24:31 root                      INFO    - GET /analyses/taux-emploi - END [Status: 200]
+22/11/2026 00:24:31 root                      INFO    - GET /analyses/taux-emploi - START
+22/11/2026 00:24:31 root                      INFO    - GET /analyses/taux-emploi - END [Status: 200]
+22/11/2026 00:24:31 root                      INFO    - GET /analyses/taux-emploi - START
+22/11/2026 00:24:31 root                      INFO    - GET /analyses/taux-emploi - END [Status: 200]
+22/11/2026 00:26:08 root                      INFO    - GET /analyses/evolution - START
+22/11/2026 00:26:08 root                      INFO    - GET /analyses/evolution - END [Status: 200]
+22/11/2026 00:26:08 root                      INFO    - GET /analyses/comparaison-pays - START
+22/11/2026 00:26:08 root                      INFO    - GET /analyses/comparaison-pays - END [Status: 200]
+22/11/2026 00:26:09 root                      INFO    - GET /analyses/taux-emploi - START
+22/11/2026 00:26:09 root                      INFO    - GET /analyses/taux-emploi - END [Status: 200]
+22/11/2026 00:26:09 root                      INFO    - GET /analyses/taux-emploi - START
+22/11/2026 00:26:09 root                      INFO    - GET /analyses/taux-emploi - END [Status: 200]
+22/11/2026 00:26:09 root                      INFO    - GET /analyses/taux-emploi - START
+22/11/2026 00:26:09 root                      INFO    - GET /analyses/taux-emploi - END [Status: 200]
+22/11/2026 00:26:27 root                      INFO    - GET /analyses/evolution - START
+22/11/2026 00:26:27 root                      INFO    - GET /analyses/evolution - END [Status: 200]
+22/11/2026 00:26:27 root                      INFO    - GET /analyses/evolution - START
+22/11/2026 00:26:27 root                      INFO    - GET /analyses/evolution - END [Status: 200]
+22/11/2026 00:26:34 root                      INFO    - GET /analyses/evolution - START
+22/11/2026 00:26:34 root                      INFO    - GET /analyses/evolution - END [Status: 200]
+22/11/2026 00:26:34 root                      INFO    - GET /analyses/carte - START
+22/11/2026 00:26:34 root                      INFO    - GET /analyses/carte - END [Status: 200]
+22/11/2026 00:26:38 root                      INFO    - GET /analyses/evolution - START
+22/11/2026 00:26:38 root                      INFO    - GET /analyses/evolution - END [Status: 200]
+22/11/2026 00:26:38 root                      INFO    - GET /analyses/taux-emploi - START
+22/11/2026 00:26:38 root                      INFO    - GET /analyses/taux-emploi - END [Status: 200]
+22/11/2026 00:26:51 root                      INFO    - GET /analyses/evolution - START
+22/11/2026 00:26:51 root                      INFO    - GET /analyses/evolution - END [Status: 200]
+22/11/2026 00:26:51 root                      INFO    - GET /analyses/comparaison-pays - START
+22/11/2026 00:26:51 root                      INFO    - GET /analyses/comparaison-pays - END [Status: 200]
+22/11/2026 00:26:53 root                      INFO    - GET /analyses/taux-emploi - START
+22/11/2026 00:26:53 root                      INFO    - GET /analyses/taux-emploi - END [Status: 200]
+22/11/2026 00:26:53 root                      INFO    - GET /analyses/taux-emploi - START
+22/11/2026 00:26:53 root                      INFO    - GET /analyses/taux-emploi - END [Status: 200]
+22/11/2026 00:26:53 root                      INFO    - GET /analyses/taux-emploi - START
+22/11/2026 00:26:53 root                      INFO    - GET /analyses/taux-emploi - END [Status: 200]
+22/11/2026 00:26:57 root                      INFO    - GET /analyses/evolution - START
+22/11/2026 00:26:57 root                      INFO    - GET /analyses/evolution - END [Status: 200]
+22/11/2026 00:26:57 root                      INFO    - GET /analyses/comparaison-pays - START
+22/11/2026 00:26:57 root                      INFO    - GET /analyses/comparaison-pays - END [Status: 200]
+22/11/2026 00:26:59 root                      INFO    - GET /analyses/taux-emploi - START
+22/11/2026 00:26:59 root                      INFO    - GET /analyses/taux-emploi - END [Status: 200]
+22/11/2026 00:26:59 root                      INFO    - GET /analyses/taux-emploi - START
+22/11/2026 00:26:59 root                      INFO    - GET /analyses/taux-emploi - END [Status: 200]
+22/11/2026 00:26:59 root                      INFO    - GET /analyses/taux-emploi - START
+22/11/2026 00:26:59 root                      INFO    - GET /analyses/taux-emploi - END [Status: 200]
+22/11/2026 00:27:35 root                      INFO    - GET /analyses/evolution - START
+22/11/2026 00:27:35 root                      INFO    - GET /analyses/evolution - END [Status: 200]
+22/11/2026 00:27:35 root                      INFO    - GET /analyses/taux-emploi - START
+22/11/2026 00:27:35 root                      INFO    - GET /analyses/taux-emploi - END [Status: 200]

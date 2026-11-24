@@ -1,0 +1,65 @@
+classDiagram
+    direction LR
+
+    %% ===== Enumerations =====
+    class Role {
+        <<enumeration>>
+        UTILISATEUR
+        ADMIN
+    }
+    class StatutRapport {
+        <<enumeration>>
+        EN_ATTENTE
+        PRET
+        ECHEC
+    }
+
+    %% ===== Classes (attributs, constructeur, methodes) =====
+    class Utilisateur {
+        +int id
+        +str nom_utilisateur
+        +str mot_de_passe_hash
+        +Role role
+        +bool actif
+        +datetime date_creation
+        +datetime derniere_connexion
+        +__init__(id, nom_utilisateur, mot_de_passe_hash, role, actif, date_creation, derniere_connexion)
+        +creer(utilisateur) Utilisateur
+        +trouver_par_id(id) Utilisateur
+        +trouver_par_nom(nom_utilisateur) Utilisateur
+        +lister() List~Utilisateur~
+        +modifier(utilisateur) bool
+    }
+    class JournalActivite {
+        +int id
+        +int utilisateur_id
+        +str action
+        +str cible
+        +str details
+        +datetime date_heure
+        +__init__(id, utilisateur_id, action, cible, details, date_heure)
+        +creer(entree) JournalActivite
+        +lister() List~JournalActivite~
+    }
+    class Rapport {
+        +int id
+        +int utilisateur_id
+        +str titre
+        +str description
+        +datetime date_creation
+        +str fichier_path
+        +StatutRapport statut
+        +__init__(id, utilisateur_id, titre, description, date_creation, fichier_path, statut)
+        +creer(rapport) Rapport
+        +mettre_a_jour(rapport) bool
+        +trouver_par_id(id) Rapport
+        +lister(utilisateur_id) List~Rapport~
+    }
+
+    %% ===== Associations entre classes =====
+    Utilisateur "1" --> "0..*" JournalActivite : effectue
+    Utilisateur "1" --> "0..*" Rapport : genere
+
+    %% ===== Usage des enumerations =====
+    Utilisateur ..> Role
+    Rapport ..> StatutRapport
