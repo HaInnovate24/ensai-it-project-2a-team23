@@ -468,10 +468,10 @@
   line(length: 100%, stroke: 1.2pt + ocean)
   v(0.8em)
 }
-#show heading.where(level: 2): it => block(above: 1.6em, below: 0.7em)[
+#show heading.where(level: 2): it => block(above: 1.6em, below: 0.9em)[
   #text(size: 12.5pt, weight: "bold", fill: brand, font: sans)[
     #if it.numbering != none [#text(fill: ocean)[#counter(heading).display()] #h(0.3em)]#it.body]]
-#show heading.where(level: 3): it => block(above: 1.2em, below: 0.5em)[
+#show heading.where(level: 3): it => block(above: 1.2em, below: 0.9em)[
   #text(size: 11.5pt, weight: "bold", fill: brand, font: sans)[
     #if it.numbering != none [#text(fill: ocean)[#counter(heading).display()] #h(0.25em)]#it.body]]
 
@@ -548,9 +548,19 @@
   footer: context align(center, text(size: 9pt, fill: brand, font: sans)[#counter(page).display()]),
   numbering: "1")
 #counter(page).update(1)
+
+#let synthese(chap, body) = block(width: 100%, fill: ocean.lighten(88%), stroke: (left: 2.5pt + ocean),
+  inset: (left: 9pt, rest: 6pt), above: 0.9em, below: 0pt, breakable: false)[
+  #set text(size: 9.5pt)
+  #set par(leading: 0.55em, justify: true)
+  #text(weight: "bold", fill: ocean, font: sans)[Synthèse du chapitre #chap] — #body]
 #heading(level: 1, numbering: none)[Remerciements]
 <remerciements>
-Nous tenons à remercier chaleureusement notre encadrant, Anas Knefati, pour sa disponibilité, la clarté de ses retours et la confiance accordée tout au long du projet. Nos remerciements vont aussi à Ludovic Deneuville, responsable du projet, et à l'équipe enseignante de l'ENSAI pour les ressources mises à notre disposition (modèles de rapport, corrections), ainsi qu'à l'Organisation internationale du Travail, dont les données ouvertes ont rendu ce projet possible. #todo[on doit compléter]
+Nous tenons à remercier chaleureusement notre encadrant, Anas Knefati, pour sa disponibilité, la clarté de ses retours et la confiance accordée tout au long du projet. Ses remarques lors de notre première présentation en direct, pendant les journées d'immersion, nous ont permis d'améliorer concrètement l'application et de mieux structurer notre démarche. Nos remerciements vont aussi à Ludovic Deneuville, responsable du projet, et à l'équipe enseignante de l'ENSAI pour les ressources mises à notre disposition ainsi que pour les cours qui nous ont donné les bases nécessaires à la conception et à la réalisation de cette application.
+
+Nous remercions également l'Organisation internationale du Travail, dont les données ouvertes, accessibles via ILOSTAT, ont rendu ce projet possible, ainsi que les communautés open source qui développent et documentent les outils sur lesquels repose LaborScope : Python, FastAPI, Streamlit, PostgreSQL, pandas, Docker et bien d'autres.
+
+Enfin, nous tenons à nous remercier mutuellement : chacun des cinq membres de l'équipe a porté la solidité de sa propre couche technique, partagé ses connaissances et pris le temps de relire et de corriger le travail des autres. C'est cette entraide, nourrie par les revues de code et les journées de travail en présentiel, qui a permis d'assembler un produit cohérent dans les délais impartis. #todo[Ajouter, si vous le souhaitez, vos proches, relecteurs ou toute autre personne à remercier. Sinon, je prevois supprimer cette section ce soir]
 
 #heading(level: 1, numbering: none)[Table des matières]
 <table-des-matières>
@@ -621,7 +631,7 @@ Afin de répondre aux différents besoins d'exploration et de sécurisation des 
 
 #figure(caption: [Diagramme de cas d'utilisation de LaborScope.])[
   #let profil(titre, body) = block(width: 100%, stroke: (left: 3pt + ocean), fill: ocean.lighten(92%),
-    inset: (left: 9pt, rest: 7pt), above: 8pt, below: 0pt)[
+    inset: (left: 9pt, rest: 7pt), above: 8pt, below: 0pt)[s
     #text(weight: "bold", fill: brand, font: sans, size: 9.5pt)[#titre] \ #body]
   #grid(columns: (7cm, 1fr), column-gutter: 16pt, align: horizon,
     block(stroke: 0.6pt + brand.lighten(60%), radius: 3pt, inset: 7pt, fill: white,
@@ -741,74 +751,7 @@ Les fonctionnalités $F_i$ forment le socle obligatoire \; les fonctionnalités 
 - #strong[Utilisateur inscrit] (chargé d'études, étudiant, journaliste) : exploite pleinement les statistiques, compare et conserve ses recherches.
 - #strong[Administrateur] : garantit le bon fonctionnement du service, gère les comptes et la fraîcheur des données.
 
-== Les données au cœur de l'application. #todo[Je propose qu'on enlève tout ce bloc, il me paraît inutile]
-<les-données-au-cœur-de-lapplication.>
-=== La source : ILOSTAT
-<la-source-ilostat>
-Les données proviennent d'#strong[ILOSTAT], la base statistique ouverte de l'Organisation internationale du Travail, accessible par une API. Elle fournit, pour de nombreux pays et régions, des séries annuelles sur l'emploi, le chômage ou la population en âge de travailler, ventilées par sexe, âge et profession, en tableaux (CSV) ou en format structuré (JSON). #todo[On doit préciser les endpoints interrogés, le format retenu, les limites de requêtage]
-
-=== Dictionnaire des variables
-<dictionnaire-des-variables>
-#table(
-  columns: (22.67%, 12%, 65.33%),
-  align: (left,left,left,),
-  table.header([Variable], [Type], [Signification métier],),
-  table.hline(),
-  [#NormalTok("ref_area");], [texte], [Pays ou région (code à trois lettres)],
-  [#NormalTok("indicator");], [texte], [Code de l'indicateur statistique],
-  [#NormalTok("sex");], [texte], [Sexe : femmes, hommes ou total],
-  [#NormalTok("classif1");], [texte], [Classification : profession ou tranche d'âge],
-  [#NormalTok("time");], [entier], [Année de la mesure],
-  [#NormalTok("obs_value");], [réel], [Valeur observée (milliers de personnes ou pourcentage)],
-  [#NormalTok("obs_status");], [texte], [Qualité de la valeur (estimée, provisoire…)],
-)
-=== Indicateurs calculés
-<indicateurs-calculés>
-$ upright("Taux d’emploi") = upright("Emploi") / upright("Population en âge de travailler") times 100 $
-
-$ upright("Part des femmes") = upright("Emploi des femmes") / upright("Emploi total") times 100 $
-
-#table(
-  columns: (24.1%, 61.45%, 14.46%),
-  align: (left,left,left,),
-  table.header([Indicateur], [Interprétation], [Intervalle],),
-  table.hline(),
-  [Taux d'emploi], [Part de la population en âge de travailler qui occupe un emploi], [$\[0 thin\;100\]$],
-  [Part des femmes], [Féminisation d'une profession (50 = parité)], [$\[0 thin\;100\]$],
-  [Variation annuelle], [Évolution relative d'un indicateur d'une année à l'autre], [$\]- 100 thin\;+ oo\[$],
-)
-=== Difficultés liées aux données
-<difficultés-liées-aux-données>
-- #strong[Valeurs manquantes] : certains pays ne publient pas toutes les années \; l'application l'indique explicitement plutôt que d'inventer une valeur.
-- #strong[Formats hétérogènes] : dates, codes pays et unités sont harmonisés avant toute comparaison.
-- #strong[Limites de requêtage] : interroger la source à chaque demande serait lent et fragile \; d'où la mise en cache décrite au chapitre 4.
-
-#block[
-#callout(
-body: 
-[
-LaborScope simplifie l'accès aux statistiques de l'OIT pour trois profils d'utilisateurs, avec des données harmonisées et des indicateurs comparables d'un pays à l'autre.
-
-]
-, 
-title: 
-[
-Synthèse du chapitre 1
-]
-, 
-background_color: 
-rgb("#dae6fb")
-, 
-icon_color: 
-rgb("#0758E5")
-, 
-icon: 
-none
-, 
-body_background_color: 
-white
-)
-]
+#synthese(1)[LaborScope simplifie l'accès aux statistiques de l'OIT pour trois profils d'utilisateurs, avec des données harmonisées et des indicateurs comparables d'un pays à l'autre.]
 = Architecture générale et choix technologiques
 <architecture-générale-et-choix-technologiques>
 == Nature de l'application et découpage en couches
@@ -817,28 +760,7 @@ white
 <structure-de-lapplication>
 LaborScope repose sur une architecture client-serveur découplée, articulée autour de deux applications communiquant exclusivement par requêtes HTTP au format JSON. Le backend (API REST FastAPI) centralise la logique métier, les calculs d'indicateurs, le contrôle des droits d'accès, les requêtes vers PostgreSQL ainsi que la collecte et le nettoyage des flux externes ILOSTAT. Le frontend (application web Streamlit) constitue l'interface utilisateur, gère la navigation et la session, produit les visualisations interactives et assemble les rapports PDF téléchargeables sans jamais accéder directement à la base de données.
 
-#figure(caption: [Architecture en couches : chaque flèche est une dépendance autorisée.])[
-  #block(width: 9.4cm, inset: 4pt)[
-    #align(center, box(fill: mist, stroke: 0.6pt + brand, radius: 3pt, inset: 6pt)[#text(size: 9pt, font: sans)[Utilisateur]])
-    #down
-    #layer([Présentation], [documentation interactive (Swagger), JSON], col: ocean)
-    #down
-    #layer([Contrôleurs], [routes, validation des entrées, authentification])
-    #down
-    #layer([Services], [logique métier, calcul des indicateurs, droits], col: brand.lighten(15%))
-    #down
-    #grid(columns: (1fr, 1fr), column-gutter: 4pt,
-      layer([Client API], [accès à ILOSTAT], col: ocean.darken(10%), w: 4.4cm),
-      layer([DAO], [accès à la base], col: ocean.darken(10%), w: 4.4cm))
-    #grid(columns: (1fr, 1fr), column-gutter: 4pt, down, down)
-    #grid(columns: (1fr, 1fr), column-gutter: 4pt,
-      align(center, box(width: 4.4cm, stroke: (dash: "dashed", paint: sun, thickness: 1pt), fill: sun.lighten(85%), radius: 3pt, inset: 7pt)[
-        #align(center, text(size: 9pt, font: sans)[API ILOSTAT (OIT)])]),
-      align(center, box(width: 4.4cm, stroke: 1pt + brand, fill: sun.lighten(70%), radius: 8pt, inset: 7pt)[
-        #align(center, text(size: 9pt, font: sans)[PostgreSQL])]))
-  ]
-] <fig-archi>
-Le diagramme de packages #todo[on mettra en annexe] illustre la manière dont les différentes couches de l'application interagissent entre elles. La première couche correspond au frontend, qui permet à l'utilisateur de se connecter, de naviguer dans l'interface et d'afficher les visualisations graphiques. La deuxième couche est l'API (controller et model), qui réceptionne et valide les requêtes de l'utilisateur avant de les transmettre au serveur. La couche de services (#NormalTok("service"); et #NormalTok("business_object");) prend ensuite le relais pour appliquer les règles métier et effectuer les calculs statistiques demandés. Enfin, elle s'appuie sur la couche d'accès aux données (#NormalTok("client"); et #NormalTok("dao");). Les flux externes sont récupérés et normalisés, puis transmis aux DAO afin d'être stockés et interrogés dans la base PostgreSQL avant d'être renvoyés sous forme de résultats JSON au frontend.
+Le diagramme de packages #std.link(<fig-packages>)[#text(fill: ocean, weight: "bold")[#underline[(voir l'annexe A)]]] illustre la manière dont les différentes couches de l'application interagissent entre elles. La première couche correspond au frontend, qui permet à l'utilisateur de se connecter, de naviguer dans l'interface et d'afficher les visualisations graphiques. La deuxième couche est l'API (controller et model), qui réceptionne et valide les requêtes de l'utilisateur avant de les transmettre au serveur. La couche de services (#NormalTok("service"); et #NormalTok("business_object");) prend ensuite le relais pour appliquer les règles métier et effectuer les calculs statistiques demandés. Enfin, elle s'appuie sur la couche d'accès aux données (#NormalTok("client"); et #NormalTok("dao");). Les flux externes sont récupérés et normalisés, puis transmis aux DAO afin d'être stockés et interrogés dans la base PostgreSQL avant d'être renvoyés sous forme de résultats JSON au frontend.
 
 == Stack technologique et justification des choix
 <stack-technologique-et-justification-des-choix>
@@ -930,49 +852,25 @@ white
 <architecture-en-couches>
 LaborScope est organisé selon une architecture en quatre couches, où chaque couche n'appelle que la couche inférieure. Ce découpage garantit que la logique métier reste indépendante du framework web, et que l'accès aux données est encapsulé.
 
-#figure(caption: [Diagramme de classes simplifié : objets métier.])[
-  #align(center)[
-    #grid(columns: (3.7cm, 1.9cm, 3.7cm, 1.9cm, 3.7cm), row-gutter: 14pt,
-      cls([Pays], [code_iso3 : str \ nom : str \ region : str]),
-      link[1 ◄──── \* \ concerne],
-      cls([Observation], [annee : int \ sexe : str \ valeur : float]),
-      link[\* ────► 1 \ mesure],
-      cls([Indicateur], [code : str \ libelle : str \ unite : str]),
-      cls([Administrateur], [gerer_comptes()]),
-      link[──────▷ \ hérite],
-      cls([Utilisateur], [id : int \ email : str \ peut(action) : bool], tag: "abstraite"),
-      link[◁────── \ hérite],
-      cls([UtilisateurInscrit], [favoris : list]))
-  ]
-]
-#figure(caption: [Services, DAO et client externe (pointillés = dépendances, ▷ = héritage ou réalisation).])[
-  #align(center)[
-    #grid(columns: (3.8cm, 3.8cm, 3.8cm), column-gutter: 8pt, row-gutter: 6pt,
-      cls([AuthService], [inscrire() \ connecter() \ verifier_jeton()], w: 3.8cm),
-      cls([StatistiquesService], [obtenir_statistiques() \ comparer_pays()], w: 3.8cm),
-      align(horizon, text(size: 8pt, fill: ocean)[◄ dépend aussi de \ l'interface SourceDonnees ↓]),
-      link[⇣ utilise], link[⇣ utilise], [],
-      cls([UtilisateurDAO], [trouver_par_email() \ creer()], w: 3.8cm),
-      cls([ObservationDAO], [rechercher() \ enregistrer()], w: 3.8cm),
-      cls([SourceDonnees], [telecharger(filtres)], w: 3.8cm, tag: "interface"),
-      link[▽ hérite de], link[▽ hérite de], link[△ réalise],
-      cls([AbstractDAO], [creer() \ supprimer()], w: 3.8cm, tag: "interface"),
-      [],
-      cls([ILOSTATClient], [telecharger(filtres)], w: 3.8cm))
-  ]
-]
-=== Diagramme de classes : couche objets métiers
-<diagramme-de-classes-couche-objets-métiers>
-#figure(caption: [Diagramme de classes : couche objets métiers.])[
-  #block(width: 100%, height: 7cm, fill: mist, stroke: 0.6pt + muted.lighten(40%), radius: 2pt)[
-    #align(center + horizon, text(size: 9pt, fill: muted, font: sans)[*Diagramme de classes (objets métiers)* — à insérer ici])]
-]
-=== Diagramme de classes : couche services et dépendances
-<diagramme-de-classes-couche-services-et-dépendances>
-#figure(caption: [Diagramme de classes : couche services et dépendances.])[
-  #block(width: 100%, height: 7cm, fill: mist, stroke: 0.6pt + muted.lighten(40%), radius: 2pt)[
-    #align(center + horizon, text(size: 9pt, fill: muted, font: sans)[*Diagramme de classes (services et dépendances)* — à insérer ici])]
-]
+#figure(caption: [Architecture en couches : chaque flèche est une dépendance autorisée.])[
+  #let lay(titre, sous, col: brand, w: 9cm) = box(width: w, fill: col, radius: 3pt, inset: (x: 6pt, y: 5pt))[
+    #align(center)[#text(fill: white, weight: "bold", size: 9pt, font: sans)[#titre] \ #text(fill: white, size: 7pt)[#sous]]]
+  #let fl = box(height: 11pt, text(fill: brand, size: 9pt)[↓])
+  #let ext(w, body, st, fond, r) = box(width: w, stroke: st, fill: fond, radius: r, inset: (x: 6pt, y: 4pt))[
+    #align(center, text(size: 8pt, font: sans)[#body])]
+  #align(center, stack(dir: ttb, spacing: 2pt,
+    ext(3cm, [Utilisateur], 0.6pt + brand, mist, 3pt), fl,
+    lay([Présentation], [documentation interactive (Swagger), JSON], col: ocean), fl,
+    lay([Contrôleurs], [routes, validation des entrées, authentification]), fl,
+    lay([Services], [logique métier, calcul des indicateurs, droits], col: brand.lighten(15%)), fl,
+    grid(columns: (4.4cm, 4.4cm), column-gutter: 6pt,
+      lay([Client API], [accès à ILOSTAT], col: ocean.darken(10%), w: 4.4cm),
+      lay([DAO], [accès à la base], col: ocean.darken(10%), w: 4.4cm)),
+    grid(columns: (4.4cm, 4.4cm), column-gutter: 6pt, align(center, fl), align(center, fl)),
+    grid(columns: (4.4cm, 4.4cm), column-gutter: 6pt,
+      ext(4.4cm, [API ILOSTAT (OIT)], (dash: "dashed", paint: sun, thickness: 1pt), sun.lighten(85%), 3pt),
+      ext(4.4cm, [PostgreSQL], 1pt + brand, sun.lighten(70%), 8pt))))
+] <fig-archi>
 == Zoom détaillé sur un processus central : la collecte de données (F1)
 <zoom-détaillé-sur-un-processus-central-la-collecte-de-données-f1>
 La collecte est le processus le plus riche de l'application car il traverse toutes les couches et interagit avec trois systèmes externes : l'API ILOSTAT (HTTP), le système de fichiers local (cache CSV) et la base PostgreSQL.
@@ -1008,8 +906,8 @@ Avant l'enregistrement, l'application élimine en mémoire les éventuels doublo
 Quelle que soit l'issue de la collecte, l'application clôture le suivi en mettant à jour la trace d'import avec son statut final (succès ou échec), le nombre de lignes traitées, la date de fin et, le cas échéant, le message d'erreur. Si un incident survient durant l'enregistrement des données, l'opération en cours est immédiatement annulée afin de laisser la base de données dans un état sain, ce qui permet ensuite de consigner l'échec dans l'historique.
 
 #figure(caption: [Diagramme de séquence de la collecte de données.])[
-  #block(width: 100%, height: 9cm, fill: mist, stroke: 0.6pt + muted.lighten(40%), radius: 2pt)[
-    #align(center + horizon, text(size: 9pt, fill: muted, font: sans)[*Diagramme de séquence de la collecte* — à insérer ici])]
+  #align(center, block(width: 100%, stroke: 0.6pt + brand.lighten(55%), radius: 3pt, clip: true, inset: 0pt, fill: white)[
+    #image("images/diagramme_sequence_collecte.png", width: 100%)])
 ]
 === Points clés de conception dans ce processus
 <points-clés-de-conception-dans-ce-processus>
@@ -1303,42 +1201,134 @@ white
 <méthode-de-travail>
 Dès la phase de conception, notre équipe, composée de cinq étudiants, a défini des périmètres de responsabilité stricts, qui ont été respectés tout au long du développement afin de faciliter des méthodes de travail communes (Chef de projet / Qualité, Data Engineer, BDD / DAO, Backend / API, et Frontend / DataViz).
 
-Plutôt que de diviser le travail par fonctionnalité où un membre développe une feature de bout en bout, nous avons opté pour une répartition du travail par couche technique. Chaque membre est ainsi devenu garant de la solidité et de la logique de son propre composant. Si ce choix a permis à chacun de monter rapidement en compétence sur sa technologie (PostgreSQL, FastAPI, Streamlit), il a également exigé une communication et une rigueur en matière d'organisation : les formats de données et les interfaces entre la DAO, les Services et l'API devaient être parfaitement définis en amont pour que les couches s'emboîtent sans erreur.
+Plutôt que de diviser le travail par fonctionnalité où un membre développe une feature de bout en bout, nous avons opté pour une répartition du travail par couche technique. Chaque membre est ainsi devenu garant de la solidité et de la logique de son propre composant. Si ce choix a permis à chacun de monter rapidement en compétence sur sa technologie (PostgreSQL, FastAPI, Streamlit), il a également exigé une communication et une rigueur en matière d'organisation, les formats de données et les interfaces entre la DAO, les Services et l'API devaient être parfaitement définis en amont pour que les couches s'emboîtent sans erreur.
 
 === Planification
 <planification>
-#let phases = (
-  ([Cadrage], 1, 2), ([Conception], 2, 4), ([Développement par couche], 4, 9),
-  ([Intégration (jours d'immersion)], 9, 10), ([Tests et qualité], 8, 13), ([Rapport], 11, 14))
-#figure(kind: image, supplement: [Figure], caption: [Diagramme de Gantt du projet.])[
-  #table(columns: (4.4cm,) + (1fr,) * 14, align: center + horizon,
-    inset: (x: 2pt, y: 4pt),
-    stroke: (x, y) => (bottom: 0.3pt + muted.lighten(50%)),
-    table.cell(fill: none)[],
-    ..range(1, 15).map(w => table.cell(fill: brand)[#text(size: 6.5pt, fill: white)[#w]]),
-    ..phases.map(p => (
-      table.cell(align: left)[#text(size: 8pt, font: sans)[#p.at(0)]],
-      ..range(1, 15).map(w => table.cell(fill: if w >= p.at(1) and w <= p.at(2) { ocean } else { none })[]))).flatten(),
-    table.cell(align: left)[#text(size: 8pt, font: sans, weight: "bold")[Soutenance]],
-    ..range(1, 14).map(w => []),
-    table.cell(fill: sun)[])
-]
-#todo[à remplacer avec le vrai diagramme (c'est juste un ex.)]
-
 Le suivi de notre avancement s'est appuyé sur le diagramme de Gantt initialement construit lors de la phase d'analyse. Face à la réalité du développement, notamment la complexité de l'intégration entre les couches développées en parallèles, nous n'avons pas pu tenir toutes les grandes lignes prévisionnelles au jour près. Certains modules ont nécessité plus de temps de débogage ou d'appropriation que prévu.
 
 Cependant, ces décalages ont été totalement maîtrisés et résorbés grâce aux trois journées d'immersion. Ce temps de travail intensif, réunissant toute l'équipe en présentiel, a agi comme un véritable catalyseur. Il nous a permis de réaliser l'intégration finale des différentes couches, de lever les points bloquants de communication entre l'API et le Front-end, et de stabiliser l'application pour livrer un produit fonctionnel dans les délais imposés. Par ailleurs, lors de ces jours d'immersion, nous avons eu l'occasion de faire une première présentation en direct du projet. Cela nous a permis de recevoir des remarques constructives de la part de notre encadrant que nous avons ensuite pris en compte afin d'améliorer l'application.
 
+#let jx(j, m) = if m == 8 { j - 30 } else if m == 9 { j + 1 } else if m == 10 { j + 31 } else { j + 62 }
+#let gantt-jours = 84
+#let gantt-jalons = ((16, 9, "J1"), (2, 10, "J2"), (8, 10, "J3"), (22, 10, "J4"), (5, 11, "J5"), (15, 11, "J6"), (20, 11, "J7"))
+#let gantt-phases = (
+  ([Phase 1 · Dossier d'analyse (1 – 16 septembre)], (
+    ([Contexte, besoins et utilisateurs], "P1", (1, 9, 5, 9), 5),
+    ([Exploration de l'API ILOSTAT], "P2", (1, 9, 8, 9), 8),
+    ([Diagramme de cas d'utilisation], "P4", (4, 9, 9, 9), 6),
+    ([Diagramme de classes métier], "P4", (8, 9, 12, 9), 5),
+    ([Modèle de données et script SQL], "P3", (7, 9, 12, 9), 6),
+    ([Architecture en couches], "P1", (8, 9, 12, 9), 5),
+    ([Maquettes et diagramme de séquence], "P5", (8, 9, 13, 9), 6),
+    ([Liste des composants et charges], "P1", (10, 9, 13, 9), 4),
+    ([Diagramme de Gantt], "P5", (11, 9, 13, 9), 3),
+    ([Export PDF et dépôt du dossier], "P1", (13, 9, 16, 9), 4))),
+  ([Phase 2 · Développement (17 septembre – 5 novembre)], (
+    ([Partage des responsabilités techniques], "P1", (17, 9, 18, 9), 2),
+    ([Socle technique : dépôt, CI, base], "P1", (17, 9, 23, 9), 7),
+    ([Récupération des données ILOSTAT], "P2", (24, 9, 7, 10), 14),
+    ([Parsing et nettoyage], "P2", (30, 9, 8, 10), 9),
+    ([Couche d'accès et chargement en base], "P3", (24, 9, 8, 10), 15),
+    ([Tests du parser et des accès aux données], "P1", (1, 10, 8, 10), 8),
+    ([Analyse temporelle], "P4", (9, 10, 17, 10), 9),
+    ([Comparaison entre pays], "P4", (14, 10, 22, 10), 9),
+    ([Interface et graphiques], "P5", (9, 10, 22, 10), 14),
+    ([Tests des services d'analyse], "P1", (19, 10, 23, 10), 5),
+    ([Comparaison multi-indicateurs], "P4", (23, 10, 30, 10), 8),
+    ([Authentification et rôles], "P3", (23, 10, 2, 11), 11),
+    ([Cartographie choroplèthe], "P5", (23, 10, 30, 10), 8),
+    ([Administration et journal d'activité], "P5", (30, 10, 5, 11), 7),
+    ([Prévision de tendance], "P2", (28, 10, 5, 11), 9))),
+  ([Phase 3 · Tests et rapport final (6 – 20 novembre)], (
+    ([Génération automatique de rapports PDF], "P5", (6, 11, 12, 11), 7),
+    ([Tests d'intégration], "P1", (6, 11, 13, 11), 8),
+    ([Temps de traitement et optimisation], "P2", (6, 11, 12, 11), 7),
+    ([Rédaction du rapport final], "P1", (6, 11, 18, 11), 13),
+    ([Corrections, refactoring, documentation], "P1", (11, 11, 15, 11), 5),
+    ([Diagrammes et captures d'écran], "P5", (16, 11, 18, 11), 3),
+    ([Relecture et mise en forme], "P1", (18, 11, 19, 11), 2),
+    ([Archive du code et dépôt], "P3", (19, 11, 20, 11), 2))),
+)
+#let gantt-ms = gantt-jalons.map(j => jx(j.at(0), j.at(1)))
+#let gantt-wk(d) = calc.rem(d, 7) == 6 or calc.rem(d, 7) == 0
+#let gantt-fmt(j, m) = [#if j < 10 [0]#j/#if m < 10 [0]#m]
+#page(flipped: true, margin: (x: 1.5cm, top: 2.2cm, bottom: 1.6cm))[
+  #figure(kind: image, supplement: [Figure], caption: [Diagramme de Gantt du projet (31 août – 22 novembre 2026).])[
+    #set text(size: 7.2pt, font: sans)
+    #show table: set text(size: 7.2pt, font: sans)
+    #table(
+      columns: (6.2cm, 0.95cm, 1.05cm, 1.05cm, 0.85cm) + (1fr,) * gantt-jours,
+      align: (left + horizon, center + horizon, center + horizon, center + horizon, center + horizon) + (center + horizon,) * gantt-jours,
+      inset: (x: 0pt, y: 2.9pt),
+      stroke: (x, y) => (
+        bottom: 0.25pt + muted.lighten(65%),
+        right: if x >= 4 and gantt-ms.contains(x - 4) { (paint: sun, thickness: 0.5pt, dash: "dashed") } else { none }),
+      // ---- en-tête : mois ----
+      table.cell(fill: brand, inset: (x: 4pt, y: 3pt))[#text(fill: white, weight: "bold")[Tâche]],
+      table.cell(fill: brand)[#text(fill: white, weight: "bold")[Resp.]],
+      table.cell(fill: brand)[#text(fill: white, weight: "bold")[Début]],
+      table.cell(fill: brand)[#text(fill: white, weight: "bold")[Fin]],
+      table.cell(fill: brand)[#text(fill: white, weight: "bold")[Jours]],
+      table.cell(colspan: 31, fill: brand)[#text(fill: white, weight: "bold", size: 7.5pt)[SEPTEMBRE]],
+      table.cell(colspan: 31, fill: brand.lighten(12%))[#text(fill: white, weight: "bold", size: 7.5pt)[OCTOBRE]],
+      table.cell(colspan: 22, fill: brand)[#text(fill: white, weight: "bold", size: 7.5pt)[NOVEMBRE]],
+      // ---- en-tête : jours ----
+      ..range(0, 5).map(_ => table.cell(fill: brand)[]),
+      ..range(1, gantt-jours + 1).map(d => {
+        let j = if d == 1 { 31 } else if d <= 31 { d - 1 } else if d <= 62 { d - 31 } else { d - 62 }
+        table.cell(fill: if gantt-wk(d) { brand.lighten(18%) } else { brand })[#text(fill: white, size: 4.6pt)[#j]]
+      }),
+      // ---- jalons ----
+      table.cell(colspan: 5, align: left + horizon, inset: (x: 4pt, y: 2.9pt))[#text(weight: "bold", fill: muted)[Jalons]],
+      ..range(1, gantt-jours + 1).map(d => {
+        let k = gantt-ms.position(m => m == d)
+        if k != none { table.cell(fill: sun)[#text(fill: white, weight: "bold", size: 4pt)[#gantt-jalons.at(k).at(2)]] }
+        else { table.cell(fill: if gantt-wk(d) { mist } else { none })[] }
+      }),
+      // ---- phases et tâches ----
+      ..gantt-phases.map(ph => (
+        table.cell(colspan: 5 + gantt-jours, fill: ocean.lighten(86%), align: left + horizon, inset: (x: 4pt, y: 3.0pt))[
+          #text(weight: "bold", fill: brand, size: 7.8pt)[#ph.at(0)]],
+        ..ph.at(1).map(t => {
+          let d0 = jx(t.at(2).at(0), t.at(2).at(1))
+          let d1 = jx(t.at(2).at(2), t.at(2).at(3))
+          (
+            table.cell(align: left + horizon, inset: (x: 4pt, y: 2.9pt))[#t.at(0)],
+            [#text(fill: muted, weight: "bold")[#t.at(1)]],
+            [#text(fill: muted)[#gantt-fmt(t.at(2).at(0), t.at(2).at(1))]],
+            [#text(fill: muted)[#gantt-fmt(t.at(2).at(2), t.at(2).at(3))]],
+            [#text(fill: muted)[#t.at(3)]],
+            ..range(1, gantt-jours + 1).map(d => table.cell(
+              fill: if d >= d0 and d <= d1 { ocean } else if gantt-wk(d) { mist } else { none })[]),
+          )
+        }).flatten(),
+      )).flatten(),
+    )
+    #v(4pt)
+    #set text(size: 7.5pt, font: sans)
+    #grid(columns: (auto, auto, auto, 1fr), column-gutter: 14pt, align: left + horizon,
+      [#box(width: 8pt, height: 6pt, fill: ocean, radius: 0.5pt) #h(2pt) Tâche planifiée],
+      [#box(width: 8pt, height: 6pt, fill: sun, radius: 0.5pt) #h(2pt) Jalon],
+      [#box(width: 8pt, height: 6pt, fill: mist, stroke: 0.3pt + muted.lighten(50%), radius: 0.5pt) #h(2pt) Week-end],
+      [*P1* Chef de projet & qualité · *P2* Data engineer · *P3* Base de données & DAO · *P4* Backend / API · *P5* Frontend / DataViz])
+    #v(3pt)
+    #grid(columns: (1fr, 1fr, 1fr), column-gutter: 10pt, row-gutter: 3pt, align: left,
+      [*J1* · 16/09 — Dossier d'analyse figé, fin de la phase 1],
+      [*J2* · 02/10 — Dépôt du dossier d'analyse sur Moodle],
+      [*J3* · 08/10 — Base alimentée automatiquement],
+      [*J4* · 22/10 — Analyses accessibles via l'API et le front],
+      [*J5* · 05/11 — Application complète, fin de la phase 2],
+      [*J6* · 15/11 — Gel du code],
+      [*J7* · 20/11 — Dépôt final : rapport et code])
+  ]
+]
 == Outils collaboratifs et normes de développement
 <outils-collaboratifs-et-normes-de-développement>
 === Outils de communication et de suivi
 <outils-de-communication-et-de-suivi>
 Travailler à cinq sur une architecture découpée en couches techniques nécessitait une bonne synchronisation. Nous avons utilisé WhatsApp pour les échanges rapides au quotidien et Notion pour le suivi de l'avancement des tâches.
 
-#figure(caption: [Suivi des tâches sur Notion.])[
-  #block(width: 100%, height: 5.5cm, fill: mist, stroke: 0.6pt + muted.lighten(40%), radius: 2pt)[
-    #align(center + horizon, text(size: 9pt, fill: muted, font: sans)[*Capture d'écran* du tableau Notion — à insérer ici])]
-]
 === Gestion du code avec GitHub
 <gestion-du-code-avec-github>
 Pour la gestion du code, l'utilisation de GitHub était indispensable. Chacun développait ses composants sur des branches séparées. Une fois qu'un palier d'avancement était atteint, nous ne fusionnions pas le code de manière isolée. Nous organisions des réunions lors desquelles le responsable qualité effectuait une revue du code de chacun pour repérer d'éventuels problèmes ou conflits d'intégration. Ce n'est qu'après cette validation que le travail était fusionné sur la branche principale. Ce n'est qu'à l'issue de chaque fusion que l'ensemble de l'équipe mettait à jour son environnement local à partir de cette nouvelle branche principale pour poursuivre le développement sur une base commune.
@@ -1354,8 +1344,18 @@ Puisque plusieurs membres intervenaient sur la même base de code, il a fallu fi
 <démarche-dassurance-qualité-performances-et-robustesse>
 === Stratégie de tests
 <stratégie-de-tests>
-Afin de garantir la stabilité de l'application, nous avons mis en place une suite de tests unitaires avec le framework pytest, couvrant les trois couches du back-end. Nous avons ainsi testé la construction des requêtes SQL au niveau des DAO, la logique de nettoyage et de gestion des erreurs des services métiers, ainsi que les codes de retour HTTP des contrôleurs de l'API. Pour garantir des tests rapides sans risquer de polluer notre base de données locale, nous avons isolé notre code grâce à l'utilisation de mocks via la bibliothèque #NormalTok("unittest.mock");. Cela consiste concrètement à simuler la base de données pour vérifier les requêtes des DAO sans les exécuter, et nous simulons le client HTTP pour tester les services sans déclencher de vrais téléchargements. Cette méthode permet de réduire le temps d'exécution des tests ainsi que de tester des cas aux limites difficiles à reproduire manuellement, comme une perte de connexion réseau ou la réception d'un fichier corrompu.
+Afin de garantir la stabilité de l'application, nous avons mis en place une suite de tests unitaires avec le framework pytest, couvrant les trois couches du back-end. Nous avons ainsi testé la construction des requêtes SQL au niveau des DAO, la logique de nettoyage et de gestion des erreurs des services métiers, ainsi que les codes de retour HTTP des contrôleurs de l'API. Pour garantir des tests rapides sans risquer de polluer notre base de données locale, nous avons isolé notre code grâce à l'utilisation de mocks via la bibliothèque #NormalTok("unittest.mock");. Cela consiste concrètement à simuler la base de données pour vérifier les requêtes des DAO sans les exécuter, et nous simulons le client HTTP pour tester les services sans déclencher de vrais téléchargements. Cette méthode permet de réduire le temps d'exécution des tests ainsi que de tester des cas aux limites difficiles à reproduire manuellement, comme une perte de connexion réseau ou la réception d'un fichier corrompu. Chaque test suit le canevas #emph[given / when / then].
 
+#table(
+  columns: 3,
+  align: (left,center,left,),
+  table.header([Couche testée], [Couverture], [Remarque],),
+  table.hline(),
+  [DAO], [#todo[100 %]], [Schéma de test dédié],
+  [Services], [#todo[100 %]], [API externe simulée],
+  [Contrôleurs], [#todo[100 %]], [Routes et validation],
+  [#strong[Total]], [#todo[100 %]], [],
+)
 === Gestion des temps de traitement longs
 <gestion-des-temps-de-traitement-longs>
 Pour éviter les problèmes de performances liés à l'extraction et l'insertion de millions de lignes via l'API ILOSTAT nous avons fait en sorte que le script vérifie les fichiers déjà présents sur la base de données locale pour ne télécharger que les données manquantes, ce qui réduit considérablement le temps d'exécution. En ce qui concerne la base de données, une insertion ligne par ligne des observations aurait été beaucoup trop lourde. Nous avons donc utilisé une fonction qui permet de faire des insertions en lot avec une seule requête, tout en traitant également les doublons.
@@ -1363,63 +1363,6 @@ Pour éviter les problèmes de performances liés à l'extraction et l'insertion
 === Résilience face au changement de source de données
 <résilience-face-au-changement-de-source-de-données>
 Si l'API ILOSTAT venait à fermer demain ou devait être remplacée, nous avons fait en sorte que l'impact sur notre code serait le plus minime possible. Cela est rendu possible par notre découpage en couches et la séparation des responsabilités. Dans notre architecture, l'intégralité du programme, que ce soit la base de données, l'API ou encore les contrôleurs ignorent l'existence d'ILOSTAT. Le traitement de cette source est centralisé dans deux scripts : le script #NormalTok("ilostat_client.py"); gère l'URL et les requêtes, tandis que #NormalTok("parser_service.py"); adapte les données brutes d'ILOSTAT et les transforment en nos objets Python génériques. En cas de changement de source des données, il suffirait de créer un nouveau fichier client et d'ajuster le dictionnaire de renommage. Ainsi, les tables PostgreSQL, les objets métiers et le reste de l'application n'auraient besoin d'aucune modification.
-
-=== Planification
-<planification-1>
-#let phases = (
-  ([Cadrage], 1, 2), ([Conception], 2, 4), ([Socle (F1 à F6)], 4, 9),
-  ([Fonctions optionnelles], 9, 11), ([Tests et qualité], 8, 13), ([Rapport], 11, 14))
-#figure(kind: image, supplement: [Figure], caption: [Planification du projet.])[
-  #table(columns: (3.6cm,) + (1fr,) * 14, align: center + horizon,
-    inset: (x: 2pt, y: 4pt),
-    stroke: (x, y) => (bottom: 0.3pt + muted.lighten(50%)),
-    table.cell(fill: none)[],
-    ..range(1, 15).map(w => table.cell(fill: brand)[#text(size: 6.5pt, fill: white)[#w]]),
-    ..phases.map(p => (
-      table.cell(align: left)[#text(size: 8pt, font: sans)[#p.at(0)]],
-      ..range(1, 15).map(w => table.cell(fill: if w >= p.at(1) and w <= p.at(2) { ocean } else { none })[]))).flatten(),
-    table.cell(align: left)[#text(size: 8pt, font: sans, weight: "bold")[Soutenance]],
-    ..range(1, 14).map(w => []),
-    table.cell(fill: sun)[])
-]
-#todo[On doit remplacer par le planning réel et commenter les écarts entre prévisionnel et réalité]
-
-== Outils collaboratifs et normes de développement
-<outils-collaboratifs-et-normes-de-développement-1>
-- #strong[Environnement] : Git et GitHub (versionnage, revue de code), IDE de l'équipe, DBeaver pour explorer la base. #todo[Ajuster]
-- #strong[Communication] : messagerie instantanée et réunions hebdomadaires. #todo[à ajuster]
-- #strong[Rédaction] : Quarto, pour un rapport reproductible.
-- #strong[Normes de codage] : conventions de nommage #strong[PEP 8], #strong[typage statique] systématique, #strong[docstrings] sur les classes et méthodes publiques.
-
-== Démarche d'assurance qualité, performances et robustesse
-<démarche-dassurance-qualité-performances-et-robustesse-1>
-=== Stratégie de tests
-<stratégie-de-tests-1>
-Les DAO et les services sont testés isolément. Les tests de la couche DAO s'exécutent sur un #strong[schéma de base dédié], recréé avant et nettoyé après chaque test, de sorte qu'ils n'altèrent jamais les données réelles. L'API ILOSTAT est #strong[simulée] (#emph[mocking]) : les tests sont rapides, reproductibles et indépendants du réseau. Chaque test suit le canevas #emph[given / when / then].
-
-\`\`\`
-
-#table(
-  columns: 3,
-  align: (left,center,left,),
-  table.header([Couche testée], [Couverture], [Remarque],),
-  table.hline(),
-  [DAO], [#todo[XX %]], [Schéma de test dédié],
-  [Services], [#todo[XX %]], [API externe simulée],
-  [Contrôleurs], [#todo[XX %]], [Routes et validation],
-  [#strong[Total]], [#todo[XX %]], [],
-)
-=== Gestion des temps de traitement longs
-<gestion-des-temps-de-traitement-longs-1>
-Les principales lenteurs venaient de l'API distante et des requêtes volumineuses. Nous les avons réduites par trois leviers : mise en cache en base, pagination des résultats et requêtes ciblées sur les seuls indicateurs demandés. #todo[On doit citer des mesures avant/après si possible]
-
-=== Résilience face au changement de source de données
-<résilience-face-au-changement-de-source-de-données-1>
-Si ILOSTAT venait à disparaître ou à changer de format, seul le #strong[client] qui implémente l'interface #NormalTok("SourceDonnees"); devrait être réécrit. Services, contrôleurs et base resteraient intacts, c'est l'intérêt direct du découpage en couches.
-
-=== Évolutivité et fonctionnalités écartées
-<évolutivité-et-fonctionnalités-écartées>
-#todo[Listons ici les fonctionnalités mises de côté et expliquons, pour chacune, où elle s'insérerait, nouvelle route, nouveau service, nouvelle DAO]
 
 #block[
 #callout(
@@ -1449,11 +1392,11 @@ white
 ]
 #heading(level: 1, numbering: none)[Conclusion générale]
 <conclusion-générale>
-#strong[Bilan technique et fonctionnel.] LaborScope atteint son objectif qui est d'offrir un accès simple, sécurisé et comparable aux statistiques mondiales du marché du travail. Le socle obligatoire est #todo[(réalisé en totalité).. Je laisse Jade compléter] et les tests couvrent #todo[XX %] du code.
+#strong[Bilan technique et fonctionnel.] LaborScope atteint son objectif qui est d'offrir un accès simple, sécurisé et comparable aux statistiques mondiales du marché du travail. Le socle obligatoire (F1 à F6) couvre toute la chaîne, de la collecte automatisée des données ILOSTAT à leur visualisation dans l'interface, en passant par l'authentification à deux profils et la traçabilité des actions sensibles. Il est complété par les deux fonctionnalités additionnelles : la cartographie interactive (FO1) et la génération de rapports PDF (FO2). Les tests unitaires, écrits avec pytest sur les trois couches du back-end (DAO, services et contrôleurs), couvrent #todo[100 %] du code.
 
-#strong[Apports pédagogiques.] Le projet nous a appris à concevoir une application en couches, à justifier des choix techniques, à tester de manière isolée et à travailler à cinq sur un même dépôt. Il nous a aussi confrontés aux imprévus, comme les données manquantes, évolutions de périmètre, arbitrages entre fonctionnalités. #todo[On doit personnaliser ici avec un exemple vécu pour que ce soit plus concret et répondra aux remarques du prof]
+#strong[Apports pédagogiques.] Le projet nous a appris à concevoir une application en couches, à justifier des choix techniques, à tester de manière isolée et à travailler à cinq sur un même dépôt. Répartir le travail par couche technique nous a permis de monter rapidement en compétence sur PostgreSQL, FastAPI et Streamlit, mais nous a aussi montré combien les formats de données et les interfaces entre les couches doivent être définis en amont. C'est lors de leur intégration que sont apparus nos principaux retards. Les trois journées d'immersion en présentiel ont été décisives pour les résorber, et la première démonstration en direct du projet nous a apporté des remarques constructives de notre encadrant. Nous avons également été confrontés à d'autres imprévus, comme les données ILOSTAT irrégulières (valeurs manquantes, nomenclatures hétérogènes) qui ont exigé un nettoyage rigoureux, les évolutions de périmètre et les arbitrages entre fonctionnalités.
 
-#strong[Perspectives.] Cartographie interactive, rapports automatiques et nouvelles sources de données s'intégreraient naturellement dans l'architecture actuelle.
+#strong[Perspectives.] Grâce au découpage en couches, LaborScope peut évoluer sans être reconstruit, l'ajout d'une nouvelle source de données ne demanderait que d'écrire un nouveau client et d'ajuster le dictionnaire de renommage, tandis que de nouveaux indicateurs, de nouvelles analyses statistiques ou de nouveaux profils d'utilisateurs s'inséreraient dans les services et les routeurs existants, sans toucher au reste de l'application.
 
 #heading(level: 1, numbering: none)[Notes individuelles]
 <notes-individuelles>
@@ -1475,42 +1418,40 @@ white
 
 #heading(level: 2, numbering: none)[Alexandre Fratter-Bardy]
 <alexandre-fratter-bardy>
-#strong[Mon rôle et mes réalisations.] #todo[…]
+Au sein du projet, j'ai pris en charge le développement de la couche base de données et des DAO, tout en apportant ponctuellement mon aide sur d'autres parties du code selon les besoins. Pour la rédaction du rapport, nous avons réparti les sections en fonction des sujets sur lesquels chacun se sentait le plus à l'aise, en cohérence avec le travail réalisé par chacun.
 
-#strong[Mon vécu du travail en groupe.] #todo[…]
+Le travail en groupe s'est bien passé, avec une bonne entente générale. Les niveaux en informatique étant variés au sein de l'équipe, j'en ai profité pour poser régulièrement des questions aux membres les plus à l'aise sur certains points techniques afin de débloquer mes problèmes et d'apprendre davantage. Cette entraide a permis de garder un bon rythme tout au long du projet.
 
-#strong[Enseignements et conseils aux futurs 2A.] #todo[…]
+Ce projet m'a permis de gagner en assurance sur la conception de bases de données et sur les méthodes de développement en équipe. Mon principal conseil aux futurs 2A est de miser sur la communication surtout lorsqu'on répartit le travail par couches techniques. En effet, échanger régulièrement sur ses avancées et ses blocages est indispensable pour travailler efficacement en équipe.
 
 #heading(level: 2, numbering: none)[Adam Ouangko Haïwè]
 <adam-ouangko-haïwè>
-#strong[Mon rôle et mes réalisations.] #todo[…]
-
-#strong[Mon vécu du travail en groupe.] #todo[…]
-
-#strong[Enseignements et conseils aux futurs 2A.] #todo[…]
+Au sein de l'équipe, j'ai principalement travaillé dans la couche #NormalTok("service"); sur la partie backend, où j'ai développé la logique métier des analyses, avec une contribution à la couche #NormalTok("controller");. Ce rôle m'a appris à traduire un besoin fonctionnel (analyser une évolution, comparer des pays ou des indicateurs) en règles claires, indépendantes de la base de données comme de l'interface. Placé entre la DAO et l'API, j'ai surtout mesuré l'importance de définir en amont les formats de données échangés, c'est à cet endroit que les couches doivent s'emboîter sans erreur. J'ai aussi appris à développer le reflexe d'écrire un code testable, en isolant mes services grâce aux mocks, et à respecter des conventions communes (typage explicite, Ruff, revue de code avant fusion). Les journées d'immersion ont montré que la communication entre l'API et le frontend se règle plus vite à plusieurs, autour d'un même écran. \ Mon conseil aux futurs 2A : séparer strictement la logique métier de l'accès aux données, tester tôt et documenter les interfaces entre couches.
 
 #heading(level: 2, numbering: none)[Vicram Raveendiran]
 <vicram-raveendiran>
-#strong[Mon rôle et mes réalisations.] #todo[…]
+Durant le projet, j'ai occupé le rôle de data engineer. Mon rôle était de gérer la collecte de données : extraction des données depuis l'API ILOSTAT, parsing pour les structurer, puis nettoyage des données. Mon objectif était de fournir des données exploitables aux autres membres de l'équipe.
 
-#strong[Mon vécu du travail en groupe.] #todo[…]
+Travailler en équipe m'a permis d'en apprendre plus sur le fonctionnement au sein d'un groupe de projet. En effet, dans les précédents projets, nous n'avions pas de rôles répartis, ce qui causait un peu de désordre. Dans ce projet, chacun travaillait sur un aspect du code et sur différentes branches. De plus, certains membres m'ont aidé à progresser en code, de par leur expérience.
 
-#strong[Enseignements et conseils aux futurs 2A.] #todo[…]
+Une des choses fondamentales que je retiens de ce projet est qu'il est toujours possible d'en apprendre plus sur les différents aspects de la programmation. Un conseil que j'aurai à donner à un futur 2A serait de bien organiser et répartir les rôles et les tâches au sein d'un groupe, car c'est essentiel dans un projet d'équipe et dans le monde du travail.
 
 #heading(level: 1, numbering: none)[Annexes]
 <annexes>
-#heading(level: 2, numbering: none)[Annexe A --- Diagramme de classes complet]
-<annexe-a-diagramme-de-classes-complet>
-#todo[Insérons le diagramme de classes complet en haute résolution]
+#heading(level: 2, numbering: none)[Annexe A --- Diagrammes de packages et de classes]
+<annexe-a-diagrammes-de-packages-et-de-classes>
+=== Diagramme de packages
+<diagramme-de-packages>
+#figure(caption: [Diagramme de packages de LaborScope.])[
+  #align(center, block(width: 100%, stroke: 0.6pt + brand.lighten(55%), radius: 3pt, clip: true, inset: 0pt, fill: white)[
+    #image("images/diagramme_packages.png", width: 100%)])
+] <fig-packages>
+=== Diagramme de classes (utilisateurs, journal d'activité et rapports)
+<diagramme-de-classes-utilisateurs-journal-dactivité-et-rapports>
+#figure(caption: [Diagramme de classes : utilisateurs, journal d'activité et rapports.])[
+  #align(center, block(width: 9cm, stroke: 0.6pt + brand.lighten(55%), radius: 3pt, clip: true, inset: 0pt, fill: white)[
+    #image("images/diagramme_classes_utilisateur.png", width: 100%)])
+]
 
-#heading(level: 2, numbering: none)[Annexe B --- Modèle physique des données complet]
-<annexe-b-modèle-physique-des-données-complet>
-#todo[Insérons le MPD complet]
 
-#heading(level: 2, numbering: none)[Annexe C --- Suivi hebdomadaire des tâches]
-<annexe-c-suivi-hebdomadaire-des-tâches>
-#todo[Je ne pense pas que cette partie est pertinente à insérer]
 
-#heading(level: 2, numbering: none)[Annexe D --- Conception initiale et conception finale]
-<annexe-d-conception-initiale-et-conception-finale>
-#todo[Comparons la conception du rapport d'étape (dossier d'analyse) et celle du rapport final]
