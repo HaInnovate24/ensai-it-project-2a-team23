@@ -1100,11 +1100,12 @@ Une équipe organisée, des outils partagés, des tests isolés et un code robus
 
 ## Alexandre Fratter-Bardy {.unnumbered}
 
-**Mon rôle et mes réalisations.** `#todo[…]`{=typst}
+Au sein du projet, j'ai pris en charge le développement de la couche base de données et des DAO, tout en apportant ponctuellement mon aide sur d'autres parties du code selon les besoins. Pour la rédaction du rapport, nous avons réparti les sections en fonction des sujets sur lesquels chacun se sentait le plus à l'aise, en cohérence avec le travail réalisé par chacun.
 
-**Mon vécu du travail en groupe.** `#todo[…]`{=typst}
+Le travail en groupe s'est bien passé, avec une bonne entente générale. Les niveaux en informatique étant variés au sein de l'équipe, j'en ai profité pour poser régulièrement des questions aux membres les plus à l'aise sur certains points techniques afin de débloquer mes problèmes et d'apprendre davantage. Cette entraide a permis de garder un bon rythme tout au long du projet.
 
-**Enseignements et conseils aux futurs 2A.** `#todo[…]`{=typst}
+Ce projet m'a permis de gagner en assurance sur la conception de bases de données et sur les méthodes de développement en équipe. Mon principal conseil aux futurs 2A est de miser sur la communication surtout lorsqu'on répartit le travail par couches techniques. En effet, échanger régulièrement sur ses avancées et ses blocages est indispensable pour travailler efficacement en équipe. 
+
 
 ## Adam Ouangko Haïwè {.unnumbered}
 
