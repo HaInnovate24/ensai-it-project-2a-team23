@@ -1114,11 +1114,12 @@ Mon conseil aux futurs 2A : séparer strictement la logique métier de l'accès 
 
 ## Vicram Raveendiran {.unnumbered}
 
-**Mon rôle et mes réalisations.** `#todo[…]`{=typst}
+Durant le projet, j'ai occupé le rôle de data engineer. Mon rôle était de gérer la collecte de données : extraction des données depuis l’API ILOSTAT, parsing pour les structurer, puis nettoyage des données. Mon objectif était de fournir des données exploitables aux autres membres de l'équipe.
 
-**Mon vécu du travail en groupe.** `#todo[…]`{=typst}
+Travailler en équipe m'a permis d'en apprendre plus sur le fonctionnement au sein d'un groupe de projet. En effet, dans les précédents projets, nous n'avions pas de rôles répartis, ce qui causait un peu de désordre. Dans ce projet, chacun travaillait sur un aspect du code et sur différentes branches. De plus, certains membres m'ont aidé à progresser en code, de par leur expérience.
 
-**Enseignements et conseils aux futurs 2A.** `#todo[…]`{=typst}
+Une des choses fondamentales que je retiens de ce projet est qu'il est toujours possible d'en apprendre plus sur les différents aspects de la programmation. Un conseil que j'aurai à donner à un futur 2A serait de bien organiser et répartir les rôles et les tâches au sein d'un groupe, car c'est essentiel dans un projet d'équipe et dans le monde du travail.
+
 
 # Annexes {.unnumbered}
 
