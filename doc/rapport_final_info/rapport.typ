@@ -474,8 +474,7 @@
 
 // ---------- Titres ----------
 #show heading.where(level: 1): it => {
-  pagebreak(weak: true)
-  v(0.4cm)
+  v(1.2cm)
   if it.numbering != none {
     block(above: 0pt, below: 0pt, text(size: 46pt, fill: ocean.lighten(10%), font: sans)[#counter(heading).display()])
     v(7pt)
@@ -579,6 +578,7 @@ Nous remercions également l'Organisation Internationale du Travail, dont les do
 
 Enfin, nous tenons à nous remercier mutuellement : chacun des cinq membres de l'équipe a porté la solidité de sa propre couche technique, partagé ses connaissances et pris le temps de relire et de corriger le travail des autres. C'est cette entraide, nourrie par les revues de code et les journées de travail en présentiel, qui a permis d'assembler un produit cohérent dans les délais impartis. #todo[Ajouter, si vous le souhaitez, vos proches, relecteurs ou toute autre personne à remercier. Sinon, je prevois supprimer cette section ce soir]
 
+#pagebreak()
 #heading(level: 1, numbering: none)[Table des matières]
 <table-des-matières>
 #outline(title: none, depth: 2, indent: 1.4em)
@@ -586,6 +586,7 @@ Enfin, nous tenons à nous remercier mutuellement : chacun des cinq membres de l
 #text(size: 14pt, weight: "bold", fill: brand, font: sans)[Table des figures]
 #v(0.4em)
 #outline(title: none, target: figure.where(kind: image))
+#pagebreak()
 #heading(level: 1, numbering: none)[Introduction]
 <introduction>
 Le marché du travail mondial traverse une période de mutations sans précédent. Plusieurs facteurs sont à l'origine de celle-ci : transition écologique, vieillissement démographique et bien évidemment la croissance exponentielle de l'intelligence artificielle. Dans ce contexte, les acteurs du marché du travail, dans le secteur public ou privé, ont besoin d'un accès aux données relatives au travail. Ces données permettraient d'accéder à des indicateurs d'emploi pour anticiper les tendances, pour comparer la situation entre différents pays et influencer les politiques publiques.
