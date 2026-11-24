@@ -573,9 +573,9 @@
   #text(weight: "bold", fill: ocean, font: sans)[Synthèse du chapitre #chap] — #body]
 #heading(level: 1, numbering: none)[Remerciements]
 <remerciements>
-Nous tenons à remercier chaleureusement notre encadrant, Anas Knefati, pour sa disponibilité, la clarté de ses retours et la confiance accordée tout au long du projet. Ses remarques lors de notre première présentation en direct, pendant les journées d'immersion, nous ont permis d'améliorer concrètement l'application et de mieux structurer notre démarche. Nos remerciements vont aussi à Ludovic Deneuville, responsable du projet, et à l'équipe enseignante de l'ENSAI pour les ressources mises à notre disposition ainsi que pour les cours qui nous ont donné les bases nécessaires à la conception et à la réalisation de cette application.
+Nous tenons à remercier chaleureusement notre encadrant, Anas Knefati, pour sa disponibilité, la clarté de ses retours et la confiance accordée tout au long du projet. Ses remarques lors de notre première présentation en direct, pendant les journées d'immersion, nous ont permis d'améliorer concrètement l'application et de mieux structurer notre démarche. Nos remerciements vont aussi à Ludovic Deneuville, responsable du projet, et à l'équipe enseignante de l'ENSAI pour les ressources mises à notre disposition, ainsi que pour les cours qui nous ont donné les bases nécessaires à la conception et à la réalisation de cette application.
 
-Nous remercions également l'Organisation internationale du Travail, dont les données ouvertes, accessibles via ILOSTAT, ont rendu ce projet possible, ainsi que les communautés open source qui développent et documentent les outils sur lesquels repose LaborScope : Python, FastAPI, Streamlit, PostgreSQL, pandas, Docker et bien d'autres.
+Nous remercions également l'Organisation Internationale du Travail, dont les données ouvertes, accessibles via ILOSTAT, ont rendu ce projet possible, ainsi que les communautés open source qui développent et documentent les outils sur lesquels repose LaborScope : Python, FastAPI, Streamlit, PostgreSQL, pandas, Docker et bien d'autres.
 
 Enfin, nous tenons à nous remercier mutuellement : chacun des cinq membres de l'équipe a porté la solidité de sa propre couche technique, partagé ses connaissances et pris le temps de relire et de corriger le travail des autres. C'est cette entraide, nourrie par les revues de code et les journées de travail en présentiel, qui a permis d'assembler un produit cohérent dans les délais impartis. #todo[Ajouter, si vous le souhaitez, vos proches, relecteurs ou toute autre personne à remercier. Sinon, je prevois supprimer cette section ce soir]
 
@@ -590,12 +590,12 @@ Enfin, nous tenons à nous remercier mutuellement : chacun des cinq membres de l
 <introduction>
 Le marché du travail mondial traverse une période de mutations sans précédent. Plusieurs facteurs sont à l'origine de celle-ci : transition écologique, vieillissement démographique et bien évidemment la croissance exponentielle de l'intelligence artificielle. Dans ce contexte, les acteurs du marché du travail, dans le secteur public ou privé, ont besoin d'un accès aux données relatives au travail. Ces données permettraient d'accéder à des indicateurs d'emploi pour anticiper les tendances, pour comparer la situation entre différents pays et influencer les politiques publiques.
 
-Pourtant, il est encore difficile d'exploiter ces données. En effet, l'ILOSTAT, la plateforme de données statistiques du travail de l'Organisation Internationale du Travail, rend ces données visibles de manière brute. On ne peut donc pas réellement voir l'évolution de certains indicateurs ou tout simplement interpréter la valeur des indicateurs. La question se pose aussi sur la visualisation, comment permettre à l'utilisateur d'obtenir directement les informations qu'il recherche. Comment peut-on alors rendre les données relatives au marché du travail accessibles et exploitables ? #NormalTok("LaborScope"); est une application web qui automatise la collecte d'indicateurs d'emploi depuis ILOSTAT. Elle stocke ces données dans une base PostgreSQL (une base de données centralisée), puis les restitue sous forme d'analyses interactives (évolutions temporelles, comparaisons entre pays, visualisations géographiques). Notre objectif est clair, faciliter la prise de décision en rendant les statistiques de l'emploi plus lisibles, visuelles et accessibles à tous. Ce rapport s'organise en cinq parties, allant de l'analyse des besoins métier jusqu'aux choix d'implémentation technique, pour s'achever sur le bilan qualité et organisationnel du projet. Nous présenterons d'abord le contexte métier, les besoins identifiés, les données mobilisées et les enjeux qui ont défini le développement de #NormalTok("LaborScope");. Nous enchaînerons avec l'architecture générale, qui détaille la structure de l'application et les technologies nécessaires. Nous entrerons ensuite dans la conception orientée objet, en montrant comment le modèle de classes répond concrètement aux besoins fonctionnels. La quatrième partie est consacrée au système de stockage et à la persistance des données. Enfin, nous terminerons par une synthèse de la gestion du projet, des outils utilisés et de l'assurance qualité mise en place tout au long du développement.
+Pourtant, il est encore difficile d'exploiter ces données. En effet, l'ILOSTAT, la plateforme de données statistiques du travail de l'Organisation Internationale du Travail, rend ces données accessibles de manière brute. On ne peut donc pas réellement voir l'évolution de certains indicateurs ou tout simplement interpréter la valeur des indicateurs. La question se pose aussi sur la visualisation, comment permettre à l'utilisateur d'obtenir directement les informations qu'il recherche ? Comment peut-on alors rendre les données relatives au marché du travail accessibles et exploitables ? #NormalTok("LaborScope"); est une application web qui automatise la collecte d'indicateurs d'emploi depuis ILOSTAT. Elle stocke ces données dans une base PostgreSQL (une base de données centralisée), puis les restitue sous forme d'analyses interactives (évolutions temporelles, comparaisons entre pays, visualisations géographiques). Notre objectif est clair : faciliter la prise de décision en rendant les statistiques de l'emploi plus lisibles, visuelles et accessibles à tous. Ce rapport s'organise en cinq parties, allant de l'analyse des besoins métier jusqu'aux choix d'implémentation technique, pour s'achever sur le bilan qualité et organisationnel du projet. Nous présenterons d'abord le contexte métier, les besoins identifiés, les données mobilisées et les enjeux qui ont défini le développement de #NormalTok("LaborScope");. Nous enchaînerons avec l'architecture générale, qui détaille la structure de l'application et les technologies nécessaires. Nous entrerons ensuite dans la conception orientée objet, en montrant comment le modèle de classes répond concrètement aux besoins fonctionnels. La quatrième partie est consacrée au système de stockage et à la persistance des données. Enfin, nous terminerons par une synthèse de la gestion du projet, des outils utilisés et de l'assurance qualité mise en place tout au long du développement.
 
 = Contexte métier, besoins et données
 <contexte-métier-besoins-et-données>
-== Besoins métiers et cahier des charges fonctionnel
-<besoins-métiers-et-cahier-des-charges-fonctionnel>
+== Besoins métier et cahier des charges fonctionnel
+<besoins-métier-et-cahier-des-charges-fonctionnel>
 #block[
 #callout(
 body: 
@@ -636,8 +636,23 @@ Dans la continuité des enjeux soulevés en introduction, LaborScope a été pen
 === Fonctionnalités additionnelles
 <fonctionnalités-additionnelles>
 - #strong[Cartographie interactive (FO1)] : Les données d'un indicateur sélectionné sont projetées sur un planisphère, avec un code couleur par pays, pour offrir une vue géographique globale des tendances.
-- #strong[Génération de rapports PDF (FO2)] : À partir d'une sélection utilisateur (pays, période, indicateurs), l'application compile les graphiques et génère un export PDF contenant un résumé statistique et une conclusion de synthèse automatisée
+- #strong[Génération de rapports PDF (FO2)] : À partir d'une sélection utilisateur (pays, période, indicateurs), l'application compile les graphiques et génère un export PDF contenant un résumé statistique et une conclusion de synthèse automatisée.
 
+#table(
+  columns: (8.45%, 74.65%, 16.9%),
+  align: (left,left,left,),
+  table.header([Réf.], [Fonctionnalité], [Nature],),
+  table.hline(),
+  [$F_1$], [Consulter l'emploi selon le sexe et la profession], [Obligatoire],
+  [$F_2$], [Consulter la population en âge de travailler selon le sexe et l'âge], [Obligatoire],
+  [$F_3$], [Comparer plusieurs pays sur un même indicateur], [Obligatoire],
+  [$F_4$], [Suivre l'évolution d'un indicateur dans le temps], [Obligatoire],
+  [$F_5$], [Créer un compte, se connecter, se déconnecter], [Obligatoire],
+  [$F_6$], [Gérer des niveaux d'accès], [Obligatoire],
+  [$F O_1$], [Cartographie interactive], [Optionnelle],
+  [$F O_2$], [Génération automatique de rapports], [Optionnelle],
+  [$F O_3$], [Favoris], [Optionnelle],
+)
 == Profils des utilisateurs
 <profils-des-utilisateurs>
 Afin de répondre aux différents besoins d'exploration et de sécurisation des données, l'application #NormalTok("LaborScope"); a été pensée autour d'une approche progressive des droits d'accès. L'architecture distingue trois profils d'acteurs, allant de la simple découverte à la gestion complète du système :
@@ -648,7 +663,7 @@ Afin de répondre aux différents besoins d'exploration et de sécurisation des 
 
 #figure(caption: [Diagramme de cas d'utilisation de LaborScope.])[
   #let profil(titre, body) = block(width: 100%, stroke: (left: 3pt + ocean), fill: ocean.lighten(92%),
-    inset: (left: 9pt, rest: 7pt), above: 8pt, below: 0pt)[s
+    inset: (left: 9pt, rest: 7pt), above: 8pt, below: 0pt)[
     #text(weight: "bold", fill: brand, font: sans, size: 9.5pt)[#titre] \ #body]
   #grid(columns: (7cm, 1fr), column-gutter: 16pt, align: horizon,
     block(stroke: 0.6pt + brand.lighten(60%), radius: 3pt, inset: 7pt, fill: white,
@@ -663,6 +678,16 @@ Afin de répondre aux différents besoins d'exploration et de sécurisation des 
       #profil([Administrateur], [Hérite de tous les cas de l'utilisateur ; met à jour les données, gère les utilisateurs et suit leurs activités.])
     ])
 ] <fig-cas>
+#table(
+  columns: 4,
+  align: (left,center,center,center,),
+  table.header([Action], [Visiteur], [Inscrit], [Admin],),
+  table.hline(),
+  [Consulter les statistiques de base], [✓], [✓], [✓],
+  [Comparer des pays, suivre une évolution], [--], [✓], [✓],
+  [Enregistrer des favoris, exporter], [--], [✓], [✓],
+  [Gérer les comptes, rafraîchir les données], [--], [--], [✓],
+)
 == Les données au cœur de l'application
 <les-données-au-cœur-de-lapplication>
 === Source et format des données
@@ -702,71 +727,6 @@ La donnée issue d'ILOSTAT, bien qu'officielle, présente de nombreuses irrégul
   - #strong[L'âge] : Les noms des catégories d'âge, parfois redondants ou modifiés dans le temps par ILOSTAT, sont harmonisés pour rester cohérents d'une année sur l'autre.
 - Parfois, les données reçues contiennent des statistiques liées à des #strong[régions ou des classements que nous ne gérons pas]. Pour éviter que ces anomalies ne bloquent le système, notre outil les détecte et les écarte d'office.
 - Pour pallier les éventuelles redondances lors du téléchargement, les données sont d'abord #strong[filtrées en mémoire] pour ne conserver que la valeur la plus récente. Lors de l'enregistrement final, une règle de mise à jour spécifique garantit qu'une nouvelle collecte actualise proprement les données existantes sans jamais créer de doublons.
-
-== Genèse du projet et besoins fonctionnels
-<genèse-du-projet-et-besoins-fonctionnels>
-=== Un problème concret
-<un-problème-concret>
-#block[
-#callout(
-body: 
-[
-Camille travaille dans un observatoire régional de l'emploi. Avant une réunion, on lui demande de comparer la part des femmes parmi les cadres dirigeants dans cinq pays européens depuis 2010. Chaque pays a son propre tableau, chaque tableau ses filtres, et les années récentes manquent parfois. Elle passe sa matinée à copier des chiffres dans un tableur. Avec #NormalTok("LaborScope");, elle choisit les pays, la profession et la période \; la réponse arrive en quelques secondes, au même format pour tous les pays.
-
-]
-, 
-title: 
-[
-Mise en situation
-]
-, 
-background_color: 
-rgb("#ccf1e3")
-, 
-icon_color: 
-rgb("#00A047")
-, 
-icon: 
-none
-, 
-body_background_color: 
-white
-)
-]
-=== Cahier des charges fonctionnel
-<cahier-des-charges-fonctionnel>
-Les fonctionnalités $F_i$ forment le socle obligatoire \; les fonctionnalités $F O_i$ sont les ajouts choisis par notre groupe.
-
-#table(
-  columns: (8.45%, 74.65%, 16.9%),
-  align: (left,left,left,),
-  table.header([Réf.], [Fonctionnalité], [Nature],),
-  table.hline(),
-  [$F_1$], [Consulter l'emploi selon le sexe et la profession], [Obligatoire],
-  [$F_2$], [Consulter la population en âge de travailler selon le sexe et l'âge], [Obligatoire],
-  [$F_3$], [Comparer plusieurs pays sur un même indicateur], [Obligatoire],
-  [$F_4$], [Suivre l'évolution d'un indicateur dans le temps], [Obligatoire],
-  [$F_5$], [Créer un compte, se connecter, se déconnecter], [Obligatoire],
-  [$F_6$], [Gérer des niveaux d'accès], [Obligatoire],
-  [$F O_1$], [Cartographie interactive], [Optionnelle],
-  [$F O_2$], [Génération automatique de rapports], [Optionnelle],
-  [$F O_3$], [Favoris], [Optionnelle],
-)
-== Profils des utilisateurs
-<profils-des-utilisateurs-1>
-#table(
-  columns: 4,
-  align: (left,center,center,center,),
-  table.header([Action], [Visiteur], [Inscrit], [Admin],),
-  table.hline(),
-  [Consulter les statistiques de base], [✓], [✓], [✓],
-  [Comparer des pays, suivre une évolution], [--], [✓], [✓],
-  [Enregistrer des favoris, exporter], [--], [✓], [✓],
-  [Gérer les comptes, rafraîchir les données], [--], [--], [✓],
-)
-- #strong[Visiteur non connecté] : découvre le service et consulte les indicateurs essentiels, sans compte.
-- #strong[Utilisateur inscrit] (chargé d'études, étudiant, journaliste) : exploite pleinement les statistiques, compare et conserve ses recherches.
-- #strong[Administrateur] : garantit le bon fonctionnement du service, gère les comptes et la fraîcheur des données.
 
 #synthese(1)[LaborScope simplifie l'accès aux statistiques de l'OIT pour trois profils d'utilisateurs, avec des données harmonisées et des indicateurs comparables d'un pays à l'autre.]
 = Architecture générale et choix technologiques
@@ -911,7 +871,7 @@ Dès le lancement de la collecte, l'application enregistre immédiatement une tr
 Plutôt que de télécharger systématiquement l'intégralité de la période demandée, l'application commence par vérifier les fichiers déjà archivés localement pour l'indicateur concerné. En identifiant les années déjà couvertes, elle isole uniquement les périodes manquantes et les regroupe par plages consécutives afin de limiter le nombre de requêtes envoyées à l'API d'ILOSTAT. Chaque fichier récupéré est d'abord écrit de façon temporaire avant d'être validé définitivement, ce qui évite de conserver un fichier corrompu en cas de coupure. L'ensemble des fichiers de la période est ensuite rassemblé en mémoire en éliminant les lignes en double. Grâce à ce mécanisme de cache, seul le premier import nécessite de télécharger tout l'historique tandis que les mises à jour suivantes ne récupèrent que les nouvelles données manquantes.
 
 #etape[Étape 3 - Parsing]
-Une fois le fichier CSV consolidé, l'application en analyse le contenu ligne par ligne pour le transformer en données exploitables. Pour chaque enregistrement, elle extrait les informations essentielles, c'est-à-dire l'indicateur, le code pays, la période (année ou trimestre) et la valeur numérique,tout en identifiant le sexe (homme, femme ou total) ainsi que la classification éventuelle (tranche d'âge ou profession). Les valeurs non numériques, notamment les données manquantes codées « \... » par ILOSTAT, sont quant à elles détectées et traitées comme des valeurs vides afin de ne pas fausser les analyses.
+Une fois le fichier CSV consolidé, l'application en analyse le contenu ligne par ligne pour le transformer en données exploitables. Pour chaque enregistrement, elle extrait les informations essentielles, c'est-à-dire l'indicateur, le code pays, la période (année ou trimestre) et la valeur numérique, tout en identifiant le sexe (homme, femme ou total) ainsi que la classification éventuelle (tranche d'âge ou profession). Les valeurs non numériques, notamment les données manquantes codées « \... » par ILOSTAT, sont quant à elles détectées et traitées comme des valeurs vides afin de ne pas fausser les analyses.
 
 #etape[Étape 4 - Filtrage par référentiels connus]
 Avant d'enregistrer les données, l'application vérifie leur cohérence en écartant toutes les observations rattachées à un pays ou à une classification absents de nos référentiels locaux. ILOSTAT renvoie en effet parfois des zones géographiques ou des codes inconnus qui, sans ce filtrage préalable, seraient rejetés par la base de données pour préserver l'intégrité des informations.
@@ -938,11 +898,11 @@ La consultation des données repose sur un mécanisme de recherche qui s'adapte 
 
 === F4 - Comparaison entre pays
 <f4---comparaison-entre-pays>
-La comparaison entre pays s'appuie sur la même logique de récupération des données que la fonctionnalité F3, mais est adaptée à une vue d'ensemble : plutôt que d'extraire tout l'historique d'un pays, le système ne récupère que la donnée la plus récente pour chacun des pays sélectionnés. Les résultats sont classés par ordre décroissant, ce qui permet à l'interface de mettre en évidence les valeurs extrêmes sans nécessiter de traitement supplémentaire lors de l'affichage. Ainsi, le pays le plus élevé en tête et le plus bas en fin de liste.
+La comparaison entre pays s'appuie sur la même logique de récupération des données que la fonctionnalité F3, mais est adaptée à une vue d'ensemble : plutôt que d'extraire tout l'historique d'un pays, le système ne récupère que la donnée la plus récente pour chacun des pays sélectionnés. Les résultats sont classés par ordre décroissant, ce qui permet à l'interface de mettre en évidence les valeurs extrêmes sans nécessiter de traitement supplémentaire lors de l'affichage. Ainsi, le pays le plus élevé figure en tête et le plus bas en fin de liste.
 
 === F5 - Croisement d'indicateurs
 <f5---croisement-dindicateurs>
-La comparaison de plusieurs indicateurs consiste à construire une série de données distincte pour chacun des indicateurs sélectionnés, avant de les regrouper au sein pour une meilleure visualisation. Comme les indicateurs comparés reposent sur des échelles différentes, l'unité de mesure est intégrée dans le titre de chaque série afin d'en assurer une lecture claire. Enfin, si aucune donnée n'est disponible pour un indicateur sur le pays choisi, celui-ci est automatiquement écarté pour éviter d'afficher des courbes vides sur le graphique.
+La comparaison de plusieurs indicateurs consiste à construire une série de données distincte pour chacun des indicateurs sélectionnés, avant de les regrouper au sein d'un même groupe pour une meilleure visualisation. Comme les indicateurs comparés reposent sur des échelles différentes, l'unité de mesure est intégrée dans le titre de chaque série afin d'en assurer une lecture claire. Enfin, si aucune donnée n'est disponible pour un indicateur sur le pays choisi, celui-ci est automatiquement écarté pour éviter d'afficher des courbes vides sur le graphique.
 
 === F6 - Authentification et gestion des droits
 <f6---authentification-et-gestion-des-droits>
@@ -964,7 +924,7 @@ La création d'un rapport automatisé repose sur un processus en trois temps. Le
 #callout(
 body: 
 [
-#strong[Contexte :] Marie, chargée d'études économiques à l'INSEE, doit alimenter son rapport sur les mesures exceptionnelles prises par le Luxembourg pendant la pandémie du Covid-19. Elle souhaite analyser l'évolution du taux d'emploi des 15-24 ans au Luxembourg sur la période 2016-2025, afin de quantifier l'impact de la pandémie sur le marché du travail luxembourgeois et le comparer à celui de pays voisins (France, Italie, Royaume-Uni)..
+#strong[Contexte :] Marie, chargée d'études économiques à l'INSEE, doit alimenter son rapport sur les mesures exceptionnelles prises par le Luxembourg pendant la pandémie du Covid-19. Elle souhaite analyser l'évolution du taux d'emploi des 15-24 ans au Luxembourg sur la période 2016-2025, afin de quantifier l'impact de la pandémie sur le marché du travail luxembourgeois et le comparer à celui de pays voisins (France, Italie, Royaume-Uni).
 
 ]
 , 
@@ -1004,10 +964,10 @@ Marie sélectionne dans l'interface :
 Le graphique ci-dessous est affiché :
 
 #capture("images/capture_evolution_luxembourg.png", [Évolution temporelle du taux d'emploi au Luxembourg.])
-On observe un ralentissement de l'évolution du taux d'emploi en 2020 (confinement) suivie d'une reprise progressive. La période 2019 sert de référence « pré-pandémie ».
+On observe un ralentissement de l'évolution du taux d'emploi en 2020 (confinement) suivi d'une reprise progressive. La période 2019 sert de référence « pré-pandémie ».
 
 #capture("images/capture_variations_luxembourg.png", [Variations annuelles du taux d'emploi au Luxembourg.])
-Comme la majorité des pays, le Luxembourg a connu une baisse du taux d'emploi avec une diminution de 0,5% en 2020. Cependant, la réaction est très rapide: le taux d'emploi évolue en 2021 de 2% par rapport à 2020. Marie se demande si la tendance est la même pour les autres pays.
+Comme la majorité des pays, le Luxembourg a connu une baisse du taux d'emploi avec une diminution de 0,5% en 2020. Cependant, la réaction est très rapide : le taux d'emploi évolue en 2021 de 2% par rapport à 2020. Marie se demande si la tendance est la même pour les autres pays.
 
 #etape[Étape 3 - Comparaison entre pays (F4)]
 Marie passe en mode « Comparaison pays » et sélectionne le Luxembourg, la France, le Royaume-Uni et l'Italie. Elle décide de comparer les taux d'emploi entre les pays :
@@ -1179,9 +1139,9 @@ Notre schéma a été conçu en respectant les trois premières formes normales.
 
 - #strong[1FN (atomicité)] : La table observation respecte la première forme normale, elle possède une clé primaire id (#NormalTok("BIGSERIAL");), chaque cellule ne contient qu'une seule valeur atomique et il n'y a pas de groupe répété ni de liste dans un attribut. Par exemple, l'attribut valeur de type #NormalTok("NUMERIC"); stocke un unique chiffre par ligne (ex. 24.5300), et l'attribut #NormalTok("sexe"); ne prend qu'une seule valeur parmi #NormalTok("homme");, #NormalTok("femme"); ou #NormalTok("total");. Chaque table du schéma suit ce principe : pays a #NormalTok("code_pays"); comme clé, indicateur a #NormalTok("code_indicateur");, et aucun attribut ne contient un ensemble de valeurs multiples.
 
-- #strong[2FN] : Toutes les clés primaires du schéma sont simples (un seul attribut), ce qui fait que la 2FN est formellement respectée puisqu'il n'existe pas de dépendance partielle possible (un attribut non-clé ne peut pas dépendre d'une partie d'une clé composite). Par exemple, dans la table observation, la clé primaire est #NormalTok("id"); et tous les autres attributs (#NormalTok("code_indicateur");, #NormalTok("code_pays");, #NormalTok("periode");, #NormalTok("valeur");, etc.) dépendent entièrement de cette clé. Cependant, la table classification présente une différence : les attributs #NormalTok("age_min");, #NormalTok("age_max"); et #NormalTok("valeur"); ne sont pas tous pertinents pour chaque ligne (si #NormalTok("type"); = #NormalTok("age");, seule #NormalTok("valeur"); est nulle \; si #NormalTok("type"); = #NormalTok("occupation");, seuls #NormalTok("age_min"); et #NormalTok("age_max"); sont nuls). C'est un attribut conditionnel qui, permet de séparer la classification pour les deux indicateurs (#NormalTok("occupation"); pour emploi par sexe et profession, et #NormalTok("âge"); pour population en âge de travailler par sexe et âge). Cette table respecte tout de même la 2FN.
+- #strong[2FN] : Toutes les clés primaires du schéma sont simples (un seul attribut), ce qui fait que la 2FN est formellement respectée puisqu'il n'existe pas de dépendance partielle possible (un attribut non-clé ne peut pas dépendre d'une partie d'une clé composite). Par exemple, dans la table observation, la clé primaire est #NormalTok("id"); et tous les autres attributs (#NormalTok("code_indicateur");, #NormalTok("code_pays");, #NormalTok("periode");, #NormalTok("valeur");, etc.) dépendent entièrement de cette clé. Cependant, la table classification présente une différence : les attributs #NormalTok("age_min");, #NormalTok("age_max"); et #NormalTok("valeur"); ne sont pas tous pertinents pour chaque ligne (si #NormalTok("type"); = #NormalTok("age");, seule #NormalTok("valeur"); est nulle \; si #NormalTok("type"); = #NormalTok("occupation");, seuls #NormalTok("age_min"); et #NormalTok("age_max"); sont nuls). C'est un attribut conditionnel qui permet de séparer la classification pour les deux indicateurs (#NormalTok("occupation"); pour emploi par sexe et profession, et #NormalTok("âge"); pour population en âge de travailler par sexe et âge). Cette table respecte tout de même la 2FN.
 
-- #strong[3FN] : La 3FN impose qu'aucun attribut non-clé ne dépende d'un autre attribut non-clé (dépendance transitique). La table utilisateur en est un bon exemple de respect, #NormalTok("mot_de_passe_hash");, #NormalTok("role");, #NormalTok("actif"); dépendent tous directement de #NormalTok("id"); sans passer par un autre attribut. Le modèle physique des données respecte donc les 3 formes normales.
+- #strong[3FN] : La 3FN impose qu'aucun attribut non-clé ne dépende d'un autre attribut non-clé (dépendance transitive). La table utilisateur en est un bon exemple de respect, #NormalTok("mot_de_passe_hash");, #NormalTok("role");, #NormalTok("actif"); dépendent tous directement de #NormalTok("id"); sans passer par un autre attribut. Le modèle physique des données respecte donc les 3 formes normales.
 
 #block[
 #callout(
@@ -1221,7 +1181,7 @@ Plutôt que de diviser le travail par fonctionnalité où un membre développe u
 
 === Planification
 <planification>
-Le suivi de notre avancement s'est appuyé sur le diagramme de Gantt initialement construit lors de la phase d'analyse. Face à la réalité du développement, notamment la complexité de l'intégration entre les couches développées en parallèles, nous n'avons pas pu tenir toutes les grandes lignes prévisionnelles au jour près. Certains modules ont nécessité plus de temps de débogage ou d'appropriation que prévu.
+Le suivi de notre avancement s'est appuyé sur le diagramme de Gantt initialement construit lors de la phase d'analyse. Face à la réalité du développement, notamment la complexité de l'intégration entre les couches développées en parallèle, nous n'avons pas pu tenir toutes les grandes lignes prévisionnelles au jour près. Certains modules ont nécessité plus de temps de débogage ou d'appropriation que prévu.
 
 Cependant, ces décalages ont été totalement maîtrisés et résorbés grâce aux trois journées d'immersion. Ce temps de travail intensif, réunissant toute l'équipe en présentiel, a agi comme un véritable catalyseur. Il nous a permis de réaliser l'intégration finale des différentes couches, de lever les points bloquants de communication entre l'API et le Front-end, et de stabiliser l'application pour livrer un produit fonctionnel dans les délais imposés. Par ailleurs, lors de ces jours d'immersion, nous avons eu l'occasion de faire une première présentation en direct du projet. Cela nous a permis de recevoir des remarques constructives de la part de notre encadrant que nous avons ensuite pris en compte afin d'améliorer l'application.
 
@@ -1360,7 +1320,7 @@ Puisque plusieurs membres intervenaient sur la même base de code, il a fallu fi
 <démarche-dassurance-qualité-performances-et-robustesse>
 === Stratégie de tests
 <stratégie-de-tests>
-Afin de garantir la stabilité de l'application, nous avons mis en place une suite de tests unitaires avec le framework pytest, couvrant les trois couches du back-end. Nous avons ainsi testé la construction des requêtes SQL au niveau des DAO, la logique de nettoyage et de gestion des erreurs des services métiers, ainsi que les codes de retour HTTP des contrôleurs de l'API. Pour garantir des tests rapides sans risquer de polluer notre base de données locale, nous avons isolé notre code grâce à l'utilisation de mocks via la bibliothèque #NormalTok("unittest.mock");. Cela consiste concrètement à simuler la base de données pour vérifier les requêtes des DAO sans les exécuter, et nous simulons le client HTTP pour tester les services sans déclencher de vrais téléchargements. Cette méthode permet de réduire le temps d'exécution des tests ainsi que de tester des cas aux limites difficiles à reproduire manuellement, comme une perte de connexion réseau ou la réception d'un fichier corrompu. Chaque test suit le canevas #emph[given / when / then].
+Afin de garantir la stabilité de l'application, nous avons mis en place une suite de tests unitaires avec le framework pytest, couvrant les trois couches du back-end. Nous avons ainsi testé la construction des requêtes SQL au niveau des DAO, la logique de nettoyage et de gestion des erreurs des services métier, ainsi que les codes de retour HTTP des contrôleurs de l'API. Pour garantir des tests rapides sans risquer de polluer notre base de données locale, nous avons isolé notre code grâce à l'utilisation de mocks via la bibliothèque #NormalTok("unittest.mock");. Cela consiste concrètement à simuler la base de données pour vérifier les requêtes des DAO sans les exécuter, et nous simulons le client HTTP pour tester les services sans déclencher de vrais téléchargements. Cette méthode permet de réduire le temps d'exécution des tests ainsi que de tester des cas aux limites difficiles à reproduire manuellement, comme une perte de connexion réseau ou la réception d'un fichier corrompu. Chaque test suit le canevas #emph[given / when / then].
 
 #table(
   columns: 3,
@@ -1378,7 +1338,7 @@ Pour éviter les problèmes de performances liés à l'extraction et l'insertion
 
 === Résilience face au changement de source de données
 <résilience-face-au-changement-de-source-de-données>
-Si l'API ILOSTAT venait à fermer demain ou devait être remplacée, nous avons fait en sorte que l'impact sur notre code serait le plus minime possible. Cela est rendu possible par notre découpage en couches et la séparation des responsabilités. Dans notre architecture, l'intégralité du programme, que ce soit la base de données, l'API ou encore les contrôleurs ignorent l'existence d'ILOSTAT. Le traitement de cette source est centralisé dans deux scripts : le script #NormalTok("ilostat_client.py"); gère l'URL et les requêtes, tandis que #NormalTok("parser_service.py"); adapte les données brutes d'ILOSTAT et les transforment en nos objets Python génériques. En cas de changement de source des données, il suffirait de créer un nouveau fichier client et d'ajuster le dictionnaire de renommage. Ainsi, les tables PostgreSQL, les objets métiers et le reste de l'application n'auraient besoin d'aucune modification.
+Si l'API ILOSTAT venait à fermer demain ou devait être remplacée, nous avons fait en sorte que l'impact sur notre code serait le plus minime possible. Cela est rendu possible par notre découpage en couches et la séparation des responsabilités. Dans notre architecture, l'intégralité du programme, que ce soit la base de données, l'API ou encore les contrôleurs, ignore l'existence d'ILOSTAT. Le traitement de cette source est centralisé dans deux scripts : le script #NormalTok("ilostat_client.py"); gère l'URL et les requêtes, tandis que #NormalTok("parser_service.py"); adapte les données brutes d'ILOSTAT et les transforme en nos objets Python génériques. En cas de changement de source des données, il suffirait de créer un nouveau fichier client et d'ajuster le dictionnaire de renommage. Ainsi, les tables PostgreSQL, les objets métiers et le reste de l'application n'auraient besoin d'aucune modification.
 
 #block[
 #callout(
@@ -1418,11 +1378,11 @@ white
 <notes-individuelles>
 #heading(level: 2, numbering: none)[Jade Colin]
 <jade-colin>
-#strong[Mon rôle et mes réalisations.] #todo[Organisation et code : ce que j'ai concrètement produits]
+Durant ce projet, j'ai pris en charge le développement de l'intégralité du frontend sous Streamlit. Concrètement, j'ai conçu les différentes pages de l'interface, intégré les graphiques interactifs et assuré la liaison entre le frontend et le backend afin de faire circuler les requêtes et l'authentification de bout en bout.
 
-#strong[Mon vécu du travail en groupe.] #todo[Écarts de niveau, tensions ou conflits Git, ajustements]
+Le travail en équipe s'est révélé très enrichissant pour moi, puisque que je partais avec de réelles lacunes en développement informatique et peu d'aisance sur ce type de projet. Le niveau de chacun était assez varié et pouvoir m'appuyer sur des membres plus expérimentés dans le groupe m'a énormément aidée à débloquer mes problèmes et à monter en compétence.
 
-#strong[Enseignements et conseils aux futurs 2A.] #todo[Ce que je retiens, ce que je ferais autrement.]
+Ce projet m'a permis de progresser bien plus que je ne l'aurais imaginé, avec un vrai déclic durant les trois jours d'immersion : travailler tous ensemble en continu m'a permis de comprendre la logique globale de l'application et de finaliser l'intégration. Mon conseil aux futurs 2A qui appréhendent le projet informatique est de ne pas rester bloqués seuls face à leurs difficultés, d'oser solliciter les membres plus à l'aise du groupe et de communiquer régulièrement surtout lorsque chacun travaille sur une brique différente.
 
 #heading(level: 2, numbering: none)[Sidy Mohamed Salim Diallo]
 <sidy-mohamed-salim-diallo>
@@ -1442,7 +1402,7 @@ Ce projet m'a permis de gagner en assurance sur la conception de bases de donné
 
 #heading(level: 2, numbering: none)[Adam Ouangko Haïwè]
 <adam-ouangko-haïwè>
-Au sein de l'équipe, j'ai principalement travaillé dans la couche #NormalTok("service"); sur la partie backend, où j'ai développé la logique métier des analyses, avec une contribution à la couche #NormalTok("controller");. Ce rôle m'a appris à traduire un besoin fonctionnel (analyser une évolution, comparer des pays ou des indicateurs) en règles claires, indépendantes de la base de données comme de l'interface. Placé entre la DAO et l'API, j'ai surtout mesuré l'importance de définir en amont les formats de données échangés, c'est à cet endroit que les couches doivent s'emboîter sans erreur. J'ai aussi appris à développer le reflexe d'écrire un code testable, en isolant mes services grâce aux mocks, et à respecter des conventions communes (typage explicite, Ruff, revue de code avant fusion). Les journées d'immersion ont montré que la communication entre l'API et le frontend se règle plus vite à plusieurs, autour d'un même écran. \ Mon conseil aux futurs 2A : séparer strictement la logique métier de l'accès aux données, tester tôt et documenter les interfaces entre couches.
+Au sein de l'équipe, j'ai principalement travaillé dans la couche #NormalTok("service"); sur la partie backend, où j'ai développé la logique métier des analyses, avec une contribution à la couche #NormalTok("controller");. Ce rôle m'a appris à traduire un besoin fonctionnel (analyser une évolution, comparer des pays ou des indicateurs) en règles claires, indépendantes de la base de données comme de l'interface. Placé entre la DAO et l'API, j'ai surtout mesuré l'importance de définir en amont les formats de données échangés, c'est à cet endroit que les couches doivent s'emboîter sans erreur. J'ai aussi appris à développer le réflexe d'écrire un code testable, en isolant mes services grâce aux mocks, et à respecter des conventions communes (typage explicite, Ruff, revue de code avant fusion). Les journées d'immersion ont montré que la communication entre l'API et le frontend se règle plus vite à plusieurs, autour d'un même écran. \ Mon conseil aux futurs 2A : séparer strictement la logique métier de l'accès aux données, tester tôt et documenter les interfaces entre couches.
 
 #heading(level: 2, numbering: none)[Vicram Raveendiran]
 <vicram-raveendiran>
@@ -1450,7 +1410,7 @@ Durant le projet, j'ai occupé le rôle de data engineer. Mon rôle était de g�
 
 Travailler en équipe m'a permis d'en apprendre plus sur le fonctionnement au sein d'un groupe de projet. En effet, dans les précédents projets, nous n'avions pas de rôles répartis, ce qui causait un peu de désordre. Dans ce projet, chacun travaillait sur un aspect du code et sur différentes branches. De plus, certains membres m'ont aidé à progresser en code, de par leur expérience.
 
-Une des choses fondamentales que je retiens de ce projet est qu'il est toujours possible d'en apprendre plus sur les différents aspects de la programmation. Un conseil que j'aurai à donner à un futur 2A serait de bien organiser et répartir les rôles et les tâches au sein d'un groupe, car c'est essentiel dans un projet d'équipe et dans le monde du travail.
+Une des choses fondamentales que je retiens de ce projet est qu'il est toujours possible d'en apprendre plus sur les différents aspects de la programmation. Un conseil que j'aurais à donner à un futur 2A serait de bien organiser et répartir les rôles et les tâches au sein d'un groupe, car c'est essentiel dans un projet d'équipe et dans le monde du travail.
 
 #heading(level: 1, numbering: none)[Annexes]
 <annexes>
