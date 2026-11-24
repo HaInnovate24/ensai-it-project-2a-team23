@@ -1,87 +1,71 @@
-import os
-import sys
-
-import pytest
-
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..", "src")))
-
-from utils.config import load_environment_variables
-
-load_environment_variables()
+"""Tests du ClassificationDao avec une connexion mockée (aucune base réelle)."""
 
 from business_object.classification import Classification
+from business_object.enums import TypeClassification
 from dao.classification_dao import ClassificationDao
 
-try:
-    from business_object.enums import TypeClassification
-except ImportError:
-    TypeClassification = None
 
+def test_trouver_par_code_existant(curseur):
+    """trouver_par_code() renvoie la classification correspondante."""
+    curseur.fetchone.return_value = {
+        "code": "AGE_AGGREGATE_TOTAL",
+        "libelle": "Total",
+        "type": "age",
+    }
 
-@pytest.fixture
-def dao():
-    """Fournit une instance du DAO pour les tests."""
-    return ClassificationDao()
+    classif = ClassificationDao().trouver_par_code("AGE_AGGREGATE_TOTAL")
 
-
-@pytest.fixture
-def nettoyage_db(dao):
-    """Nettoie la base de données après le test (Teardown)."""
-    yield
-    with dao.conn.cursor() as cursor:
-        cursor.execute("DELETE FROM classification WHERE code = 'TEST_CLASS';")
-    dao.conn.commit()
-
-
-def test_trouver_par_code_existant(dao):
-    """Vérifie qu'on peut récupérer une classification de base."""
-    # 'AGE_AGGREGATE_TOTAL' est inséré par pop.referentiel.sql
-    classif = dao.trouver_par_code("AGE_AGGREGATE_TOTAL")
     assert classif is not None
     assert classif.code == "AGE_AGGREGATE_TOTAL"
-    # Le DAO renvoie la chaîne ou l'Enum, on vérifie juste que c'est le bon type
-    assert str(classif.type) == "age" or getattr(classif.type, "value", classif.type) == "age"
+    valeur_type = classif.type.value if hasattr(classif.type, "value") else classif.type
+    assert valeur_type == "age"
 
 
-def test_trouver_par_code_inexistant(dao):
-    """Vérifie le comportement si la classification n'existe pas."""
-    classif = dao.trouver_par_code("CODE_INEXISTANT")
-    assert classif is None
+def test_trouver_par_code_inexistant(curseur):
+    """trouver_par_code() renvoie None si le code n'existe pas."""
+    curseur.fetchone.return_value = None
+    assert ClassificationDao().trouver_par_code("CODE_INEXISTANT") is None
 
 
-def test_lister_sans_filtre(dao):
-    """Vérifie que l'on récupère bien toutes les classifications (âges + occupations)."""
-    liste = dao.lister()
-    # pop.referentiel.sql contient 3 âges et 12 occupations = 15 lignes
-    assert len(liste) >= 15
+def test_lister_sans_filtre(curseur):
+    """lister() mappe toutes les lignes renvoyées en objets Classification."""
+    curseur.fetchall.return_value = [
+        {"code": "AGE_AGGREGATE_TOTAL", "libelle": "Total", "type": "age"},
+        {"code": "OCU_ISCO08_1", "libelle": "Directeurs", "type": "occupation"},
+    ]
+
+    liste = ClassificationDao().lister()
+
+    assert len(liste) == 2
     assert isinstance(liste[0], Classification)
 
 
-def test_lister_avec_filtre(dao):
-    """Vérifie que le filtrage par type fonctionne bien."""
-    # On peut passer l'Enum s'il existe, sinon on passe directement la chaîne 'age'
-    filtre = TypeClassification.AGE if hasattr(TypeClassification, "AGE") else "age"
+def test_lister_avec_filtre_type(curseur):
+    """lister(type=AGE) passe la valeur du type en paramètre SQL."""
+    curseur.fetchall.return_value = [
+        {"code": "AGE_AGGREGATE_TOTAL", "libelle": "Total", "type": "age"},
+    ]
 
-    liste = dao.lister(type=filtre)
-    # Il n'y a que 3 tranches d'âge dans le référentiel de base
-    assert len(liste) >= 3
+    liste = ClassificationDao().lister(type=TypeClassification.AGE)
 
-    # On vérifie que toutes les lignes retournées sont bien du type 'age'
-    for classif in liste:
-        valeur_type = classif.type.value if hasattr(classif.type, "value") else classif.type
-        assert valeur_type == "age"
+    assert len(liste) == 1
+    # Le filtre 'age' (valeur de l'Enum) est transmis à la requête.
+    _, parametres = curseur.execute.call_args[0]
+    assert parametres == ("age",)
 
 
-def test_creer_classification(dao, nettoyage_db):
-    """Vérifie l'insertion d'une nouvelle classification et le nettoyage."""
-    nouvelle = Classification(
-        code="TEST_CLASS", libelle="Classification de test automatisé", type="occupation"
+def test_creer_renvoie_la_classification_inseree(curseur, connexion):
+    """creer() renvoie l'objet inséré et valide la transaction (commit)."""
+    curseur.fetchone.return_value = {
+        "code": "TEST_CLASS",
+        "libelle": "Classification de test",
+        "type": "occupation",
+    }
+
+    creee = ClassificationDao().creer(
+        Classification(code="TEST_CLASS", libelle="Classification de test", type="occupation")
     )
 
-    classif_creee = dao.creer(nouvelle)
-    assert classif_creee.code == "TEST_CLASS"
-
-    # Vérification en base
-    classif_en_base = dao.trouver_par_code("TEST_CLASS")
-    assert classif_en_base is not None
-    assert classif_en_base.libelle == "Classification de test automatisé"
+    assert creee.code == "TEST_CLASS"
+    assert creee.libelle == "Classification de test"
+    connexion.commit.assert_called()

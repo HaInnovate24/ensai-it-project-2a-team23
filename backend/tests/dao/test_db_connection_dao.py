@@ -1,42 +1,44 @@
-import os
-import sys
+"""Tests de DBConnection : singleton et paramètres de connexion (sans vraie base).
+
+La connexion psycopg2 est mockée par le conftest racine : on vérifie ici le
+comportement de DBConnection (singleton, options passées à psycopg2.connect)
+sans contacter de base de données.
+"""
 
 from psycopg2.extras import RealDictCursor
 
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..", "src")))
-
-from utils.config import load_environment_variables
-
-load_environment_variables()
-
 from dao.db_connection import DBConnection
+from utils.singleton import Singleton
 
 
 def test_singleton_pattern():
-    """Vérifie que DBConnection ne crée qu'une seule et unique instance."""
+    """DBConnection ne crée qu'une seule et unique instance partagée."""
     db1 = DBConnection()
     db2 = DBConnection()
 
     assert db1 is db2
-
     assert db1.connection is db2.connection
 
 
-def test_connection_is_active():
-    """Vérifie que la connexion est bien établie et fonctionnelle."""
-    db = DBConnection()
-    conn = db.connection
+def test_connection_est_utilisable(curseur):
+    """La connexion exposée permet d'exécuter une requête et d'en lire le résultat."""
+    curseur.fetchone.return_value = {"numero": 1}
 
-    with conn.cursor() as cursor:
-        cursor.execute("SELECT 1 AS numero;")
-        result = cursor.fetchone()
-
-        assert result is not None
-        assert result["numero"] == 1
-
-
-def test_real_dict_cursor_is_used():
-    """Vérifie que le curseur renvoie bien des dictionnaires comme demandé."""
     db = DBConnection()
     with db.connection.cursor() as cursor:
-        assert isinstance(cursor, RealDictCursor)
+        cursor.execute("SELECT 1 AS numero;")
+        resultat = cursor.fetchone()
+
+    assert resultat is not None
+    assert resultat["numero"] == 1
+
+
+def test_connexion_utilise_real_dict_cursor(appels_connect):
+    """DBConnection demande bien un RealDictCursor et positionne le search_path."""
+    # On force une nouvelle construction pour capturer les paramètres de connexion.
+    Singleton._instances.pop(DBConnection, None)
+    DBConnection()
+
+    kwargs = appels_connect[-1]
+    assert kwargs["cursor_factory"] is RealDictCursor
+    assert "search_path" in kwargs["options"]

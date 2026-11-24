@@ -8,7 +8,7 @@ from dao.classification_dao import ClassificationDao
 from dao.indicateur_dao import IndicateurDao
 from dao.observation_dao import ObservationDao
 from dao.pays_dao import PaysDao
-from model.analyse_model import Comparaison, PointSerie, Serie
+from model.analyse_model import Comparaison, PointSerie, PointTauxEmploi, ResultatTauxEmploi, Serie
 from utils.exceptions import DonneesInvalides, RessourceIntrouvable
 
 
@@ -178,6 +178,103 @@ class AnalyseService:
         if not series:
             raise RessourceIntrouvable(f"Aucune donnée pour le pays {code_pays}.")
         return Comparaison(series=series)
+
+    def calculer_taux_emploi(
+        self,
+        code_pays: str,
+        nb_periodes: int | None = None,
+    ) -> ResultatTauxEmploi:
+        """Calcule les taux d'emploi et leurs variations pour un pays donné.
+
+        Taux d'emploi = Emploi (OCU_ISCO08_TOTAL) / Population (AGE_AGGREGATE_TOTAL) * 100
+        Les variations sont en points (différence entre la période courante et la précédente).
+
+        Les deux indicateurs utilisés :
+        - EMP_TEMP_SEX_OCU_NB (emploi, classification OCU_ISCO08_TOTAL)
+        - POP_XWAP_SEX_AGE_NB (population, classification AGE_AGGREGATE_TOTAL)
+        """
+        if not code_pays:
+            raise DonneesInvalides("Le code pays est obligatoire.")
+        if nb_periodes is not None and nb_periodes < 1:
+            raise DonneesInvalides("Le nombre de périodes doit être supérieur ou égal à 1.")
+
+        self._trouver_pays(code_pays)
+
+        code_emploi = "EMP_TEMP_SEX_OCU_NB"
+        code_population = "POP_XWAP_SEX_AGE_NB"
+
+        self._trouver_indicateur(code_emploi)
+        self._trouver_indicateur(code_population)
+
+        sexes = [Sexe.TOTAL, Sexe.HOMME, Sexe.FEMME]
+
+        def _serie_par_sexe(code_ind: str, code_classif: str) -> dict[Sexe, dict[str, float]]:
+            """Renvoie {sexe: {periode: valeur}} pour un indicateur."""
+            resultat: dict[Sexe, dict[str, float]] = {s: {} for s in sexes}
+            for sexe in sexes:
+                observations = self.observation_dao.lire_serie(
+                    code_ind, code_pays, sexe, code_classif
+                )
+                for obs in observations:
+                    if obs.valeur is not None:
+                        resultat[sexe][obs.periode] = float(obs.valeur)
+            return resultat
+
+        emploi = _serie_par_sexe(code_emploi, "OCU_ISCO08_TOTAL")
+        population = _serie_par_sexe(code_population, "AGE_AGGREGATE_TOTAL")
+
+        # Calculer les taux d'emploi pour chaque sexe et période
+        taux: dict[Sexe, dict[str, float]] = {s: {} for s in sexes}
+        for sexe in sexes:
+            for periode, pop_val in population[sexe].items():
+                emp_val = emploi[sexe].get(periode)
+                if emp_val is not None and pop_val > 0:
+                    taux[sexe][periode] = emp_val / pop_val * 100.0
+
+        if all(not t for t in taux.values()):
+            raise RessourceIntrouvable(
+                f"Aucune donnée d'emploi et/ou de population disponible pour le pays {code_pays}."
+            )
+
+        def _limiter(d: dict[str, float]) -> dict[str, float]:
+            """Garde uniquement les N dernières périodes."""
+            if nb_periodes is None:
+                return d
+            periodes_triees = sorted(d.keys())[-nb_periodes:]
+            return {p: d[p] for p in periodes_triees}
+
+        def _points(d: dict[str, float]) -> list[PointTauxEmploi]:
+            """Convertit {periode: taux} en liste ordonnée de PointTauxEmploi."""
+            return [
+                PointTauxEmploi(periode=p, taux=v) for p, v in sorted(d.items())
+            ]
+
+        def _variations(d: dict[str, float]) -> list[PointTauxEmploi]:
+            """Calcule les variations (en points) entre périodes consécutives."""
+            periodes_triees = sorted(d.keys())
+            resultat: list[PointTauxEmploi] = []
+            for i in range(1, len(periodes_triees)):
+                resultat.append(
+                    PointTauxEmploi(
+                        periode=periodes_triees[i],
+                        taux=d[periodes_triees[i]] - d[periodes_triees[i - 1]],
+                    )
+                )
+            return resultat
+
+        taux_total = _limiter(taux[Sexe.TOTAL])
+        taux_homme = _limiter(taux[Sexe.HOMME])
+        taux_femme = _limiter(taux[Sexe.FEMME])
+
+        return ResultatTauxEmploi(
+            taux_total=_points(taux_total),
+            taux_homme=_points(taux_homme),
+            taux_femme=_points(taux_femme),
+            variation_annuelle_emploi=_variations(taux_total),
+            variation_taux_total=_variations(taux_total),
+            variation_taux_homme=_variations(taux_homme),
+            variation_taux_femme=_variations(taux_femme),
+        )
 
     def carte(
         self,

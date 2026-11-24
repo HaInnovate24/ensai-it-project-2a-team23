@@ -13,10 +13,14 @@ def main() -> int:
     """Collecte chaque indicateur actif ; renvoie le nombre d'imports en échec."""
     load_environment_variables()
 
+    from client.ilostat_client import IlostatClient
     from dao.indicateur_dao import IndicateurDao
     from service.collecte_service import CollecteService
 
-    service = CollecteService()
+    # Import reproductible et hors ligne : on lit les CSV déjà présents dans
+    # backend/src/client/data/ (jamais d'appel réseau à ILOSTAT), puis on parse
+    # et on enregistre les observations en base comme d'habitude.
+    service = CollecteService(ilostat_client=IlostatClient(offline=True))
     indicateurs = [indicateur for indicateur in IndicateurDao().lister() if indicateur.actif]
 
     if not indicateurs:

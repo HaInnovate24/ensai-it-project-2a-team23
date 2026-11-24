@@ -1,62 +1,53 @@
-import os
-import sys
-
-import pytest
-
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..", "src")))
-
-from utils.config import load_environment_variables
-
-load_environment_variables()
+"""Tests du PaysDao avec une connexion mockée (aucune base réelle)."""
 
 from business_object.pays import Pays
 from dao.pays_dao import PaysDao
 
 
-@pytest.fixture
-def dao():
-    """Fournit une instance du DAO pour les tests."""
-    return PaysDao()
+def test_lister_renvoie_des_pays(curseur):
+    """lister() mappe chaque ligne renvoyée par la base en objet Pays."""
+    curseur.fetchall.return_value = [
+        {"code_pays": "FRA", "nom_pays": "France"},
+        {"code_pays": "DEU", "nom_pays": "Allemagne"},
+    ]
+
+    pays = PaysDao().lister()
+
+    assert len(pays) == 2
+    assert all(isinstance(p, Pays) for p in pays)
+    assert pays[0].code_pays == "FRA"
+    assert pays[0].nom_pays == "France"
 
 
-@pytest.fixture
-def nettoyage_db(dao):
-    """Nettoie la base de données après le test."""
-    yield
-    with dao.conn.cursor() as cursor:
-        cursor.execute("DELETE FROM pays WHERE code_pays = 'ZZZ';")
-    dao.conn.commit()
+def test_lister_sans_resultat(curseur):
+    """lister() renvoie une liste vide si la base ne renvoie rien."""
+    curseur.fetchall.return_value = []
+    assert PaysDao().lister() == []
 
 
-def test_trouver_par_code_existant(dao):
-    """Vérifie qu'on peut récupérer la France."""
-    pays = dao.trouver_par_code("FRA")
+def test_trouver_par_code_existant(curseur):
+    """trouver_par_code() renvoie le Pays correspondant quand il existe."""
+    curseur.fetchone.return_value = {"code_pays": "FRA", "nom_pays": "France"}
+
+    pays = PaysDao().trouver_par_code("FRA")
+
     assert pays is not None
     assert pays.code_pays == "FRA"
     assert pays.nom_pays == "France"
 
 
-def test_trouver_par_code_inexistant(dao):
-    """Vérifie le comportement si le pays n'existe pas."""
-    pays = dao.trouver_par_code("XYZ")
-    assert pays is None
+def test_trouver_par_code_inexistant(curseur):
+    """trouver_par_code() renvoie None quand le pays n'existe pas."""
+    curseur.fetchone.return_value = None
+    assert PaysDao().trouver_par_code("XYZ") is None
 
 
-def test_lister_pays(dao):
-    """Vérifie que la liste contient bien des objets Pays."""
-    pays_liste = dao.lister()
-    assert len(pays_liste) >= 22
-    assert isinstance(pays_liste[0], Pays)
+def test_creer_renvoie_le_pays_insere(curseur, connexion):
+    """creer() renvoie l'objet inséré et valide la transaction (commit)."""
+    curseur.fetchone.return_value = {"code_pays": "ITA", "nom_pays": "Italie"}
 
+    cree = PaysDao().creer(Pays(code_pays="ITA", nom_pays="Italie"))
 
-def test_creer_pays(dao, nettoyage_db):
-    """Vérifie l'insertion d'un nouveau pays et le nettoyage automatique."""
-    nouveau_pays = Pays(code_pays="ZZZ", nom_pays="Pays de Test")
-
-    pays_cree = dao.creer(nouveau_pays)
-    assert pays_cree.code_pays == "ZZZ"
-    assert pays_cree.nom_pays == "Pays de Test"
-
-    pays_en_base = dao.trouver_par_code("ZZZ")
-    assert pays_en_base is not None
-    assert pays_en_base.nom_pays == "Pays de Test"
+    assert cree.code_pays == "ITA"
+    assert cree.nom_pays == "Italie"
+    connexion.commit.assert_called()

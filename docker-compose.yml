@@ -12,6 +12,7 @@ services:
       - POSTGRES_USER=user
       - POSTGRES_PASSWORD=password
       - POSTGRES_SCHEMA=project
+      - JWT_SECRET_KEY=laborscope-dev-secret-key-change-in-production-0123456789
       - UVICORN_HOST=0.0.0.0
       - UVICORN_PORT=5000
       - ELO_K_FACTOR=32

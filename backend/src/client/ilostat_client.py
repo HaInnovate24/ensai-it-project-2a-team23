@@ -19,6 +19,17 @@ class IlostatClient:
     CODE_INDICATEUR_PATTERN = re.compile(r"[A-Za-z0-9][A-Za-z0-9_-]*")
     FICHIER_PATTERN = re.compile(r"(.+)_(\d{4})_(\d{4})\.csv")
 
+    def __init__(self, offline: bool = False):
+        """Initialise le client.
+
+        offline=True : lit uniquement les CSV déjà présents dans le dossier
+        ``data/`` (``backend/src/client/data/``) et ne contacte jamais ILOSTAT.
+        Utile pour un import reproductible et hors ligne (démonstration, Docker,
+        correction par un enseignant). Par défaut (False), les années absentes du
+        cache sont téléchargées depuis ILOSTAT.
+        """
+        self.offline = offline
+
     @classmethod
     def _valider_code_indicateur(cls, code_indicateur: str) -> str:
         """Valide le code pour éviter qu'il ne sorte du dossier de cache."""
@@ -74,12 +85,15 @@ class IlostatClient:
                 "L'année de début (from_date) doit être inférieure ou égale à l'année de fin (to_date)."
             )
 
-        annees_existantes = self.lister_annees_telechargees(code, from_date, to_date)
-        annees_manquantes = [
-            annee for annee in range(from_date, to_date + 1) if annee not in annees_existantes
-        ]
-        for debut, fin in self._regrouper_annees_consecutives(annees_manquantes):
-            self._telecharger_plage(code, debut, fin)
+        # En mode hors ligne, on ne télécharge rien : on se contente des CSV déjà
+        # présents dans le cache local (backend/src/client/data/).
+        if not self.offline:
+            annees_existantes = self.lister_annees_telechargees(code, from_date, to_date)
+            annees_manquantes = [
+                annee for annee in range(from_date, to_date + 1) if annee not in annees_existantes
+            ]
+            for debut, fin in self._regrouper_annees_consecutives(annees_manquantes):
+                self._telecharger_plage(code, debut, fin)
 
         return self._lire_csv_archive(code, from_date, to_date)
 

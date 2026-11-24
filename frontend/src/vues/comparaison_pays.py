@@ -2,6 +2,7 @@ from datetime import date
 
 import pandas as pd
 import plotly.express as px
+import plotly.graph_objects as go
 import streamlit as st
 
 from utils.api_client import api_client
@@ -444,6 +445,12 @@ with col_chart:
         # Marge à droite pour que les étiquettes des barres ne soient pas coupées.
         fig.update_xaxes(showticklabels=False, range=[0, df["Valeur"].max() * 1.15])
         afficher_graphique(fig)
+        with st.expander("Voir les données"):
+            st.dataframe(
+                df[["Pays", "Valeur", "Période"]],
+                use_container_width=True,
+                hide_index=True,
+            )
 
 with col_aside:
     df_retenir = df.sort_values("Valeur", ascending=False)
@@ -530,3 +537,221 @@ emplacement_pdf.download_button(
     icon=":material/picture_as_pdf:",
     use_container_width=True,
 )
+
+# =====================================================================
+# Taux d'emploi : évolution et variations entre pays
+# =====================================================================
+st.divider()
+st.subheader("Taux d'emploi — comparaison entre pays")
+st.caption("Taux d'emploi = Emploi (toutes professions) / Population (15 ans et plus) × 100")
+
+col_t4a, col_t4b, col_t4c = st.columns([1.2, 1, 1])
+with col_t4a:
+    libelle_taux4 = st.selectbox(
+        "Série à comparer",
+        ["Taux total", "Hommes", "Femmes"],
+        key="f4_taux_serie",
+    )
+with col_t4b:
+    nb_periodes_taux4 = st.slider(
+        "Nombre d'années", min_value=2, max_value=13, value=10, key="f4_taux_n"
+    )
+with col_t4c:
+    sens_taux4 = st.segmented_control(
+        "Affichage", ["Évolution", "Variations"], default="Évolution",
+        key="f4_taux_sens",
+        label_visibility="collapsed",
+    )
+
+st.write("")
+
+_clé_taux = {"Taux total": "taux_total", "Hommes": "taux_homme", "Femmes": "taux_femme"}
+_clé_var = {
+    "Taux total": "variation_taux_total",
+    "Hommes": "variation_taux_homme",
+    "Femmes": "variation_taux_femme",
+}
+cle_taux = _clé_taux[libelle_taux4]
+cle_var = _clé_var[libelle_taux4]
+
+# Appel API pour chaque pays sélectionné
+lignes_taux4 = []
+pays_taux_sans = []
+with st.spinner("Calcul des taux d'emploi…"):
+    for nom in noms_pays:
+        rep = api_client.get(
+            "/analyses/taux-emploi",
+            params={
+                "code_pays": pays_referentiel[nom],
+                "nb_periodes": nb_periodes_taux4,
+            },
+        )
+        if rep["status_code"] in (401, 403):
+            notif("Session expirée ou accès refusé. Reconnectez-vous pour continuer.", "ko")
+            st.stop()
+        if rep["status_code"] == 200:
+            data = rep["data"]
+            for pt in data[cle_taux]:
+                lignes_taux4.append({"Période": pt["periode"], "Pays": nom, "Valeur": pt["taux"], "_type": "taux"})
+            for pt in data[cle_var]:
+                lignes_taux4.append({"Période": pt["periode"], "Pays": nom, "Valeur": pt["taux"], "_type": "var"})
+        else:
+            pays_taux_sans.append(nom)
+
+if pays_taux_sans:
+    notif("Taux non calculable pour : " + ", ".join(pays_taux_sans), "warn")
+
+lignes_taux = [r for r in lignes_taux4 if r["_type"] == "taux"]
+lignes_var = [r for r in lignes_taux4 if r["_type"] == "var"]
+
+if not lignes_taux:
+    notif("Aucun taux d'emploi calculable pour les pays sélectionnés.", "info")
+    st.stop()
+
+df_taux = pd.DataFrame(lignes_taux).sort_values("Période")
+df_var = pd.DataFrame(lignes_var).sort_values("Période") if lignes_var else pd.DataFrame()
+
+# --- Cartes métriques : dernière valeur par pays ---
+dernieres = df_taux.groupby("Pays")["Valeur"].last().sort_values(ascending=False)
+annee_derniere = df_taux["Période"].max()[:4] if not df_taux.empty else ""
+
+cartes = st.columns(min(len(dernieres), 5))
+for i, (nom_p, val_p) in enumerate(dernieres.items()):
+    with cartes[i]:
+        carte_metrique(
+            nom_p,
+            f"{val_p:.1f}",
+            "%",
+            f"{libelle_taux4} · {annee_derniere}",
+            icone_svg=ICONE_CIBLE,
+        )
+
+st.write("")
+
+# --- Graphique principal : évolution ou variations ---
+with st.container(border=True):
+    tete_g, tete_d = st.columns([0.62, 0.38], vertical_alignment="center")
+    with tete_g:
+        st.markdown("<div class='ls-eyebrow plain'>Taux d'emploi</div>", unsafe_allow_html=True)
+        titre_graph = (
+            f"Évolution — {libelle_taux4}" if sens_taux4 == "Évolution"
+            else f"Variations annuelles — {libelle_taux4}"
+        )
+        st.markdown(
+            f"<div class='ls-serif' style='font-size:1.5rem'>{titre_graph}</div>",
+            unsafe_allow_html=True,
+        )
+    with tete_d:
+        unite_aff = "En %" if sens_taux4 == "Évolution" else "En points"
+        st.markdown(
+            f"<div style='text-align:right;margin-bottom:0.3rem'><span class='ls-pill'>{unite_aff}</span></div>",
+            unsafe_allow_html=True,
+        )
+
+    st.caption(f"{len(noms_pays)} pays · {nb_periodes_taux4} dernières années · Taux = Emploi / Population (15+) × 100")
+
+    # Axe X numérique (année) + connectgaps dynamique :
+    #   gap <= 2 ans → on relie ; gap >= 3 ans → rupture visible.
+    df_tracer = df_taux if sens_taux4 == "Évolution" else df_var
+    df_tracer = df_tracer.copy()
+    df_tracer["Année"] = df_tracer["Période"].str[:4].astype(int)
+    df_tracer = df_tracer.sort_values("Année")
+
+    if sens_taux4 == "Variations" and df_var.empty:
+        st.info("Pas assez de périodes pour calculer les variations.")
+        st.stop()
+
+    fig_taux4 = go.Figure()
+    couleurs = list(PALETTE_GRAPHIQUE)
+    for i, (pays, sous_df) in enumerate(df_tracer.groupby("Pays", sort=False)):
+        sous_df = sous_df.sort_values("Année")
+        annees = sous_df["Année"].tolist()
+        valeurs = sous_df["Valeur"].tolist()
+        gaps = [annees[j + 1] - annees[j] for j in range(len(annees) - 1)]
+        max_gap = max(gaps) if gaps else 0
+        connecter = max_gap < 3
+        fig_taux4.add_trace(go.Scatter(
+            x=annees,
+            y=valeurs,
+            mode="lines+markers",
+            name=pays,
+            line=dict(width=2.5, color=couleurs[i % len(couleurs)]),
+            marker=dict(size=7, color=couleurs[i % len(couleurs)]),
+            connectgaps=connecter,
+        ))
+
+    fig_taux4.update_layout(
+        yaxis_title="Taux d'emploi (%)" if sens_taux4 == "Évolution" else "Variation (points)",
+    )
+    fig_taux4.update_xaxes(type="linear", dtick=1, tickformat=".0f", title="Année")
+    if sens_taux4 == "Variations":
+        fig_taux4.add_hline(y=0, line_dash="dash", line_color="#999", line_width=1)
+
+    styliser_figure(fig_taux4, hauteur=400)
+    afficher_graphique(fig_taux4)
+
+# --- Tableau détaillé ---
+with st.expander("Voir les données brutes"):
+    st.dataframe(
+        df_taux.pivot_table(index="Période", columns="Pays", values="Valeur"),
+        use_container_width=True,
+    )
+    if not df_var.empty:
+        st.markdown("**Variations annuelles (points)**")
+        st.dataframe(
+            df_var.pivot_table(index="Période", columns="Pays", values="Valeur"),
+            use_container_width=True,
+        )
+
+# --- Rapport PDF ---
+st.write("")
+if st.button("Rapport PDF (comparaison taux d'emploi)", icon=":material/picture_as_pdf:", key="f4_btn_pdf_taux"):
+    chiffres_pdf4 = []
+    for nom_p, val_p in dernieres.items():
+        chiffres_pdf4.append((nom_p, f"{val_p:.1f}%"))
+
+    lignes_pdf4 = []
+    periodes4 = sorted(df_taux["Période"].unique())
+    for per in periodes4:
+        ligne = [per[:4]]
+        for nom in noms_pays:
+            val = df_taux[(df_taux["Période"] == per) & (df_taux["Pays"] == nom)]["Valeur"]
+            ligne.append(f"{val.iloc[0]:.1f}%" if not val.empty else "—")
+        lignes_pdf4.append(ligne)
+
+    colonnes_pdf4 = ["Année"] + noms_pays
+
+    if len(dernieres) >= 2:
+        note4 = (
+            f"Comparaison du taux d'emploi ({libelle_taux4}) entre {len(noms_pays)} pays. "
+            f"En {annee_derniere}, le plus élevé est {dernieres.index[0]} ({dernieres.iloc[0]:.1f}%) "
+            f"et le plus bas est {dernieres.index[-1]} ({dernieres.iloc[-1]:.1f}%)."
+        )
+    else:
+        note4 = f"Taux d'emploi ({libelle_taux4}) pour {noms_pays[0]} en {annee_derniere} : {dernieres.iloc[0]:.1f}%."
+
+    pdf4 = construire_rapport_pdf(
+        titre="Taux d'emploi — comparaison",
+        sous_titre=f"{libelle_taux4} · {annee_derniere}",
+        contexte=[
+            ("Série", libelle_taux4),
+            ("Pays", ", ".join(noms_pays)),
+            ("Période", f"{periodes4[0][:4]} - {periodes4[-1][:4]}" if periodes4 else "—"),
+            ("Formule", "Emploi / Population (15+) x 100"),
+            ("Source", "OIT - ILOSTAT"),
+        ],
+        colonnes=colonnes_pdf4,
+        lignes=lignes_pdf4,
+        chiffres=chiffres_pdf4[:4] or None,
+        note=note4,
+        image_png=figure_png(fig_taux4),
+        legende_graphique=f"{libelle_taux4} · {len(noms_pays)} pays",
+    )
+    st.download_button(
+        label="Télécharger le rapport PDF",
+        data=pdf4,
+        file_name=f"rapport_taux_comparaison_{libelle_taux4.replace(' ', '_')}.pdf",
+        mime="application/pdf",
+        icon=":material/download:",
+        key="f4_dl_taux",
+    )

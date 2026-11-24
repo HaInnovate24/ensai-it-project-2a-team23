@@ -11,7 +11,7 @@ from fastapi import APIRouter, Depends, HTTPException, Query
 from business_object.enums import Sexe
 from controller.dependances import exiger_connexion
 from controller.erreurs import code_http
-from model.analyse_model import Comparaison, Serie
+from model.analyse_model import Comparaison, ResultatTauxEmploi, Serie
 from service.analyse_service import AnalyseService
 from utils.exceptions import ErreurMetier
 
@@ -98,6 +98,22 @@ def comparaison_indicateurs(
             code_pays=code_pays,
             sexe=sexe,
             code_classification=code_classification,
+        )
+    except ErreurMetier as erreur:
+        raise erreur_http(erreur) from erreur
+
+
+@router.get("/taux-emploi", response_model=ResultatTauxEmploi)
+def taux_emploi(
+    code_pays: str,
+    nb_periodes: int | None = None,
+    service: AnalyseService = Depends(get_analyse_service),
+) -> ResultatTauxEmploi:
+    """Calcule les taux d'emploi et leurs variations pour un pays (accès libre)."""
+    try:
+        return service.calculer_taux_emploi(
+            code_pays=code_pays,
+            nb_periodes=nb_periodes,
         )
     except ErreurMetier as erreur:
         raise erreur_http(erreur) from erreur

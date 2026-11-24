@@ -51,6 +51,8 @@ COMPOSE := docker compose
 .PHONY: help
 help: ## Affiche cette aide
 	@echo LaborScope - cibles disponibles :
+	@echo   make go            Tout-en-un : demande Docker/local, init + admin + demarre back+front
+	@echo   make admin         Cree le compte admin par defaut (admin / admin1234@)
 	@echo   make init          Initialise tout : deps + base + 1er import
 	@echo   make install       Installe les dependances backend + frontend
 	@echo   make install-back  Installe les dependances du backend
@@ -58,7 +60,7 @@ help: ## Affiche cette aide
 	@echo   make db-create     Cree la base PostgreSQL si elle n'existe pas
 	@echo   make db-push       Cree le schema et les tables (init_db.sql)
 	@echo   make db-load       Charge les referentiels (pop_referentiels.sql)
-	@echo   make db-import     Collecte les indicateurs actifs (ILOSTAT)
+	@echo   make db-import     Importe les observations depuis les CSV locaux vers la base
 	@echo   make db-init       Enchaine db-create + db-push + db-load
 	@echo   make db-reset      Reinitialise la base (db-init)
 	@echo   make db-shell      Ouvre une console psql locale
@@ -73,6 +75,17 @@ help: ## Affiche cette aide
 	@echo   make cov-collecte  Couverture des modules de collecte
 	@echo   make lint          Verifie le style du code
 	@echo   make clean         (option Docker) Supprime conteneurs et volume
+
+# ---------------------------------------------------------------------
+# Lancement tout-en-un (une seule commande)
+# ---------------------------------------------------------------------
+.PHONY: go
+go: ## Demande Docker ou local, initialise tout, cree l'admin et demarre back + front
+	python scripts/lancer.py
+
+.PHONY: admin
+admin: ## Cree (ou reinitialise) l'administrateur par defaut admin / admin1234@
+	uv run --project backend python backend/src/utils/creer_admin.py
 
 # ---------------------------------------------------------------------
 # Initialisation complete du projet
@@ -108,21 +121,19 @@ db-create: ## Cree la base PostgreSQL cible si elle n'existe pas encore
 
 .PHONY: db-push
 db-push: ## Cree le schema applicatif et les tables (push de init_db.sql)
-	@echo Creation du schema $(POSTGRES_SCHEMA)...
-	$(PSQL) -c "CREATE SCHEMA IF NOT EXISTS $(POSTGRES_SCHEMA)"
-	@echo Creation des tables depuis data/init_db.sql...
-	$(PSQL) $(SET_SCHEMA) -f data/init_db.sql
+	@echo Creation du schema $(POSTGRES_SCHEMA) et des tables depuis data/init_db.sql...
+	uv run --project backend python backend/src/utils/executer_sql.py data/init_db.sql --create-schema
 	@echo Structure de la base en place - schema $(POSTGRES_SCHEMA).
 
 .PHONY: db-load
 db-load: ## Charge les referentiels (pays, indicateurs, classifications)
 	@echo Chargement des referentiels depuis data/pop_referentiels.sql...
-	$(PSQL) $(SET_SCHEMA) -f data/pop_referentiels.sql
+	uv run --project backend python backend/src/utils/executer_sql.py data/pop_referentiels.sql
 	@echo Referentiels charges.
 
 .PHONY: db-import
-db-import: ## Collecte tous les indicateurs actifs du referentiel (ILOSTAT)
-	@echo Import initial des observations (collecte ILOSTAT des indicateurs actifs)...
+db-import: ## Importe les observations depuis les CSV locaux (backend/src/client/data) vers la base
+	@echo Import des observations depuis les CSV locaux (backend/src/client/data)...
 	uv run --project backend python backend/src/service/init_donnees.py
 	@echo Import initial termine.
 

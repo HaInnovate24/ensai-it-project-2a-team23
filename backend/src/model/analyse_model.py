@@ -35,3 +35,26 @@ class Comparaison(BaseModel):
     """Comparaison de plusieurs séries en sortie."""
 
     series: list[Serie]
+
+
+class PointTauxEmploi(BaseModel):
+    """Point d'une série de taux d'emploi (période + taux calculé)."""
+
+    periode: str
+    taux: float
+
+
+class ResultatTauxEmploi(BaseModel):
+    """Résultat complet du calcul des taux d'emploi et des variations.
+
+    Chaque série est une liste de points ordonnés par période.
+    Les taux sont en pourcentage (%). Les variations sont en points.
+    """
+
+    taux_total: list[PointTauxEmploi]
+    taux_homme: list[PointTauxEmploi]
+    taux_femme: list[PointTauxEmploi]
+    variation_annuelle_emploi: list[PointTauxEmploi]
+    variation_taux_total: list[PointTauxEmploi]
+    variation_taux_homme: list[PointTauxEmploi]
+    variation_taux_femme: list[PointTauxEmploi]

@@ -1,42 +1,75 @@
 # LaborScope
 
-Application d'analyse du marché du travail à partir des données ouvertes
-[ILOSTAT](https://ilostat.ilo.org/). Elle collecte des indicateurs d'emploi,
-les stocke dans PostgreSQL, et propose des analyses (évolutions, comparaisons
-entre pays, carte) via une API **FastAPI** et une interface **Streamlit**.
+**English** | [Français](README.fr.md)
 
-- **Backend** : API REST FastAPI (collecte, stockage, analyses, comptes, rapports PDF).
-- **Frontend** : interface web Streamlit.
-- **Base de données** : PostgreSQL (schéma applicatif dédié).
+A labour-market analysis application built on the [ILOSTAT](https://ilostat.ilo.org/)
+open data. It collects employment indicators, stores them in PostgreSQL, and provides
+analyses (trends, country comparisons, map) through a **FastAPI** API and a
+**Streamlit** interface.
 
----
-
-## 1. Prérequis
-
-Installez ces outils avant de commencer :
-
-| Outil | Version | Rôle |
-|-------|---------|------|
-| [Python](https://www.python.org/) | **3.13+** | Exécution du backend et du frontend |
-| [uv](https://docs.astral.sh/uv/) | récente | Gestionnaire de dépendances et d'environnements |
-| [PostgreSQL](https://www.postgresql.org/) | 14+ | Base de données (client `psql` sur le `PATH`) |
-| [Make](https://www.gnu.org/software/make/) | — | Orchestration des commandes (`make init`, etc.) |
-| Git | — | Clonage du dépôt |
-
-> **Note Windows** : le `Makefile` est compatible `cmd.exe`, PowerShell et Git Bash.
-> Assurez-vous que `psql`, `uv` et `make` sont accessibles depuis le terminal.
-> `make` peut s'installer via [Chocolatey](https://chocolatey.org/) (`choco install make`)
-> ou est fourni avec Git Bash / MSYS2.
-
-Une instance PostgreSQL doit être **démarrée et accessible** (en local par défaut).
-Si vous n'avez pas PostgreSQL installé, voir la [section Docker](#6-alternative-tout-en-docker).
+- **Backend**: FastAPI REST API (collection, storage, analyses, accounts, PDF reports).
+- **Frontend**: Streamlit web interface.
+- **Database**: PostgreSQL (dedicated application schema).
 
 ---
 
-## 2. Récupération du projet
+## Quick start (one command)
+
+Once the prerequisites are installed (see section 1), from the project root:
 
 ```bash
-git clone <url-du-depot>
+make go
+```
+
+`make go` asks whether to run with **Docker** or **locally**, then does everything in one
+shot: installs the dependencies, initializes the database (schema + reference data), imports
+the observations **from the local CSV files** in `backend/src/client/data/` (offline, no
+network call), creates a default administrator, and starts the backend **and** the frontend
+together.
+
+Default administrator account:
+
+| Username | Password |
+|----------|-------------|
+| `admin`  | `admin1234@` |
+
+> In **Docker** mode, `make go` provisions PostgreSQL automatically. In **local** mode, a
+> PostgreSQL server must already be running (see section 1), or start one with `make db-docker`.
+
+The sections below detail each step if you prefer to run them manually.
+
+---
+
+## 1. Prerequisites
+
+Install these tools before you start:
+
+| Tool | Version | Role |
+|------|---------|------|
+| [Python](https://www.python.org/) | **3.13+** | Runs the backend and the frontend |
+| [uv](https://docs.astral.sh/uv/) | recent | Dependency and environment manager |
+| [PostgreSQL](https://www.postgresql.org/) | 14+ | Database **server** (the `psql` client is optional — only used by `make db-shell`) |
+| [Make](https://www.gnu.org/software/make/) | — | Command orchestration (`make init`, etc.) |
+| Git | — | Cloning the repository |
+
+> The database setup (`make db-push` / `db-load`) runs the SQL files through Python
+> (`psycopg2`), so the `psql` command-line client does **not** need to be installed.
+> No PostgreSQL server locally? Start one in Docker with `make db-docker`.
+
+> **Windows note**: the `Makefile` is compatible with `cmd.exe`, PowerShell and Git Bash.
+> Make sure `uv` and `make` are reachable from the terminal.
+> `make` can be installed via [Chocolatey](https://chocolatey.org/) (`choco install make`)
+> or comes with Git Bash / MSYS2.
+
+A PostgreSQL instance must be **started and reachable** (local by default).
+If you do not have PostgreSQL installed, see the [Docker section](#6-alternative-all-in-docker).
+
+---
+
+## 2. Getting the project
+
+```bash
+git clone <repository-url>
 cd ensai-it-project-2a-team23
 ```
 
@@ -44,14 +77,13 @@ cd ensai-it-project-2a-team23
 
 ## 3. Configuration (`.env`)
 
-Le projet lit sa configuration depuis un fichier `.env` à la racine. Créez-le  
-en copiant le modèle ci-dessous et en adaptant les valeurs à votre installation  
-PostgreSQL : 
+The project reads its configuration from a `.env` file at the root. Create it by
+copying the template below and adapting the values to your PostgreSQL installation:
 
-A adapter en fonction des vos informations de connexion
+Adapt it to your own connection details.
 
 ```dotenv
-# --- Base de données PostgreSQL ---
+# --- PostgreSQL database ---
 POSTGRES_HOST=localhost
 POSTGRES_PORT=5432
 POSTGRES_DATABASE=defaultdb
@@ -59,163 +91,163 @@ POSTGRES_USER=user
 POSTGRES_PASSWORD=password
 POSTGRES_SCHEMA=project
 
-# --- Sécurité (jetons d'authentification) ---
-JWT_SECRET_KEY=changez-moi-par-une-chaine-longue-et-aleatoire
+# --- Security (authentication tokens) ---
+JWT_SECRET_KEY=change-me-to-a-long-random-string
 
-# --- Serveur API (backend) ---
+# --- API server (backend) ---
 UVICORN_HOST=0.0.0.0
 UVICORN_PORT=5000
 
-# --- Accès à l'API depuis le frontend ---
+# --- API access from the frontend ---
 BACKEND_URL=http://localhost:5000
 BACKEND_TIMEOUT=5
 
-# --- Divers ---
+# --- Miscellaneous ---
 ELO_K_FACTOR=32
 ```
 
-Points importants :
+Important points:
 
-- `POSTGRES_USER` doit pouvoir **créer une base** (`CREATEDB`) pour que `make init`
-crée automatiquement `POSTGRES_DATABASE` si elle n'existe pas. Sinon, créez la base
-manuellement au préalable.
-- `POSTGRES_SCHEMA` est le schéma applicatif (créé automatiquement) — pas besoin de
-le créer à la main.
-- Changez `JWT_SECRET_KEY` par une valeur secrète (utilisée pour signer les jetons).
+- `POSTGRES_USER` must be able to **create a database** (`CREATEDB`) so that `make init`
+  automatically creates `POSTGRES_DATABASE` if it does not exist. Otherwise, create the
+  database manually beforehand.
+- `POSTGRES_SCHEMA` is the application schema (created automatically) — no need to create
+  it by hand.
+- Change `JWT_SECRET_KEY` to a secret value (used to sign the tokens).
 
 ---
 
-## 4. Initialisation en une commande
+## 4. One-command initialization
 
-Depuis la racine du projet :
+From the project root:
 
 ```bash
 make init
 ```
 
-Cette commande fait **tout** :
+This command does **everything**:
 
-1. `install` — installe les dépendances du backend et du frontend (via `uv`).
-2. `db-create` — crée la base PostgreSQL `POSTGRES_DATABASE` si elle n'existe pas.
-3. `db-push` — crée le schéma applicatif et les tables (`data/init_db.sql`).
-4. `db-load` — charge les référentiels : pays, indicateurs, classifications
+1. `install` — installs the backend and frontend dependencies (via `uv`).
+2. `db-create` — creates the PostgreSQL database `POSTGRES_DATABASE` if it does not exist.
+3. `db-push` — creates the application schema and the tables (`data/init_db.sql`).
+4. `db-load` — loads the reference data: countries, indicators, classifications
 
    (`data/pop_referentiels.sql`).
-5. `db-import` — collecte depuis ILOSTAT **tous les indicateurs actifs** du
+5. `db-import` — imports the observations of **all active indicators** from the local CSV
+   files in `backend/src/client/data/` (offline, no network call), namely:
+   - `EMP_TEMP_SEX_OCU_NB` — Employment by sex and occupation;
+   - `POP_XWAP_SEX_AGE_NB` — Working-age population by sex and age.
 
-   référentiel, soit :
-   - `EMP_TEMP_SEX_OCU_NB` — Emploi par sexe et profession ;
-   - `POP_XWAP_SEX_AGE_NB` — Population en âge de travailler par sexe et âge.
+At the end, the database is fully initialized (structure + reference data + observations).
 
-À la fin, la base est entièrement initialisée (structure + référentiels + observations).
-
-> La collecte ILOSTAT télécharge des fichiers depuis Internet : la première exécution
-> peut prendre quelques minutes selon la connexion.
+> The observations are read from the CSV files bundled in `backend/src/client/data/`, so the
+> import is reproducible and works without an Internet connection.
 
 ---
 
-## 5. Lancer l'application
+## 5. Running the application
 
-Dans deux terminaux séparés, à la racine du projet :
+In two separate terminals, from the project root:
 
 ```bash
-# Terminal 1 — API backend (FastAPI/uvicorn)
+# Terminal 1 — backend API (FastAPI/uvicorn)
 make run-back
 ```
 
-L'API démarre sur `http://127.0.0.1:5000`. Documentation interactive : **http://127.0.0.1:5000/docs**.
+The API starts on `http://127.0.0.1:5000`. Interactive documentation: **http://127.0.0.1:5000/docs**.
 
 ```bash
-# Terminal 2 — interface web (Streamlit)
+# Terminal 2 — web interface (Streamlit)
 make run-front
 ```
 
-Le frontend s'ouvre dans le navigateur (par défaut `http://localhost:8501`) et
-communique avec l'API via `BACKEND_URL`.
+The frontend opens in the browser (by default `http://localhost:8501`) and
+communicates with the API via `BACKEND_URL`.
 
-### Créer un compte et un administrateur
+### Create an account and an administrator
 
-- Les utilisateurs se créent via la page **Inscription** de l'interface (compte
-standard).
-- Pour obtenir un **administrateur** (accès à la page d'administration, imports,
-gestion des comptes), promouvez un compte existant directement en base :
+- Users are created via the **Sign up** page of the interface (standard account).
+- To obtain an **administrator** (access to the admin page, imports, account
+  management), promote an existing account directly in the database:
   ```bash
   make db-shell
   ```
 
-  puis, dans la console `psql` :
+  then, in the `psql` console:
   ```sql
-  UPDATE utilisateur SET role = 'admin' WHERE nom_utilisateur = '<votre_nom>';
+  UPDATE utilisateur SET role = 'admin' WHERE nom_utilisateur = '<your_name>';
   ```
 
 ---
 
-## 6. Alternative : tout en Docker
+## 6. Alternative: all in Docker
 
-Si vous préférez ne rien installer en local (PostgreSQL inclus) :
-
-```bash
-make up      # construit et démarre backend + frontend + PostgreSQL
-make down    # arrête les conteneurs
-make clean   # arrête et supprime le volume de données PostgreSQL
-```
-
-Vous pouvez aussi ne lancer que la base de données via Docker, puis travailler en
-local pour le reste :
+If you prefer not to install anything locally (PostgreSQL included):
 
 ```bash
-make db-docker   # démarre uniquement PostgreSQL (et attend qu'il soit prêt)
+make up      # builds and starts backend + frontend + PostgreSQL
+make down    # stops the containers
+make clean   # stops and removes the PostgreSQL data volume
+```
+
+You can also run only the database via Docker, then work locally for the rest:
+
+```bash
+make db-docker   # starts only PostgreSQL (and waits until it is ready)
 ```
 
 ---
 
-## 7. Commandes `make` utiles
+## 7. Useful `make` commands
 
-| Commande | Description |
-|----------|-------------|
-| `make init` | Initialise tout (dépendances + base + référentiels + indicateurs) |
-| `make install` | Installe les dépendances backend + frontend |
-| `make db-create` | Crée la base PostgreSQL si elle n'existe pas |
-| `make db-push` | Crée le schéma et les tables |
-| `make db-load` | Charge les référentiels (pays, indicateurs, classifications) |
-| `make db-import` | Collecte les indicateurs actifs depuis ILOSTAT |
-| `make db-init` | Enchaîne `db-create` + `db-push` + `db-load` |
-| `make db-reset` | Réinitialise la structure et les référentiels |
-| `make db-shell` | Ouvre une console `psql` (schéma positionné) |
-| `make run-back` | Lance l'API backend |
-| `make run-front` | Lance le frontend Streamlit |
-| `make test` | Lance tous les tests du backend |
-| `make cov` | Couverture des tests (console + rapport HTML) |
-| `make lint` | Vérifie le style du code (ruff) |
-| `make help` | Liste toutes les cibles disponibles |
-
----
-
-## 8. Dépannage
-
-| Symptôme | Cause probable / solution |
-|----------|---------------------------|
-| `psql: command not found` | Le client PostgreSQL n'est pas sur le `PATH`. Installez PostgreSQL ou ajoutez `bin/` au `PATH`. |
-| `Impossible de se connecter à la base de maintenance 'postgres'` | L'utilisateur ne peut pas créer de base ou PostgreSQL n'est pas démarré. Vérifiez `.env` et que le serveur tourne, ou créez `POSTGRES_DATABASE` à la main. |
-| `password authentication failed` | Identifiants `POSTGRES_USER` / `POSTGRES_PASSWORD` incorrects dans `.env`. |
-| La collecte ne renvoie aucune donnée | Lancez `make db-load` avant `make db-import` (les indicateurs doivent exister dans le référentiel). |
-| Le frontend n'atteint pas l'API | Vérifiez que `make run-back` tourne et que `BACKEND_URL` pointe vers la bonne adresse/port. |
+| Command | Description |
+|---------|-------------|
+| `make go` | One command: asks Docker/local, initializes everything, creates the admin, starts back + front |
+| `make admin` | Creates (or resets) the default administrator `admin` / `admin1234@` |
+| `make init` | Initializes everything (dependencies + database + reference data + observations) |
+| `make install` | Installs the backend + frontend dependencies |
+| `make db-create` | Creates the PostgreSQL database if it does not exist |
+| `make db-push` | Creates the schema and the tables |
+| `make db-load` | Loads the reference data (countries, indicators, classifications) |
+| `make db-import` | Imports the observations from the local CSV files (`backend/src/client/data/`) into the database |
+| `make db-init` | Chains `db-create` + `db-push` + `db-load` |
+| `make db-reset` | Resets the structure and the reference data |
+| `make db-shell` | Opens a `psql` console (schema set) |
+| `make run-back` | Starts the backend API |
+| `make run-front` | Starts the Streamlit frontend |
+| `make test` | Runs all the backend tests |
+| `make cov` | Test coverage (console + HTML report) |
+| `make lint` | Checks the code style (ruff) |
+| `make help` | Lists all available targets |
 
 ---
 
-## 9. Structure du dépôt
+## 8. Troubleshooting
+
+| Symptom | Likely cause / solution |
+|---------|-------------------------|
+| `psql: command not found` | Only affects `make db-shell` (the other commands do not need `psql`). Install the PostgreSQL client, or inspect the database with `docker compose exec postgres psql ...`. |
+| `CreateProcess(...) psql ... failed` (Windows) | Same cause: `psql` is not installed. The `make db-push` / `db-load` commands no longer need it — make sure you are on the latest version of the `Makefile`. |
+| `Unable to connect to the maintenance database 'postgres'` | The user cannot create a database or PostgreSQL is not started. Check `.env` and that the server is running, or create `POSTGRES_DATABASE` by hand. |
+| `password authentication failed` | Incorrect `POSTGRES_USER` / `POSTGRES_PASSWORD` credentials in `.env`. |
+| Collection returns no data | Run `make db-load` before `make db-import` (the indicators must exist in the reference data). |
+| The frontend cannot reach the API | Check that `make run-back` is running and that `BACKEND_URL` points to the correct address/port. |
+
+---
+
+## 9. Repository structure
 
 ```
 .
-├── backend/          # API FastAPI (dao, service, controller, business_object, utils)
+├── backend/          # FastAPI API (dao, service, controller, business_object, utils)
 │   ├── src/
 │   └── tests/
-├── frontend/         # Interface Streamlit
+├── frontend/         # Streamlit interface
 │   └── src/
-├── data/             # Scripts SQL (init_db.sql, pop_referentiels.sql)
+├── data/             # SQL scripts (init_db.sql, pop_referentiels.sql)
 ├── docker-compose.yml
 ├── Makefile          # Orchestration (make init, run-back, run-front, ...)
 └── README.md
 ```
 
-Documentation détaillée du backend : [`backend/README.md`](backend/README.md).
+Detailed backend documentation: [`backend/README.md`](backend/README.md).

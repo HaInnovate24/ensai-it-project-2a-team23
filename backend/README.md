@@ -1,6 +1,8 @@
 
 # Backend - LaborScope API
 
+**English** | [Français](README.fr.md)
+
 Core of the application: a layered REST API built with [FastAPI](https://fastapi.tiangolo.com/)
 that collects, stores and analyses labour-market statistics from the
 [ILOSTAT](https://ilostat.ilo.org/) open data, with user management and PDF reporting.

@@ -12,6 +12,7 @@ from fastapi import APIRouter, HTTPException, Query
 from business_object.enums import Role
 from business_object.observation import Observation
 from business_object.utilisateur import Utilisateur
+from client.ilostat_client import IlostatClient
 from controller.dependances import utilisateur_courant
 from controller.erreurs import code_http
 from model.donnees_model import ObservationCorrection
@@ -24,7 +25,9 @@ from utils.exceptions import (
 )
 
 router = APIRouter()
-collecte_service = CollecteService()
+# Import reproductible et hors ligne : les données proviennent des CSV locaux
+# (backend/src/client/data/), puis sont enregistrées en base. Aucun appel réseau.
+collecte_service = CollecteService(ilostat_client=IlostatClient(offline=True))
 utilisateur_service = UtilisateurService()
 
 
