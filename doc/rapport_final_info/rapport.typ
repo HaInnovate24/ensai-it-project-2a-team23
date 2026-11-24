@@ -904,22 +904,22 @@ L'administrateur clique sur un bouton « Importer les données » dans l'interfa
 #let etape(titre) = block(width: 100%, above: 1.3em, below: 0.6em, fill: ocean.lighten(90%),
   stroke: (left: 3pt + ocean), inset: (left: 10pt, y: 6pt, right: 8pt))[
   #text(weight: "bold", fill: brand, font: sans, size: 10.5pt)[#titre]]
-#etape[Étape 1 — Création de la trace d'import]
+#etape[Étape 1 - Création de la trace d'import]
 Dès le lancement de la collecte, l'application enregistre immédiatement une trace de l'opération en base de données avec le statut « en cours ». Cette entrée fait office de journal de suivi. Ainsi, même si le processus venait à échouer en cours de route, l'administrateur pourra toujours consulter l'historique pour savoir quel indicateur a été demandé, à quelle date et pour quel motif l'import n'a pas abouti.
 
-#etape[Étape 2 — Téléchargement sélectif via le cache]
+#etape[Étape 2 - Téléchargement sélectif via le cache]
 Plutôt que de télécharger systématiquement l'intégralité de la période demandée, l'application commence par vérifier les fichiers déjà archivés localement pour l'indicateur concerné. En identifiant les années déjà couvertes, elle isole uniquement les périodes manquantes et les regroupe par plages consécutives afin de limiter le nombre de requêtes envoyées à l'API d'ILOSTAT. Chaque fichier récupéré est d'abord écrit de façon temporaire avant d'être validé définitivement, ce qui évite de conserver un fichier corrompu en cas de coupure. L'ensemble des fichiers de la période est ensuite rassemblé en mémoire en éliminant les lignes en double. Grâce à ce mécanisme de cache, seul le premier import nécessite de télécharger tout l'historique tandis que les mises à jour suivantes ne récupèrent que les nouvelles données manquantes.
 
-#etape[Étape 3 — Parsing]
+#etape[Étape 3 - Parsing]
 Une fois le fichier CSV consolidé, l'application en analyse le contenu ligne par ligne pour le transformer en données exploitables. Pour chaque enregistrement, elle extrait les informations essentielles, c'est-à-dire l'indicateur, le code pays, la période (année ou trimestre) et la valeur numérique,tout en identifiant le sexe (homme, femme ou total) ainsi que la classification éventuelle (tranche d'âge ou profession). Les valeurs non numériques, notamment les données manquantes codées « \... » par ILOSTAT, sont quant à elles détectées et traitées comme des valeurs vides afin de ne pas fausser les analyses.
 
-#etape[Étape 4 — Filtrage par référentiels connus]
+#etape[Étape 4 - Filtrage par référentiels connus]
 Avant d'enregistrer les données, l'application vérifie leur cohérence en écartant toutes les observations rattachées à un pays ou à une classification absents de nos référentiels locaux. ILOSTAT renvoie en effet parfois des zones géographiques ou des codes inconnus qui, sans ce filtrage préalable, seraient rejetés par la base de données pour préserver l'intégrité des informations.
 
-#etape[Étape 5 — Déduplication et upsert]
+#etape[Étape 5 - Déduplication et upsert]
 Avant l'enregistrement, l'application élimine en mémoire les éventuels doublons en vérifiant chaque combinaison unique d'indicateur, de pays, de période, de sexe et de classification, afin d'éviter tout conflit lors de l'envoi groupé. Les données sont ensuite transmises en bloc à la base de données via une opération qui insère les nouvelles observations et met à jour celles déjà existantes. Ce fonctionnement permet de relancer un import sur une même période, ne crée aucun doublon et se contente d'actualiser les valeurs déjà enregistrées.
 
-#etape[Étape 6 — Mise à jour de la trace d'import]
+#etape[Étape 6 - Mise à jour de la trace d'import]
 Quelle que soit l'issue de la collecte, l'application clôture le suivi en mettant à jour la trace d'import avec son statut final (succès ou échec), le nombre de lignes traitées, la date de fin et, le cas échéant, le message d'erreur. Si un incident survient durant l'enregistrement des données, l'opération en cours est immédiatement annulée afin de laisser la base de données dans un état sain, ce qui permet ensuite de consigner l'échec dans l'historique.
 
 #figure(caption: [Diagramme de séquence de la collecte de données.])[
@@ -932,30 +932,30 @@ Le processus d'import est conçu pour être idempotent c'est-à-dire que relance
 
 == Aperçu synthétique des autres fonctionnalités
 <aperçu-synthétique-des-autres-fonctionnalités>
-=== F2 --- Filtrage et consultation
-<f2-filtrage-et-consultation>
+=== F2 - Filtrage et consultation
+<f2---filtrage-et-consultation>
 La consultation des données repose sur un mécanisme de recherche qui s'adapte aux critères sélectionnés par l'utilisateur (pays, indicateur, période, etc.). Afin de garantir la sécurité de la base de données et de prévenir tout risque d'injection SQL, seuls les critères de filtrage explicitement autorisés sont acceptés, toute demande non reconnue étant immédiatement rejetée. De plus, les valeurs recherchées sont transmises de manière sécurisée et isolée, sans jamais être insérées directement dans le texte des requêtes envoyées à la base.
 
-=== F4 --- Comparaison entre pays
-<f4-comparaison-entre-pays>
+=== F4 - Comparaison entre pays
+<f4---comparaison-entre-pays>
 La comparaison entre pays s'appuie sur la même logique de récupération des données que la fonctionnalité F3, mais est adaptée à une vue d'ensemble : plutôt que d'extraire tout l'historique d'un pays, le système ne récupère que la donnée la plus récente pour chacun des pays sélectionnés. Les résultats sont classés par ordre décroissant, ce qui permet à l'interface de mettre en évidence les valeurs extrêmes sans nécessiter de traitement supplémentaire lors de l'affichage. Ainsi, le pays le plus élevé en tête et le plus bas en fin de liste.
 
-=== F5 --- Croisement d'indicateurs
-<f5-croisement-dindicateurs>
+=== F5 - Croisement d'indicateurs
+<f5---croisement-dindicateurs>
 La comparaison de plusieurs indicateurs consiste à construire une série de données distincte pour chacun des indicateurs sélectionnés, avant de les regrouper au sein pour une meilleure visualisation. Comme les indicateurs comparés reposent sur des échelles différentes, l'unité de mesure est intégrée dans le titre de chaque série afin d'en assurer une lecture claire. Enfin, si aucune donnée n'est disponible pour un indicateur sur le pays choisi, celui-ci est automatiquement écarté pour éviter d'afficher des courbes vides sur le graphique.
 
-=== F6 --- Authentification et gestion des droits
-<f6-authentification-et-gestion-des-droits>
+=== F6 - Authentification et gestion des droits
+<f6---authentification-et-gestion-des-droits>
 L'accès à l'application est sécurisé par un système de jetons de connexion signés, tandis que les mots de passe ne sont jamais conservés en clair mais protégés par un hachage sécurisé avec sel aléatoire. Le contrôle des droits repose sur deux vérifications. La première est de s'assurer que l'utilisateur est bien authentifié. La seconde est de vérifier qu'il dispose du statut d'administrateur pour les opérations sensibles. Un choix de conception important a été de recontrôler le rôle et l'état du compte en base de données à chaque requête plutôt que de se fier uniquement aux informations contenues dans le jeton : ainsi, la promotion ou la désactivation d'un compte prend effet immédiatement, sans avoir à attendre l'expiration de la session (24 heures).
 
 En parallèle, un mécanisme de traçabilité enregistre chaque action significative réalisée sur la plateforme (connexion, lancement d'une collecte, modification ou suppression de données). Chaque entrée consignée associe l'auteur de l'opération, l'horodatage, la nature de l'action et un descriptif qui permet aux administrateurs de consulter l'historique et de suivre précisément qui a effectué quelle action.
 
-=== FO1 --- Cartographie interactive
-<fo1-cartographie-interactive>
+=== FO1 - Cartographie interactive
+<fo1---cartographie-interactive>
 La vue cartographique récupère les données d'une période unique pour l'ensemble des pays disponibles, afin d'associer une seule valeur à chaque pays. L'interface utilise ensuite ces résultats pour colorer dynamiquement une carte interactive selon un dégradé de couleurs proportionnel aux valeurs observées. Enfin, la réutilisation de la même structure de données que celle des comparaisons entre pays (F4) simplifie la conception de l'interface. Une seule logique d'affichage permet ainsi de gérer à la fois les graphiques en barres et la carte.
 
-=== FO2 --- Génération de rapports PDF
-<fo2-génération-de-rapports-pdf>
+=== FO2 - Génération de rapports PDF
+<fo2---génération-de-rapports-pdf>
 La création d'un rapport automatisé repose sur un processus en trois temps. Le système commence par récupérer les séries de données via les modules d'analyse existants (F3 et F4), génère ensuite les graphiques correspondants sous forme d'images, puis assemble l'ensemble dans un document PDF réunissant ces visuels, un tableau récapitulatif et une synthèse automatique des principaux résultats. Une fois produit, le fichier est directement archivé en base de données afin que l'utilisateur puisse le retrouver et le télécharger à tout moment depuis son historique.
 
 == Cas d'utilisation concret (Démonstration)
