@@ -111,7 +111,6 @@
           subfloat-numbering(n-super, subfloat-idx)
         })
         show figure.where(kind: kind): set figure.caption(position: position)
-        show figure.where(kind: kind): set figure(outlined: false)
 
         show figure: it => {
           let num = numbering(subcapnumbering, n-super, quartosubfloatcounter.get().first() + 1)
@@ -290,10 +289,6 @@
   toc_title: none,
   toc_depth: none,
   toc_indent: 1.5em,
-  lof: false,
-  lof-title: none,
-  lot: false,
-  lot-title: none,
   doc,
 ) = {
   // Set document metadata for PDF accessibility
@@ -391,22 +386,10 @@
     }
     block(above: 0em, below: 2em)[
     #outline(
-      title: title,
+      title: toc_title,
       depth: toc_depth,
       indent: toc_indent
     );
-    ]
-  }
-
-  if lof {
-    block(above: 0em, below: 2em)[
-    #outline(title: lof-title, target: figure.where(kind: "quarto-float-fig"));
-    ]
-  }
-
-  if lot {
-    block(above: 0em, below: 2em)[
-    #outline(title: lot-title, target: figure.where(kind: "quarto-float-tbl"));
     ]
   }
 
@@ -535,16 +518,16 @@
 #v(0.6cm)
 #grid(columns: (1fr, 1fr), column-gutter: 1cm,
   align(left)[
-    #text(style: "italic", fill: muted)[Étudiants] \ #v(0.3em)
-    Jade #smallcaps[Colin] \
-    Sidy Mohamed Salim #smallcaps[Diallo] \
-    Alexandre #smallcaps[Fratter-Bardy] \
+    #text(style: "italic", fill: muted)[Étudiant.e.s :] \ #v(0.3em)
     Adam Ouangko #smallcaps[Haïwè] \
-    Vicram #smallcaps[Raveendiran]],
+    Alexandre #smallcaps[Fratter-Bardy] \
+    Jade #smallcaps[Colin] \
+    Vicram #smallcaps[Raveendiran] \
+    Sidy Mohamed Salim #smallcaps[Diallo]],
   align(right)[
-    #text(style: "italic", fill: muted)[Responsable] \ #v(0.3em)
+    #text(style: "italic", fill: muted)[Responsable :] \ #v(0.3em)
     Ludovic #smallcaps[Deneuville] \ #v(0.8cm)
-    #text(style: "italic", fill: muted)[Encadrant] \ #v(0.3em)
+    #text(style: "italic", fill: muted)[Encadrant :] \ #v(0.3em)
     Anas #smallcaps[Knefati]])
 #v(1.2cm)
 #v(1fr)
@@ -576,7 +559,7 @@ Nous tenons à remercier chaleureusement notre encadrant, Anas Knefati, pour sa 
 
 Nous remercions également l'Organisation Internationale du Travail, dont les données ouvertes, accessibles via ILOSTAT, ont rendu ce projet possible, ainsi que les communautés open source qui développent et documentent les outils sur lesquels repose LaborScope : Python, FastAPI, Streamlit, PostgreSQL, pandas, Docker et bien d'autres.
 
-Enfin, nous tenons à nous remercier mutuellement : chacun des cinq membres de l'équipe a porté la solidité de sa propre couche technique, partagé ses connaissances et pris le temps de relire et de corriger le travail des autres. C'est cette entraide, nourrie par les revues de code et les journées de travail en présentiel, qui a permis d'assembler un produit cohérent dans les délais impartis. #todo[Ajouter, si vous le souhaitez, vos proches, relecteurs ou toute autre personne à remercier. Sinon, je prevois supprimer cette section ce soir]
+Enfin, nous tenons à nous remercier mutuellement : chacun des cinq membres de l'équipe a porté la solidité de sa propre couche technique, partagé ses connaissances et pris le temps de relire et de corriger le travail des autres. C'est cette entraide, nourrie par les revues de code et les journées de travail en présentiel, qui a permis d'assembler un produit cohérent dans les délais impartis.
 
 #pagebreak()
 #heading(level: 1, numbering: none)[Table des matières]
@@ -627,7 +610,7 @@ Dans la continuité des enjeux soulevés en introduction, LaborScope a été pen
 
 === Fonctionnalités principales (Socle obligatoire)
 <fonctionnalités-principales-socle-obligatoire>
-- #strong[Automatisation du flux de données (F1)] : L'application interroge l'API ILOSTAT de manière périodique pour récupérer les indicateurs ciblés. Les fichiers bruts obtenus sont triés et nettoyés pour ne conserver que les champs utiles au projet. Ces données prêtes à l'emploi sont ensuite sauvegardées dans la base de données locale.
+- #strong[Automatisation du flux de données (F1)] : À la demande d'un administrateur (bouton d'import dans l'interface ou commande #NormalTok("make db-import");), l'application récupère les indicateurs ciblés depuis ILOSTAT ou depuis les fichiers CSV déjà archivés localement. Les fichiers bruts obtenus sont triés et nettoyés pour ne conserver que les champs utiles au projet. Ces données prêtes à l'emploi sont ensuite sauvegardées dans la base de données locale.
 - #strong[Filtrage et consultation (F2)] : L'utilisateur peut explorer les données de la base en appliquant divers filtres d'analyse (pays, sexe, tranche d'âge, profession).
 - #strong[Analyse temporelle (F3)] : À partir d'un indicateur et d'une fenêtre de temps définis par l'utilisateur, l'API calcule l'évolution de la métrique et le frontend l'affiche sous forme de graphique pour observer les dynamiques du marché.
 - #strong[Comparaison entre pays (F4)] : Sur la période la plus récente disponible en base, l'application permet de comparer un même indicateur sur une sélection de pays. Les valeurs extrêmes (les plus hautes et les plus basses) sont mises en évidence sur l'interface.
@@ -644,12 +627,12 @@ Dans la continuité des enjeux soulevés en introduction, LaborScope a été pen
   align: (left,left,left,),
   table.header([Réf.], [Fonctionnalité], [Nature],),
   table.hline(),
-  [$F_1$], [Automatiser le flux de données (F1)], [Obligatoire],
-  [$F_2$], [Consulter la population en âge de travailler selon le sexe et l'âge], [Obligatoire],
+  [$F_1$], [Automatiser le flux de données], [Obligatoire],
+  [$F_2$], [Filtrer et consulter les données], [Obligatoire],
   [$F_3$], [Suivre l'évolution d'un indicateur dans le temps], [Obligatoire],
   [$F_4$], [Comparer plusieurs pays sur un même indicateur], [Obligatoire],
   [$F_5$], [Comparer plusieurs indicateurs], [Obligatoire],
-  [$F_6$], [Gérer des niveaux d'accès], [Obligatoire],
+  [$F_6$], [S'authentifier et gérer les niveaux d'accès], [Obligatoire],
   [$F O_1$], [Cartographie interactive], [Optionnelle],
   [$F O_2$], [Génération automatique de rapports], [Optionnelle],
 )
@@ -683,9 +666,9 @@ Afin de répondre aux différents besoins d'exploration et de sécurisation des 
   align: (left,center,center,center,),
   table.header([Action], [Visiteur], [Inscrit], [Admin],),
   table.hline(),
-  [Consulter les statistiques de base], [✓], [✓], [✓],
-  [Comparer des pays, suivre une évolution], [--], [✓], [✓],
-  [Enregistrer des favoris, exporter], [--], [✓], [✓],
+  [Analyser l'évolution temporelle d'un indicateur], [✓], [✓], [✓],
+  [Comparer des pays ou des indicateurs, afficher la carte], [--], [✓], [✓],
+  [Exporter les données, générer un rapport PDF], [--], [✓], [✓],
   [Gérer les comptes, rafraîchir les données], [--], [--], [✓],
 )
 == Les données au cœur de l'application
@@ -712,8 +695,8 @@ Le tableau ci-dessous présente les variables clés stockées et manipulées par
   [#NormalTok("code_indicateur");], [Chaîne], [Identifiant de la métrique mesurée (ex : #NormalTok("EMP_TEMP_SEX_OCU_NB"); pour l'emploi par profession).],
   [#NormalTok("code_pays");], [Chaîne], [Code géographique du pays concerné par la mesure (ex : FRA, USA).],
   [#NormalTok("periode");], [Chaîne], [Période de la mesure (ex : 2024-Q1 pour le 1er trimestre 2024, ou 2023).],
-  [#NormalTok("sexe");], [Chaîne], [Répartition démographique de l'indicateur (HOMME, FEMME, TOTAL).],
-  [#NormalTok("age"); / #NormalTok("occupation");], [Chaîne], [Classification de la population ciblée (tranche d'âge ou catégorie socio-professionnelle).],
+  [#NormalTok("sexe");], [Chaîne], [Répartition démographique de l'indicateur (homme, femme, total).],
+  [#NormalTok("code_classification");], [Chaîne], [Classification de la population ciblée (tranche d'âge ou catégorie socio-professionnelle).],
   [#NormalTok("valeur");], [Décimal], [La valeur quantitative de l'indicateur pour le croisement des cinq dimensions précédentes.],
 )
 === Difficultés des données et nettoyage
@@ -721,9 +704,9 @@ Le tableau ci-dessous présente les variables clés stockées et manipulées par
 La donnée issue d'ILOSTAT, bien qu'officielle, présente de nombreuses irrégularités qui empêchent son exploitation directe. Nous avons donc mis en place un processus de nettoyage strict pour transformer ce flux brut en données fiables et prêtes à l'emploi :
 
 - #strong[Standardisation des noms de variables] : Les colonnes fournies par l'OIT sont souvent multiples ou non explicites. Des variables nommées différemment selon les fichiers ont toutes été unifiées sous une appellation interne stricte pour faciliter notre traitement.
-- Pour ce qui est du #strong[traitement des valeurs aberrantes et manquantes], la plateforme remonte ponctuellement des données non numériques (textes inattendus, cases vides) ou des valeurs infinies. Ces anomalies sont détectées et purgées automatiquement, garantissant que seules des observations quantitatives mathématiquement valides entrent dans notre système.
+- Pour ce qui est du #strong[traitement des valeurs aberrantes et manquantes], la plateforme remonte ponctuellement des données non numériques (textes inattendus, cases vides, valeurs « … ») ou des valeurs infinies. Ces anomalies sont détectées et purgées automatiquement, garantissant que seules des observations quantitatives mathématiquement valides entrent dans notre système.
 - #strong[Normalisation des nomenclatures hétérogènes] :
-  - #strong[Le sexe] : Les différentes variations textuelles remontées (ex : m, male, homme, sex\_m) sont nettoyées et strictement transformées pour correspondre à notre référentiel unique (HOMME, FEMME, TOTAL).
+  - #strong[Le sexe] : Les différentes variations textuelles remontées (ex : m, male, homme, sex\_m) sont nettoyées et strictement transformées pour correspondre à notre référentiel unique (homme, femme, total).
   - #strong[L'âge] : Les noms des catégories d'âge, parfois redondants ou modifiés dans le temps par ILOSTAT, sont harmonisés pour rester cohérents d'une année sur l'autre.
 - Parfois, les données reçues contiennent des statistiques liées à des #strong[régions ou des classements que nous ne gérons pas]. Pour éviter que ces anomalies ne bloquent le système, notre outil les détecte et les écarte d'office.
 - Pour pallier les éventuelles redondances lors du téléchargement, les données sont d'abord #strong[filtrées en mémoire] pour ne conserver que la valeur la plus récente. Lors de l'enregistrement final, une règle de mise à jour spécifique garantit qu'une nouvelle collecte actualise proprement les données existantes sans jamais créer de doublons.
@@ -758,7 +741,7 @@ white
 <architecture-générale-et-choix-technologiques>
 == Structure de l'application
 <structure-de-lapplication>
-LaborScope repose sur une architecture client-serveur découplée, articulée autour de deux applications communiquant exclusivement par requêtes HTTP au format JSON. Le backend (API REST FastAPI) centralise la logique métier, les calculs d'indicateurs, le contrôle des droits d'accès, les requêtes vers PostgreSQL ainsi que la collecte et le nettoyage des flux externes ILOSTAT. Le frontend (application web Streamlit) constitue l'interface utilisateur, gère la navigation et la session, produit les visualisations interactives et assemble les rapports PDF téléchargeables sans jamais accéder directement à la base de données.
+#NormalTok("LaborScope"); repose sur une architecture client-serveur découplée, articulée autour de deux applications communiquant exclusivement par requêtes HTTP au format JSON. Le backend (API REST FastAPI) centralise la logique métier, les calculs d'indicateurs, le contrôle des droits d'accès, les requêtes vers PostgreSQL ainsi que la collecte et le nettoyage des flux externes ILOSTAT. Le frontend (application web Streamlit) constitue l'interface utilisateur, gère la navigation et la session, produit les visualisations interactives et assemble les rapports PDF téléchargeables sans jamais accéder directement à la base de données.
 
 Le diagramme de packages #std.link(<fig-packages>)[#text(fill: ocean, weight: "bold")[#underline[(voir l'annexe A)]]] illustre la manière dont les différentes couches de l'application interagissent entre elles. La première couche correspond au frontend, qui permet à l'utilisateur de se connecter, de naviguer dans l'interface et d'afficher les visualisations graphiques. La deuxième couche est l'API (controller et model), qui réceptionne et valide les requêtes de l'utilisateur avant de les transmettre au serveur. La couche de services (#NormalTok("service"); et #NormalTok("business_object");) prend ensuite le relais pour appliquer les règles métier et effectuer les calculs statistiques demandés. Enfin, elle s'appuie sur la couche d'accès aux données (#NormalTok("client"); et #NormalTok("dao");). Les flux externes sont récupérés et normalisés, puis transmis aux DAO afin d'être stockés et interrogés dans la base PostgreSQL avant d'être renvoyés sous forme de résultats JSON au frontend.
 
@@ -774,7 +757,7 @@ Développé en #strong[Python], le projet utilise le gestionnaire #strong[uv] (#
   [#strong[API & Validation]], [#strong[FastAPI], #strong[Uvicorn], #strong[Pydantic]], [Création d'une API rapide, documentée automatiquement et qui vérifie le format des données échangées.],
   [#strong[Interface, DataViz & Export]], [#strong[Streamlit], #strong[Plotly], #strong[Kaleido], #strong[FPDF2]], [Développement d'une interface interactive (courbes et cartes avec Plotly), export des graphiques en images (Kaleido) et génération de rapports PDF téléchargeables (FPDF2)],
   [#strong[Base de données]], [#strong[PostgreSQL 16], #strong[psycopg2]], [Base de données relationnelle adaptée au stockage structuré des indicateurs, des référentiels géographiques et des comptes utilisateurs.],
-  [#strong[Traitement & Flux]], [#strong[Pandas], #strong[Requests], #strong[HTTPX], #strong[APScheduler]], [Nettoyage et mise en forme des fichiers CSV d'ILOSTAT, requêtes vers l'API externe et programmation régulière des mises à jour.],
+  [#strong[Traitement & Flux]], [#strong[Pandas], #strong[Requests], #strong[HTTPX]], [Nettoyage et mise en forme des fichiers CSV d'ILOSTAT, requêtes vers l'API externe et tests de l'API.],
   [#strong[Sécurité & Déploiement]], [#strong[PyJWT], #strong[python-dotenv], #strong[PyYAML], #strong[Docker]], [Gestion des connexions par jetons sécurisés, conservation des identifiants en dehors du code source et déploiement simplifié et identique sur n'importe quelle machine.],
 )
 Des outils d'assurance qualité (pytest, coverage, ruff, mypy, bandit) complètent cette stack pour vérifier les tests, le typage statique et la conformité du code (détaillés en Partie 5).
@@ -793,9 +776,9 @@ Afin de protéger les comptes utilisateurs et de restreindre l'accès aux foncti
 
 === Conteneurisation et déploiement
 <conteneurisation-et-déploiement>
-L'application est conteneurisée avec #strong[Docker] et orchestrée via #NormalTok("docker-compose.yml"); autour de trois services isolés communiquant sur un réseau interne dédié :
+L'application est conteneurisée avec #strong[Docker] et orchestrée via #NormalTok("docker-compose.yml"); autour de trois services isolés communiquant sur le réseau interne créé par Docker Compose :
 
-- #strong[#NormalTok("postgres"); (port 5432) :] base de données PostgreSQL 16 dotée d'un volume persistant et initialisée automatiquement au démarrage via les scripts SQL du dossier #NormalTok("data/"); \;
+- #strong[#NormalTok("postgres"); (port 5432) :] base de données PostgreSQL 16 dotée d'un volume persistant \; les scripts SQL du dossier #NormalTok("data/"); y sont montés et exécutés par #NormalTok("make go"); (mode Docker) pour créer le schéma et charger les référentiels \;
 - #strong[#NormalTok("backend"); (port 5000) :] serveur API FastAPI exécuté sous Python 3.13 \;
 - #strong[#NormalTok("frontend"); (port 8000) :] application web Streamlit dialoguant directement avec le backend via le réseau interne Docker.
 
@@ -880,7 +863,7 @@ La collecte est le processus le plus riche de l'application car il traverse tout
 L'administrateur clique sur un bouton « Importer les données » dans l'interface. Il peut choisir :
 
 - l'indicateur à collecter (ou tous les indicateurs actifs du référentiel) \;
-- la période de temps (par défaut 2014-2026).
+- la période de temps, comprise entre 2014 et 2026 (l'interface présélectionne 2015-2025).
 
 === Ce que fait l'application étape par étape
 <ce-que-fait-lapplication-étape-par-étape>
@@ -894,7 +877,7 @@ Dès le lancement de la collecte, l'application enregistre immédiatement une tr
 Plutôt que de télécharger systématiquement l'intégralité de la période demandée, l'application commence par vérifier les fichiers déjà archivés localement pour l'indicateur concerné. En identifiant les années déjà couvertes, elle isole uniquement les périodes manquantes et les regroupe par plages consécutives afin de limiter le nombre de requêtes envoyées à l'API d'ILOSTAT. Chaque fichier récupéré est d'abord écrit de façon temporaire avant d'être validé définitivement, ce qui évite de conserver un fichier corrompu en cas de coupure. L'ensemble des fichiers de la période est ensuite rassemblé en mémoire en éliminant les lignes en double. Grâce à ce mécanisme de cache, seul le premier import nécessite de télécharger tout l'historique tandis que les mises à jour suivantes ne récupèrent que les nouvelles données manquantes.
 
 #etape[Étape 3 - Parsing]
-Une fois le fichier CSV consolidé, l'application en analyse le contenu ligne par ligne pour le transformer en données exploitables. Pour chaque enregistrement, elle extrait les informations essentielles, c'est-à-dire l'indicateur, le code pays, la période (année ou trimestre) et la valeur numérique, tout en identifiant le sexe (homme, femme ou total) ainsi que la classification éventuelle (tranche d'âge ou profession). Les valeurs non numériques, notamment les données manquantes codées « \... » par ILOSTAT, sont quant à elles détectées et traitées comme des valeurs vides afin de ne pas fausser les analyses.
+Une fois le fichier CSV consolidé, l'application en analyse le contenu ligne par ligne pour le transformer en données exploitables. Pour chaque enregistrement, elle extrait les informations essentielles, c'est-à-dire l'indicateur, le code pays, la période (année ou trimestre) et la valeur numérique, tout en identifiant le sexe (homme, femme ou total) ainsi que la classification éventuelle (tranche d'âge ou profession). Les valeurs non numériques, notamment les données manquantes codées « ... » par ILOSTAT, sont quant à elles détectées et traitées comme des valeurs vides afin de ne pas fausser les analyses.
 
 #etape[Étape 4 - Filtrage par référentiels connus]
 Avant d'enregistrer les données, l'application vérifie leur cohérence en écartant toutes les observations rattachées à un pays ou à une classification absents de nos référentiels locaux. ILOSTAT renvoie en effet parfois des zones géographiques ou des codes inconnus qui, sans ce filtrage préalable, seraient rejetés par la base de données pour préserver l'intégrité des informations.
@@ -933,7 +916,7 @@ La comparaison de plusieurs indicateurs consiste à construire une série de don
 
 === F6 - Authentification et gestion des droits
 <f6---authentification-et-gestion-des-droits>
-L'accès à l'application est sécurisé par un système de jetons de connexion signés, tandis que les mots de passe ne sont jamais conservés en clair mais protégés par un hachage sécurisé avec sel aléatoire. Le contrôle des droits repose sur deux vérifications. La première est de s'assurer que l'utilisateur est bien authentifié. La seconde est de vérifier qu'il dispose du statut d'administrateur pour les opérations sensibles. Un choix de conception important a été de recontrôler le rôle et l'état du compte en base de données à chaque requête plutôt que de se fier uniquement aux informations contenues dans le jeton : ainsi, la promotion ou la désactivation d'un compte prend effet immédiatement, sans avoir à attendre l'expiration de la session (24 heures).
+L'accès à l'application est sécurisé par un système de jetons de connexion signés, tandis que les mots de passe ne sont jamais conservés en clair mais protégés par un hachage sécurisé avec sel aléatoire. Le contrôle des droits repose sur deux vérifications. La première est de s'assurer que l'utilisateur est bien authentifié. La seconde est de vérifier qu'il dispose du statut d'administrateur pour les opérations sensibles. Un choix de conception important a été de recontrôler le rôle et l'état du compte en base de données à chaque requête plutôt que de se fier uniquement aux informations contenues dans le jeton : ainsi, la promotion ou la désactivation d'un compte prend effet immédiatement, sans avoir à attendre l'expiration du jeton (60 minutes par défaut, durée réglable via la variable #NormalTok("JWT_DUREE_MINUTES");).
 
 En parallèle, un mécanisme de traçabilité enregistre chaque action significative réalisée sur la plateforme (connexion, lancement d'une collecte, modification ou suppression de données). Chaque entrée consignée associe l'auteur de l'opération, l'horodatage, la nature de l'action et un descriptif qui permet aux administrateurs de consulter l'historique et de suivre précisément qui a effectué quelle action.
 
@@ -943,7 +926,7 @@ La vue cartographique récupère les données d'une période unique pour l'ensem
 
 === FO2 - Génération de rapports PDF
 <fo2---génération-de-rapports-pdf>
-La création d'un rapport automatisé repose sur un processus en trois temps. Le système commence par récupérer les séries de données via les modules d'analyse existants (F3 et F4), génère ensuite les graphiques correspondants sous forme d'images, puis assemble l'ensemble dans un document PDF réunissant ces visuels, un tableau récapitulatif et une synthèse automatique des principaux résultats. Une fois produit, le fichier est directement archivé en base de données afin que l'utilisateur puisse le retrouver et le télécharger à tout moment depuis son historique.
+La création d'un rapport automatisé repose sur un processus en trois temps. Le système commence par récupérer les séries de données via les modules d'analyse existants (F3 et F4), génère ensuite les graphiques correspondants sous forme d'images, puis assemble l'ensemble dans un document PDF réunissant ces visuels, un tableau récapitulatif et une synthèse automatique des principaux résultats. Le document est assemblé directement par l'interface (bibliothèque FPDF2, graphiques exportés avec Kaleido) puis proposé immédiatement au téléchargement \; il n'est pas conservé en base de données.
 
 == Cas d'utilisation concret (Démonstration)
 <cas-dutilisation-concret-démonstration>
@@ -981,7 +964,7 @@ white
     #image(chemin, width: 100%)])
 ]
 #etape[Étape 1 - Connexion]
-Marie se connecte sur l'API après avoir créé un compte.
+Marie se connecte à l'application après avoir créé un compte.
 
 #capture("images/capture_connexion.png", [Page de connexion de LaborScope.], w: 85%)
 #etape[Étape 2 - Analyse temporelle (F3)]
@@ -1000,7 +983,7 @@ Comme la majorité des pays, le Luxembourg a connu une baisse du taux d'emploi a
 Marie passe en mode « Comparaison pays » et sélectionne le Luxembourg, la France, le Royaume-Uni et l'Italie. Elle décide de comparer les taux d'emploi entre les pays :
 
 #capture("images/capture_comparaison_pays.png", [Comparaison du taux d'emploi entre les quatre pays.])
-La plupart des pays ont connu une baisse ou une stagnation du taux d'emploi de 2019 à 2021. Cependant le Luxembourg voit une nette augmentation de 2020 à 2021. Marie souhaite illustrer cette nette différence en passant sur le mode "Variations" :
+La plupart des pays ont connu une baisse ou une stagnation du taux d'emploi de 2019 à 2021. Cependant le Luxembourg voit une nette augmentation de 2020 à 2021. Marie souhaite illustrer cette nette différence en passant sur le mode “Variations” :
 
 #capture("images/capture_variations_pays.png", [Variations annuelles du taux d'emploi par pays.])
 La différence est claire, une augmentation de 2% sur une année, la plus haute variation parmi les pays cités. Marie peut désormais retranscrire ses informations dans son rapport.
@@ -1009,7 +992,7 @@ La différence est claire, une augmentation de 2% sur une année, la plus haute 
 #callout(
 body: 
 [
-Une conception en couches, appuyée sur l'héritage, les interfaces et un singleton, qui isole la logique métier du reste \; le processus de consultation illustre le rôle de chaque couche.
+Une conception en couches, appuyée sur l'héritage (classifications d'âge et de profession) et un singleton (connexion à la base), qui isole la logique métier du reste \; le processus de collecte illustre le rôle de chaque couche.
 
 ]
 , 
@@ -1120,14 +1103,15 @@ Le modèle physique de données traduit le diagramme de classes en schéma relat
     #mpd-table("Observation", brand, 5.4cm, 3.7cm, 4.6cm, (
       ("id", "bigserial", "PK"), ("code_indicateur", "varchar(50)", "FK"), ("code_pays", "varchar(10)", "FK"),
       ("periode", "varchar(20)", ""), ("valeur", "numeric", ""), ("sexe", "varchar(10)", ""),
-      ("code_classification", "varchar(50)", "FK"), ("import_id", "integer", "FK")))
+      ("code_classification", "varchar(50)", "FK"), ("import_id", "integer", "FK"),
+      ("source", "varchar(100)", ""), ("date_import", "timestamp", "")))
     #mpd-table("Import_donnees", brand, 10.8cm, 2.4cm, 4.6cm, (
       ("id", "serial", "PK"), ("indicateur_code", "varchar(50)", "FK"), ("utilisateur_id", "integer", "FK"),
       ("date_debut", "timestamp", ""), ("date_fin", "timestamp", ""), ("statut", "varchar(20)", ""),
       ("nombre_lignes", "integer", ""), ("fichier_source", "varchar(255)", ""), ("message_erreur", "text", "")))
     // --- comptes et traçabilité ---
     #mpd-table("Utilisateur", sun.darken(20%), 5.4cm, 9.7cm, 4.6cm, (
-      ("id", "serial", "PK"), ("nom_utilisateur", "varchar(50)", "UK"), ("mot_de_passe_hash", "varchar(256)", ""),
+      ("id", "serial", "PK"), ("nom_utilisateur", "varchar(50)", "UQ"), ("mot_de_passe_hash", "varchar(256)", ""),
       ("role", "varchar(20)", ""), ("actif", "boolean", ""), ("date_creation", "timestamp", ""), ("derniere_connexion", "timestamp", "")))
     #mpd-table("Journal_activite", sun.darken(20%), 0cm, 9.31cm, 4.6cm, (
       ("id", "bigserial", "PK"), ("utilisateur_id", "integer", "FK"), ("action", "varchar(100)", ""),
@@ -1145,20 +1129,20 @@ Le modèle physique de données traduit le diagramme de classes en schéma relat
       #box(width: 7pt, height: 7pt, fill: sun.darken(20%), radius: 1pt, baseline: 1pt) #h(3pt) Comptes et traçabilité \
       #v(2pt)
       #text(fill: sun.darken(25%), weight: "bold")[PK] clé primaire · #text(fill: ocean, weight: "bold")[FK] clé étrangère \
-      #text(fill: brand, weight: "bold")[UK] unique])
+      #text(fill: brand, weight: "bold")[UQ] unique])
   ]
 ]
 === Justification des choix de modélisation
 <justification-des-choix-de-modélisation>
-Le modèle physique de LaborScope repose sur une table centrale "observation" qui joue le rôle de table d'association : elle relie simultanément "Indicateur", "Pays", "Sexe" et la classification ("Age" ou "Occupation"). Cette approche évite de créer des tables de jointure séparées pour chaque relation NàN, car une observation est portée par cette table uniquement. Par exemple, l'observation du taux d'emploi des femmes de 25-34 ans en France en 2023 se retrouve dans une seule ligne qui référence à la fois l'indicateur, le pays, le sexe et la classification d'âge, sans duplication des attributs de ces entités dans d'autres tables.
+Le modèle physique de #NormalTok("LaborScope"); repose sur une table centrale #NormalTok("observation"); qui joue le rôle de table d'association, elle relie simultanément #NormalTok("Indicateur");, #NormalTok("Pays"); et #NormalTok("Classification"); (âge ou profession), le sexe étant porté directement comme attribut de l'observation. Cette approche évite de créer des tables de jointure séparées pour chaque relation N à N, car une observation est portée par cette table uniquement. Par exemple, l'observation du taux d'emploi des femmes de 25-34 ans en France en 2023 se retrouve dans une seule ligne qui référence à la fois l'indicateur, le pays et la classification d'âge, et précise le sexe, sans duplication des attributs de ces entités dans d'autres tables.
 
-Les contraintes SQL mises en place garantissent la cohérence des données sans surcharger le modèle. Les clés étrangères assurent qu'une "observation" ne peut exister que si l'indicateur, le pays et, lorsqu'ils sont renseignés, le sexe et la classification qu'elle cite sont effectivement présents dans leurs tables respectives. Les contraintes #NormalTok("CHECK"); bornent les valeurs possibles à un ensemble connu (par exemple, le #NormalTok("statut"); d'un import est limité à #NormalTok("'en_cours'");, #NormalTok("'succes'"); ou #NormalTok("'echec'");), ce qui élimine les données incohérentes. Enfin, la contrainte d'unicité #NormalTok("(code_indicateur, code_pays, periode, code_sexe, code_age, code_occupation)"); sur #NormalTok("observation"); garantit qu'une même mesure n'est jamais enregistrée deux fois.
+Les contraintes SQL mises en place garantissent la cohérence des données sans surcharger le modèle. Les clés étrangères assurent qu'une “observation” ne peut exister que si l'indicateur, le pays et, lorsqu'elle est renseignée, la classification qu'elle cite sont effectivement présents dans leurs tables respectives \; le sexe est quant à lui limité à #NormalTok("homme");, #NormalTok("femme"); ou #NormalTok("total"); par une contrainte #NormalTok("CHECK");. Les contraintes #NormalTok("CHECK"); bornent les valeurs possibles à un ensemble connu (par exemple, le #NormalTok("statut"); d'un import est limité à #NormalTok("'en_cours'");, #NormalTok("'succes'"); ou #NormalTok("'echec'");), ce qui élimine les données incohérentes. Enfin, la contrainte d'unicité #NormalTok("(code_indicateur, code_pays, periode, sexe, code_classification)"); sur #NormalTok("observation"); garantit qu'une même mesure n'est jamais enregistrée deux fois.
 
 == Stockage des données
 <stockage-des-données>
-Les données de référence (pays, indicateurs, classifications) sont chargées une seule fois en base au démarrage du système : ce sont des référentiels immuables qui servent de dictionnaires à l'ensemble de l'application. En revanche, les observations (les valeurs mesurées) sont écrites en base PostgreSQL lors d'une action de collecte déclenchée par l'utilisateur. Puis elles sont mises à jour par un upsert si de nouvelles valeurs arrivent pour la même combinaison indicateur/pays/période/sexe/classification.
+Les données de référence (pays, indicateurs, classifications) sont chargées une seule fois en base au démarrage du système, ce sont des référentiels immuables qui servent de dictionnaires à l'ensemble de l'application. En revanche, les observations (les valeurs mesurées) sont écrites en base PostgreSQL lors d'une action de collecte déclenchée par l'utilisateur. Puis elles sont mises à jour par un upsert si de nouvelles valeurs arrivent pour la même combinaison indicateur#NormalTok("/pays/période/sexe/classification");.
 
-Le système met en place un mécanisme pour éviter de sur-solliciter l'ILOSTAT. D'abord, au niveau fichier, les CSV téléchargés sont archivés localement. Avant de faire une requête réseau, le système vérifie quelles années sont déjà couvertes par les fichiers existants (seules les années manquantes sont demandées à l'API). Ensuite, au niveau base de données : une fois les données parsées et insérées, toutes les lectures ultérieures (analyses, graphiques, calculs de taux) se font directement avec la base, sans aucun appel à ILOSTAT. L'API n'est donc contactée qu'au moment de la collecte, uniquement pour les données réellement manquantes.
+Le système met en place un mécanisme pour éviter de sur-solliciter l'ILOSTAT. D'abord, au niveau fichier, les CSV téléchargés sont archivés localement. Avant de faire une requête réseau, le système vérifie quelles années sont déjà couvertes par les fichiers existants (seules les années manquantes sont demandées à l'API). Ensuite, au niveau base de données, une fois les données parsées et insérées, toutes les lectures ultérieures (analyses, graphiques, calculs de taux) se font directement avec la base, sans aucun appel à ILOSTAT. L'API n'est donc contactée qu'au moment de la collecte, uniquement pour les données réellement manquantes.
 
 == Normalisation et formes normales
 <normalisation-et-formes-normales>
@@ -1174,7 +1158,7 @@ Notre schéma a été conçu en respectant les trois premières formes normales.
 #callout(
 body: 
 [
-Un schéma relationnel de dix tables, organisé autour d'une table centrale d'observations reliée à cinq référentiels (indicateur, pays, sexe, âge, occupation), et protégé par des clés étrangères, des contraintes #NormalTok("CHECK"); et une contrainte d'unicité. La base sert aussi de cache entre l'application et l'API ILOSTAT : celle-ci n'est contactée qu'au moment de la collecte, et uniquement pour les données manquantes.
+Un schéma relationnel de huit tables, organisé autour d'une table centrale d'observations reliée à trois référentiels (indicateur, pays, classification d'âge ou de profession), le sexe étant contrôlé par une contrainte #NormalTok("CHECK");, et protégé par des clés étrangères, des contraintes #NormalTok("CHECK"); et une contrainte d'unicité. La base sert aussi de cache entre l'application et l'API ILOSTAT, celle-ci n'est contactée qu'au moment de la collecte, et uniquement pour les données manquantes.
 
 ]
 , 
@@ -1354,10 +1338,10 @@ Afin de garantir la stabilité de l'application, nous avons mis en place une sui
   align: (left,center,left,),
   table.header([Couche testée], [Couverture], [Remarque],),
   table.hline(),
-  [DAO], [#todo[100 %]], [Schéma de test dédié],
-  [Services], [#todo[100 %]], [API externe simulée],
-  [Contrôleurs], [#todo[100 %]], [Routes et validation],
-  [#strong[Total]], [#todo[100 %]], [],
+  [DAO], [100 %], [Base simulée (mocks)],
+  [Services], [96 %], [API externe simulée],
+  [Contrôleurs], [85 %], [Routes et validation],
+  [#strong[Total]], [95 %], [460 tests],
 )
 === Gestion des temps de traitement longs
 <gestion-des-temps-de-traitement-longs>
@@ -1395,7 +1379,7 @@ white
 ]
 #heading(level: 1, numbering: none)[Conclusion générale]
 <conclusion-générale>
-#strong[Bilan technique et fonctionnel.] LaborScope atteint son objectif qui est d'offrir un accès simple, sécurisé et comparable aux statistiques mondiales du marché du travail. Le socle obligatoire (F1 à F6) couvre toute la chaîne, de la collecte automatisée des données ILOSTAT à leur visualisation dans l'interface, en passant par l'authentification à deux profils et la traçabilité des actions sensibles. Il est complété par les deux fonctionnalités additionnelles : la cartographie interactive (FO1) et la génération de rapports PDF (FO2). Les tests unitaires, écrits avec pytest sur les trois couches du back-end (DAO, services et contrôleurs), couvrent #todo[100 %] du code.
+#strong[Bilan technique et fonctionnel.] LaborScope atteint son objectif qui est d'offrir un accès simple, sécurisé et comparable aux statistiques mondiales du marché du travail. Le socle obligatoire (F1 à F6) couvre toute la chaîne, de la collecte automatisée des données ILOSTAT à leur visualisation dans l'interface, en passant par l'authentification à deux profils et la traçabilité des actions sensibles. Il est complété par les deux fonctionnalités additionnelles : la cartographie interactive (FO1) et la génération de rapports PDF (FO2). Les tests unitaires, écrits avec pytest sur les trois couches du back-end (DAO, services et contrôleurs), couvrent 95 % du code (100 % des DAO).
 
 #strong[Apports pédagogiques.] Le projet nous a appris à concevoir une application en couches, à justifier des choix techniques, à tester de manière isolée et à travailler à cinq sur un même dépôt. Répartir le travail par couche technique nous a permis de monter rapidement en compétence sur PostgreSQL, FastAPI et Streamlit, mais nous a aussi montré combien les formats de données et les interfaces entre les couches doivent être définis en amont. C'est lors de leur intégration que sont apparus nos principaux retards. Les trois journées d'immersion en présentiel ont été décisives pour les résorber, et la première démonstration en direct du projet nous a apporté des remarques constructives de notre encadrant. Nous avons également été confrontés à d'autres imprévus, comme les données ILOSTAT irrégulières (valeurs manquantes, nomenclatures hétérogènes) qui ont exigé un nettoyage rigoureux, les évolutions de périmètre et les arbitrages entre fonctionnalités.
 
@@ -1429,7 +1413,8 @@ Ce projet m'a permis de gagner en assurance sur la conception de bases de donné
 
 #heading(level: 2, numbering: none)[Adam Ouangko Haïwè]
 <adam-ouangko-haïwè>
-Au sein de l'équipe, j'ai principalement travaillé dans la couche #NormalTok("service"); sur la partie backend, où j'ai développé la logique métier des analyses, avec une contribution à la couche #NormalTok("controller");. Ce rôle m'a appris à traduire un besoin fonctionnel (analyser une évolution, comparer des pays ou des indicateurs) en règles claires, indépendantes de la base de données comme de l'interface. Placé entre la DAO et l'API, j'ai surtout mesuré l'importance de définir en amont les formats de données échangés, c'est à cet endroit que les couches doivent s'emboîter sans erreur. J'ai aussi appris à développer le réflexe d'écrire un code testable, en isolant mes services grâce aux mocks, et à respecter des conventions communes (typage explicite, Ruff, revue de code avant fusion). Les journées d'immersion ont montré que la communication entre l'API et le frontend se règle plus vite à plusieurs, autour d'un même écran. \ Mon conseil aux futurs 2A : séparer strictement la logique métier de l'accès aux données, tester tôt et documenter les interfaces entre couches.
+Au sein de l'équipe, j'ai principalement travaillé dans la couche #NormalTok("service"); sur la partie backend, où j'ai développé la logique métier des analyses, avec une contribution à la couche #NormalTok("controller");. Ce rôle m'a appris à traduire un besoin fonctionnel (analyser une évolution, comparer des pays ou des indicateurs) en règles claires, indépendantes de la base de données comme de l'interface. Placé entre la DAO et l'API, j'ai surtout mesuré l'importance de définir en amont les formats de données échangés, c'est à cet endroit que les couches doivent s'emboîter sans erreur. J'ai aussi appris à développer le réflexe d'écrire un code testable, en isolant mes services grâce aux mocks, et à respecter des conventions communes (typage explicite, Ruff, revue de code avant fusion). Les journées d'immersion ont montré que la communication entre l'API et le frontend se règle plus vite à plusieurs, autour d'un même écran. \
+#strong[Mon conseil aux futurs 2A] : séparer strictement la logique métier de l'accès aux données, tester tôt et documenter les interfaces entre couches.
 
 #heading(level: 2, numbering: none)[Vicram Raveendiran]
 <vicram-raveendiran>

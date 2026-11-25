@@ -107,16 +107,16 @@ format:
 #v(0.6cm)
 #grid(columns: (1fr, 1fr), column-gutter: 1cm,
   align(left)[
-    #text(style: "italic", fill: muted)[Étudiants] \ #v(0.3em)
-    Jade #smallcaps[Colin] \
-    Sidy Mohamed Salim #smallcaps[Diallo] \
-    Alexandre #smallcaps[Fratter-Bardy] \
+    #text(style: "italic", fill: muted)[Étudiant.e.s :] \ #v(0.3em)
     Adam Ouangko #smallcaps[Haïwè] \
-    Vicram #smallcaps[Raveendiran]],
+    Alexandre #smallcaps[Fratter-Bardy] \
+    Jade #smallcaps[Colin] \
+    Vicram #smallcaps[Raveendiran] \
+    Sidy Mohamed Salim #smallcaps[Diallo]],
   align(right)[
-    #text(style: "italic", fill: muted)[Responsable] \ #v(0.3em)
+    #text(style: "italic", fill: muted)[Responsable :] \ #v(0.3em)
     Ludovic #smallcaps[Deneuville] \ #v(0.8cm)
-    #text(style: "italic", fill: muted)[Encadrant] \ #v(0.3em)
+    #text(style: "italic", fill: muted)[Encadrant :] \ #v(0.3em)
     Anas #smallcaps[Knefati]])
 #v(1.2cm)
 #v(1fr)
@@ -150,7 +150,7 @@ Nous tenons à remercier chaleureusement notre encadrant, Anas Knefati, pour sa 
 
 Nous remercions également l'Organisation Internationale du Travail, dont les données ouvertes, accessibles via ILOSTAT, ont rendu ce projet possible, ainsi que les communautés open source qui développent et documentent les outils sur lesquels repose LaborScope : Python, FastAPI, Streamlit, PostgreSQL, pandas, Docker et bien d'autres.
 
-Enfin, nous tenons à nous remercier mutuellement : chacun des cinq membres de l'équipe a porté la solidité de sa propre couche technique, partagé ses connaissances et pris le temps de relire et de corriger le travail des autres. C'est cette entraide, nourrie par les revues de code et les journées de travail en présentiel, qui a permis d'assembler un produit cohérent dans les délais impartis. `#todo[Ajouter, si vous le souhaitez, vos proches, relecteurs ou toute autre personne à remercier. Sinon, je prevois supprimer cette section ce soir]`{=typst}
+Enfin, nous tenons à nous remercier mutuellement : chacun des cinq membres de l'équipe a porté la solidité de sa propre couche technique, partagé ses connaissances et pris le temps de relire et de corriger le travail des autres. C'est cette entraide, nourrie par les revues de code et les journées de travail en présentiel, qui a permis d'assembler un produit cohérent dans les délais impartis.
 
 {{< pagebreak >}}
 
@@ -306,34 +306,9 @@ LaborScope simplifie l'accès aux statistiques de l'OIT pour trois profils d'uti
 
 ## Structure de l'application
 
-LaborScope repose sur une architecture client-serveur découplée, articulée autour de deux applications communiquant exclusivement par requêtes HTTP au format JSON.
+`LaborScope` repose sur une architecture client-serveur découplée, articulée autour de deux applications communiquant exclusivement par requêtes HTTP au format JSON.
 Le backend (API REST FastAPI) centralise la logique métier, les calculs d'indicateurs, le contrôle des droits d'accès, les requêtes vers PostgreSQL ainsi que la collecte et le nettoyage des flux externes ILOSTAT.
 Le frontend (application web Streamlit) constitue l'interface utilisateur, gère la navigation et la session, produit les visualisations interactives et assemble les rapports PDF téléchargeables sans jamais accéder directement à la base de données.
-
-
-<!-- ```{=typst} -->
-<!-- #figure(caption: [Architecture en couches : chaque flèche est une dépendance autorisée.])[ -->
-<!--   #block(width: 9.4cm, inset: 4pt)[ -->
-<!--     #align(center, box(fill: mist, stroke: 0.6pt + brand, radius: 3pt, inset: 6pt)[#text(size: 9pt, font: sans)[Utilisateur]]) -->
-<!--     #down -->
-<!--     #layer([Présentation], [documentation interactive (Swagger), JSON], col: ocean) -->
-<!--     #down -->
-<!--     #layer([Contrôleurs], [routes, validation des entrées, authentification]) -->
-<!--     #down -->
-<!--     #layer([Services], [logique métier, calcul des indicateurs, droits], col: brand.lighten(15%)) -->
-<!--     #down -->
-<!--     #grid(columns: (1fr, 1fr), column-gutter: 4pt, -->
-<!--       layer([Client API], [accès à ILOSTAT], col: ocean.darken(10%), w: 4.4cm), -->
-<!--       layer([DAO], [accès à la base], col: ocean.darken(10%), w: 4.4cm)) -->
-<!--     #grid(columns: (1fr, 1fr), column-gutter: 4pt, down, down) -->
-<!--     #grid(columns: (1fr, 1fr), column-gutter: 4pt, -->
-<!--       align(center, box(width: 4.4cm, stroke: (dash: "dashed", paint: sun, thickness: 1pt), fill: sun.lighten(85%), radius: 3pt, inset: 7pt)[ -->
-<!--         #align(center, text(size: 9pt, font: sans)[API ILOSTAT (OIT)])]), -->
-<!--       align(center, box(width: 4.4cm, stroke: 1pt + brand, fill: sun.lighten(70%), radius: 8pt, inset: 7pt)[ -->
-<!--         #align(center, text(size: 9pt, font: sans)[PostgreSQL])])) -->
-<!--   ] -->
-<!-- ] <fig-archi> -->
-<!-- ``` -->
 
 Le diagramme de packages `#std.link(<fig-packages>)[#text(fill: ocean, weight: "bold")[#underline[(voir l'annexe A)]]]`{=typst} illustre la manière dont les différentes couches de l'application interagissent entre elles. La première couche correspond au frontend, qui permet à l'utilisateur de se connecter, de naviguer dans l'interface et d'afficher les visualisations graphiques. La deuxième couche est l'API (controller et model), qui réceptionne et valide les requêtes de l'utilisateur avant de les transmettre au serveur. La couche de services (`service` et `business_object`) prend ensuite le relais pour appliquer les règles métier et effectuer les calculs statistiques demandés. Enfin, elle s'appuie sur la couche d'accès aux données (`client` et `dao`). Les flux externes sont récupérés et normalisés, puis transmis aux DAO afin d'être stockés et interrogés dans la base PostgreSQL avant d'être renvoyés sous forme de résultats JSON au frontend. 
 
@@ -430,61 +405,6 @@ LaborScope est organisé selon une architecture en quatre couches, où chaque co
 ] <fig-archi>
 ```
 
-<!-- ```{=typst} -->
-<!-- #figure(caption: [Diagramme de classes simplifié : objets métier.])[ -->
-<!--   #align(center)[ -->
-<!--     #grid(columns: (3.7cm, 1.9cm, 3.7cm, 1.9cm, 3.7cm), row-gutter: 14pt, -->
-<!--       cls([Pays], [code_iso3 : str \ nom : str \ region : str]), -->
-<!--       link[1 ◄──── \* \ concerne], -->
-<!--       cls([Observation], [annee : int \ sexe : str \ valeur : float]), -->
-<!--       link[\* ────► 1 \ mesure], -->
-<!--       cls([Indicateur], [code : str \ libelle : str \ unite : str]), -->
-<!--       cls([Administrateur], [gerer_comptes()]), -->
-<!--       link[──────▷ \ hérite], -->
-<!--       cls([Utilisateur], [id : int \ email : str \ peut(action) : bool], tag: "abstraite"), -->
-<!--       link[◁────── \ hérite], -->
-<!--       cls([UtilisateurInscrit], [favoris : list])) -->
-<!--   ] -->
-<!-- ] -->
-<!-- ``` -->
-
-<!-- ```{=typst} -->
-<!-- #figure(caption: [Services, DAO et client externe (pointillés = dépendances, ▷ = héritage ou réalisation).])[ -->
-<!--   #align(center)[ -->
-<!--     #grid(columns: (3.8cm, 3.8cm, 3.8cm), column-gutter: 8pt, row-gutter: 6pt, -->
-<!--       cls([AuthService], [inscrire() \ connecter() \ verifier_jeton()], w: 3.8cm), -->
-<!--       cls([StatistiquesService], [obtenir_statistiques() \ comparer_pays()], w: 3.8cm), -->
-<!--       align(horizon, text(size: 8pt, fill: ocean)[◄ dépend aussi de \ l'interface SourceDonnees ↓]), -->
-<!--       link[⇣ utilise], link[⇣ utilise], [], -->
-<!--       cls([UtilisateurDAO], [trouver_par_email() \ creer()], w: 3.8cm), -->
-<!--       cls([ObservationDAO], [rechercher() \ enregistrer()], w: 3.8cm), -->
-<!--       cls([SourceDonnees], [telecharger(filtres)], w: 3.8cm, tag: "interface"), -->
-<!--       link[▽ hérite de], link[▽ hérite de], link[△ réalise], -->
-<!--       cls([AbstractDAO], [creer() \ supprimer()], w: 3.8cm, tag: "interface"), -->
-<!--       [], -->
-<!--       cls([ILOSTATClient], [telecharger(filtres)], w: 3.8cm)) -->
-<!--   ] -->
-<!-- ] -->
-<!-- ``` -->
-
-
-<!-- ### Diagramme de classes : couche objets métiers -->
-
-<!-- ```{=typst} -->
-<!-- #figure(caption: [Diagramme de classes : couche objets métiers.])[ -->
-<!--   #block(width: 100%, height: 7cm, fill: mist, stroke: 0.6pt + muted.lighten(40%), radius: 2pt)[ -->
-<!--     #align(center + horizon, text(size: 9pt, fill: muted, font: sans)[*Diagramme de classes (objets métiers)* — à insérer ici])] -->
-<!-- ] -->
-<!-- ``` -->
-
-<!-- ### Diagramme de classes : couche services et dépendances -->
-
-<!-- ```{=typst} -->
-<!-- #figure(caption: [Diagramme de classes : couche services et dépendances.])[ -->
-<!--   #block(width: 100%, height: 7cm, fill: mist, stroke: 0.6pt + muted.lighten(40%), radius: 2pt)[ -->
-<!--     #align(center + horizon, text(size: 9pt, fill: muted, font: sans)[*Diagramme de classes (services et dépendances)* — à insérer ici])] -->
-<!-- ] -->
-<!-- ``` -->
 
 ## Zoom détaillé sur un processus central : la collecte de données (F1)
 
@@ -770,15 +690,15 @@ Le modèle physique de données traduit le diagramme de classes en schéma relat
 
 ### Justification des choix de modélisation
 
-Le modèle physique de LaborScope repose sur une table centrale “observation” qui joue le rôle de table d'association : elle relie simultanément “Indicateur”, “Pays” et “Classification” (âge ou profession), le sexe étant porté directement comme attribut de l'observation. Cette approche évite de créer des tables de jointure séparées pour chaque relation NàN, car une observation est portée par cette table uniquement. Par exemple, l'observation du taux d'emploi des femmes de 25-34 ans en France en 2023 se retrouve dans une seule ligne qui référence à la fois l'indicateur, le pays et la classification d'âge, et précise le sexe, sans duplication des attributs de ces entités dans d'autres tables.
+Le modèle physique de `LaborScope` repose sur une table centrale `observation` qui joue le rôle de table d'association, elle relie simultanément `Indicateur`, `Pays` et `Classification` (âge ou profession), le sexe étant porté directement comme attribut de l'observation. Cette approche évite de créer des tables de jointure séparées pour chaque relation N à N, car une observation est portée par cette table uniquement. Par exemple, l'observation du taux d'emploi des femmes de 25-34 ans en France en 2023 se retrouve dans une seule ligne qui référence à la fois l'indicateur, le pays et la classification d'âge, et précise le sexe, sans duplication des attributs de ces entités dans d'autres tables.
 
 Les contraintes SQL mises en place garantissent la cohérence des données sans surcharger le modèle. Les clés étrangères assurent qu’une “observation” ne peut exister que si l'indicateur, le pays et, lorsqu'elle est renseignée, la classification qu'elle cite sont effectivement présents dans leurs tables respectives ; le sexe est quant à lui limité à `homme`, `femme` ou `total` par une contrainte `CHECK`. Les contraintes `CHECK` bornent les valeurs possibles à un ensemble connu (par exemple, le `statut` d'un import est limité à `'en_cours'`, `'succes'` ou `'echec'`), ce qui élimine les données incohérentes. Enfin, la contrainte d'unicité `(code_indicateur, code_pays, periode, sexe, code_classification)` sur `observation` garantit qu'une même mesure n'est jamais enregistrée deux fois.
 
 ## Stockage des données
 
-Les données de référence (pays, indicateurs, classifications) sont chargées une seule fois en base au démarrage du système : ce sont des référentiels immuables qui servent de dictionnaires à l'ensemble de l'application. En revanche, les observations (les valeurs mesurées) sont écrites en base PostgreSQL lors d'une action de collecte déclenchée par l'utilisateur. Puis elles sont mises à jour par un upsert si de nouvelles valeurs arrivent pour la même combinaison indicateur/pays/période/sexe/classification.
+Les données de référence (pays, indicateurs, classifications) sont chargées une seule fois en base au démarrage du système, ce sont des référentiels immuables qui servent de dictionnaires à l'ensemble de l'application. En revanche, les observations (les valeurs mesurées) sont écrites en base PostgreSQL lors d'une action de collecte déclenchée par l'utilisateur. Puis elles sont mises à jour par un upsert si de nouvelles valeurs arrivent pour la même combinaison indicateur`/pays/période/sexe/classification`.
 
-Le système met en place un mécanisme pour éviter de sur-solliciter l’ILOSTAT. D'abord, au niveau fichier, les CSV téléchargés sont archivés localement. Avant de faire une requête réseau, le système vérifie quelles années sont déjà couvertes par les fichiers existants (seules les années manquantes sont demandées à l'API). Ensuite, au niveau base de données : une fois les données parsées et insérées, toutes les lectures ultérieures (analyses, graphiques, calculs de taux) se font directement avec la base, sans aucun appel à ILOSTAT. L'API n'est donc contactée qu'au moment de la collecte, uniquement pour les données réellement manquantes.
+Le système met en place un mécanisme pour éviter de sur-solliciter l’ILOSTAT. D'abord, au niveau fichier, les CSV téléchargés sont archivés localement. Avant de faire une requête réseau, le système vérifie quelles années sont déjà couvertes par les fichiers existants (seules les années manquantes sont demandées à l'API). Ensuite, au niveau base de données, une fois les données parsées et insérées, toutes les lectures ultérieures (analyses, graphiques, calculs de taux) se font directement avec la base, sans aucun appel à ILOSTAT. L'API n'est donc contactée qu'au moment de la collecte, uniquement pour les données réellement manquantes.
 
 ## Normalisation et formes normales
 
@@ -792,7 +712,7 @@ Notre schéma a été conçu en respectant les trois premières formes normales.
 
 
 ::: {.callout-note title="Synthèse du chapitre 4" icon=false}
-Un schéma relationnel de huit tables, organisé autour d'une table centrale d'observations reliée à trois référentiels (indicateur, pays, classification d'âge ou de profession), le sexe étant contrôlé par une contrainte `CHECK`, et protégé par des clés étrangères, des contraintes `CHECK` et une contrainte d'unicité. La base sert aussi de cache entre l'application et l'API ILOSTAT : celle-ci n'est contactée qu'au moment de la collecte, et uniquement pour les données manquantes.
+Un schéma relationnel de huit tables, organisé autour d'une table centrale d'observations reliée à trois référentiels (indicateur, pays, classification d'âge ou de profession), le sexe étant contrôlé par une contrainte `CHECK`, et protégé par des clés étrangères, des contraintes `CHECK` et une contrainte d'unicité. La base sert aussi de cache entre l'application et l'API ILOSTAT, celle-ci n'est contactée qu'au moment de la collecte, et uniquement pour les données manquantes.
 :::
 
 # Gestion de projet, outils et assurance qualité
@@ -1056,7 +976,7 @@ Ce projet m'a permis de gagner en assurance sur la conception de bases de donné
 ## Adam Ouangko Haïwè {.unnumbered}
 
 Au sein de l'équipe, j'ai principalement travaillé dans la couche `service` sur la partie backend, où j'ai développé la logique métier des analyses, avec une contribution à la couche `controller`. Ce rôle m'a appris à traduire un besoin fonctionnel (analyser une évolution, comparer des pays ou des indicateurs) en règles claires, indépendantes de la base de données comme de l'interface. Placé entre la DAO et l'API, j'ai surtout mesuré l'importance de définir en amont les formats de données échangés, c'est à cet endroit que les couches doivent s'emboîter sans erreur. J'ai aussi appris à développer le réflexe d'écrire un code testable, en isolant mes services grâce aux mocks, et à respecter des conventions communes (typage explicite, Ruff, revue de code avant fusion). Les journées d'immersion ont montré que la communication entre l'API et le frontend se règle plus vite à plusieurs, autour d'un même écran.  
-Mon conseil aux futurs 2A : séparer strictement la logique métier de l'accès aux données, tester tôt et documenter les interfaces entre couches.
+**Mon conseil aux futurs 2A** : séparer strictement la logique métier de l'accès aux données, tester tôt et documenter les interfaces entre couches.
 
 ## Vicram Raveendiran {.unnumbered}
 
