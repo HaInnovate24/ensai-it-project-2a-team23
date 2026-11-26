@@ -111,6 +111,7 @@
           subfloat-numbering(n-super, subfloat-idx)
         })
         show figure.where(kind: kind): set figure.caption(position: position)
+        show figure.where(kind: kind): set figure(outlined: false)
 
         show figure: it => {
           let num = numbering(subcapnumbering, n-super, quartosubfloatcounter.get().first() + 1)
@@ -289,6 +290,10 @@
   toc_title: none,
   toc_depth: none,
   toc_indent: 1.5em,
+  lof: false,
+  lof-title: none,
+  lot: false,
+  lot-title: none,
   doc,
 ) = {
   // Set document metadata for PDF accessibility
@@ -386,10 +391,22 @@
     }
     block(above: 0em, below: 2em)[
     #outline(
-      title: toc_title,
+      title: title,
       depth: toc_depth,
       indent: toc_indent
     );
+    ]
+  }
+
+  if lof {
+    block(above: 0em, below: 2em)[
+    #outline(title: lof-title, target: figure.where(kind: "quarto-float-fig"));
+    ]
+  }
+
+  if lot {
+    block(above: 0em, below: 2em)[
+    #outline(title: lot-title, target: figure.where(kind: "quarto-float-tbl"));
     ]
   }
 
@@ -877,7 +894,7 @@ Dès le lancement de la collecte, l'application enregistre immédiatement une tr
 Plutôt que de télécharger systématiquement l'intégralité de la période demandée, l'application commence par vérifier les fichiers déjà archivés localement pour l'indicateur concerné. En identifiant les années déjà couvertes, elle isole uniquement les périodes manquantes et les regroupe par plages consécutives afin de limiter le nombre de requêtes envoyées à l'API d'ILOSTAT. Chaque fichier récupéré est d'abord écrit de façon temporaire avant d'être validé définitivement, ce qui évite de conserver un fichier corrompu en cas de coupure. L'ensemble des fichiers de la période est ensuite rassemblé en mémoire en éliminant les lignes en double. Grâce à ce mécanisme de cache, seul le premier import nécessite de télécharger tout l'historique tandis que les mises à jour suivantes ne récupèrent que les nouvelles données manquantes.
 
 #etape[Étape 3 - Parsing]
-Une fois le fichier CSV consolidé, l'application en analyse le contenu ligne par ligne pour le transformer en données exploitables. Pour chaque enregistrement, elle extrait les informations essentielles, c'est-à-dire l'indicateur, le code pays, la période (année ou trimestre) et la valeur numérique, tout en identifiant le sexe (homme, femme ou total) ainsi que la classification éventuelle (tranche d'âge ou profession). Les valeurs non numériques, notamment les données manquantes codées « ... » par ILOSTAT, sont quant à elles détectées et traitées comme des valeurs vides afin de ne pas fausser les analyses.
+Une fois le fichier CSV consolidé, l'application en analyse le contenu ligne par ligne pour le transformer en données exploitables. Pour chaque enregistrement, elle extrait les informations essentielles, c'est-à-dire l'indicateur, le code pays, la période (année ou trimestre) et la valeur numérique, tout en identifiant le sexe (homme, femme ou total) ainsi que la classification éventuelle (tranche d'âge ou profession). Les valeurs non numériques, notamment les données manquantes codées « \... » par ILOSTAT, sont quant à elles détectées et traitées comme des valeurs vides afin de ne pas fausser les analyses.
 
 #etape[Étape 4 - Filtrage par référentiels connus]
 Avant d'enregistrer les données, l'application vérifie leur cohérence en écartant toutes les observations rattachées à un pays ou à une classification absents de nos référentiels locaux. ILOSTAT renvoie en effet parfois des zones géographiques ou des codes inconnus qui, sans ce filtrage préalable, seraient rejetés par la base de données pour préserver l'intégrité des informations.
@@ -983,7 +1000,7 @@ Comme la majorité des pays, le Luxembourg a connu une baisse du taux d'emploi a
 Marie passe en mode « Comparaison pays » et sélectionne le Luxembourg, la France, le Royaume-Uni et l'Italie. Elle décide de comparer les taux d'emploi entre les pays :
 
 #capture("images/capture_comparaison_pays.png", [Comparaison du taux d'emploi entre les quatre pays.])
-La plupart des pays ont connu une baisse ou une stagnation du taux d'emploi de 2019 à 2021. Cependant le Luxembourg voit une nette augmentation de 2020 à 2021. Marie souhaite illustrer cette nette différence en passant sur le mode “Variations” :
+La plupart des pays ont connu une baisse ou une stagnation du taux d'emploi de 2019 à 2021. Cependant le Luxembourg voit une nette augmentation de 2020 à 2021. Marie souhaite illustrer cette nette différence en passant sur le mode "Variations" :
 
 #capture("images/capture_variations_pays.png", [Variations annuelles du taux d'emploi par pays.])
 La différence est claire, une augmentation de 2% sur une année, la plus haute variation parmi les pays cités. Marie peut désormais retranscrire ses informations dans son rapport.
@@ -1136,7 +1153,7 @@ Le modèle physique de données traduit le diagramme de classes en schéma relat
 <justification-des-choix-de-modélisation>
 Le modèle physique de #NormalTok("LaborScope"); repose sur une table centrale #NormalTok("observation"); qui joue le rôle de table d'association, elle relie simultanément #NormalTok("Indicateur");, #NormalTok("Pays"); et #NormalTok("Classification"); (âge ou profession), le sexe étant porté directement comme attribut de l'observation. Cette approche évite de créer des tables de jointure séparées pour chaque relation N à N, car une observation est portée par cette table uniquement. Par exemple, l'observation du taux d'emploi des femmes de 25-34 ans en France en 2023 se retrouve dans une seule ligne qui référence à la fois l'indicateur, le pays et la classification d'âge, et précise le sexe, sans duplication des attributs de ces entités dans d'autres tables.
 
-Les contraintes SQL mises en place garantissent la cohérence des données sans surcharger le modèle. Les clés étrangères assurent qu'une “observation” ne peut exister que si l'indicateur, le pays et, lorsqu'elle est renseignée, la classification qu'elle cite sont effectivement présents dans leurs tables respectives \; le sexe est quant à lui limité à #NormalTok("homme");, #NormalTok("femme"); ou #NormalTok("total"); par une contrainte #NormalTok("CHECK");. Les contraintes #NormalTok("CHECK"); bornent les valeurs possibles à un ensemble connu (par exemple, le #NormalTok("statut"); d'un import est limité à #NormalTok("'en_cours'");, #NormalTok("'succes'"); ou #NormalTok("'echec'");), ce qui élimine les données incohérentes. Enfin, la contrainte d'unicité #NormalTok("(code_indicateur, code_pays, periode, sexe, code_classification)"); sur #NormalTok("observation"); garantit qu'une même mesure n'est jamais enregistrée deux fois.
+Les contraintes SQL mises en place garantissent la cohérence des données sans surcharger le modèle. Les clés étrangères assurent qu'une "observation" ne peut exister que si l'indicateur, le pays et, lorsqu'elle est renseignée, la classification qu'elle cite sont effectivement présents dans leurs tables respectives \; le sexe est quant à lui limité à #NormalTok("homme");, #NormalTok("femme"); ou #NormalTok("total"); par une contrainte #NormalTok("CHECK");. Les contraintes #NormalTok("CHECK"); bornent les valeurs possibles à un ensemble connu (par exemple, le #NormalTok("statut"); d'un import est limité à #NormalTok("'en_cours'");, #NormalTok("'succes'"); ou #NormalTok("'echec'");), ce qui élimine les données incohérentes. Enfin, la contrainte d'unicité #NormalTok("(code_indicateur, code_pays, periode, sexe, code_classification)"); sur #NormalTok("observation"); garantit qu'une même mesure n'est jamais enregistrée deux fois.
 
 == Stockage des données
 <stockage-des-données>
@@ -1413,8 +1430,7 @@ Ce projet m'a permis de gagner en assurance sur la conception de bases de donné
 
 #heading(level: 2, numbering: none)[Adam Ouangko Haïwè]
 <adam-ouangko-haïwè>
-Au sein de l'équipe, j'ai principalement travaillé dans la couche #NormalTok("service"); sur la partie backend, où j'ai développé la logique métier des analyses, avec une contribution à la couche #NormalTok("controller");. Ce rôle m'a appris à traduire un besoin fonctionnel (analyser une évolution, comparer des pays ou des indicateurs) en règles claires, indépendantes de la base de données comme de l'interface. Placé entre la DAO et l'API, j'ai surtout mesuré l'importance de définir en amont les formats de données échangés, c'est à cet endroit que les couches doivent s'emboîter sans erreur. J'ai aussi appris à développer le réflexe d'écrire un code testable, en isolant mes services grâce aux mocks, et à respecter des conventions communes (typage explicite, Ruff, revue de code avant fusion). Les journées d'immersion ont montré que la communication entre l'API et le frontend se règle plus vite à plusieurs, autour d'un même écran. \
-#strong[Mon conseil aux futurs 2A] : séparer strictement la logique métier de l'accès aux données, tester tôt et documenter les interfaces entre couches.
+Au sein de l'équipe, j'ai principalement travaillé dans la couche #NormalTok("service"); sur la partie backend, où j'ai développé la logique métier des analyses, avec une contribution à la couche #NormalTok("controller");. Ce rôle m'a appris à traduire un besoin fonctionnel (analyser une évolution, comparer des pays ou des indicateurs) en règles claires, indépendantes de la base de données comme de l'interface. Placé entre la DAO et l'API, j'ai surtout mesuré l'importance de définir en amont les formats de données échangés, c'est à cet endroit que les couches doivent s'emboîter sans erreur. J'ai aussi appris à développer le réflexe d'écrire un code testable, en isolant mes services grâce aux mocks, et à respecter des conventions communes (typage explicite, Ruff, revue de code avant fusion). Les journées d'immersion ont montré que la communication entre l'API et le frontend se règle plus vite à plusieurs, autour d'un même écran. \ #strong[Mon conseil aux futurs 2A] : séparer strictement la logique métier de l'accès aux données, tester tôt et documenter les interfaces entre couches.
 
 #heading(level: 2, numbering: none)[Vicram Raveendiran]
 <vicram-raveendiran>
@@ -1428,24 +1444,24 @@ Une des choses fondamentales que je retiens de ce projet est qu'il est toujours 
 <annexes>
 #heading(level: 2, numbering: none)[Annexe A --- Diagrammes de packages et de classes]
 <annexe-a-diagrammes-de-packages-et-de-classes>
-=== Diagramme de packages
-<diagramme-de-packages>
 #figure(caption: [Diagramme de packages de LaborScope.])[
   #align(center, block(width: 100%, stroke: 0.6pt + brand.lighten(55%), radius: 3pt, clip: true, inset: 0pt, fill: white)[
     #image("images/diagramme_packages.png", width: 100%)])
 ] <fig-packages>
-=== Diagramme de classes --- domaine de l'emploi
-<diagramme-de-classes-domaine-de-lemploi>
-#figure(caption: [Diagramme de classes : indicateurs, pays, classifications (âge / occupation par héritage), observations et imports, avec constructeurs et associations.])[
-  #align(center, block(width: 100%, stroke: 0.6pt + brand.lighten(55%), radius: 3pt, clip: true, inset: 0pt, fill: white)[
-    #image("images/diag_class_emploi.png", width: 100%)])
-] <fig-classes-emploi>
-=== Diagramme de classes --- utilisateurs, journal d'activité et rapports
-<diagramme-de-classes-utilisateurs-journal-dactivité-et-rapports>
-#figure(caption: [Diagramme de classes : utilisateurs, journal d'activité et rapports, avec constructeurs et associations.])[
-  #align(center, block(width: 100%, stroke: 0.6pt + brand.lighten(55%), radius: 3pt, clip: true, inset: 0pt, fill: white)[
-    #image("images/diag_class_user.png", width: 100%)])
-] <fig-classes-user>
+#page(flipped: true, margin: (x: 1.5cm, top: 2cm, bottom: 1.8cm))[
+  #heading(level: 3, numbering: none)[Diagramme de classes — domaine de l'emploi]
+  #figure(caption: [Diagramme de classes : indicateurs, pays, classifications (âge / occupation par héritage), observations et imports, avec constructeurs et associations.])[
+    #align(center, block(width: 100%, stroke: 0.6pt + brand.lighten(55%), radius: 3pt, clip: true, inset: 0pt, fill: white)[
+      #image("images/diag_class_emploi.png", width: 100%, height: 70%, fit: "contain")])
+  ] <fig-classes-emploi>
+]
+#page(flipped: true, margin: (x: 1.5cm, top: 2cm, bottom: 1.8cm))[
+  #heading(level: 3, numbering: none)[Diagramme de classes (utilisateurs, journal d'activité et rapports)]
+  #figure(caption: [Diagramme de classes : utilisateurs, journal d'activité et rapports, avec constructeurs et associations.])[
+    #align(center, block(width: 100%, stroke: 0.6pt + brand.lighten(55%), radius: 3pt, clip: true, inset: 0pt, fill: white)[
+      #image("images/diag_class_user.png", width: 100%, height: 70%, fit: "contain")])
+  ] <fig-classes-user>
+]
 
 
 

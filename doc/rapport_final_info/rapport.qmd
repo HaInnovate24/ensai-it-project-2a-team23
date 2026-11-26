@@ -991,8 +991,6 @@ Une des choses fondamentales que je retiens de ce projet est qu'il est toujours 
 
 ## Annexe A — Diagrammes de packages et de classes {.unnumbered}
 
-### Diagramme de packages
-
 ```{=typst}
 #figure(caption: [Diagramme de packages de LaborScope.])[
   #align(center, block(width: 100%, stroke: 0.6pt + brand.lighten(55%), radius: 3pt, clip: true, inset: 0pt, fill: white)[
@@ -1000,20 +998,24 @@ Une des choses fondamentales que je retiens de ce projet est qu'il est toujours 
 ] <fig-packages>
 ```
 
-### Diagramme de classes — domaine de l'emploi
 
 ```{=typst}
-#figure(caption: [Diagramme de classes : indicateurs, pays, classifications (âge / occupation par héritage), observations et imports, avec constructeurs et associations.])[
-  #align(center, block(width: 100%, stroke: 0.6pt + brand.lighten(55%), radius: 3pt, clip: true, inset: 0pt, fill: white)[
-    #image("images/diag_class_emploi.png", width: 100%)])
-] <fig-classes-emploi>
+#page(flipped: true, margin: (x: 1.5cm, top: 2cm, bottom: 1.8cm))[
+  #heading(level: 3, numbering: none)[Diagramme de classes — domaine de l'emploi]
+  #figure(caption: [Diagramme de classes : indicateurs, pays, classifications (âge / occupation par héritage), observations et imports, avec constructeurs et associations.])[
+    #align(center, block(width: 100%, stroke: 0.6pt + brand.lighten(55%), radius: 3pt, clip: true, inset: 0pt, fill: white)[
+      #image("images/diag_class_emploi.png", width: 100%, height: 70%, fit: "contain")])
+  ] <fig-classes-emploi>
+]
 ```
 
-### Diagramme de classes — utilisateurs, journal d'activité et rapports
 
 ```{=typst}
-#figure(caption: [Diagramme de classes : utilisateurs, journal d'activité et rapports, avec constructeurs et associations.])[
-  #align(center, block(width: 100%, stroke: 0.6pt + brand.lighten(55%), radius: 3pt, clip: true, inset: 0pt, fill: white)[
-    #image("images/diag_class_user.png", width: 100%)])
-] <fig-classes-user>
+#page(flipped: true, margin: (x: 1.5cm, top: 2cm, bottom: 1.8cm))[
+  #heading(level: 3, numbering: none)[Diagramme de classes (utilisateurs, journal d'activité et rapports)]
+  #figure(caption: [Diagramme de classes : utilisateurs, journal d'activité et rapports, avec constructeurs et associations.])[
+    #align(center, block(width: 100%, stroke: 0.6pt + brand.lighten(55%), radius: 3pt, clip: true, inset: 0pt, fill: white)[
+      #image("images/diag_class_user.png", width: 100%, height: 70%, fit: "contain")])
+  ] <fig-classes-user>
+]
 ```
