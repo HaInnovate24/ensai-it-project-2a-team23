@@ -1442,21 +1442,23 @@ Une des choses fondamentales que je retiens de ce projet est qu'il est toujours 
 
 #heading(level: 1, numbering: none)[Annexes]
 <annexes>
-#heading(level: 2, numbering: none)[Annexe A --- Diagrammes de packages et de classes]
-<annexe-a-diagrammes-de-packages-et-de-classes>
-#figure(caption: [Diagramme de packages de LaborScope.])[
-  #align(center, block(width: 100%, stroke: 0.6pt + brand.lighten(55%), radius: 3pt, clip: true, inset: 0pt, fill: white)[
-    #image("images/diagramme_packages.png", width: 100%)])
-] <fig-packages>
+#page(flipped: true, margin: (x: 1.5cm, top: 1.8cm, bottom: 1.8cm))[
+  #v(-1em)
+  #heading(level: 2, numbering: none)[Diagrammes de packages]
+  #figure(caption: [Diagramme de packages de LaborScope.])[
+    #align(center, block(stroke: 0.6pt + brand.lighten(55%), radius: 3pt, clip: true, inset: 4pt, fill: white)[
+      #image("images/diagramme_packages.png", height: 12.5cm)])
+  ] <fig-packages>
+]
 #page(flipped: true, margin: (x: 1.5cm, top: 2cm, bottom: 1.8cm))[
-  #heading(level: 3, numbering: none)[Diagramme de classes — domaine de l'emploi]
+  #heading(level: 2, numbering: none)[Diagramme de classes — domaine de l'emploi]
   #figure(caption: [Diagramme de classes : indicateurs, pays, classifications (âge / occupation par héritage), observations et imports, avec constructeurs et associations.])[
     #align(center, block(width: 100%, stroke: 0.6pt + brand.lighten(55%), radius: 3pt, clip: true, inset: 0pt, fill: white)[
       #image("images/diag_class_emploi.png", width: 100%, height: 70%, fit: "contain")])
   ] <fig-classes-emploi>
 ]
 #page(flipped: true, margin: (x: 1.5cm, top: 2cm, bottom: 1.8cm))[
-  #heading(level: 3, numbering: none)[Diagramme de classes (utilisateurs, journal d'activité et rapports)]
+  #heading(level: 2, numbering: none)[Diagramme de classes (utilisateurs, journal d'activité et rapports)]
   #figure(caption: [Diagramme de classes : utilisateurs, journal d'activité et rapports, avec constructeurs et associations.])[
     #align(center, block(width: 100%, stroke: 0.6pt + brand.lighten(55%), radius: 3pt, clip: true, inset: 0pt, fill: white)[
       #image("images/diag_class_user.png", width: 100%, height: 70%, fit: "contain")])
