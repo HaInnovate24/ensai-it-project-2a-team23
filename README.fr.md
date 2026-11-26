@@ -2,6 +2,8 @@
 
 [English](README.md) | **Français**
 
+> 🎥 **Une vidéo de guide est accessible ici :** https://drive.google.com/file/d/1MH8HUZVSFC-x1t9fRpUtF36HegpH6WKe/view?usp=sharing
+
 Application d'analyse du marché du travail à partir des données ouvertes
 [ILOSTAT](https://ilostat.ilo.org/). Elle collecte des indicateurs d'emploi,
 les stocke dans PostgreSQL, et propose des analyses (évolutions, comparaisons
@@ -16,6 +18,13 @@ entre pays, carte) via une API **FastAPI** et une interface **Streamlit**.
 ## Démarrage rapide (une seule commande)
 
 Une fois les prérequis installés (voir section 1), depuis la racine du projet :
+
+**Commencez par configurer le `.env`** — c'est la toute première chose à mettre en
+place. Créez un fichier `.env` à la racine du projet à partir du modèle de la
+[section 3](#3-configuration-env) et adaptez-le à votre installation PostgreSQL.
+Rien ne fonctionne sans lui.
+
+Ensuite, depuis la racine du projet :
 
 ```bash
 make go

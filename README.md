@@ -2,6 +2,8 @@
 
 **English** | [Français](README.fr.md)
 
+> 🎥 **A video guide is available here:** https://drive.google.com/file/d/1MH8HUZVSFC-x1t9fRpUtF36HegpH6WKe/view?usp=sharing
+
 A labour-market analysis application built on the [ILOSTAT](https://ilostat.ilo.org/)
 open data. It collects employment indicators, stores them in PostgreSQL, and provides
 analyses (trends, country comparisons, map) through a **FastAPI** API and a
@@ -16,6 +18,12 @@ analyses (trends, country comparisons, map) through a **FastAPI** API and a
 ## Quick start (one command)
 
 Once the prerequisites are installed (see section 1), from the project root:
+
+**First, configure `.env`** — this is the very first thing to set up. Create a `.env`
+file at the project root from the template in [section 3](#3-configuration-env) and
+adapt it to your PostgreSQL installation. Nothing works without it.
+
+Then, from the project root:
 
 ```bash
 make go
