@@ -2,6 +2,8 @@
 
 **English** | [Français](README.fr.md)
 
+> 🎥 **A video guide is available here:** https://drive.google.com/file/d/1MH8HUZVSFC-x1t9fRpUtF36HegpH6WKe/view?usp=sharing
+
 A labour-market analysis application built on the [ILOSTAT](https://ilostat.ilo.org/)
 open data. It collects employment indicators, stores them in PostgreSQL, and provides
 analyses (trends, country comparisons, map) through a **FastAPI** API and a

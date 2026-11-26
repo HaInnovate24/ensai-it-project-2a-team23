@@ -2,6 +2,8 @@
 
 [English](README.md) | **Français**
 
+> 🎥 **Une vidéo de guide est accessible ici :** https://drive.google.com/file/d/1MH8HUZVSFC-x1t9fRpUtF36HegpH6WKe/view?usp=sharing
+
 Application d'analyse du marché du travail à partir des données ouvertes
 [ILOSTAT](https://ilostat.ilo.org/). Elle collecte des indicateurs d'emploi,
 les stocke dans PostgreSQL, et propose des analyses (évolutions, comparaisons
