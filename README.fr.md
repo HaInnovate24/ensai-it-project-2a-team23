@@ -19,6 +19,13 @@ entre pays, carte) via une API **FastAPI** et une interface **Streamlit**.
 
 Une fois les prérequis installés (voir section 1), depuis la racine du projet :
 
+**Commencez par configurer le `.env`** — c'est la toute première chose à mettre en
+place. Créez un fichier `.env` à la racine du projet à partir du modèle de la
+[section 3](#3-configuration-env) et adaptez-le à votre installation PostgreSQL.
+Rien ne fonctionne sans lui.
+
+Ensuite, depuis la racine du projet :
+
 ```bash
 make go
 ```

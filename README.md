@@ -19,6 +19,12 @@ analyses (trends, country comparisons, map) through a **FastAPI** API and a
 
 Once the prerequisites are installed (see section 1), from the project root:
 
+**First, configure `.env`** — this is the very first thing to set up. Create a `.env`
+file at the project root from the template in [section 3](#3-configuration-env) and
+adapt it to your PostgreSQL installation. Nothing works without it.
+
+Then, from the project root:
+
 ```bash
 make go
 ```
